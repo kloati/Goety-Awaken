@@ -1,0 +1,20 @@
+{
+  "name": "Arch Illusioner",
+  "icon": "goetyawaken:delusive_fragment",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "A reclusive Illager sorcerer who has spent years secretly honing their craft within castles, making their illusions far more threatening than those of a common Illusioner. This master of misdirection excels at creating phantasms indistinguishable from reality to deceive and toy with their victims."
+    },
+    {
+       "type": "text",
+      "text": "The wisp of cloth, caught between truth and illusion, left behind upon their passing has sparked an idea within you. Perhaps you could utilize this enigmatic substance to enlighten your Illusioner servants."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:arch_illusioner",
+      "text": ""
+    }
+  ]
+}

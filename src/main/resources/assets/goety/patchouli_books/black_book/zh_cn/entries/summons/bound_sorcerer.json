@@ -1,0 +1,16 @@
+{
+  "name": "被绑定的巫师",
+  "icon": "goety:soul_emerald",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "你已经学会了怎么制造一个不死的灾厄村民法师，那为什么不把你的巫师也亡灵化呢！只需要穿着无名套装时让巫师因为一些小小的意外死亡，你就可以从不详神像处再起一个被绑定的巫师了。它们会保留生前的等级，并且因为它们没有腿所以可以飞行！"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:bound_sorcerer",
+      "text": "黑巫师你等着我！你等着！"
+    }
+  ]
+}

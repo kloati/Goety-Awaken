@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:witch",
+    "goety:witch_servant",
+    "goety:warlock",
+    "goety:crone",
+    "goetyawaken:crone_servant"
+  ]
+}

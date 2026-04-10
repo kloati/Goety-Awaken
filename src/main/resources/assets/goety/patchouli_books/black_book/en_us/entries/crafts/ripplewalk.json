@@ -1,0 +1,16 @@
+{
+  "name": "Ripplewalk",
+  "icon": "goetyawaken:ripplewalk",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Walking on water was once considered by mortals a miracle. You can indeed reproduce such a wonder at any time, but continuously casting spells is ultimately too cumbersome and slow. It is an act of folly to traverse rivers and seas relying solely on ongoing enchantments. Therefore, you have sealed this flowing magic into footwear. Though it is merely an easily slipping enchantment, it lasts long enough."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:ripplewalk",
+      "text": "The wearer can run on fluids, but the effect ceases once they stop moving."
+    }
+  ]
+}

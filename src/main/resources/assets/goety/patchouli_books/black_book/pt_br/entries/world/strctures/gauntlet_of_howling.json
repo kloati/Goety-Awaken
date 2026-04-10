@@ -1,0 +1,16 @@
+{
+  "name": "Desafio do Uivo",
+  "icon": "goety:jade",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "O Desafio do Uivo é reverentemente chamado de Ira do Deus da Montanha pelos aldeões que vivem em seus pés. Eles acreditam que um avatar do Deus da Montanha vigia eternamente o mundo varrido pelo vento a partir dos picos nevados, e assim impedem qualquer estrangeiro que ousa subir. Diz-se que até mesmo o Caçador, por respeito às suas tradições, nunca se aventurou na montanha."
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/gauntlet_of_howling.png"],
+      "border": true
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "潮汐墓穴",
+  "icon": "minecraft:prismarine_bricks",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "深海之下有一个海员长眠的地方。凡是进入其中的冒险者，都得跟那些往日执念打一场生死之战。赢了，就能拿到宝藏的钥匙，而那些海员腐烂的尸骨也会变成值钱的东西；输了，就只能沉进深渊，永远溺死在水里。"
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/tidal_tomb.png"],
+      "border": true
+    }
+  ]
+}

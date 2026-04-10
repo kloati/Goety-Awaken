@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "lit=true": { "model": "goetyawaken:block/dark_mender_glow" },
+    "lit=false": { "model": "goetyawaken:block/dark_mender" }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "Apostle",
+  "icon": "goetyawaken:obsidian_tear",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "You have countless times thought about drinking the wine of wailing gods—or so the cultists call the Obsidian Tear. Yet, even if you can enslave the various demons of the abyss, a rational mind would not hold optimistic expectations about the consequences of consuming it: perhaps you should let a servant be the test subject? In any case, you should be sufficiently prepared before attempting such an act."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:summon_apostle_servant",
+      "text": "Of course, you can also directly summon an 'Apostle' through sacrifices—such an Apostle may not match those truly ascended, but it will suffice."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:apostle_servant",
+      "text": ""
+    }
+  ],
+  "advancement": "goety:goety/kill_a_apostle"
+}

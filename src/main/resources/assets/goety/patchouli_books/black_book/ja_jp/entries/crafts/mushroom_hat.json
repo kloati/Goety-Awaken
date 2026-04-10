@@ -1,0 +1,17 @@
+{
+  "name": "マッシュルームの帽子",
+  "icon": "goetyawaken:mushroom_hat",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "混沌の牢獄に座す巨獣から抽出した共生菌糸を用い、汝はこの風変わりな帽子を仕立て上げた。マッシュルームの帽子は有害な毒素を濾過し、汝を酸毒から守るだけでなく、時に毒を浄化する力さえ持つ。さらに、この帽子は真菌を増殖させ、汝の敵に向かって放つのだ！"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:mushroom_hat",
+      "text": ""
+    }
+  ],
+  "advancement": "goetyawaken:mushroom_monstrosity_kill"
+}

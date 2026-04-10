@@ -1,0 +1,12 @@
+{
+    "goety:skull_lord":  [
+                             {
+                                 "key": "kill_special_enemy.goety.skull_lord_1",
+                                 "subtitles":  10.5
+                             },
+                             {
+                                 "key": "kill_special_enemy.goety.skull_lord_2",
+                                 "subtitles":  11.0
+                             }
+                         ]
+}

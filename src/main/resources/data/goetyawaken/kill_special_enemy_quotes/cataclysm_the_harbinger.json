@@ -1,0 +1,12 @@
+{
+    "cataclysm:the_harbinger":  [
+                                    {
+                                        "key": "kill_special_enemy.cataclysm.the_harbinger_1",
+                                        "subtitles":  10.5
+                                    },
+                                    {
+                                        "key": "kill_special_enemy.cataclysm.the_harbinger_2",
+                                        "subtitles":  10.0
+                                    }
+                                ]
+}

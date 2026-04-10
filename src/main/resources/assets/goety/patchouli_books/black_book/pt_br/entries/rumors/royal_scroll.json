@@ -1,0 +1,11 @@
+{
+  "name": "Segredos Reais",
+  "icon": "goetyawaken:royal_scroll",
+  "category": "goety:goetyawaken_rumors",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Você tem ponderado sobre como tomar o poder dos escalões superiores dos neollager, talvez os segredos reais transmitidos por um lorde nas terras áridas possam ajudá-lo..."
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety:soul_candlestick"
+  },
+  "craftType": "forge",
+  "soulCost": 5,
+  "duration": 10,
+  "ingredients": [
+    {
+      "item": "goety:spirit_fabric"
+    },
+    {
+      "item": "goety:spirit_fabric"
+    },
+    {
+      "item": "goety:spirit_fabric"
+    },
+    {
+      "item": "goety:dark_ingot"
+    },
+    {
+      "item": "goety:mystic_core"
+    },
+    {
+      "item": "goety:dark_ingot"
+    },
+    {
+      "item": "goety:command_focus"
+    },
+    {
+      "item": "goety:soul_emerald"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:dark_soul_candle"
+  }
+}

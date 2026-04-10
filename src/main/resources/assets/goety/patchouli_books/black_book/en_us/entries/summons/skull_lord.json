@@ -1,0 +1,17 @@
+{
+  "name": "Skull Lord Servant",
+  "icon": "goetyawaken:ally_pithos",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "The technique of anchoring the dead with Respawn Anchors and the craft of creating Necromancers have inspired you. Using the Ceramic Pithos of a Tomb Lord as a vessel, you have fashioned a Skull Lord Servant of your own. Should the Lord fall, you need only use a Respawn Anchor on the ceramic pithos it leaves behind to summon it back from death once more."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:skull_lord_servant",
+      "text": "The departed who failed to achieve transcendence..."
+    }
+  ],
+  "advancement": "goety:goety/unlock_necromancer"
+}

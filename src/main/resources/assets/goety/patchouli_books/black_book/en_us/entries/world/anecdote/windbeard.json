@@ -1,0 +1,27 @@
+{
+    "name": "Windbeard",
+    "icon": "minecraft:goat_horn",
+    "category": "goety:anecdote/anecdote",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "The spiritual totem of an ancient tribe, standing atop a windswept peak under the full moon, gazing up at the bright moon, its long beard streaming in the gale like a ranger's cloak—such is the legend of Windbeard."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "I strongly suspect this goat had already shown its unique nature long before the Gale Sanctum was even built. According to Illager historical records, when their forces marched into the Gale Sanctum, this goat blocked the entrance, refusing to let them pass, and sent many soldiers of the main force flying with its charges. Even Ravagers and Redstone Golems struggled to match its strength. It only relented when a highly skilled Vindicator Captain managed to chop off its horns with an iron axe. However, even after that, it would occasionally slam open doors with its horns, smashing their rituals, magical devices, and forging equipment to pieces."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "Later, as the Illagers deepened their research into tempest magic, the roles of Wind Callers and Storm Casters emerged. They could kite the goat with hit-and-run tactics, preventing it from wrecking Illager equipment any further. Day and night, the Wind Callers held a stalemate with Windbeard, wearing it down until the old goat eventually accepted them and ceased its hostility. Eventually, that Vindicator Captain was reassigned to inspect the Frosted Prison—the Illagers no longer needed his help to coexist with Windbeard, though a few Wind Callers still had to accompany any expedition to keep an eye on things. After that, the goat stopped attacking Illagers... though it might still be hostile toward players—it headbutted me at least once."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "Where did this goat even come from? Some say it was the pet of the Gale Sanctum's original owner, left to guard an empty tower after its master departed. Others claim it is the embodiment of the sanctum's owner themselves—their lingering obsession manifesting as a goat to defend their possessions. And still others insist it was born from the condensed will of the mountain winds—don't make me laugh. A will forged by nature wouldn't be stuck at this level. As for the tales of it guarding a sacred site or being a reincarnated soul repaying a debt of gratitude—utter nonsense."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "Regardless, the goat's remarkable nature has allowed the mountaineers who once guarded it to survive to this day. Perhaps they've formed a team? Maybe you'll encounter them when you ascend the mountain... Relax! Isn't this so-called 'righteous watch' just the traditional target for a dark magician to crush?"
+        }
+    ]
+}

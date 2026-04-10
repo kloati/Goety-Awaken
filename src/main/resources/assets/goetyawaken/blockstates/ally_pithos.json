@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "locked=false,triggered=false": { "model": "goetyawaken:block/ally_pithos" },
+    "locked=false,triggered=true": { "model": "goetyawaken:block/ally_pithos" },
+    "locked=true,triggered=false": {"model": "goetyawaken:block/ally_pithos_locked"},
+    "locked=true,triggered=true": {"model": "goetyawaken:block/ally_pithos_locked"}
+  }
+}

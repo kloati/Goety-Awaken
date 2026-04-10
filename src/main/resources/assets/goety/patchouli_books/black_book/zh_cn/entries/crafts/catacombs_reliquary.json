@@ -1,0 +1,16 @@
+{
+  "name": "圣物匣",
+  "icon": "goetyawaken:catacombs_reliquary",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "你有时会很苦恼自己的亡灵手下惧怕太阳这件事情。那位沙漠中的死灵法师为什么不惧怕太阳？你或许能从它身上获取到一些魔法技术来解答你的疑问。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:catacombs_reliquary",
+      "text": "用于为亡灵生物提供永久的日光免疫"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "name": "goetyawaken:boreal_spire/start_pool",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "goetyawaken:boreal_spire1",
+        "processors": "goetyawaken:boreal_spire_loot",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "goetyawaken:boreal_spire2",
+        "processors": "goetyawaken:boreal_spire_loot",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

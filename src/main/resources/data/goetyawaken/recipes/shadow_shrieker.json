@@ -1,0 +1,51 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "minecraft:sculk_shrieker"
+  },
+  "craftType": "magic",
+  "soulCost": 200,
+  "duration": 10,
+  "ingredients": [
+    {
+      "item": "minecraft:sculk_vein"
+    },
+    {
+      "item": "goety:sculk_relay"
+    },
+    {
+      "item": "goety:sculk_converter"
+    },
+    {
+      "item": "goety:sculk_devourer"
+    },
+    {
+      "item": "minecraft:sculk_vein"
+    },
+    {
+      "item": "minecraft:sculk"
+    },
+    {
+      "item": "minecraft:sculk_catalyst"
+    },
+    {
+      "item": "goety:dark_ingot"
+    },
+    {
+      "item": "goety:dark_ingot"
+    },
+    {
+      "item": "goety:dark_ingot"
+    },
+    {
+      "item": "minecraft:sculk_sensor"
+    },
+    {
+      "item": "minecraft:sculk_sensor"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:shadow_shrieker"
+  }
+}

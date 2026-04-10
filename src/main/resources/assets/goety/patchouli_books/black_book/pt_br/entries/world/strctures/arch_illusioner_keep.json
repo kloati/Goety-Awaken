@@ -1,0 +1,24 @@
+{
+  "name": "Castelo da Ilusão",
+  "icon": "goetyawaken:delusive_fragment",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Um magnífico castelo, aparentemente um local favorito para muitos Illagers se entregarem à folia. Seu interior é mobiliado com o máximo luxo, tesouros espalhados por toda parte: livros encantados saqueados de aldeias, artefatos mágicos de todo o mundo e um totem que se diz ser capaz de invocar tempestades."
+    },
+    {
+      "type": "text",
+      "text": "Este castelo nunca recusa visitantes; o espelho que serve como seu portão permanece perpetuamente aberto. No entanto, aqueles com más intenções jamais ousariam pisar dentro, pois nenhum ladrão convidaria a ira de seu mestre.$(br2)A família real das forças Illager comanda muitos subordinados de elite diretamente sob eles, entre eles um Ilusionista de habilidade incomparável na arte do engano."
+    },
+    {
+      "type": "text",
+      "text": "A realeza até permitiu que ele reivindicasse este castelo como seu. Ele cataloga sua coleção meticulosamente, mas nunca anota quais peças são genuínas — pois em suas mãos, falsificações e originais já são indistinguíveis."
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/arch_illusioner_keep.png"],
+      "border": true
+    }
+  ]
+}

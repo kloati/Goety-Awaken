@@ -1,0 +1,12 @@
+{
+    "goety_ladder:void_necromancer":  [
+                         {
+                             "key": "kill_special_enemy.goety_ladder.void_necromancer_1",
+                             "subtitles":  11.0
+                         },
+                         {
+                             "key": "kill_special_enemy.goety_ladder.void_necromancer_2",
+                             "subtitles":  10.5
+                         }
+                     ]
+}

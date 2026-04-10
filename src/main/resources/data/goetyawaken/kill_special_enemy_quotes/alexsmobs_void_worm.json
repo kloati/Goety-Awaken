@@ -1,0 +1,12 @@
+{
+    "alexsmobs:void_worm":  [
+                                {
+                                    "key": "kill_special_enemy.alexsmobs.void_worm_1",
+                                    "subtitles":  11.5
+                                },
+                                {
+                                    "key": "kill_special_enemy.alexsmobs.void_worm_2",
+                                    "subtitles":  10.0
+                                }
+                            ]
+}

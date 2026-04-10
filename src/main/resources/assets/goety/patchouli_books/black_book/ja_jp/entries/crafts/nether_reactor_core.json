@@ -1,0 +1,21 @@
+{
+  "name": "ネザーリアクターコア",
+  "icon": "goetyawaken:nether_reactor_core",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "ネザーリアクターコアは、強大なネザーエネルギーを宿した神秘的な装置であり、汝に忠実なウィザーの従者を召喚するために用いられる。この装置を造り出せるのは、「旧事」を深く理解する者のみである。"
+    },
+    {
+      "type": "text",
+      "text": "ウィザーの従者を召喚する手順は、通常のウィザー召喚と似ているが、核心となる工程が異なる。まず、ソウルサンドとネザーリアクターコアをT字型に配置せよ。中央にネザーリアクターコアを置き、その周囲を3つのソウルサンドで囲むのだ。次に、上部に3つのウィザースケルトンの頭蓋骨を設置する。最後に、中央のネザーリアクターコアを右クリックすれば、汝の支配に服するウィザーの従者が覚醒するだろう。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:nether_reactor_core",
+      "text": "ネザーリアクターコアを作成する。"
+    }
+  ],
+  "advancement": "minecraft:nether/summon_wither"
+}

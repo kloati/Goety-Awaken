@@ -1,0 +1,11 @@
+{
+  "name": "恐怖之魂",
+  "icon": "goetyawaken:terror_soul",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "孤魂尸鬼的复活道具，可以更便宜地召唤孤魂尸鬼。"
+    }
+  ]
+}

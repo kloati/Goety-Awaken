@@ -1,0 +1,16 @@
+{
+  "name": "Servo Atormentador",
+  "icon": "goetyawaken:tormentor_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "O Atormentador tem origem nos experimentos proibidos de Vexes e Vingadores — você roubou os resultados da pesquisa dos illagers e criou essas criaturas através de focos."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:tormentor_servant",
+      "text": "Servos Atormentadores são Vexes mais poderosos."
+    }
+  ]
+}

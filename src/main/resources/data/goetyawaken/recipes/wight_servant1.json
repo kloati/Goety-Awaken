@@ -1,0 +1,41 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:summon_tamed",
+  "activation_item": {
+    "item": "goety:cryptic_eye"
+  },
+  "craftType": "sabbath",
+  "entity_to_summon": "goetyawaken:wight_servant",
+  "soulCost": 500,
+  "duration": 30,
+  "research": "haunting",
+  "ingredients": [
+    {
+      "item": "goety:grave_dust"
+    },
+    {
+      "item": "goety:grave_dust"
+    },
+    {
+      "item": "goety:arca_compass"
+    },
+    {
+      "item": "goety:spent_totem"
+    },
+    {
+      "item": "goety:dark_fabric"
+    },
+    {
+      "item": "goety:blink_focus"
+    },
+    {
+      "item": "minecraft:ghast_tear"
+    },
+    {
+      "item": "goety:leeching_focus"
+    }
+  ],
+  "result": {
+    "item": "goety:jei_dummy/none"
+  }
+}

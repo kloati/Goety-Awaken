@@ -1,0 +1,11 @@
+{
+  "name": "ウサギの小屋",
+  "icon": "minecraft:oak_log",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "数多のウサギを飼育していた、あるイリジャー化した村人の住処。……だが、どうやらそこで「予期せぬ何か」が起きてしまったようだな？"
+    }
+  ]
+}

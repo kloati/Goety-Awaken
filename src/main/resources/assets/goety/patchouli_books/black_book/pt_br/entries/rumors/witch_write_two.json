@@ -1,0 +1,65 @@
+{
+  "name": "Anotações da Bruxa. II",
+  "icon": "goety:death_scythe",
+  "category": "goety:goetyawaken_rumors",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Ao longo de minhas longas caçadas, alguns nomes merecem ser lembrados. Os seguintes antigos são presas que passei décadas rastreando. Se você insiste em trilhar este caminho, eles serão suas pedras de amolar."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety:necromancer",
+      "text": "Invocador Assombrado"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Ele já foi um mago, até perceber que não podia matar a própria morte. Então escolheu se juntar a eles. Com aquela varinha roubada de um reino esquecido, ele invoca os há muito partidos de cada centímetro de solo. Sua cripta está amontoada com os ossos daqueles que tentaram se aproximar dele, e agora esses mesmos ossos servem como seus guardiões mais leais."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_wildfire",
+      "text": "A Chama Buscadora"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "O fogo foi feito para ser uma ferramenta para iluminar a escuridão. Mas quando uma chama queima por séculos sem se extinguir, ela começa a questionar sua própria existência. Ela vagueia pelos corredores carbonizados do templo de Apollyon, buscando respostas para o porquê de queimar. A verdade é que ela é a própria chama — uma que nunca morrerá, e nunca cessará sua busca."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety:hostile_redstone_golem",
+      "text": "O Pequeno Flagelo"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Quando ouvi falar do Pequeno Flagelo pela primeira vez, pensei que fosse uma piada cruel. O cadáver de um zumbi bebê, preso no topo de uma torre coberta de gelo. Foi até testemunhar um esquadrão de caçadores de doze pessoas entrar naquela torre, e nenhuma alma sequer sair."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_drowned_necromancer",
+      "text": "Marinheiro Vingativo"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Marinheiro Vingativo já foi um capitão, liderando uma tripulação completa em busca de novos continentes. Encontraram uma costa nunca marcada em nenhum mapa — mas era habitada por coisas mais terríveis do que qualquer tempestade. Quando o navio afundou, ele foi o último a se afogar, e o único a ressurgir, carregando ressentimento."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_twilight_goat",
+      "text": "Barba de Vento"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Você já viu cabras paradas na beira de um penhasco, não é? Imóveis, como pedra, deixando o vento da montanha uivar ao seu redor. Mas Barba de Vento está no topo do pico há séculos. Os aldeões locais o chamam de 'Deus da Montanha'. Deixam oferendas na base da montanha, rezando para que ele não se irrite. Pois quando ele se irrita, os ventos da montanha se transformam em um foehn escaldante."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Lembre-se destes nomes. Lembre-se dos lugares que eles assombram. Então, decida se está verdadeiramente preparado para enfrentá-los. Pois eu não lutarei em seu lugar. Tudo o que posso oferecer é dizer onde eles habitam, e o que são."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "O resto é sua própria caçada."
+    }
+  ]
+}

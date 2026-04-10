@@ -1,0 +1,16 @@
+{
+  "name": "Zumbi da Selva",
+  "icon": "goetyawaken:jungle_zombie_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Parece que a vitalidade da selva, previsivelmente, também se espalhou para esses corpos falecidos. Graças ao musgo e plantas que cobrem essas variantes de zumbis, suas garras e mordidas carregam um veneno potente."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:jungle_zombie",
+      "text": ""
+    }
+  ]
+}

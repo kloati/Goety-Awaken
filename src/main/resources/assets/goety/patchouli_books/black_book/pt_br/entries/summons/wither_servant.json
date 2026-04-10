@@ -1,0 +1,16 @@
+{
+  "name": "Servo Wither",
+  "icon": "goetyawaken:wither_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Através do antigo reator do Nether e suas habilidades refinadas de magia negra, combinadas com a história do Nether aprendida em pergaminhos passados, você criou com sucesso um Wither que obedece a seus comandos. Claro, ele só escuta você."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:wither_servant",
+      "text": "Você pode até montar nele e pilotá-lo para voar."
+    }
+  ]
+}

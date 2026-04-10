@@ -1,0 +1,16 @@
+{
+  "name": "黑曜石阔剑",
+  "icon": "goetyawaken:obsidian_claymore",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "这把黑曜石巨剑同样可以像阔剑那样施展真实横扫的技艺，并且由于使用了黑暗金属锻造，其能利用灵魂能量自我修复。其攻击不仅沉重，还会使受害者陷入衰弱状态。据说甚至可以轻松地劈开最厚的潜影壳。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:obsidian_claymore",
+      "text": ""
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "goety:soul_ruby"
+    }
+  },
+  "result": {
+    "item": "goetyawaken:soul_ruby_block"
+  }
+}

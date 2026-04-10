@@ -1,0 +1,40 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety:thunderstorm_focus"
+  },
+  "craftType": "sky",
+  "soulCost": 1000,
+  "duration": 10,
+  "research": "forbidden",
+  "ingredients": [
+    {
+      "item": "goety:waystone"
+    },
+    {
+      "item": "goetyawaken:taboo_fragment"
+    },
+    {
+      "item": "goetyawaken:taboo_fragment"
+    },
+    {
+      "item": "goety:discharge_focus"
+    },
+    {
+      "item": "goetyawaken:soul_sapphire"
+    },
+    {
+      "item": "goetyawaken:nameless_platinum"
+    },
+    {
+      "item": "goety:forbidden_fragment"
+    },
+    {
+      "item": "goetyawaken:nameless_platinum"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:heaven_rift_focus"
+  }
+}

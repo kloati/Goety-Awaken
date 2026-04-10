@@ -1,0 +1,30 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "minecraft:echo_shard"
+  },
+  "craftType": "magic",
+  "soulCost": 100,
+  "duration": 15,
+  "ingredients": [
+    {
+      "item": "goety:hunger_core"
+    },
+    {
+      "item": "goety:sonic_boom_focus"
+    },
+    {
+      "item": "goety:raging_matter"
+    },
+    {
+      "item": "minecraft:sculk_vein"
+    },
+    {
+      "item": "minecraft:sculk_vein"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:profound_echoing_shard"
+  }
+}

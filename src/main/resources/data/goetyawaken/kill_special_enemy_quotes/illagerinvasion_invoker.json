@@ -1,0 +1,12 @@
+{
+    "illagerinvasion:invoker":  [
+                                    {
+                                        "key": "kill_special_enemy.illagerinvasion.invoker_1",
+                                        "subtitles":  10.0
+                                    },
+                                    {
+                                        "key": "kill_special_enemy.illagerinvasion.prayerer_1",
+                                        "subtitles":  9.5
+                                    }
+                                ]
+}

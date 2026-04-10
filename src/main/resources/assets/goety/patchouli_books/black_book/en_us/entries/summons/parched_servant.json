@@ -1,0 +1,16 @@
+{
+  "name": "Parched Servant",
+  "icon": "goetyawaken:parched_servant_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Within the sands of time, countless inhabitants or travelers have been buried beneath the golden dunes of the desert. It should come as no surprise that using a Osseous Focus here summons a loyal Parched Servant. Like their hostile counterparts, their arrows inflict weakness upon creatures."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:parched_servant",
+      "text": "Parched Servant will fight faithfully for you."
+    }
+  ]
+}

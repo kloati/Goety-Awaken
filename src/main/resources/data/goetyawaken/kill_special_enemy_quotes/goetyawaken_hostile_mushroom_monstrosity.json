@@ -1,0 +1,12 @@
+{
+    "goetyawaken:hostile_mushroom_monstrosity":  [
+                                                     {
+                                                         "key": "kill_special_enemy.goetyawaken.hostile_mushroom_monstrosity_1",
+                                                         "subtitles":  11.5
+                                                     },
+                                                     {
+                                                         "key": "kill_special_enemy.goetyawaken.hostile_mushroom_monstrosity_2",
+                                                         "subtitles":  10.5
+                                                     }
+                                                 ]
+}

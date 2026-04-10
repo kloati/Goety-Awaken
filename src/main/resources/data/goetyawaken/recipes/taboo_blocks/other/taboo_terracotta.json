@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "tt",
+    "tt"
+  ],
+  "key":
+  {
+    "t":
+    {
+      "item": "goetyawaken:taboo_bricks"
+    }
+  },
+  "result":
+  {
+    "item": "goetyawaken:taboo_terracotta",
+    "count": 4
+  }
+}

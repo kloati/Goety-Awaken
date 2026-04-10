@@ -1,0 +1,17 @@
+{
+  "name": "蘑菇帽",
+  "icon": "goetyawaken:mushroom_hat",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "利用从混沌监牢里那只巨兽身上提取出的共生菌丝，你得以制作出这件很时尚的帽子。蘑菇帽会为你过滤掉毒物，使你免受毒液侵扰，还会时不时为你解毒。它还会增殖出菌团，朝着你的敌人发射出去！"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:mushroom_hat",
+      "text": ""
+    }
+  ],
+  "advancement": "goetyawaken:mushroom_monstrosity_kill"
+}

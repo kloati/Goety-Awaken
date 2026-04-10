@@ -1,0 +1,12 @@
+{
+    "twilightforest:lich":  [
+                                {
+                                    "key": "kill_special_enemy.twilightforest.lich_1",
+                                    "subtitles":  10.5
+                                },
+                                {
+                                    "key": "kill_special_enemy.twilightforest.lich_2",
+                                    "subtitles":  11.0
+                                }
+                            ]
+}

@@ -1,0 +1,40 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety:star_amulet"
+  },
+  "craftType": "expert_nether",
+  "soulCost": 40,
+  "duration": 20,
+  "research": "bygone",
+  "ingredients": [
+    {
+      "item": "goety:mystic_core"
+    },
+    {
+      "item": "goety:soul_jar"
+    },
+    {
+      "item": "goetyawaken:soul_sapphire"
+    },
+    {
+      "item": "goety:shadow_essence"
+    },
+    {
+      "item": "goety:shadow_essence"
+    },
+    {
+      "item": "minecraft:diamond_block"
+    },
+    {
+      "item": "minecraft:iron_block"
+    },
+    {
+      "item": "minecraft:iron_block"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:nether_reactor_core"
+  }
+}

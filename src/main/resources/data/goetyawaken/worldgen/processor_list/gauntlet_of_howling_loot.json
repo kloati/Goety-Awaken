@@ -1,0 +1,98 @@
+{
+  "processors": [
+    {
+      "processor_type": "goety:waterlogging_stop_processor"
+    },
+    {
+      "processor_type": "minecraft:rule",
+      "rules": [
+        {
+          "input_predicate": {
+            "block": "minecraft:chest",
+            "predicate_type": "minecraft:block_match"
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "minecraft:chest",
+            "Properties": {
+              "waterlogged": "false"
+            }
+          },
+          "block_entity_modifier": {
+            "type": "minecraft:append_loot",
+            "loot_table": "goetyawaken:chests/gauntlet_of_howling"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "goety:haunted_chest",
+            "predicate_type": "minecraft:block_match"
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "goety:haunted_chest"
+          },
+          "block_entity_modifier": {
+            "type": "minecraft:append_loot",
+            "loot_table": "goetyawaken:chests/gauntlet_of_howling"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "goety:windswept_chest",
+            "predicate_type": "minecraft:block_match"
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "goety:windswept_chest"
+          },
+          "block_entity_modifier": {
+            "type": "minecraft:append_loot",
+            "loot_table": "goetyawaken:chests/gauntlet_of_howling"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "goety:crypt_chest",
+            "predicate_type": "minecraft:block_match"
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "goety:crypt_chest"
+          },
+          "block_entity_modifier": {
+            "type": "minecraft:append_loot",
+            "loot_table": "goetyawaken:chests/gauntlet_of_howling"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "minecraft:barrel",
+            "predicate_type": "minecraft:block_match"
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "minecraft:barrel",
+            "Properties": {
+              "open": "false"
+            }
+          },
+          "block_entity_modifier": {
+            "type": "minecraft:append_loot",
+            "loot_table": "goetyawaken:chests/gauntlet_of_howling"
+          }
+        }
+      ]
+    }
+  ]
+}

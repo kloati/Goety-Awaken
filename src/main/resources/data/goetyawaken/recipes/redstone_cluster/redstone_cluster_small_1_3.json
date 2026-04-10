@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "goetyawaken:redstone_cluster"
+    }
+  ],
+  "result": {
+    "item":"goetyawaken:redstone_cluster_small",
+    "count": 3
+  }
+}

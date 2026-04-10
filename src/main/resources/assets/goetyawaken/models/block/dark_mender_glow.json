@@ -1,0 +1,6 @@
+{
+	"parent": "goetyawaken:block/template_mender",
+	"textures": {
+		"flame": "goetyawaken:block/dark_mender_glow"
+	}
+}

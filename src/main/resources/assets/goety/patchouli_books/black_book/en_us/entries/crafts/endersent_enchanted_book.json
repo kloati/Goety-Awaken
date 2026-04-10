@@ -1,0 +1,20 @@
+{
+  "name": "Endersent Enchanted Book",
+  "icon": "goetyawaken:endersent_enchanted_book",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Ordinary endersents no longer satisfy you. You thought of the four named endersents you witnessed in the End Eternity, and drew inspiration from them. You can infuse a book with void echoes containing void power, which can then be given to your endersents to grant them greater power — bestowed with \"eyes\"."
+    },
+    {
+      "type": "text",
+      "text": "The power of this special enchanted book is very unstable; you cannot decide which type of \"eye\" is stored within."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:endersent_enchanted_book",
+      "text": "Craft the Endersent Enchanted Book."
+    }
+  ]
+}

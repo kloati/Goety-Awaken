@@ -1,0 +1,16 @@
+{
+  "name": "Creeder Aranha",
+  "icon": "goetyawaken:hostile_spider_creeder_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Essas criaturas retorcidas, se contorcendo em agonia e emitindo gritos estridentes, são uma das razões pelas quais aventureiros mantêm distância da Floresta Carmesim. Não apenas os Creeders Aranha possuem poder explosivo muito superior ao de seus primos verdes comuns, mas suas detonações também infligem fogo mortal e enfraquecem suas vítimas. Alguns sussurram que esses seres cruzaram para o Nether a partir de outro plano de existência..."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_spider_creeder",
+      "text": "O Carcereiro da Prisão"
+    }
+  ]
+}

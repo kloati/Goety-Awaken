@@ -1,0 +1,30 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "minecraft:leather_boots"
+  },
+  "craftType": "deep",
+  "soulCost": 3,
+  "duration": 10,
+  "ingredients": [
+    {
+      "tag": "minecraft:boats"
+    },
+    {
+      "item": "goety:feet_of_frog"
+    },
+    {
+      "item": "minecraft:prismarine_crystals"
+    },
+    {
+      "item": "minecraft:water_bucket"
+    },
+    {
+      "item": "minecraft:soul_sand"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:ripplewalk"
+  }
+}

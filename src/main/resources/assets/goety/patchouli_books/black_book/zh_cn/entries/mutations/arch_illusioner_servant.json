@@ -1,0 +1,25 @@
+{
+  "name": "高位幻术师仆从",
+  "icon": "goety:illusion_focus",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "text",
+      "text": "这些远离了黑暗庄园，在外历练的熟练幻术师与它们弱小的后辈相比不仅只在幻术造诣更上一层楼。与那些只懂些幻术皮毛的后辈不同，高位幻术师是孤僻而致命的弓箭手，它们褪去了学徒的稚嫩，变得敏锐、阴险且攻击性十足。"
+    },
+    {
+      "type": "text",
+      "text": "它们随身携带一袋魔法烟花箭，能在战斗中射出绚丽的致命爆炸箭矢，同时召唤出重重镜像分身。在烟花与幻象的掩护下，它们能轻易隐去身形，从暗处策划下一次伏击。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:arch_illusioner_servant",
+      "text": "通过仪式将幻术师转化为高位幻术师仆从。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:arch_illusioner_servant",
+      "text": ""
+    }
+  ]
+}

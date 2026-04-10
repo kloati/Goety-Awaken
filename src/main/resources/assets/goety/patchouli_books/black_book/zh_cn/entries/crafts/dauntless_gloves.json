@@ -1,0 +1,16 @@
+{
+  "name": "无畏手套",
+  "icon": "goetyawaken:dauntless_gloves",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "据说善于使用阔剑的无畏战士们天生神力，能将沉重的阔剑挥舞如风，斩铁如泥。不过你认为他们可能只是给自己打造了一幅适合阔剑的手套罢了，就像你曾为镰刀和大锤打造过类似的手套那样。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:dauntless_gloves",
+      "text": "穿戴时，增加阔剑类武器50%攻击速度。"
+    }
+  ]
+}

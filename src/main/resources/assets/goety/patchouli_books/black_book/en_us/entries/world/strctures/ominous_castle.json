@@ -1,0 +1,16 @@
+{
+  "name": "Ominous Castle",
+  "icon": "goety:pale_steel_ingot",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "It is unwise to rashly invade the royal castle——unless you already harbor ambitions of treason."
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/ominous_castle.png"],
+      "border": true
+    }
+  ]
+}

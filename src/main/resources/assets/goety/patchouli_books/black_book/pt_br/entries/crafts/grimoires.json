@@ -1,0 +1,55 @@
+{
+  "name": "Grimório",
+  "icon": "goetyawaken:ruby_grimoire",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Estes grimórios não foram feitos para apoiar pernas de mesa bambas. Eles são a chave para o avanço de seus servos. Cada grimório — seja de ferro comum ou de rubi precioso — pode elevar diretamente o poder de um servo feiticeiro em um nível. Basta usá-lo uma vez."
+    },
+    {
+      "type": "text",
+      "text": "Cada grimório tem seu próprio nível, que determina o limite de poder que pode conceder. Um grimório de ferro não pode melhorar um feiticeiro de diamante, e um grimório de diamante nunca alcançará a verdade do nível rubi. Se você deseja obter um servo de nível rubi, deve primeiro ter um grimório de rubi em mãos."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:iron_grimoire",
+      "text": "Receita do Grimório de Ferro."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:gold_grimoire1",
+      "text": "Receita do Grimório de Ouro 1."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:gold_grimoire2",
+      "text": "Receita do Grimório de Ouro 2."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:emerald_grimoire1",
+      "text": "Receita do Grimório de Esmeralda 1."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:emerald_grimoire2",
+      "text": "Receita do Grimório de Esmeralda 2."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:diamond_grimoire1",
+      "text": "Receita do Grimório de Diamante 1."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:diamond_grimoire2",
+      "text": "Receita do Grimório de Diamante 2."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:ruby_grimoire",
+      "text": "Receita do Grimório de Rubi."
+    }
+  ]
+}

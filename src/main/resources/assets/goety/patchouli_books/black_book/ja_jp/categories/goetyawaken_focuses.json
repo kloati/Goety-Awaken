@@ -1,0 +1,7 @@
+{
+  "name": "フォーカス",
+  "description": "フォーカスは、さまざまな杖に装着して呪文を詠唱するために用いられる。",
+  "icon": "goety:dark_wand",
+  "sortnum": 1,
+  "parent": "goety:goetyawaken"
+}

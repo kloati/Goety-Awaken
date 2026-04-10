@@ -1,0 +1,21 @@
+{
+  "name": "Spider Creeder Servant",
+  "icon": "goetyawaken:hostile_spider_creeder_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "These creatures, resembling a fusion between Creepers and Spiders, serve as exceptional servants. Their explosions are swift, capable of igniting and weakening your foes. You can summon a loyal Spider Creeder Servant through an Adept Nether Ritual."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:spider_creeder_servant",
+      "text": "The untamed power of the Nether has taught you how to push the art of explosion to its very limits."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:spider_creeder_servant",
+      "text": "Spider Creeder Servants will fight for you with fervent explosions."
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "灾厄驿站",
+  "icon": "minecraft:chiseled_sandstone",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "荒漠中一处歇脚点，供灾厄村民补给、修整、标记路线。炊烟若起，劫掠号角声也将至。"
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/illager_station.png"],
+      "border": true
+    }
+  ]
+}

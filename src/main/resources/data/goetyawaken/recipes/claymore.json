@@ -1,0 +1,45 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "minecraft:iron_sword"
+  },
+  "craftType": "forge",
+  "soulCost": 5,
+  "duration": 10,
+  "ingredients": [
+    {
+      "item": "minecraft:iron_block"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "goety:pale_steel_block"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "goety:pale_steel_ingot"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "goety:pale_steel_ingot"
+    },
+    {
+      "item": "goety:occult_fabric"
+    },
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "minecraft:diamond"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:claymore"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety:hunger_core"
+  },
+  "craftType": "geoturgy",
+  "soulCost": 1,
+  "duration": 10,
+  "ingredients": [
+    {
+      "item": "goety:warped_wartful_egg"
+    },
+    {
+      "item": "goety:warped_wartful_egg"
+    },
+    {
+      "item": "goety:warped_wartful_egg"
+    },
+    {
+      "tag": "minecraft:stone_bricks"
+    },
+    {
+      "tag": "minecraft:stone_bricks"
+    },
+    {
+      "tag": "minecraft:stone_bricks"
+    },
+    {
+      "tag": "minecraft:stone_bricks"
+    },
+    {
+      "item": "goety:refuse_bottle"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:infestation_focus"
+  }
+}

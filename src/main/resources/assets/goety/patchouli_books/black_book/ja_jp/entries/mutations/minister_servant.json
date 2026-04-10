@@ -1,0 +1,25 @@
+{
+  "name": "ミニスターの従者",
+  "icon": "goety:ominous_orb",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "text",
+      "text": "ミニスターは、イリジャーの中でも最も高い地位にある者たちだ。汝の手によって直々に昇進せしめられたこのミニスターは、周囲のイリジャーの従者たちを指揮し、杖からマジックボルトを放ち、悪質な歯を召喚し、さらには爆弾を投じて敵を攻撃する。"
+    },
+    {
+      "type": "text",
+      "text": "たとえその杖が破壊されたとしても、彼は120秒後には新たなる杖を造り出すだろう。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:minister_servant",
+      "text": "儀式を通じてプリーチャーをミニスターの従者へと変貌させる。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:minister_servant",
+      "text": "ミニスターの従者は、その統率の妙技と強大な魔術を以て汝のために戦うだろう。"
+    }
+  ]
+}

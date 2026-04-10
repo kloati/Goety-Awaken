@@ -1,0 +1,15 @@
+{
+  "name": "goetyawaken:castlep4",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "goetyawaken:castle4",
+        "processors": "goetyawaken:ominous_castle_loot",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "goetyawaken:block/sandstone/sandstone_column_top",
+    "side": "goetyawaken:block/sandstone/sandstone_column_side"
+  }
+}

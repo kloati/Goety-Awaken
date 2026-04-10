@@ -1,0 +1,16 @@
+{
+  "name": "Foco Assassino",
+  "icon": "goetyawaken:killer_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Como um coelho tão fofo poderia atacar pessoas?"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:killer_focus",
+      "text": "Crie o Foco Assassino."
+    }
+  ]
+}

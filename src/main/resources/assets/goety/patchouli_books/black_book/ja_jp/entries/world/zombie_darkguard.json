@@ -1,0 +1,16 @@
+{
+  "name": "ゾンビダークガード",
+  "icon": "goetyawaken:zombie_darkguard_spawn_egg",
+  "category": "goety:goetyawaken_world",
+  "pages": [
+    {
+      "type": "text",
+      "text": "朽ち果てた肉体に重厚な鎧を纏いし姿……。だが、その重装備とて、この衛兵たちが抱く侵入者への底知れぬ憎悪と、生肉への渇望を削ぐことは決してない。彼らはその腐敗した腕で、汝の行く手を阻むだろう。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:zombie_darkguard",
+      "text": "決して侮れぬ強敵だ！"
+    }
+  ]
+}

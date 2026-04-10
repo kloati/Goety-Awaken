@@ -1,0 +1,15 @@
+{
+  "loader": "forge:separate_transforms",
+  "gui_light": "front",
+  "base": {
+    "parent": "goetyawaken:item/truth_seeker_model"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "goetyawaken:item/truth_seeker_inventory"
+    },
+    "fixed": {
+      "parent": "goetyawaken:item/truth_seeker_inventory"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Luva de Assassino",
+  "icon": "goetyawaken:assassin_glove",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Para um Mago das Trevas como você, abater inimigos pelas costas dificilmente é um ato desonroso. No entanto, o dano insignificante causado por adagas frequentemente o decepciona. Após várias tentativas semelhantes, você projetou uma luva que permite segurar com muito mais firmeza adagas ou punhais. Ao usar esta luva, você pode empunhar sem esforço aquelas armas traiçoeiras para perfurar à força as costas de um inimigo."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:assassin_glove",
+      "text": ""
+    }
+  ]
+}

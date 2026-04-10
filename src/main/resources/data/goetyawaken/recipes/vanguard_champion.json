@@ -1,0 +1,39 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:convert_complete_tamed",
+  "activation_item": {
+    "item": "goetyawaken:moonlight_cut"
+  },
+  "craftType": "necroturgy",
+  "entity_to_convert": {
+    "tag": "goety:vanguard",
+    "display_name": "entity.goety.vanguard_servant"
+  },
+  "entity_to_convert_into": "goetyawaken:vanguard_champion",
+  "soulCost": 5,
+  "duration": 50,
+  "research": "forbidden",
+  "ingredients": [
+    {
+      "item": "goety:pale_steel_block"
+    },
+    {
+      "item": "goety:indented_gold"
+    },
+    {
+      "item": "goety:iron_hide_focus"
+    },
+    {
+      "item": "goety:weakening_focus"
+    },
+    {
+      "item": "goetyawaken:mucilage"
+    },
+    {
+      "item": "goety:launch_focus"
+    }
+  ],
+  "result": {
+    "item": "goety:jei_dummy/none"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "goetyawaken:block/cube_bottom_top_inner_faces",
+  "textures": {
+    "bottom": "goetyawaken:block/trial_spawner/trial_spawner_bottom",
+    "side": "goetyawaken:block/trial_spawner/trial_spawner_side_active",
+    "top": "goetyawaken:block/trial_spawner/trial_spawner_top_active"
+  }
+}

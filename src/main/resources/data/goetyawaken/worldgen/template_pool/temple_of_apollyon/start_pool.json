@@ -1,0 +1,24 @@
+{
+  "name": "goetyawaken:temple_of_apollyon/start_pool",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "goetyawaken:temple_of_apollyon1",
+        "processors": "goetyawaken:temple_of_apollyon_loot",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "goetyawaken:temple_of_apollyon2",
+        "processors": "goetyawaken:temple_of_apollyon_loot",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

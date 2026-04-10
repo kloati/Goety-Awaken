@@ -1,0 +1,12 @@
+{
+    "goety:endersent":  [
+                            {
+                                "key": "kill_special_enemy.goety.endersent_1",
+                                "subtitles":  10.5
+                            },
+                            {
+                                "key": "kill_special_enemy.goety.endersent_2",
+                                "subtitles":  10.0
+                            }
+                        ]
+}

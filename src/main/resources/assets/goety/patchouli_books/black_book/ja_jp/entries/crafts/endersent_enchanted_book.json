@@ -1,0 +1,20 @@
+{
+  "name": "エンダーセントのエンチャント本",
+  "icon": "goetyawaken:endersent_enchanted_book",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "並大抵のエンダーセントでは、もはや汝を満足させることはできぬ。汝はエンドの永遠にて目撃した、名を冠する4体のエンダーセントを思い返し、そこから着想を得た。虚空の力を宿した「虚空の残響」を本に注ぎ込むことで、汝のエンダーセントに従者としてのさらなる力を――すなわち「眼」を授けることができるのだ。"
+    },
+    {
+      "type": "text",
+      "text": "この特殊なエンチャント本の力は極めて不安定であり、その内にどの種類の「眼」が宿るかを汝が決めることはできぬ。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:endersent_enchanted_book",
+      "text": "エンダーセントのエンチャント本を作成する。"
+    }
+  ]
+}

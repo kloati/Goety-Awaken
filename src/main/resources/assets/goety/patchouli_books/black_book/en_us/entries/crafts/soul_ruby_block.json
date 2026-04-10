@@ -1,0 +1,21 @@
+{
+  "name": "Soul Ruby Block",
+  "icon": "goetyawaken:soul_ruby_block",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "The Soul Ruby Block is tightly compressed from Soul Rubies. Soul Rubies are monopolized by the Calamity Royal Family. How many royal family members have you killed to obtain them, $(playername)?"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:soul_ruby_block",
+      "text": "Craft the Soul Ruby Block."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:soul_ruby_from_block",
+      "text": "Obtain Soul Ruby from Soul Ruby Block."
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Claymore de Obsidiana",
+  "icon": "goetyawaken:obsidian_claymore",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Esta espada grande de obsidiana também pode executar a arte da Varredura Verdadeira como a claymore. Forjada com metal sombrio, ela utiliza energia das almas para se autorreparar. Seus ataques não são apenas pesados, mas também infligem o efeito Declínio nas vítimas. Diz-se ser capaz de cortar até mesmo as cascas mais grossas de shulker com facilidade."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:obsidian_claymore",
+      "text": ""
+    }
+  ]
+}

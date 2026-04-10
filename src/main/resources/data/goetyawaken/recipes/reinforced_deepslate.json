@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "#A#",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "goetyawaken:profound_echoing_shard"
+    },
+    "A": {
+      "item": "minecraft:deepslate"
+    }
+  },
+  "result": {
+    "item": "minecraft:reinforced_deepslate"
+  }
+}

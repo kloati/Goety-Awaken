@@ -1,0 +1,16 @@
+{
+  "name": "Nocturnal Rite",
+  "icon": "goety:infernal_tome",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Beside the ruins of an ancient portal, five Obsidian Monolith stand like tombstones. Heretics clad in robes adorned with dark golden patterns chant in unison, no longer content with corrupting the land—they are attempting to welcome back a powerful presence from the Nether. All who draw near hear heartbeat-like whispers from the depths of the darkness."
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/nocturnal_rite.png"],
+      "border": true
+    }
+  ]
+}

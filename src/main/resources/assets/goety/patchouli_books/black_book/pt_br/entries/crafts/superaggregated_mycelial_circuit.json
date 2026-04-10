@@ -1,0 +1,17 @@
+{
+  "name": "Circuito Micelial Superagregado",
+  "icon": "goetyawaken:superaggregated_mycelial_circuit",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Estes micélios, agregados de maneira peculiar e profundamente fundidos aos componentes da Monstruosidade Mooshroom, formaram seu próprio ecossistema único, tornando extremamente difícil propagá-los. Para evitar que se tornem um recurso não renovável, você decidiu enfrentar esse desafio. Por fim, encontrou inspiração no Pergaminho Real e dominou a técnica milagrosa de construir um circuito com precisão com base no projeto de outro Circuito Micelial Superagregado!"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:superaggregated_mycelial_circuit",
+      "text": ""
+    }
+  ],
+  "advancement": "goetyawaken:royal_research_completed"
+}

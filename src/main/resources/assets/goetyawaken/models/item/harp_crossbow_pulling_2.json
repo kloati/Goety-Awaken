@@ -1,0 +1,6 @@
+{
+  "parent": "goetyawaken:item/harp_crossbow",
+  "textures": {
+    "layer0": "goetyawaken:item/harp_crossbow_pulling_2"
+  }
+}

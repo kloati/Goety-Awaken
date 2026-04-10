@@ -1,0 +1,16 @@
+{
+  "name": "Wither Servant",
+  "icon": "goetyawaken:wither_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Through the ancient Nether reactor and your exquisite dark magic skills, combined with the Nether history learned from past scrolls, you successfully created a Wither that obeys your commands. Of course, it only listens to you."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:wither_servant",
+      "text": "You can even ride on it and pilot it to fly."
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "Livro Encantado de Endersent",
+  "icon": "goetyawaken:endersent_enchanted_book",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Endersents comuns não te satisfazem mais. Você lembrou dos quatro endersents nomeados que testemunhou na Eternidade do End e tirou inspiração deles. Você pode infundir um livro com ecos do vazio contendo poder do vazio, que pode então ser dado aos seus endersents para conceder-lhes maior poder — dotados com \"olhos\"."
+    },
+    {
+      "type": "text",
+      "text": "O poder deste livro encantado especial é muito instável; você não pode decidir qual tipo de \"olho\" está armazenado dentro dele."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:endersent_enchanted_book",
+      "text": "Crie o Livro Encantado de Endersent."
+    }
+  ]
+}

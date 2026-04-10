@@ -1,0 +1,16 @@
+{
+  "name": "End Trials",
+  "icon": "goety:void_block",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "You've heard that small camps, different from the End Cities, are scattered across the End. Perhaps they serve as outposts for something far more significant?"
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/endersent_in_end.png"],
+      "border": true
+    }
+  ]
+}

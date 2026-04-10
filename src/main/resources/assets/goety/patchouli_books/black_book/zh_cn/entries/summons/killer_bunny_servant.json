@@ -1,0 +1,16 @@
+{
+  "name": "杀手兔仆从",
+  "icon": "minecraft:rabbit",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "不知为何而诞生的奇异兔子，一个癫狂且只想着杀戮的存在。它们脆弱不堪，但那对牙齿某种程度上甚至比精铁锻造的长剑还要锋利。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:caerbannog_rabbit_servant",
+      "text": "也可以进行繁殖，将残暴的血脉流传。"
+    }
+  ]
+}

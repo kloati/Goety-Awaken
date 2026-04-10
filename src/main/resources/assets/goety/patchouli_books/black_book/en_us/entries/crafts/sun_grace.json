@@ -1,0 +1,16 @@
+{
+  "name": "Sun's Grace",
+  "icon": "goetyawaken:sun_grace",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Through a ritual that inscribes a mystical healing rune onto the mace, you have successfully imbued it with powerful restorative energy, granting it both considerable offensive strength and potent supportive capabilities."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:sun_grace",
+      "text": ""
+    }
+  ]
+}

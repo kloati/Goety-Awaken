@@ -1,0 +1,7 @@
+{
+  "name": "Focos",
+  "description": "Focos são usados para serem inseridos em diferentes cajados/varinha para lançar feitiços.",
+  "icon": "goety:dark_wand",
+  "sortnum": 1,
+  "parent": "goety:goetyawaken"
+}

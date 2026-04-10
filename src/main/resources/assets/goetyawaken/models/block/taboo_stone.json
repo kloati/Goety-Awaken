@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "goetyawaken:block/taboo_blocks/taboo_stone"
+  }
+}

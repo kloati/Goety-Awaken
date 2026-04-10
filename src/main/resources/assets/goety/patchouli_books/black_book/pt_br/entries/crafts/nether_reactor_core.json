@@ -1,0 +1,21 @@
+{
+  "name": "Núcleo do Reator do Nether",
+  "icon": "goetyawaken:nether_reactor_core",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "O Núcleo do Reator do Nether é um dispositivo misterioso que contém a poderosa energia do Nether, que pode ser usada para invocar um servo Wither leal. Apenas aqueles que entendem os eventos do passado podem criar o Núcleo do Reator do Nether."
+    },
+    {
+      "type": "text",
+      "text": "O método de invocar um servo Wither é semelhante à maneira usual de invocar um Wither, mas as etapas principais são diferentes: Primeiro, organize areia de alma e o Núcleo do Reator do Nether em uma estrutura em forma de T, com o Núcleo do Reator do Nether no centro e três pedaços de areia de alma ao redor. Em seguida, coloque três crânios de esqueleto wither no topo. Por fim, clique com o botão direito no Núcleo do Reator do Nether central para despertar um servo Wither sob seu controle."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:nether_reactor_core",
+      "text": "Crie o Núcleo do Reator do Nether."
+    }
+  ],
+  "advancement": "minecraft:nether/summon_wither"
+}

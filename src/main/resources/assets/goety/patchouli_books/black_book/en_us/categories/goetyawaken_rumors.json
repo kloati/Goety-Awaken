@@ -1,0 +1,7 @@
+{
+  "name": "Rumors and Gossip",
+  "description": "Impromptu rumors and secrets discovered by chance.",
+  "icon": "minecraft:globe_banner_pattern",
+  "sortnum": 7,
+  "parent": "goety:goetyawaken"
+}

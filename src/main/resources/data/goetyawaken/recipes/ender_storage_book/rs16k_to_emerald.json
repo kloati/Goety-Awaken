@@ -1,0 +1,27 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "refinedstorage:16k_storage_part"
+  },
+  "craftType": "magic",
+  "soulCost": 50,
+  "duration": 2,
+  "ingredients": [
+    {
+      "item": "goety:soul_emerald"
+    },
+    {
+      "item": "goety:jade"
+    },
+    {
+      "item": "goety:jade"
+    },
+    {
+      "item": "goety:jade"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:ender_storage_book_emerald"
+  }
+}

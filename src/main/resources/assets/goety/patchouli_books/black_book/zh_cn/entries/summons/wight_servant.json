@@ -1,0 +1,30 @@
+{
+  "name": "孤魂尸鬼仆从",
+  "icon": "goetyawaken:wight_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "那些渴求着灵魂的收割者们既然已经归属于你的麾下了，那么那个与墓穴存在特殊联系的永远渴求灵魂的妖魔或许也可以归顺于你。在尝试了一些特殊的方法后，一位为你而战的孤魂尸鬼便就此诞生。"
+    },
+    {
+      "type": "text",
+      "text": "他可以在战斗当中瞬间移动迷惑敌人，窃取敌人的灵魂来治愈自身，召唤分身和腐尸蛆虫辅助作战——一切就像它作为对手那般。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:wight_servant1",
+      "text": "通过复杂的仪式召唤孤魂尸鬼仆从。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:wight_servant2",
+      "text": "使用恐怖之魂进行简化召唤。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:wight_servant",
+      "text": "孤魂尸鬼仆从会忠实地为你战斗。"
+    }
+  ]
+}

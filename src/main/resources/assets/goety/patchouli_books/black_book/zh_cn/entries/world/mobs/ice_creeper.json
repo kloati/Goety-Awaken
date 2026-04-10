@@ -1,0 +1,16 @@
+{
+  "name": "寒冰苦力怕",
+  "icon": "goetyawaken:ice_creeper_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "极寒之地的苦力怕变种，冰霜的力量已经把这些苦力怕变成了随时会爆炸的大冰球。虽然寒冰苦力怕的爆炸威力不及它们的原身，但那刺骨的寒意却更加致命——它们的爆炸会将不幸的受害者冻结。在寒冷群系上遇到它们时，千万要格外小心。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:ice_creeper",
+      "text": ""
+    }
+  ]
+}

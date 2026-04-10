@@ -1,0 +1,16 @@
+{
+  "name": "Mini Ghast Hostil",
+  "icon": "goetyawaken:hostile_mini_ghast_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Um ramo da família Ghast que evoluiu para a miniaturização para se adaptar ao ambiente do Nether. Como seus parentes maiores, Mini Ghasts não são exatamente amigáveis, pois seus corpos estão cheios de chamas ardentes assim como os Ghasts normais. Ainda assim, você pode achá-los bastante fofos — até que esses pequenos bombardeiros brancos atirem bolas de fogo diretamente no seu rosto. Embora as bolas de fogo que cospem sejam menos aterrorizantes em poder comparadas às suas contrapartes maiores, seu denso bombardeio de ataques prova ser uma dor de cabeça mais persistente."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_mini_ghast",
+      "text": ""
+    }
+  ]
+}

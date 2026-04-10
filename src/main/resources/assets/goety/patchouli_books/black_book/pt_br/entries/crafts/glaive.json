@@ -1,0 +1,16 @@
+{
+  "name": "Glaive",
+  "icon": "goetyawaken:glaive",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Você frequentemente se perguntou por que as Vanguardas Esqueléticos são equipados com glaives. Talvez ao experimentar empunhar uma por si mesmo, você entenderá por que os reis antigos emitiam essas armas como equipamento padrão para suas tropas de elite."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:glaive",
+      "text": ""
+    }
+  ]
+}

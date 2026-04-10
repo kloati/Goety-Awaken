@@ -1,0 +1,16 @@
+{
+  "name": "混沌监牢",
+  "icon": "goetyawaken:mushroom_coated_alloy_block",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "主世界、下界、末地三个维度的力量在此地交织。传闻其中关押着一只失控的巨型战争机器......"
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/chaos_prison.png"],
+      "border": true
+    }
+  ]
+}

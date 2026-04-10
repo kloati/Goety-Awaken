@@ -1,0 +1,16 @@
+{
+  "name": "エンヴィオーカーの従者",
+  "icon": "goetyawaken:envioker_spawn_egg",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "text",
+      "text": "邪悪な魔術に精通した高位の学徒。その額に埋め込まれたルビーの欠片は、通常のエヴォーカーを遥かに凌駕する力を授け、その視覚を極限まで研ぎ澄ませる。これにより、彼らは遠方に潜む敵であっても、いち早く察知することができるのだ。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:envioker_servant",
+      "text": "エンヴィオーカーの従者は、強大な魔術を駆使して汝のために戦うだろう。"
+    }
+  ]
+}

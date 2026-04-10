@@ -1,0 +1,16 @@
+{
+  "name": "Foice de Gelo",
+  "icon": "goetyawaken:frost_scythe",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Você frequentemente ponderou sobre outros caminhos de desenvolvimento para a Foice Sombria. Você acredita que, além de temperá-la no Sangue do Apóstolo para saturá-la com a essência da morte, deve haver outros métodos de modificação. Inspirado pela Safira da Alma, você finalmente descobriu tal método, criando com sucesso uma versão alternativa melhorada da Foice para ''A Foice de Gelo''."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:frost_scythe",
+      "text": ""
+    }
+  ]
+}

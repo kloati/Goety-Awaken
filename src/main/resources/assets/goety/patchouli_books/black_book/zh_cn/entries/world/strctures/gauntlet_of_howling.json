@@ -1,0 +1,16 @@
+{
+  "name": "呼啸之巅",
+  "icon": "goety:jade",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "呼啸之巅敬畏地被生活在山脚下的村民称为山神之怒。他们相信山神的化身正在雪山上终日守望着狂风下的世界，为此他们阻拦任何企图上山的外来者，据说某位狩猎的魔女也因为尊重他们的习惯而没有上山。"
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/gauntlet_of_howling.png"],
+      "border": true
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+    "traveloptics:enraged_dead_king":  [
+                                           {
+                                               "key": "kill_special_enemy.traveloptics.enraged_dead_king_1",
+                                               "subtitles":  9.5
+                                           },
+                                           {
+                                               "key": "kill_special_enemy.traveloptics.enraged_dead_king_2",
+                                               "subtitles":  10.0
+                                           }
+                                       ]
+}

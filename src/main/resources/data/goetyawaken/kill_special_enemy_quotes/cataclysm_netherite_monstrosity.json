@@ -1,0 +1,12 @@
+{
+    "cataclysm:netherite_monstrosity":  [
+                                            {
+                                                "key": "kill_special_enemy.cataclysm.netherite_monstrosity_1",
+                                                "subtitles":  9.5
+                                            },
+                                            {
+                                                "key": "kill_special_enemy.cataclysm.netherite_monstrosity_2",
+                                                "subtitles":  10.0
+                                            }
+                                        ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "卫道士厨师",
+  "icon": "goetyawaken:vindicator_chef_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "卫道士厨师一种受过特殊训练的卫道士——与只会挥舞斧子的同类相比，他们的职责是给其他灾厄村民制作食物——尽管他们的智力注定了厨艺不精。不过值得注意的是，做了厨师并没有让他们的肌肉退化，他们对你的威胁性和卫道士是一样的。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:vindicator_chef",
+      "text": "厨艺不精的厨师，但是依然能劈开敌人的颅骨！"
+    }
+  ]
+}

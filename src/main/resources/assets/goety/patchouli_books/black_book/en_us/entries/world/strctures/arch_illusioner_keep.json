@@ -1,0 +1,24 @@
+{
+  "name": "Illusion Castle",
+  "icon": "goetyawaken:delusive_fragment",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "A magnificent castle, seemingly a favored haunt for many Illagers to indulge in revelry. Its interior is furnished with the utmost luxury, treasures strewn about everywhere: enchanted books plundered from villages, magical artifacts from across the world, and a totem rumored to be capable of summoning storms."
+    },
+    {
+      "type": "text",
+      "text": "This castle never refuses visitors; the mirror serving as its gate stands perpetually open. Yet those with ill intent would never dare set foot inside, for no thief would invite the wrath of its master.$(br2)The royal family of the Illager forces commands many elite subordinates directly under them, among them an Illusioner of unparalleled skill in the art of deception."
+    },
+    {
+      "type": "text",
+      "text": "The royalty even permitted him to claim this castle as his own. He catalogs his collection meticulously, yet never notes which pieces are genuine—for in his hands, counterfeit and authentic are already indistinguishable."
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/arch_illusioner_keep.png"],
+      "border": true
+    }
+  ]
+}

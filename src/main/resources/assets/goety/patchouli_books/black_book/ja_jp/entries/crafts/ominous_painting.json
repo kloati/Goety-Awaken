@@ -1,0 +1,16 @@
+{
+  "name": "不吉な絵画",
+  "icon": "goetyawaken:ominous_painting",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "通常の絵画とペールスチールのインゴットを組み合わせることで、この「不吉な絵画」を造り出すことができる。新たな名を冠したこれらの絵画は、既存のものとは全く異なる芸術作品の数々であるようだ。……ただ、それだけのことだがな。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:ominous_painting",
+      "text": ""
+    }
+  ]
+}

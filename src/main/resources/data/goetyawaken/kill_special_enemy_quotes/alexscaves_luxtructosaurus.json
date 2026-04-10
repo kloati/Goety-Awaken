@@ -1,0 +1,12 @@
+{
+    "alexscaves:luxtructosaurus":  [
+                                       {
+                                           "key": "kill_special_enemy.alexscaves.luxtructosaurus_1",
+                                           "subtitles":  11.0
+                                       },
+                                       {
+                                           "key": "kill_special_enemy.alexscaves.luxtructosaurus_2",
+                                           "subtitles":  10.5
+                                       }
+                                   ]
+}

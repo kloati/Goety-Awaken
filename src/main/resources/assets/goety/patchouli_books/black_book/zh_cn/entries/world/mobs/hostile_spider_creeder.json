@@ -1,0 +1,16 @@
+{
+  "name": "敌对苦力蛛",
+  "icon": "goetyawaken:hostile_spider_creeder_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "这种痛苦且不断发出尖锐叫声的扭曲生物是冒险者对绯红森林避之不及的原因之一。苦力蛛不仅爆炸威力远超那些绿油油的普通苦力怕，它们的爆炸甚至还会让生物遭受更致命的着火并陷入衰弱状态。有说法认为这些生物是从另一个位面来到下界的......"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_spider_creeder",
+      "text": "阳光学院的狱卒"
+    }
+  ]
+}

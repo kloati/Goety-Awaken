@@ -1,0 +1,16 @@
+{
+  "name": "Agony Focus",
+  "icon": "goetyawaken:agony_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Tear out the souls of those who have died by your hand from the depths of the Nether. Use their wails to ignite the pyre that burns them, and forge chains of their lingering hatred to bind them. Send them screeching into enemies with posthumous venom. $(br)$(l)$(4)For our hatred is eternal, and our wrath unending."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:agony_focus",
+      "text": "Crafting the Agony Focus."
+    }
+  ]
+}

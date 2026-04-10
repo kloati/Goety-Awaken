@@ -1,0 +1,16 @@
+{
+  "name": "监狱之眼",
+  "icon": "goetyawaken:prison_eye",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "一只用于追踪混沌监牢的眼睛。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:prison_eye",
+      "text": "监狱之眼"
+    }
+  ]
+}

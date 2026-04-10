@@ -1,0 +1,16 @@
+{
+  "name": "Servo Defensor",
+  "icon": "goetyawaken:warden_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Na Escuridão Profunda, você encontrou uma forma de vida poderosa, sua energia de alma transbordante. Após sua pesquisa dia e noite, você finalmente criou com sucesso o Emissor das Trevas. Você pode invocá-lo gastando um pouco de energia de alma e outros itens."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:warden_servant",
+      "text": "Você pode até montar nele."
+    }
+  ]
+}

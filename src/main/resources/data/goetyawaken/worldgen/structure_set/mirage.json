@@ -1,0 +1,15 @@
+{
+  "structures": [
+    {
+      "structure": "goetyawaken:mirage",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "salt": 1876543457,
+    "spacing": 96,
+    "separation": 32,
+    "spread_type": "linear",
+    "type": "minecraft:random_spread"
+  }
+}

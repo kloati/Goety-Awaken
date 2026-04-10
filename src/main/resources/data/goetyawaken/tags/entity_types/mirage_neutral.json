@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:zombie",
+    "minecraft:skeleton",
+    "minecraft:wither_skeleton",
+    "goety:haunted_armor",
+    "goety:crypt_slime",
+    "goety:reaper",
+    "goety:border_wraith",
+    "goety:bone_spider",
+    "goety:cairn_necromancer",
+    "goety:drowned_necromancer_servant",
+    "goetyawaken:zombie_darkguard",
+    "goetyawaken:skeleton_vanguard",
+    "minecraft:husk"
+  ]
+}

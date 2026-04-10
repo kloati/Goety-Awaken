@@ -1,0 +1,16 @@
+{
+  "name": "废弃塔楼",
+  "icon": "goety:crag_bricks",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "早已被遗弃的前哨站。其底部蔓延着紫黑的虚空，曾驻扎于此的人们的尸骸早已被侵蚀地只剩下头骨。如今塔内空无一人，谁也不知道是否还有来自虚空的怪物藏匿于其中。"
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/abandoned_tower.png"],
+      "border": true
+    }
+  ]
+}

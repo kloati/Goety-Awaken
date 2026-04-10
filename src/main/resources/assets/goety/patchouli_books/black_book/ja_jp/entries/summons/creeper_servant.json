@@ -1,0 +1,21 @@
+{
+  "name": "クリーパーの従者",
+  "icon": "goetyawaken:creeper_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "葉のような質感を持つこの奇妙な生物は、標的に向かって猛然と突き進み、自らを犠牲にして爆発を巻き起こす。幸いなことに、この爆発が汝の領地――すなわち周囲のブロックを損なうことはないようだ。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:creeper_servant",
+      "text": "爆発物の力を利用し、クリーパーの従者を召喚する。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:creeper_servant",
+      "text": "クリーパーの従者は、汝のためにその身を捧げて忠実に爆発するだろう。"
+    }
+  ]
+}

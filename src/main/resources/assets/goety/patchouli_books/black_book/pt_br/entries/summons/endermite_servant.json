@@ -1,0 +1,16 @@
+{
+  "name": "Servo Endermite",
+  "icon": "goetyawaken:endermite_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Uma criaturinha 'peluda' de uma dimensão aterrorizante desconhecida. O ser mais odiado do Enderman."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:endermite_servant",
+      "text": "Servos Endermite rastrearão e atacarão seus inimigos."
+    }
+  ]
+}

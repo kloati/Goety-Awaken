@@ -1,0 +1,25 @@
+{
+  "name": "Servo Arqu-Ilusionista",
+  "icon": "goety:illusion_focus",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Estes Ilusionistas experientes, tendo aprimorado suas habilidades longe da Mansão da Floresta, superam seus parentes mais fracos não apenas em seu domínio das ilusões. Diferente de seus aprendizes que só entendem o básico da magia de ilusão, os Arqu-Ilusionistas são arqueiros solitários e mortais. Eles se livraram de sua fragilidade novata, tornando-se perspicazes, insidiosos e altamente agressivos."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Eles carregam uma aljava de flechas de fogos de artifício mágicas, capazes de disparar flechas explosivas belas e mortais em meio à batalha. Simultaneamente, eles invocam múltiplos duplos ilusórios. Sob a cobertura de fogos de artifício e fantasmas arcanos, eles podem facilmente desaparecer de vista, planejando sua próxima emboscada das sombras."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:arch_illusioner_servant",
+      "text": "Transforme um Ilusionista em um Servo Arqu-Ilusionista através de um ritual."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:arch_illusioner_servant",
+      "text": ""
+    }
+  ]
+}

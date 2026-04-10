@@ -1,0 +1,24 @@
+{
+  "name": "goetyawaken:greatsword_burial_site/start_pool",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "goetyawaken:greatsword_burial_site1",
+        "processors": "goetyawaken:greatsword_burial_site_loot",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "goetyawaken:greatsword_burial_site2",
+        "processors": "goetyawaken:greatsword_burial_site_loot",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

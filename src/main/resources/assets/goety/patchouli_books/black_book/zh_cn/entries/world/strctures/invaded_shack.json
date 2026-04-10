@@ -1,0 +1,16 @@
+{
+  "name": "废墟小屋",
+  "icon": "goety:silt_marble",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "路边一座废弃房屋，破损至此，了无人烟。虚空的侵蚀从地底蔓延而上，已吞没半间屋舍。若当年研究者有所得，此地或许不至于荒废如此。"
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/invaded_shack.png"],
+      "border": true
+    }
+  ]
+}

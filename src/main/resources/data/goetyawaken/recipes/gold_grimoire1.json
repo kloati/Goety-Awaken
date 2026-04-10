@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "minecraft:honeycomb"
+    },
+    {
+      "item": "minecraft:blue_ice"
+    },
+    {
+      "item": "minecraft:lightning_rod"
+    },
+    {
+      "item": "minecraft:redstone_block"
+    },
+    {
+      "item": "minecraft:snowball"
+    },
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "goety:wind_core"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:gold_grimoire"
+  }
+}

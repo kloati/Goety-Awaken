@@ -1,0 +1,11 @@
+{
+  "name": "混沌の牢獄",
+  "icon": "goetyawaken:mushroom_coated_alloy_block",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "オーバーワールド、ネザー、そしてエンド……。三つの次元の力が複雑に交錯するこの場所には、ある不穏な伝説が語り継がれている。その奥深くには、かつて造り出された巨大にして制御不能な「戦争兵器」が、今もなお幽閉されているというのだ……。"
+    }
+  ]
+}

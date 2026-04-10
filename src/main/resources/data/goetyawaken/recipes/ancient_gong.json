@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "B#B",
+    "#A#",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:copper_ingot"
+    },
+    "B": {
+      "item": "minecraft:string"
+    },
+    "A": {
+      "item": "goety:weakening_focus"
+    }
+  },
+  "result": {
+    "item": "goetyawaken:ancient_gong"
+  }
+}

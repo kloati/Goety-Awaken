@@ -1,0 +1,21 @@
+{
+  "name": "Bloco de Safira da Alma",
+  "icon": "goetyawaken:soul_sapphire_block",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Assim como o Bloco de Rubi da Alma, é comprimido a partir de Safiras da Alma e contém os mistérios mágicos da família real. Ninguém sabe quanta gente teve seu sangue espremido deste belo bloco de safira."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:soul_sapphire_block",
+      "text": "Crie o Bloco de Safira da Alma."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:soul_sapphire_from_block",
+      "text": "Obtenha Safira da Alma do Bloco de Safira da Alma."
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Cabra do Crepúsculo",
+  "icon": "goetyawaken:hostile_twilight_goat_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Entre os habitantes das terras altas, lendas de cabras negras persistem há eras — contos provavelmente inspirados nas Cabras do Crepúsculo. Essas criaturas negras, muito mais ferozes que cabras comuns, investem violentamente contra suas vítimas com seus chifres. Se seus chifres se quebrarem, recorrem a dilacerar as vítimas com seus dentes afiados."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_twilight_goat",
+      "text": "Jovem Sombrio"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Glaive",
+  "icon": "goetyawaken:glaive",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "You have often wondered why the Skeleton Vanguards are equipped with glaives. Perhaps by trying wielding one for yourself, you will understand why ancient kings issued these weapons as standard arms for their elite troops."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:glaive",
+      "text": ""
+    }
+  ]
+}

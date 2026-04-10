@@ -1,0 +1,31 @@
+{
+  "name": "华丽之瓮",
+  "icon": "goetyawaken:gorgeous_urn_pale",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "漂亮的罐子，比外观看起来的内容空间更大，可以用来储存物资和装饰基地，甚至还有多种颜色可供选择！"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:gorgeous_urn_pale",
+      "text": "苍白"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:gorgeous_urn_verdant",
+      "text": "铜绿"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:gorgeous_urn_indigo",
+      "text": "靛青"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:gorgeous_urn_crimson",
+      "text": "赤红"
+    }
+  ]
+}

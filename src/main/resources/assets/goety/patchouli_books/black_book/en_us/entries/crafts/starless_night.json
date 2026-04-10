@@ -1,0 +1,29 @@
+{
+  "name": "Starless Night",
+  "icon": "goetyawaken:starless_night",
+  "category": "goety:goetyawaken_crafts",
+  "advancement": "goety:goety/kill_an_ender_keeper",
+  "secret": true,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "It is said that the Starless Night is haunted by echoes of pain that linger within the pitch-black blade. This formidable claymore can be obtained by upgrading an Obsidian Claymore using collected rare treasures and curiosities."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:starless_night"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Beyond possessing all the functionalities of the Obsidian Claymore, this blade can unleash blade-like air currents infused with Void energy, and inflicts the Void Touched effect upon beings. When its attack damage exceeds a target's remaining health, the excess damage is transferred to surrounding creatures."
+    },
+    {
+       "type": "patchouli:text",
+      "text": "For certain arcane reasons, this claymore can be inserted into a staff for spellcasting, functioning akin to a focus. When loaded into a Void Staff, it fires Void slashes reminiscent of Razor Wind Focus. When not used with a Void Staff, it serves the function of an End Walk focus."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "It can absorb Soul Energy for self-repair."
+    }
+  ]
+}

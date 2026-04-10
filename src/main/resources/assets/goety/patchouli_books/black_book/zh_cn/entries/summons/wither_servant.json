@@ -1,0 +1,16 @@
+{
+  "name": "凋灵仆从",
+  "icon": "goetyawaken:wither_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "通过远古的下界反应堆与你精湛的黑魔法技艺，结合从过往卷轴中得知的下界历史，你成功创造出了服从你命令的凋灵。当然，它只听你的。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:wither_servant",
+      "text": "你甚至可以骑上去，驾驶它进行飞行。"
+    }
+  ]
+}

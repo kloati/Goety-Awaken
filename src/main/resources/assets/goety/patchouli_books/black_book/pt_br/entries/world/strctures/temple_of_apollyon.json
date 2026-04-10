@@ -1,0 +1,16 @@
+{
+  "name": "Templo de Apollyon",
+  "icon": "minecraft:red_nether_bricks",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Um templo outrora construído por cultistas, e um local de peregrinação para A Chama Buscadora. Diz-se que as chamas do templo queimam desde os tempos antigos, nunca se apagando. A maioria dos vitoriosos que saem vivos tornam-se reticentes, relutantes em falar de suas experiências no interior; quanto àqueles que nunca emergiram, seus nomes há muito foram dispersos ao vento, restando apenas cinzas."
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/temple_of_apollyon.png"],
+      "border": true
+    }
+  ]
+}

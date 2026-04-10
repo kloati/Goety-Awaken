@@ -1,0 +1,16 @@
+{
+  "name": "幽魂提灯",
+  "icon": "goetyawaken:wraith_lantern",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "一位法师的灵魂可不好获得，但你可以通过把灵魂重新聚集的方式来复活它。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:wraith_lantern",
+      "text": "制作这把寒冷的灯笼，便可以重新复活那座幽灵小屋的主人"
+    }
+  ]
+}

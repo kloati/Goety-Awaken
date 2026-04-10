@@ -1,0 +1,21 @@
+{
+  "name": "Lágrima de Obsidiana",
+  "icon": "goetyawaken:obsidian_tear",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "A Lágrima de Obsidiana é uma oferenda ancestral que escorre do inquebrável, o próprio ritual solidificado, e a personificação do 'Portão' para a ascensão. Mortais que bebem esta lágrima se tornam capazes de transformação, mas o mero consumo é insuficiente para atravessar o portão - o bebedor deve realizar grandes feitos como prova oferecida aos princípios invisíveis, assim ganhando o sinal de promoção."
+    },
+    {
+      "type": "text",
+      "text": "Quando os feitos são cumpridos, a forma antiga e vinculada se desprenderá como poeira derramada, completando a ascensão final. Se alguém que a bebe realizar proezas dignas de serem registradas na história, ele se livrará de sua casca mundana e buscará um novo propósito sob seres superiores - tornando-se o que pode ser chamado de 'Apóstolo'."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:obsidian_tear",
+      "text": "Criando a Lágrima de Obsidiana."
+    }
+  ],
+  "advancement": "goety:goety/kill_a_apostle"
+}

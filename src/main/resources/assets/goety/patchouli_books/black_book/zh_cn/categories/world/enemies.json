@@ -1,0 +1,7 @@
+{
+  "name": "敌人",
+  "description": "这个世界中的敌对生物和威胁。",
+  "icon": "minecraft:zombie_head",
+  "parent": "goety:goetyawaken_world",
+  "sortnum": 1
+}

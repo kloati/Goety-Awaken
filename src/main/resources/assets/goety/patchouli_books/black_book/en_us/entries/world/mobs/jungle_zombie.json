@@ -1,0 +1,16 @@
+{
+  "name": "Jungle Zombie",
+  "icon": "goetyawaken:jungle_zombie_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "It seems the vitality of the jungle has, unsurprisingly, also spread to these deceased bodies. Thanks to the moss and plants covering these zombie variants, their claws and bites carry a potent venom."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:jungle_zombie",
+      "text": ""
+    }
+  ]
+}

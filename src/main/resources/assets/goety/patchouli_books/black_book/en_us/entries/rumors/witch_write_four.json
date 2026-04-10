@@ -1,0 +1,74 @@
+{
+  "name": "Witch's Notes. III",
+  "icon": "goety:death_scythe",
+  "category": "goety:goetyawaken_rumors",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Lately, I've discovered new presences lurking in the lairs left behind by the ancients I've slain. It seems the old law of the wild—survival of the fittest—applies even to those ancient beings. They absorb one another's power, growing ever more ancient, ever more formidable."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety:muck_wraith",
+      "text": "Ancient Terror"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "It was among the first souls to perish in these lands, lingering long before death was understood as an 'end.' So much time has passed that it no longer remembers its living face—only an endless, seething hatred for the living."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety:obsidian_monolith",
+      "text": "The Unending"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The first apostle of the Nether cult erected this monolith. No one knows why. Perhaps to prove that eternity exists. Perhaps simply to show later generations what stubbornness looks like. Bound to its power, heretics kneel before it in prayer, guarding something that lost its meaning long ago. Perhaps this is the end of faith."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety:bound_geomancer",
+      "text": "Frost Warden"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "He was once among the finest geomancers of the Illagers. Sent on a mission to the Boreal Spire, he never returned. Now bound by an undying curse to the tower's highest floor, he exists neither living nor dead—merely a prisoner trapped by uncontrollable sorcery, guarding the very prison that holds him. He does not seek freedom. He only wants you to stay as well."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "minecraft:guardian",
+      "text": "Abyssal Eye"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Sailors tell a hundred tales of the abyss. Ninety-nine are false. The hundredth was never spoken—because none who spoke it lived to reach the shore. The drowned do not guard it willingly; they simply cannot escape. Former sailors, now hollow pupils through which the abyss gazes outward."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety:squall_golem",
+      "text": "The Thunderstorm"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Highland folk say the first Squall Golem was shaped by the storm itself. It wandered here from the Tempest Shrine, every stone still etched with the wind-scars of that sacred place. The bound storm casters follow it—not merely because they are bound, but because in its presence, they feel the true power they have always sought."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety:web_spider",
+      "text": "Abominable Weaver"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Web Spiders are annoying enough. Now imagine one that learned patience. That learned to wait. That learned to make every single strand of silk part of its trap. The Abominable Weaver dwells within the Greatsword Burial Site—cunning, patient, waiting until its minions have blasted you apart before it feasts on your remains."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "These enemies are no easier than the last. They are stronger, more cunning—the kind that give even me pause. But remember, fear and hesitation are your greatest foes. Since you seek to prove your courage in hunting the ancients, press forward without looking back."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "May fortune favor you, $(playername)."
+    }
+  ]
+}

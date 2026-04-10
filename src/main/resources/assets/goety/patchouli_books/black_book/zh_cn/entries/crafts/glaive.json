@@ -1,0 +1,16 @@
+{
+  "name": "长柄刀",
+  "icon": "goetyawaken:glaive",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "你时常好奇骷髅先锋们配备的武器为什么是长柄刀——或许亲自上手用一用才会知道为什么古代国王将其作为精锐部队的制式武器。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:glaive",
+      "text": ""
+    }
+  ]
+}

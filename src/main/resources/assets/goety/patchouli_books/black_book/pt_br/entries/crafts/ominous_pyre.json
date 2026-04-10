@@ -1,0 +1,58 @@
+{
+  "name": "Pira Amaldiçoada",
+  "icon": "goety:ominous_pyre",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Você pode ser capaz de treinar seus Neollagers em mais classes através da Pira Sinistra..."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety:ominous_pyre"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Servo Envioker",
+      "text": "Requisitos: $(li)Servo Invocador$(li)1 Bloco de Rubi da Alma $(li)48 Estantes de Livros/Blocos com poder de encantamento equivalente $(li)4 Crânios Altos, $(li)2 Mesas de Encantamento $(li)8 Castiçais de Almas $(li)8 Urnas de Reserva."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Guarda Real",
+      "text": "Requisitos: $(li)Servo Vingador $(li)16 Blocos de Aço Pálido $(li)16 Blocos de Metal Amaldiçoado $(li)8 Blocos de Ouro $(li)4 Bancas de Ferraria $(li)4 Altos-fornos $(li)4 Bigornas $(li)8 Estandartes $(li)4 Suportes de Armadura $(li)1 Bloco de Safira da Alma."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Servo Feiticeiro Pedra (Nível 1)",
+      "text": "Requisitos: $(li)Deve ser um neollager com aptidão mágica $(li)32 Pedras $(li)2 Fogueiras das Almas $(li)4 Fogueiras $(li)4 Altar das Trevas $(li)1 Pedestal com um Núcleo da Fome $(li)1 Pedestal com um Núcleo de Animação $(li)1 Pedestal com um Núcleo Místico $(li)1 Pedestal com um Núcleo do Vento $(li)1 Gaiola Amaldiçoada não vazia $(li)4 Suportes de Armadura"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Servo Feiticeiro Ferro (Nível 2)",
+      "text": "Requisitos: $(li)Servo Feiticeiro Pedra $(li)Além dos blocos ambientais do servo feiticeiro Pedra: $(li)24 Blocos de Ferro $(li)1 Caldeirão cheio de Água $(li)1 Caldeirão cheio de Lava $(li)1 Caldeirão cheio de Neve Fofa $(li)1 Caldeirão cheio de Vácuo líquido $(li)4 Drusa de Ametista $(li)8 Raíces Invadidas $(li)4 Blocos de Mel $(li)2 Favo de Mel"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Servo Feiticeiro Ouro (Nível 3)",
+      "text": "Requisitos: $(li)Servo Feiticeiro Nível Ferro $(li)Além dos blocos ambientais do servo feiticeiro Ferro: $(li)20 Blocos de Ouro $(li)1 Cristal de Ressonância $(li)16 Gelo Azul $(li)8 Para-raios"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Servo Feiticeiro Esmeralda (Nível 4)",
+      "text": "Requisitos: $(li)Servo Feiticeiro Nível Ouro $(li)Além dos blocos ambientais do servo feiticeiro Ouro: $(li)8 Blocos de Esmeralda $(li)2 Tear $(li)2 Lanterna Marinha $(li)4 Blocos de Jade"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Servo Feiticeiro Diamante (Nível 5)",
+      "text": "Requisitos: $(li)Servo Feiticeiro Nível Esmeralda $(li)Além dos blocos ambientais do servo feiticeiro Esmeralda:$(li)8 Blocos de Diamante $(li)16 Blocos de Redstone $(li)4 Blocos de Magma"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Servo Pregador",
+      "text": "Requisitos: $(li)Novo aldeão com aptidão mágica $(li)20 Púlpitos não vazios $(li)16 Estantes de Livros Cinzeladas não vazias $(li)4 Caldeirões cheios de água."
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety:ominous_pyre": 1
+  }
+}

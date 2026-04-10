@@ -1,0 +1,16 @@
+{
+  "name": "皇家守卫",
+  "icon": "goetyawaken:royalguard_spawn_egg",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "text",
+      "text": "你设法从卫道士中训练出一批最精锐的护卫，他们兼具速度和力量，能够轻易粉碎目标的防线。最重要的是，这些强大的士兵只听命于你一人。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:royalguard_servant",
+      "text": "皇家守卫会为你献上忠诚。"
+    }
+  ]
+}

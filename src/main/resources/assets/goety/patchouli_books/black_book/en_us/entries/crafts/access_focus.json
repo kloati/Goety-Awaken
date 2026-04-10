@@ -1,0 +1,20 @@
+{
+  "name": "Access Focus",
+  "icon": "goetyawaken:access_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Oh no, I'm not at my base right now, but I suddenly need to access my Ender Storage network! What do I do? Relax, friend—you need this Access Focus, which barely even looks like a focus! It can be used not only in a wand, but also held in hand, or even equipped in a curios slot! Simply press the Remote Access keybind (default: [) to open your storage network anytime, anywhere!"
+    },
+    {
+      "type": "text",
+      "text": "To use this focus, besides a small amount of Soul Energy, you must first right-click to bind it to an Ender Access Lectern. Afterwards, the Access Focus can be used to remotely open the storage network of the bound lectern. Additionally, while it ignores dimensional and distance limitations, the network's chunk must be loaded for it to function."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:access_focus",
+      "text": ""
+    }
+  ]
+}

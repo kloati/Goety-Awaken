@@ -1,0 +1,16 @@
+{
+  "name": "监守者仆从",
+  "icon": "goetyawaken:warden_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "在幽暗之域，你见到了一个强大的生命体，他散发的灵魂能量都要溢出来了。在你夜以继日的研究下，你终于成功地制作出了暗影尖啸体。只需要付出一些灵魂能量和其他东西就可以召唤他了。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:warden_servant",
+      "text": "你甚至可以骑上去。"
+    }
+  ]
+}

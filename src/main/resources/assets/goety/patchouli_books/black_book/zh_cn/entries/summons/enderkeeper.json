@@ -1,0 +1,22 @@
+{
+  "name": "末影守望者",
+  "icon": "goetyawaken:eye_of_overwatch",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "在那位守望者倒下后，你才发觉它的身体空无一物，只有一块块随风而逝的残骸。但在虚无中有一只眼瞳死死的盯着你，仿佛在期盼着什么。在你解开卷轴上的密文后，你果然在卷中找到了有关它的记载，并得出结论：这是一把“活着”的剑。以世界各地搜来的奇珍异宝为守望者重塑形体，或许它将在未来助你一臂之力。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:enderkeeper",
+      "text": ""
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:ender_keeper_servant",
+      "text": "武艺冠绝"
+    }
+  ],
+  "advancement": "goety:goety/get_shrouded_blueprint"
+}

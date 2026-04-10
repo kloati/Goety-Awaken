@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#+ ",
+    "$&%",
+    " +#"
+  ],
+  "key": {
+    "#": {
+      "item": "goetyawaken:iron_grimoire"
+    },
+    "%": {
+      "item": "goety:ectoplasm"
+    },
+    "$": {
+      "item": "minecraft:ender_eye"
+    },
+    "&": {
+      "item": "minecraft:white_dye"
+    },
+    "+": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "goetyawaken:ender_storage_book_iron",
+    "count": 1
+  }
+}

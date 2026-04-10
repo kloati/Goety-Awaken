@@ -1,0 +1,17 @@
+{
+  "name": "黑暗登山镐",
+  "icon": "goetyawaken:dark_ice_axe",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "你能用铁和钻石制作一把登山镐，为什么不用黑暗金属制作一把呢？它拥有登山镐的功能，还会像黑暗金属工具那样让敌人陷入衰弱并用灵魂修复自己。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:dark_ice_axe",
+      "text": ""
+    }
+  ],
+  "advancement": "goety:goety/craft_dark_ingot"
+}

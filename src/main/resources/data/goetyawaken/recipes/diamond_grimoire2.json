@@ -1,0 +1,42 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "minecraft:book"
+  },
+  "craftType": "magic",
+  "soulCost": 300,
+  "duration": 10,
+  "ingredients": [
+    {
+      "item": "goety:resonance_crystal"
+    },
+    {
+      "item": "minecraft:budding_amethyst"
+    },
+    {
+      "tag": "forge:tools/tridents"
+    },
+    {
+      "item": "minecraft:goat_horn"
+    },
+    {
+      "item": "minecraft:nautilus_shell"
+    },
+    {
+      "item": "minecraft:tnt"
+    },
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "goety:frost_nova_focus"
+    },
+    {
+      "item": "minecraft:vine"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:diamond_grimoire"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "灾厄教父仆从",
+  "icon": "goety:ominous_orb",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "text",
+      "text": "灾厄教父是灾厄村民当中的威望的是数一数二的。这位被你亲自提拔的灾厄教父会指挥附近的灾厄村民仆从，使用自己的法杖射出魔力束和创造邪恶之牙，还会丢出炸弹来攻击他的敌人。"
+    },
+    {
+      "type": "text",
+      "text": "当他的魔杖被破坏后，他会在120秒后重新制作出一个新的。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:minister_servant",
+      "text": "通过仪式将传教士转化为灾厄教父仆从。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:minister_servant",
+      "text": "灾厄教父仆从会用他的指挥艺术和魔法为你战斗。"
+    }
+  ]
+}

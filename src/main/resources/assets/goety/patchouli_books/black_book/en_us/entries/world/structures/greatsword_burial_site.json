@@ -1,0 +1,16 @@
+{
+  "name": "Greatsword Burial Site",
+  "icon": "goety:dark_sword",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "It is said that the Greatsword Burial Site stands in the deepest darkness underground, a legendary greatsword that no one can wield embedded within a stone pedestal. Legends tell that this blade can sever the soul itself, yet for a thousand years, none have been able to claim it from its grim guardian—whether by brute strength or arcane force."
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/greatsword_burial_site.png"],
+      "border": true
+    }
+  ]
+}

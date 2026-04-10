@@ -1,0 +1,16 @@
+{
+  "name": "Invaded Shack",
+  "icon": "goety:silt_marble",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A derelict shack by the roadside, broken and abandoned, void of any sign of life. The corruption of the void creeps upward from below, having already swallowed half the dwelling. Perhaps if the researchers had succeeded back then, this place might not have fallen into such desolation."
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/invaded_shack.png"],
+      "border": true
+    }
+  ]
+}

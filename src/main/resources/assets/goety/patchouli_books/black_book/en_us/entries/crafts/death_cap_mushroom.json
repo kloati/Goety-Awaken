@@ -1,0 +1,17 @@
+{
+  "name": "Death Cap Mushroom",
+  "icon": "goetyawaken:death_cap_mushroom",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Gazing at the dangerous mycelium in the Chaos Prison, you sometimes can't help but wonder how it might taste. Ingenious as you are, although you cannot fully eliminate its toxicity, you have ultimately succeeded in cultivating a variety with acceptable levels of poison. However, before sampling it, perhaps wearing a hat derived from the same source might make the experience more bearable?"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:death_cap_mushroom",
+      "text": ""
+    }
+  ],
+  "advancement": "goetyawaken:mushroom_monstrosity_kill"
+}

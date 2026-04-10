@@ -1,0 +1,20 @@
+{
+  "name": "末影遣使附魔书",
+  "icon": "goetyawaken:endersent_enchanted_book",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "普通的末影遣使已经无法满足你了。你想到了在终末永狱中见识过的那四位具名遣使，并从它们那里得到了灵感。你可以将蕴含虚空力量的虚空回响注入到一本附魔书里面，便可以给予你的末影遣使，让他们获得更加强大的力量——被授予“眼”。"
+    },
+    {
+      "type": "text",
+      "text": "这本特别的附魔书的力量是十分不稳定的，你无法决定其中储存的是哪种“眼”。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:endersent_enchanted_book",
+      "text": "制作末影遣使附魔书。"
+    }
+  ]
+}

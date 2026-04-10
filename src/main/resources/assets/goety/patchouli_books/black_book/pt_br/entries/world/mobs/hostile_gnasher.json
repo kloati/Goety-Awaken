@@ -1,0 +1,16 @@
+{
+  "name": "Triturador Hostil",
+  "icon": "goetyawaken:hostile_gnasher_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Falando de modo geral, humanos raramente aparecem no cardápio de um tubarão, mas esses demônios das profundezas são mais ferozes que a maioria dos peixes. Eles são viciosos, gananciosos e incansáveis — felizmente, não são muito comuns."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_gnasher",
+      "text": ""
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "グレイブ",
+  "icon": "goetyawaken:glaive",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "汝は、なぜスケルトンヴァンガードたちが皆一様にグレイブを携えているのか、常々不思議に思っていた。その答えは、汝自身がこの武器を手に取り、振るってみることで自ずと明らかになるだろう。かつての古代の王たちが、なぜ自らの精鋭部隊にこの武器を制式兵装として与えたのか、その真意を理解する時が来たのだ。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:glaive",
+      "text": ""
+    }
+  ]
+}

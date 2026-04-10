@@ -1,0 +1,28 @@
+{
+  "parent": "goety:goety/craft_empty_focus",
+  "criteria": {
+    "the_end_envoy": {
+      "trigger": "goetyawaken:the_end_envoy"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.goetyawaken.the_end_envoy.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "goetyawaken:stare_focus"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.goetyawaken.the_end_envoy.title"
+    }
+  },
+  "requirements": [
+    [
+      "the_end_envoy"
+    ]
+  ]
+}

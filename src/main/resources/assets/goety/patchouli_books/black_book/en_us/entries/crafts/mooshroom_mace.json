@@ -1,0 +1,17 @@
+{
+  "name": "Mooshroom Mallet",
+  "icon": "goetyawaken:mooshroom_mace",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "The Mushroom-coated alloy block is an exceptionally heavy material—only such a substance can bear the power of the Mooshroom monstrosity. Yet, you sometimes wonder if this weighty force could be utilized for something else? Ultimately, you forged it into a somewhat familiar-looking weapon. The Mooshroom Mallet ingeniously harnesses the heaviness of the mushroom alloy and the explosive force of fungi, allowing its wielder to deal extra damage based on falling distance when leaping from a height and striking an enemy, while also triggering a violent fungal explosion upon impact."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:mooshroom_mace",
+      "text": "Fungal Explosion Mallet!"
+    }
+  ],
+  "advancement": "goetyawaken:mushroom_monstrosity_kill"
+}

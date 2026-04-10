@@ -1,0 +1,45 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety:ender_chest_focus"
+  },
+  "craftType": "end",
+  "soulCost": 64,
+  "duration": 8,
+  "ingredients": [
+    {
+      "item": "goety:void_shard"
+    },
+    {
+      "item": "goety:shadow_essence"
+    },
+    {
+      "item": "goetyawaken:wraith_lantern"
+    },
+    {
+      "item": "goety:ominous_orb"
+    },
+    {
+      "item": "goety:forbidden_piece"
+    },
+    {
+      "item": "goety:void_shard"
+    },
+    {
+      "item": "goetyawaken:diamond_grimoire"
+    },
+    {
+      "item": "goetyawaken:diamond_grimoire"
+    },
+    {
+      "item": "goety:forbidden_piece"
+    },
+    {
+      "item": "goety:forbidden_piece"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:ender_storage_book_diamond"
+  }
+}

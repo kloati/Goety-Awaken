@@ -1,0 +1,21 @@
+{
+  "name": "Servo Enderman",
+  "icon": "goetyawaken:enderman_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Membros longos, olhos roxos. Eles já possuíam alta inteligência, mas foi completamente destruída no fluxo do tempo. Você conseguiu iluminar a sabedoria desses Emissários do Fim, e além de seu medo de água e sua altura excessiva, essas entidades quase não têm falhas. Elas também podem mover blocos ao redor e entregá-los a você — desde que você diga a elas o que precisa."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:enderman_servant",
+      "text": "Invoque um servo Enderman"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:enderman_servant",
+      "text": "Servos Enderman lutarão fielmente por você e moverão blocos."
+    }
+  ]
+}

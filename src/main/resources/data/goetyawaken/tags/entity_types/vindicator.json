@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:vindicator",
+    "goety:vindicator_servant",
+    "goety:vindicator_chef_servant"
+  ]
+}

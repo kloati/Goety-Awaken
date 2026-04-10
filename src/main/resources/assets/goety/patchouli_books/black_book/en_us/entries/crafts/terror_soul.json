@@ -1,0 +1,11 @@
+{
+  "name": "Terror Soul",
+  "icon": "goetyawaken:terror_soul",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "The revival item for Wight, which can summon Wight more cheaply."
+    }
+  ]
+}

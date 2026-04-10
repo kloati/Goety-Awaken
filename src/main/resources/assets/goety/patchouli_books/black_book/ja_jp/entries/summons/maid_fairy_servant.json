@@ -1,0 +1,21 @@
+{
+  "name": "メイドフェアリー",
+  "icon": "goetyawaken:maid_fairy_servant_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "メイドと契約を交わす儀式と同様に、闇の魔術を用いれば、メイドフェアリーと契約するための儀式を再現することも可能だ。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:maid_fairy_servant",
+      "text": ""
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:maid_fairy_servant",
+      "text": "彼女は、あまりにも愛らしいとは思わぬか？"
+    }
+  ]
+}

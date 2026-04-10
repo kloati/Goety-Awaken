@@ -1,0 +1,17 @@
+{
+  "name": "Grave Bane",
+  "icon": "goetyawaken:grave_bane",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "You have managed to modify the glaive, forging it into a sacred blade that strikes down the undead by utilizing a Soul Sapphire imbued with dominance and a Cryptic Eye. It has grown so attuned to the Smite enchantment that Smite will have double its normal effectiveness when applied to this weapon!"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:grave_bane",
+      "text": ""
+    }
+  ],
+  "advancement": "goety:goety/read_front_scroll"
+}

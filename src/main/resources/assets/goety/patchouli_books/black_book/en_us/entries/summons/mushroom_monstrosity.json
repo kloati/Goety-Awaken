@@ -1,0 +1,42 @@
+{
+  "name": "Mooshroom Monstrosity",
+  "icon": "goetyawaken:mushroom_monstrosity_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Now that you have mastered the Dominance Scrolls, merely creating a Monstrosity forged from redstone can no longer satisfy your ambition. After destroying the fungal monstrosity within the Chaos Prison, you were deeply awed by the raw power and violence of that Prototype. The wisdom of the ancients now seems so tantalizingly within your reach. "
+    },
+    {
+      "type": "text",
+      "text": "Having obtained the circuits stripped from that monstrosity, and wielding the power of three dimensions, you have crafted a mold that merges materials from those dimensions with some... mushrooms. With this bizarre mold, you already know what must be done next. "
+    },
+    {
+      "type": "image",
+      "images": ["goetyawaken:textures/gui/mushroom_monstrosity_1.png"],
+      "border": true,
+      "title": "Construct the First Layer of the Mold",
+      "text": "Of course, glass is not required."
+    },
+    {
+      "type": "image",
+      "images": ["goetyawaken:textures/gui/mushroom_monstrosity_2.png"],
+      "border": true,
+      "title": "Construct the Second Layer of the Mold",
+      "text": "Of course, glass is not required."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:mushroom_monstrosity",
+      "text": "Build Your Own Prototype!"
+    },
+    {
+      "type": "image",
+      "images": ["goetyawaken:textures/gui/mushroom_monstrosity_revive.png"],
+      "border": true,
+      "title": "Revive",
+      "text": "Your monstrosity fell? That's quite an achievement. For your enemy, I mean."
+    }
+  ],
+  "advancement": "goetyawaken:royal_research_completed"
+}

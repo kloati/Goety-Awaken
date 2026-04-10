@@ -1,0 +1,7 @@
+{
+  "name": "Mutations",
+  "description": "Transform one creature into another.",
+  "icon": "minecraft:red_mushroom",
+  "sortnum": 3,
+  "parent": "goety:goetyawaken"
+}

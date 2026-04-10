@@ -1,0 +1,7 @@
+{
+  "name": "Inimigos",
+  "description": "Criaturas hostis e ameaças deste mundo.",
+  "icon": "minecraft:zombie_head",
+  "parent": "goety:goetyawaken_world",
+  "sortnum": 1
+}

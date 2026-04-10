@@ -1,0 +1,20 @@
+{
+  "name": "伪造的任命书",
+  "icon": "goetyawaken:fake_appointment",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "有幸于灾厄堡垒中寻得一份或许是不慎被灾厄皇室遗弃于此的宰相任命书之后，一个大逆不道的想法浮现在你心头——如果，对照着任命高级官员的任命书原件，伪造出一份虚假的任命书，是不是可以扶持那些忠于你的灾厄村民中的一个，顶替一位真的宰相的位置？"
+    },
+    {
+      "type": "text",
+      "text": "你需要欺骗一位高级官员前来，劫持他，让你的恶妒者拿着伪造出来的任命书谋杀他——或许可以神不知鬼不觉地窃取他的身份！"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:fake_appointment",
+      "text": "伪造一份任命书。"
+    }
+  ]
+}

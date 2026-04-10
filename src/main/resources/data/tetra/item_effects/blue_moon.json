@@ -1,0 +1,11 @@
+{
+    "trigger": "tetra:apply_hit_effects",
+    "effect": "goetyawaken.blue_moon",
+    "data": {
+        "numbers": {}
+    },
+    "condition": {
+        "type": "tetra:fixed",
+        "value": false
+    }
+}

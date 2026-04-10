@@ -1,0 +1,17 @@
+{
+  "name": "Servo Senhor da Caveira",
+  "icon": "goetyawaken:ally_pithos",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "A técnica de ancorar os mortos com Âncoras de Renascimento e o ofício de criar Necromantes o inspiraram. Usando o Pithos de Cerâmica de um Senhor da Tumba como recipiente, você criou um Servo Senhor da Caveira próprio. Se o Senhor cair, você só precisa usar uma Âncora de Renascimento no pithos de cerâmica que ele deixar para invocá-lo de volta da morte mais uma vez."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:skull_lord_servant",
+      "text": "Aquele que partiu e não conseguiu alcançar a transcendência..."
+    }
+  ],
+  "advancement": "goety:goety/unlock_necromancer"
+}

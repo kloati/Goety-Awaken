@@ -1,0 +1,21 @@
+{
+  "name": "goetyawaken:rabbit_shed/start_pool",
+
+  "fallback": "minecraft:empty",
+
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+
+        "location": "goetyawaken:rabbit_shed",
+
+        "processors": "goetyawaken:rabbit_shed_loot",
+
+        "projection": "rigid",
+
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

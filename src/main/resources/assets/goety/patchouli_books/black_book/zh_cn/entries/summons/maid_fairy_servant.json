@@ -1,0 +1,21 @@
+{
+  "name": "妖精女仆",
+  "icon": "goetyawaken:maid_fairy_servant_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "如同契约女仆的仪式，用黑暗魔法当然也可以仿造一个契约妖精女仆的仪式。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:maid_fairy_servant",
+      "text": ""
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:maid_fairy_servant",
+      "text": "非常可爱不是吗？"
+    }
+  ]
+}

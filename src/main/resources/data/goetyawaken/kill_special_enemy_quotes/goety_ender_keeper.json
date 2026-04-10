@@ -1,0 +1,16 @@
+{
+    "goety:ender_keeper":  [
+                               {
+                                   "key": "kill_special_enemy.goety.ender_keeper_1",
+                                   "subtitles":  10.0
+                               },
+                               {
+                                   "key": "kill_special_enemy.goety.ender_keeper_2",
+                                   "subtitles":  10.5
+                               },
+                               {
+                                   "key": "kill_special_enemy.goety.ender_keeper_3",
+                                   "subtitles":  11.0
+                               }
+                           ]
+}

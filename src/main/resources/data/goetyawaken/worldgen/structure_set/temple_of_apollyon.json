@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "goetyawaken:temple_of_apollyon",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 384,
+    "separation": 32,
+    "salt": 769472947
+  }
+}

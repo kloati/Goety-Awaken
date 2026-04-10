@@ -1,0 +1,24 @@
+{
+  "name": "Emissor das Trevas",
+  "icon": "goetyawaken:shadow_shrieker",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "O Emissor das Trevas é uma criação requintada que combina muitas características do domínio Sculk em um só. Através de um ritual específico, ele pode invocar um servo Defensor leal para servi-lo. Para criar um servo Defensor, você deve primeiro colocar o Emissor das Trevas sobre uma Gaiola Amaldiçoada cheia de energia de alma. Após completar esse passo, use um Fragmento de Eco Profundo nele, e um temível servo Defensor aparecerá."
+    },
+    {
+      "type": "text",
+      "text": "O Emissor das Trevas também pode se defender automaticamente. Basta armazenar Fragmentos de Eco Profundo em um recipiente adjacente a ele e configurar Sensor de Sculk ao redor. Quando os sensores detectarem atividade indesejada, eles enviarão um sinal ao gritador. O gritador então consumirá um fragmento e invocará um servo Defensor para eliminar os invasores."
+    },
+    {
+      "type": "text",
+      "text": "Seu princípio de funcionamento é combinar o poder de vários itens e instrumentos Sculk em um só, criando assim um pequeno pedaço de Escuridão Profunda falsa. Através desse ambiente anormal criado, e então infundido com energia de alma pura, um servo Defensor que obedece a você pode ser moldado."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:shadow_shrieker",
+      "text": "Crie o Emissor das Trevas."
+    }
+  ]
+}

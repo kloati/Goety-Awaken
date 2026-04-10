@@ -1,0 +1,28 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety:wither_skull_focus"
+  },
+  "craftType": "expert_nether",
+  "soulCost": 50,
+  "duration": 10,
+  "research": "royal",
+  "ingredients": [
+    {
+      "item": "goety:ominous_shackles"
+    },
+    {
+      "item": "goety:ominous_shackles"
+    },
+    {
+      "item": "goety:lavaball_focus"
+    },
+    {
+      "item": "goety:flame_capture"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:agony_focus"
+  }
+}

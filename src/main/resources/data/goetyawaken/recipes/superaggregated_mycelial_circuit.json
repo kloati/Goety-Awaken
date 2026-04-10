@@ -1,0 +1,53 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goetyawaken:superaggregated_mycelial_circuit"
+  },
+  "craftType": "overgrown",
+  "soulCost": 100,
+  "duration": 10,
+  "research": "royal",
+  "ingredients": [
+    {
+      "item": "minecraft:red_mushroom_block"
+    },
+    {
+      "item": "minecraft:brown_mushroom_block"
+    },
+    {
+      "item": "minecraft:mushroom_stem"
+    },
+    {
+      "item": "minecraft:nether_wart_block"
+    },
+    {
+      "item": "minecraft:warped_wart_block"
+    },
+    {
+      "item": "goety:snap_fungus"
+    },
+    {
+      "item": "goety:berserk_fungus"
+    },
+    {
+      "item": "goety:overgrowth_focus"
+    },
+    {
+      "item": "goetyawaken:soul_sapphire"
+    },
+    {
+      "item": "minecraft:totem_of_undying"
+    },
+    {
+      "item": "goety:dark_ingot"
+    },
+    {
+      "item": "minecraft:end_crystal"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:superaggregated_mycelial_circuit",
+    "count": 2
+  }
+}

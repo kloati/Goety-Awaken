@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:jigsaw",
+  "biomes": "#goetyawaken:has_structure/greatsword_burial_site",
+  "step": "underground_structures",
+  "spawn_overrides": {},
+  "start_pool": "goetyawaken:greatsword_burial_site/start_pool",
+  "size": 7,
+  "start_height": {
+    "type": "minecraft:uniform",
+    "min_inclusive": {
+      "absolute": -40
+    },
+    "max_inclusive": {
+      "absolute": 0
+    }
+  },
+  "max_distance_from_center": 80,
+  "use_expansion_hack": false,
+  "terrain_adaptation": "bury"
+}

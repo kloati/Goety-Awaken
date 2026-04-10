@@ -1,0 +1,15 @@
+{
+  "name": "goetyawaken:ruined_camp",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "goetyawaken:ruined_camp",
+        "processors": "goetyawaken:ruined_camp_loot",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

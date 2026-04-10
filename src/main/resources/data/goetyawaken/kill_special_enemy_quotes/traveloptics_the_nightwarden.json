@@ -1,0 +1,12 @@
+{
+    "traveloptics:the_nightwarden":  [
+                                         {
+                                             "key": "kill_special_enemy.traveloptics.the_nightwarden_1",
+                                             "subtitles":  10.5
+                                         },
+                                         {
+                                             "key": "kill_special_enemy.traveloptics.the_nightwarden_2",
+                                             "subtitles":  11.0
+                                         }
+                                     ]
+}

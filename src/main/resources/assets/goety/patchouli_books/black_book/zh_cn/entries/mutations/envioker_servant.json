@@ -1,0 +1,16 @@
+{
+  "name": "恶妒者仆从",
+  "icon": "goetyawaken:envioker_spawn_egg",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "text",
+      "text": "灾厄法术的资深学者，额头上的那枚红宝石碎片赋予了他们远超普通唤魔者的力量，同时也使他们的视觉更敏锐，更容易察觉远处的敌人。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:envioker_servant",
+      "text": "恶妒者仆从会使用强大的法术为你战斗。"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "loader": "forge:separate_transforms",
+  "gui_light": "front",
+  "base": {
+    "parent": "goetyawaken:item/starless_night_model"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "goetyawaken:item/starless_night_inventory"
+    },
+    "fixed": {
+      "parent": "goetyawaken:item/starless_night_inventory"
+    },
+    "ground": {
+      "parent": "goetyawaken:item/starless_night_ground"
+    }
+  }
+}

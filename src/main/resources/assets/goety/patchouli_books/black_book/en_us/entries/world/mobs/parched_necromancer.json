@@ -1,0 +1,16 @@
+{
+  "name": "Ruins Necromancer",
+  "icon": "goetyawaken:parched_necromancer_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "It is said that the ancient kingdom buried beneath the yellow sands once possessed many powerful mages. They did not actually perish with the kingdom's decline but instead were reborn as undead... They have hidden themselves away, but perhaps you can summon them using something from that ancient kingdom?"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:parched_necromancer",
+      "text": "Use the Ancient Gong in desert biomes to summon them!"
+    }
+  ]
+}

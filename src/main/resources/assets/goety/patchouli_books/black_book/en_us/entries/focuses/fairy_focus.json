@@ -1,0 +1,16 @@
+{
+  "name": "Fairy Focus",
+  "icon": "goetyawaken:fairy_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "text",
+      "text": "It must be admitted that these annoying, frail little fairies, though not particularly formidable in combat, are flawless in appearance. After studying the ritual of the Contract Maid, you have used dark magic to replicate a ritual for contracting a fairy maid. Now you can put these pretty vases to work!"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:fairy_focus",
+      "text": "Create an Incident?"
+    }
+  ]
+}

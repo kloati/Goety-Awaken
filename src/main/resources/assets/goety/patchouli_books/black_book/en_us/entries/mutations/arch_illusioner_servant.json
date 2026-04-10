@@ -1,0 +1,25 @@
+{
+  "name": "Arch Illusioner Servant",
+  "icon": "goety:illusion_focus",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "These seasoned Illusioners, having honed their skills far from the Dark Manor, surpass their weaker kin not only in their mastery of illusions. Unlike their apprentices who only grasp the basics of illusion magic, Arch Illusioners are solitary and deadly archers. They have shed their novice fragility, becoming sharp-witted, insidious, and highly aggressive."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "They carry a quiver of magical firework arrows, capable of firing beautiful and deadly explosive arrows amidst battle. Simultaneously, they summon multiple illusionary duplicates. Under the cover of fireworks and arcane phantoms, they can easily vanish from sight, plotting their next ambush from the shadows."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:arch_illusioner_servant",
+      "text": "Transform an Illusioner into an Arch Illusioner Servant through a ritual."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:arch_illusioner_servant",
+      "text": ""
+    }
+  ]
+}

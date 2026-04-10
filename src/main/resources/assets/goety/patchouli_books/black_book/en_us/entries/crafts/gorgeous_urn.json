@@ -1,0 +1,31 @@
+{
+  "name": "Gorgeous Urn",
+  "icon": "goetyawaken:gorgeous_urn_pale",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A beautiful vessel with more interior space than its appearance suggests. Perfect for storage and base decoration—available in multiple colors!"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:gorgeous_urn_pale",
+      "text": "Pale"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:gorgeous_urn_verdant",
+      "text": "Verdant"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:gorgeous_urn_indigo",
+      "text": "Indigo"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:gorgeous_urn_crimson",
+      "text": "Crimson"
+    }
+  ]
+}

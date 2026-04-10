@@ -1,0 +1,31 @@
+{
+    "name": "Fate Helmsman",
+    "icon": "goety:ominous_orb",
+    "category": "goety:anecdote/anecdote",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "$(0)\"So why did you leave the Illager Empire?\"$(br)$(5)\"I never betrayed the Illager Empire—I was among its earliest followers... I fought alongside them through campaigns and dangers, my wand weathered by storms. It's been used as a megaphone longer than most people have used their wands at all... I charged to the front because I wanted to give my all for the fledgling empire.\"$(br)$(0)\"Then that would be even less reason to leave, since you loved it so much.\"$(br)$(5)\"Yes, I did love it back then. After the great war, I rose to a high position, seemingly enjoying boundless wealth and honor—yet I had no say in the true heart of power.\""
+        },
+        {
+            "type": "patchouli:text",
+            "text": "$(br)$(0)\"No say? But aren't you...\"$(br)$(5)\"When we fought, how did my techniques compare to the Viziers you've faced before?\"$(br)$(0)\"Oh? Are you saying...\"$(br)$(5)\"Yes—the very things the Illagers most desire: wall-phasing, directed fangs, summoning.\"$(br)$(0)\"Those are exactly what I want most too.\"$(br)$(5)\"Don't interrupt!\"$(br)$(0)\"Yes, sir.\"$(br)$(0)—Strange. For that moment, I wondered why I was afraid of him."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "$(5)\"I was never permitted to learn those spells... Instead, those young Evokers—connected by blood to old nobles and powerful clans, or simply because they were students of the right people—passed the assessments and received a portion of the Soul Ruby's power.\"$(br)$(0)\"But you don't seem to need that power either.\"$(br)$(5)\"True. Yet the Soul Ruby, the Hooded Robe, and the Gilded Robe all signify a certain 'recognition.' Clearly, I was never admitted into the 'recognized' circle—simply because my talent wasn't as great as theirs... It may sound like asking for handouts, but that feeling... it's despair.\"$(br)$(0)\"I understand. I've experienced moments of deep despair too.\"$(br)$(5)\"Hohoho (ahem)... And I was still a Minister, still fighting on the front lines, day after day, year after year. I couldn't bear that cold, bloody life any longer.\""
+        },
+        {
+            "type": "patchouli:text",
+            "text": "$(0)\"So?\"$(br)$(5)\"So I volunteered to serve as the instructor for that term's Vizier candidates. That post is usually just a formality—but that time, I put in extra effort. I used my megaphone to give those young ones a little extra seasoning.\"$(br)$(0)\"Ah? That's not...\"$(br)$(5)\"Keep your voice down! Do you think it's honorable?\"$(br)$(5)\"Anyway, the night before the selection, I led all the candidates of that term in a midnight escape from the Illager Empire. Not a single guard stopped us along the way. I fled across the border like that, determined to become the helmsman of my own fate.\"$(br)$(0)\"...\""
+        },
+        {
+            "type": "patchouli:text",
+            "text": "$(5)\"Later, I got a pet—this orange chicken. It helped us build the house we live in now.\"$(br)$(0)\"Ah? Lava Chickens are that capable?\"$(br)$(5)\"Oh, you've heard of Lava Chickens too, have you? Haha—that makes things easier to understand. Anyway, we lived well, and we went on like that for a long time... until you came. I inevitably assumed a defensive posture for battle.\"$(br)$(0)\"Then why not keep fighting? Aren't you afraid I'll flatten you into a pancake?\"$(br)$(5)\"So what? I've never feared death. I didn't survive this long by cowering. I saw no need to fight, because you didn't come to brawl—I know what you truly want.\""
+        },
+        {
+            "type": "patchouli:text",
+            "text": "$(0)\"Oh?\"$(br)$(5)\"This is the method for training the Minister profession. You can pass this knowledge down to adventurers of future generations, so that they may inspire you to never retreat.\"$(br)$(0)\"Truly a seasoned veteran. Words cannot express my gratitude! I'll be on my way! But if I had actually killed you, how would you have felt?\"$(br)$(5)\"I would have been glad, $(playername)—because you are doing what you want to do. You are all helmsmen of your own fate.\"$(br)$(0)The door closed gently. I continued on my journey."
+        }
+    ]
+}

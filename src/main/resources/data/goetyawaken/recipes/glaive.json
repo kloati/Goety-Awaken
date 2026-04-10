@@ -1,0 +1,34 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "minecraft:iron_sword"
+  },
+  "craftType": "forge",
+  "soulCost": 10,
+  "duration": 5,
+  "research": "front",
+  "ingredients": [
+    {
+      "item": "goety:magic_emerald"
+    },
+    {
+      "item": "goety:savage_tooth"
+    },
+    {
+      "item": "goety:cursed_ingot"
+    },
+    {
+      "item": "goety:grave_dust"
+    },
+    {
+      "item": "goety:haunted_log"
+    },
+    {
+      "item": "minecraft:stick"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:glaive"
+  }
+}

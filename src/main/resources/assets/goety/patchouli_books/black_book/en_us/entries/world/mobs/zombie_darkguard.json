@@ -1,0 +1,16 @@
+{
+  "name": "Zombie Darkguard",
+  "icon": "goetyawaken:zombie_darkguard_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "These putrid bodies are draped in heavy armor, but this in no way affects these guards' hatred of intruders and their craving for flesh."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:zombie_darkguard",
+      "text": "Not to be underestimated opponents!"
+    }
+  ]
+}

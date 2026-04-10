@@ -1,0 +1,11 @@
+{
+  "name": "Mirage",
+  "icon": "minecraft:sandstone",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "A fortaleza fronteiriça de um reino que uma vez de Namelles. Este lugar guardava antigas elites e já foi uma importante fonte de minerais. Até hoje, a fortaleza ainda permanece nas terras áridas, talvez escondendo os segredos da força de elite do reino dentro......"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "ae2:cell_component_4k"
+  },
+  "craftType": "magic",
+  "soulCost": 25,
+  "duration": 2,
+  "ingredients": [
+    {
+      "item": "goety:magic_fabric"
+    },
+    {
+      "item": "goety:magic_fabric"
+    },
+    {
+      "item": "goety:magic_emerald"
+    },
+    {
+      "item": "goety:magic_emerald"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:ender_storage_book_gold"
+  }
+}

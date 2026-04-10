@@ -1,0 +1,21 @@
+{
+  "name": "Servo Creeper de Gelo",
+  "icon": "goetyawaken:ice_creeper_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Explosões mais frias e arrepiantes! Esses creepers aparentemente espertos podem ter menos poder, mas sua frieza após a explosão também congelará inimigos!"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:ice_creeper_servant",
+      "text": "Invoque um servo Creeper de Gelo usando o poder do gelo."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:ice_creeper_servant",
+      "text": "Servos Creeper de Gelo explodiram por você com explosões de gelo."
+    }
+  ]
+}

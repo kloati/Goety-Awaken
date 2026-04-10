@@ -1,0 +1,40 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "minecraft:sugar"
+  },
+  "craftType": "animation",
+  "soulCost": 13,
+  "duration": 37,
+  "ingredients": [
+    {
+      "item": "minecraft:cherry_sapling"
+    },
+    {
+      "item": "minecraft:cherry_sapling"
+    },
+    {
+      "item": "minecraft:cherry_leaves"
+    },
+    {
+      "item": "minecraft:cherry_leaves"
+    },
+    {
+      "item": "minecraft:pink_petals"
+    },
+    {
+      "item": "minecraft:pink_petals"
+    },
+    {
+      "item": "minecraft:string"
+    },
+    {
+      "item": "minecraft:string"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:no_1337_candy",
+    "count": 4
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "Guardião do End",
+  "icon": "goetyawaken:eye_of_overwatch",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Após a queda do Guardião do End, você percebeu que seu corpo era oco, restando apenas fragmentos que se espalharam com o vento. No entanto, dentro do vazio, um olho permaneceu, fixando-se intensamente em você como se estivesse esperando por algo. Ao decifrar o texto críptico no pergaminho, você de fato encontrou registros sobre ele e se apercebeu que esta é uma espada 'viva'. Ao forjar uma nova forma para o Guardião do End com tesouros raros coletados de todo o mundo, talvez ele o ajude no futuro."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:enderkeeper",
+      "text": ""
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:ender_keeper_servant",
+      "text": "Artes marciais incomparáveis"
+    }
+  ],
+  "advancement": "goety:goety/get_shrouded_blueprint"
+}

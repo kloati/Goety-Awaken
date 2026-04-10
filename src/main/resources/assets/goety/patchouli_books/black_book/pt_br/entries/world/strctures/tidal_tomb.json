@@ -1,0 +1,16 @@
+{
+  "name": "Tumba das Marés",
+  "icon": "minecraft:prismarine_bricks",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Nas profundezas do mar jaz um lugar onde marinheiros descansam em sono eterno. Qualquer aventureiro que entrar deve lutar uma batalha de vida ou morte contra suas obsessões persistentes. Se vencerem, podem reivindicar a chave do tesouro, e os ossos apodrecidos dos marinheiros se tornarão saque valioso. Se perderem, afundarão no abismo, afogando-se para sempre nas profundezas."
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/tidal_tomb.png"],
+      "border": true
+    }
+  ]
+}

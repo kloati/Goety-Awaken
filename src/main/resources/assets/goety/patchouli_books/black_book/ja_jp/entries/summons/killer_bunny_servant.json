@@ -1,0 +1,16 @@
+{
+  "name": "ケアーバノグのウサギの従者",
+  "icon": "minecraft:rabbit",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "いかなる理由でこの世に生を受けたのか定かではない、奇妙なウサギ。それはただ殺戮のみを渇望する、狂乱の存在である。その身はあまりに脆いが、その牙は精鉄を鍛え上げた剣よりもなお鋭い。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:caerbannog_rabbit_servant",
+      "text": "繁殖させることも可能であり、その凶暴な血統を絶やすことなく受け継がせることができる。"
+    }
+  ]
+}

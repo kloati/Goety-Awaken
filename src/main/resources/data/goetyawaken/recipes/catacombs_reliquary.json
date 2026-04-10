@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "B#B",
+    "#A#",
+    "B#B"
+  ],
+  "key": {
+    "#": {
+      "item": "goety:steep_planks"
+    },
+    "B": {
+      "item": "goety:gale_fabric"
+    },
+    "A": {
+      "item": "goetyawaken:taboo_fragment"
+    }
+  },
+  "result": {
+    "item": "goetyawaken:catacombs_reliquary",
+    "count": 16
+  }
+}

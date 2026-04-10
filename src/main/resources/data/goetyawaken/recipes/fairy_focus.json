@@ -1,0 +1,42 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety:animation_core"
+  },
+  "craftType": "magic",
+  "soulCost": 5,
+  "duration": 10,
+  "ingredients": [
+    {
+      "tag": "goetyawaken:gohei"
+    },
+    {
+      "item": "touhou_little_maid:power_point"
+    },
+    {
+      "item": "goety:occult_fabric"
+    },
+    {
+      "item": "minecraft:cake"
+    },
+    {
+      "item": "goety:magic_fabric"
+    },
+    {
+      "item": "touhou_little_maid:power_point"
+    },
+    {
+      "item": "goety:occult_fabric"
+    },
+    {
+      "item": "minecraft:cake"
+    },
+    {
+      "item": "goety:magic_fabric"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:fairy_focus"
+  }
+}

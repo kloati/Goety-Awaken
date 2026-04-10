@@ -1,0 +1,16 @@
+{
+  "name": "不祥之画",
+  "icon": "goetyawaken:ominous_painting",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "将普通的画和苍白金属锭一起合成即可制成不祥之画，拥有全新名字的它们似乎是一套完全不同的新画作，仅此而已。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:ominous_painting",
+      "text": ""
+    }
+  ]
+}

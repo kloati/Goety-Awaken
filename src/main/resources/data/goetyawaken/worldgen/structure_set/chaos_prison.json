@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "goetyawaken:chaos_prison",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 64,
+    "separation": 16,
+    "salt": 1310200119
+  }
+}

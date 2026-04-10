@@ -1,0 +1,24 @@
+{
+  "name": "goetyawaken:tidal_tomb/start_pool",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "goetyawaken:tidal_tomb1",
+        "processors": "goetyawaken:tidal_tomb_loot",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "goetyawaken:tidal_tomb2",
+        "processors": "goetyawaken:tidal_tomb_loot",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Mirage Eye",
+  "icon": "goetyawaken:mirage_eye",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "An eye used for tracking the Mirage."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:mirage_eye",
+      "text": "Mirage Eye"
+    }
+  ]
+}

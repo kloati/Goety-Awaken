@@ -1,0 +1,16 @@
+{
+  "name": "Zumbi Montanhista",
+  "icon": "goetyawaken:bouldering_zombie_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Um zumbi de montanha melhor, mais rápido e mais forte, capaz de escalar facilmente penhascos íngremes inacessíveis para zumbis comuns. Além dessa proeza atlética que deixa outros zumbis verdes de inveja, não parece haver nada particularmente excepcional nele."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:bouldering_zombie",
+      "text": "Especialista em escalada de montanhas"
+    }
+  ]
+}

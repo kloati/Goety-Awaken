@@ -1,0 +1,16 @@
+{
+  "name": "Hostile Spider Creeder",
+  "icon": "goetyawaken:hostile_spider_creeder_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "These twisted creatures, writhing in agony and emitting piercing shrieks, are one of the reasons adventurers give the Crimson Forest a wide berth. Not only do Creeper Spiders possess explosive power far exceeding their green, common cousins, but their detonations also inflict deadly fire and weaken their victims. Some whisper that these beings crossed into the Nether from another plane of existence..."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_spider_creeder",
+      "text": "The Jailer of the Prison"
+    }
+  ]
+}

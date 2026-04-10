@@ -1,0 +1,17 @@
+{
+  "name": "哞菇重锤",
+  "icon": "goetyawaken:mooshroom_mace",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "蘑菇镀层合金块是一种格外沉重的材料——也只有这样的材料能够承载哞菇巨兽的力量。不过你有时会思索，是否能利用这般沉重的力量做点什么别的？你最终将它锻造成了一件有些眼熟的武器。哞菇重锤巧妙地利用了蘑菇合金的沉重与真菌爆发的力量，使得其使用者从高处跃下并击中敌人时，重锤会根据坠落距离产生额外伤害，并在命中的瞬间引发剧烈的菌爆。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:mooshroom_mace",
+      "text": "菌爆重锤！"
+    }
+  ],
+  "advancement": "goetyawaken:mushroom_monstrosity_kill"
+}

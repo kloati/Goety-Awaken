@@ -1,0 +1,12 @@
+{
+    "cataclysm:ender_guardian":  [
+                                     {
+                                         "key": "kill_special_enemy.cataclysm.ender_guardian_1",
+                                         "subtitles":  9.0
+                                     },
+                                     {
+                                         "key": "kill_special_enemy.cataclysm.ender_guardian_2",
+                                         "subtitles":  10.5
+                                     }
+                                 ]
+}

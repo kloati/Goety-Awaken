@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+		"goetyawaken:wraith_necromancer",
+		"goetyawaken:apostle_servant",
+		"goetyawaken:ender_keeper_servant",
+		"goetyawaken:mushroom_monstrosity",
+		"goetyawaken:vizier_servant",
+		"goetyawaken:vizier_clone_servant",
+		"goetyawaken:shulker_servant",
+		"goetyawaken:pale_golem_servant"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "name": "末影遣使仆从",
+  "icon": "goetyawaken:endersent_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "那些乌合之众般的末影灵令你十分感到失望。你突然想起来，在终末永狱有一个大家伙，它的力量远超于那些末影灵，让它加入你的阵营，或许是个十分不错的想法。"
+    },
+    {
+      "type": "text",
+      "text": "在战斗中，末影遣使仆从会举起自己的双臂砸向敌人，用自己的传送迷惑对方和召唤看守灵。不过有一个让你感到疑惑的地方——你所召唤出来的末影遣使并没有像你之前遇到的那些具名的遣使一样拥有特殊的“眼”。或许有一些手段可以让他们获得那些能力。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:endersent_servant",
+      "text": "通过复杂的仪式召唤末影遣使仆从。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:endersent_servant",
+      "text": "末影遣使仆从会用强大的攻击为你战斗。"
+    }
+  ]
+}

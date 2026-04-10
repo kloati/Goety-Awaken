@@ -1,0 +1,7 @@
+{
+  "name": "Focuses",
+  "description": "Focuses are used to be embedded in different wands to cast spells.",
+  "icon": "goety:dark_wand",
+  "sortnum": 1,
+  "parent": "goety:goetyawaken"
+}

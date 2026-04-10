@@ -1,0 +1,16 @@
+{
+  "name": "Preacher Servant",
+  "icon": "goetyawaken:preacher_spawn_egg",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "text",
+      "text": "These monks who focus on healing will continuously restore the life of their allies in battle, and can even heal undead creatures. Although doctors cannot heal themselves, these monks have clearly overcome this point under your training, and they can heal each other."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:preacher_servant",
+      "text": "Preacher servants will heal for you."
+    }
+  ]
+}

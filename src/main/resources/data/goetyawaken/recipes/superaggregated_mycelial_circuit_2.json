@@ -1,0 +1,41 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goetyawaken:superaggregated_mycelial_circuit"
+  },
+  "craftType": "overgrown",
+  "soulCost": 200,
+  "duration": 10,
+  "research": "royal",
+  "ingredients": [
+    {
+      "item": "goetyawaken:mushroom_coated_alloy_block"
+    },
+    {
+      "item": "goety:whispering_focus"
+    },
+    {
+      "item": "goety:blast_fungus"
+    },
+    {
+      "item": "goety:blast_fungus"
+    },
+    {
+      "item": "goetyawaken:soul_sapphire_block"
+    },
+    {
+      "item": "goety:ominous_idol"
+    },
+    {
+      "item": "goety:dark_metal_block"
+    },
+    {
+      "item": "minecraft:end_crystal"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:superaggregated_mycelial_circuit",
+    "count": 4
+  }
+}

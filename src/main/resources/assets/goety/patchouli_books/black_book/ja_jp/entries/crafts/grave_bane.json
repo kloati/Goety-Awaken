@@ -1,0 +1,17 @@
+{
+  "name": "大いなる破滅",
+  "icon": "goetyawaken:grave_bane",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "汝はグレイブを造り変え、支配の力を宿したソウルサファイアとクリプトアイを組み込むことで、アンデッドを討ち果たす神聖なる刃へと昇華させた。この武器は「アンデッド特効」の魔力と深く共鳴しており、そのエンチャントを施した際、通常の2倍という驚異的な威力を発揮するのだ！"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:grave_bane",
+      "text": ""
+    }
+  ],
+  "advancement": "goety:goety/read_front_scroll"
+}

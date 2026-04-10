@@ -1,0 +1,7 @@
+{
+  "name": "クラフト",
+  "description": "神秘的な魔術の深淵へと足を踏み入れた今、汝のクラフト技術を無駄にしてはならない。",
+  "icon": "goety:focus_bag",
+  "sortnum": 4,
+  "parent": "goety:goetyawaken"
+}

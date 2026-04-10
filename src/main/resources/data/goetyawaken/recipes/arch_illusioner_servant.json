@@ -1,0 +1,42 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:convert_complete_tamed",
+  "activation_item": {
+    "item": "goety:illusion_focus"
+  },
+  "craftType": "magic",
+  "entity_to_convert": {
+    "tag": "goetyawaken:illusioner",
+    "display_name": "entity.minecraft.illusioner"
+  },
+  "entity_to_convert_into": "goetyawaken:arch_illusioner_servant",
+  "soulCost": 50,
+  "duration": 10,
+  "research": "royal",
+  "ingredients": [
+    {
+      "item": "minecraft:firework_rocket"
+    },
+    {
+      "item": "minecraft:firework_rocket"
+    },
+    {
+      "item": "goetyawaken:delusive_fragment"
+    },
+    {
+      "item": "goetyawaken:delusive_fragment"
+    },
+    {
+      "item": "goety:illusion_robe"
+    },
+    {
+      "item": "minecraft:phantom_membrane"
+    },
+    {
+      "item": "minecraft:azure_bluet"
+    }
+  ],
+  "result": {
+    "item": "goety:jei_dummy/none"
+  }
+}

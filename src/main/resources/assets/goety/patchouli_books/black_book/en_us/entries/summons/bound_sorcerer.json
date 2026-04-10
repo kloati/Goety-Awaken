@@ -1,0 +1,16 @@
+{
+  "name": "Bound Sorcerer",
+  "icon": "goety:soul_emerald",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "You have already learned how to create an undead Illager caster—so why not transform your Sorcerer into one as well! Simply ensure your Sorcerer meets with a little accident while you are wearing the Nameless Set, and you can resurrect a Bound Sorcerer from the Ominous Idol. They retain their former level, and thanks to their lack of legs, they can fly!"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:bound_sorcerer",
+      "text": "Black Sorcerer, you wait for me! Just you wait!"
+    }
+  ]
+}

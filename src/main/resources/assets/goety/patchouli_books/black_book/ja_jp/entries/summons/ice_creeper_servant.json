@@ -1,0 +1,21 @@
+{
+  "name": "アイスクリーパーの従者",
+  "icon": "goetyawaken:ice_creeper_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "より冷たく、骨まで凍てつくような爆発を！一見すると賢そうなこのクリーパーは、爆発の威力こそ通常の個体に劣るものの、その後に生じる冷気によって敵を凍結させることができるのだ。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:ice_creeper_servant",
+      "text": "氷の力を利用し、アイスクリーパーの従者を召喚する。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:ice_creeper_servant",
+      "text": "アイスクリーパーの従者は、氷の爆発を以て汝のために戦うだろう。"
+    }
+  ]
+}

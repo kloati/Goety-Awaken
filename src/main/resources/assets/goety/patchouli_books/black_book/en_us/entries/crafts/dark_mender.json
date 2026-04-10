@@ -1,0 +1,20 @@
+{
+  "name": "Dark Mender",
+  "icon": "goetyawaken:dark_mender",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "The Soul Mender is good, but not good enough. With that thought in mind, you began tinkering. After your genius modifications, the resulting Mender combines the functions of the Grim Infuser and the Soul Mender, capable of converting and repairing items at an even greater speed."
+    },
+    {
+      "type": "text",
+      "text": "Of course, it must be placed atop a Cursed Cage containing a Totem or a Soul Transfer to function."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:dark_mender",
+      "text": ""
+    }
+  ]
+}

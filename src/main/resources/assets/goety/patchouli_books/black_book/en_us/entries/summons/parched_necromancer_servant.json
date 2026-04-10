@@ -1,0 +1,25 @@
+{
+  "name": "Ruins Necromancer Servant",
+  "icon": "goetyawaken:parched_necromancer_servant_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "These beings, less fortunate than their fellow necromancers, were scorched by the sun, their remains tumbled and buried by the shifting sands. Gradually, they became either sacrifices to or embodiments of the malevolent dunes and ruins; bound to the fallen cities in exchange for walking once more beneath the daylight."
+    },
+    {
+      "type": "text",
+      "text": "You have discovered that a master of necromancy, such as yourself, can shatter the 'chains' by which the desert binds these necromancers with remarkable ease, allowing them to rise again from your Parched servants."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:parched_necromancer_servant",
+      "text": ""
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:parched_necromancer_servant",
+      "text": "You suspect this flaw was left there deliberately."
+    }
+  ]
+}

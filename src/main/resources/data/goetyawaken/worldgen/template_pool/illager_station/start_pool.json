@@ -1,0 +1,21 @@
+{
+  "name": "goetyawaken:illager_station/start_pool",
+
+  "fallback": "minecraft:empty",
+
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+
+        "location": "goetyawaken:illager_station",
+
+        "processors": "goetyawaken:illager_station_loot",
+
+        "projection": "rigid",
+
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

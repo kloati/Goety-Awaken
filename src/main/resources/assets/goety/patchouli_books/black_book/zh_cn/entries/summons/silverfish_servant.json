@@ -1,0 +1,16 @@
+{
+  "name": "蠹虫仆从",
+  "icon": "goetyawaken:silverfish_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "石头缝里的小虫子。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:silverfish_servant",
+      "text": "蠹虫仆从会为你战斗。"
+    }
+  ]
+}

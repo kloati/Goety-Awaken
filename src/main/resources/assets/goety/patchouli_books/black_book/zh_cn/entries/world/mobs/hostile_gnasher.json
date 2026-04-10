@@ -1,0 +1,16 @@
+{
+  "name": "敌对噬咬鲨",
+  "icon": "goetyawaken:hostile_gnasher_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "通常来说鲨鱼的菜谱上很少会出现人类，但这些黑色的水中恶魔却比大多数鱼类都要凶猛。它们凶狠，贪婪，不知疲倦，幸运的是它们并不是很常见。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_gnasher",
+      "text": ""
+    }
+  ]
+}

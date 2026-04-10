@@ -1,0 +1,16 @@
+{
+  "name": "Golem Pálido",
+  "icon": "goetyawaken:pale_golem_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Os aldeões têm golems de ferro para protegê-los, por que não podemos fazer um golem proprio e leal? Assim como construir um golem de ferro, construa uma forma em T com blocos de aço pálido, coloque uma cabeça de abóbora no topo e finalmente ative-o com um núcleo de animação."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:pale_golem_servant",
+      "text": "Golems Pálidos protegerão você fielmente."
+    }
+  ]
+}

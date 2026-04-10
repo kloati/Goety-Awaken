@@ -1,0 +1,21 @@
+{
+  "name": "寒冰苦力怕仆从",
+  "icon": "goetyawaken:ice_creeper_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "更寒冷，更刺骨的爆破！这些看起来很聪明的苦力怕虽然威力较小，但爆炸后的寒霜还会冰冻敌人！"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:ice_creeper_servant",
+      "text": "利用寒冰的力量召唤寒冰苦力怕仆从。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:ice_creeper_servant",
+      "text": "寒冰苦力怕仆从会用寒冰爆炸为你战斗。"
+    }
+  ]
+}

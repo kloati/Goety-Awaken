@@ -1,0 +1,11 @@
+{
+  "name": "Prisão do Caos",
+  "icon": "goetyawaken:mushroom_coated_alloy_block",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Os poderes das três dimensões — a Superfície, o Nether e o End — se entrelaçam aqui. A lenda diz que uma colossal máquina de guerra descontrolada está aprisionada dentro..."
+    }
+  ]
+}

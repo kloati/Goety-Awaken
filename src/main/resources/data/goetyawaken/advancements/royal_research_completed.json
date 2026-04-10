@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "goetyawaken:royal_scroll"
+    },
+    "title": {
+      "translate": "advancement.goetyawaken.royal_research_completed.title"
+    },
+    "description": {
+      "translate": "advancement.goetyawaken.royal_research_completed.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "parent": "goety:goety/root",
+  "criteria": {
+    "royal_research_completed": {
+      "trigger": "goetyawaken:royal_research_completed"
+    }
+  },
+  "requirements": [
+    [
+      "royal_research_completed"
+    ]
+  ]
+}

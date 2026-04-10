@@ -1,0 +1,16 @@
+{
+  "name": "Royal Guard",
+  "icon": "goetyawaken:royalguard_spawn_egg",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "text",
+      "text": "You managed to train a group of elite guards from the Vindicators, who combine speed and strength, and can easily crush the target's defenses. Most importantly, these powerful soldiers only take orders from you."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:royalguard_servant",
+      "text": "Royal Guards will offer their loyalty to you."
+    }
+  ]
+}

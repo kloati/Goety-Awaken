@@ -1,0 +1,21 @@
+{
+  "name": "苦力蛛仆从",
+  "icon": "goetyawaken:hostile_spider_creeder_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "这些看起来像是苦力怕和蜘蛛的混合体可以作为很不错的仆从。它们的爆炸速度很快，而且可以使你的敌人燃烧并陷入衰弱。你可以使用进阶下界仪式召唤一个忠诚于你的苦力蛛仆从。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:spider_creeder_servant",
+      "text": "下界的狂野力量教会了你怎么将爆炸之道推至极致。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:spider_creeder_servant",
+      "text": "苦力蛛仆从会用热烈的爆炸为你战斗。"
+    }
+  ]
+}

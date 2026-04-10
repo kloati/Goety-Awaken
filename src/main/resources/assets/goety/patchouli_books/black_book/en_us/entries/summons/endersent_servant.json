@@ -1,0 +1,25 @@
+{
+  "name": "Endersent Servant",
+  "icon": "goetyawaken:endersent_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Those rabble-like Enderling have disappointed you greatly. You suddenly remembered that in the End Eternity there is a big one, whose power far exceeds those Ender spirits, and having it join your side might be a very good idea."
+    },
+    {
+      "type": "text",
+      "text": "In battle, the Endersent servant will raise its arms to strike enemies, confuse opponents with its teleportation, and summon guardians. However, there is one thing that puzzles you — the Endersents you summon do not have special \"eyes\" like the named Endersents you encountered before. Perhaps there are ways to give them those abilities."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:endersent_servant",
+      "text": "Summon an Endersent servant through a complex ritual."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:endersent_servant",
+      "text": "Endersent servants will fight for you with powerful attacks."
+    }
+  ]
+}

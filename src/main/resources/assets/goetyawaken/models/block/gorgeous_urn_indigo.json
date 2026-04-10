@@ -1,0 +1,27 @@
+{
+  "parent": "goetyawaken:block/template_gorgeous_urn",
+  "loader": "forge:composite",
+  "textures": {
+    "urn": "goetyawaken:block/gorgeous_urn/gorgeous_urn_1",
+    "glow": "goetyawaken:block/gorgeous_urn/gorgeous_urn_glow",
+    "particle": "goetyawaken:block/gorgeous_urn/gorgeous_urn_1"
+  },
+  "item_render_order": [
+    "urn",
+    "glow"
+  ],
+  "children": {
+    "urn": {
+      "parent": "goetyawaken:block/template_gorgeous_urn",
+      "textures": {
+        "urn": "goetyawaken:block/gorgeous_urn/gorgeous_urn_1"
+      }
+    },
+    "glow": {
+      "parent": "goetyawaken:block/template_gorgeous_urn_glow",
+      "textures": {
+        "glow": "goetyawaken:block/gorgeous_urn/gorgeous_urn_glow"
+      }
+    }
+  }
+}

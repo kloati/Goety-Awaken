@@ -1,0 +1,16 @@
+{
+  "name": "Mumificado",
+  "icon": "goetyawaken:parched_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Parece que os antigos habitantes do deserto encontraram uma maneira de extravasar seu ódio milenar contra você. Esses restos esqueléticos, queimados pelo calor intenso do deserto, disparam flechas que deixarão seus braços fracos e enfraquecidos. E, como os leprosos, eles não queimam sob a luz do sol."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:parched",
+      "text": "Uma nova ameaça no deserto."
+    }
+  ]
+}

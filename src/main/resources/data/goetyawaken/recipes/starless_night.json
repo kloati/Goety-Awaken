@@ -1,0 +1,52 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goetyawaken:obsidian_claymore"
+  },
+  "craftType": "forge",
+  "soulCost": 500,
+  "duration": 20,
+  "research": "forbidden",
+  "ingredients": [
+    {
+      "item": "goety:blade_of_ender"
+    },
+    {
+      "item": "goetyawaken:eye_of_overwatch"
+    },
+    {
+      "item": "goetyawaken:soul_sapphire"
+    },
+    {
+      "item": "goety:dark_metal_block"
+    },
+    {
+      "item": "minecraft:netherite_block"
+    },
+    {
+      "item": "goety:void_staff"
+    },
+    {
+      "item": "goety:razor_wind_focus"
+    },
+    {
+      "item": "goety:night_beacon"
+    },
+    {
+      "item": "goety:void_shard"
+    },
+    {
+      "item": "goety:end_walk_focus"
+    },
+    {
+      "item": "goetyawaken:taboo_fragment"
+    },
+    {
+      "item": "goety:void_barrel"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:starless_night"
+  }
+}

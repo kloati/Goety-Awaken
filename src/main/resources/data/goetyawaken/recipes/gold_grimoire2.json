@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:redstone"
+    },
+    {
+      "item": "minecraft:honey_bottle"
+    },
+    {
+      "item": "goety:totem_of_souls"
+    },
+    {
+      "item": "goetyawaken:iron_grimoire"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:gold_grimoire"
+  }
+}

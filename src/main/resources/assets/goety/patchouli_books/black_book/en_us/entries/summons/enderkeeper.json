@@ -1,0 +1,22 @@
+{
+  "name": "Ender Keeper",
+  "icon": "goetyawaken:eye_of_overwatch",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "After the fall of Ender Keeper, you realized its body was hollow, leaving only fragments that scattered with the wind. Yet within the void, an eye remained, piercingly fixated on you as if awaiting something. Upon deciphering the cryptic text on the scroll, you indeed found records about it and concluded: this is a 'living' sword. By reforging a new form for the Ender Keeper with rare treasures gathered from across the world, perhaps it will aid you in the future."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:enderkeeper",
+      "text": ""
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:ender_keeper_servant",
+      "text": "Peerless martial arts"
+    }
+  ],
+  "advancement": "goety:goety/get_shrouded_blueprint"
+}

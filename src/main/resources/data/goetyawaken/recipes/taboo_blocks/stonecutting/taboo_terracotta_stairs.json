@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "goetyawaken:taboo_terracotta"
+  },
+  "result": "goetyawaken:taboo_terracotta_stairs",
+  "count": 1
+}

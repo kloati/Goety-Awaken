@@ -1,0 +1,42 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:convert_complete_tamed",
+  "activation_item": {
+    "item": "goety:necro_cape"
+  },
+  "craftType": "necroturgy",
+  "entity_to_convert": {
+    "tag": "goetyawaken:parched",
+    "display_name": "entity.goetyawaken.parched"
+  },
+  "entity_to_convert_into": "goetyawaken:parched_necromancer_servant",
+  "soulCost": 10,
+  "duration": 30,
+  "research": "mistral",
+  "ingredients": [
+    {
+      "item": "goety:wind_staff"
+    },
+    {
+      "item": "goetyawaken:taboo_fragment"
+    },
+    {
+      "item": "goety:necro_crown"
+    },
+    {
+      "item": "goety:osseous_focus"
+    },
+    {
+      "item": "goety:razor_wind_focus"
+    },
+    {
+      "item": "goety:trembling_focus"
+    },
+    {
+      "item": "goety:cyclone_focus"
+    }
+  ],
+  "result": {
+    "item": "goety:jei_dummy/none"
+  }
+}

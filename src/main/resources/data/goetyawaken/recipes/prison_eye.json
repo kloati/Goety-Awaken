@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:netherrack"
+    },
+    {
+      "item": "minecraft:end_stone"
+    },
+    {
+      "item": "minecraft:red_mushroom"
+    },
+    {
+      "item": "minecraft:brown_mushroom"
+    },
+    {
+      "item": "minecraft:ender_eye"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:prison_eye"
+  }
+}

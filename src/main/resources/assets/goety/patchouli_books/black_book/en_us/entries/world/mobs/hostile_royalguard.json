@@ -1,0 +1,16 @@
+{
+  "name": "Hostile Royal Guard",
+  "icon": "goetyawaken:hostile_royalguard_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Royal Guards are elite guards promoted from Vindicators, usually stationed at important strategic locations or protecting royal family members. They wear heavy armor and wield shields and maces, making them difficult to defeat. Your attacks will not harm them until you break their shields."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_royalguard",
+      "text": "Beware of these elite warriors!"
+    }
+  ]
+}

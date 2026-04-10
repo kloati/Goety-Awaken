@@ -1,0 +1,16 @@
+{
+  "name": "ハープクロスボウ",
+  "icon": "goetyawaken:harp_crossbow",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "音楽と殺傷能力の完璧な融合。それはあらゆる集まりにおいて、欠かすことのできぬ逸品である。幾重にも張られた弦により、一度に複数の矢を放つことが可能となっている。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:harp_crossbow",
+      "text": ""
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+    "twilightforest:naga":  [
+                                {
+                                    "key": "kill_special_enemy.twilightforest.naga_1",
+                                    "subtitles":  10.0
+                                },
+                                {
+                                    "key": "kill_special_enemy.twilightforest.naga_2",
+                                    "subtitles":  10.5
+                                }
+                            ]
+}

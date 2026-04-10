@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " A ",
+    "DBD",
+    "ACA"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:brick"
+    },
+    "B": {
+      "tag": "forge:chests/wooden"
+    },
+     "C": {
+      "item": "goety:stash_urn"
+      },
+     "D": {
+      "item": "minecraft:cyan_dye"
+    }
+  },
+  "result": {
+    "item": "goetyawaken:gorgeous_urn_indigo"
+  }
+}

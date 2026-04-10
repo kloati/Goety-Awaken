@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#*#"
+  ],
+  "key": {
+    "#": {
+      "item": "goetyawaken:taboo_bricks_chiseled"
+    },
+    "*": {
+      "item": "minecraft:redstone_lamp"
+    }
+  },
+  "result": {
+    "item": "goetyawaken:taboo_lamp_chiseled",
+    "count": 1
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Ominous Painting",
+  "icon": "goetyawaken:ominous_painting",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Combine an ordinary painting with a Pale Steel Ingot to craft an Ominous Painting. These newly named paintings appear to be a completely different set of artworks—nothing more."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:ominous_painting",
+      "text": ""
+    }
+  ]
+}

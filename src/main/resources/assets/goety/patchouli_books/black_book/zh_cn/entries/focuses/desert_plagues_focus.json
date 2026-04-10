@@ -1,0 +1,20 @@
+{
+  "name": "漠灾聚晶",
+  "icon": "goetyawaken:desert_plagues_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "text",
+      "text": "根据你的考察，你认为古代的“神明”会利用天灾来惩罚和控制手下的奴隶——当然，这只不过是一种奇特的魔法罢了。随着王国的消逝，这些魔法也已失传。或许一位来自古国并以亡灵之身存续至今的高级法师还存留着关于这些魔法的技术？"
+    },
+    {
+      "type": "text",
+      "text": "在目标上方制造天灾，唤来一朵追踪目标的灾云，持续降下冰雹、虫群和闪电。使用烈风魔杖施法时，召唤出来的灾云范围更大、伤害更高。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:desert_plagues_focus",
+      "text": ""
+    }
+  ]
+}

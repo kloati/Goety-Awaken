@@ -1,0 +1,21 @@
+{
+  "name": "蘑菇镀层合金块",
+  "icon": "goetyawaken:mushroom_coated_alloy_block",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "你试图仿照红石巨兽的建造方法建造一只哞菇巨兽，但是尝试了很多次，每次均因钻石模具无法承受其力量而中道崩殂。"
+    },
+    {
+      "type": "text",
+      "text": "多次试验让你对那些神奇的真菌有了更深的理解。在结合支配卷轴中提及的支配之法和你自己对那只混沌监牢里的原型机的观察，你认为或许可以创造出一种足以承担哞菇巨兽力量的方块——蘑菇镀层合金块因此诞生。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:mushroom_coated_alloy_block",
+      "text": ""
+    }
+  ],
+  "advancement": "goetyawaken:royal_research_completed"
+}

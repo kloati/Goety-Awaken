@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "goetyawaken:block/wall_taboo_torch"
+    },
+    "facing=north": {
+      "model": "goetyawaken:block/wall_taboo_torch",
+      "y": 270
+    },
+    "facing=south": {
+      "model": "goetyawaken:block/wall_taboo_torch",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "goetyawaken:block/wall_taboo_torch",
+      "y": 180
+    }
+  }
+}

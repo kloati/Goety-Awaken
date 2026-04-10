@@ -1,0 +1,20 @@
+{
+  "name": "Fragmento de Eco Profundo",
+  "icon": "goetyawaken:profound_echoing_shard",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Após infundir o poder da magia em fragmentos de eco, você obteve um fragmento de eco mais profundo, no qual os ecos infinitos da Escuridão Profunda estão selados. Você pode usá-lo como um catalisador para criar uma versão aliada do antigo defensor que já lhe deu tantos problemas — ele é completamente feito de sua energia de alma, então o considerará como um aliado. Consulte Gritador das Sombras para mais detalhes."
+    },
+    {
+      "type": "text",
+      "text": "Além de ser usado para criar servos Defensores, o Fragmento de Eco Profundo também contém o poder de reproduzir habilidades perdidas. Ele pode ser usado para transformar ardósia comum em uma forma mais durável e reforçada — a ardósia reforçada que os antigos supostamente faziam."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:profound_echoing_shard",
+      "text": "Crie o Fragmento de Eco Profundo."
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+    "twilightforest:alpha_yeti":  [
+                                      {
+                                          "key": "kill_special_enemy.twilightforest.alpha_yeti_1",
+                                          "subtitles":  10.5
+                                      },
+                                      {
+                                          "key": "kill_special_enemy.twilightforest.alpha_yeti_2",
+                                          "subtitles":  9.0
+                                      }
+                                  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "goetyawaken:mirage_p4",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "goetyawaken:mirage_4",
+        "processors": "goetyawaken:mirage_loot",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

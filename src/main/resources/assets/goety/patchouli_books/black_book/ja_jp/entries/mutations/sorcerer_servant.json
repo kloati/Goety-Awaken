@@ -1,0 +1,16 @@
+{
+  "name": "ソーサラーの従者",
+  "icon": "goetyawaken:sorcerer_spawn_egg",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "text",
+      "text": "高位のソーサラーはイリジャーの間でも高い地位を占めており、その実力は決して侮れるものではない。複数の学派の素材を組み合わせたグリモワールを用いれば、汝の命に従うソーサラーの従者を鍛え上げることができるやもしれぬ。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:sorcerer_servant",
+      "text": "ソーサラーの従者は強大な魔術を以て汝のために戦う。また、エメラルドを用いて彼らと取引を行うことも可能だ。"
+    }
+  ]
+}

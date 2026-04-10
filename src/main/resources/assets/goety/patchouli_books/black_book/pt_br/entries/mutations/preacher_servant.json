@@ -1,0 +1,16 @@
+{
+  "name": "Servo Pregador",
+  "icon": "goetyawaken:preacher_spawn_egg",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Esses monges focados em cura restaurarão continuamente a vida de seus aliados em batalha, e podem até curar criaturas mortas-vivas. Embora médicos não possam se curar, esses monges claramente superaram esse ponto sob seu treinamento, e eles podem se curar mutuamente."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:preacher_servant",
+      "text": "Servos Pregadores curarão por você."
+    }
+  ]
+}

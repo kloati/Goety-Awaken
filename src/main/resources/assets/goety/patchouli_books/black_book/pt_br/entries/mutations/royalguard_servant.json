@@ -1,0 +1,16 @@
+{
+  "name": "Guarda Real",
+  "icon": "goetyawaken:royalguard_spawn_egg",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Você conseguiu treinar um grupo de guardas de elite a partir dos Vingadores, que combinam velocidade e força, e podem facilmente esmagar as defesas do alvo. O mais importante, esses soldados poderosos só recebem ordens de você."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:royalguard_servant",
+      "text": "Guardas Reais oferecerão sua lealdade a você."
+    }
+  ]
+}

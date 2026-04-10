@@ -1,0 +1,21 @@
+{
+  "name": "ソウルサファイアブロック",
+  "icon": "goetyawaken:soul_sapphire_block",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "ソウルルビーブロックと同じく、これはソウルサファイアを固く圧縮して造られたものであり、王家が秘匿する魔術の深淵が刻まれている。この美しきサファイアブロックを造り上げるために、一体どれほどの人々の鮮血が絞り出されたのか……それを知る者は、もはや誰一人としておらぬ。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:soul_sapphire_block",
+      "text": "ソウルサファイアブロックを作成する。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:soul_sapphire_from_block",
+      "text": "ソウルサファイアブロックからソウルサファイアを取り出す。"
+    }
+  ]
+}

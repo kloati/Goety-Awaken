@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "goetyawaken:the_mausoleum",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 512,
+    "separation": 32,
+    "salt": 314536492
+  }
+}

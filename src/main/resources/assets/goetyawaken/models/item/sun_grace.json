@@ -1,0 +1,15 @@
+{
+  "loader": "forge:separate_transforms",
+  "gui_light": "front",
+  "base": {
+    "parent": "goetyawaken:item/sun_grace_model"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "goetyawaken:item/sun_grace_inventory"
+    },
+    "fixed": {
+      "parent": "goetyawaken:item/sun_grace_inventory"
+    }
+  }
+}

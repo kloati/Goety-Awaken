@@ -1,0 +1,11 @@
+{
+  "name": "灾厄宰相",
+  "icon": "goetyawaken:vizier_spawn_egg",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "text",
+      "text": "通常来说，让一位灾厄皇室成员听命于你是不可能的......除非你篡夺了他的位置！如果你真的胆大包天完成了此等偷梁换柱的功业（或者，应该叫做谋逆之罪更为贴切），你或许可以将一些魔法交给他......"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "name": "灵魂蓝宝石块",
+  "icon": "goetyawaken:soul_sapphire_block",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "和灵魂红宝石块一样，由灵魂蓝宝石压制而成，蕴含着皇室的魔法奥秘。谁也不知道这漂亮的蓝宝石块榨干了多少人的血汗。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:soul_sapphire_block",
+      "text": "制作灵魂蓝宝石块。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:soul_sapphire_from_block",
+      "text": "从灵魂蓝宝石块中获得灵魂蓝宝石。"
+    }
+  ]
+}

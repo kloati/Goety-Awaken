@@ -1,0 +1,16 @@
+{
+  "name": "沉溺骷髅",
+  "icon": "goetyawaken:sunken_skeleton_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "沉没于深渊之中的骨架成为了水手和钓鱼佬的又一场噩梦。它们装备着直到生前最后一刻仍然紧握着的弩，不仅会游泳，还能发射在水中飞行效果更好的鱼叉。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:sunken_skeleton",
+      "text": ""
+    }
+  ]
+}

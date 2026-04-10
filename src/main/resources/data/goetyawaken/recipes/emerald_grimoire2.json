@@ -1,0 +1,45 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "minecraft:book"
+  },
+  "craftType": "magic",
+  "soulCost": 10,
+  "duration": 5,
+  "ingredients": [
+    {
+      "item": "minecraft:shield"
+    },
+    {
+      "item": "minecraft:shield"
+    },
+    {
+      "item": "minecraft:golden_apple"
+    },
+    {
+      "item": "minecraft:golden_apple"
+    },
+    {
+      "item": "minecraft:quartz_block"
+    },
+    {
+      "item": "minecraft:fletching_table"
+    },
+    {
+      "item": "goety:jade_block"
+    },
+    {
+      "item": "goety:soul_emerald"
+    },
+    {
+      "item": "goety:bouncy_bubble_focus"
+    },
+    {
+      "item": "goety:vexing_focus"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:emerald_grimoire"
+  }
+}

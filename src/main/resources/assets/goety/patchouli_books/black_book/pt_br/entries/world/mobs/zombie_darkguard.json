@@ -1,0 +1,16 @@
+{
+  "name": "Guarda-Negra Zumbi",
+  "icon": "goetyawaken:zombie_darkguard_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Esses cadáveres pútridos estão envoltos em armaduras pesadas, mas isso de forma alguma afeta o ódio desses guardas por intrusos e seu desejo por carne."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:zombie_darkguard",
+      "text": "Oponentes que não devem ser subestimados!"
+    }
+  ]
+}

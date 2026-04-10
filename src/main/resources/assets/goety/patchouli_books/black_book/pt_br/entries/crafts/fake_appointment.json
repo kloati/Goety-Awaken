@@ -1,0 +1,20 @@
+{
+  "name": "Documento de Nomeação Falso",
+  "icon": "goetyawaken:fake_appointment",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Depois de encontrar uma carta de nomeação para o cargo de Grão-Vizier, possivelmente descartada acidentalmente pela família real da Calamidade, uma ideia traiçoeira surge em sua mente — e se, comparando com o documento original de nomeação de altos funcionários, você falsificar uma carta de nomeação e colocar um dos seus aldeões da Calamidade leais em você no lugar de um Grão-Vizier real?"
+    },
+    {
+      "type": "text",
+      "text": "Você precisa atrair um alto funcionário, sequestrá-lo, e fazer seu Invejoso segurar o documento falso para assassiná-lo — talvez assim você possa roubar sua identidade sem que ninguém perceba!"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:fake_appointment",
+      "text": "Falsifique um documento de nomeação."
+    }
+  ]
+}

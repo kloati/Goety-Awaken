@@ -1,0 +1,32 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:enchant",
+  "activation_item": {
+    "item": "minecraft:book"
+  },
+  "craftType": "magic",
+  "soulCost": 100,
+  "duration": 10,
+  "enchantment": "goety:absorb",
+  "xpLevelCost": 10,
+  "ingredients": [
+    {
+      "item": "minecraft:beetroot"
+    },
+    {
+      "item": "minecraft:lapis_block"
+    },
+    {
+      "item": "minecraft:hanging_roots"
+    },
+    {
+      "item": "goety:hunger_core"
+    },
+    {
+      "item": "goety:shadow_essence"
+    }
+  ],
+  "result": {
+    "item": "minecraft:enchanted_book"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety:dark_scroll"
+  },
+  "craftType": "magic",
+  "soulCost": 20,
+  "duration": 10,
+  "research": "royal",
+  "ingredients": [
+    {
+      "item": "goety:grand_turban"
+    },
+    {
+      "item": "goety:grand_robe"
+    },
+    {
+      "item": "goety:sword_focus"
+    },
+    {
+      "item": "goety:ectoplasm"
+    },
+    {
+      "item": "goetyawaken:fake_appointment"
+    },
+    {
+      "item": "goety:spent_totem"
+    },
+    {
+      "item": "goety:soul_emerald"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:fake_appointment"
+  }
+}

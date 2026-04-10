@@ -1,0 +1,16 @@
+{
+  "name": "Ice Creeper",
+  "icon": "goetyawaken:ice_creeper_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "A Creeper variant from the frigid lands, where the power of frost has transformed these Creepers into giant ice balls ready to explode at any moment. Although Ice Creepers' explosions are less powerful than their original counterparts, their piercing chill is even more deadly—their blast freezes unfortunate victims. Exercise extra caution when encountering them in cold biomes."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:ice_creeper",
+      "text": ""
+    }
+  ]
+}

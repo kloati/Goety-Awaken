@@ -1,0 +1,16 @@
+{
+  "name": "Pristine Shack",
+  "icon": "goety:witch_cauldron",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "A quaint little shack, the cozy home shared by a couple of young witch and warlock. Little do they know, an old crone secretly watches their daily life through her crystal ball."
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/pristine_shack.png"],
+      "border": true
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "name": "Creeper Servant",
+  "icon": "goetyawaken:creeper_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "These strange creatures made of leaves will rush towards the target to explode together, and will not destroy any blocks."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:creeper_servant",
+      "text": "Summon a Creeper servant using the power of explosives."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:creeper_servant",
+      "text": "Creeper servants will faithfully explode for you."
+    }
+  ]
+}

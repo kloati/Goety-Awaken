@@ -1,0 +1,20 @@
+{
+  "name": "Doutor Compassivo",
+  "icon": "goetyawaken:gatling_charm",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Diz o ditado, um soldado vale por cem homens..."
+    },
+    {
+      "type": "text",
+      "text": "No entanto, os espectros da guerra nunca diminuíram, deixando apenas espectros lastimáveis para cantar hinos de sonhos despedaçados. E com o tempo, seu réquiem chegou aos seus ouvidos."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:gatling_charm",
+      "text": ""
+    }
+  ]
+}

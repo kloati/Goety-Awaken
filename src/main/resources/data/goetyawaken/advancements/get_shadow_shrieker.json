@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:adventure/avoid_vibration",
+  "criteria": {
+    "get_shadow_shrieker": {
+      "trigger": "goetyawaken:get_shadow_shrieker"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.goetyawaken.get_shadow_shrieker.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "goetyawaken:shadow_shrieker"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.goetyawaken.get_shadow_shrieker.title"
+    }
+  },
+  "requirements": [
+    [
+      "get_shadow_shrieker"
+    ]
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Chefe Vingador",
+  "icon": "goetyawaken:vindicator_chef_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "O Chefe Vingador é um Vingador especialmente treinado — comparado aos seus colegas que apenas balançam machados, seu dever é preparar comida para outros illagers — embora sua inteligência determine que suas habilidades culinárias não são refinadas. No entanto, é importante notar que se tornar um chefe não atrofiou seus músculos; seu nível de ameaça para você é o mesmo de um Vingador."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:vindicator_chef",
+      "text": "Um chefe com habilidades culinárias não refinadas, mas ainda capaz de rachar o crânio de um inimigo!"
+    }
+  ]
+}

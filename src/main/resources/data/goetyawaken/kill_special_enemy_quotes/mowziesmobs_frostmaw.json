@@ -1,0 +1,12 @@
+{
+    "mowziesmobs:frostmaw":  [
+                                 {
+                                     "key": "kill_special_enemy.mowziesmobs.frostmaw_1",
+                                     "subtitles":  9.5
+                                 },
+                                 {
+                                     "key": "kill_special_enemy.mowziesmobs.frostmaw_2",
+                                     "subtitles":  10.0
+                                 }
+                             ]
+}

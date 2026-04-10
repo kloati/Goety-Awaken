@@ -1,0 +1,28 @@
+{
+  "parent": "goety:goety/craft_empty_focus",
+  "criteria": {
+    "bed_lice": {
+      "trigger": "goetyawaken:bed_lice"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.goetyawaken.bed_lice.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "goetyawaken:infestation_focus"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.goetyawaken.bed_lice.title"
+    }
+  },
+  "requirements": [
+    [
+      "bed_lice"
+    ]
+  ]
+}

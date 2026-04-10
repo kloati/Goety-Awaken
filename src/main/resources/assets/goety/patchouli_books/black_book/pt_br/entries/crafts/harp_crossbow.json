@@ -1,0 +1,16 @@
+{
+  "name": "Besta Harpa",
+  "icon": "goetyawaken:harp_crossbow",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Uma fusão perfeita entre música e letalidade, um item essencial para qualquer reunião. Múltiplas cordas permitem disparar várias flechas de uma só vez."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:harp_crossbow",
+      "text": ""
+    }
+  ]
+}

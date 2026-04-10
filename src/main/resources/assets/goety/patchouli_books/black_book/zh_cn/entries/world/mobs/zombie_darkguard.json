@@ -1,0 +1,16 @@
+{
+  "name": "僵尸暗卫",
+  "icon": "goetyawaken:zombie_darkguard_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "这些腐臭的躯体上披着沉重的盔甲，但这丝毫不影响这些守卫对闯入者的憎恶以及对血肉的渴望。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:zombie_darkguard",
+      "text": "不可小觑的对手！"
+    }
+  ]
+}

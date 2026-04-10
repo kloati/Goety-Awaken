@@ -1,0 +1,33 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety:hunger_core"
+  },
+  "craftType": "animation",
+  "soulCost": 5,
+  "duration": 10,
+  "ingredients": [
+    {
+      "item": "minecraft:rabbit"
+    },
+    {
+      "item": "minecraft:rabbit_hide"
+    },
+    {
+      "item": "minecraft:rabbit_foot"
+    },
+    {
+      "item": "minecraft:carrot"
+    },
+    {
+      "item": "minecraft:carrot"
+    },
+    {
+      "item": "minecraft:grass"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:killer_focus"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "minecraft:powder_snow_bucket"
+    },
+    {
+      "item": "goety:magic_emerald"
+    },
+    {
+      "item": "goety:savage_tooth"
+    },
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "goety:ectoplasm"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:iron_grimoire"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "replace": false,
+  "__comment": "all mobs that are immune to the effects of the irradiated effect.",
+  "values": [
+		"goetyawaken:enderman_servant",
+		"goetyawaken:shulker_servant",
+		"goetyawaken:pale_golem_servant",
+		"goetyawaken:wight_servant",
+		"goetyawaken:wither_servant",
+		"goetyawaken:warden_servant",
+		"goetyawaken:endersent_servant",
+		"goetyawaken:minister_servant",
+		"goetyawaken:wraith_necromancer_servant",
+		"goetyawaken:wraith_necromancer",
+		"goetyawaken:apostle_servant",
+		"goetyawaken:ender_keeper_servant",
+		"goetyawaken:mushroom_monstrosity",
+		"goetyawaken:vizier_servant",
+		"goetyawaken:vizier_clone_servant",
+		"goetyawaken:crone_servant",
+    	"goetyawaken:hostile_mushroom_monstrosity",
+		"goetyawaken:nameless_one"
+  ]
+}

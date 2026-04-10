@@ -1,0 +1,35 @@
+{
+  "name": "Monstruosidade Mooshroom",
+  "icon": "goetyawaken:mushroom_monstrosity_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Agora que você dominou os Pergaminhos da Realeza, apenas criar uma Monstruosidade forjada de redstone já não pode satisfazer sua ambição. Após destruir a monstruosidade fúngica dentro da Prisão do Caos, você ficou profundamente impressionado com o poder bruto e a violência daquele Protótipo. A sabedoria dos antigos parece agora tão tentadoramente ao seu alcance."
+    },
+    {
+      "type": "text",
+      "text": "Tendo obtido os circuitos extraídos daquela monstruosidade, e detendo o poder das três dimensões, você criou um molde que funde materiais dessas dimensões com alguns... cogumelos. Com este molde bizarro, você já sabe o que deve ser feito a seguir."
+    },
+    {
+      "type": "image",
+      "images": ["goetyawaken:textures/gui/mushroom_monstrosity_1.png"],
+      "border": true,
+      "title": "Construa a Primeira Camada do Molde",
+      "text": "Claro, vidro não é necessário."
+    },
+    {
+      "type": "image",
+      "images": ["goetyawaken:textures/gui/mushroom_monstrosity_2.png"],
+      "border": true,
+      "title": "Construa a Segunda Camada do Molde",
+      "text": "Claro, vidro não é necessário."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:mushroom_monstrosity",
+      "text": "Construa Seu Próprio Protótipo!"
+    }
+  ],
+  "advancement": "goetyawaken:royal_research_completed"
+}

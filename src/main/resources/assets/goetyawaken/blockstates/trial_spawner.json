@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "trial_spawner_state=active": {
+      "model": "goetyawaken:block/trial_spawner_active"
+    },
+    "trial_spawner_state=cooldown": {
+      "model": "goetyawaken:block/trial_spawner"
+    },
+    "trial_spawner_state=ejecting_reward": {
+      "model": "goetyawaken:block/trial_spawner_ejecting_reward"
+    },
+    "trial_spawner_state=inactive": {
+      "model": "goetyawaken:block/trial_spawner"
+    },
+    "trial_spawner_state=waiting_for_players": {
+      "model": "goetyawaken:block/trial_spawner_active"
+    },
+    "trial_spawner_state=waiting_for_reward_ejection": {
+      "model": "goetyawaken:block/trial_spawner_active"
+    }
+  }
+}

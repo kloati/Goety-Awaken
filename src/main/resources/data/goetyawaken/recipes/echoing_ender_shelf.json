@@ -1,0 +1,39 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "minecraft:chiseled_bookshelf"
+  },
+  "craftType": "magic",
+  "soulCost": 75,
+  "duration": 10,
+  "ingredients": [
+    {
+      "item": "goety:cursed_ingot"
+    },
+    {
+      "item": "goety:cursed_ingot"
+    },
+    {
+      "item": "goety:cursed_ingot"
+    },
+    {
+      "item": "goety:void_block"
+    },
+    {
+      "item": "goety:void_block"
+    },
+    {
+      "item": "goety:mystic_core"
+    },
+    {
+      "item": "goety:spirit_fabric"
+    },
+    {
+      "item": "minecraft:ender_eye"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:echoing_ender_shelf"
+  }
+}

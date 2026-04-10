@@ -1,0 +1,20 @@
+{
+  "name": "Compassionate Doctor",
+  "icon": "goetyawaken:gatling_charm",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "The saying goes, one soldier worth a hundred men..."
+    },
+    {
+       "type": "text",
+      "text": "Yet the specters of war never waned, leaving only mournful wraiths to sing hymns of shattered dreams. And in time, their requiem reached your ears."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:gatling_charm",
+      "text": ""
+    }
+  ]
+}

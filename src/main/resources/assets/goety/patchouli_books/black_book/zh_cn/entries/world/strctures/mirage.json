@@ -1,0 +1,16 @@
+{
+  "name": "荒漠迷城",
+  "icon": "minecraft:sandstone",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "曾经无名王国的边境壁垒。这里守卫着曾经的精锐，也曾是重要的矿物产地。时至今日堡垒依然屹立在恶地之中，里面或许藏着王国精锐强大的秘密......"
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/mirage.png"],
+      "border": true
+    }
+  ]
+}

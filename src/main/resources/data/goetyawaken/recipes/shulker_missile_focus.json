@@ -1,0 +1,33 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety:soul_bolt_focus"
+  },
+  "craftType": "end",
+  "soulCost": 1,
+  "duration": 20,
+  "ingredients": [
+    {
+      "item": "minecraft:popped_chorus_fruit"
+    },
+    {
+      "item": "minecraft:popped_chorus_fruit"
+    },
+    {
+      "item": "minecraft:chorus_flower"
+    },
+    {
+      "item": "minecraft:chorus_flower"
+    },
+    {
+      "item": "minecraft:shulker_shell"
+    },
+    {
+      "item": "minecraft:shulker_shell"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:shulker_missile_focus"
+  }
+}

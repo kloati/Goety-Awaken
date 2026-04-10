@@ -1,0 +1,28 @@
+{
+  "parent": "goety:goety/root",
+  "criteria": {
+    "the_swarm": {
+      "trigger": "goetyawaken:the_swarm"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.goetyawaken.the_swarm.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "goetyawaken:endersent_enchanted_book"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.goetyawaken.the_swarm.title"
+    }
+  },
+  "requirements": [
+    [
+      "the_swarm"
+    ]
+  ]
+}

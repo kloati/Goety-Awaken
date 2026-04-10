@@ -1,0 +1,16 @@
+{
+  "name": "Hostile Gnasher",
+  "icon": "goetyawaken:hostile_gnasher_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Generally speaking, humans rarely appear on a shark's menu, but these black demons of the deep are fiercer than most fish. They are vicious, greedy, and tireless—fortunately, they are not very common."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_gnasher",
+      "text": ""
+    }
+  ]
+}

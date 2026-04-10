@@ -1,0 +1,7 @@
+{
+  "name": "Whispers of the Ancients",
+  "description": "The hidden secrets of those powerful ancient beings, as told in rumors and legends...",
+  "icon": "goetyawaken:glowing_ember",
+  "parent": "goety:goetyawaken_world",
+  "sortnum": 1
+}

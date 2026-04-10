@@ -1,0 +1,16 @@
+{
+  "name": "Vindicator Chef",
+  "icon": "goetyawaken:vindicator_chef_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "The Vindicator Chef is a specially trained Vindicator — compared to their counterparts who only swing axes, their duty is to make food for other illagers — though their intelligence determines their cooking skills are not refined. However, it's worth noting that becoming a chef did not cause their muscles to atrophy; their threat level to you is the same as that of a Vindicator."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:vindicator_chef",
+      "text": "A chef with unrefined cooking skills, but still able to cleave open an enemy's skull!"
+    }
+  ]
+}

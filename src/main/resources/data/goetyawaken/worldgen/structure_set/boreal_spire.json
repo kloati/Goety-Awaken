@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "goetyawaken:boreal_spire",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 256,
+    "separation": 32,
+    "salt": 264525442
+  }
+}

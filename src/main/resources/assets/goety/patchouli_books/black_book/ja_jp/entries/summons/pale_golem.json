@@ -1,0 +1,16 @@
+{
+  "name": "ペイルゴーレム",
+  "icon": "goetyawaken:pale_golem_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "村人どもには守護者たるアイアンゴーレムがいるというのに、我らイリジャーのゴーレムを造れぬ道理があろうか？ アイアンゴーレムを構築する時と同じように、ペールスチールのブロックをT字型に積み上げ、その頂にカボチャを置くのだ。最後にアニメーションコアを以て命を吹き込めば、汝の忠実な守護者が覚醒するだろう。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:pale_golem_servant",
+      "text": "ペイルゴーレムは、汝を忠実に守護し続けるだろう。"
+    }
+  ]
+}

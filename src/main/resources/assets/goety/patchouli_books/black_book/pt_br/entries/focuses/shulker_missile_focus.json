@@ -1,0 +1,17 @@
+{
+  "name": "Foco do Míssil de Shulker",
+  "icon": "goetyawaken:shulker_missile_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Desde a primeira vez que você viu um míssil de Shulker em uma Cidade do Fim, você sempre pensou que esse míssil mágico era o portador perfeito para poções. Você replicou com sucesso esse míssil, e agora pode fazer seus oponentes voarem! Além disso, você pode infundir poções nele, para que ele transfira essas poções aos inimigos."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:shulker_missile_focus",
+      "text": "Crie o Foco do Míssil de Shulker."
+    }
+  ],
+  "advancement": "minecraft:end/end_city"
+}

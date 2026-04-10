@@ -1,0 +1,28 @@
+{
+  "parent": "goety:goety/craft_empty_focus",
+  "criteria": {
+    "creeper_focus": {
+      "trigger": "goetyawaken:creeper_focus"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.goetyawaken.creeper_focus.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "goetyawaken:creeper_focus"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.goetyawaken.creeper_focus.title"
+    }
+  },
+  "requirements": [
+    [
+      "creeper_focus"
+    ]
+  ]
+}

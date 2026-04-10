@@ -1,0 +1,33 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety:hungry_dagger"
+  },
+  "craftType": "forge",
+  "soulCost": 20,
+  "duration": 15,
+  "ingredients": [
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "goety:pale_steel_ingot"
+    },
+    {
+      "item": "goetyawaken:taboo_fragment"
+    },
+    {
+      "item": "goetyawaken:soul_sapphire"
+    },
+    {
+      "item": "goety:ominous_shard"
+    },
+    {
+      "item": "goety:magic_fabric"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:truth_seeker"
+  }
+}

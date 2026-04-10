@@ -1,0 +1,16 @@
+{
+  "name": "暗魂蜡烛",
+  "icon": "goetyawaken:dark_soul_candle",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "你时常觉得灵魂蜡烛的效率太慢了，特别是在锻造黑暗金属和制作女巫精酿的时候，你只能通过量变引起质变的方法来加快这种痛苦的进程。在一些繁琐但必要的试验之后，你制作了一根更高效的蜡烛，它能以8倍速为设备供给灵魂能量！"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:dark_soul_candle",
+      "text": "生命在于效率！"
+    }
+  ]
+}

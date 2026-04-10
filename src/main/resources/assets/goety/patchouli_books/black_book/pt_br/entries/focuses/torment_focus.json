@@ -1,0 +1,16 @@
+{
+  "name": "Foco do Tormento",
+  "icon": "goetyawaken:torment_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Ao roubar os resultados da pesquisa dos Neollager e o sacrifício \"voluntário\" do Vingador, você obteve este foco. Olhando para aquele atormentador, às vezes você se pergunta se é muito cruel deixar a alma do Vingador ser eternamente atormentada no foco."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:torment_focus",
+      "text": "Crie o Foco do Tormento."
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "minecraft:iron_shovel"
+  },
+  "craftType": "forge",
+  "soulCost": 10,
+  "duration": 5,
+  "research": "front",
+  "ingredients": [
+    {
+      "item": "minecraft:iron_nugget"
+    },
+    {
+      "item": "minecraft:iron_nugget"
+    },
+    {
+      "item": "minecraft:iron_nugget"
+    },
+    {
+      "item": "minecraft:iron_nugget"
+    },
+    {
+      "item": "goety:pale_steel_block"
+    },
+    {
+      "item": "goety:pale_steel_block"
+    },
+    {
+      "item": "goety:cursed_metal_block"
+    },
+    {
+      "item": "goety:cursed_metal_block"
+    },
+    {
+      "item": "goety:haunted_log"
+    },
+    {
+      "item": "goety:magic_emerald"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:mace"
+  }
+}

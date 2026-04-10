@@ -1,0 +1,36 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "minecraft:bow"
+  },
+  "craftType": "forge",
+  "soulCost": 100,
+  "duration": 20,
+  "ingredients": [
+    {
+      "item": "minecraft:netherite_ingot"
+    },
+    {
+      "item": "goety:dark_ingot"
+    },
+    {
+      "item": "goety:dark_ingot"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "minecraft:leather"
+    },
+    {
+      "item": "goety:shadow_essence"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:dark_netherite_bow"
+  }
+}

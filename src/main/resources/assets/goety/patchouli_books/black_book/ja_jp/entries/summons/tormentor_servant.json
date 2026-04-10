@@ -1,0 +1,16 @@
+{
+  "name": "トーメンターの従者",
+  "icon": "goetyawaken:tormentor_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "トーメンターは、ヴェックスとヴィンディケーターを掛け合わせるという禁断の実験にその端を発する。汝はイリジャーたちの研究成果を掠め取り、フォーカスを介してこの禍々しき生物を造り出す術を確立したのだ。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:tormentor_servant",
+      "text": "トーメンターの従者は、通常のヴェックスを遥かに凌駕する力を秘めている。"
+    }
+  ]
+}

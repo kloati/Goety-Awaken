@@ -1,0 +1,23 @@
+{
+    "name": "The Thunderstorm",
+    "icon": "goety:resonance_crystal",
+    "category": "goety:anecdote/anecdote",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "The Gale Sanctum atop the Howling Peaks has always been one of the most mysterious places. It existed long before the Illagers began their campaigns, and the Squall Golems and Mistral Scroll found within remain deeply enigmatic. From these scattered reports, I can only offer a glimpse of what transpired."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "Illager Heavy Armor Regiment #5152 Garrison: Gale Sanctum, Howling Peaks$(br)Date: ??/??/????$(br)Live Communication Log:$(br)$(4)\"This Squall Golem seems easy enough to handle. Forget kiting—just stand on a slightly higher step and you've got it in the bag.\"$(br)$(1)\"Really? I don't buy it.\"$(br)$(4)\"Let me show you. Just flip the switch once.\"$(br)$(1)\"Is that really a good idea? Nothing said we're allowed to touch this thing.\"$(br)$(4)\"Ah, don't worry about it. Once we figure out the mechanics, we're golden.\"$(br)$(1)\"B-But that's a Squall Golem!\"$(br)$(4)\"Just watch me.\"$(br)$(0)[Communication Interrupted]"
+        },
+        {
+            "type": "patchouli:text",
+            "text": "Massive ambient storm energy detected on-site, mixed with minor amounts of artificial wind and storm energies.$(br)Field Investigation Report:$(br)Based on deduction, this Squall Golem was activated by absorbing lightning energy on its own, then amplified by attacks from Storm Casters. It carries an immense amount of storm energy, generating a magnetic field. On-site observers witnessed the souls of slain Storm Casters trapped within the magnetic field, unable to disperse, and attempting to attack the observers. As to why this particular Squall Golem can absorb thunderstorms to generate a magnetic field while others cannot—we have no answer.$(br)Report ID: #5354"
+        },
+        {
+            "type": "patchouli:text",
+            "text": "Sounds mysterious, doesn't it, dark magician? Yet the Huntswitch told me she's already faced this thing—but she didn't kill it. You know her nature: normally she never lets prey escape. But after investigating it myself, I understand why she did what she did. You'll understand too, once you try it. Just remember to bring a weapon with some reach. Hehehehehe!"
+        }
+    ]
+}

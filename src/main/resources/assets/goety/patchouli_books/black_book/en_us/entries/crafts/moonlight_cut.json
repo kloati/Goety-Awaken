@@ -1,0 +1,17 @@
+{
+  "name": "Moonlight Cut",
+  "icon": "goetyawaken:moonlight_cut",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Legend has it that the glaives wielded by the elite of the Nameless Kingdom could cleave even the moonlight from the night sky. Emulating the standard weaponry of the rearguard under the Undead Overlord, and combining the concepts recorded on the Front Scroll with certain dark magical materials, you have successfully recreated this weapon:one that embodies both speed and powe through your own rituals. It can also launch replicas for ranged attacks, much like the Magic Sword Focus."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:moonlight_cut",
+      "text": ""
+    }
+  ],
+  "advancement": "goety:goety/read_front_scroll"
+}

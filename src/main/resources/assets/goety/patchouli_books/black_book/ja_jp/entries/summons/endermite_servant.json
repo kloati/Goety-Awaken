@@ -1,0 +1,16 @@
+{
+  "name": "エンダーマイトの従者",
+  "icon": "goetyawaken:endermite_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "未知なる恐ろしき次元より現れし、毛むくじゃらの小さき生物。それはエンダーマンが最も忌み嫌う、不快な因縁そのものである。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:endermite_servant",
+      "text": "エンダーマイトの従者は敵を執拗に追跡し、汝のためにその牙を剥くだろう。"
+    }
+  ]
+}

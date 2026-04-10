@@ -1,0 +1,16 @@
+{
+  "name": "Illager Station",
+  "icon": "minecraft:chiseled_sandstone",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "A resting point in the desert wasteland, where Illagers resupply, rest, and mark their routes. If smoke rises from its hearth, the sound of raid horns will soon follow."
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/illager_station.png"],
+      "border": true
+    }
+  ]
+}

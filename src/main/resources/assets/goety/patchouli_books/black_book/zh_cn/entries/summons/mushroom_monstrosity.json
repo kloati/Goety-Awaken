@@ -1,0 +1,38 @@
+{
+  "name": "哞菇巨兽",
+  "icon": "goetyawaken:mushroom_monstrosity_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "既然你已经通晓了支配的卷轴，那仅仅创造一头由红石制造的巨兽自然不能满足你的野心。在摧毁了混沌监牢里的真菌巨兽之后，你被那台初号机的强大和暴力深深震撼，古人的智慧在你眼中是如此触手可及。在你得到了从巨兽身上剥离的回路之后，利用三界的力量，你创造了一种融合了三界材料和一些...蘑菇的模具。有了这种奇异的模具，接下来该怎么做你已了然于心。"
+    },
+    {
+      "type": "image",
+      "images": ["goetyawaken:textures/gui/mushroom_monstrosity_1.png"],
+      "border": true,
+      "title": "建造模具的第一层",
+      "text": "当然，玻璃不是必须的。"
+    },
+    {
+      "type": "image",
+      "images": ["goetyawaken:textures/gui/mushroom_monstrosity_2.png"],
+      "border": true,
+      "title": "建造模具的第二层",
+      "text": "当然，玻璃不是必须的。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:mushroom_monstrosity",
+      "text": "建造你自己的原型机！"
+    },
+    {
+      "type": "image",
+      "images": ["goetyawaken:textures/gui/mushroom_monstrosity_revive.png"],
+      "border": true,
+      "title": "复活哞菇巨兽",
+      "text": "你的巨兽倒下了？这还真是不容易。我是说，对于对方来说。"
+    }
+  ],
+  "advancement": "goetyawaken:royal_research_completed"
+}

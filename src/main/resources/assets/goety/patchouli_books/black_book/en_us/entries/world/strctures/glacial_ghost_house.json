@@ -1,0 +1,16 @@
+{
+  "name": "Glacial Ghost House",
+  "icon": "minecraft:spruce_log",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Rumors say that in the depths of the Frozen Ocean, there is a frozen ruin where a Wraith Necromancer roams. This unusual ghost moves as swift as a specter, unexpectedly approaching any trespasser and killing them. The wand in its hand can fire extremely cold Ghost Rays that can ignite \"Ice Fire\", and can also summon pale phantoms. Some fishermen say it's the creation of ancient ghosts who refuse to sink into darkness — they use it as a foothold to quietly process the souls they have collected."
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/glacial_ghost_house.png"],
+      "border": true
+    }
+  ]
+}

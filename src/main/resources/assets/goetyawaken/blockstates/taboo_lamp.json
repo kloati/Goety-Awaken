@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "goetyawaken:block/taboo_lamp_off"
+    },
+    "lit=true": {
+      "model": "goetyawaken:block/taboo_lamp"
+    }
+  }
+}

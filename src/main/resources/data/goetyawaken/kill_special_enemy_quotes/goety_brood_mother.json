@@ -1,0 +1,16 @@
+{
+    "goety:brood_mother":  [
+                               {
+                                   "key": "kill_special_enemy.goety.brood_mother_1",
+                                   "subtitles":  10.0
+                               },
+                               {
+                                   "key": "kill_special_enemy.goety.brood_mother_2",
+                                   "subtitles":  11.0
+                               },
+                               {
+                                   "key": "kill_special_enemy.goety.brood_mother_3",
+                                   "subtitles":  9.0
+                               }
+                           ]
+}

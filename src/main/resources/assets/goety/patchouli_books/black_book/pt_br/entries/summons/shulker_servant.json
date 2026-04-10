@@ -1,0 +1,16 @@
+{
+  "name": "Servo Shulker",
+  "icon": "goetyawaken:shulker_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Aquelas estranhas e irritantes criaturas das Cidades do Fim fazem bons servos, então você replicou uma. Ligada por sua vontade, seus mísseis não machucarão seus aliados. Usar um núcleo de animação para ativar uma Caixa de Shulker lhe dará um servo Shulker próprio."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:shulker_servant",
+      "text": "Servos Shulker lutarão por você disparando mísseis de Shulker."
+    }
+  ]
+}

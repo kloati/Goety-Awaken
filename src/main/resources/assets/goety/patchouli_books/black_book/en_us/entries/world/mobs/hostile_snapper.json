@@ -1,0 +1,16 @@
+{
+  "name": "Hostile Snapper",
+  "icon": "goetyawaken:hostile_snapper_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "As most people imagine, piranhas never fail to live up to their reputation for being vicious and aggressive. While packs of black wolves hunt together on land, these terrifying black fish carry out their own predatory campaigns beneath the water's surface."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_snapper",
+      "text": ""
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Killer Focus",
+  "icon": "goetyawaken:killer_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "text",
+      "text": "How could such a cute rabbit attack people?"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:killer_focus",
+      "text": "Craft the Killer Focus."
+    }
+  ]
+}

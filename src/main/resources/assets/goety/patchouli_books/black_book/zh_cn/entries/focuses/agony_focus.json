@@ -1,0 +1,16 @@
+{
+  "name": "痛楚聚晶",
+  "icon": "goetyawaken:agony_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "text",
+      "text": "把那些因你而死的灵魂，从下界的深渊里扯出来，用它们的哀嚎激发燃烧它们的柴薪，用它们的残恨铸成控制它们的锁链。用死后的怨毒尖叫着冲向敌人。$(br)$(l)$(4)因我们的恨意永世不灭，我们的盛怒永世不休。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:agony_focus",
+      "text": "制作痛楚聚晶。"
+    }
+  ]
+}

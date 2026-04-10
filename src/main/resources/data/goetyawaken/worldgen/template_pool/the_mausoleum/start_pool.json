@@ -1,0 +1,24 @@
+{
+  "name": "goetyawaken:the_mausoleum/start_pool",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "goetyawaken:the_mausoleum1",
+        "processors": "goetyawaken:the_mausoleum_loot",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "goetyawaken:the_mausoleum2",
+        "processors": "goetyawaken:the_mausoleum_loot",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

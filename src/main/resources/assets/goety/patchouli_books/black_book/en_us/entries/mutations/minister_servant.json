@@ -1,0 +1,25 @@
+{
+  "name": "Minister Servant",
+  "icon": "goety:ominous_orb",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "text",
+      "text": "The Minister is among the most prestigious of the illagers. This Minister, personally promoted by you, will command nearby illager servants, use his staff to shoot magic bolts and create vicious teeth, and also throw bombs to attack his enemies."
+    },
+    {
+      "type": "text",
+      "text": "When his staff is destroyed, he will make a new one after 120 seconds."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:minister_servant",
+      "text": "Transform a preacher into a Minister servant through ritual."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:minister_servant",
+      "text": "Minister servants will fight for you using his command artistry and magic."
+    }
+  ]
+}

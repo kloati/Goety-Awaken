@@ -1,0 +1,17 @@
+{
+  "name": "Superaggregated Mycelial Circuit",
+  "icon": "goetyawaken:superaggregated_mycelial_circuit",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "These mycelia, aggregated in peculiar ways and deeply fused with the components of the Mooshroom Monstrosity, have formed their own unique ecosystem, making it extremely difficult to propagate more of them. To prevent them from becoming a non-renewable resource, you decided to tackle this challenge. Ultimately, you found inspiration in the Dominance Scroll and mastered the miraculous technique of precisely constructing one circuit based on the blueprint of another Superaggregated Mycelial Circuit!"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:superaggregated_mycelial_circuit",
+      "text": ""
+    }
+  ],
+  "advancement": "goetyawaken:royal_research_completed"
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Wololo聚晶",
+  "icon": "goetyawaken:wololo_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "text",
+      "text": "一种来源于唤魔者们的神秘咒语。把羊毛从蓝色变成红色——你本来并不想理会这种无趣的法术，毕竟他对你学习黑魔法毫无帮助，只是一个有趣但无意义的东西——可是这太有趣了！"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:wololo_focus",
+      "text": "Wololo！"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Necromante das Ruínas",
+  "icon": "goetyawaken:parched_necromancer_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Diz-se que o antigo reino enterrado sob as areias amarelas possuía muitos seres poderosos. Eles não pereceram realmente com o declínio do reino, mas sim renasceram como mortos-vivos... Eles se esconderam, mas talvez você possa invocá-los usando algo daquele reino antigo?"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:parched_necromancer",
+      "text": "Use o Gongo Antigo em biomas de deserto para invocá-los!"
+    }
+  ]
+}

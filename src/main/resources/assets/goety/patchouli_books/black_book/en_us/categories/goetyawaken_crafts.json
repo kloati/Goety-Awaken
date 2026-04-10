@@ -1,0 +1,7 @@
+{
+  "name": "Crafting",
+  "description": "Now that you're delving into mystical magic, your crafting skills shouldn't go to waste.",
+  "icon": "goety:focus_bag",
+  "sortnum": 4,
+  "parent": "goety:goetyawaken"
+}

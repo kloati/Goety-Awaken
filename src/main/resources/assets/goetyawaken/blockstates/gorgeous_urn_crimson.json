@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "goetyawaken:block/gorgeous_urn_crimson" },
+    "facing=south": { "model": "goetyawaken:block/gorgeous_urn_crimson", "y": 180 },
+    "facing=east": { "model": "goetyawaken:block/gorgeous_urn_crimson", "y": 90 },
+    "facing=west": { "model": "goetyawaken:block/gorgeous_urn_crimson", "y": 270 }
+  }
+}

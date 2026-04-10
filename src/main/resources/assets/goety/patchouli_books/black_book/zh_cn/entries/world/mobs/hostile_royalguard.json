@@ -1,0 +1,16 @@
+{
+  "name": "敌对皇家守卫",
+  "icon": "goetyawaken:hostile_royalguard_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "皇家守卫是从卫道士中提拔出的精锐卫队，通常驻守在重要的战略要地，或是护卫着皇室成员。他们穿着重型装甲，挥舞着盾牌和狼牙棒，很难被击败。在你打破他们的盾牌之前，你的攻击不会伤及他们。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_royalguard",
+      "text": "小心这些精锐战士！"
+    }
+  ]
+}

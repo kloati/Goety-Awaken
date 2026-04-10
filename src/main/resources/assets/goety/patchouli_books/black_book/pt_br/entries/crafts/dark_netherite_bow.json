@@ -1,0 +1,17 @@
+{
+  "name": "Arco de Netherite das Trevas",
+  "icon": "goetyawaken:dark_netherite_bow",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Este arco é forjado a partir de Metal das Trevas, Ouro e Netherite. Requer força excepcional para ser tensionado, representando maior poder. Criaturas atingidas por suas flechas serão afligidas com Declínio."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:dark_netherite_bow",
+      "text": ""
+    }
+  ],
+  "advancement": "goety:goety/craft_dark_ingot"
+}

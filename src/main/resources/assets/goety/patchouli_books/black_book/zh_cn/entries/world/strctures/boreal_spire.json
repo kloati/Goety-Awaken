@@ -1,0 +1,16 @@
+{
+  "name": "凛冬高塔",
+  "icon": "goety:snowy_highrock_bricks",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "传言极北荒原的深处有座孤塔，独自站在永夜的寒风中，偶有路人经过也只是低头快走不敢多看。只有经验老到的冒险家知道其中埋藏着多少珍宝。"
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/boreal_spire.png"],
+      "border": true
+    }
+  ]
+}

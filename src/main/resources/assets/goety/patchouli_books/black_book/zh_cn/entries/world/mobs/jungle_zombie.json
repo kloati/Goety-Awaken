@@ -1,0 +1,16 @@
+{
+  "name": "丛林僵尸",
+  "icon": "goetyawaken:jungle_zombie_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "看起来丛林的生机不出意外地同样蔓延到了这些死去的尸体身上。得益于这些僵尸的变种被青苔和植物所覆盖，它们的抓咬也附带着剧毒。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:jungle_zombie",
+      "text": ""
+    }
+  ]
+}

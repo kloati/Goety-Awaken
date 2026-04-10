@@ -1,0 +1,16 @@
+{
+  "name": "Mirage",
+  "icon": "minecraft:sandstone",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "The border fortress of a once nameless kingdom. This place guarded former elites and was once an important mineral source. To this day, the fortress still stands in the badlands, perhaps hiding the secrets of the kingdom's elite strength inside......"
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/mirage.png"],
+      "border": true
+    }
+  ]
+}

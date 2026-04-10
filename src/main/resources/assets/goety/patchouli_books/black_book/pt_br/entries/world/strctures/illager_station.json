@@ -1,0 +1,16 @@
+{
+  "name": "Estação Illager",
+  "icon": "minecraft:chiseled_sandstone",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Um ponto de descanso no deserto árido, onde Illagers reabastecem, descansam e marcam suas rotas. Se a fumaça subir de sua lareira, o som das trombetas de invasão logo se seguirá."
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/illager_station.png"],
+      "border": true
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "name": "Anotações da Bruxa. Saque",
+  "icon": "goety:death_scythe",
+  "category": "goety:goetyawaken_rumors",
+  "sortnum": 9,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Ao abater os antigos, além de Bolsas de Tesouro, eles também deixam cair algumas brasas estranhas. Você pode se perguntar que utilidade essas cinzas têm para arriscar tanto caçando-os — afinal, sei que você embarcou nesta caçada por razões que não preciso me preocupar. Fique tranquilo, suas caçadas antigas valerão absolutamente a pena."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:gilded_ingot",
+      "text": "No momento em que a encontrei pela primeira vez, notei que esta barra peculiar possui imensa energia arcana. É precisamente por isso que aqueles antigos brilham com aquele fulgor dourado encantado."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Imagino que você já compreenda os princípios de forja do Metal das Trevas, embora não tenha tempo para discutir o que você já sabe. Em uma bigorna, usar Barras de Liga Brilhante pode aumentar cada encantamento em seu item encantado em um nível — até três vezes por item. Fui bastante clara: se deseja encantamentos de nível mais alto, continue caçando. Acredito que isso seja motivação suficiente para impulsionar suas caçadas."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:enchanted_golden_apple",
+      "text": "A propósito, Brasas Brilhantes também podem ser usadas para fabricar Maçãs Douradas Encantadas. Pelo que me lembro, não têm um gosto particularmente bom — embora não leve minha palavra como verdade. Já perdi a capacidade de sentir qualquer sabor há muito tempo."
+    }
+  ]
+}

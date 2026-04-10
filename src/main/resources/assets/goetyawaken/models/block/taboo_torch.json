@@ -1,0 +1,6 @@
+{
+	"parent": "goetyawaken:block/template_taboo_torch",
+	"textures": {
+		"torch": "goetyawaken:block/taboo_blocks/taboo_torch"
+	}
+}

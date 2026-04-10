@@ -1,0 +1,30 @@
+{
+  "name": "Wight Servant",
+  "icon": "goetyawaken:wight_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Since those soul-craving Reapers have already pledged allegiance to you, perhaps that demon that has a special connection with the tombs and forever craves souls might also submit to you. After trying some special methods, a Wight to fight for you was born."
+    },
+    {
+      "type": "text",
+      "text": "He can teleport instantly in battle to confuse enemies, steal enemy souls to heal himself, summon duplicates and Carrion Maggots to assist in battle — just like when it was an opponent."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:wight_servant1",
+      "text": "Summon a Wight servant through a complex ritual."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:wight_servant2",
+      "text": "Simplified summoning using Terror Soul."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:wight_servant",
+      "text": "Wight servants will faithfully fight for you."
+    }
+  ]
+}

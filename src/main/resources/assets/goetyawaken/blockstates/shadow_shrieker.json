@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "can_summon=false,shrieking=false": {
+      "model": "goetyawaken:block/shadow_shrieker"
+    },
+    "can_summon=false,shrieking=true": {
+      "model": "goetyawaken:block/shadow_shrieker_shriek"
+    },
+    "can_summon=true,shrieking=false": {
+      "model": "goetyawaken:block/shadow_shrieker_can_summon"
+    },
+    "can_summon=true,shrieking=true": {
+      "model": "goetyawaken:block/shadow_shrieker_can_summon_shriek"
+    }
+  }
+}

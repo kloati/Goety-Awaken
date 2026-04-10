@@ -1,0 +1,17 @@
+{
+  "name": "Flagelo da Tumba",
+  "icon": "goetyawaken:grave_bane",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Você conseguiu modificar o glaive, forjando-o em uma lâmina sagrada que abate os mortos-vivos utilizando uma Safira da Alma imbuída com domínio e um Olho Críptico. Ele se tornou tão sintonizado com o encantamento Julgamento que fara ter o dobro de sua eficácia normal quando aplicado a esta arma!"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:grave_bane",
+      "text": ""
+    }
+  ],
+  "advancement": "goety:goety/read_front_scroll"
+}

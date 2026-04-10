@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "goetyawaken:taboo_bricks"
+  },
+  "result": "goetyawaken:taboo_bricks_engraved",
+  "count": 1
+}

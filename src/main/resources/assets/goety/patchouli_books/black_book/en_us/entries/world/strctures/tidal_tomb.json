@@ -1,0 +1,16 @@
+{
+  "name": "Tidal Tomb",
+  "icon": "minecraft:prismarine_bricks",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Beneath the deep sea lies a place where sailors rest in eternal slumber. Any adventurer who enters must fight a life-or-death battle against their lingering obsessions. If they win, they can claim the key to the treasure, and the rotted bones of the sailors will become valuable loot. If they lose, they will sink into the abyss, drowning forever in the depths."
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/tidal_tomb.png"],
+      "border": true
+    }
+  ]
+}

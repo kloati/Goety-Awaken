@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "__comment": "servants that heals and lose limited lifespan through Void set.",
+  "values": [
+    "goetyawaken:ender_keeper_servant"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "parent": "minecraft:block/sculk_shrieker",
+  "render_type": "cutout",
+  "textures": {
+    "bottom": "goetyawaken:block/sculk_shrieker/sculk_shrieker_bottom",
+    "side": "goetyawaken:block/sculk_shrieker/sculk_shrieker_side",
+    "top": "goetyawaken:block/sculk_shrieker/sculk_shrieker_top",
+    "inner_top": "goetyawaken:block/sculk_shrieker/sculk_shrieker_inner_top"
+  }
+}

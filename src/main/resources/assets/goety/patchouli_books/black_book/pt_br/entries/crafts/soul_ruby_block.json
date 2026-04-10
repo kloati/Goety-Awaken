@@ -1,0 +1,21 @@
+{
+  "name": "Bloco de Rubi da Alma",
+  "icon": "goetyawaken:soul_ruby_block",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "O Bloco de Rubi da Alma é firmemente comprimido a partir de Rubis da Alma. Os Rubis da Alma são monopólio da Família Real da Calamidade. Quantos membros da família real você matou para obtê-los, $(playername)?"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:soul_ruby_block",
+      "text": "Crie o Bloco de Rubi da Alma."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:soul_ruby_from_block",
+      "text": "Obtenha Rubi da Alma do Bloco de Rubi da Alma."
+    }
+  ]
+}

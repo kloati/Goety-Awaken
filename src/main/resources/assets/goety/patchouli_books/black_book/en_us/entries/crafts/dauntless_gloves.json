@@ -1,0 +1,16 @@
+{
+  "name": "Dauntless Gloves",
+  "icon": "goetyawaken:dauntless_gloves",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "It is said that the dauntless warriors, skilled in the use of claymores, possess natural divine strength, enabling them to swing heavy claymores as swiftly as the wind and cleave through iron as if it were mud. However, you suspect they might have simply crafted a pair of gloves suited for claymores, much like the ones you once made for scythes and warhammers."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:dauntless_gloves",
+      "text": "When worn, increases the attack speed of claymore-type weapons by 50%."
+    }
+  ]
+}

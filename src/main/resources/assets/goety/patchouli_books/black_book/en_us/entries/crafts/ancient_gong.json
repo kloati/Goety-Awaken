@@ -1,0 +1,16 @@
+{
+  "name": "Ancient Gong",
+  "icon": "goetyawaken:ancient_gong",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "It is said that one of the symbols of a certain nameless kingdom was a type of gong, and you have managed to create a replica. The distorted ancient sound can still stir the ruins—summoning a Desert Progeny from amidst the rubble to respond to the source of the noise."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:ancient_gong",
+      "text": "By placing a Weakening Focus onto a gong, you can mimic the sound of the ancient gong. While retaining the Weakening Focus's original function, it can also barely rouse the interest of the desert."
+    }
+  ]
+}

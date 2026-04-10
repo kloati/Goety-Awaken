@@ -1,0 +1,16 @@
+{
+  "name": "ソウルサファイア",
+  "icon": "goetyawaken:soul_sapphire",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "ワズィールが持つ「魂のルビー」の輝きは、それを手中に収めるために積み重ねられた罪の深さを思い起こさせる。……ならば、魔術の力でその本質を造り変え、血の如き色を拭い去ってはどうだろうか？ そうすれば、この石が辿った不名誉な起源を覆い隠せるやもしれぬ。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:soul_sapphire",
+      "text": "ソウルサファイアを作成する。"
+    }
+  ]
+}

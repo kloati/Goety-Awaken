@@ -1,0 +1,16 @@
+{
+  "name": "刺客手套",
+  "icon": "goetyawaken:assassin_glove",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "对于像你这样的黑暗巫师来说，从背后杀死敌人并不是什么卑鄙的行为，然而匕首那可怜的伤害却总让你感到失望。在经过一些类似的尝试之后，你设计出了一种能更好地握住匕首或是刺刀的手套，当你戴着这幅手套时，你可以轻易地使用那些阴险的武器狠狠刺穿敌人的后背。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:assassin_glove",
+      "text": ""
+    }
+  ]
+}

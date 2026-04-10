@@ -1,0 +1,16 @@
+{
+  "name": "Olho Sombrio",
+  "icon": "goetyawaken:ominous_eye",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Um olho usado para rastrear o Castelo Sombrio."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:ominous_eye",
+      "text": "Olho Sombrio"
+    }
+  ]
+}

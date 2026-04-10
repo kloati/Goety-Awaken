@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:jigsaw",
+  "biomes": "#goetyawaken:has_structure/temple_of_apollyon",
+ "step": "surface_structures",
+  "spawn_overrides": {},
+  "start_pool": "goetyawaken:temple_of_apollyon/start_pool",
+  "size": 7,
+  "start_height": {
+    "type": "minecraft:uniform",
+    "min_inclusive": {
+      "absolute": 27
+    },
+    "max_inclusive": {
+      "absolute": 32
+    }
+  },
+  "max_distance_from_center": 80,
+  "use_expansion_hack": false,
+  "terrain_adaptation": "beard_box",
+  "liquid_settings": "apply_waterlogging"
+}

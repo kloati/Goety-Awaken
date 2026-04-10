@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "goetyawaken:greatsword_burial_site",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 512,
+    "separation": 32,
+    "salt": 457154321
+  }
+}

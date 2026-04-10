@@ -1,0 +1,12 @@
+{
+    "illageandspillage:magispeller":  [
+                                          {
+                                              "key": "kill_special_enemy.illageandspillage.magispeller_1",
+                                              "subtitles":  10.0
+                                          },
+                                          {
+                                              "key": "kill_special_enemy.illageandspillage.magispeller_2",
+                                              "subtitles":  10.5
+                                          }
+                                      ]
+}

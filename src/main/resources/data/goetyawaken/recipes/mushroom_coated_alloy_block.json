@@ -1,0 +1,53 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goetyawaken:superaggregated_mycelial_circuit"
+  },
+  "craftType": "forge",
+  "soulCost": 10,
+  "duration": 5,
+  "research": "royal",
+  "ingredients": [
+    {
+      "item": "minecraft:diamond_block"
+    },
+    {
+      "item": "minecraft:diamond_block"
+    },
+    {
+      "item": "minecraft:netherite_ingot"
+    },
+    {
+      "item": "minecraft:netherite_ingot"
+    },
+    {
+      "item": "minecraft:netherite_ingot"
+    },
+    {
+      "item": "minecraft:netherite_ingot"
+    },
+    {
+      "item": "minecraft:crying_obsidian"
+    },
+    {
+      "item": "minecraft:end_stone"
+    },
+    {
+      "item": "minecraft:mycelium"
+    },
+    {
+      "item": "minecraft:brown_mushroom_block"
+    },
+    {
+      "item": "minecraft:mushroom_stem"
+    },
+    {
+      "item": "minecraft:red_mushroom_block"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:mushroom_coated_alloy_block",
+    "count": 4
+  }
+}

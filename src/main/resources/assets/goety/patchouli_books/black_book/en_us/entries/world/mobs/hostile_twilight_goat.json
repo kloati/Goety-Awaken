@@ -1,0 +1,16 @@
+{
+  "name": "Hostile Twilight Goat",
+  "icon": "goetyawaken:hostile_twilight_goat_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Among highland dwellers, legends of dark goats have persisted for ages—tales likely inspired by the Twilight Goats. These black creatures, far more ferocious than ordinary goats, violently ram their victims with their horns. Should their horns break off, they will resort to tearing at victims with their sharp teeth."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_twilight_goat",
+      "text": "Dark Young"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:enchant",
+  "activation_item": {
+    "item": "minecraft:book"
+  },
+  "craftType": "magic",
+  "soulCost": 10,
+  "duration": 10,
+  "enchantment": "goety:range",
+  "xpLevelCost": 3,
+  "ingredients": [
+    {
+      "item": "minecraft:quartz"
+    },
+    {
+      "item": "minecraft:bow"
+    },
+    {
+      "item": "minecraft:repeater"
+    }
+  ],
+  "result": {
+    "item": "minecraft:enchanted_book"
+  }
+}

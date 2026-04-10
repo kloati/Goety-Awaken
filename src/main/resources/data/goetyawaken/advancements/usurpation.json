@@ -1,0 +1,28 @@
+{
+  "parent": "goety:goety/kill_a_vizier",
+  "display": {
+    "icon": {
+      "item": "goetyawaken:fake_appointment"
+    },
+    "title": {
+      "translate": "advancements.goetyawaken.usurpation.title"
+    },
+    "description": {
+      "translate": "advancements.goetyawaken.usurpation.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "envioker_becomes_vizier": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "requirements": [
+    [
+      "envioker_becomes_vizier"
+    ]
+  ]
+}

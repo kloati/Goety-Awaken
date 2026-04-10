@@ -1,0 +1,427 @@
+{
+  "trades": [
+    {
+      "item_id": "goety:empty_focus",
+      "min_level": 1,
+      "max_level": 3,
+      "min_count": 3,
+      "max_count": 6,
+      "weight": 30,
+      "price": 4
+    },
+    {
+      "item_id": "goety:mystic_core",
+      "min_level": 3,
+      "max_level": 6,
+      "min_count": 1,
+      "max_count": 2,
+      "weight": 10,
+      "price": 8
+    },
+    {
+      "item_id": "goety:animation_core",
+      "min_level": 3,
+      "max_level": 6,
+      "min_count": 1,
+      "max_count": 2,
+      "weight": 10,
+      "price": 8
+    },
+    {
+      "item_id": "goety:hunger_core",
+      "min_level": 3,
+      "max_level": 6,
+      "min_count": 1,
+      "max_count": 2,
+      "weight": 10,
+      "price": 8
+    },
+    {
+      "item_id": "goety:wind_core",
+      "min_level": 3,
+      "max_level": 6,
+      "min_count": 1,
+      "max_count": 2,
+      "weight": 10,
+      "price": 8
+    },
+    {
+      "item_id": "goety:ectoplasm",
+      "min_level": 2,
+      "max_level": 4,
+      "min_count": 3,
+      "max_count": 6,
+      "weight": 40,
+      "price": 4
+    },
+    {
+      "item_id": "goetyawaken:iron_grimoire",
+      "min_level": 3,
+      "max_level": 3,
+      "min_count": 1,
+      "max_count": 1,
+      "weight": 1,
+      "price": 24
+    },
+    {
+      "item_id": "goetyawaken:gold_grimoire",
+      "min_level": 4,
+      "max_level": 4,
+      "min_count": 1,
+      "max_count": 1,
+      "weight": 1,
+      "price": 36
+    },
+    {
+      "item_id": "goetyawaken:emerald_grimoire",
+      "min_level": 5,
+      "max_level": 5,
+      "min_count": 1,
+      "max_count": 1,
+      "weight": 1,
+      "price": 48
+    },
+    {
+      "item_id": "goetyawaken:diamond_grimoire",
+      "min_level": 6,
+      "max_level": 6,
+      "min_count": 1,
+      "max_count": 1,
+      "weight": 1,
+      "price": 64
+    },
+    {
+      "item_id": "minecraft:totem_of_undying",
+      "min_level": 5,
+      "max_level": 6,
+      "min_count": 1,
+      "max_count": 1,
+      "weight": 5,
+      "price": 32
+    },
+    {
+      "item_id": "goety:void_bottle",
+      "min_level": 2,
+      "max_level": 4,
+      "min_count": 2,
+      "max_count": 2,
+      "weight": 20,
+      "price": 4
+    },
+    {
+      "item_id": "goety:forbidden_piece",
+      "min_level": 6,
+      "max_level": 6,
+      "min_count": 1,
+      "max_count": 1,
+      "weight": 5,
+      "price": 12
+    },
+    {
+      "item_id": "goety:soul_emerald",
+      "min_level": 4,
+      "max_level": 6,
+      "min_count": 1,
+      "max_count": 1,
+      "weight": 5,
+      "price": 24
+    },
+    {
+      "item_id": "goety:magic_emerald",
+      "min_level": 4,
+      "max_level": 6,
+      "min_count": 3,
+      "max_count": 6,
+      "weight": 10,
+      "price": 4
+    },
+    {
+      "item_id": "goety:cursed_ingot",
+      "min_level": 2,
+      "max_level": 3,
+      "min_count": 3,
+      "max_count": 6,
+      "weight": 40,
+      "price": 4
+    },
+    {
+      "item_id": "goety:ice_cube",
+      "min_level": 3,
+      "max_level": 3,
+      "min_count": 8,
+      "max_count": 12,
+      "weight": 40,
+      "price": 1
+    },
+    {
+      "item_id": "goety:savage_tooth",
+      "min_level": 2,
+      "max_level": 4,
+      "min_count": 3,
+      "max_count": 6,
+      "weight": 40,
+      "price": 4
+    },
+    {
+      "item_id": "goety:venomous_fang",
+      "min_level": 3,
+      "max_level": 5,
+      "min_count": 3,
+      "max_count": 6,
+      "weight": 30,
+      "price": 4
+    },
+    {
+      "item_id": "goety:jade",
+      "min_level": 4,
+      "max_level": 5,
+      "min_count": 1,
+      "max_count": 1,
+      "weight": 30,
+      "price": 4
+    },
+    {
+      "item_id": "goety:dark_fabric",
+      "min_level": 1,
+      "max_level": 3,
+      "min_count": 1,
+      "max_count": 2,
+      "weight": 20,
+      "price": 8
+    },
+    {
+      "item_id": "goety:magic_fabric",
+      "min_level": 1,
+      "max_level": 3,
+      "min_count": 1,
+      "max_count": 2,
+      "weight": 20,
+      "price": 8
+    },
+    {
+      "item_id": "goety:occult_fabric",
+      "min_level": 1,
+      "max_level": 3,
+      "min_count": 1,
+      "max_count": 2,
+      "weight": 20,
+      "price": 8
+    },
+    {
+      "item_id": "goety:spirit_fabric",
+      "min_level": 1,
+      "max_level": 3,
+      "min_count": 1,
+      "max_count": 2,
+      "weight": 20,
+      "price": 8
+    },
+    {
+      "item_id": "goety:gale_fabric",
+      "min_level": 1,
+      "max_level": 3,
+      "min_count": 1,
+      "max_count": 2,
+      "weight": 20,
+      "price": 8
+    },
+    {
+      "item_id": "goety:chill_fabric",
+      "min_level": 1,
+      "max_level": 3,
+      "min_count": 1,
+      "max_count": 2,
+      "weight": 20,
+      "price": 8
+    },
+    {
+      "item_id": "goety:pale_steel_ingot",
+      "min_level": 2,
+      "max_level": 3,
+      "min_count": 3,
+      "max_count": 6,
+      "weight": 40,
+      "price": 4
+    },
+    {
+      "item_id": "goety:ravaging_scroll",
+      "min_level": 6,
+      "max_level": 6,
+      "min_count": 1,
+      "max_count": 1,
+      "weight": 1,
+      "price": 64
+    },
+    {
+      "item_id": "goety:shade_stone",
+      "min_level": 1,
+      "max_level": 1,
+      "min_count": 12,
+      "max_count": 20,
+      "weight": 40,
+      "price": 1
+    },
+    {
+      "item_id": "minecraft:prismarine_crystals",
+      "min_level": 4,
+      "max_level": 5,
+      "min_count": 8,
+      "max_count": 12,
+      "weight": 10,
+      "price": 4
+    },
+    {
+      "item_id": "minecraft:experience_bottle",
+      "min_level": 3,
+      "max_level": 6,
+      "min_count": 6,
+      "max_count": 10,
+      "weight": 5,
+      "price": 6
+    },
+    {
+      "item_id": "minecraft:prismarine_shard",
+      "min_level": 4,
+      "max_level": 5,
+      "min_count": 8,
+      "max_count": 12,
+      "weight": 10,
+      "price": 6
+    },
+    {
+      "item_id": "minecraft:amethyst_cluster",
+      "min_level": 6,
+      "max_level": 6,
+      "min_count": 2,
+      "max_count": 2,
+      "weight": 5,
+      "price": 12
+    },
+    {
+      "item_id": "minecraft:heart_of_the_sea",
+      "min_level": 4,
+      "max_level": 6,
+      "min_count": 1,
+      "max_count": 1,
+      "weight": 1,
+      "price": 24
+    },
+    {
+      "item_id": "goety:quick_growing_seed",
+      "min_level": 2,
+      "max_level": 4,
+      "min_count": 1,
+      "max_count": 2,
+      "weight": 20,
+      "price": 12
+    },
+    {
+      "item_id": "goety:poison_quill_seed",
+      "min_level": 2,
+      "max_level": 4,
+      "min_count": 1,
+      "max_count": 2,
+      "weight": 20,
+      "price": 12
+    },
+    {
+      "item_id": "goety:waystone",
+      "min_level": 4,
+      "max_level": 6,
+      "min_count": 2,
+      "max_count": 2,
+      "weight": 10,
+      "price": 12
+    },
+    {
+      "item_id": "goety:tall_skull",
+      "min_level": 1,
+      "max_level": 4,
+      "min_count": 1,
+      "max_count": 1,
+      "weight": 10,
+      "price": 4
+    },
+    {
+      "item_id": "minecraft:string",
+      "min_level": 1,
+      "max_level": 3,
+      "min_count": 1,
+      "max_count": 8,
+      "weight": 40,
+      "price": 2
+    },
+    {
+      "item_id": "minecraft:feather",
+      "min_level": 1,
+      "max_level": 3,
+      "min_count": 1,
+      "max_count": 8,
+      "weight": 40,
+      "price": 2
+    },
+    {
+      "item_id": "minecraft:lapis_lazuli",
+      "min_level": 2,
+      "max_level": 5,
+      "min_count": 3,
+      "max_count": 6,
+      "weight": 40,
+      "price": 4
+    },
+    {
+      "item_id": "minecraft:leather",
+      "min_level": 2,
+      "max_level": 5,
+      "min_count": 3,
+      "max_count": 6,
+      "weight": 40,
+      "price": 4
+    },
+    {
+      "item_id": "minecraft:amethyst_shard",
+      "min_level": 2,
+      "max_level": 5,
+      "min_count": 3,
+      "max_count": 6,
+      "weight": 40,
+      "price": 4
+    },
+    {
+      "item_id": "minecraft:ender_pearl",
+      "min_level": 3,
+      "max_level": 6,
+      "min_count": 1,
+      "max_count": 2,
+      "weight": 10,
+      "price": 6
+    },
+    {
+      "item_id": "minecraft:redstone",
+      "min_level": 1,
+      "max_level": 5,
+      "min_count": 3,
+      "max_count": 6,
+      "weight": 40,
+      "price": 4
+    },
+    {
+      "item_id": "minecraft:paper",
+      "min_level": 1,
+      "max_level": 5,
+      "min_count": 1,
+      "max_count": 2,
+      "weight": 30,
+      "price": 1
+    },
+    {
+      "item_id": "minecraft:book",
+      "min_level": 1,
+      "max_level": 5,
+      "min_count": 1,
+      "max_count": 2,
+      "weight": 20,
+      "price": 4
+    }
+  ]
+}

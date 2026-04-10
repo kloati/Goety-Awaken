@@ -1,0 +1,44 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety:void_eye"
+  },
+  "craftType": "end",
+  "entity_to_sacrifice": {
+    "tag": "goetyawaken:ender_keeper",
+    "display_name": "entity.goety.ender_keeper"
+  },
+  "soulCost": 500,
+  "duration": 30,
+  "research": "forbidden",
+  "ingredients": [
+    {
+      "item": "minecraft:end_crystal"
+    },
+    {
+      "item": "goety:weakening_focus"
+    },
+    {
+      "item": "goetyawaken:profound_echoing_shard"
+    },
+    {
+      "item": "goety:void_shard"
+    },
+    {
+      "item": "goety:flame_capture"
+    },
+    {
+      "item": "goety:pulverize_focus"
+    },
+    {
+      "item": "goety:stormlander"
+    },
+    {
+      "item": "goety:philosophers_stone"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:eye_of_overwatch"
+  }
+}

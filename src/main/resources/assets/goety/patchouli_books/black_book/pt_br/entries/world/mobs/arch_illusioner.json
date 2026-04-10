@@ -1,0 +1,20 @@
+{
+  "name": "Arqu-Ilusionista",
+  "icon": "goetyawaken:delusive_fragment",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Um feiticeiro Illager recluso que passou anos aprimorando secretamente sua arte dentro de castelos, tornando suas ilusões muito mais ameaçadoras que as de um Ilusionista comum. Este mestre do engano é excelente em criar miragens indistinguíveis da realidade para enganar e atormentar suas vítimas."
+    },
+    {
+      "type": "text",
+      "text": "O fragmento de tecido, preso entre verdade e ilusão, deixado para trás ao partir, despertou uma ideia em você. Talvez você possa utilizar essa substância enigmática para iluminar seus servos Ilusionistas."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:arch_illusioner",
+      "text": ""
+    }
+  ]
+}

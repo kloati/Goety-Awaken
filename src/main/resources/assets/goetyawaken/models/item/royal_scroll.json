@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "goetyawaken:item/royal_scroll_base",
+    "layer1": "goetyawaken:item/royal_scroll_emblem"
+  }
+}

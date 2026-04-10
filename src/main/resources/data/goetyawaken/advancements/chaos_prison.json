@@ -1,0 +1,28 @@
+{
+  "parent": "goety:goety/root",
+  "criteria": {
+    "chaos_prison": {
+      "trigger": "goetyawaken:chaos_prison"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.goetyawaken.chaos_prison.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:obsidian"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.goetyawaken.chaos_prison.title"
+    }
+  },
+  "requirements": [
+    [
+      "chaos_prison"
+    ]
+  ]
+}

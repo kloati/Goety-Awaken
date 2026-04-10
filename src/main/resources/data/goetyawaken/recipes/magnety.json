@@ -1,0 +1,26 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:enchant",
+  "activation_item": {
+    "item": "minecraft:book"
+  },
+  "craftType": "magic",
+  "soulCost": 15,
+  "duration": 10,
+  "enchantment": "goety:magnet",
+  "xpLevelCost": 5,
+  "ingredients": [
+    {
+      "item": "minecraft:quartz"
+    },
+    {
+      "item": "minecraft:compass"
+    },
+    {
+      "item": "minecraft:lodestone"
+    }
+  ],
+  "result": {
+    "item": "minecraft:enchanted_book"
+  }
+}

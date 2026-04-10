@@ -1,0 +1,40 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goetyawaken:glaive"
+  },
+  "craftType": "forge",
+  "soulCost": 20,
+  "duration": 10,
+  "research": "front",
+  "ingredients": [
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "minecraft:blaze_rod"
+    },
+    {
+      "item": "minecraft:blaze_rod"
+    },
+    {
+      "item": "goety:magic_fabric"
+    },
+    {
+      "item": "goety:magic_fabric"
+    },
+    {
+      "item": "minecraft:netherite_ingot"
+    },
+    {
+      "item": "goety:cryptic_eye"
+    },
+    {
+      "item": "goetyawaken:soul_sapphire"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:grave_bane"
+  }
+}

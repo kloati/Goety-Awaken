@@ -1,0 +1,16 @@
+{
+  "name": "潜影贝仆从",
+  "icon": "goetyawaken:shulker_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "末地城的那些奇特的而又恼人的傀儡生物是不错的仆人，因此你仿制了一只。受你的意志绑定，他的导弹不会伤害到你的盟友们。使用活力核心激活潜影盒即可获得一只属于你的潜影贝仆从。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:shulker_servant",
+      "text": "潜影贝仆从会发射潜影弹为你战斗。"
+    }
+  ]
+}

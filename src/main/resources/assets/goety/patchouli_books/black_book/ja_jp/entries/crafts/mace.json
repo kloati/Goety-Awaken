@@ -1,0 +1,16 @@
+{
+  "name": "メイス",
+  "icon": "goetyawaken:mace",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "汝は、なぜゾンビダークガードたちが皆一様にメイスを携えているのか、常々不思議に思っていた。その答えは、汝自身がこの武器を手に取り、振るってみることで自ずと明らかになるだろう。かつての古代の王たちが、なぜ自らの精鋭部隊にこの武器を制式兵装として与えたのか、その真意を理解する時が来たのだ。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:mace",
+      "text": ""
+    }
+  ]
+}

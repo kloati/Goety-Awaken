@@ -1,0 +1,20 @@
+{
+  "name": "华丽陶瓷坛",
+  "icon": "goetyawaken:ally_pithos",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "你已经知道可以对着骷髅领主留下的陶瓷坛使用重生锚来将其重新带回世间的奥术了。但你开始好奇既然陶瓷坛剩下的魔力能够复活那位愤怒的领主，有没有办法利用黑魔法改造一下陶瓷坛，让领主绑定于你的意志为你服务呢？"
+    },
+    {
+      "type": "text",
+      "text": "让那位愤怒的领主屈从于你显然不如自己创造一名领主更加方便。你利用一种方法改造并制作出了华丽陶瓷坛，当你打开这个陶瓷坛时即可释放出忠诚于你的骷髅领主。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:ally_pithos",
+      "text": ""
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Chaos Prison",
+  "icon": "goetyawaken:mushroom_coated_alloy_block",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "The powers of the three dimensions—the Overworld, the Nether, and the End—intertwine here. Legend has it that a colossal, out-of-control war machine is imprisoned within..."
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/chaos_prison.png"],
+      "border": true
+    }
+  ]
+}

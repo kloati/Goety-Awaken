@@ -1,0 +1,16 @@
+{
+  "name": "Maça",
+  "icon": "goetyawaken:mace",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Você frequentemente se perguntou por que os Guardas-Negras Zumbis são equipados com maças. Talvez ao empunhar uma por si mesmo, você entenderá por que os reis antigos emitiam essas armas como equipamento padrão para suas tropas de elite."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:mace",
+      "text": ""
+    }
+  ]
+}

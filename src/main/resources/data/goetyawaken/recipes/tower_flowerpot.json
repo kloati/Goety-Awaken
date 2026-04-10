@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "C C",
+    "BAB",
+    "BBB"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:dirt"
+    },
+    "B": {
+      "item": "minecraft:birch_planks"
+    },
+     "C": {
+      "item": "minecraft:white_dye"
+    }
+  },
+  "result": {
+    "item": "goetyawaken:tower_flowerpot"
+  }
+}

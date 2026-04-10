@@ -1,0 +1,7 @@
+{
+  "name": "Summons",
+  "description": "The servants of dark wizards are also dark.",
+  "icon": "minecraft:zombie_head",
+  "sortnum": 2,
+  "parent": "goety:goetyawaken"
+}

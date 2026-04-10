@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+		"goetyawaken:wraith_necromancer_servant",
+		"goetyawaken:wraith_necromancer",
+    "goetyawaken:parched_necromancer_servant",
+		"goetyawaken:parched_necromancer",
+		"goetyawaken:nameless_one"
+  ]
+}

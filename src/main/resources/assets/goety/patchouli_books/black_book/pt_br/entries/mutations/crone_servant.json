@@ -1,0 +1,25 @@
+{
+  "name": "Serva Anciã",
+  "icon": "goety:crone_hat",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Embora você já domine a técnica de transformar bruxas em suas próprias servas, quando olha para o Chapéu de Anciã em suas mãos, não pode deixar de pensar naquela mestre de poções eremita. Pode ser uma boa ideia melhorar essas bruxas em Anciãs mais poderosas para seu próprio uso."
+    },
+    {
+      "type": "text",
+      "text": "Comparadas às servas bruxas, elas lançam mais tipos de poções, e mais fortes. Elas são muito boas em atormentar oponentes e se proteger, lançando poções maliciosas em inimigos, teletransportando-se e usando poções para se ajudar e apoiar aliados, e suas roupas também são cobertas de espinhos como amoras!"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:crone_servant",
+      "text": "Transforme bruxas em servas Anciãs através de ritual."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:crone_servant",
+      "text": "Servas Anciãs lutarão por você usando várias poções."
+    }
+  ]
+}

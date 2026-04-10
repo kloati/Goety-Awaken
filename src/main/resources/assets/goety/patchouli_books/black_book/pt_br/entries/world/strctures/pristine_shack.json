@@ -1,0 +1,16 @@
+{
+  "name": "Cabana Intocada",
+  "icon": "goety:witch_cauldron",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Uma pequena cabana pitoresca, o lar acolhedor compartilhado por um jovem casal de bruxo e bruxa. Mal sabem eles que uma anciã secretamente observa sua vida diária através de sua bola de cristal."
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/pristine_shack.png"],
+      "border": true
+    }
+  ]
+}

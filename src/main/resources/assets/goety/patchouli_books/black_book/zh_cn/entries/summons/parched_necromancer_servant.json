@@ -1,0 +1,25 @@
+{
+  "name": "焦骸死灵法师仆从",
+  "icon": "goetyawaken:parched_necromancer_servant_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "这些不如它们其他死灵法师同僚幸运的家伙被太阳烤焦后，残骸被黄沙翻滚，埋没。逐渐沦为这些邪恶的沙丘和废墟所代表的牺牲品或是化身；被束缚在逝去的城市之上以换取重新行走在日光之下。"
+    },
+    {
+      "type": "text",
+      "text": "你发现达到像你这样的死灵术大师可以极其轻易的打破沙漠束缚这些死灵法师的“锁链”，让它们从你的焦骸中重新崛起。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:parched_necromancer_servant",
+      "text": ""
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:parched_necromancer_servant",
+      "text": "你怀疑这个缺口本身就是被刻意留下的。"
+    }
+  ]
+}

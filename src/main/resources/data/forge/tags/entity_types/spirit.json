@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "goetyawaken:apostle_servant",
+    "goetyawaken:wight_servant",
+    "goetyawaken:wither_servant",
+    "goetyawaken:wraith_necromancer",
+    "goetyawaken:wraith_necromancer_servant",
+    "goetyawaken:tormentor_servant"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety:pale_steel_ingot"
+  },
+  "craftType": "forge",
+  "soulCost": 25,
+  "duration": 8,
+  "ingredients": [
+    {
+      "item": "goety:magic_fabric"
+    },
+    {
+      "item": "goety:magic_fabric"
+    },
+    {
+      "item": "goety:telekinesis_focus"
+    },
+    {
+      "item": "goety:wind_core"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:gatling_charm"
+  }
+}

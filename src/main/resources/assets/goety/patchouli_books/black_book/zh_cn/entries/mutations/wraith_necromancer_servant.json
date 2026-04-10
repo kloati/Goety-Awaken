@@ -1,0 +1,21 @@
+{
+  "name": "幽灵死灵法师仆从",
+  "icon": "goetyawaken:wraith_necromancer_spawn_egg",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "text",
+      "text": "通过将魔法的力量伴随着冰封幽魂质注入幽灵，你得以让这只幽灵掌握死灵法师的力量。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:wraith_necromancer_servant",
+      "text": "通过仪式将幽灵转化为幽灵死灵法师仆从。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:wraith_necromancer_servant",
+      "text": "幽灵死灵法师仆从会使用强大的死灵魔法为你战斗。"
+    }
+  ]
+}

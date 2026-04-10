@@ -1,0 +1,16 @@
+{
+  "name": "ミラージュアイ",
+  "icon": "goetyawaken:mirage_eye",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "蜃気楼を追跡するために用いられるアイ。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:mirage_eye",
+      "text": "ミラージュアイ"
+    }
+  ]
+}

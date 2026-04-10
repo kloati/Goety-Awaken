@@ -1,0 +1,36 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety:ender_chest_focus"
+  },
+  "craftType": "magic",
+  "soulCost": 75,
+  "duration": 10,
+  "ingredients": [
+    {
+      "item": "goety:waystone"
+    },
+    {
+      "item": "minecraft:chorus_flower"
+    },
+    {
+      "item": "minecraft:nether_star"
+    },
+    {
+      "item": "goety:void_eye"
+    },
+    {
+      "item": "goety:soul_transfer"
+    },
+    {
+      "item": "goetyawaken:taboo_fragment"
+    },
+    {
+      "item": "goety:crystal_ball"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:access_focus"
+  }
+}

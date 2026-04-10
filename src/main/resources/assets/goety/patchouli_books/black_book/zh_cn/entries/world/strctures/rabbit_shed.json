@@ -1,0 +1,16 @@
+{
+  "name": "兔子棚屋",
+  "icon": "minecraft:oak_log",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "一个养了很多兔子的灾厄村民的居所。似乎发生了什么意外？"
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/rabbit_shed.png"],
+      "border": true
+    }
+  ]
+}

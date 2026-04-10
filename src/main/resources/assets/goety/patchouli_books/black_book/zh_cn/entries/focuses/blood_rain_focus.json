@@ -1,0 +1,16 @@
+{
+  "name": "血雨聚晶",
+  "icon": "goetyawaken:blood_rain_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "text",
+      "text": "已死世界的残存之力污染了冰雹，如今它承担着整个下界的猩红的恶意，吞吐着对一切的憎恨，$(l)向那些曾经的生者降下天罚吧， 让其血脉凝滞，让其魂火战栗，让死寂成为世界的唯一。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:blood_rain_focus",
+      "text": "制作血雨聚晶。"
+    }
+  ]
+}

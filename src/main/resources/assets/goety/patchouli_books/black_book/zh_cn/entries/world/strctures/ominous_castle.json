@@ -1,0 +1,16 @@
+{
+  "name": "灾厄堡垒",
+  "icon": "goety:pale_steel_ingot",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "贸然进犯皇室的城堡可不是明智之举——除非你已有谋逆的野心。"
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/ominous_castle.png"],
+      "border": true
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "亚波伦神殿",
+  "icon": "minecraft:red_nether_bricks",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "冥教曾经修建的神殿，也是烈焰寻求者的朝圣之所。据说神殿的火焰从远古烧到现在，从未熄灭过。活着走出来的胜者大多沉默寡言，不愿提及里面的遭遇；而那些再也没能出来的人，他们的名字早已被风吹散，只剩下灰烬。"
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/temple_of_apollyon.png"],
+      "border": true
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "黒曜石のクレイモア",
+  "icon": "goetyawaken:obsidian_claymore",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "この黒曜石の大剣もまた、クレイモアと同様に「真のなぎ払い」の極致を繰り出すことができる。ダークメタルを以て鍛え上げられたこの刃は、ソウルエネルギーを糧として自らを修復する力を備えている。その一撃は重厚であるのみならず、犠牲者に「ウェイン」の呪いをもたらし、その生気を削ぎ落とす。どれほど厚いシュルカーの殻であっても、この剣の前では無に等しく、容易く断ち切ることができると言い伝えられている。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:obsidian_claymore",
+      "text": ""
+    }
+  ]
+}

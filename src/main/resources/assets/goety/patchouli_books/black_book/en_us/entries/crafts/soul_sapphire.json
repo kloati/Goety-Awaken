@@ -1,0 +1,16 @@
+{
+  "name": "Soul Sapphire",
+  "icon": "goetyawaken:soul_sapphire",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "The color of the Vizier's Soul Ruby reminds you of the crimes committed to obtain it — perhaps transforming it with the power of magic, changing its nature to look less bloody, might hide its disreputable origin?"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:soul_sapphire",
+      "text": "Craft the Soul Sapphire."
+    }
+  ]
+}

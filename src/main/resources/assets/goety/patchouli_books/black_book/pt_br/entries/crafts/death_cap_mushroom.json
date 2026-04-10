@@ -1,0 +1,16 @@
+{
+  "name": "Cogumelo Chapéu-da-Morte",
+  "icon": "goetyawaken:death_cap_mushroom",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Observando o micélio perigoso na Prisão do Caos, às vezes você não pode deixar de imaginar como ele deve ser o sabor. Engenhoso como é, embora não consiga eliminar completamente sua toxicidade, você finalmente conseguiu cultivar uma variedade com níveis aceitáveis de veneno. No entanto, antes de experimentá-lo, talvez usar um chapéu derivado da mesma fonte possa tornar a experiência mais suportável?"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:death_cap_mushroom",
+      "text": ""
+    }
+  ]
+}

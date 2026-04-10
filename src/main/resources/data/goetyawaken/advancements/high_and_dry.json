@@ -1,0 +1,28 @@
+{
+  "parent": "goety:goety/root",
+  "criteria": {
+    "high_and_dry": {
+      "trigger": "goetyawaken:high_and_dry"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.goetyawaken.high_and_dry.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:red_sand"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.goetyawaken.high_and_dry.title"
+    }
+  },
+  "requirements": [
+    [
+      "high_and_dry"
+    ]
+  ]
+}

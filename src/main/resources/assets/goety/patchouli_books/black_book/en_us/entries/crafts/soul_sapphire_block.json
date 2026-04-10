@@ -1,0 +1,21 @@
+{
+  "name": "Soul Sapphire Block",
+  "icon": "goetyawaken:soul_sapphire_block",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Like the Soul Ruby Block, it is compressed from Soul Sapphires and contains the royal family's magical mysteries. No one knows how many people's blood have been squeezed out of this beautiful sapphire block."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:soul_sapphire_block",
+      "text": "Craft the Soul Sapphire Block."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:soul_sapphire_from_block",
+      "text": "Obtain Soul Sapphire from Soul Sapphire Block."
+    }
+  ]
+}

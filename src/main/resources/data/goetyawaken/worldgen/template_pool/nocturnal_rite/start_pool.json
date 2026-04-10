@@ -1,0 +1,21 @@
+{
+  "name": "goetyawaken:nocturnal_rite/start_pool",
+
+  "fallback": "minecraft:empty",
+
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+
+        "location": "goetyawaken:nocturnal_rite",
+
+        "processors": "goetyawaken:nocturnal_rite_loot",
+
+        "projection": "rigid",
+
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

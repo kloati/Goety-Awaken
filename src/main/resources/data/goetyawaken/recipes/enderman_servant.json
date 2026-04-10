@@ -1,0 +1,28 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:summon_tamed",
+  "activation_item": {
+    "tag": "forge:ender_pearls"
+  },
+  "craftType": "end",
+  "entity_to_summon": "goetyawaken:enderman_servant",
+  "soulCost": 1,
+  "duration": 10,
+  "ingredients": [
+    {
+      "item": "minecraft:chorus_fruit"
+    },
+    {
+      "item": "minecraft:chorus_fruit"
+    },
+    {
+      "tag": "forge:ender_pearls"
+    },
+    {
+      "item": "goety:void_block"
+    }
+  ],
+  "result": {
+    "item": "goety:jei_dummy/none"
+  }
+}

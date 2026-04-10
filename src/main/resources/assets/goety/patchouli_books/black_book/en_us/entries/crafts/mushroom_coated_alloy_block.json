@@ -1,0 +1,21 @@
+{
+  "name": "Mushroom-Coated Alloy Block",
+  "icon": "goetyawaken:mushroom_coated_alloy_block",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "You attempted to construct a Mooshroom Monstrosity by mimicking the method used for the Redstone Monstrosity. However, after numerous attempts, each one ended in failure as the diamond molds could not withstand its power and crumbled midway."
+    },
+    {
+      "type": "text",
+      "text": "Through repeated experiments, you have gained a deeper understanding of those wondrous fungi. Combining the principles of domination mentioned in the Dominance Scroll with your own observations of the prototype trapped in the Chaos Prison, you believe it may be possible to create a block strong enough to bear the power of the Mooshroom Monstrosity—thus, the Mushroom-Coated Alloy Block was born."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:mushroom_coated_alloy_block",
+      "text": ""
+    }
+  ],
+  "advancement": "goetyawaken:royal_research_completed"
+}

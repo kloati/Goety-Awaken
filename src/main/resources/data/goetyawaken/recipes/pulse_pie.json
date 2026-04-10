@@ -1,0 +1,24 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "minecraft:pumpkin_pie"
+  },
+  "craftType": "magic",
+  "soulCost": 5,
+  "duration": 10,
+  "ingredients": [
+    {
+      "item": "minecraft:wither_rose"
+    },
+    {
+      "item": "minecraft:popped_chorus_fruit"
+    },
+    {
+      "item": "minecraft:wither_rose"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:pulse_pie"
+  }
+}

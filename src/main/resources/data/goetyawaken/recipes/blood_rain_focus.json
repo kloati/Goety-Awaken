@@ -1,0 +1,40 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety:hail_focus"
+  },
+  "craftType": "expert_nether",
+  "soulCost": 50,
+  "duration": 10,
+  "research": "royal",
+  "ingredients": [
+    {
+      "item": "goety:wind_core"
+    },
+    {
+      "item": "goety:wind_core"
+    },
+    {
+      "item": "minecraft:lava_bucket"
+    },
+    {
+      "item": "minecraft:lava_bucket"
+    },
+    {
+      "item": "minecraft:lava_bucket"
+    },
+    {
+      "item": "minecraft:lava_bucket"
+    },
+    {
+      "item": "goety:unholy_blood"
+    },
+    {
+      "item": "minecraft:blaze_powder"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:blood_rain_focus"
+  }
+}

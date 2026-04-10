@@ -1,0 +1,16 @@
+{
+  "name": "Relíquia das Catacumbas",
+  "icon": "goetyawaken:catacombs_reliquary",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Você às vezes se incomoda com o fato que seus servos mortos-vivos temerem o sol. Mas então, por que aquele necromante no deserto não tem medo do sol? Talvez você possa adquirir algumas técnicas mágicas dele para responder à sua pergunta."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:catacombs_reliquary",
+      "text": "Usado para conceder as criaturas mortas-vivas imunidade permanente à luz solar."
+    }
+  ]
+}

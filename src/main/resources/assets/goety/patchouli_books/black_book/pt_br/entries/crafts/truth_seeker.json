@@ -1,0 +1,16 @@
+{
+  "name": "Buscador da Verdade",
+  "icon": "goetyawaken:truth_seeker",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Você frequentemente contempla como desbloquear todo o potencial das armas de assassinato em suas mãos. Você ouviu que carcereiros em certos castelos usam um tipo de adaga para interrogar prisioneiros. Utilizando alguns materiais saqueados de illagers e fragmentos guardados por mortos-vivos que habitam o deserto, você forjou esta lâmina que pode fazer qualquer inimigo falar obedientemente. Ela não apenas inflige dano mais severo, como se estivesse atormentando criaturas feridas, podendo até mesmo arrancar cruelmente as almas dos seres de seus corpos!"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:truth_seeker",
+      "text": ""
+    }
+  ]
+}

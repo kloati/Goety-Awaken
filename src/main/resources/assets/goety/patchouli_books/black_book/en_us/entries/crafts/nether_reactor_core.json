@@ -1,0 +1,21 @@
+{
+  "name": "Nether Reactor Core",
+  "icon": "goetyawaken:nether_reactor_core",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "The Nether Reactor Core is a mysterious device that contains powerful Nether energy, which can be used to summon a loyal Wither servant. Only those who understand past events can craft the Nether Reactor Core."
+    },
+    {
+      "type": "text",
+      "text": "The method of summoning a Wither servant is similar to the usual way of summoning a Wither, but the core steps are different: First, arrange soul sand and the Nether Reactor Core in a T-shaped structure, with the Nether Reactor Core in the center and three pieces of soul sand around it. Then place three Wither Skeleton skulls at the top. Finally, right-click the central Nether Reactor Core to awaken a Wither servant under your control."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:nether_reactor_core",
+      "text": "Craft the Nether Reactor Core."
+    }
+  ],
+  "advancement": "minecraft:nether/summon_wither"
+}

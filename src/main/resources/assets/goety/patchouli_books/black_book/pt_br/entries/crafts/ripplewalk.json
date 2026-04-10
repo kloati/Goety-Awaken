@@ -1,0 +1,16 @@
+{
+  "name": "Caminho das Ondas",
+  "icon": "goetyawaken:ripplewalk",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Andar sobre a água já foi considerado pelos mortais um milagre. Você pode de fato reproduzir tal maravilha a qualquer momento, mas lançar feitiços continuamente é em última análise muito incômodo e lento. É um ato de loucura atravessar rios e mares confiando apenas em encantamentos gélidos. Portanto, você selou esta magia fluida em calçados. Embora seja meramente um encantamento de fácil escorregão, dura tempo suficiente."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:ripplewalk",
+      "text": "O usuário pode correr sobre fluidos, mas o efeito cessa assim que para de se mover."
+    }
+  ]
+}

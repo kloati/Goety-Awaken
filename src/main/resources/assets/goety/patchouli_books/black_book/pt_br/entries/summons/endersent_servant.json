@@ -1,0 +1,25 @@
+{
+  "name": "Servo Endersent",
+  "icon": "goetyawaken:endersent_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Aqueles Enderlings parecidos com ralé o decepcionaram muito. Você de repente se lembrou que na Eternidade do End há um grandão, cujo poder supera em muito os espíritos Ender, e tê-lo ao seu lado pode ser uma ideia muito boa."
+    },
+    {
+      "type": "text",
+      "text": "Em batalha, o servo Endersent levantará os braços para golpear inimigos, confundir oponentes com seu teletransporte e invocar guardiões. No entanto, há uma coisa que o deixa intrigado — os Endersents que você invoca não têm \"olhos\" especiais como os Endersents nomeados que você encontrou antes. Talvez existam maneiras de dar a eles essas habilidades."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:endersent_servant",
+      "text": "Invoque um servo Endersent através de um ritual complexo."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:endersent_servant",
+      "text": "Servos Endersent lutarão por você com ataques poderosos."
+    }
+  ]
+}

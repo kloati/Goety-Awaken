@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "goetyawaken:smooth_taboo_stone_wall",
+    "goetyawaken:taboo_stone_wall",
+    "goetyawaken:taboo_terracotta_wall",
+    "goetyawaken:taboo_bricks_wall"
+  ]
+}

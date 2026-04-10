@@ -1,0 +1,16 @@
+{
+  "name": "Pintura Ominosa",
+  "icon": "goetyawaken:ominous_painting",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Combine uma pintura comum com um Lingote de Aço Pálido para criar uma Pintura Ominosa. Estas pinturas recém-nomeadas parecem ser um conjunto completamente diferente de obras de arte - nada mais."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:ominous_painting",
+      "text": ""
+    }
+  ]
+}

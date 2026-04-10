@@ -1,0 +1,52 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety:vanguard_focus"
+  },
+  "craftType": "necroturgy",
+  "soulCost": 100,
+  "duration": 30,
+  "research": "forbidden",
+  "ingredients": [
+    {
+      "item": "goety:indented_gold"
+    },
+    {
+      "item": "goety:weakening_focus"
+    },
+    {
+      "item": "goetyawaken:soul_sapphire_block"
+    },
+    {
+      "item": "goetyawaken:moonlight_cut"
+    },
+    {
+      "item": "goetyawaken:taboo_fragment"
+    },
+    {
+      "item": "goetyawaken:nameless_platinum"
+    },
+    {
+      "item": "goetyawaken:nameless_platinum"
+    },
+    {
+      "item": "goety:bulwark_focus"
+    },
+    {
+      "item": "minecraft:enchanted_book"
+    },
+    {
+      "item": "goetyawaken:mucilage"
+    },
+    {
+      "item": "goetyawaken:nameless_platinum"
+    },
+    {
+      "item": "goety:heart_of_the_night"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:champion_focus"
+  }
+}

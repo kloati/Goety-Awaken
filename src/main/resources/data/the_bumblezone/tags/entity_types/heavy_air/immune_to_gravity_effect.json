@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+		"goetyawaken:vizier_servant",
+		"goetyawaken:vizier_clone_servant",
+		"goetyawaken:wight_servant",
+		"goetyawaken:wraith_necromancer_servant"
+  ]
+}

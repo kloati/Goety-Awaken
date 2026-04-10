@@ -1,0 +1,16 @@
+{
+  "name": "Torre Abandonada",
+  "icon": "goety:crag_bricks",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Um posto avançado há muito abandonado. Em sua base, espalha-se um vazio roxo escuro; os restos daqueles que outrora guarneciam aqui foram corroídos até restarem apenas caveiras. Agora a torre permanece vazia — ninguém sabe se criaturas do vácuo ainda espreitam dentro de seus muros."
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/abandoned_tower.png"],
+      "border": true
+    }
+  ]
+}

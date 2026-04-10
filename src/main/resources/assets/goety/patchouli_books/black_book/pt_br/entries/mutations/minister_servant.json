@@ -1,0 +1,25 @@
+{
+  "name": "Servo Ministro",
+  "icon": "goety:ominous_orb",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "text",
+      "text": "O Ministro está entre os mais prestigiados dos illagers. Este Ministro, promovido pessoalmente por você, comandará servos illager próximos, usará seu cajado para disparar rajadas mágicas e criar dentes maliciosos, e também lançará bombas para atacar seus inimigos."
+    },
+    {
+      "type": "text",
+      "text": "Quando seu cajado for destruído, ele fará um novo após 120 segundos."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:minister_servant",
+      "text": "Transforme um pregador em um servo Ministro através de ritual."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:minister_servant",
+      "text": "Servos Ministros lutarão por você usando sua arte de comando e magia."
+    }
+  ]
+}

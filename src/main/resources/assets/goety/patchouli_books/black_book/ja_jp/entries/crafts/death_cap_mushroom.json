@@ -1,0 +1,17 @@
+{
+  "name": "シビレタケ",
+  "icon": "goetyawaken:death_cap_mushroom",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "混沌の牢獄に蔓延る危険な菌糸を眺めていると、汝はふと、それがどのような味なのかという誘惑に駆られることがある。類まれなる知恵を持つ汝をしても、その毒性を完全に消し去ることは叶わなかった。だが、ついに許容できる程度の毒に抑えた品種を栽培することに成功したのだ。とはいえ、これを試食する前に、同じ菌糸から作られた帽子を被っておくべきだろう。そうすれば、この「体験」も幾分か耐えやすくなるはずだ。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:death_cap_mushroom",
+      "text": ""
+    }
+  ],
+  "advancement": "goetyawaken:mushroom_monstrosity_kill"
+}

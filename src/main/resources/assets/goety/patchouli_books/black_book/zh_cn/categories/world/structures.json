@@ -1,0 +1,7 @@
+{
+  "name": "结构",
+  "description": "黑魔法师或许会遇到的黑暗的建筑与地点。",
+  "icon": "minecraft:bricks",
+  "parent": "goety:goetyawaken_world",
+  "sortnum": 0
+}

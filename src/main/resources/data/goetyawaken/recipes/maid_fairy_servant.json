@@ -1,0 +1,25 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:summon_tamed",
+  "activation_item": {
+    "item": "touhou_little_maid:power_point"
+  },
+  "craftType": "magic",
+  "entity_to_summon": "goetyawaken:maid_fairy_servant",
+  "soulCost": 1,
+  "duration": 5,
+  "ingredients": [
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "minecraft:wheat"
+    },
+    {
+      "item": "minecraft:milk_bucket"
+    }
+  ],
+  "result": {
+    "item": "goety:jei_dummy/none"
+  }
+}

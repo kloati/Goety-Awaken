@@ -1,0 +1,74 @@
+{
+  "name": "魔女的笔记.二",
+  "icon": "goety:death_scythe",
+  "category": "goety:goetyawaken_rumors",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "在我漫长的狩猎中，有些名字值得被记住。以下几个远古生物，是我花了数十年才追踪到的猎物。你若执意要走这条路，它们将是你的磨刀石。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety:necromancer",
+      "text": "鬼魅召唤师"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "他曾经也是一个魔法师，直到他发现自己杀不死死亡本身，于是他选择加入它们。他会用那根从无名王国偷来的魔杖，从每一寸泥土中唤出早已安息的亡者。他的墓穴里堆满了试图接近他的人的骸骨，而这些骸骨现在成了他最忠实的卫兵。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_wildfire",
+      "text": "烈焰寻求者"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "火本该是照亮黑暗的工具。但当一团火燃烧了数百年而不灭，它就会开始思考自己为何存在。它游荡在亚波伦神殿的焦黑走廊里，寻找着作为火焰燃烧的答案。其实它自己就是那团火——一团永远不会熄灭，也永远不会停止寻求的火焰。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety:hostile_redstone_golem",
+      "text": "微小之灾"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "我第一次听说微小之灾时，以为这是个残酷的笑话。一个小僵尸的躯体，被困在冰雪覆盖的高塔顶端。直到我亲眼看到一支十二人的猎人小队进入那座塔，没有一个人出来。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_drowned_necromancer",
+      "text": "复仇海员"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "复仇海员曾经是一名船长，带着整船的人去寻找新大陆。他们找到了一片从未被标记在任何地图上的海岸，但那里住着比风暴更可怕的东西。当船沉没时，他是最后一个溺死的人，也是唯一一个带着怨恨重新站起来的人。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_twilight_goat",
+      "text": "狂风之须"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "你见过山羊站在悬崖边上吧，一动不动，像石头一样，任凭山风从它身边呼啸而过。只不过狂风之须在呼啸之巅的最高处站了几百年。当地村民叫它“山神”。他们会把贡物放在山脚，祈求它不要发怒。因为当它发怒的时候，山风会变成焚风，炙热会吞没整个山谷。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "minecraft:zombie",
+      "text": "冷酷守卫者"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "传说巨剑的守卫并非骑士，而是被剑中残存的灵魂所束缚的亡者。他们曾是试图拔出此剑的勇者，却因未能承受其力量而永世徘徊于此，守护着他们永远无法企及的传说。"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "记住这些名字。记住它们盘踞的地方。然后，决定你是否真的准备好面对它们。因为我不会替你战斗。我能做的，只是告诉你它们在哪里，以及它们是什么。"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "剩下的，是你自己的狩猎。"
+    }
+  ]
+}

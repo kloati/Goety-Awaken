@@ -1,0 +1,39 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:convert_complete_tamed",
+  "activation_item": {
+    "item": "goety:necro_cape"
+  },
+  "craftType": "necroturgy",
+  "entity_to_convert": {
+    "tag": "goetyawaken:wraith",
+    "display_name": "entity.goety.wraith"
+  },
+  "entity_to_convert_into": "goetyawaken:wraith_necromancer_servant",
+  "soulCost": 10,
+  "duration": 30,
+  "research": "forbidden",
+  "ingredients": [
+    {
+      "item": "goetyawaken:glacial_wraith_essence"
+    },
+    {
+      "item": "goety:nameless_crown"
+    },
+    {
+      "item": "goety:necro_staff"
+    },
+    {
+      "item": "goety:shockwave_focus"
+    },
+    {
+      "item": "goety:weakening_focus"
+    },
+    {
+      "item": "goety:spooky_focus"
+    }
+  ],
+  "result": {
+    "item": "goety:jei_dummy/none"
+  }
+}

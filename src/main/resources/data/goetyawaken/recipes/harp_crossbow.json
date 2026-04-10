@@ -1,0 +1,45 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "minecraft:crossbow"
+  },
+  "craftType": "forge",
+  "soulCost": 5,
+  "duration": 10,
+  "ingredients": [
+    {
+      "item": "minecraft:crossbow"
+    },
+    {
+      "item": "minecraft:crossbow"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "minecraft:string"
+    },
+    {
+      "item": "minecraft:string"
+    },
+    {
+      "item": "minecraft:string"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:harp_crossbow"
+  }
+}

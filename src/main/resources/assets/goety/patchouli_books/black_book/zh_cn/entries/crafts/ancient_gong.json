@@ -1,0 +1,16 @@
+{
+  "name": "古代铜锣",
+  "icon": "goetyawaken:ancient_gong",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "据说某个无名王国象征物之一是一种铜锣，你设法制作了一种仿造品。变调的古老声音依然可以刺激到那些废墟——让断垣残垣中的一名大漠子嗣回应声音的来源。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:ancient_gong",
+      "text": "把弱化聚晶安置在一个铜锣身上，你就可以模仿出古代铜锣的声音，它在保留了弱化聚晶的功能的情况下，也能够勉强调动沙漠的兴致。"
+    }
+  ]
+}

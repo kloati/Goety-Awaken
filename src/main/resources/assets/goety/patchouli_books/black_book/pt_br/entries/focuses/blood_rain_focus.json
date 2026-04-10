@@ -1,0 +1,16 @@
+{
+  "name": "Foco da Chuva de Sangue",
+  "icon": "goetyawaken:blood_rain_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "text",
+      "text": "O povo comum diz que as chamas do Nether queimam ferozmente, mas isso é apenas a superfície do abismo. Somente os loucos ousam mergulhar em seus recessos mais profundos - lá, não existe fogo ou lava, apenas pecadores e pecadoras coexistindo eternamente. O profano retorna ao profano, o não perdoado acompanha o não perdoado. Se os portões para o abismo não puderem ser abertos em qualquer lugar, uma descida dos céus também é um caminho que vale a pena abraçar."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:blood_rain_focus",
+      "text": "Criando o Foco da Chuva de Sangue."
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "シルバーフィッシュの従者",
+  "icon": "goetyawaken:silverfish_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "石の裂け目に潜む、小さき虫けらども。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:silverfish_servant",
+      "text": "シルバーフィッシュの従者は、汝の命に従い敵に群がり戦うだろう。"
+    }
+  ]
+}

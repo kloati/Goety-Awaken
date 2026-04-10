@@ -1,0 +1,16 @@
+{
+  "name": "Frost Scythe",
+  "icon": "goetyawaken:frost_scythe",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "You have often pondered other paths of development for the Dark Scythe. You believe that aside from quenching it in Apostle's Blood to saturate it with the essence of death, there should be other methods of modification. Inspired by the Soul Sapphire, you have finally discovered such a method, successfully crafting an alternative improved version of the scythe——the Frost Scythe."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:frost_scythe",
+      "text": ""
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "goetyawaken:block/taboo_blocks/taboo_terracotta",
+    "side": "goetyawaken:block/taboo_blocks/taboo_terracotta",
+    "top": "goetyawaken:block/taboo_blocks/taboo_terracotta"
+  }
+}

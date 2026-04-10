@@ -1,0 +1,16 @@
+{
+  "name": "O Mausoléu",
+  "icon": "goety:crypt_bricks",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "O local de descanso selado de um Invocador Assombrado, onde sua sombra jaz adormecida sob a lápide. Cavando a passagem até o fundo, o mestre do Mausoléu espera silenciosamente na câmara mais profunda. Perturbar a paz dos mortos nunca é uma coisa boa — mas para um mago das trevas que abandonou a moralidade, isso não pesa nada, especialmente quando você cobiça os bens funerários lá dentro."
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/the_mausoleum.png"],
+      "border": true
+    }
+  ]
+}

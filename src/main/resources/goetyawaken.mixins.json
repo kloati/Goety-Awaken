@@ -1,0 +1,35 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.k1sak1.goetyawaken.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "goetyawaken.refmap.json",
+  "plugin": "com.k1sak1.goetyawaken.mixin.GoetyAwakenMixinConfigPlugin",
+  "mixins": [
+    "AbstractSkeletonServantMixin",
+    "ApostleRangedSummonMixin",
+    "ZPiglinServantMixin",
+    "ZPiglinBruteServantMixin",
+    "LivingEntityFireImmunityMixin",
+    "ArrowRainSpellMixin",
+    "LivingEntityMixin",
+    "BlizzardSpellMixin",
+    "ChatFormattingMixin",
+    "FontMixin",
+    "TextColorMixin",
+    "NecroBrazierBlockEntityMixin",
+    "BrewCauldronBlockEntityMixin",
+    "PurifyBrewEffectMixin",
+    "EntityAncientHuntMixin",
+    "EntityAncientBossBarMixin",
+    "ChunkGeneratorSurfaceMixin",
+    "GrindstoneMenuMixin",
+    "compat.modernui.ModernTextRendererMixin"
+  ],
+  "client": [
+    "client.LivingEntityRendererMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

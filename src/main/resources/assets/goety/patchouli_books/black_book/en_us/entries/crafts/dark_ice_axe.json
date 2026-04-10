@@ -1,0 +1,17 @@
+{
+  "name": "Dark Ice Axe",
+  "icon": "goetyawaken:dark_ice_axe",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "You can craft an ice axe using iron and diamonds, so why not forge one with Dark Metal? It retains the functionality of an ice axe while also weakening enemies like other Dark Metal tools and repairing itself with souls."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:dark_ice_axe",
+      "text": ""
+    }
+  ],
+  "advancement": "goety:goety/craft_dark_ingot"
+}

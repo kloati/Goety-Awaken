@@ -1,0 +1,16 @@
+{
+  "name": "冰川幽灵小屋",
+  "icon": "minecraft:spruce_log",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "有流言称，在冻洋的深处，隐匿着一处被冰封的遗址，有一位幽灵死灵法师徘徊在那里。这位不同寻常的幽灵动作迅如鬼魅，出其不意地靠近任何踏足者，令其殒命。它手中的魔杖可发射出极寒的幽灵束，能燃起”冰之火“，更能唤来苍白的鬼怪。有渔民说，那是古代的幽灵不甘沉沦暗处的造物——它们以此作为落脚点，悄然处理那些收集来的灵魂。"
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/glacial_ghost_house.png"],
+      "border": true
+    }
+  ]
+}

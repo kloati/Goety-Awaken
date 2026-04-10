@@ -1,0 +1,39 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety:jade_block"
+  },
+  "craftType": "magic",
+  "soulCost": 16,
+  "duration": 8,
+  "ingredients": [
+    {
+      "item": "goety:soul_emerald"
+    },
+    {
+      "item": "goety:void_barrel"
+    },
+    {
+      "item": "goetyawaken:emerald_grimoire"
+    },
+    {
+      "item": "goetyawaken:emerald_grimoire"
+    },
+    {
+      "item": "minecraft:scute"
+    },
+    {
+      "item": "minecraft:ender_chest"
+    },
+    {
+      "item": "goety:freezing_lamp"
+    },
+    {
+      "item": "goety:ominous_shard"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:ender_storage_book_emerald"
+  }
+}

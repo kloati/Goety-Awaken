@@ -1,0 +1,16 @@
+{
+  "name": " Shelter",
+  "icon": "goety:crypt_stone",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "You've heard of those underground bunkers once inhabited by the ancients. Now, illagers have taken over the place. Perhaps you can claim some valuable resources before they do?"
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/shelter.png"],
+      "border": true
+    }
+  ]
+}

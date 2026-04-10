@@ -1,0 +1,16 @@
+{
+  "name": "フロストサイス",
+  "icon": "goetyawaken:frost_scythe",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "汝はこれまで、不気味な大鎌をさらなる高みへと導く別の道について、幾度となく思索を巡らせてきた。使徒の血に浸し、死の神髄を刻み込む以外にも、この武器を造り変える術があるはずだと汝は確信していたのだ。そしてソウルサファイアから得た着想により、ついにその秘術を見出した。こうして、大鎌に新たなる可能性を付与した改良型――「フロストサイス」が誕生したのである。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:frost_scythe",
+      "text": ""
+    }
+  ]
+}

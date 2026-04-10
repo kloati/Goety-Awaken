@@ -1,0 +1,16 @@
+{
+  "name": "Envioker Servant",
+  "icon": "goetyawaken:envioker_spawn_egg",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "text",
+      "text": "A senior scholar of ill magic, the ruby fragment on their forehead gives them power far beyond ordinary evokers, and also makes their vision sharper, making it easier to detect distant enemies."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:envioker_servant",
+      "text": "Envioker servants will fight for you using powerful magic."
+    }
+  ]
+}

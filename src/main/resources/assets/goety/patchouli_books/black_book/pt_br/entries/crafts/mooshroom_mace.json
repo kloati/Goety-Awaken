@@ -1,0 +1,17 @@
+{
+  "name": "Martelo de Mooshroom",
+  "icon": "goetyawaken:mooshroom_mace",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "O bloco de liga revestido de cogumelos é um material excepcionalmente pesado — apenas uma substância assim pode suportar o poder da monstruosidade Mooshroom. No entanto, você às vezes se pergunta se essa força pesada poderia ser utilizada para outra coisa? Por fim, você a forjou em uma arma de aparência um tanto familiar. O Martelo de Mooshroom aproveita de forma engenhosa o peso da liga fúngica e a força explosiva dos fungos, permitindo que seu portador cause dano extra com base na distância da queda ao saltar de uma altura e atingir um inimigo, enquanto desencadeia uma violenta explosão fúngica no impacto."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:mooshroom_mace",
+      "text": "Martelo da Explosão Fúngica!"
+    }
+  ],
+  "advancement": "goetyawaken:mushroom_monstrosity_kill"
+}

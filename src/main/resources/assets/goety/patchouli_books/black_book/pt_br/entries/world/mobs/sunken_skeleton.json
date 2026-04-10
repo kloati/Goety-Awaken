@@ -1,0 +1,16 @@
+{
+  "name": "Esqueleto Submerso",
+  "icon": "goetyawaken:sunken_skeleton_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Esqueletos que afundaram no abismo se tornaram outro pesadelo para marinheiros e pescadores. Eles estão equipados com as bestas às quais se agarraram até seus momentos finais, não apenas capazes de nadar, mas também de disparar arpões que viajam mais eficazmente pela água."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:sunken_skeleton",
+      "text": ""
+    }
+  ]
+}

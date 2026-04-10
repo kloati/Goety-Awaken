@@ -1,0 +1,60 @@
+{
+  "name": "末影存储",
+  "icon": "goetyawaken:echoing_ender_shelf",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "利用末影的空间性质来存储物品听起来很天马行空，但末影箱已经证明了这是一种可行的方式。当然那个小箱子里可装不下黑魔法师的野心，你发现你可以利用黑暗艺术来制作一个真正属于黑魔法师的末影储存仓库。"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goetyawaken:ender_access_lectern",
+      "text": "末影访问讲台是整个末影存储的控制器和终端。它需要下方含有图腾或连接宝石的诅咒之笼来供给灵魂能量，每次执行存取都需要消耗一小部分灵魂。你注意到这个讲台具有奇妙的空间属性，它能够自动识别并连接附近2格以内的虚空回响书架。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:ender_access_lectern",
+      "text": ""
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goetyawaken:echoing_ender_shelf",
+      "text": "为了储存你的物品，你设计出了一种类似书架的设备，它可以用来容纳一些奇妙的末影存储书。更多末影存储书可以为末影存储网络提供更多容量。书架本身也可以根据剩余空位来提供附魔能力，每放入两本存储书时就可以提供1点附魔能力。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:echoing_ender_shelf",
+      "text": ""
+    },
+    {
+      "type": "text",
+      "text": "要真正让你那先进的末影存储网络完全超越老旧的木箱仓库，你还需要制作末影存储书，它们可以为存储网络提供容量，存储书需要被放入虚空回响书架来发挥作用。如果你想扩大你的存储网络，你可以制作更多存储书，当然也可以升级你的存储书，它们会随着品质的提升扩大存储容量。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:ender_storage_book/ender_storage_book_iron",
+      "text": "书为什么能存储物品？问就是黑魔法，神奇吧。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:ender_storage_book/ender_storage_book_gold",
+      "text": ""
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:ender_storage_book/ender_storage_book_emerald",
+      "text": ""
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:ender_storage_book/ender_storage_book_diamond",
+      "text": ""
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:ender_storage_book/ender_storage_book_sapphire",
+      "text": ""
+    }
+  ]
+}

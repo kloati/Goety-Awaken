@@ -1,0 +1,16 @@
+{
+  "name": "Claymore",
+  "icon": "goetyawaken:claymore",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "A massive sword that seems too heavy to lift, yet can be wielded with ease by a true warrior. The claymore carries immense weight, which transforms its sweeping attacks. You call this art of fully utilizing sweeps 'True Sweep'—sweeping attacks always deal full damage, cover a wider range, and you can perform a sweep with this greatsword even if no target is present."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:claymore",
+      "text": ""
+    }
+  ]
+}

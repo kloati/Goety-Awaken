@@ -1,0 +1,16 @@
+{
+  "name": "Ancient Flower Pot",
+  "icon": "goetyawaken:tower_flowerpot",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The craftsmen of the Tower created these rather handsome flower pots. You reckon that learning how to make them would be perfect for decorating your own base."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:tower_flowerpot",
+      "text": "A stylish decoration"
+    }
+  ]
+}

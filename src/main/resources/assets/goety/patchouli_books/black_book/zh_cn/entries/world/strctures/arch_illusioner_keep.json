@@ -1,0 +1,20 @@
+{
+  "name": "幻象城堡",
+  "icon": "goetyawaken:delusive_fragment",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "一座漂亮的城堡，似乎是不少灾厄村民花天酒地的好去处。堡内陈设极尽奢华，宝物堆得到处都是：从村庄掳来的附魔书、来自世界各地的魔法造物、据说能召唤风暴的图腾。这座城堡从不拒绝访客，作为大门的魔镜始终敞开着，但是不怀好意者绝对不愿涉足其中，因为没有哪个窃贼敢于招惹这里的主人。"
+    },
+    {
+      "type": "text",
+      "text": "灾厄势力的皇室拥有许多直属的精锐下属，其中就有一位在幻术上造诣极高的幻术师，皇室甚至允许他拥有一座城堡。他为藏品编了目录，却从不注明真伪——毕竟在他手中，仿品与真物本就难辨。"
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/arch_illusioner_keep.png"],
+      "border": true
+    }
+  ]
+}

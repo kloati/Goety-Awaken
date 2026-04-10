@@ -1,0 +1,24 @@
+{
+  "name": "Mooshroom Monstrosity",
+  "icon": "goetyawaken:superaggregated_mycelial_circuit",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Imprisoned in the lowest level of the Chaos Prison is a massive entity—similar to the Redstone Monstrosity you have encountered before, yet distinctly different. You do not know why the civilization that created it exiled it here. Perhaps you will find out soon enough."
+    },
+    {
+      "type": "text",
+      "text": "After untold ages of nourishment, this war machine has achieved symbiosis with the entire fungal environment, drawing power from it. Its scatter bombs differ from those of its successors—deeply integrated with fungi, they eject bombs laden with dangerous mycelium. Upon landing, these mycelial strands display tenacious vitality, sprouting clusters of toxic mushrooms. These poisonous mushrooms, propagated from the spores of the Colossus, emanate an ominous aura; stepping on them would surely bring misfortune. Yet, for the Moo-Shroom Colossus, its spores can repair the machine's structure. Any wise individual would know to eradicate them all as quickly as possible."
+    },
+    {
+      "type": "text",
+      "text": "You might recover some mechanical components deeply fused with mycelium from this out-of-control prototype of the Redstone Colossus. Revealed through dark magic, these components could have unusual uses..."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_mushroom_monstrosity",
+      "text": "The Prototype"
+    }
+  ]
+}

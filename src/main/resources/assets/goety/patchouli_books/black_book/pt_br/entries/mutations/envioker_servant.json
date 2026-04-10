@@ -1,0 +1,16 @@
+{
+  "name": "Servo Envioker",
+  "icon": "goetyawaken:envioker_spawn_egg",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Um estudioso sênior da magia maligna, o fragmento de rubi em sua testa lhes dá poder muito além dos invocadores comuns, e também torna sua visão mais aguçada, facilitando a detecção de inimigos distantes."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:envioker_servant",
+      "text": "Servos Envioker lutarão por você usando magias poderosas."
+    }
+  ]
+}

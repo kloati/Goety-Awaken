@@ -1,0 +1,16 @@
+{
+  "name": "Servo Feiticeiro",
+  "icon": "goetyawaken:sorcerer_spawn_egg",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Feiticeiros de alto nível têm um status elevado entre os illagers, e sua força não deve ser subestimada. Talvez você possa treinar servos feiticeiros que seguirão seus comandos através de um grimório que combina materiais de várias escolas."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:sorcerer_servant",
+      "text": "Servos Feiticeiros lutarão por você usando magias poderosas."
+    }
+  ]
+}

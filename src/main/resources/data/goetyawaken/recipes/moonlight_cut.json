@@ -1,0 +1,43 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goetyawaken:glaive"
+  },
+  "craftType": "forge",
+  "soulCost": 50,
+  "duration": 5,
+  "research": "front",
+  "ingredients": [
+    {
+      "item": "goety:spirit_fabric"
+    },
+    {
+      "item": "goety:hunger_core"
+    },
+    {
+      "item": "goetyawaken:soul_sapphire"
+    },
+    {
+      "item": "goety:shadow_essence"
+    },
+    {
+      "item": "goety:shadow_essence"
+    },
+    {
+      "item": "goety:dark_ingot"
+    },
+    {
+      "item": "goety:dark_ingot"
+    },
+    {
+      "item": "goety:reaping_focus"
+    },
+    {
+      "item": "goety:sword_focus"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:moonlight_cut"
+  }
+}

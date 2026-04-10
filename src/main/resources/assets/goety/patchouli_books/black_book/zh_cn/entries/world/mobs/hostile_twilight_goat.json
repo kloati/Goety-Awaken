@@ -1,0 +1,16 @@
+{
+  "name": "敌对暮光山羊",
+  "icon": "goetyawaken:hostile_twilight_goat_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "高山居民中黑山羊的传说由来已久，那些传说很可能是受到了暮光山羊的启发。这些远远比山羊凶悍的黑色生物会用角猛烈地顶向受害者，如果它们的角脱落了，它们会转而用锋利的牙齿撕咬受害者。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_twilight_goat",
+      "text": "黑山羊"
+    }
+  ]
+}

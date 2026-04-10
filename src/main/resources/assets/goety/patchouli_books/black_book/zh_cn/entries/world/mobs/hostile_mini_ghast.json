@@ -1,0 +1,16 @@
+{
+  "name": "敌对迷你恶魂",
+  "icon": "goetyawaken:hostile_mini_ghast_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "一些为了适应下界环境而向着小型化方向进化的恶魂族群分支。就像它们的近亲一样，迷你恶魂不会友善地笑，因为它们的体内和正常恶魂一样充斥着燃烧的火焰。尽管如此你还是觉得它们还是很可爱，直到这些白色的小轰炸机把火球狠狠吐在你的脸上。虽然它们喷射的火球威力不如大型恶魂那般恐怖，但密集的攻击频率却更加令人头疼。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_mini_ghast",
+      "text": ""
+    }
+  ]
+}

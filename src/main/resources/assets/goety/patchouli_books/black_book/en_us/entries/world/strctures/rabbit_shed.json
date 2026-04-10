@@ -1,0 +1,16 @@
+{
+  "name": "Rabbit Shed",
+  "icon": "minecraft:oak_log",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "A home of an illager villager who raised many rabbits. It seems something unexpected happened?"
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/rabbit_shed.png"],
+      "border": true
+    }
+  ]
+}

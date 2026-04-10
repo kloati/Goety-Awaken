@@ -1,0 +1,16 @@
+{
+  "name": "霜冻僵尸",
+  "icon": "goetyawaken:frozen_zombie_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "更寒冷、更雪球的僵尸！它们的拳头和雪球攻击会对受害者施加缓慢效果，除此以外就和普通僵尸一样，没什么特别的。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:frozen_zombie",
+      "text": "打雪仗！"
+    }
+  ]
+}

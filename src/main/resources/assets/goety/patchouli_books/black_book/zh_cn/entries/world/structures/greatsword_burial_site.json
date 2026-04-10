@@ -1,0 +1,16 @@
+{
+  "name": "断灭之剑冢",
+  "icon": "goety:dark_sword",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "据说巨剑冢矗立于最深暗的地底，一柄无人能拔出的传说巨剑插于石台之中。传闻此剑能斩断灵魂本身，但千年来，无人能从沉默的守护者手中将其拔出——无论凭借蛮力，还是魔法。"
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/greatsword_burial_site.png"],
+      "border": true
+    }
+  ]
+}

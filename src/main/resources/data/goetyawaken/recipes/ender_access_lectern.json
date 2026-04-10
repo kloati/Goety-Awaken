@@ -1,0 +1,39 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "minecraft:lectern"
+  },
+  "craftType": "magic",
+  "soulCost": 75,
+  "duration": 10,
+  "ingredients": [
+    {
+      "item": "goety:mystic_core"
+    },
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "minecraft:ender_chest"
+    },
+    {
+      "item": "minecraft:crying_obsidian"
+    },
+    {
+      "item": "minecraft:crying_obsidian"
+    },
+    {
+      "item": "goety:spirit_fabric"
+    },
+    {
+      "item": "goety:spirit_fabric"
+    },
+    {
+      "item": "goety:soul_emerald"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:ender_access_lectern"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Silverfish Servant",
+  "icon": "goetyawaken:silverfish_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Little bugs in stone crevices."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:silverfish_servant",
+      "text": "Silverfish servants will fight for you."
+    }
+  ]
+}

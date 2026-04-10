@@ -1,0 +1,16 @@
+{
+    "goety:vizier":  [
+                         {
+                             "key": "kill_special_enemy.goety.vizier_1",
+                             "subtitles":  11.0
+                         },
+                         {
+                             "key": "kill_special_enemy.goety.vizier_2",
+                             "subtitles":  10.5
+                         },
+                         {
+                             "key": "kill_special_enemy.goety.vizier_3",
+                             "subtitles":  11.5
+                         }
+                     ]
+}

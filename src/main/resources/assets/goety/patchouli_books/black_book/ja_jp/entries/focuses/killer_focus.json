@@ -1,0 +1,16 @@
+{
+  "name": "殺人ウサギのフォーカス",
+  "icon": "goetyawaken:killer_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "text",
+      "text": "これほどまでに愛くるしいウサギが、人に襲いかかるはずがないではないか？"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:killer_focus",
+      "text": "殺人ウサギのフォーカスを作成する。"
+    }
+  ]
+}

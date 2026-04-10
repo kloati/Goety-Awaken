@@ -1,0 +1,11 @@
+{
+  "name": "Alma do Terror",
+  "icon": "goetyawaken:terror_soul",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "O item de revivescência do Wight, que pode invocar o Wight de forma mais barata."
+    }
+  ]
+}

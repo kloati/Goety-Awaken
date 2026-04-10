@@ -1,0 +1,16 @@
+{
+  "name": "焦骸",
+  "icon": "goetyawaken:parched_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "看来沙漠曾经的居民找到了一种方法来向你宣泄久远的仇恨。这些被沙漠的高温烤焦的骨头架子射出的箭矢会让你感到手臂虚弱无力。当然，它们和尸壳一样不会在太阳下燃烧。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:parched",
+      "text": "沙漠的新型威胁"
+    }
+  ]
+}

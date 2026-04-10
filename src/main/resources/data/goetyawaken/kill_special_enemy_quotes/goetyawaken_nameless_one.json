@@ -1,0 +1,16 @@
+{
+    "goetyawaken:nameless_one":  [
+                                     {
+                                         "key": "kill_special_enemy.goetyawaken.nameless_one_1",
+                                         "subtitles":  10.0
+                                     },
+                                     {
+                                         "key": "kill_special_enemy.goetyawaken.nameless_one_2",
+                                         "subtitles":  10.5
+                                     },
+                                     {
+                                         "key": "kill_special_enemy.goetyawaken.nameless_one_3",
+                                         "subtitles":  11.0
+                                     }
+                                 ]
+}

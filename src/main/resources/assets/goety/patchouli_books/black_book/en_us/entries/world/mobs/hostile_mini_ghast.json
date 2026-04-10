@@ -1,0 +1,16 @@
+{
+  "name": "Hostile Mini Ghast",
+  "icon": "goetyawaken:hostile_mini_ghast_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "A branch of the Ghast family that has evolved towards miniaturization to adapt to the Nether's environment. Like their larger kin, Mini Ghasts are not exactly friendly, as their bodies are filled with burning flames just like regular Ghasts. Still, you might find them rather cute—until these little white bombers hurl fireballs directly at your face. While the fireballs they spit are less terrifying in power compared to their larger counterparts, their dense barrage of attacks proves to be a more persistent headache."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_mini_ghast",
+      "text": ""
+    }
+  ]
+}

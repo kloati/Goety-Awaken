@@ -1,0 +1,45 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goetyawaken:claymore"
+  },
+  "craftType": "forge",
+  "soulCost": 50,
+  "duration": 10,
+  "ingredients": [
+    {
+      "item": "minecraft:crying_obsidian"
+    },
+    {
+      "item": "minecraft:crying_obsidian"
+    },
+    {
+      "item": "goety:shadow_essence"
+    },
+    {
+      "item": "goety:dark_metal_block"
+    },
+    {
+      "item": "goety:void_block"
+    },
+    {
+      "item": "goety:void_block"
+    },
+    {
+      "item": "minecraft:obsidian"
+    },
+    {
+      "item": "minecraft:obsidian"
+    },
+    {
+      "item": "goety:mystic_core"
+    },
+    {
+      "item": "minecraft:obsidian"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:obsidian_claymore"
+  }
+}

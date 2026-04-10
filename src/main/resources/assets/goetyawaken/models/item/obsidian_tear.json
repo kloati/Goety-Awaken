@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "goetyawaken:item/crying_obsidian_tear"
+  }
+}

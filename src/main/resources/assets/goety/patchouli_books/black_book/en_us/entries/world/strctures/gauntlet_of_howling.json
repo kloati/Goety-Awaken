@@ -1,0 +1,16 @@
+{
+  "name": "Gauntlet of Howling",
+  "icon": "goety:jade",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "The Gauntlet of Howling is reverently called the Wrath of the Mount God by villagers dwelling at its feet. They believe that an avatar of the Mount God watches eternally over the wind-swept world from the snowy peaks, and thus they deter any outsider who dares ascend. It is said that even the Huntswitch, out of respect for their traditions, never ventured up the mountain."
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/gauntlet_of_howling.png"],
+      "border": true
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Endermite Servant",
+  "icon": "goetyawaken:endermite_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "A furry little creature from an unknown terrifying dimension. The Enderman's most hated episode."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:endermite_servant",
+      "text": "Endermite servants will track and attack your enemies."
+    }
+  ]
+}

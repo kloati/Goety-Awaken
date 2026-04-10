@@ -1,0 +1,7 @@
+{
+  "name": "Exploration",
+  "description": "This world is very different from the one I'm familiar with...",
+  "icon": "minecraft:map",
+  "sortnum": 5,
+  "parent": "goety:goetyawaken"
+}

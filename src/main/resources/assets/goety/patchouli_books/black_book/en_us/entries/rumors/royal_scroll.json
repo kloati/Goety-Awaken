@@ -1,0 +1,11 @@
+{
+  "name": "The Secret of Domination",
+  "icon": "goetyawaken:royal_scroll",
+  "category": "goety:goetyawaken_rumors",
+  "pages": [
+    {
+      "type": "text",
+      "text": "You have long pondered how to seize power related to domination. Perhaps secrets of rule passed down by a certain lord in the badlands can assist you..."
+    }
+  ]
+}

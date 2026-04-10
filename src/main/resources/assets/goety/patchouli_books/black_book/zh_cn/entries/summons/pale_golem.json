@@ -1,0 +1,16 @@
+{
+  "name": "苍白傀儡",
+  "icon": "goetyawaken:pale_golem_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "村民们有铁傀儡守护，为什么我们不能制造一个灾厄村民的傀儡？只需要像搭建铁傀儡那样，用苍白金属块搭建一个T字形，摆上南瓜头，最后用一个活力核心激活它即可。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:pale_golem_servant",
+      "text": "苍白傀儡会忠实地保护你。"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+    "goety:apostle":  [
+                          {
+                              "key": "kill_special_enemy.goety.apostle_1",
+                              "subtitles":  11.0
+                          },
+                          {
+                              "key": "kill_special_enemy.goety.apostle_2",
+                              "subtitles":  10.5
+                          },
+                          {
+                              "key": "kill_special_enemy.goety.apostle_3",
+                              "subtitles":  11.5
+                          }
+                      ]
+}

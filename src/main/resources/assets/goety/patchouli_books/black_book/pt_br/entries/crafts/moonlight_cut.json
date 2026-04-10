@@ -1,0 +1,17 @@
+{
+  "name": "Corte do Luar",
+  "icon": "goetyawaken:moonlight_cut",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Reza a lenda que as glaives empunhadas pela elite do Reino Nameless One podiam cortar até mesmo o luar do céu noturno. Emulando o armamento padrão da Vanguarda de Elite sob o Lorde dos Mortos, e combinando os conceitos registrados no Pergaminho da Frente com certos materiais mágicos sombrios, você recriou com sucesso esta arma: uma que incorpora tanto velocidade quanto poder através de seus próprios rituais. Ela também pode lançar réplicas para ataques à distância, assim como o Foco da Espada Mágica."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:moonlight_cut",
+      "text": ""
+    }
+  ],
+  "advancement": "goety:goety/read_front_scroll"
+}

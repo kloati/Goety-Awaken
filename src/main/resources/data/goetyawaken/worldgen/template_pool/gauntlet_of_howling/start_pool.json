@@ -1,0 +1,24 @@
+{
+  "name": "goetyawaken:gauntlet_of_howling/start_pool",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "goetyawaken:gauntlet_of_howling1",
+        "processors": "goetyawaken:gauntlet_of_howling_loot",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "goetyawaken:gauntlet_of_howling2",
+        "processors": "goetyawaken:gauntlet_of_howling_loot",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "エンダーキーパー",
+  "icon": "goetyawaken:eye_of_overwatch",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "エンダーキーパーが倒れた後、汝はその体が虚ろであり、風に散る破片のみが残されたことに気づいた。だが虚空の中には一つの「眼」が残り、何かを待つかのように汝を鋭く凝視していた。図面に記された暗号を解読した汝は、ついにその記録を見つけ出し、一つの結論に至った。これは「生ける」剣なのだと。世界中から集めた稀少な秘宝を用いてエンダーキーパーに新たな姿を与えれば、それは将来、汝の強力な助けとなるだろう。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:enderkeeper",
+      "text": ""
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:ender_keeper_servant",
+      "text": "古今無双の武芸"
+    }
+  ],
+  "advancement": "goety:goety/get_shrouded_blueprint"
+}

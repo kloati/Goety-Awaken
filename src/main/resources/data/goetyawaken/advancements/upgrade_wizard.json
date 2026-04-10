@@ -1,0 +1,28 @@
+{
+  "parent": "goety:goety/root",
+  "criteria": {
+    "upgrade_wizard": {
+      "trigger": "goetyawaken:upgrade_wizard"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.goetyawaken.upgrade_wizard.description"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "goetyawaken:ruby_grimoire"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.goetyawaken.upgrade_wizard.title"
+    }
+  },
+  "requirements": [
+    [
+      "upgrade_wizard"
+    ]
+  ]
+}

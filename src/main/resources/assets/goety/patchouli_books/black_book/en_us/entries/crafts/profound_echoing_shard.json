@@ -1,0 +1,20 @@
+{
+  "name": "Profound Echoing Shard",
+  "icon": "goetyawaken:profound_echoing_shard",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "After infusing the power of magic into echoing shards, you obtained a more profound echoing shard, in which the endless echoes from the Deep Dark are sealed. You can use it as a catalyst to create an allied version of the ancient guardian that once gave you so much trouble — it is completely made of your soul energy, so it will regard you as a kindred. See Shadow Shrieker for details."
+    },
+    {
+      "type": "text",
+      "text": "In addition to being used to make Warden servants, the Profound Echoing Shard also contains the power to reproduce lost skills. It can be used to transform ordinary deepslate into a more durable reinforced form — the reinforced deepslate that ancient people are said to have made."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:profound_echoing_shard",
+      "text": "Craft the Profound Echoing Shard."
+    }
+  ]
+}

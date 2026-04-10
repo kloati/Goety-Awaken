@@ -1,0 +1,12 @@
+{
+    "illageandspillage:freakager":  [
+                                        {
+                                            "key": "kill_special_enemy.illageandspillage.freakager_1",
+                                            "subtitles":  10.5
+                                        },
+                                        {
+                                            "key": "kill_special_enemy.illageandspillage.freakager_2",
+                                            "subtitles":  10.0
+                                        }
+                                    ]
+}

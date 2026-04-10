@@ -1,0 +1,16 @@
+{
+  "name": "折磨聚晶",
+  "icon": "goetyawaken:torment_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "text",
+      "text": "通过窃取灾厄村民的研究成果和卫道士的“自愿”牺牲，你得到了这枚聚晶。看着那些折磨，你有时候会想，让那名卫道士的灵魂在聚晶中被永恒折磨是否过于残酷？"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:torment_focus",
+      "text": "制作折磨聚晶。"
+    }
+  ]
+}

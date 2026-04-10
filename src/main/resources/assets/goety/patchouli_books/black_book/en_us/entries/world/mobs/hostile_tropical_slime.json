@@ -1,0 +1,16 @@
+{
+  "name": "Hostile Tropical Slime",
+  "icon": "goetyawaken:hostile_tropical_slime_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Ignoring the fact that these peculiar creatures are always hostile, perhaps treating them as a tropical fish tank wouldn't be a bad idea either. They also contain precious oxygen within, which is released when they are destroyed."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_tropical_slime",
+      "text": ""
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "name": "Witch's Notes. II",
+  "icon": "goety:death_scythe",
+  "category": "goety:goetyawaken_rumors",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Throughout my lengthy hunts, some names deserve to be remembered. The following ancients are prey I spent decades tracking. If you insist upon walking this path, they shall be your whetstones."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety:necromancer",
+      "text": "Haunted Caller"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "He was once a magician himself, until he realized he could not slay death itself.so he chose to join them. With that wand stolen from a forgotten kingdom, he summons the long-since departed from every inch of soil. His crypt is piled high with the bones of those who sought to approach him, and now those very bones serve as his most loyal guardians."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_wildfire",
+      "text": "The Seeking Flame"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Fire was meant to be a tool to illuminate darkness. But when a flame burns for centuries without extinguishing, it begins to question its own existence. It wanders the charred corridors of Apollyon's temple, seeking answers as to why it burns. The truth is, it is the flame itself,one that will never die, and will never cease its seeking."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety:hostile_redstone_golem",
+      "text": "The Tiny Scourge"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "When I first heard of the Tiny Scourge,I thought it a cruel joke. A baby zombie's corpse, trapped atop an ice-covered tower. That was until I witnessed a twelve-person hunter squad enter that tower,and not a single soul emerge."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_drowned_necromancer",
+      "text": "Vengeful Mariner"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Vengeful Mariner was once a captain, leading a full crew in search of new continents. They found a shore never marked on any map—but it was inhabited by things more dreadful than any storm. When the ship sank, he was the last to drown, and the only one to rise again, bearing resentment."
+    },
+    {
+       "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_twilight_goat",
+      "text": "Windbeard"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "You've seen goats standing on the edge of a cliff, haven't you? Motionless, like stone, letting the mountain wind howl past them. But Windbeard has stood atop the peak for centuries. The local villagers call him the 'Mount God.' They leave offerings at the mountain's base, praying he does not grow angry. For when he is angered, the mountain winds turn into a searing foehn."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "minecraft:zombie",
+      "text": "Grim Guardian"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The guardian of the greatsword are no mere knight, but the restless undead bound by the lingering souls within the greatsword. Once braves who sought to wield it, they failed to bear its power—and now linger eternally, guarding a legend they can never claim."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Remember these names. Remember the places they haunt. Then, decide if you are truly prepared to face them. For I shall not fight on your behalf. All I can offer is to tell you where they dwell, and what they are."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The rest is your own hunt."
+    }
+  ]
+}

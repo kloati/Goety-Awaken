@@ -1,0 +1,20 @@
+{
+  "name": "高位幻术师",
+  "icon": "goetyawaken:delusive_fragment",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "一位离群索居的灾厄村民法师。他已经在城堡里潜心修行许久，正因如此他的幻术比起常规幻术师更具威胁。这位幻术大师擅长制造出和真实无异的幻象用以欺骗，玩弄他的受害者。"
+    },
+    {
+       "type": "text",
+      "text": "在他消散之前留下的一缕不只是真实还是幻觉的布匹启发了你。或许你可以利用这种奇妙的物质来启发你的幻术师仆从。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:arch_illusioner",
+      "text": "幻术大师"
+    }
+  ]
+}

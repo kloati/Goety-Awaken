@@ -1,0 +1,21 @@
+{
+  "name": "苦力怕仆从",
+  "icon": "goetyawaken:creeper_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "这些由树叶组成的奇特生物会冲向目标与其同归于尽，而且不会炸毁任何方块。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:creeper_servant",
+      "text": "利用爆炸物的力量召唤苦力怕仆从。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:creeper_servant",
+      "text": "苦力怕仆从会忠实地为你爆炸。"
+    }
+  ]
+}

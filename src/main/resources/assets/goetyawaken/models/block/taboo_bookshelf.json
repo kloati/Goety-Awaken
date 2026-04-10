@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "goetyawaken:block/taboo_blocks/column_top_bottom",
+    "side": "goetyawaken:block/taboo_blocks/taboo_bookshelf"
+  }
+}

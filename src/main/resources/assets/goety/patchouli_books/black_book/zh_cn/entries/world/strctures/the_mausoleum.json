@@ -1,0 +1,16 @@
+{
+  "name": "陵墓",
+  "icon": "goety:crypt_bricks",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "被封印的鬼魅召唤师的葬身之地，墓石下面蛰伏着他的虚影。挖开甬道一路往下，墓主就在最深处静静等着。打扰逝者的安息总是不好的，不过这对于抛弃了道德的黑暗魔法师来说毫无负担，更何况你也眼馋其中的陪葬品。"
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/the_mausoleum.png"],
+      "border": true
+    }
+  ]
+}

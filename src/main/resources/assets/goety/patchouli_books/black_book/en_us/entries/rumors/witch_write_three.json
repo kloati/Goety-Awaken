@@ -1,0 +1,34 @@
+{
+  "name": "Witch's Notes. Loot",
+  "icon": "goety:death_scythe",
+  "category": "goety:goetyawaken_rumors",
+  "sortnum": 9,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Upon slaying ancient beings, aside from Treasure Pouches, they also drop some strange embers. You might wonder what use these ashes have for risking so much to hunt them—after all, I know you've embarked on this hunt for reasons I need not concern myself with. Rest assured, your ancient hunts will absolutely be worth it."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:gilded_ingot",
+      "text": ""
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The moment I first encountered it, I noticed this peculiar ingot possesses immense arcane energy. This is precisely why those ancient creatures shimmer with that golden enchanted glow."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "I imagine you already understand the forging principles of Dark Metal, though I haven't the leisure to discuss what you already know. On an anvil, using Ember Alloy Ingots can increase every enchantment on your enchanted item by one level—up to three times per item. I've made myself quite clear: if you desire higher-level enchantments, continue hunting. I believe this suffices as motivation to drive your hunts."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:enchanted_golden_apple",
+      "text": ""
+    },
+    {
+      "type": "patchouli:text",
+      "text": "By the way, Glimmering Embers can also be used to craft Enchanted Golden Apples. Though they might be a bit hard—best not to chip a tooth before some ancient creature knocks it out for you."
+    }
+  ]
+}

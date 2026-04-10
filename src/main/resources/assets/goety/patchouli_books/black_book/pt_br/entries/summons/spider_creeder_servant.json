@@ -1,0 +1,21 @@
+{
+  "name": "Servo Creeder Aranha",
+  "icon": "goetyawaken:hostile_spider_creeder_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Essas criaturas, que se assemelham a uma fusão entre Creepers e Aranhas, servem como servos excepcionais. Suas explosões são rápidas, capazes de incendiar e enfraquecer seus inimigos. Você pode invocar um leal Servo Creeder Aranha através de um Ritual do Nether Avançado."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:spider_creeder_servant",
+      "text": "O poder indomado do Nether ensinou-lhe como levar a arte da explosão aos seus limites máximos."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:spider_creeder_servant",
+      "text": "Servos Creeder Aranha lutarão por você com explosões fervorosas."
+    }
+  ]
+}

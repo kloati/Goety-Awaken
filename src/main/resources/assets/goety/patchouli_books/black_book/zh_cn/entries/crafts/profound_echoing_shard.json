@@ -1,0 +1,20 @@
+{
+  "name": "深邃回响碎片",
+  "icon": "goetyawaken:profound_echoing_shard",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "将魔法的力量融入回响碎片后，你得到了一种更为深邃的回响碎片，在其中封存了来自幽暗之域的无尽回音。你可以用它来作为触媒，制作出那曾令你吃尽苦头的古城守卫的盟友版本——它完全由你的灵魂能量制作，因此会将你视为同类。详情请见暗影尖啸体。"
+    },
+    {
+      "type": "text",
+      "text": "除了用来制作监守者仆从以外，深邃回响碎片还蕴含着复现失落技艺的力量。它可以用于将寻常的深板岩转化为一种更为坚固的强化形态——传闻中古人所制造的强化深板岩。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:profound_echoing_shard",
+      "text": "制作深邃回响碎片。"
+    }
+  ]
+}

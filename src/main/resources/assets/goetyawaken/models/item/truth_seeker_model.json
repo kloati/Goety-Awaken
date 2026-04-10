@@ -1,0 +1,7 @@
+{
+	"parent": "item/handheld",
+    "textures": {
+    "layer0": "goetyawaken:item/truth_seeker_model"
+    },
+	"gui_light": "front"
+}

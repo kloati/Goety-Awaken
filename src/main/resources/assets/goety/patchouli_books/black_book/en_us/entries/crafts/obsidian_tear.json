@@ -1,0 +1,29 @@
+{
+  "name": "Obsidian Tear",
+  "icon": "goetyawaken:obsidian_tear",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "The Obsidian Tear is an ancient offering seeped from an unyielding substance, a solidified ritual in itself, and the manifestation of that 'Gate' leading to ascension. A mortal who drinks this tear gains the qualification for transformation, but mere consumption is not enough to pass through the gate—the drinker must establish great deeds, offering them as proof to the formless principle, to earn the token of promotion."
+    },
+    {
+      "type": "text",
+      "text": "When the deed is fulfilled, the old, bound form will shed like dust, completing the final ascension. If, after drinking, one can perform a feat worthy of being etched into history, they will shed their mundane shell and seek a new purpose under higher beings—becoming an existence that can be called an 'Apostle.'"
+    },
+    {
+      "type": "text",
+      "text": "A deed is to accomplish what others cannot, to achieve what others dare not, and then, the accomplished one will finally behold that gate. $(br) One who repeatedly escapes death shall earn the name of Risen. $(br) One wounded by the world shall repay it with ten thousandfold malice, forging the Substance of Abhorrent . $(br) One who devours a hundred venomous insects shall gain the name of the Defiler. $(br) One who seals the Gate of Life's End thrice shall earn the name of the Dark. $(br) One who slays the soul-weapon in the deep darkness shall become the Great Shadow."
+    },
+    {
+      "type": "text",
+      "text": "One whose mind remains unbroken after enduring a hundred poisons is the Witch-King. $(br) One who masters the essence of the infernal flames becomes the Pyre Lord. $(br) One who uses scarcity as a scale to drain the lifeblood of all becomes the Profane . $(br) One who condenses bone-chilling cold into blood frozen without tears attains the name of the Cruel. $(br) One for whom extreme speed is the norm, mastering time as a slave, becomes a Thing of Terrible. $(br) One who gathers a multitude like a city, erecting an unshakable wall, is the name of the Glorious. $(br) One who treads a river of innocent blood, building stairs from bones, is called the Atrocious."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:obsidian_tear",
+      "text": "Crafting the Obsidian Tear."
+    }
+  ],
+  "advancement": "goety:goety/kill_a_apostle"
+}

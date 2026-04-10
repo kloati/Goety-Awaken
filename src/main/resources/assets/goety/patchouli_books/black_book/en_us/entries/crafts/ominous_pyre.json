@@ -1,0 +1,63 @@
+{
+  "name": "Ominous Pyre",
+  "icon": "goety:ominous_pyre",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "You might be able to train your illager villagers into more classes through the Ominous Pyre..."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety:ominous_pyre"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Envioker Servant",
+      "text": "Requirements: $(li)Evoker Servant$(li)1 Soul Ruby Block $(li)48 Bookshelves/Blocks with equivalent enchantment power $(li)4 Tall Skulls, $(li)2 Enchanting Tables $(li)8 Soul Candlestick $(li)8 Stash Urn."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Royal Guard",
+      "text": "Requirements: $(li)Vindicator Servant $(li)16 Pale Metal Blocks $(li)16 Cursed Metal Blocks $(li)8 Gold Blocks $(li)4 Smithing Tables $(li)4 Blast Furnaces $(li)4 Anvils $(li)8 Banners $(li)4 Armor Stands $(li)1 Soul Sapphire Block."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Stone-Level Sorcerer Servant (Level 1)",
+      "text": "Requirements: $(li)Must be a new villager with magical aptitude $(li)32 Stone $(li)2 Soul Campfires $(li)4 Campfires $(li)4 Dark Altars $(li)1 Pedestal holding a Hunger Core $(li)1 Pedestal holding a Animation Core $(li)1 Pedestal holding a Mystic Core $(li)1 Pedestal holding a Wind Core $(li)1 Non-empty Cursed Cage $(li)4 Armor Stands"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Iron-Level Sorcerer Servant (Level 2)",
+      "text": "Requirements: $(li)Stone-Level Sorcerer Servant (Level 1) $(li)In addition to the Level 1 sorcerer servant's environmental blocks: $(li)24 Iron Blocks $(li)1 Cauldron filled with water $(li)1 Cauldron filled with lava $(li)1 Cauldron filled with powder snow $(li)1 Cauldron filled with liquid void $(li)4 Amethyst Buddings $(li)8 Root Growth $(li)4 Honey Blocks $(li)2 Honeycombs"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Gold-Level Sorcerer Servant (Level 3)",
+      "text": "Requirements: $(li)Iron-Level Sorcerer Servant (Level 2) $(li)In addition to the Level 2 sorcerer servant's environmental blocks: $(li)20 Gold Blocks $(li)1 Resonance Crystal $(li)16 Blue Ice $(li)8 Lightning Rods"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Emerald-Level Sorcerer Servant (Level 4)",
+      "text": "Requirements: $(li)Gold-Level Sorcerer Servant (Level 3) $(li)In addition to the Level 4 sorcerer servant's environmental blocks: $(li)8 Emerald Blocks $(li)2 Fletching Tables $(li)2 Sea Lanterns $(li)4 Jade Blocks"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Diamond-Level Sorcerer Servant (Level 5)",
+      "text": "Requirements: $(li)Emerald-Level Sorcerer Servant (Level 4) $(li)In addition to the Level 4 sorcerer servant's environmental blocks:$(li)8 Diamond Blocks $(li)16 Redstone Blocks $(li)4 Magma Blocks"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Preacher Servant",
+      "text": "Requirements: $(li)New villager with magical aptitude $(li)20 Non-empty Lecterns $(li)16 Non-empty Chiseled Bookshelves $(li)4 Cauldrons filled with water."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Illusioner Servant",
+      "text": "需求: $(li)New villager with magical aptitude $(li)24 Wools $(li)4 Targets $(li)1 Pedestal holding a Mirror Focus."
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety:ominous_pyre": 1
+  }
+}

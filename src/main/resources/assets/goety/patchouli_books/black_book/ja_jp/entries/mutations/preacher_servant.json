@@ -1,0 +1,16 @@
+{
+  "name": "プリーチャーの従者",
+  "icon": "goetyawaken:preacher_spawn_egg",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "text",
+      "text": "癒やしに専念するこれらの修道僧は、戦場において絶えず味方の生命力を回復させ、アンデッドの生物さえも癒やすことができる。癒やし手は自らを癒やすことはできぬものだが、汝の訓練を受けた彼らはその限界を克服しており、互いを癒やし合うことが可能だ。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:preacher_servant",
+      "text": "プリーチャーの従者は、汝のために癒やしを施すだろう。"
+    }
+  ]
+}

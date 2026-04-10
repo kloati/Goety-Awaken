@@ -1,0 +1,16 @@
+{
+  "name": "Cabana Invadida",
+  "icon": "goety:silt_marble",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Uma cabana abandonada à beira da estrada, quebrada e abandonada, sem qualquer sinal de vida. A corrupção do vácuo sobe de baixo, já tendo engolido metade da moradia. Talvez se os pesquisadores tivessem sucesso naquela época, este lugar não teria caído em tal desolação."
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/invaded_shack.png"],
+      "border": true
+    }
+  ]
+}

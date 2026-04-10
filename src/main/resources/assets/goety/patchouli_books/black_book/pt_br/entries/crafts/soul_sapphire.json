@@ -1,0 +1,16 @@
+{
+  "name": "Safira da Alma",
+  "icon": "goetyawaken:soul_sapphire",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "A cor do Rubi da Alma do Grão-Vizier lembra você dos crimes cometidos para obtê-lo — talvez transformá-lo com o poder da magia, mudando sua natureza para parecer menos sangrento, possa esconder sua origem duvidosa?"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:soul_sapphire",
+      "text": "Crie a Safira da Alma."
+    }
+  ]
+}

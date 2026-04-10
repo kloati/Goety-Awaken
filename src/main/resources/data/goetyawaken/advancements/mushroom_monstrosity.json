@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "goetyawaken:mushroom_monstrosity_spawn_egg"
+    },
+    "title": {
+      "translate": "advancement.goetyawaken.mushroom_monstrosity.title"
+    },
+    "description": {
+      "translate": "advancement.goetyawaken.mushroom_monstrosity.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "parent": "goetyawaken:royal_research_completed",
+  "criteria": {
+    "mushroom_monstrosity": {
+      "trigger": "goetyawaken:mushroom_monstrosity"
+    }
+  },
+  "requirements": [
+    [
+      "mushroom_monstrosity"
+    ]
+  ]
+}

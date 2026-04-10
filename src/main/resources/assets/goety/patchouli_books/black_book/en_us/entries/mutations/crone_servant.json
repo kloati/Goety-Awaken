@@ -1,0 +1,25 @@
+{
+  "name": "Crone Servant",
+  "icon": "goety:crone_hat",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Although you have already mastered the technique of transforming witches into your own servants, when you look at the crone hat in your hands, you can't help but think of that hermit potion master. It might be a good idea to cultivate these witches into more powerful crones for your own use."
+    },
+    {
+      "type": "text",
+      "text": "Compared to witch servants, they throw more types of potions, and stronger ones. They are very good at tormenting opponents and protecting themselves, throwing malicious potions at enemies, teleporting, and using potions to help themselves and support allies, and their clothes are also covered with thorns like sweet berries!"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:crone_servant",
+      "text": "Transform witch into Crone servants through ritual."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:crone_servant",
+      "text": "Crone servants will fight for you using various potions."
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "name": "Fairy Maid",
+  "icon": "goetyawaken:maid_fairy_servant_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Similar to the ritual for contracting a maid, dark magic can also be used to replicate a ritual for contracting a fairy maid."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:maid_fairy_servant",
+      "text": ""
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:maid_fairy_servant",
+      "text": "Isn’t she absolutely adorable?"
+    }
+  ]
+}

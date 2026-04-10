@@ -1,0 +1,16 @@
+{
+  "name": "敌对热带史莱姆",
+  "icon": "goetyawaken:hostile_tropical_slime_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "忽略这些奇特的生灵总是充满敌意这点，把它们当做热带鱼缸或许也是一个不错的选择。它们内部也含有一些珍贵的氧气，会在它们被消灭时被释放出来。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_tropical_slime",
+      "text": ""
+    }
+  ]
+}

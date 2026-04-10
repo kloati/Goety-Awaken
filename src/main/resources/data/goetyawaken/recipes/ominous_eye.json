@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "#A#",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "goety:pale_steel_ingot"
+    },
+    "A": {
+      "item": "minecraft:ender_eye"
+    }
+  },
+  "result": {
+    "item": "goetyawaken:ominous_eye"
+  }
+}

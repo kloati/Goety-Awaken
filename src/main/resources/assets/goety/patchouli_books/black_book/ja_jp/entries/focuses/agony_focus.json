@@ -1,0 +1,16 @@
+{
+  "name": "苦悩のフォーカス",
+  "icon": "goetyawaken:agony_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "text",
+      "text": "汝の手によって命を落とした者たちの魂を、ネザーの深淵より引きずり出すのだ。彼らの慟哭を以て、その身を焼く火を熾し、消えぬ憎悪を鎖へと鍛え上げて彼らを縛り付けよ。死してなお消えぬ毒を纏わせ、金切り声を上げる彼らを敵陣へと解き放つのだ。$(br)$(l)$(4)我らが憎悪は永遠なり。我らが憤怒に終わりなし。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:agony_focus",
+      "text": "苦悩のフォーカスを作成する。"
+    }
+  ]
+}

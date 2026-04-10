@@ -1,0 +1,16 @@
+{
+  "name": "不祥之眼",
+  "icon": "goetyawaken:ominous_eye",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "一只用于追踪灾厄堡垒的眼睛。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:ominous_eye",
+      "text": "不祥之眼"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "__comment": "servants that heals and lose limited lifespan through Wild set.",
+  "values": [
+    "goetyawaken:hostile_spider_creeder",
+    "goetyawaken:spider_creeder_servant"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=top": {
+      "model": "goetyawaken:block/taboo_bricks_slab_top"
+    },
+    "type=bottom": {
+      "model": "goetyawaken:block/taboo_bricks_slab"
+    },
+    "type=double": {
+      "model": "goetyawaken:block/taboo_bricks"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "parent": "goetyawaken:chaos_prison",
+  "criteria": {
+    "mushroom_monstrosity_kill": {
+      "trigger": "goetyawaken:mushroom_monstrosity_kill"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.goetyawaken.mushroom_monstrosity_kill.description"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "goetyawaken:superaggregated_mycelial_circuit"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.goetyawaken.mushroom_monstrosity_kill.title"
+    }
+  },
+  "requirements": [
+    [
+      "mushroom_monstrosity_kill"
+    ]
+  ]
+}

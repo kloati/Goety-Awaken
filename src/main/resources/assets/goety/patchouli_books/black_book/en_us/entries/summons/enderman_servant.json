@@ -1,0 +1,21 @@
+{
+  "name": "Enderman Servant",
+  "icon": "goetyawaken:enderman_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Long limbs, purple eyes. They once possessed high intelligence, but it has been completely destroyed in the torrent of time. You managed to enlighten the wisdom of these End Emissaries, and apart from their fear of water and their excessive height, these entities have almost no flaws. They can also move blocks around and give them to you — as long as you tell them what you need."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:enderman_servant",
+      "text": "Summon an Enderman servant"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:enderman_servant",
+      "text": "Enderman servants will faithfully fight for you and move blocks."
+    }
+  ]
+}

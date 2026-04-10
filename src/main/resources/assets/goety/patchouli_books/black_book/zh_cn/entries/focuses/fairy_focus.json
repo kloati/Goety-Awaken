@@ -1,0 +1,16 @@
+{
+  "name": "精灵聚晶",
+  "icon": "goetyawaken:fairy_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "text",
+      "text": "不得不说，这些烦人的孱弱小妖精虽然战斗力不怎么强悍，但外貌却是无可挑剔的。在研究了契约女仆的仪式后，你用黑魔法仿造了一个契约妖精女仆的仪式。现在你可以使唤这些好看的花瓶了！"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:fairy_focus",
+      "text": "制造异变？"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Chapéu de Cogumelo",
+  "icon": "goetyawaken:mushroom_hat",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Usando o micélio simbiótico extraído da fera gigante na Prisão do Caos, você criou este chapéu elegante. O Chapéu de Cogumelo filtra as toxinas, protegendo-o de veneno e ocasionalmente curando envenenamento. Ele também irá proliferar Fungos e lançá-los em seus inimigos!"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:mushroom_hat",
+      "text": ""
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Caerbannog Rabbit Servant",
+  "icon": "minecraft:rabbit",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "A strange rabbit born for unknown reasons—a frenzied existence that only seeks slaughter. They are fragile, yet their teeth are in some way even sharper than a sword forged of fine iron."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:caerbannog_rabbit_servant",
+      "text": "They can also be bred, passing down their vicious lineage."
+    }
+  ]
+}

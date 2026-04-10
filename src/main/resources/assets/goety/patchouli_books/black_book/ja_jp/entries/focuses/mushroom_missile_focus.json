@@ -1,0 +1,17 @@
+{
+  "name": "マッシュルームミサイルのフォーカス",
+  "icon": "goetyawaken:mushroom_missile_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "text",
+      "text": "ムーシュルーム島に座すあの試作機が放つミサイルには、汝も随分と手を焼かされたことだろう。奴を仕留め、その残骸からミサイルの生成機構を暴き出したことで、ついに研究の道が開かれた。回収した部品を魔術的に組み替え、その仕組みをこのフォーカスへと封じ込めることに成功したのだ。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:mushroom_missile_focus",
+      "text": "マッシュルームミサイルのフォーカスを作成する。"
+    }
+  ],
+  "advancement": "goetyawaken:mushroom_monstrosity_kill"
+}

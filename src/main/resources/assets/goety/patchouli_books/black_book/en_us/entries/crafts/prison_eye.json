@@ -1,0 +1,16 @@
+{
+  "name": "Prison Eye",
+  "icon": "goetyawaken:prison_eye",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "An eye used for tracking the Chaos Prison."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:prison_eye",
+      "text": "Prison Eye"
+    }
+  ]
+}

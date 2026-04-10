@@ -1,0 +1,7 @@
+{
+  "name": "Crafts",
+  "description": "Agora que você está se aprofundando nas trevas, suas habilidades de criação não devem ser desperdiçadas.",
+  "icon": "goety:focus_bag",
+  "sortnum": 4,
+  "parent": "goety:goetyawaken"
+}

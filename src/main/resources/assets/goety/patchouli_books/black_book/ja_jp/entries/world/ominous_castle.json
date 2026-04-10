@@ -1,0 +1,11 @@
+{
+  "name": "不吉な城",
+  "icon": "goety:pale_steel_ingot",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "王家の城へ軽率に足を踏み入れるのは、賢明な判断とは言えぬ。……汝が既に、反逆の野心を抱いているのでない限りはな。"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Sorcerer Servant",
+  "icon": "goetyawaken:sorcerer_spawn_egg",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "text",
+      "text": "High-level sorcerers have a high status among the illagers, and their strength is not to be underestimated. Perhaps you can train sorcerer servants who will follow your commands through a grimoire that combines materials from multiple schools."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:sorcerer_servant",
+      "text": "Sorcerer servants will fight for you using powerful magic, and you can also trade with them using emeralds."
+    }
+  ]
+}

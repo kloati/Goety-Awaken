@@ -1,0 +1,16 @@
+{
+  "name": "传教士仆从",
+  "icon": "goetyawaken:preacher_spawn_egg",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "text",
+      "text": "这些专注治疗的僧侣会在战斗中持续为他的盟友恢复生命，甚至可以治疗亡灵生物。虽说医者不能自医，但在你的训练下这些僧侣显然已经克服了这一点，他们可以互相治疗。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:preacher_servant",
+      "text": "传教士仆从会为你治疗。"
+    }
+  ]
+}

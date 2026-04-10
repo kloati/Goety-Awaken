@@ -1,0 +1,36 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety:blink_focus"
+  },
+  "craftType": "end",
+  "soulCost": 5,
+  "duration": 15,
+  "ingredients": [
+    {
+      "item": "minecraft:ender_eye"
+    },
+    {
+      "item": "goety:void_block"
+    },
+    {
+      "item": "goety:void_block"
+    },
+    {
+      "item": "goety:rotation_focus"
+    },
+    {
+      "item": "minecraft:ender_eye"
+    },
+    {
+      "item": "minecraft:ender_eye"
+    },
+    {
+      "item": "goety:void_eye"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:stare_focus"
+  }
+}

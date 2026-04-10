@@ -1,0 +1,28 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "minecraft:poisonous_potato"
+  },
+  "craftType": "animation",
+  "soulCost": 1,
+  "duration": 5,
+  "ingredients": [
+    {
+      "item": "goety:savage_tooth"
+    },
+    {
+      "item": "goety:savage_tooth"
+    },
+    {
+      "item": "goety:savage_tooth"
+    },
+    {
+      "item": "goety:savage_tooth"
+    }
+  ],
+  "result": {
+    "item": "goety:venomous_fang",
+    "count": 4
+  }
+}

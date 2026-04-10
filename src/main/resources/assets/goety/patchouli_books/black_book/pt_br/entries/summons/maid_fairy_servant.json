@@ -1,0 +1,21 @@
+{
+  "name": "Fada Criada",
+  "icon": "goetyawaken:maid_fairy_servant_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Semelhante ao ritual para contratar uma criada, a magia sombria também pode ser usada para replicar um ritual para contratar uma fada criada."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:maid_fairy_servant",
+      "text": ""
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:maid_fairy_servant",
+      "text": "Ela não é absolutamente adorável?"
+    }
+  ]
+}

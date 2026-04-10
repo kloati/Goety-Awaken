@@ -1,0 +1,11 @@
+{
+  "name": "Grão-Vizier",
+  "icon": "goetyawaken:vizier_spawn_egg",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "text",
+      "text": "De modo geral, fazer um membro da Família Real obedecê-lo é impossível...... a menos que você usurpe sua posição! Se você realmente tiver a audácia de completar tal substituição (ou talvez seja mais preciso chamar de crime de traição), você pode ser capaz de dar a ele alguma magia......"
+    }
+  ]
+}

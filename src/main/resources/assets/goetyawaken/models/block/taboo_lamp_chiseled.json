@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "render_type": "cutout",
+  "textures": {
+    "all": "goetyawaken:block/taboo_blocks/taboo_lamp_chiseled"
+  }
+}

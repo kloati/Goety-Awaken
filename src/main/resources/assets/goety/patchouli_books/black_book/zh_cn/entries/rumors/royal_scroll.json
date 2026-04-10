@@ -1,0 +1,11 @@
+{
+  "name": "支配之秘辛",
+  "icon": "goetyawaken:royal_scroll",
+  "category": "goety:goetyawaken_rumors",
+  "pages": [
+    {
+      "type": "text",
+      "text": "你一直在思索如何攫取有关支配的力量，或许恶地中某个领主流传下来的有关统治的秘辛可以帮到你..."
+    }
+  ]
+}

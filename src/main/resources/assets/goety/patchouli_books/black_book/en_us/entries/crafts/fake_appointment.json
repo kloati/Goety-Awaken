@@ -1,0 +1,20 @@
+{
+  "name": "Forged Appointment Letter",
+  "icon": "goetyawaken:fake_appointment",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "After coming across an appointment letter for a Grand Chancellor—perhaps carelessly left behind by the Royal Family in the Fortress of Calamity—an audacious idea crosses your mind. What if, using the original appointment document for high officials as a reference, you forge a false appointment letter? Could you then elevate one of the illagers loyal to you to replace a true Grand Chancellor?"
+    },
+    {
+      "type": "text",
+      "text": "You will need to lure a high-ranking official to come, capture him, and have your Envioker use the forged appointment letter to eliminate him—perhaps you can secretly steal his identity without anyone noticing!"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:fake_appointment",
+      "text": "Forge an appointment letter."
+    }
+  ]
+}

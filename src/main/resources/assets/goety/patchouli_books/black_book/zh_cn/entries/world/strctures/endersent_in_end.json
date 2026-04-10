@@ -1,0 +1,16 @@
+{
+  "name": "末地试炼",
+  "icon": "goety:void_block",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "你听说末地中散落着一些不同于末地城的小型营地。或许它们充当着某些更为重要的建筑的前哨？"
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/endersent_in_end.png"],
+      "border": true
+    }
+  ]
+}

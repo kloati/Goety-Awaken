@@ -1,0 +1,16 @@
+{
+  "name": "Bouldering Zombie",
+  "icon": "goetyawaken:bouldering_zombie_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "A better, faster, stronger mountain zombie, capable of easily scaling sheer cliffs beyond the reach of ordinary zombies. Apart from this athletic prowess that leaves other zombies green with envy, there doesn't seem to be anything particularly outstanding about it."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:bouldering_zombie",
+      "text": "Expert in mountain climbing"
+    }
+  ]
+}

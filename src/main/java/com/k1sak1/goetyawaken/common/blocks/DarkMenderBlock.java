@@ -1,0 +1,210 @@
+package com.k1sak1.goetyawaken.common.blocks;
+
+import com.Polarice3.Goety.api.items.magic.ITotem;
+import com.Polarice3.Goety.common.crafting.CursedInfuserRecipes;
+import com.Polarice3.Goety.common.crafting.ModRecipeSerializer;
+import com.k1sak1.goetyawaken.common.blocks.entity.DarkMenderBlockEntity;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+
+import javax.annotation.Nullable;
+import java.util.Optional;
+import java.util.function.ToIntFunction;
+
+public class DarkMenderBlock extends BaseEntityBlock implements SimpleWaterloggedBlock {
+    protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
+    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+    public static final BooleanProperty LIT = BlockStateProperties.LIT;
+
+    public DarkMenderBlock() {
+        super(Properties.of()
+                .mapColor(MapColor.COLOR_BLACK)
+                .strength(5.0F, 1200.0F)
+                .sound(SoundType.STONE)
+                .lightLevel(litBlockEmission())
+                .noOcclusion());
+        this.registerDefaultState(
+                this.stateDefinition.any().setValue(WATERLOGGED, Boolean.FALSE).setValue(LIT, Boolean.FALSE));
+    }
+
+    private static ToIntFunction<BlockState> litBlockEmission() {
+        return (state) -> state.getValue(BlockStateProperties.LIT) ? 10 : 0;
+    }
+
+    @Override
+    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand,
+            BlockHitResult pHit) {
+        BlockEntity tileentity = pLevel.getBlockEntity(pPos);
+        if (tileentity instanceof DarkMenderBlockEntity blockEntity) {
+            ItemStack itemstack = pPlayer.getItemInHand(pHand);
+
+            if ((itemstack.isDamaged() && itemstack.isRepairable()) || itemstack.getItem() instanceof ITotem) {
+                if (!pLevel.isClientSide
+                        && blockEntity.placeItem(pPlayer.getAbilities().instabuild ? itemstack.copy() : itemstack)) {
+                    return InteractionResult.SUCCESS;
+                }
+                return InteractionResult.CONSUME;
+            }
+
+            Optional<CursedInfuserRecipes> recipe = pLevel.getRecipeManager()
+                    .getRecipeFor(ModRecipeSerializer.CURSED_INFUSER.get(),
+                            new net.minecraft.world.SimpleContainer(itemstack), pLevel);
+            if (recipe.isPresent()) {
+                if (!pLevel.isClientSide) {
+                    ItemStack handCopy = pPlayer.getAbilities().instabuild ? itemstack.copy() : itemstack;
+                    if (blockEntity.placeRecipeItem(handCopy, recipe.get().getCookingTime())) {
+                        return InteractionResult.SUCCESS;
+                    }
+                }
+                return InteractionResult.CONSUME;
+            }
+
+            if (itemstack.isEmpty() || itemstack == blockEntity.getItem(0)) {
+                if (!pLevel.isClientSide) {
+                    ItemStack output = blockEntity.getItem(0).copyAndClear();
+                    if (!output.isEmpty()) {
+                        if (itemstack.isEmpty()) {
+                            pPlayer.setItemInHand(pHand, output);
+                            pLevel.playSound(null, pPos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1.0F, 1.0F);
+                        } else if (!pPlayer.addItem(output)) {
+                            dropItemStack(pLevel, pPlayer.blockPosition(), output);
+                        }
+                        blockEntity.markUpdated();
+                        return InteractionResult.SUCCESS;
+                    }
+                }
+                return InteractionResult.CONSUME;
+            }
+        }
+
+        return InteractionResult.PASS;
+    }
+
+    @Override
+    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
+        if (!pState.is(pNewState.getBlock())) {
+            BlockEntity tileentity = pLevel.getBlockEntity(pPos);
+            if (tileentity instanceof DarkMenderBlockEntity) {
+                dropItemStack(pLevel, pPos, ((DarkMenderBlockEntity) tileentity).getItem(0));
+            }
+
+            super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
+        }
+    }
+
+    @Nullable
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext pContext) {
+        LevelAccessor iworld = pContext.getLevel();
+        BlockPos blockpos = pContext.getClickedPos();
+        boolean flag = iworld.getFluidState(blockpos).getType() == Fluids.WATER;
+        return this.defaultBlockState().setValue(WATERLOGGED, flag);
+    }
+
+    @Override
+    public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, LevelAccessor pLevel,
+            BlockPos pCurrentPos, BlockPos pFacingPos) {
+        if (pState.getValue(WATERLOGGED)) {
+            pLevel.scheduleTick(pCurrentPos, Fluids.WATER, Fluids.WATER.getTickDelay(pLevel));
+        }
+
+        return super.updateShape(pState, pFacing, pFacingState, pLevel, pCurrentPos, pFacingPos);
+    }
+
+    @Override
+    public boolean placeLiquid(LevelAccessor pLevel, BlockPos pPos, BlockState pState, FluidState pFluidState) {
+        if (!pState.getValue(BlockStateProperties.WATERLOGGED) && pFluidState.getType() == Fluids.WATER) {
+            pLevel.setBlock(pPos, pState.setValue(WATERLOGGED, Boolean.TRUE), 3);
+            pLevel.scheduleTick(pPos, pFluidState.getType(), pFluidState.getType().getTickDelay(pLevel));
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public FluidState getFluidState(BlockState pState) {
+        return pState.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(pState);
+    }
+
+    @Override
+    public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
+        return SHAPE;
+    }
+
+    @Override
+    public RenderShape getRenderShape(BlockState pState) {
+        return RenderShape.MODEL;
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
+        pBuilder.add(WATERLOGGED, LIT);
+    }
+
+    @Override
+    public boolean isPathfindable(BlockState pState, BlockGetter pLevel, BlockPos pPos, PathComputationType pType) {
+        return false;
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(BlockPos p_153215_, BlockState p_153216_) {
+        return new DarkMenderBlockEntity(p_153215_, p_153216_);
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level p_152755_, BlockState p_152756_,
+            BlockEntityType<T> p_152757_) {
+        return (world, pos, state, blockEntity) -> {
+            if (blockEntity instanceof DarkMenderBlockEntity darkMenderBlock)
+                darkMenderBlock.tick();
+        };
+    }
+
+    public static void dropItemStack(Level pLevel, BlockPos pPos, ItemStack pStack) {
+        double d0 = (double) EntityType.ITEM.getWidth();
+        double d1 = 1.0D - d0;
+        double d2 = d0 / 2.0D;
+        double d3 = Math.floor(pPos.getX()) + pLevel.random.nextDouble() * d1 + d2;
+        double d4 = Math.floor(pPos.getY()) + pLevel.random.nextDouble() * d1;
+        double d5 = Math.floor(pPos.getZ()) + pLevel.random.nextDouble() * d1 + d2;
+
+        while (!pStack.isEmpty()) {
+            ItemEntity itementity = new ItemEntity(pLevel, d3, d4, d5, pStack.split(pLevel.random.nextInt(21) + 10));
+            float f = 0.05F;
+            itementity.setDeltaMovement(pLevel.random.nextGaussian() * (double) f,
+                    pLevel.random.nextGaussian() * (double) f + (double) 0.2F,
+                    pLevel.random.nextGaussian() * (double) f);
+            pLevel.addFreshEntity(itementity);
+        }
+    }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Temple of Apollyon",
+  "icon": "minecraft:red_nether_bricks",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "A temple once built by cultists, and a place of pilgrimage for The Seeking Flame. It is said that the temple's flames have burned since ancient times, never extinguished. Most victors who walk out alive grow reticent, unwilling to speak of their experiences within; as for those who never emerged, their names have long been scattered to the winds, leaving only ashes behind."
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/temple_of_apollyon.png"],
+      "border": true
+    }
+  ]
+}

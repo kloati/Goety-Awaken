@@ -1,0 +1,31 @@
+{
+    "name": "Highblock Chef",
+    "icon": "minecraft:cake",
+    "category": "goety:anecdote/anecdote",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "The north wind howled. War thundered. Hordes of Draugrs and Aptrgangrs formed battle lines on the snowy mountain, hunting down a routed squad.$(br)$(3)\"Give me your crossbow! I'll take a few shots!\"$(br)$(8)\"Captain, what about you?\"$(br)$(3)\"I'll stay behind to hold them off. You go—the vanguard can't be routed like this!\"$(br)$(0)A Soul Jar's time passed. Reinforcements arrived.$(br)$(8)\"Captain, we've all evacuated!\"$(br)$(3)\"Copy that, then I'll...\"$(br)$(0)His legs sank into the powdery snow. He couldn't move.$(br)$(3)\"Urgh... Hah!\""
+        },
+        {
+            "type": "patchouli:text",
+            "text": "A flash of green light struck like a colossal axe. The captain dodged with all his might—he avoided the fatal blow, but lost a leg.$(br)Back at the capital, the Vindicator Captain received commendations, but could no longer serve in the front lines. The Vizier decided to reassign him to logistics—cooking and tending Ravagers. Yet this hot-tempered, simple-minded soldier seemed to treat both tasks as the same. The Vizier's meals often contained blackened, dead meat, giving the Vizier's jaw quite the workout. The cooks teased him endlessly for it (though they were hardly any better themselves). And because his strength was utterly monstrous—he minced meat with a ladle, and one strike was enough to shatter bone and sinew—the cooks respectfully called him the \"One-Ladle Superman.\""
+        },
+        {
+            "type": "patchouli:text",
+            "text": "A rainy night, on the eve of the candidate selection.$(br)$(5)\"Don't try to stop me anymore. This is the last lesson I leave for this kingdom.\"$(br)$(3)\"But isn't this going too far? Your position is high enough already! Won't you feel you've failed the empire?\"$(br)$(5)\"If the empire had any sense of shame, it would come to keep me now... It's done. Say no more. Come visit me sometime... Bring those little pets of yours? Or little ingredients? You know where.\"$(br)$(3)\"...Take care of yourself, then.\"$(br)$(5)\"Take care.\""
+        },
+        {
+            "type": "patchouli:text",
+            "text": "Watching seven men and seven Tramplers charge toward the city gates, the Head Chef felt something rise within him—far more complicated than his cooking. He wanted to run after them, but the piercing wind howled again in his ears. He said nothing. He turned back to organize the evening banquet.$(br)Time flowed on. Seasons changed. Brilliant fungal blooms grew from the Nether's stone. White ships dropped anchor before the city. The clang of the wok continued, seeing off generation after generation of those in power (in every sense of the word). The Head Chef had no magic, and little by little, he forgot many things. Until one day, he served a cake and dumplings together at the banquet—and the Vizier decided it was time for him to retire and enjoy his remaining years. He took nothing with him—just his Ravager and his giant ladle—and slowly left the capital. Every blade of grass, every tree felt both familiar and strange. He couldn't tell whether he had forgotten, or whether they had truly been renovated. He walked on, slowly, until he reached the doorstep of the Fate Helmsman's estate."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "$(5)\"You've come?\"$(br)$(3)\"I've come.\"$(br)$(5)\"I sometimes go out. Would you help watch over the estate?\"$(br)$(3)\"I can't remember things well...\"$(br)$(5)\"Kill anyone who tries to enter. Is that enough?\"$(br)$(3)\"Yes sir! Mission guaranteed!\"$(br)$(0)From that day on, dark magician, if you come to this estate, you may be mercilessly driven away by the Fate Helmsman. If he is away on business, the One-Ladle Superman will greet you with a crushing blow. Of course—if you simply run away, the sound of the mountain wind will come back to him."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "The old kingdom's affairs have flowed away like water—but the kitchen smoke still rises, and the man remains."
+        }
+    ]
+}

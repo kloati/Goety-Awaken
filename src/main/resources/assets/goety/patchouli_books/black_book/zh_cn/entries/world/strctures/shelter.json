@@ -1,0 +1,16 @@
+{
+  "name": "避难所",
+  "icon": "goety:crypt_stone",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "你听说了那些古人曾经居住过的地下掩体。如今灾厄村民们已经占领了那个地方。或许你能在他们之前从里边捞点好处？"
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/shelter.png"],
+      "border": true
+    }
+  ]
+}

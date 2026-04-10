@@ -1,0 +1,16 @@
+{
+  "name": "Assassin Glove",
+  "icon": "goetyawaken:assassin_glove",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "For a dark wizard like you, slaying enemies from behind is hardly a dishonorable act. Yet, the pitiful damage dealt by daggers often leaves you disappointed. After several similar attempts, you have designed a glove that allows for a much firmer grip on daggers or poniards. When wearing this glove, you can effortlessly use those underhanded weapons to forcefully pierce through an enemy's back."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:assassin_glove",
+      "text": ""
+    }
+  ]
+}

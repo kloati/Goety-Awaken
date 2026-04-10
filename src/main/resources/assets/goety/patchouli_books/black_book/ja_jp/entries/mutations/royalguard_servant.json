@@ -1,0 +1,16 @@
+{
+  "name": "ロイヤルガード",
+  "icon": "goetyawaken:royalguard_spawn_egg",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "text",
+      "text": "汝はヴィンディケーターの中から、速さと力、その双方を兼ね備えた精鋭たちを選りすぐり、近衛兵として鍛え上げることに成功した。彼らは標的の防御を容易く打ち砕く破壊力を持ち、何より重要なことに、この強靭な兵士たちは汝の命にのみ従うのだ。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:royalguard_servant",
+      "text": "ロイヤルガードは、汝にその絶対的な忠誠を捧げるだろう。"
+    }
+  ]
+}

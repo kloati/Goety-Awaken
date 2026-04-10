@@ -1,0 +1,15 @@
+{
+  "name": "goetyawaken:pristine_shack",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "goetyawaken:pristine_shack",
+        "processors": "goetyawaken:pristine_shack_loot",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

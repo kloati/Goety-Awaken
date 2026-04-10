@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " + ",
+    "#&#",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:iron_ingot"
+    },
+    "&": {
+      "item": "ae2:cell_component_1k"
+    },
+    "+": {
+      "item": "goety:ectoplasm"
+    }
+  },
+  "result": {
+    "item": "goetyawaken:ender_storage_book_iron",
+    "count": 1
+  }
+}

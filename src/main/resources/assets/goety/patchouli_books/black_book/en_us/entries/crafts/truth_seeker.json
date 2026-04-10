@@ -1,0 +1,16 @@
+{
+  "name": "Truth Seeker",
+  "icon": "goetyawaken:truth_seeker",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "You often contemplate how to unlock the full potential of assassination-type weapons in your hands. You have heard that jailers in certain castles use a kind of dagger to interrogate prisoners. Utilizing some materials plundered from illagers and fragments held by desert-dwelling undead, you have forged this blade that can make any enemy obediently speak. Not only does it inflict more severe damage, as if tormenting wounded creatures, it can even cruelly rip out the souls of beings from their bodies!"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:truth_seeker",
+      "text": ""
+    }
+  ]
+}

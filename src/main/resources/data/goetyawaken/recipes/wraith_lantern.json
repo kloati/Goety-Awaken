@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#C#",
+    "BAB",
+    "#C#"
+  ],
+  "key": {
+    "#": {
+      "item": "goety:ectoplasm"
+    },
+    "A": {
+      "item": "minecraft:soul_lantern"
+    },
+    "B": {
+      "item": "goety:cursed_bars"
+    },
+    "C": {
+      "item": "goety:chill_fabric"
+    }
+  },
+  "result": {
+    "item": "goetyawaken:wraith_lantern"
+  }
+}

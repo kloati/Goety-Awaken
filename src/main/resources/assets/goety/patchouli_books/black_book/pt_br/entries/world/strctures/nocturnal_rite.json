@@ -1,0 +1,11 @@
+{
+  "name": "Rito Noturno",
+  "icon": "goety:infernal_tome",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Ao lado das ruínas de um portal antigo, cinco Monólitos de Obsidiana se erguem como lápides. Hereges vestidos com mantos adornados com padrões dourados escuros cantam em uníssono, não mais contentes em corromper a terra - eles estão tentando receber de volta uma presença poderosa do Nether. Todos que se aproximam ouvem sussurros semelhantes a batimentos cardíacos das profundezas da escuridão."
+    }
+  ]
+}

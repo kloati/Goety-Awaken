@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " CA",
+    " BC",
+    "B  "
+  ],
+  "key": {
+    "A": {
+      "item": "goety:pale_steel_ingot"
+    },
+    "B": {
+      "item": "minecraft:stick"
+    },
+    "C": {
+      "item": "goety:dark_ingot"
+    }
+  },
+  "result": {
+    "item": "goetyawaken:dark_ice_axe"
+  }
+}

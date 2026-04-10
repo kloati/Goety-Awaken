@@ -1,0 +1,16 @@
+{
+  "name": "焦骸死灵法师",
+  "icon": "goetyawaken:parched_necromancer_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "据说，那个被掩埋在黄沙下的古国曾经拥有诸多强大的魔法师，他们其实并没有随着古国的消逝而死去，而是超生为了亡灵......它们将自身隐藏了起来，不过你或许可以用一些来自古国的东西呼唤它们？"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:parched_necromancer",
+      "text": "在沙漠群系使用古代铜锣呼唤它们！"
+    }
+  ]
+}

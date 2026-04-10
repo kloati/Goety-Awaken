@@ -1,0 +1,44 @@
+{
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "rolls": {
+        "min": 1,
+        "max": 3
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "goety:treasure_pouch",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": {
+        "min": 4,
+        "max": 9
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "goetyawaken:nameless_platinum",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": {
+        "min": 1,
+        "max": 5
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "goety:forbidden_fragment",
+          "weight": 1
+        }
+      ]
+    }
+  ]
+}

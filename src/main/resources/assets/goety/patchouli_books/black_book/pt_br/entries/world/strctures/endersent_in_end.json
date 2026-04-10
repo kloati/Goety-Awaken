@@ -1,0 +1,11 @@
+{
+  "name": "Provas do End",
+  "icon": "goety:void_block",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Você ouviu falar que pequenos acampamentos, diferentes das Cidades do End, estão espalhados pelo End. Talvez eles sirvam como postos avançados para algo muito mais significativo?"
+    }
+  ]
+}

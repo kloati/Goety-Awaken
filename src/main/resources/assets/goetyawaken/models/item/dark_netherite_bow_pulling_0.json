@@ -1,0 +1,6 @@
+{
+  "parent": "goetyawaken:item/dark_netherite_bow",
+  "textures": {
+    "layer0": "goetyawaken:item/dark_netherite_bow_pulling_0"
+  }
+}

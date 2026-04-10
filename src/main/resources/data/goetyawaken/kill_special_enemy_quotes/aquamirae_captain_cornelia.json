@@ -1,0 +1,12 @@
+{
+    "aquamirae:captain_cornelia":  [
+                                       {
+                                           "key": "kill_special_enemy.aquamirae.captain_cornelia_1",
+                                           "subtitles":  10.5
+                                       },
+                                       {
+                                           "key": "kill_special_enemy.aquamirae.captain_cornelia_2",
+                                           "subtitles":  10.0
+                                       }
+                                   ]
+}

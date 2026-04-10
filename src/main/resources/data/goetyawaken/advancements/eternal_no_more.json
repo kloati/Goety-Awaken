@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:nether/summon_wither",
+  "display": {
+    "icon": {
+      "item": "goetyawaken:nether_reactor_core"
+    },
+    "title": {
+      "translate": "advancements.goetyawaken.eternal_no_more.title"
+    },
+    "description": {
+      "translate": "advancements.goetyawaken.eternal_no_more.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "summon_wither_servant": {
+      "trigger": "goetyawaken:summon_wither_servant"
+    }
+  },
+  "requirements": [
+    [
+      "summon_wither_servant"
+    ]
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Wraith Lantern",
+  "icon": "goetyawaken:wraith_lantern",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "A mage's soul is not easy to obtain, but you can resurrect it by gathering the soul fragments back together."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:wraith_lantern",
+      "text": "Crafting this chilling lantern will allow you to resurrect the master of that ghostly hut."
+    }
+  ]
+}

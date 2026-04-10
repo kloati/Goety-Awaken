@@ -1,0 +1,39 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goetyawaken:superaggregated_mycelial_circuit"
+  },
+  "craftType": "overgrown",
+  "soulCost": 10,
+  "duration": 5,
+  "ingredients": [
+    {
+      "item": "minecraft:crimson_fungus"
+    },
+    {
+      "item": "minecraft:warped_fungus"
+    },
+    {
+      "item": "minecraft:brown_mushroom"
+    },
+    {
+      "item": "minecraft:red_mushroom"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "goety:mystic_core"
+    },
+    {
+      "item": "minecraft:suspicious_stew"
+    },
+    {
+      "item": "minecraft:poisonous_potato"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:death_cap_mushroom"
+  }
+}

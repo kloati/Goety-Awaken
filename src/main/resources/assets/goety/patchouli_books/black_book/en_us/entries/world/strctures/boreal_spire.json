@@ -1,0 +1,16 @@
+{
+  "name": "Boreal Tower",
+  "icon": "goety:snowy_highrock_bricks",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Legends speak of a solitary tower deep in the northern wastelands, standing alone in the chilling winds of the eternal night. The occasional passerby dares not linger, walking quickly with heads bowed. Only experienced adventurers know of the countless treasures hidden within."
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/boreal_spire.png"],
+      "border": true
+    }
+  ]
+}

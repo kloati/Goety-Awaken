@@ -1,0 +1,21 @@
+{
+  "name": "Bloco de Liga Revestida de Cogumelos",
+  "icon": "goetyawaken:mushroom_coated_alloy_block",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Você tentou construir uma Monstruosidade Mooshroom imitando o método usado para a Monstruosidade de Redstone. No entanto, após várias tentativas, cada uma terminou em fracasso, pois os moldes de diamante não suportavam seu poder e desintegravam-se no meio do processo."
+    },
+    {
+      "type": "text",
+      "text": "Através de experimentos repetidos, você obteve um entendimento mais profundo desses fungos maravilhosos. Combinando os princípios de dominação mencionados no Pergaminho da Dominação com suas próprias observações do protótipo preso na Prisão do Caos, você acredita que pode ser possível criar um bloco forte o suficiente para suportar o poder da Monstruosidade Mooshroom — assim, nasceu o Bloco de Liga Revestida de Cogumelos."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:mushroom_coated_alloy_block",
+      "text": ""
+    }
+  ],
+  "advancement": "goetyawaken:royal_research_completed"
+}

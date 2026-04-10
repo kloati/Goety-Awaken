@@ -1,0 +1,16 @@
+{
+  "name": "Foco da Infestação",
+  "icon": "goetyawaken:infestation_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Faça os pequenos insetos nas fendas das rochas obedecerem às suas ordens!"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:infestation_focus",
+      "text": "Crie o Foco da Infestação."
+    }
+  ]
+}

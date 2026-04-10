@@ -1,0 +1,28 @@
+{
+  "name": "Witch's Notes.I",
+  "icon": "goety:death_scythe",
+  "category": "goety:goetyawaken_rumors",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Greetings, dark magician. I am the Huntswitch. You may have heard my name, or perhaps not—it matters little. What matters is the path you have chosen. The path of hunting the ancients."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Those ancient abominations—they lurk in the abyss, in the hearts of mountains, in corners forgotten even by sunlight. They slumber, they wait, they drain the lifeblood of this world. They remember every swing of your sword, learn every trick you employ. Kill one ancient, and another, more cunning one will remember your methods. This is why I still draw breath, and why they bear such deep-seated hatred for me."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "I do not mean to frighten you. Not because you lack strength—but because you cannot fathom how ancient, how cunning they truly are. They have deceived time, cheated death, outwitted beings far more powerful than you or I."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Yet here you are, just as I was all those years ago. I have hunted them for three hundred years. Three centuries in which I have witnessed stars flicker and reignite, kingdoms rise and crumble. And still, they remain. Every time I believed I had finally ended one, another would crawl forth from the shadows."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "So, if you insist upon walking this path, then grip your weapon tightly, and keep breathing. Then, like me, go forth and hunt. Remember, you are the hunter—and they are merely the prey."
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "name": "Anotações da Bruxa.I",
+  "icon": "goety:death_scythe",
+  "category": "goety:goetyawaken_rumors",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Saudações, mago das trevas. Sou a Caçadora. Pode ser que já tenha ouvido meu nome, ou talvez não — pouco importa. O que importa é o caminho que você escolheu. O caminho de caçar os antigos."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Aquelas abominações antigas — elas espreitam no abismo, nos corações das montanhas, em cantos esquecidos até mesmo pela luz do sol. Elas dormem, esperam, drenam a força vital deste mundo. Elas se lembram de cada golpe da sua espada, aprendem cada truque que você emprega. Mate um antigo, e outro, mais astuto, se lembrará dos seus métodos. É por isso que ainda respiro, e por que eles nutrem um ódio tão profundo por mim."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Não pretendo assustá-lo. Não porque lhe falte força — mas porque você não consegue imaginar quão antigos, quão astutos eles realmente são. Eles enganaram o tempo, trapacearam a morte, superaram seres muito mais poderosos do que você ou eu."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "No entanto, aqui está você, assim como eu estava todos aqueles anos atrás. Caço-os há trezentos anos. Três séculos em que testemunhei estrelas cintilarem e reacenderem, reinos se erguerem e desmoronarem. E ainda assim, eles permanecem. Toda vez que acreditava ter finalmente acabado com um, outro rastejava das sombras."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Então, se você insiste em trilhar este caminho, então segure sua arma com firmeza, e continue respirando. Então, como eu, vá em frente e cace. Lembre-se, você é o caçador — e eles são meramente a presa."
+    }
+  ]
+}

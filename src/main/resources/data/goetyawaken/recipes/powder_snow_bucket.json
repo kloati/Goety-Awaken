@@ -1,0 +1,30 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "minecraft:bucket"
+  },
+  "craftType": "frost",
+  "soulCost": 1,
+  "duration": 5,
+  "ingredients": [
+    {
+      "item": "goety:ice_cube"
+    },
+    {
+      "item": "minecraft:snowball"
+    },
+    {
+      "item": "minecraft:snowball"
+    },
+    {
+      "item": "minecraft:snowball"
+    },
+    {
+      "item": "minecraft:snowball"
+    }
+  ],
+  "result": {
+    "item": "minecraft:powder_snow_bucket"
+  }
+}

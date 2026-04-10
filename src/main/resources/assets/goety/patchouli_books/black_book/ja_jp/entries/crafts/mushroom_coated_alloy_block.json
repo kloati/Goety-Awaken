@@ -1,0 +1,21 @@
+{
+  "name": "キノコ被覆合金ブロック",
+  "icon": "goetyawaken:mushroom_coated_alloy_block",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "汝はレッドストーンの怪物を造り上げた手法を模し、ムーシュルームの怪物を構築しようと試みた。しかし、幾度となく繰り返された試みは、すべて失敗に終わった。強化ダイヤモンドブロックでさえその力には耐えきれず、構築の途中で崩れ去ってしまったのだ。"
+    },
+    {
+      "type": "text",
+      "text": "度重なる実験を経て、汝はあの驚異的な真菌について深い理解を得るに至った。「支配のスクロール」に記された支配の原理と、混沌の牢獄に囚われた試作機の観察結果を組み合わせることで、ムーシュルームの怪物の力に耐えうる強固なブロックを造り出せると確信したのだ。こうして、キノコ被覆合金ブロックが誕生した。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:mushroom_coated_alloy_block",
+      "text": ""
+    }
+  ],
+  "advancement": "goetyawaken:royal_research_completed"
+}

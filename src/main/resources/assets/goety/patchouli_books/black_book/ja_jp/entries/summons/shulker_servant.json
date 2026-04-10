@@ -1,0 +1,16 @@
+{
+  "name": "シュルカーの従者",
+  "icon": "goetyawaken:shulker_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "エンドシティに潜むあの奇妙で厄介なゴーレムのような生物は、従者として極めて有用である。ゆえに汝は、それを複製する術を見出した。汝の意志に縛られたそのミサイルが、味方を傷つけることはない。アニメーションコアを用いてシュルカーボックスに命を吹き込めば、汝だけのシュルカーの従者が手に入るだろう。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:shulker_servant",
+      "text": "シュルカーの従者は、シュルカーの弾を放って汝のために戦う。"
+    }
+  ]
+}

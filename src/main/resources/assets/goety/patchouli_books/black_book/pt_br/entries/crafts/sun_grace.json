@@ -1,0 +1,16 @@
+{
+  "name": "Graça do Sol",
+  "icon": "goetyawaken:sun_grace",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Através de um ritual que inscreve uma runa curativa mística na maça, você conseguiu imbuí-la com poderosa energia restauradora, concedendo-lhe tanto considerável força ofensiva quanto capacidades de suporte potentes."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:sun_grace",
+      "text": ""
+    }
+  ]
+}

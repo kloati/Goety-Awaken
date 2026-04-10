@@ -1,0 +1,22 @@
+{
+  "name": "Apóstolo",
+  "icon": "goetyawaken:obsidian_tear",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Você já pensou inúmeras vezes em beber o vinho dos deuses lamentadores - ou como os cultistas chamam a Lágrima de Obsidiana. No entanto, mesmo que você possa escravizar os vários demônios do abismo, uma mente racional não teria expectativas otimistas sobre as consequências de consumi-la: talvez você deva deixar um servo ser o cobaia? De qualquer forma, você deve estar suficientemente preparado antes de tentar tal ato."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:summon_apostle_servant",
+      "text": "Claro, você também pode invocar diretamente um 'Apóstolo' através de sacrifícios - tal Apóstolo pode não corresponder àqueles verdadeiramente ascendidos, mas será suficiente."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:apostle_servant",
+      "text": ""
+    }
+  ],
+  "advancement": "goety:goety/kill_a_apostle"
+}

@@ -1,0 +1,33 @@
+{
+    "trigger": "tetra:apply_hit_effects",
+    "effect": "goetyawaken.void_strike",
+    "data": {
+        "numbers": {
+            "effectLevel": {
+                "type": "tetra:effect_level",
+                "effect": "goetyawaken.void_strike"
+            },
+            "effectEfficiency": {
+                "type": "tetra:effect_efficiency",
+                "effect": "goetyawaken.void_strike"
+            }
+        }
+    },
+    "condition": {
+        "type": "tetra:random",
+        "chance": "effectLevel * 0.05"
+    },
+    "outcome": {
+        "type": "tetra:apply_effect",
+        "effect": "goety:void_touched",
+        "entity": "target",
+        "duration": {
+            "type": "tetra:expression",
+            "expression": "effectEfficiency * 40"
+        },
+        "amplifier": {
+            "type": "tetra:expression",
+            "expression": "effectLevel - 1"
+        }
+    }
+}

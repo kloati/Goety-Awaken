@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GCG",
+    " S ",
+    " G "
+  ],
+  "key": {
+    "C": {
+      "tag": "minecraft:coals"
+    },
+    "S": {
+      "item": "goety:haunted_log"
+    },
+    "G": {
+      "item": "goetyawaken:taboo_terracotta"
+    }
+  },
+  "result": {
+    "item": "goetyawaken:taboo_torch",
+    "count": 1
+  }
+}

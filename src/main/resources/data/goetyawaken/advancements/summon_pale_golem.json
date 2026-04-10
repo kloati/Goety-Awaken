@@ -1,0 +1,28 @@
+{
+  "parent": "goety:goety/craft_animation_core",
+  "criteria": {
+    "summoned_golem": {
+      "trigger": "goetyawaken:summon_pale_golem"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.goetyawaken.summon_pale_golem.description"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "goety:pale_steel_block"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.goetyawaken.summon_pale_golem.title"
+    }
+  },
+  "requirements": [
+    [
+      "summoned_golem"
+    ]
+  ]
+}

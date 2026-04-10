@@ -1,0 +1,16 @@
+{
+  "name": "求真者",
+  "icon": "goetyawaken:truth_seeker",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "你时常思考如何开发刺杀型武器在你手中的潜力。你听说某些城堡里的狱卒会使用一种刺刀来审讯囚犯，利用一些从灾厄村民们那里掠夺而来的材料和沙漠亡灵持有的碎片，你锻造出了这把能让任何敌人乖乖开口的刀。它不仅会仿佛折磨一般对受伤的生物造成更严重的伤害，甚至还能将生物的灵魂从它们体内残忍地剥离出来！"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:truth_seeker",
+      "text": ""
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "block/wall_inventory",
+  "textures": {
+    "wall": "goetyawaken:block/taboo_blocks/smooth_taboo_stone"
+  }
+}

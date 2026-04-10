@@ -1,0 +1,16 @@
+{
+  "name": "Claymore",
+  "icon": "goetyawaken:claymore",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Uma espada massiva que parece pesada demais para levantar, mas que pode ser manejada com facilidade por um verdadeiro guerreiro. A claymore carrega um peso imenso, o que transforma seus ataques de varredura. Você chama esta arte de utilizar completamente as varreduras de 'Varredura Verdadeira' — ataques de varredura sempre causam dano total, cobrem uma área mais ampla e você pode executar uma varredura com esta espada grande mesmo se não houver alvo presente."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:claymore",
+      "text": ""
+    }
+  ]
+}

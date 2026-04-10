@@ -1,0 +1,17 @@
+{
+  "name": "潜影导弹聚晶",
+  "icon": "goetyawaken:shulker_missile_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "text",
+      "text": "从第一次在末地城里见到潜影导弹开始，你就一直觉得这种神奇的导弹是药水的绝佳载体。你成功复刻了那种导弹，现在你可以让你的对手飞起来！除此之外，你还可以将药水灌注于其中，这样它就会将那些药水传递给敌人。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:shulker_missile_focus",
+      "text": "制作潜影导弹聚晶。"
+    }
+  ],
+  "advancement": "minecraft:end/find_end_city"
+}

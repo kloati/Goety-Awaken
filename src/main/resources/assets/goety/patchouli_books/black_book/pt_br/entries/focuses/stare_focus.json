@@ -1,0 +1,16 @@
+{
+  "name": "Foco do Olhar",
+  "icon": "goetyawaken:stare_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Os Endermen do vazio estão dispostos a ajudá-lo. Talvez eles tenham mais talento para mover coisas do que para lutar?"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:stare_focus",
+      "text": "Crie o Foco do Olhar."
+    }
+  ]
+}

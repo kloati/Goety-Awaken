@@ -1,0 +1,16 @@
+{
+  "name": "古朴小屋",
+  "icon": "goety:witch_cauldron",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "一间看起来很古朴的小屋，是年轻的女巫和术士同居的温馨小窝。他们并不知道有位巫婆正躲在水晶球里偷偷窥视他们的生活。"
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/pristine_shack.png"],
+      "border": true
+    }
+  ]
+}

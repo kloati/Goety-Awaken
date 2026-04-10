@@ -1,0 +1,12 @@
+{
+    "goetyawaken:parched_necromancer":  [
+                                            {
+                                                "key": "kill_special_enemy.goetyawaken.parched_necromancer_1",
+                                                "subtitles":  10.5
+                                            },
+                                            {
+                                                "key": "kill_special_enemy.goetyawaken.parched_necromancer_2",
+                                                "subtitles":  9.5
+                                            }
+                                        ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Guarda Real Hostil",
+  "icon": "goetyawaken:hostile_royalguard_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Guardas Reais são guardas de elite promovidos dos Vingadores, geralmente estacionados em locais estratégicos importantes ou protegendo membros da família real. Eles usam armaduras pesadas e empunham escudos e maças, tornando-os difíceis de derrotar. Seus ataques não os prejudicarão até que você quebre seus escudos."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_royalguard",
+      "text": "Cuidado com esses guerreiros de elite!"
+    }
+  ]
+}

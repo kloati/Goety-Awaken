@@ -1,0 +1,51 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety:shrouded_blueprint"
+  },
+  "craftType": "end",
+  "soulCost": 256,
+  "duration": 8,
+  "ingredients": [
+    {
+      "item": "goetyawaken:ruby_grimoire"
+    },
+    {
+      "item": "goetyawaken:ruby_grimoire"
+    },
+    {
+      "item": "goety:void_echo"
+    },
+    {
+      "item": "goety:void_echo"
+    },
+    {
+      "item": "goetyawaken:soul_sapphire"
+    },
+    {
+      "item": "goetyawaken:glowing_ember"
+    },
+    {
+      "item": "minecraft:netherite_ingot"
+    },
+    {
+      "item": "goety:awakened_emerald_block"
+    },
+    {
+      "item": "minecraft:enchanted_golden_apple"
+    },
+    {
+      "item": "minecraft:blue_dye"
+    },
+    {
+      "item": "goetyawaken:profound_echoing_shard"
+    },
+    {
+      "item": "goety:dark_ingot"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:ender_storage_book_sapphire"
+  }
+}

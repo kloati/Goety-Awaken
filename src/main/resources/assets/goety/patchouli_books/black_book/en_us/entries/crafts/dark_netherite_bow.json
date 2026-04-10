@@ -1,0 +1,17 @@
+{
+  "name": "Dark Netherite Bow",
+  "icon": "goetyawaken:dark_netherite_bow",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "This bow is forged from Dark Ingot, Gold, and Netherite. It requires exceptional strength to draw, representing greater power. Creatures struck by its arrows will be inflicted with Wane."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:dark_netherite_bow",
+      "text": ""
+    }
+  ],
+  "advancement": "goety:goety/craft_dark_ingot"
+}

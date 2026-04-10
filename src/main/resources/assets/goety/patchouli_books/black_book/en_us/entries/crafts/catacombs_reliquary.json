@@ -1,0 +1,16 @@
+{
+  "name": "Catacombs Reliquary",
+  "icon": "goetyawaken:catacombs_reliquary",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "You are sometimes troubled by the fact that your undead servants fear the sun. Why is that necromancer in the desert not afraid of the sun? Perhaps you can acquire some magical techniques from it to answer your question."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:catacombs_reliquary",
+      "text": "Used to grant undead creatures permanent immunity to sunlight."
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "使徒",
+  "icon": "goetyawaken:obsidian_tear",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "你曾经无数次想饮下悲嚎的神酒——起码冥教徒如此称呼黑曜石的泪水。然而，即使你能奴役无底坑中的诸般邪魔，一个有理智的头脑不会对饮下它导致的后果报以乐观的期待：或许你该让一位仆人当实验品？无论如何，你都应当有足够的把握再去做这件事。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:summon_apostle_servant",
+      "text": "当然，你也可以直接用祭品唤来一位“使徒”——这样的使徒虽然不及真正晋升的那些，但也足够了。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:apostle_servant",
+      "text": ""
+    }
+  ],
+  "advancement": "goety:goety/kill_a_apostle"
+}

@@ -1,0 +1,29 @@
+{
+  "name": "无星之夜",
+  "icon": "goetyawaken:starless_night",
+  "category": "goety:goetyawaken_crafts",
+  "advancement": "goety:goety/kill_an_ender_keeper",
+  "secret": true,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "据说无星之夜被漆黑的刀刃内徘徊的痛苦回声所包裹。这把威力巨大的阔剑可以通过利用搜罗来的奇珍异宝来升级黑曜石阔剑获得。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:starless_night"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "这把阔剑除了拥有黑曜石阔剑的所有功能以外，此刃能斩出灌注虚空能量的锋刃气流，而且能对生物施加虚空之蚀效果。当它的攻击伤害溢出时，溢出的伤害会传递给周围的生物。"
+    },
+    {
+       "type": "patchouli:text",
+      "text": "出于某些奥术层面的原因，这把阔剑似乎可以塞入魔杖进行施法，就像是一颗聚晶一样。当它被填入虚空魔杖时，可以发射类似风刃的虚空斩击。不使用虚空魔杖时，它可以充当末影漫步聚晶的功能。"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "它可以吸收灵魂能量来进行修复。"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety:animation_core"
+  },
+  "craftType": "overgrown",
+  "soulCost": 1,
+  "duration": 10,
+  "ingredients": [
+    {
+      "item": "minecraft:tnt"
+    },
+    {
+      "item": "minecraft:tnt"
+    },
+    {
+      "item": "minecraft:tnt"
+    },
+    {
+      "tag": "minecraft:leaves"
+    },
+    {
+      "tag": "minecraft:leaves"
+    },
+    {
+      "item": "minecraft:moss_block"
+    },
+    {
+      "item": "minecraft:grass"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:creeper_focus"
+  }
+}

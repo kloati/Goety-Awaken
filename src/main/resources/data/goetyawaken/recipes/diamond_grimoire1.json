@@ -1,0 +1,30 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goetyawaken:emerald_grimoire"
+  },
+  "craftType": "magic",
+  "soulCost": 30,
+  "duration": 10,
+  "ingredients": [
+    {
+      "item": "goety:resonance_crystal"
+    },
+    {
+      "item": "minecraft:budding_amethyst"
+    },
+    {
+      "item": "minecraft:tnt"
+    },
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "goety:frost_nova_focus"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:diamond_grimoire"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "Servo Creeper",
+  "icon": "goetyawaken:creeper_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Essas criaturas estranhas feitas de folhas correrão em direção ao alvo para explodir junto, e não destruirão nenhum bloco."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:creeper_servant",
+      "text": "Invoque um servo Creeper usando o poder de explosivos."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:creeper_servant",
+      "text": "Servos Creeper explodirão fielmente por você."
+    }
+  ]
+}

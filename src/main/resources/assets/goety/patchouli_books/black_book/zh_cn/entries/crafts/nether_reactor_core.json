@@ -1,0 +1,21 @@
+{
+  "name": "下界反应核心",
+  "icon": "goetyawaken:nether_reactor_core",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "下界反应核心是一种蕴藏强大下界能量的神秘装置，可用于召唤一位忠诚的凋灵仆从。只有通晓过往之事者才能制作下界反应核心。"
+    },
+    {
+      "type": "text",
+      "text": "召唤凋灵仆从的方法与寻常召唤凋灵类似，然其核心步骤有所不同：首先，将灵魂沙与下界反应核心摆放成T字形结构，下界反应核心置于正中，三块灵魂沙位于周围。随后于顶端放置三枚凋零骷髅头颅。最后，右键点击中央的下界反应核心，便可唤醒一位受你掌控的凋灵仆从。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:nether_reactor_core",
+      "text": "制作下界反应核心。"
+    }
+  ],
+  "advancement": "minecraft:nether/summon_wither"
+}

@@ -1,0 +1,16 @@
+{
+  "name": "日之恩惠",
+  "icon": "goetyawaken:sun_grace",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "通过仪式将神秘治疗符文铭刻在钉锤上，你成功地为其赋予了其强大的恢复能量，让其在拥有不俗威力的同时，还具有强大的支援能力。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:sun_grace",
+      "text": ""
+    }
+  ]
+}

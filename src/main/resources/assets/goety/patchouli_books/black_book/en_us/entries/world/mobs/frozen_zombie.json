@@ -1,0 +1,16 @@
+{
+  "name": "Frozen Zombie",
+  "icon": "goetyawaken:frozen_zombie_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Colder, snowball-throwing zombies! Their punches and snowball attacks apply Slowness to victims. Other than that, they're just like regular zombies—nothing too special."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:frozen_zombie",
+      "text": "Snowball fight!"
+    }
+  ]
+}

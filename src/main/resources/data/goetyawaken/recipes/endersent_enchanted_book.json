@@ -1,0 +1,33 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "minecraft:enchanted_book"
+  },
+  "craftType": "end",
+  "soulCost": 20,
+  "duration": 10,
+  "ingredients": [
+    {
+      "item": "minecraft:ender_eye"
+    },
+    {
+      "item": "goety:void_echo"
+    },
+    {
+      "item": "goety:void_block"
+    },
+    {
+      "item": "goety:void_key"
+    },
+    {
+      "item": "goety:end_rod_block"
+    },
+    {
+      "item": "minecraft:ender_eye"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:endersent_enchanted_book"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "tag": "forge:storage_blocks/redstone"
+  },
+  "result": "goetyawaken:redstone_cluster",
+  "count": 1
+}

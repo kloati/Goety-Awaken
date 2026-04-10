@@ -1,0 +1,20 @@
+{
+  "name": "魂咒融注器",
+  "icon": "goetyawaken:dark_mender",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "灵魂修补器很好，但还是不够好。抱着这种想法你开始动起了小巧思，经过你天才版的改造升级之后的融注器兼具阴咒注入器和灵魂修补器的功能，它能够以更快的速度转化和修复物品。"
+    },
+    {
+      "type": "text",
+      "text": "当然，它必须放置在含有图腾或连接宝石的诅咒之笼上才能工作。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:dark_mender",
+      "text": ""
+    }
+  ]
+}

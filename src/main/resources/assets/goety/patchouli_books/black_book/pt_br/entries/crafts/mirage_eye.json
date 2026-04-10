@@ -1,0 +1,16 @@
+{
+  "name": "Olho da Mirage",
+  "icon": "goetyawaken:mirage_eye",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Um olho usado para rastrear Miragens???."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:mirage_eye",
+      "text": "Olho do Mirage"
+    }
+  ]
+}

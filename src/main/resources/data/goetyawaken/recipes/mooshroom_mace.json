@@ -1,0 +1,39 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety:great_hammer"
+  },
+  "craftType": "forge",
+  "soulCost": 150,
+  "duration": 10,
+  "ingredients": [
+    {
+      "item": "goetyawaken:superaggregated_mycelial_circuit"
+    },
+    {
+      "item": "goetyawaken:soul_sapphire"
+    },
+    {
+      "item": "goetyawaken:mushroom_coated_alloy_block"
+    },
+    {
+      "item": "goetyawaken:mushroom_coated_alloy_block"
+    },
+    {
+      "item": "goety:dark_metal_block"
+    },
+    {
+      "item": "minecraft:crimson_stem"
+    },
+    {
+      "item": "minecraft:warped_stem"
+    },
+    {
+      "item": "goety:poison_quill_seed"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:mooshroom_mace"
+  }
+}

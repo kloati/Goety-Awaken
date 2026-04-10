@@ -1,0 +1,20 @@
+{
+  "name": "Foco das Pragas do Deserto",
+  "icon": "goetyawaken:desert_plagues_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "text",
+      "text": "De acordo com seus estudos, você acredita que antigos 'deuses' usavam pragas para punir e controlar seus escravos — claro, isso é meramente uma forma peculiar de magia. Com o declínio do reino, essas magias foram perdidas. Talvez um mago avançado do reino antigo, que sobreviveu como um morto-vivo, ainda mantenha conhecimento dessas magias?"
+    },
+    {
+      "type": "text",
+      "text": "Cria uma nuvem de pragas acima do alvo que o rastreia, invocando continuamente granizo, enxames e relâmpagos. Quando conjurado com um Cajado dos Ventos, a nuvem de pragas tem uma área maior e causa mais dano."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:desert_plagues_focus",
+      "text": ""
+    }
+  ]
+}

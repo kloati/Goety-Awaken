@@ -1,0 +1,11 @@
+{
+  "name": "支配の秘密",
+  "icon": "goetyawaken:royal_scroll",
+  "category": "goety:goetyawaken_rumors",
+  "pages": [
+    {
+      "type": "text",
+      "text": "汝は長きにわたり、支配にまつわる力をいかにして手中に収めるべきか思索を巡らせてきた。おそらく、荒野に君臨するある領主が継承してきた統治の秘密が、汝の助けとなるであろう……"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Stare Focus",
+  "icon": "goetyawaken:stare_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "text",
+      "text": "The Endermen of the void are willing to help you. Perhaps they are more talented in moving things than in fighting?"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:stare_focus",
+      "text": "Craft the Stare Focus."
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "Abrigo",
+  "icon": "goety:crypt_stone",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Você ouviu falar daqueles bunkers subterrâneos outrora habitados pelos antigos. Agora, illagers tomaram o lugar. Talvez você possa reivindicar alguns recursos valiosos antes deles?"
+    }
+  ]
+}

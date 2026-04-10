@@ -1,0 +1,28 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety:animation_core"
+  },
+  "craftType": "animation",
+  "soulCost": 5,
+  "duration": 10,
+  "research": "ravaging",
+  "ingredients": [
+    {
+      "item": "minecraft:red_wool"
+    },
+    {
+      "item": "minecraft:blue_wool"
+    },
+    {
+      "item": "minecraft:blue_dye"
+    },
+    {
+      "item": "minecraft:red_dye"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:wololo_focus"
+  }
+}

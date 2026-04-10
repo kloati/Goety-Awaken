@@ -1,0 +1,25 @@
+{
+  "replace": false,
+  "values": [
+    "goety:necromancer",
+    "goety:wither_necromancer",
+    "goety:mossy_necromancer",
+    "goety:cairn_necromancer",
+    "goety:wither_necromancer_servant",
+    "goety:necromancer_servant",
+    "goety:mossy_necromancer_servant",
+    "goety:drowned_necromancer_servant",
+    "goety:cairn_necromancer_servant",
+    "goety:skull_lord",
+    "goetyawaken:parched_necromancer",
+    "goetyawaken:wraith_necromancer",
+    "goetyawaken:hostile_drowned_necromancer",
+    "goetyawaken:parched_necromancer_servant",
+    "goetyawaken:wraith_necromancer_servant",
+    "goetyawaken:skull_lord_servant",
+    "goetyawaken:vanguard_champion",
+    "goetyawaken:hostile_vanguard_champion",
+    "goety_cataclysm:draugr_necromancer",
+    "goety_cataclysm:draugr_necromancer_servant"
+  ]
+}

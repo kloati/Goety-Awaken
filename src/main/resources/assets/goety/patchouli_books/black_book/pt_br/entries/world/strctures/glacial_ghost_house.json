@@ -1,0 +1,11 @@
+{
+  "name": "Casa Fantasma Glacial",
+  "icon": "minecraft:spruce_log",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Rumores dizem que nas profundezas do Oceano Congelado, há uma ruína congelada onde um Necromante Espectral vaga. Este espectro incomum se move tão rápido quanto um fantasma, aproximando-se inesperadamente de qualquer intruso e matando-o. A varinha em sua mão pode disparar Raios Fantasmas extremamente frios que podem acender \"Fogo de Gelo\", e também pode invocar fantasmas pálidos. Alguns pescadores dizem que é a criação de fantasmas antigos que se recusam a afundar na escuridão — eles a usam como ponto de apoio para processar silenciosamente as almas que coletaram."
+    }
+  ]
+}

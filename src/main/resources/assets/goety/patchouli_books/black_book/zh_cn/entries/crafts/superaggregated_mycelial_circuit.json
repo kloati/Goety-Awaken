@@ -1,0 +1,17 @@
+{
+  "name": "超聚合菌丝回路",
+  "icon": "goetyawaken:superaggregated_mycelial_circuit",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "这些以奇异方式互相聚合、与哞菇巨兽的部件深度融合起来的菌丝已经形成了自己独特的生态，这使得使其增殖更多变得极为困难。为了不让它们变成不可再生资源，你还是决定去攻克这一难题。最终，你从支配卷轴中找到了灵感，掌握了以一个超聚合菌丝回路为蓝本，精密地构建出另一个的神奇技艺！"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:superaggregated_mycelial_circuit",
+      "text": ""
+    }
+  ],
+  "advancement": "goetyawaken:royal_research_completed"
+}

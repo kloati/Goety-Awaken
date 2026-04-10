@@ -1,0 +1,30 @@
+{
+  "name": "Servo Wight",
+  "icon": "goetyawaken:wight_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Já que aqueles Ceifadores que anseiam por almas já juraram lealdade a você, talvez aquele demônio que tem uma conexão especial com as tumbas e sempre anseia por almas também possa se submeter a você. Após tentar alguns métodos especiais, um Wight para lutar por você nasceu."
+    },
+    {
+      "type": "text",
+      "text": "Ele pode se teletransportar instantaneamente em batalha para confundir inimigos, roubar almas inimigas para se curar, invocar duplicatas e Vermes Carniceiros para ajudar na batalha — assim como quando era um oponente."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:wight_servant1",
+      "text": "Invoque um servo Wight através de um ritual complexo."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:wight_servant2",
+      "text": "Invocação simplificada usando a Alma do Terror."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:wight_servant",
+      "text": "Servos Wight lutarão fielmente por você."
+    }
+  ]
+}

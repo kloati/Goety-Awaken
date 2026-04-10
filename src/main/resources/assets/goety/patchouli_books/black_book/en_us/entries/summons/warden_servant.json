@@ -1,0 +1,16 @@
+{
+  "name": "Warden Servant",
+  "icon": "goetyawaken:warden_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "In the Deep Dark, you encountered a powerful life form, its soul energy overflowing. After your day and night research, you finally successfully created the Shadow Shrieker. You can summon it by expending some soul energy and other items."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:warden_servant",
+      "text": "You can even ride on it."
+    }
+  ]
+}

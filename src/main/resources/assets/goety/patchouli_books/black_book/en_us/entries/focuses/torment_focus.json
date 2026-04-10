@@ -1,0 +1,16 @@
+{
+  "name": "Torment Focus",
+  "icon": "goetyawaken:torment_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "text",
+      "text": "By stealing the research results of the illager villagers and the \"voluntary\" sacrifice of the Vindicator, you obtained this focus. Looking at that tormentor, you sometimes wonder if it's too cruel to let the Vindicator's soul be eternally tormented in the focus."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:torment_focus",
+      "text": "Craft the Torment Focus."
+    }
+  ]
+}

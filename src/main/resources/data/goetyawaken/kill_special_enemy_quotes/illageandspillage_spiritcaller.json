@@ -1,0 +1,12 @@
+{
+    "illageandspillage:spiritcaller":  [
+                                           {
+                                               "key": "kill_special_enemy.illageandspillage.spiritcaller_1",
+                                               "subtitles":  10.5
+                                           },
+                                           {
+                                               "key": "kill_special_enemy.illageandspillage.spiritcaller_2",
+                                               "subtitles":  10.0
+                                           }
+                                       ]
+}

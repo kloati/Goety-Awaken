@@ -1,0 +1,21 @@
+{
+  "name": "末影人仆从",
+  "icon": "goetyawaken:enderman_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "细长的四肢，紫色的眼睛。它们曾拥有高等的智慧，不过已经在时光的洪流中毁灭殆尽。你设法启迪了这些来自终末的使者的智慧，除了惧怕水以及身材过高以外，这些实体几乎没有任何缺点。它们还可以搬运周围的方块并交予你——只要你告诉它们你需要什么。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:enderman_servant",
+      "text": "召唤一位末影人仆从"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:enderman_servant",
+      "text": "末影人仆从会忠实地为你战斗和搬运方块。"
+    }
+  ]
+}

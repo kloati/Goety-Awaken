@@ -1,0 +1,27 @@
+{
+    "name": "The Unbreakable",
+    "icon": "minecraft:redstone_block",
+    "category": "goety:anecdote/anecdote",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Who would have thought that a crude construct of redstone, magic, and stone could truly 'possess' life.$(br)The history of Unbreakable One dates back to the early days of the Redstone Mines and Fiery Forge. As one of the first constructs of that era, and combined with my investigations into the Tower and Illager culture, I believe the Redstone Golem's form bears some resemblance to the ancient Overworld deity known as 'Action'. Redstone Golems of the past were likely no different from those of today—yet the Unbreakable One stands as an exception among exceptions. Take a look at these records."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "“Military Museum Sentry Report”$(br)Date: %%Month && Day, Year 5354$(br)In the dead of night, the prototype Redstone Golem 'Unbreakable One' suddenly awakened in the central exhibition hall, shattered the museum's walls and doors, and strode outward. After multiple sentries failed to stop it, the Royal Guard quickly responded and dispatched elite soldiers to follow. As the Redstone Golem exhibited no hostile actions and held special historical significance, the Royal Guard maintained a safe distance while following. Museum damage assessment and repairs have been placed under the full authority of the Royal Ministry of Works."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "*Escort Communication Log - 'Unbreakable One'*$(br)$(2)\"What's the situation? Report from the front!\"$(br)$(1)\"Commander, Unbreakable One is showing no aggressive behavior—it's simply moving in one direction!\"$(br)$(2)\"Which direction? Pull up the map! ...Redstone Mines? It's heading toward the Redstone Mines!\"$(br)$(1)\"What? What's it going there for? That place was abandoned ages ago!\"$(br)$(2)\"Stay on it! Use your wand to record ambient sounds!\"$(br)$(1)\"Yes, sir!\"$(br)$(4)\"The... god's will... return to homeland... in due time...\"$(br)$(1)\"It's speaking, Commander!\"$(br)$(2)\"I heard it! Maintain observation!\""
+        },
+        {
+            "type": "patchouli:text",
+            "text": "No further records exist. The general account is that the Illager royal court assigned those few elite Royal Guards to stand watch day and night, observing this Redstone Golem that seemed to possess life—or at least a vague consciousness. After all, you know how powerful a fully conscious Mushroom Monstrosity can be. Yet this Redstone Golem showed no response whatsoever. They just kept watching—I personally saw supply teams deliver meals dozens of times..."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "When the Huntswitch and I went there, this Redstone Golem showed no reaction at all... Could it be that the command it received was to wait for you? Ancient deities can observe players of later eras! If you intend to take it down, you'd best be on high alert—because the worst-case scenario is that this golem may have been crafted by 'Foresight' itself, shaped in its own image. No other Redstone Golem has ever received such a command... The road ahead is long and arduous..."
+        }
+    ]
+}

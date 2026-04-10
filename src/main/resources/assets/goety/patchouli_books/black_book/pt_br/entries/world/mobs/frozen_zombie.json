@@ -1,0 +1,16 @@
+{
+  "name": "Zumbi Congelado",
+  "icon": "goetyawaken:frozen_zombie_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Zumbis mais frios que atiram bolas de neve! Seus socos e ataques de bola de neve aplicam Lentidão nas vítimas. Fora isso, são como zumbis comuns — nada muito especial."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:frozen_zombie",
+      "text": "Briga de bola de neve!"
+    }
+  ]
+}

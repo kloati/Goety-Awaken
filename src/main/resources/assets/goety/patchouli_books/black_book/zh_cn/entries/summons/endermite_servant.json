@@ -1,0 +1,16 @@
+{
+  "name": "末影螨仆从",
+  "icon": "goetyawaken:endermite_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "一种来自不知名恐怖维度的毛茸茸小家伙。末影人最讨厌的一集。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:endermite_servant",
+      "text": "末影螨仆从会追踪并攻击你的敌人。"
+    }
+  ]
+}

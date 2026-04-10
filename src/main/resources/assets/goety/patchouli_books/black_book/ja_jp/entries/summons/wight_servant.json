@@ -1,0 +1,30 @@
+{
+  "name": "ワイトの従者",
+  "icon": "goetyawaken:wight_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "魂を渇望するあのリーパーたちが既に汝に忠誠を誓っている以上、墓所と深き繋がりを持ち、永遠にソウルを求め続けるあの魔物もまた、汝に屈するやもしれぬ。特殊な秘術を試みた末、汝のために戦う「ワイト」が誕生したのだ。"
+    },
+    {
+      "type": "text",
+      "text": "彼は戦闘中に瞬時にテレポートして敵を翻弄し、敵のソウルを奪って自らを癒やし、分身や「腐ったうじ虫」を召喚して戦いを援護する。かつて汝の前に立ちはだかった強敵であった時と同じようにな。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:wight_servant1",
+      "text": "複雑な儀式を通じてワイトの従者を召喚する。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:wight_servant2",
+      "text": "恐怖のソウルを用いた簡略化された召喚。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:wight_servant",
+      "text": "ワイトの従者は、汝のために忠実に戦うだろう。"
+    }
+  ]
+}

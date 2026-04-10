@@ -1,0 +1,52 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety:refuse_bottle"
+  },
+  "craftType": "sabbath",
+  "soulCost": 100,
+  "duration": 30,
+  "research": "royal",
+  "ingredients": [
+    {
+      "item": "goety:philosophers_stone"
+    },
+    {
+      "item": "minecraft:respawn_anchor"
+    },
+    {
+      "item": "goetyawaken:agony_focus"
+    },
+    {
+      "item": "goetyawaken:blood_rain_focus"
+    },
+    {
+      "item": "goety:unholy_hat"
+    },
+    {
+      "item": "goety:unholy_robe"
+    },
+    {
+      "item": "goetyawaken:nether_reactor_core"
+    },
+    {
+      "item": "goety:cyclone_focus"
+    },
+    {
+      "item": "goety:lavaball_focus"
+    },
+    {
+      "item": "goety:blazing_focus"
+    },
+    {
+      "item": "goety:ghastly_focus"
+    },
+    {
+      "item": "goety:nether_staff"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:obsidian_tear"
+  }
+}

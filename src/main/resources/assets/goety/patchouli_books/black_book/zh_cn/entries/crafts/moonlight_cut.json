@@ -1,0 +1,17 @@
+{
+  "name": "胧切",
+  "icon": "goetyawaken:moonlight_cut",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "传说无名王国的精锐所使用的刀连夜空下的月光都能切落。仿照亡灵统帅手下的后卫的制式兵器，结合先锋卷轴上记载的思路以及一些黑魔法材料，你成功用自己的仪式复现了这把兼具速度和威力的长柄刀。它也可以像魔力剑一样发射出复制体用来远程攻击。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:moonlight_cut",
+      "text": ""
+    }
+  ],
+  "advancement": "goety:goety/read_front_scroll"
+}

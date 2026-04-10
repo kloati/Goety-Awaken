@@ -1,0 +1,16 @@
+{
+  "name": "Foco da Fada",
+  "icon": "goetyawaken:fairy_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Deve-se admitir que essas pequenas fadas irritantes e frágeis, embora não sejam particularmente formidáveis em combate, têm uma aparência impecável. Após estudar o ritual da Criada Contratada, você usou magia sombria para replicar um ritual para contratar uma fada criada. Agora você pode colocar esses belos vasos para trabalhar!"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:fairy_focus",
+      "text": "Criar um Incidente?"
+    }
+  ]
+}

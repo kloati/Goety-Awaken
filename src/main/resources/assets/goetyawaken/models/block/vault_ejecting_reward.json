@@ -1,0 +1,9 @@
+{
+  "parent": "goetyawaken:block/template_vault",
+  "textures": {
+    "bottom": "goetyawaken:block/vault/bottom",
+    "front": "goetyawaken:block/vault/front_ejecting",
+    "side": "goetyawaken:block/vault/side_on",
+    "top": "goetyawaken:block/vault/top_ejecting"
+  }
+}

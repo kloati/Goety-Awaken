@@ -1,0 +1,16 @@
+{
+  "name": "Sunken Skeleton",
+  "icon": "goetyawaken:sunken_skeleton_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Skeletons that sank into the abyss have become another nightmare for sailors and anglers alike. They are equipped with the crossbows they clung to until their final moments, not only capable of swimming but also firing harpoons that travel more effectively through water."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:sunken_skeleton",
+      "text": ""
+    }
+  ]
+}

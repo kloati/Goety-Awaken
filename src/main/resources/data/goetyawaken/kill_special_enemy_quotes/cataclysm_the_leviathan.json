@@ -1,0 +1,12 @@
+{
+    "cataclysm:the_leviathan":  [
+                                    {
+                                        "key": "kill_special_enemy.cataclysm.the_leviathan_1",
+                                        "subtitles":  10.5
+                                    },
+                                    {
+                                        "key": "kill_special_enemy.cataclysm.the_leviathan_2",
+                                        "subtitles":  10.0
+                                    }
+                                ]
+}

@@ -1,0 +1,33 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety:mystic_core"
+  },
+  "craftType": "magic",
+  "soulCost": 4,
+  "duration": 8,
+  "ingredients": [
+    {
+      "item": "goety:magic_fabric"
+    },
+    {
+      "item": "goetyawaken:gold_grimoire"
+    },
+    {
+      "item": "goetyawaken:gold_grimoire"
+    },
+    {
+      "item": "goety:void_block"
+    },
+    {
+      "item": "goety:magic_fabric"
+    },
+    {
+      "item": "minecraft:ender_eye"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:ender_storage_book_gold"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "refinedstorage:64k_storage_part"
+  },
+  "craftType": "end",
+  "soulCost": 75,
+  "duration": 2,
+  "ingredients": [
+    {
+      "item": "goety:diamond_mold_block"
+    },
+    {
+      "item": "goety:pale_steel_ingot"
+    },
+    {
+      "item": "goety:pale_steel_ingot"
+    },
+    {
+      "item": "goety:pale_steel_ingot"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:ender_storage_book_diamond"
+  }
+}

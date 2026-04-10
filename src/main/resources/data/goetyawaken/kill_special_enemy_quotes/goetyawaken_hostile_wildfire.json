@@ -1,0 +1,12 @@
+{
+    "goetyawaken:hostile_wildfire":  [
+                                         {
+                                             "key": "kill_special_enemy.goetyawaken.hostile_wildfire_1",
+                                             "subtitles":  11.0
+                                         },
+                                         {
+                                             "key": "kill_special_enemy.goetyawaken.hostile_wildfire_2",
+                                             "subtitles":  10.0
+                                         }
+                                     ]
+}

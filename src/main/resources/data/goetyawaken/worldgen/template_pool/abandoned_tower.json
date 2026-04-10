@@ -1,0 +1,15 @@
+{
+  "name": "goetyawaken:abandoned_tower",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "goetyawaken:abandoned_tower",
+        "processors": "goetyawaken:abandoned_tower_loot",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ABA"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:leather"
+    },
+    "B": {
+      "item": "goetyawaken:delusive_fragment"
+    }
+  },
+  "result": {
+    "item": "goety:illusion_robe"
+  }
+}

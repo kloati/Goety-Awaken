@@ -1,0 +1,11 @@
+{
+  "name": "Celeiro de Coelhos",
+  "icon": "minecraft:oak_log",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "A casa de um neollager que criava muitos coelhos. Parece que algo inesperado aconteceu?"
+    }
+  ]
+}

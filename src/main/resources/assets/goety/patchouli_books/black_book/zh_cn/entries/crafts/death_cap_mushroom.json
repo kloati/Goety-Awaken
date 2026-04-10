@@ -1,0 +1,17 @@
+{
+  "name": "毒帽菇",
+  "icon": "goetyawaken:death_cap_mushroom",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "看着混沌监牢里那些危险的菌丝，你有时会忍不住想尝尝味道如何——天才如你，尽管无法完全消除毒性，你最终还是成功培育出了一种毒性尚可接受的品种。不过在品尝它之前，戴上一件与之同源的帽子或许会让你好受一些？"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:death_cap_mushroom",
+      "text": ""
+    }
+  ],
+  "advancement": "goetyawaken:mushroom_monstrosity_kill"
+}

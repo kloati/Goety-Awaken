@@ -1,0 +1,39 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety:soul_bolt_focus"
+  },
+  "craftType": "overgrown",
+  "soulCost": 3,
+  "duration": 10,
+  "ingredients": [
+    {
+      "item": "goetyawaken:superaggregated_mycelial_circuit"
+    },
+    {
+      "item": "minecraft:red_mushroom_block"
+    },
+    {
+      "item": "minecraft:red_mushroom_block"
+    },
+    {
+      "item": "minecraft:mushroom_stem"
+    },
+    {
+      "item": "goety:launch_focus"
+    },
+    {
+      "item": "minecraft:poisonous_potato"
+    },
+    {
+      "item": "goety:venomous_fang"
+    },
+    {
+      "item": "minecraft:tnt"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:mushroom_missile_focus"
+  }
+}

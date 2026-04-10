@@ -1,0 +1,16 @@
+{
+  "name": "Foco Wololo",
+  "icon": "goetyawaken:wololo_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Um encantamento misterioso originário dos Invocadores. Transforma lã de ovelhas azuis para vermelho - um feitiço no qual você inicialmente não tinha interesse, pois não oferece ajuda no aprendizado das artes das trevas, apenas um truque divertido mas sem significado. No entanto, é simplesmente muito divertido!"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:wololo_focus",
+      "text": "Wololo!"
+    }
+  ]
+}

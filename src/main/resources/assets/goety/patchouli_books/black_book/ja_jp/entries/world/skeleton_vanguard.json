@@ -1,0 +1,16 @@
+{
+  "name": "スケルトンヴァンガード",
+  "icon": "goetyawaken:skeleton_vanguard_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "呪われし亡者たる彼らは、生前、ある領主の砦を護る任に就いていた。死してなお、白骨と化してなお、彼らがその持ち場を離れることはない。その鋭きパイクは、領主の秘宝を欲し、土足で踏み入る愚かな生者どもを容赦なく貫くであろう。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:skeleton_vanguard",
+      "text": "決して侮れぬ強敵だ！"
+    }
+  ]
+}

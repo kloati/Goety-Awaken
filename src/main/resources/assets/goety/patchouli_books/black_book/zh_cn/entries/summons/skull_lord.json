@@ -1,0 +1,17 @@
+{
+  "name": "骷髅领主",
+  "icon": "goetyawaken:ally_pithos",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "利用重生锚锚定死者的技术和创造死灵法师的技艺启发了你，你利用墓穴之主的陶瓷坛为载体，制作了一个属于自己的骷髅领主仆从。如果领主倒下了，你可以简单地对着领主留下的陶瓷坛使用重生锚让它从死亡中再次归来。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:skull_lord_servant",
+      "text": "未能达成超越之逝者..."
+    }
+  ],
+  "advancement": "goety:goety/unlock_necromancer"
+}

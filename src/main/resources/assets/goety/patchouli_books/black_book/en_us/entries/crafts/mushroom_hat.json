@@ -1,0 +1,17 @@
+{
+  "name": "Mushroom Hat",
+  "icon": "goetyawaken:mushroom_hat",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Using the symbiotic mycelium extracted from the giant beast in the Chaos Prison, you have crafted this fashionable hat. The Mushroom Hat filters out toxins, protecting you from venom, and occasionally cures poison. It will also proliferate Fungus and launch them at your enemies!"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:mushroom_hat",
+      "text": ""
+    }
+  ],
+  "advancement": "goetyawaken:mushroom_monstrosity_kill"
+}

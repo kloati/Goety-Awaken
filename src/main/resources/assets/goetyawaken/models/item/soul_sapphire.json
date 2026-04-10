@@ -1,0 +1,32 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "goetyawaken:item/soul_sapphire1"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "goetyawaken:texture_variant": 0.0
+      },
+      "model": "goetyawaken:item/soul_sapphire1"
+    },
+    {
+      "predicate": {
+        "goetyawaken:texture_variant": 0.33
+      },
+      "model": "goetyawaken:item/soul_sapphire2"
+    },
+    {
+      "predicate": {
+        "goetyawaken:texture_variant": 0.66
+      },
+      "model": "goetyawaken:item/soul_sapphire3"
+    },
+    {
+      "predicate": {
+        "goetyawaken:texture_variant": 0.99
+      },
+      "model": "goetyawaken:item/soul_sapphire4"
+    }
+  ]
+}

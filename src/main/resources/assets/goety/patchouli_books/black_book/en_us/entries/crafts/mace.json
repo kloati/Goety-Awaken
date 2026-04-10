@@ -1,0 +1,16 @@
+{
+  "name": "Mace",
+  "icon": "goetyawaken:mace",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "You have often wondered why the Zombie Darkguards are equipped with maces. Perhaps by wielding one for yourself, you will understand why ancient kings issued these weapons as standard arms for their elite troops."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:mace",
+      "text": ""
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "竖琴弩",
+  "icon": "goetyawaken:harp_crossbow",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "音乐与致命的完美结合，是聚会中不可或缺的东西。多根弓弦带来了一次发射多枚箭矢的能力。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:harp_crossbow",
+      "text": ""
+    }
+  ]
+}

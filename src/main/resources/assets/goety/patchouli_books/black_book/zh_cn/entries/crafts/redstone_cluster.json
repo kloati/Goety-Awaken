@@ -1,0 +1,16 @@
+{
+  "name": "粗红石块",
+  "icon": "goetyawaken:redstone_cluster",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "一种装饰性的红石晶簇，看起来很好看，当然你的囚犯们不会那么认为。"
+    },
+    {
+      "type": "patchouli:stonecutting",
+      "recipe": "goetyawaken:redstone_cluster/redstone_cluster_1_1",
+      "text": "囚犯：霉嚎的回忆"
+    }
+  ]
+}

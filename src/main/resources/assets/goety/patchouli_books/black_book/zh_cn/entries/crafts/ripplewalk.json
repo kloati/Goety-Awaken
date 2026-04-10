@@ -1,0 +1,16 @@
+{
+  "name": "凌波",
+  "icon": "goetyawaken:ripplewalk",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "行走于水上曾被凡人视作神迹。你固然能随时复现此等奇迹，但持续施法终究太过笨拙迟缓。为越过江海一直施展法术实在不智，因此你将这份流动的魔力封存于足履之上。虽然只是容易滑落的魔法，但已经足够长久了。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:ripplewalk",
+      "text": "穿戴者可以在流体上奔跑，一旦停下就会失效。"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety:vexing_focus"
+  },
+  "craftType": "magic",
+  "entity_to_sacrifice": {
+  "tag": "goetyawaken:vindicator",
+  "display_name": "entity.minecraft.vindicator"
+  },
+  "soulCost": 10,
+  "duration": 10,
+  "ingredients": [
+    {
+      "item": "minecraft:lapis_block"
+    },
+    {
+      "item": "goetyawaken:soul_sapphire"
+    },
+    {
+      "item": "goety:hunger_core"
+    },
+    {
+      "item": "goety:magic_emerald"
+    },
+    {
+      "item": "goety:magic_emerald"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:torment_focus"
+  }
+}

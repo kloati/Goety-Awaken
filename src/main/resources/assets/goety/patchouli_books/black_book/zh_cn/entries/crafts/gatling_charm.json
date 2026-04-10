@@ -1,0 +1,20 @@
+{
+  "name": "医者仁心",
+  "icon": "goetyawaken:gatling_charm",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "让一名士兵能顶上百人的话……"
+    },
+    {
+       "type": "text",
+      "text": "然而战争的亡魂从未减少，只剩下悲歌的幽魂歌唱着医生破灭的愿景。而他们终究传唱到了你的耳边。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:gatling_charm",
+      "text": ""
+    }
+  ]
+}

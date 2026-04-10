@@ -1,0 +1,40 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goetyawaken:mace"
+  },
+  "craftType": "forge",
+  "soulCost": 20,
+  "duration": 10,
+  "research": "front",
+  "ingredients": [
+    {
+      "item": "minecraft:jack_o_lantern"
+    },
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "minecraft:sunflower"
+    },
+    {
+      "item": "goety:indented_gold"
+    },
+    {
+      "item": "goety:magic_fabric"
+    },
+    {
+      "item": "minecraft:glistering_melon_slice"
+    },
+    {
+      "item": "minecraft:dragon_breath"
+    },
+    {
+      "item": "minecraft:bell"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:sun_grace"
+  }
+}

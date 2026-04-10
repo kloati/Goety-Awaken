@@ -1,0 +1,39 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:convert_complete_tamed",
+  "activation_item": {
+    "item": "goety:dark_hat"
+  },
+  "craftType": "magic",
+  "entity_to_convert": {
+    "tag": "goetyawaken:preacher",
+    "display_name": "entity.goety.preacher"
+  },
+  "entity_to_convert_into": "goetyawaken:minister_servant",
+  "soulCost": 5,
+  "duration": 10,
+  "research": "royal",
+  "ingredients": [
+    {
+      "item": "goety:dark_robe"
+    },
+    {
+      "item": "goety:ominous_staff"
+    },
+    {
+      "item": "goety:ill_bomb"
+    },
+    {
+      "item": "goety:ill_bomb"
+    },
+    {
+      "item": "goety:teeth_focus"
+    },
+    {
+      "item": "goety:soul_emerald"
+    }
+  ],
+  "result": {
+    "item": "goety:jei_dummy/none"
+  }
+}

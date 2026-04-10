@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "goetyawaken:block/taboo_blocks/taboo_bricks",
+    "side": "goetyawaken:block/taboo_blocks/taboo_bricks",
+    "top": "goetyawaken:block/taboo_blocks/taboo_bricks"
+  }
+}

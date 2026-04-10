@@ -1,0 +1,16 @@
+{
+  "name": "阔剑",
+  "icon": "goetyawaken:claymore",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "一把巨剑，看似难以举起，却能轻松地被一位纯正的战士握住。阔剑势大力沉，这使其横扫攻击产生了质变。你将这种充分利用横扫攻击的技艺称为真实横扫——横扫攻击总能造成全额伤害，且范围更为宽广，并且即使没有目标，你也可以挥舞这把巨剑进行横扫。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:claymore",
+      "text": ""
+    }
+  ]
+}

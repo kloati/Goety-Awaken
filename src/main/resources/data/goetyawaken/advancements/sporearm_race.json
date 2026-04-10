@@ -1,0 +1,28 @@
+{
+  "parent": "goetyawaken:mushroom_monstrosity_kill",
+  "criteria": {
+    "sporearm_race": {
+      "trigger": "goetyawaken:sporearm_race"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.goetyawaken.sporearm_race.description"
+    },
+    "frame": "challenge",
+    "hidden": true,
+    "icon": {
+      "item": "goetyawaken:angry_mooshroom_spawn_egg"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.goetyawaken.sporearm_race.title"
+    }
+  },
+  "requirements": [
+    [
+      "sporearm_race"
+    ]
+  ]
+}

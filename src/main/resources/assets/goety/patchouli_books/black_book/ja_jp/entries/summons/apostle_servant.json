@@ -1,0 +1,22 @@
+{
+  "name": "使徒（アパスル）",
+  "icon": "goetyawaken:obsidian_tear",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "「嘆きの神々のワイン」――狂信者たちがそう呼ぶ「黒曜石の涙」を啜ることを、汝は幾度となく考えた。たとえ深淵の悪魔どもを奴隷の如く従える汝であっても、これを口にした際の結果に楽観的な期待を抱くほど、理性を失ってはおらぬ。……まずは従者を実験台にすべきだろうか？いずれにせよ、そのような挙に出る前には、万全の準備を整えておくべきだ。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:summon_apostle_servant",
+      "text": "言うまでもなく、生贄を捧げることで直接「使徒（アパスル）」を召喚することも可能だ。真に昇天を遂げた者には及ばぬやもしれぬが、それでも戦力としては十分であろう。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:apostle_servant",
+      "text": ""
+    }
+  ],
+  "advancement": "goety:goety/kill_a_apostle"
+}

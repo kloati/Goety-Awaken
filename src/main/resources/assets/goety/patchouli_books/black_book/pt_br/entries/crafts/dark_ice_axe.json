@@ -1,0 +1,17 @@
+{
+  "name": "Machado de Gelo das Trevas",
+  "icon": "goetyawaken:dark_ice_axe",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Você pode criar um machado de gelo usando ferro e diamantes, então por que não forjar um com Metal das Trevas? Ele mantém a funcionalidade de um machado de gelo enquanto também enfraquece inimigos como outras ferramentas de Metal das Trevas e se repara com almas."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:dark_ice_axe",
+      "text": ""
+    }
+  ],
+  "advancement": "goety:goety/craft_dark_ingot"
+}

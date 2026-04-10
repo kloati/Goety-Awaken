@@ -1,0 +1,16 @@
+{
+  "name": "Wololo Focus",
+  "icon": "goetyawaken:wololo_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "text",
+      "text": "A mysterious incantation originating from Evokers. It turns wool from blue to red—a spell you initially had no interest in, as it offers no aid in learning dark arts, merely an amusing but meaningless trick. Yet, it's just too fun!"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:wololo_focus",
+      "text": "Wololo!"
+    }
+  ]
+}

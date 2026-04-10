@@ -1,0 +1,16 @@
+{
+  "name": "ウィザーの従者",
+  "icon": "goetyawaken:wither_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "古代のネザーリアクターと汝の卓越した闇の魔術の技、そして旧事のスクロールから学んだネザーの歴史を組み合わせることで、汝の命に従うウィザーを造り出すことに成功した。言うまでもなく、それが耳を貸すのは汝に対してのみである。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:wither_servant",
+      "text": "汝はこのウィザーに跨り、意のままに空を駆けることさえ可能だ。"
+    }
+  ]
+}

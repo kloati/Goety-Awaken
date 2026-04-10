@@ -1,0 +1,15 @@
+{
+  "name": "goetyawaken:tidal_tomb",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "goetyawaken:tidal_tomb",
+        "processors": "goetyawaken:tidal_tomb_loot",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

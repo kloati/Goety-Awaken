@@ -1,0 +1,7 @@
+{
+  "name": "Estruturas",
+  "description": "Edifícios e locais deste mundo.",
+  "icon": "minecraft:bricks",
+  "parent": "goety:goetyawaken_world",
+  "sortnum": 0
+}

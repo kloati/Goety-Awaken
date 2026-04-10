@@ -1,0 +1,16 @@
+{
+  "name": "巫师仆从",
+  "icon": "goetyawaken:sorcerer_spawn_egg",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "text",
+      "text": "高等级的巫师在灾厄村民群体里拥有很高的地位，他们的实力也不容小觑。或许你可以通过一种融合多个流派材料的魔导书来训练听从你指挥的巫师仆从。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:sorcerer_servant",
+      "text": "巫师仆从会使用强大的魔法为你战斗，你也可以用绿宝石与他们交易。"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "name": "Monstruosidade Mooshroom",
+  "icon": "goetyawaken:superaggregated_mycelial_circuit",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Aprisionada no nível mais baixo da Prisão do Caos está uma entidade massiva — semelhante à Monstruosidade de Redstone que você encontrou antes, mas distintamente diferente. Você não sabe por que a civilização que a criou a exilou aqui. Talvez você descubra em breve."
+    },
+    {
+      "type": "text",
+      "text": "Após eras incontáveis de nutrição, esta máquina de guerra alcançou simbiose com todo o ambiente fúngico, extraindo poder dele. Suas bombas de dispersão diferem das de seus sucessores — profundamente integradas com fungos, elas ejetam bombas carregadas com micélio perigoso. Ao aterrissar, esses filamentos miceliais exibem vitalidade tenaz, brotando aglomerados de cogumelos tóxicos. Estes cogumelos venenosos, propagados a partir dos esporos do Colosso, emanam uma aura sinistra; pisar neles certamente traria infortúnio. No entanto, para o Colosso Moo-Shroom, seus esporos podem reparar a estrutura da máquina. Qualquer pessoa sábia saberia que deveria erradicá-los todos o mais rápido possível."
+    },
+    {
+      "type": "text",
+      "text": "Você pode recuperar alguns componentes mecânicos profundamente fundidos com micélio deste protótipo descontrolado do Colosso de Redstone. Revelados através de magia sombria, estes componentes poderiam ter usos incomuns..."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_mushroom_monstrosity",
+      "text": "O Protótipo"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "不敵な手袋",
+  "icon": "goetyawaken:dauntless_gloves",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "語り継がれる伝説によれば、クレイモアの扱いに長けた不敵な戦士たちは、生まれながらにして神の如き剛力を備えていたという。彼らは重厚なるクレイモアを風の如き速さで振るい、鉄を泥の如く容易く断ち切ったとされる。だが汝は、彼らもまた単にクレイモアに適した手袋を仕立てただけではないかと推測した。かつて汝が大鎌やグレートハンマーのために作った、あの手袋と同じようにな。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:dauntless_gloves",
+      "text": "装備時、クレイモア系武器の攻撃速度が50%増加する。"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+    "cataclysm:ancient_remnant":  [
+                                      {
+                                          "key": "kill_special_enemy.cataclysm.ancient_remnant_1",
+                                          "subtitles":  10.0
+                                      },
+                                      {
+                                          "key": "kill_special_enemy.cataclysm.ancient_remnant_2",
+                                          "subtitles":  9.5
+                                      }
+                                  ]
+}

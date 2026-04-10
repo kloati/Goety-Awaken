@@ -1,0 +1,17 @@
+{
+  "name": "蕈弹聚晶",
+  "icon": "goetyawaken:mushroom_missile_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "text",
+      "text": "蘑菇岛的那台原型机的导弹曾让你吃了不少苦头，在终结了它之后，你终于能研究一下这种导弹是怎样构造的了。利用从它身上回收到的零件，你得以将其导弹构造系统魔法化，制作出这一枚聚晶。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:mushroom_missile_focus",
+      "text": "制作蕈弹聚晶。"
+    }
+  ],
+  "advancement": "goetyawaken:mushroom_monstrosity_kill"
+}

@@ -1,0 +1,24 @@
+{
+  "name": "Shadow Shrieker",
+  "icon": "goetyawaken:shadow_shrieker",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "The Shadow Shrieker is an exquisite creation that combines many characteristics of the Sculk domain into one. Through a specific ritual, it can summon a loyal Warden servant to serve you. To create a Warden servant, you must first place the Shadow Shrieker above a Cursed Cage filled with soul energy. After completing this step, use a Profound Echoing Shard on it, and a fearsome Warden servant will appear."
+    },
+    {
+      "type": "text",
+      "text": "The Shadow Shrieker can also defend automatically. Simply store Profound Echoing Shards in a container adjacent to it, and set up Sculk Sensors around it. Once the sensors detect unwelcome activity, they will send a signal to the shrieker. The shrieker will then consume a shard and summon a Warden servant to eliminate the offenders."
+    },
+    {
+      "type": "text",
+      "text": "Its working principle is to combine the power of various Sculk items and instruments into one, thus creating a small piece of false Deep Dark. Through this created abnormal environment, and then infused with pure soul energy, a Warden servant that obeys you can be shaped."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:shadow_shrieker",
+      "text": "Craft the Shadow Shrieker."
+    }
+  ]
+}

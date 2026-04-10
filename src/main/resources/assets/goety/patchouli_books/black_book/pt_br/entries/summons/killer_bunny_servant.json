@@ -1,0 +1,16 @@
+{
+  "name": "Servo Coelho de Caerbannog",
+  "icon": "minecraft:rabbit",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Um coelho estranho nascido por razões desconhecidas — uma existência frenética que busca apenas matança. Eles são frágeis, mas seus dentes são de alguma forma ainda mais afiados do que uma espada forjada de ferro refinado."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:caerbannog_rabbit_servant",
+      "text": "Eles também podem ser reproduzidos, passando adiante sua linhagem viciosa."
+    }
+  ]
+}

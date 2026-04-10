@@ -1,0 +1,28 @@
+{
+  "parent": "goety:goety/root",
+  "criteria": {
+    "clash_royale": {
+      "trigger": "goetyawaken:clash_royale"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.goetyawaken.clash_royale.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "goetyawaken:soul_sapphire"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.goetyawaken.clash_royale.title"
+    }
+  },
+  "requirements": [
+    [
+      "clash_royale"
+    ]
+  ]
+}

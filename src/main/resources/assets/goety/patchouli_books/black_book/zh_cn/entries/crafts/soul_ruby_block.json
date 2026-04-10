@@ -1,0 +1,21 @@
+{
+  "name": "灵魂红宝石块",
+  "icon": "goetyawaken:soul_ruby_block",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "灵魂红宝石块由灵魂红宝石紧密压制而成。灵魂红宝石本就由灾厄皇室垄断，为了得到它，你杀害了多少位皇室成员，$(playername)？"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:soul_ruby_block",
+      "text": "制作灵魂红宝石块。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:soul_ruby_from_block",
+      "text": "从灵魂红宝石块中获得灵魂红宝石。"
+    }
+  ]
+}

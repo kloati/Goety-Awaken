@@ -1,0 +1,17 @@
+{
+  "name": "弑墓者",
+  "icon": "goetyawaken:grave_bane",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "你设法将长柄刀进行了一番改造，利用蕴含着支配之力的灵魂蓝宝石和墓穴之眼，你锻造出了这把克制亡灵生物的神圣之刃。它变得非常亲和亡灵杀手魔咒，以至于亡灵杀手能在其身上发挥两倍的效力！"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:grave_bane",
+      "text": ""
+    }
+  ],
+  "advancement": "goety:goety/read_front_scroll"
+}

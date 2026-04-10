@@ -1,0 +1,16 @@
+{
+  "name": "攀岩僵尸",
+  "icon": "goetyawaken:bouldering_zombie_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "更好，更快，更强的山地僵尸，能轻易爬上普通僵尸望尘莫及的崖壁。除了这项让其他僵尸无比嫉妒的运动能力以外，似乎也并没有什么突出之处。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:bouldering_zombie",
+      "text": "山地攀爬专家"
+    }
+  ]
+}

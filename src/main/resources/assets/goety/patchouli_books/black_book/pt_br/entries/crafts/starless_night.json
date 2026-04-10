@@ -1,0 +1,29 @@
+{
+  "name": "A Noite Sem Estrelas",
+  "icon": "goetyawaken:starless_night",
+  "category": "goety:goetyawaken_crafts",
+  "advancement": "goety:goety/kill_an_ender_keeper",
+  "secret": true,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Diz-se que a Noite Sem Estrelas é assombrada por ecos de dor que permanecem dentro da lâmina negra como breu. Esta formidável claymore pode ser obtida melhorando uma Claymore de Obsidiana usando tesouros raros e curiosidades coletadas."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:starless_night"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Além de possuir todas as funcionalidades da Claymore de Obsidiana, esta lâmina pode liberar correntes de ar em forma de lâmina infundidas com energia do Vácuo, e inflige o efeito Toque do Vácuo nos seres. Quando seu dano de ataque excede a vida restante de um alvo, o excesso de dano é transferido para as criaturas ao redor."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Por certas razões arcanas, esta claymore pode ser inserida em um cajado para conjuração, funcionando de forma semelhante a um foco. Quando carregada em um Cajado do Vácuo, dispara cortes do Vácuo reminiscentes do Foco da Lâmina de Vento. Quando não usada com um Cajado do Vácuo, serve à função de um foco Caminhada do End."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Pode absorver Energia da Alma para se autorreparar."
+    }
+  ]
+}

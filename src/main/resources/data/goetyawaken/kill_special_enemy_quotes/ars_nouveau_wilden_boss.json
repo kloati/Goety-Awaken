@@ -1,0 +1,12 @@
+{
+    "ars_nouveau:wilden_boss":  [
+                                    {
+                                        "key": "kill_special_enemy.ars_nouveau.wilden_boss_1",
+                                        "subtitles":  10.5
+                                    },
+                                    {
+                                        "key": "kill_special_enemy.ars_nouveau.wilden_boss_2",
+                                        "subtitles":  10.0
+                                    }
+                                ]
+}

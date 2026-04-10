@@ -1,0 +1,18 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goetyawaken:taboo_fragment"
+  },
+  "craftType": "necroturgy",
+  "soulCost": 10,
+  "duration": 2,
+  "ingredients": [
+    {
+      "tag": "forge:stone"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:taboo_stone"
+  }
+}

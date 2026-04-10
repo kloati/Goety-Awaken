@@ -1,0 +1,15 @@
+{
+  "structures": [
+    {
+      "structure": "goetyawaken:glacial_ghost_house",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "salt": 14357617,
+    "spacing": 128,
+    "separation": 32,
+    "spread_type": "linear",
+    "type": "minecraft:random_spread"
+  }
+}

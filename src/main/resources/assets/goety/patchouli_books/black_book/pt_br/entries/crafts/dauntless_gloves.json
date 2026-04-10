@@ -1,0 +1,16 @@
+{
+  "name": "Luvas Intrépidas",
+  "icon": "goetyawaken:dauntless_gloves",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Dizem que os guerreiros intrépidos, habilidosos no uso de claymores, possuem força divina natural, permitindo-lhes brandir claymores pesadas com a velocidade do vento e cortar ferro como se fosse manteiga. No entanto, você suspeita que eles podem ter simplesmente criado um par de luvas adequadas para claymores, assim como aquelas que você já fez para foices e martelos de guerra."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:dauntless_gloves",
+      "text": "Quando equipadas, aumentam a velocidade de ataque de armas do tipo claymore em 50%."
+    }
+  ]
+}

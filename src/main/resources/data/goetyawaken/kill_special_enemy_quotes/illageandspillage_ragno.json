@@ -1,0 +1,12 @@
+{
+    "illageandspillage:ragno":  [
+                                    {
+                                        "key": "kill_special_enemy.illageandspillage.ragno_1",
+                                        "subtitles":  10.5
+                                    },
+                                    {
+                                        "key": "kill_special_enemy.illageandspillage.ragno_2",
+                                        "subtitles":  10.0
+                                    }
+                                ]
+}

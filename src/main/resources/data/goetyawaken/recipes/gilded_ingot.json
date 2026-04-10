@@ -1,0 +1,53 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "minecraft:netherite_ingot"
+  },
+  "craftType": "expert_nether",
+  "soulCost": 50,
+  "duration": 20,
+  "research": "bygone",
+  "ingredients": [
+    {
+      "item": "minecraft:gold_block"
+    },
+    {
+      "item": "minecraft:gold_block"
+    },
+    {
+      "item": "goetyawaken:glowing_ember"
+    },
+    {
+      "item": "goetyawaken:glowing_ember"
+    },
+    {
+      "item": "minecraft:netherite_scrap"
+    },
+    {
+      "item": "minecraft:netherite_scrap"
+    },
+    {
+      "item": "minecraft:blaze_rod"
+    },
+    {
+      "item": "goety:dark_ingot"
+    },
+    {
+      "item": "goety:dark_ingot"
+    },
+    {
+      "item": "goety:dark_ingot"
+    },
+    {
+      "item": "goety:dark_ingot"
+    },
+    {
+      "item": "goety:mystic_core"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:gilded_ingot",
+    "count": 2
+  }
+}

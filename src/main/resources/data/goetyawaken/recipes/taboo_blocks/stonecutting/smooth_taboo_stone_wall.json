@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "goetyawaken:smooth_taboo_stone"
+  },
+  "result": "goetyawaken:smooth_taboo_stone_wall",
+  "count": 1
+}

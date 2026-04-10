@@ -1,0 +1,16 @@
+{
+  "name": "焦骸仆从",
+  "icon": "goetyawaken:parched_servant_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "在时间的沙漏中，有许多居民或是旅者被埋葬在了荒漠的金沙之下。在这里使用骨质聚晶，会召唤出一名忠诚的焦骸仆从并不会让你感到意外。和敌对的焦骸一样，它们的箭矢会让生物陷入虚弱。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:parched_servant",
+      "text": "焦骸仆从会忠实地为你战斗。"
+    }
+  ]
+}

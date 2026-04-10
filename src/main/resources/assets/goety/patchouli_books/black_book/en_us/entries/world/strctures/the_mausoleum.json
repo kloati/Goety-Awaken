@@ -1,0 +1,16 @@
+{
+  "name": "The Mausoleum",
+  "icon": "goety:crypt_bricks",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "The sealed resting place of a Haunted Caller, where his shade lies dormant beneath the tombstone. Digging through the passageway all the way down, the master of the Mausoleum waits silently in the deepest chamber. Disturbing the peace of the dead is never a good thing—yet for a dark mage who has abandoned morality, this weighs nothing, especially when you covet the grave goods within."
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/the_mausoleum.png"],
+      "border": true
+    }
+  ]
+}

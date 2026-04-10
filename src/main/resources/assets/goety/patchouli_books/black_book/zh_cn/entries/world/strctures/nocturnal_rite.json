@@ -1,0 +1,16 @@
+{
+  "name": "夜之仪礼",
+  "icon": "goety:infernal_tome",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "古老传送门的残骸旁，五座黑曜石柱如墓碑矗立。身着暗金纹路长袍的异教徒们齐声吟唱，不再满足于腐化土地——他们正试图迎回下界中的某个强大存在。靠近者无不听见黑暗深处传来心跳般的低语。"
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/nocturnal_rite.png"],
+      "border": true
+    }
+  ]
+}

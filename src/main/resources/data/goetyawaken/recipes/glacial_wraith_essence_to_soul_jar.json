@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "goetyawaken:glacial_wraith_essence"
+    },
+    {
+      "item": "goety:empty_soul_jar"
+    }
+  ],
+  "result": {
+    "item": "goety:soul_jar"
+  }
+}

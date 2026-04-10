@@ -1,0 +1,16 @@
+{
+  "name": "骷髅先锋",
+  "icon": "goetyawaken:skeleton_vanguard_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "这些被诅咒的亡灵生前被任命守卫某个领主的堡垒，直到死后化为白骨也坚守于此，它们锋利的长柄刀会刺穿所有胆敢染指领主宝藏的生灵。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:skeleton_vanguard",
+      "text": "不可小觑的对手！"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "冰霜长镰",
+  "icon": "goetyawaken:frost_scythe",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "你时常思索黑暗镰刀的其他发展方向——你认为，除了用使徒之血浇灌它，使其满溢死亡的气息以外，应该还存在着其他改造方法。在受到灵魂蓝宝石的启发后，你最终找到了这种方法，成功制作出了镰刀的另一种改进方向——冰霜长镰。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:frost_scythe",
+      "text": ""
+    }
+  ]
+}

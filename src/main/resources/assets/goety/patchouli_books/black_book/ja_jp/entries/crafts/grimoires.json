@@ -1,0 +1,55 @@
+{
+  "name": "グリモワール",
+  "icon": "goetyawaken:ruby_grimoire",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "これらのグリモワールは、決してガタつくテーブルの脚を支えるためにあるのではない。これらは汝の従者たちがさらなる高みへと至るための鍵なのだ。ありふれた鉄から貴重なルビーに至るまで、各グリモワールは「ソーサラーの従者」の力を直接1段階引き上げることができる。ただ一度、それを使うだけでよいのだ。"
+    },
+    {
+      "type": "text",
+      "text": "各グリモワールには独自のランクがあり、それが授けられる力の限界を決定する。鉄のグリモワールではダイヤモンド級のソーサラーを育てることはできず、ダイヤモンドのグリモワールではルビー級の真理に到達することは決して叶わぬ。もし汝がルビー級の従者を望むのであれば、まずはその手にルビーのグリモワールを携えねばならぬ。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:iron_grimoire",
+      "text": "鉄のグリモワールのレシピ"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:gold_grimoire1",
+      "text": "金のグリモワールのレシピ 1"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:gold_grimoire2",
+      "text": "金のグリモワールのレシピ 2"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:emerald_grimoire1",
+      "text": "エメラルドのグリモワールのレシピ 1"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:emerald_grimoire2",
+      "text": "エメラルドのグリモワールのレシピ 2"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:diamond_grimoire1",
+      "text": "ダイヤモンドのグリモワールのレシピ 1"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:diamond_grimoire2",
+      "text": "ダイヤモンドのグリモワールのレシピ 2"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:ruby_grimoire",
+      "text": "ルビーのグリモワールのレシピ"
+    }
+  ]
+}

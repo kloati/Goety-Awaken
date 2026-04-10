@@ -1,0 +1,20 @@
+{
+  "name": "Desert Plagues Focus",
+  "icon": "goetyawaken:desert_plagues_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "text",
+      "text": "According to your investigation, you believe that ancient 'gods' used plagues to punish and control their slaves—of course, this is merely a peculiar form of magic. With the kingdom's decline, these magics have been lost. Perhaps an advanced mage from the ancient kingdom, who has survived as an undead, still retains knowledge of these magics?"
+    },
+    {
+      "type": "text",
+      "text": "Creates a plague cloud above the target that tracks them, continuously summoning hail, swarms, and lightning. When cast with a Wind Staff, the plague cloud has a larger area and deals higher damage."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:desert_plagues_focus",
+      "text": ""
+    }
+  ]
+}

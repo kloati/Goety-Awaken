@@ -1,0 +1,16 @@
+{
+  "name": "Lanterna Espectral",
+  "icon": "goetyawaken:wraith_lantern",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "A alma de um mago não é fácil de obter, mas você pode ressuscitá-la reunindo os fragmentos da alma novamente."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:wraith_lantern",
+      "text": "Fabricar esta lanterna gelada permitirá que você ressuscite o mestre daquela cabana fantasmagórica."
+    }
+  ]
+}

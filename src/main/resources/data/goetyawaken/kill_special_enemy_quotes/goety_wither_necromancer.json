@@ -1,0 +1,12 @@
+{
+    "goety:wither_necromancer":  [
+                                     {
+                                         "key": "kill_special_enemy.goety.wither_necromancer_1",
+                                         "subtitles":  11.5
+                                     },
+                                     {
+                                         "key": "kill_special_enemy.goety.wither_necromancer_2",
+                                         "subtitles":  10.5
+                                     }
+                                 ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "goetyawaken:invaded_shack",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "goetyawaken:invaded_shack",
+        "processors": "goetyawaken:invaded_shack_loot",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

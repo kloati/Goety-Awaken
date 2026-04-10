@@ -1,0 +1,63 @@
+{
+  "name": "不祥火炬",
+  "icon": "goety:ominous_pyre",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "你或许可以通过不祥火炬将归属于你的灾厄村民们训练成更多的兵种......"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety:ominous_pyre"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "恶妒者仆从",
+      "text": "需求: $(li)唤魔者仆从$(li)1灵魂红宝石块 $(li)48书架/附魔能力等同的方块 $(li)4高头骨，$(li)2附魔台 $(li)8灵魂蜡烛 $(li)8隐秘之瓮。"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "皇家守卫",
+      "text": "需求: $(li)卫道士仆从 $(li)16苍白金属块 $(li)16诅咒金属块 $(li)8金块 $(li)4锻造台 $(li)4高炉 $(li)4铁砧 $(li)8旗帜 $(li)4盔甲架 $(li)1灵魂蓝宝石块。"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "石级巫师仆从 (Level 1)",
+      "text": "需求: $(li)必须是有魔法资质的新刌民 $(li)32石头 $(li)2灵魂营火 $(li)4营火 $(li)4个黑暗祭坛 $(li)1个承载饥饿核心的祭坛基座 $(li)1个承载活力核心的祭坛基座 $(li)1个承载神秘核心的祭坛基座 $(li)1个承载烈风核心的祭坛基座 $(li)1个非空的诅咒之笼 $(li)4盔甲架"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "铁级巫师仆从 (Level 2)",
+      "text": "需求: $(li)石级巫师仆从 (Level 1) $(li)在1级巫师仆从的环境方块基础上增加： $(li)24铁块 $(li)1装有水的炼药锅 $(li)1装有熔岩的炼药锅 $(li)1装有细雪的炼药锅 $(li)1装有液态虚空的炼药锅 $(li)4紫水晶母岩 $(li)8增生之根 $(li)4蜂蜜块 $(li)2蜜脾"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "金级巫师仆从 (Level 3)",
+      "text": "需求: $(li)铁级巫师仆从 (Level 2) $(li)在2级巫师仆从的环境方块基础上增加： $(li)20金块 $(li)1共振晶体 $(li)16蓝冰 $(li)8避雷针"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "绿宝石级巫师仆从 (Level 4)",
+      "text": "需求: $(li)金级巫师仆从 (Level 3) $(li)在3级巫师仆从的环境方块基础上增加： $(li)8绿宝石块 $(li)2制箭台 $(li)2海晶灯 $(li)4玉块"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "钻石级巫师仆从 (Level 5)",
+      "text": "需求: $(li)绿宝石级巫师仆从 (Level 4) $(li)在4级巫师仆从的环境方块基础上增加：$(li)8钻石块 $(li)16红石块 $(li)4岩浆块"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "传教士仆从",
+      "text": "需求: $(li)有魔法资质的新刌民 $(li)20非空的讲台 $(li)16非空的雕纹书架 $(li)4装满水的炼药锅。"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "幻术师仆从",
+      "text": "需求: $(li)有魔法资质的新刌民 $(li)24羊毛 $(li)4标靶 $(li)1承载幻象聚晶的祭坛基座。"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety:ominous_pyre": 1
+  }
+}

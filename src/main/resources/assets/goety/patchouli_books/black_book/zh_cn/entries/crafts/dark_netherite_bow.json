@@ -1,0 +1,17 @@
+{
+  "name": "黑暗合金弓",
+  "icon": "goetyawaken:dark_netherite_bow",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "这把弓由黑暗金属、黄金和下界合金联合锻造而成。拉开它需要非同寻常的力量，这代表更高的威力。被其箭矢所伤的生物将陷入衰弱状态。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:dark_netherite_bow",
+      "text": ""
+    }
+  ],
+  "advancement": "goety:goety/craft_dark_ingot"
+}

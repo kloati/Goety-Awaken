@@ -1,0 +1,16 @@
+{
+  "name": "Servo Mumificado",
+  "icon": "goetyawaken:parched_servant_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Nas areias do tempo, inúmeros habitantes ou viajantes foram enterrados sob as dunas douradas do deserto. Não deve ser surpresa que usar um Foco Ósseo aqui invoque um leal Servo Mumificado. Como suas contrapartes hostis, suas flechas infligem fraqueza nas criaturas."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:parched_servant",
+      "text": "Servos Mumificado lutarão fielmente por você."
+    }
+  ]
+}

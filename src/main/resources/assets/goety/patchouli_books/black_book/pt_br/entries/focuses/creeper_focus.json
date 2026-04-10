@@ -1,0 +1,16 @@
+{
+  "name": "Foco de Creeper",
+  "icon": "goetyawaken:creeper_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Invoque um Creeper para dar uma grande surpresa ao seu oponente!"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:creeper_focus",
+      "text": "Crie o Foco de Creeper."
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Gongo Antigo",
+  "icon": "goetyawaken:ancient_gong",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Diz-se que um dos símbolos de certo reino de Namelles era um tipo de gongo, e você conseguiu criar uma réplica. O som antigo distorcido ainda pode agitar as ruínas — invocando uma Prole do Deserto de entre os escombros para responder à fonte do barulho."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:ancient_gong",
+      "text": "Ao colocar um Foco Enfraquecedor em um gongo, você pode imitar o som do gongo antigo. Embora mantenha a função original do Foco Enfraquecedor, também pode despertar vagamente o interesse do deserto."
+    }
+  ]
+}

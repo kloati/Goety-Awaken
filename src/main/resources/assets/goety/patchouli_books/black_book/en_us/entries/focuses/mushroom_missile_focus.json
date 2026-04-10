@@ -1,0 +1,17 @@
+{
+  "name": "Mushroom Missile Focus",
+  "icon": "goetyawaken:mushroom_missile_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "text",
+      "text": "The missiles from that prototype on the Mushroom Island gave you quite a hard time. After putting an end to it, you were finally able to study how its missiles were constructed. Using the parts recovered from it, you managed to magicalize its missile construction system, creating this focus."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:mushroom_missile_focus",
+      "text": "Craft the Mushroom Missile Focus."
+    }
+  ],
+  "advancement": "goetyawaken:mushroom_monstrosity_kill"
+}

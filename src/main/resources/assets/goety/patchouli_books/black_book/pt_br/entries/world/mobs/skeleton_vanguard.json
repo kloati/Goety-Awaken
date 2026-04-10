@@ -1,0 +1,16 @@
+{
+  "name": "Vanguardas Esqueléticos",
+  "icon": "goetyawaken:skeleton_vanguard_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Esses mortos-vivos amaldiçoados foram designados para guardar a fortaleza de um lorde em vida, e mesmo após a morte e transformarem-se em ossos, eles ainda mantêm sua posição. Suas lanças afiadas perfurarão qualquer ser vivo que ousar cobiçar o tesouro do lorde."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:skeleton_vanguard",
+      "text": "Oponentes que não devem ser subestimados!"
+    }
+  ]
+}

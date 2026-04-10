@@ -1,0 +1,11 @@
+{
+  "name": "Castelo Sombrio",
+  "icon": "goety:pale_steel_ingot",
+  "category": "goety:goetyawaken_world",
+  "pages": [
+    {
+      "type": "text",
+      "text": "É imprudente invadir precipitadamente o castelo real——a menos que você já abrigue ambições de traição."
+    }
+  ]
+}

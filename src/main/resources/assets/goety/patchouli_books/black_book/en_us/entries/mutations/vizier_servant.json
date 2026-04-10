@@ -1,0 +1,11 @@
+{
+  "name": "Vizier",
+  "icon": "goetyawaken:vizier_spawn_egg",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Generally speaking, making a member of the Royal Family obey you is impossible...... unless you usurp his position! If you really have the audacity to complete such a substitution (or perhaps it would be more accurate to call it the crime of treason), you might be able to give him some magic......"
+    }
+  ]
+}

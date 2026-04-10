@@ -1,0 +1,16 @@
+{
+  "name": "Foco da Agonia",
+  "icon": "goetyawaken:agony_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Não há caminho após a morte. O Abismo é um purgatório de tormento eterno, onde as almas que caíram nele sofrem entre as chamas, para sempre incapazes de escapar. Mesmo se temporariamente arrastadas para fora por feitiços, elas já foram levadas à loucura e serão finalmente puxadas de volta para o abismo, suas próprias exalações carregando o fogo incessante da prisão."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:agony_focus",
+      "text": "Crie o Foco da Agonia."
+    }
+  ]
+}

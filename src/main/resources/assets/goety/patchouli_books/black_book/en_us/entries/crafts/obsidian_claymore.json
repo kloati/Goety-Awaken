@@ -1,0 +1,16 @@
+{
+  "name": "Obsidian Claymore",
+  "icon": "goetyawaken:obsidian_claymore",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "This obsidian greatsword can also perform the art of True Sweep like the claymore. Forged with dark metal, it harnesses soul energy to repair itself. Its attacks are not only heavy, but also inflict the Wane effect upon victims. It is said to be capable of cleaving through even the thickest shulker shells with ease."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:obsidian_claymore",
+      "text": ""
+    }
+  ]
+}

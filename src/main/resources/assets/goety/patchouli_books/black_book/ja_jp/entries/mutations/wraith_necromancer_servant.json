@@ -1,0 +1,21 @@
+{
+  "name": "レイスネクロマンサーの従者",
+  "icon": "goetyawaken:wraith_necromancer_spawn_egg",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "text",
+      "text": "魔術の力と「氷結レイスのエッセンス」をレイスに注ぎ込むことで、汝はこのレイスにネクロマンシーの力を習得させることに成功した。かつてはただ彷徨うのみであった霊魂が、今や死者を操る術をその手に収めたのだ。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:wraith_necromancer_servant",
+      "text": "儀式を通じてレイスをレイスネクロマンサーの従者へと変貌させる。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:wraith_necromancer_servant",
+      "text": "レイスネクロマンサーの従者は、強大なネクロマンシーを駆使して汝のために戦うだろう。"
+    }
+  ]
+}

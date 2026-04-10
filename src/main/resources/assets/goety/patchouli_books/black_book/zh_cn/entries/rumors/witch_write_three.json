@@ -1,0 +1,34 @@
+{
+  "name": "魔女的笔记.战利品",
+  "icon": "goety:death_scythe",
+  "category": "goety:goetyawaken_rumors",
+  "sortnum": 9,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "杀死远古生物之后除了宝藏袋，还会掉落一些奇怪的余烬。你可能会好奇这些尘埃对你冒这么大的风险猎杀他们有什么用处，毕竟我知道你是抱着我无需关心的目的而踏上狩猎的。放心，你的远古狩猎绝对会是值得的。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:gilded_ingot",
+      "text": ""
+    },
+    {
+      "type": "patchouli:text",
+      "text": "刚接触到它时我就已经注意到了这种奇异的锭拥有庞大的奥术能量，这就是那些远古生物为什么闪烁着金色附魔光芒的原因。"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "我想你已经知道了黑暗金属的锻造原理，不过我没那么多闲情再谈及你已经知道的东西了。在铁砧上使用余烬合金锭可以为你的附魔物品上的所有魔咒提升一级，一件物品最多只能提升三次。我讲的很明白了，如果你想要更多等级更高的附魔，就继续狩猎，我想这足够成为驱动你猎杀它们的理由了。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:enchanted_golden_apple",
+      "text": ""
+    },
+    {
+      "type": "patchouli:text",
+      "text": "顺带一提，辉光余烬还可以用来制作附魔金苹果。只不过可能有点硬，在某个远古生物把你的门牙打掉之前别自己先磕掉一颗。"
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "name": "魔女的笔记.三",
+  "icon": "goety:death_scythe",
+  "category": "goety:goetyawaken_rumors",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "近来我发现被我剿灭的一些远古生物遗留的巢窟里出现了一些新的存在。看来那些古老之物也遵循自古以来就有的弱肉强食之道——它们吸收彼此的力量，以至于变得如此古老，如此强大。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety:muck_wraith",
+      "text": "远古之怖"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "它曾是这片土地上最早死去的灵魂之一。在死亡还没有被理解成“终点”的年代，它就学会了徘徊不去。太久远了，久到它已经记不清自己活着时的脸，只剩下对生者的无尽恨意。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety:obsidian_monolith",
+      "text": "永不停歇之物"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "下界冥教的第一个使徒立下了这座柱子。没有人知道他为什么要这么做。也许是为了证明永恒的存在，也许只是想让后来者看看什么叫固执。那些被巨柱的力量束缚的异教徒跪在柱子前祈祷，它们在守护一个早就没有了意义的东西。也许这就是信仰的尽头。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety:bound_geomancer",
+      "text": "霜寒看守者"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "他曾是灾厄村民中最出色的地卜师之一。被派去凛冬高塔执行任务之后，他就再也没有回来。现在他被不死诅咒绑定在高塔的最顶层，他不算活着，也不算死了——他只是一个被不可控制的法术困住的囚犯，看守着这座困住他自己的监牢。他不需要自由，他只需要你也留下来。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "minecraft:guardian",
+      "text": "深渊之眼"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "航海者的传说里有一百种关于深渊的说法。其中九十九种是假的，剩下的一种没说出来，因为说出来的人都没能活着回到岸上。那些溺亡者并不心甘情愿地守护它，因为它们已经无法逃离。曾经是水手的亡灵，现在成了深渊之眼向外凝视的空洞瞳孔。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety:squall_golem",
+      "text": "雷暴"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "高山的居民传说最初的呼啸傀儡是被风暴本身塑造出来的。它从烈风神殿一路游荡到了这里，身上的每一块石头都还带着圣殿的风痕。被绑定的暴风术士们追随它，不只是因为被它绑定，而是因为在它身边的时候，他们能感受到自己所追求的真正力量。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety:web_spider",
+      "text": "憎恶编织者"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "织网蜘蛛已经很烦人了。现在想象一下，有只织网蜘蛛学会了忍耐，学会了等待，学会了把每一根丝线都当作陷阱的一部分。憎恶编织者盘踞在在巨剑的坟场之中，它很狡猾，很有耐心，会等到你被它的仆从炸碎之后再享用你的残骸。"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "这次敌人不会比前一次的更好对付。它们更强大，更狡猾，是连我都会感到棘手的存在。但后来者，记住，恐惧和退缩是你最大的敌人。既然你想要证明你有逐猎远古的勇气，那就一往无前地走下去。"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "愿你顺利，$(playername)。"
+    }
+  ]
+}

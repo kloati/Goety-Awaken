@@ -1,0 +1,16 @@
+{
+  "name": "ロイヤルガード",
+  "icon": "goetyawaken:hostile_royalguard_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "ロイヤルガードは、ヴィンディケーターの中から選りすぐられた精鋭の衛兵である。彼らは通常、重要な戦略拠点に駐屯するか、王家の面々を護衛する任に就いている。重厚な鎧に身を包み、盾とメイスを構えた彼らを打ち倒すのは至難の業だ。その堅牢な盾を打ち砕かぬ限り、汝の攻撃が彼らに届くことは決してないだろう。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_royalguard",
+      "text": "この精鋭の戦士たちに用心せよ！"
+    }
+  ]
+}

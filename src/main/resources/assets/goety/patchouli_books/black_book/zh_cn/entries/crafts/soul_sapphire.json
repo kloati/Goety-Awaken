@@ -1,0 +1,16 @@
+{
+  "name": "灵魂蓝宝石",
+  "icon": "goetyawaken:soul_sapphire",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "灾厄宰相的那块灵魂红宝石的色泽让你想到了得到它所犯下的罪行——用魔法的力量改造它，使其性质转变，看起来不那么血腥的话，或许可以掩盖它不光彩的来历？"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:soul_sapphire",
+      "text": "制作灵魂蓝宝石。"
+    }
+  ]
+}

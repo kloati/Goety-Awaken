@@ -1,0 +1,12 @@
+{
+    "goety:crone":  [
+                        {
+                            "key": "kill_special_enemy.goety.crone_1",
+                            "subtitles":  10.5
+                        },
+                        {
+                            "key": "kill_special_enemy.goety.crone_2",
+                            "subtitles":  9.5
+                        }
+                    ]
+}

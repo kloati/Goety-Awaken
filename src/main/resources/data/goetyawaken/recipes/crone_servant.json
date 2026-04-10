@@ -1,0 +1,41 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:convert_complete_tamed",
+  "activation_item": {
+    "item": "goety:crone_hat"
+  },
+  "craftType": "storm",
+  "entity_to_convert": {
+    "tag": "goetyawaken:witch",
+    "display_name": "entity.minecraft.witch"
+  },
+  "entity_to_convert_into": "goetyawaken:crone_servant",
+  "soulCost": 5,
+  "duration": 10,
+  "ingredients": [
+    {
+      "item": "goety:brew"
+    },
+    {
+      "item": "goety:splash_brew"
+    },
+    {
+      "item": "goety:lingering_brew"
+    },
+    {
+      "item": "goety:gas_brew"
+    },
+    {
+      "item": "goety:brew_bag"
+    },
+    {
+      "item": "goety:cauldron_ladle"
+    },
+    {
+      "item": "goety:witch_pole"
+    }
+  ],
+  "result": {
+    "item": "goety:jei_dummy/none"
+  }
+}

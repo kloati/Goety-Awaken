@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "#*#",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "goetyawaken:taboo_stone"
+    },
+    "*": {
+      "item": "minecraft:glass"
+    }
+  },
+  "result": {
+    "item": "goetyawaken:taboo_glass",
+    "count": 2
+  }
+}

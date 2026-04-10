@@ -1,0 +1,7 @@
+{
+  "name": "噂と世間話",
+  "description": "ふとした拍子に耳にした噂や、偶然にも暴かれた秘密の数々。",
+  "icon": "minecraft:globe_banner_pattern",
+  "sortnum": 7,
+  "parent": "goety:goetyawaken"
+}

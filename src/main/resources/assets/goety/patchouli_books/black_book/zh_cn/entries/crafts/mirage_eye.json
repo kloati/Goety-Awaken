@@ -1,0 +1,16 @@
+{
+  "name": "迷乱之眼",
+  "icon": "goetyawaken:mirage_eye",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "一只用于追踪荒漠迷城的眼睛。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:mirage_eye",
+      "text": "迷乱之眼"
+    }
+  ]
+}

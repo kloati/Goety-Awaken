@@ -1,0 +1,16 @@
+{
+  "name": "Torre Boreal",
+  "icon": "goety:snowy_highrock_bricks",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Lendas falam de uma torre solitária nas profundezas dos ermos do norte, erguendo-se sozinha nos ventos gelados da noite eterna. O ocasional transeunte não ousa demorar-se, andando rápido com a cabeça baixa. Apenas aventureiros experientes conhecem os inúmeros tesouros escondidos em seu interior."
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/boreal_spire.png"],
+      "border": true
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+    "twilightforest:minoshroom":  [
+                                      {
+                                          "key": "kill_special_enemy.twilightforest.minoshroom_1",
+                                          "subtitles":  9.5
+                                      },
+                                      {
+                                          "key": "kill_special_enemy.twilightforest.minoshroom_2",
+                                          "subtitles":  10.0
+                                      }
+                                  ]
+}

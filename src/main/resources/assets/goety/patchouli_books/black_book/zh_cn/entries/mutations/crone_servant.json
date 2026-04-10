@@ -1,0 +1,25 @@
+{
+  "name": "巫婆仆从",
+  "icon": "goety:crone_hat",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "text",
+      "text": "虽然你已经掌握了把女巫转化为自己仆从的技术，但是你望着自己手上的巫婆帽，不禁想到了那位离群索居的药剂大师。把这帮女巫培养成更强大的巫婆为自己所用，或许是一个不错的行为"
+    },
+    {
+      "type": "text",
+      "text": "相比于女巫仆从，她们扔出的药水种类更多，并且更强。她们十分擅长折磨对手和保护自己，会向敌人投掷恶毒的药水，会瞬间移动，也会用药水来帮助自己和支援盟友，同时她们的衣服也布满了如同甜浆果一般的荆棘！"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:crone_servant",
+      "text": "通过仪式将女巫转化为巫婆仆从。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:crone_servant",
+      "text": "巫婆仆从会使用各种药水为你战斗。"
+    }
+  ]
+}

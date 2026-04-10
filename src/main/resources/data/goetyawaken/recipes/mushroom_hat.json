@@ -1,0 +1,39 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "minecraft:leather_helmet"
+  },
+  "craftType": "overgrown",
+  "soulCost": 100,
+  "duration": 6,
+  "ingredients": [
+    {
+      "item": "goetyawaken:superaggregated_mycelial_circuit"
+    },
+    {
+      "item": "goety:blast_fungus"
+    },
+    {
+      "item": "goety:blast_fungus"
+    },
+    {
+      "item": "goety:snap_fungus"
+    },
+    {
+      "item": "goety:snap_fungus"
+    },
+    {
+      "item": "minecraft:red_mushroom"
+    },
+    {
+      "item": "minecraft:red_mushroom"
+    },
+    {
+      "item": "goety:snap_warts"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:mushroom_hat"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety:soul_ruby"
+  },
+  "craftType": "magic",
+  "soulCost": 50,
+  "duration": 10,
+  "research": "royal",
+  "ingredients": [
+    {
+      "item": "goety:ectoplasm"
+    },
+    {
+      "item": "goety:ectoplasm"
+    },
+    {
+      "item": "goety:mystic_core"
+    },
+    {
+      "item": "goety:forbidden_piece"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:soul_sapphire"
+  }
+}

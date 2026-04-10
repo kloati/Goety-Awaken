@@ -1,0 +1,16 @@
+{
+  "name": "Abandoned Tower",
+  "icon": "goety:crag_bricks",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "A long-abandoned outpost. At its base spreads a dark purple void; the remains of those who once garrisoned here have been corroded down to mere skulls. Now the tower stands empty—none know if creatures from the void still lurk within its walls."
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/abandoned_tower.png"],
+      "border": true
+    }
+  ]
+}

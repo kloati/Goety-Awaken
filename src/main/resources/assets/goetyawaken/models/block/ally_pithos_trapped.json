@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "goetyawaken:block/ally_pithos_trapped",
+    "bottom": "goetyawaken:block/ally_pithos_bottom",
+    "side": "goetyawaken:block/ally_pithos_trapped_side"
+  }
+}

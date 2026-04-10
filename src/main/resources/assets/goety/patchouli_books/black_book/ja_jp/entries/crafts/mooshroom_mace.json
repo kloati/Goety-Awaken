@@ -1,0 +1,17 @@
+{
+  "name": "ムーシュルームの木槌",
+  "icon": "goetyawaken:mooshroom_mace",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "キノコ被覆合金ブロックは極めて重厚な素材であり、ムーシュルームの怪物の力に耐えうるのはこの物質のみである。だが汝は、この重苦しき力を他に転用できぬものかと考えることがあった。最終的に、汝はこれをどこか見覚えのある姿の武器へと鍛え上げた。ムーシュルームの木槌は、キノコ合金の重量と真菌の爆発力を巧みに利用している。高所から飛び降りて敵を叩き伏せれば、落下距離に応じた追加ダメージを与え、さらに着弾と同時に激しい真菌の爆発を引き起こすのだ。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:mooshroom_mace",
+      "text": "真菌爆発の木槌！"
+    }
+  ],
+  "advancement": "goetyawaken:mushroom_monstrosity_kill"
+}

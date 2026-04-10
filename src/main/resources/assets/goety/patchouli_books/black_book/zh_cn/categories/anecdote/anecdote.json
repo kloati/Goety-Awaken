@@ -1,0 +1,7 @@
+{
+  "name": "逸闻",
+  "description": "传言中那些强大古代生物的不为人知的秘密...",
+  "icon": "goetyawaken:glowing_ember",
+  "parent": "goety:goetyawaken_world",
+  "sortnum": 1
+}

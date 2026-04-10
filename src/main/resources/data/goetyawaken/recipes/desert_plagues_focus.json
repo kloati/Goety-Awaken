@@ -1,0 +1,40 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety:monsoon_focus"
+  },
+  "craftType": "sky",
+  "soulCost": 150,
+  "duration": 10,
+  "research": "mistral",
+  "ingredients": [
+    {
+      "item": "goety:hail_focus"
+    },
+    {
+      "item": "goety:swarm_focus"
+    },
+    {
+      "item": "goety:weakening_focus"
+    },
+    {
+      "item": "goety:wind_core"
+    },
+    {
+      "item": "goetyawaken:taboo_fragment"
+    },
+    {
+      "item": "goetyawaken:taboo_fragment"
+    },
+    {
+      "item": "goety:forbidden_piece"
+    },
+    {
+      "item": "minecraft:echo_shard"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:desert_plagues_focus"
+  }
+}

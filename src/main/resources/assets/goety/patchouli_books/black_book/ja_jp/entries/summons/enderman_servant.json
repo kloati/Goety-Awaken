@@ -1,0 +1,21 @@
+{
+  "name": "エンダーマンの従者",
+  "icon": "goetyawaken:enderman_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "長い手足に、妖しく光る紫の瞳。彼らはかつて高度な知性を備えていたが、時の奔流の中でそれは完全に失われてしまった。汝はこの「エンドの使者」たちの知恵を啓蒙することに成功したのだ。水への恐怖と、そのあまりの長身を除けば、彼らに欠点などほとんど存在せぬ。また、彼らはブロックを運び、汝へと捧げることもできる。汝が何を求めているか、伝えさえすればな。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:enderman_servant",
+      "text": "エンダーマンの従者を召喚する。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:enderman_servant",
+      "text": "エンダーマンの従者は汝のために忠実に戦い、ブロックを運んでくれるだろう。"
+    }
+  ]
+}

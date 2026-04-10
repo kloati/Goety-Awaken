@@ -1,0 +1,16 @@
+{
+  "name": "Creeper de Gelo",
+  "icon": "goetyawaken:ice_creeper_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Uma variante dos Creeper terrestres frígidas, onde o poder do gelo transformou esses Creepers em gigantescas bolas de gelo prontas para explodir a qualquer momento. Embora as explosões dos Creepers de Gelo sejam menos poderosas que as de suas contrapartes originais, seu frio penetrante é ainda mais mortal — sua explosão congela as vítimas infelizes. Tenha cuidado extra ao encontrá-los em biomas frios."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:ice_creeper",
+      "text": ""
+    }
+  ]
+}
