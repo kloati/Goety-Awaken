@@ -452,6 +452,26 @@ public class Config {
                         .comment("Obsidian Claymore attack speed (default: 0.6)")
                         .defineInRange("obsidianClaymoreAttackSpeed", 0.6, Double.MIN_VALUE, Double.MAX_VALUE);
 
+        public static final ForgeConfigSpec.IntValue SHULKER_MISSILE_MAX_POTION_AMPLIFIER = BUILDER
+                        .comment("Shulker Missile Focus maximum potion effect amplifier from crafting (default: 1, which is level II)")
+                        .defineInRange("shulkerMissileMaxPotionAmplifier", 1, 0, 255);
+
+        public static final ForgeConfigSpec.IntValue SHULKER_MISSILE_MAX_POTION_DURATION = BUILDER
+                        .comment("Shulker Missile Focus maximum potion effect duration from crafting in ticks (default: 200 = 10 seconds)")
+                        .defineInRange("shulkerMissileMaxPotionDuration", 200, 20, Integer.MAX_VALUE);
+
+        public static final ForgeConfigSpec.IntValue MUSHROOM_MISSILE_MAX_POTION_AMPLIFIER = BUILDER
+                        .comment("Mushroom Missile Focus maximum potion effect amplifier from crafting (default: 1, which is level II)")
+                        .defineInRange("mushroomMissileMaxPotionAmplifier", 1, 0, 255);
+
+        public static final ForgeConfigSpec.IntValue MUSHROOM_MISSILE_MAX_POTION_DURATION = BUILDER
+                        .comment("Mushroom Missile Focus maximum potion effect duration from crafting in ticks (default: 200 = 10 seconds)")
+                        .defineInRange("mushroomMissileMaxPotionDuration", 200, 20, Integer.MAX_VALUE);
+
+        public static final ForgeConfigSpec.IntValue MUSHROOM_MISSILE_AREA_CLOUD_DURATION = BUILDER
+                        .comment("Mushroom Missile area effect cloud duration in ticks, affected by lasting enchantment (default: 100 = 5 seconds)")
+                        .defineInRange("mushroomMissileAreaCloudDuration", 100, 20, Integer.MAX_VALUE);
+
         private static final ForgeConfigSpec.ConfigValue<List<? extends String>> ENDERMAN_SERVANT_BLACKLIST = BUILDER
                         .comment("Enderman Servant blacklisted blocks that cannot be picked up. Default: Minecraft's unbreakable blocks, chests, barrels, and shulker boxes")
                         .defineListAllowEmpty(List.of("endermanServantBlacklist"),
@@ -497,6 +517,38 @@ public class Config {
         public static final ForgeConfigSpec.BooleanValue NAMELESS_ONE_EASY_MODE = BUILDER
                         .comment("Enable Easy mode for Nameless One (which is more like Minecraft Dungeons). Default: false")
                         .define("namelessOneEasyMode", false);
+
+        public static final ForgeConfigSpec.BooleanValue ENABLE_NAMELESS_ONE_DESERT_PLAGUES = BUILDER
+                        .comment("Enable Desert Plagues Spell for Nameless One. Default: true")
+                        .define("enableNamelessOneDesertPlagues", true);
+
+        public static final ForgeConfigSpec.BooleanValue ENABLE_NAMELESS_ONE_AVADA = BUILDER
+                        .comment("Enable Avada Spell for Nameless One. Default: true")
+                        .define("enableNamelessOneAvada", true);
+
+        public static final ForgeConfigSpec.BooleanValue ENABLE_NAMELESS_ONE_THUNDERSTORM = BUILDER
+                        .comment("Enable Thunderstorm Spell for Nameless One. Default: true")
+                        .define("enableNamelessOneThunderstorm", true);
+
+        public static final ForgeConfigSpec.BooleanValue ENABLE_NAMELESS_ONE_HEAVEN_RIFT = BUILDER
+                        .comment("Enable Heaven Rift Spell for Nameless One. Default: true")
+                        .define("enableNamelessOneHeavenRift", true);
+
+        public static final ForgeConfigSpec.BooleanValue ENABLE_NAMELESS_ONE_ENCHANTMENT = BUILDER
+                        .comment("Enable Enchantment Spell (variant) for Nameless One. Default: true")
+                        .define("enableNamelessOneEnchantment", true);
+
+        public static final ForgeConfigSpec.BooleanValue ENABLE_NAMELESS_ONE_SUPPORT_SPELLS = BUILDER
+                        .comment("Enable Support and Buff Spells for Nameless One. Default: true")
+                        .define("enableNamelessOneSupportSpells", true);
+
+        public static final ForgeConfigSpec.BooleanValue ENABLE_NAMELESS_ONE_NEW_TEXTURE = BUILDER
+                        .comment("Enable new texture for Ally Nameless One. Default: true")
+                        .define("enableNamelessOneNewTexture", true);
+
+        public static final ForgeConfigSpec.BooleanValue ENABLE_HOSTILE_NAMELESS_ONE_NEW_TEXTURE = BUILDER
+                        .comment("Enable new texture for Hostile Nameless One. Default: false")
+                        .define("enableHostileNamelessOneNewTexture", false);
 
         public static final ForgeConfigSpec.BooleanValue MUSHROOM_MONSTROSITY_EASY_MODE = BUILDER
                         .comment("Enable Easy mode for Mushroom Monstrosity (which is more like Minecraft Dungeons). Default: false")
@@ -576,6 +628,7 @@ public class Config {
                                                         "goetyawaken:mushroom_scatter_bomb",
                                                         "goetyawaken:frost_scythe_slash", "goetyawaken:explosive_arrow",
                                                         "goetyawaken:mod_sword_projectile",
+                                                        "goetyawaken:nameless_bolt",
                                                         "goetyawaken:corrupted_soul_bolt"),
                                         obj -> obj instanceof String);
 
@@ -599,6 +652,22 @@ public class Config {
                                                         "goetyawaken:ominous_castle",
                                                         "goetyawaken:arch_illusioner_keep"),
                                         obj -> obj instanceof String);
+
+        public static final ForgeConfigSpec.IntValue DEATH_CAP_MUSHROOM_COOLDOWN = BUILDER
+                        .comment("Death Cap Mushroom cooldown in ticks after eating (default: 1200 - 60 seconds)")
+                        .defineInRange("deathCapMushroomCooldown", 1200, 0, Integer.MAX_VALUE);
+
+        public static final ForgeConfigSpec.IntValue DEATH_CAP_MUSHROOM_MAX_USAGES = BUILDER
+                        .comment("Death Cap Mushroom maximum usages before being consumed (default: 10)")
+                        .defineInRange("deathCapMushroomMaxUsages", 10, 1, Integer.MAX_VALUE);
+
+        public static final ForgeConfigSpec.IntValue DEATH_CAP_MUSHROOM_EFFECT_DURATION = BUILDER
+                        .comment("Death Cap Mushroom BERSERK effect duration in ticks (default: 600 - 30 seconds)")
+                        .defineInRange("deathCapMushroomEffectDuration", 600, 0, Integer.MAX_VALUE);
+
+        public static final ForgeConfigSpec.IntValue DEATH_CAP_MUSHROOM_EFFECT_LEVEL = BUILDER
+                        .comment("Death Cap Mushroom BERSERK effect level/amplifier (default: 4, which is level IV)")
+                        .defineInRange("deathCapMushroomEffectLevel", 4, 1, 255);
 
         static final ForgeConfigSpec SPEC = BUILDER.build();
 
@@ -717,8 +786,19 @@ public class Config {
         public static boolean parchedNecromancerBossMusic;
         public static boolean namelessOneBossMusic;
         public static boolean namelessOneEasyMode;
+        public static boolean enableNamelessOneDesertPlagues;
+        public static boolean enableNamelessOneAvada;
+        public static boolean enableNamelessOneThunderstorm;
+        public static boolean enableNamelessOneHeavenRift;
+        public static boolean enableNamelessOneEnchantment;
+        public static boolean enableNamelessOneSupportSpells;
         public static boolean mushroomMonstrosityEasyMode;
         public static int mushroomDynamicShieldDefaultLimitTime;
+
+        public static int deathCapMushroomCooldown;
+        public static int deathCapMushroomMaxUsages;
+        public static int deathCapMushroomEffectDuration;
+        public static int deathCapMushroomEffectLevel;
 
         public static double truthSeekerDamage;
         public static double truthSeekerAttackSpeed;
@@ -744,6 +824,13 @@ public class Config {
         public static double obsidianClaymoreAttackSpeed;
         public static double graveBaneDamage;
         public static double graveBaneAttackSpeed;
+
+        public static int shulkerMissileMaxPotionAmplifier;
+        public static int shulkerMissileMaxPotionDuration;
+
+        public static int mushroomMissileMaxPotionAmplifier;
+        public static int mushroomMissileMaxPotionDuration;
+        public static int mushroomMissileAreaCloudDuration;
 
         public static boolean enableBlastlingEnhancement;
         public static boolean enableSnarelingEnhancement;
@@ -879,8 +966,19 @@ public class Config {
                 parchedNecromancerBossMusic = PARCHED_NECROMANCER_BOSS_MUSIC.get();
                 namelessOneBossMusic = NAMELESS_ONE_BOSS_MUSIC.get();
                 namelessOneEasyMode = NAMELESS_ONE_EASY_MODE.get();
+                enableNamelessOneDesertPlagues = ENABLE_NAMELESS_ONE_DESERT_PLAGUES.get();
+                enableNamelessOneAvada = ENABLE_NAMELESS_ONE_AVADA.get();
+                enableNamelessOneThunderstorm = ENABLE_NAMELESS_ONE_THUNDERSTORM.get();
+                enableNamelessOneHeavenRift = ENABLE_NAMELESS_ONE_HEAVEN_RIFT.get();
+                enableNamelessOneEnchantment = ENABLE_NAMELESS_ONE_ENCHANTMENT.get();
+                enableNamelessOneSupportSpells = ENABLE_NAMELESS_ONE_SUPPORT_SPELLS.get();
                 mushroomMonstrosityEasyMode = MUSHROOM_MONSTROSITY_EASY_MODE.get();
                 mushroomDynamicShieldDefaultLimitTime = MUSHROOM_DYNAMIC_SHIELD_DEFAULT_LIMIT_TIME.get();
+
+                deathCapMushroomCooldown = DEATH_CAP_MUSHROOM_COOLDOWN.get();
+                deathCapMushroomMaxUsages = DEATH_CAP_MUSHROOM_MAX_USAGES.get();
+                deathCapMushroomEffectDuration = DEATH_CAP_MUSHROOM_EFFECT_DURATION.get();
+                deathCapMushroomEffectLevel = DEATH_CAP_MUSHROOM_EFFECT_LEVEL.get();
 
                 truthSeekerDamage = TRUTH_SEEKER_DAMAGE.get();
                 truthSeekerAttackSpeed = TRUTH_SEEKER_ATTACK_SPEED.get();
@@ -906,6 +1004,13 @@ public class Config {
                 obsidianClaymoreAttackSpeed = OBSIDIAN_CLAYMORE_ATTACK_SPEED.get();
                 graveBaneDamage = GRAVE_BANE_DAMAGE.get();
                 graveBaneAttackSpeed = GRAVE_BANE_ATTACK_SPEED.get();
+
+                shulkerMissileMaxPotionAmplifier = SHULKER_MISSILE_MAX_POTION_AMPLIFIER.get();
+                shulkerMissileMaxPotionDuration = SHULKER_MISSILE_MAX_POTION_DURATION.get();
+
+                mushroomMissileMaxPotionAmplifier = MUSHROOM_MISSILE_MAX_POTION_AMPLIFIER.get();
+                mushroomMissileMaxPotionDuration = MUSHROOM_MISSILE_MAX_POTION_DURATION.get();
+                mushroomMissileAreaCloudDuration = MUSHROOM_MISSILE_AREA_CLOUD_DURATION.get();
 
                 enableBlastlingEnhancement = ENABLE_BLASTLING_ENHANCEMENT.get();
                 enableSnarelingEnhancement = ENABLE_SNARELING_ENHANCEMENT.get();

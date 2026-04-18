@@ -1,5 +1,6 @@
 package com.k1sak1.goetyawaken.common.entities.hostile.undead.zombie;
 
+import com.k1sak1.goetyawaken.common.entities.projectiles.FrostSnowball;
 import com.Polarice3.Goety.config.AttributesConfig;
 import com.Polarice3.Goety.init.ModSounds;
 import com.Polarice3.Goety.utils.MathHelper;
@@ -17,7 +18,6 @@ import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.monster.Zombie;
-import net.minecraft.world.entity.projectile.Snowball;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -32,9 +32,10 @@ public class FrozenZombie extends Zombie implements Enemy, RangedAttackMob {
         super(type, worldIn);
     }
 
+    @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(3, new ThrowSnowballGoal(this));
+        this.goalSelector.addGoal(1, new ThrowSnowballGoal(this));
     }
 
     public static AttributeSupplier.Builder setCustomAttributes() {
@@ -86,7 +87,7 @@ public class FrozenZombie extends Zombie implements Enemy, RangedAttackMob {
 
     @Override
     public void performRangedAttack(LivingEntity p_33317_, float p_33318_) {
-        Snowball snowball = new Snowball(this.level(), this);
+        FrostSnowball snowball = new FrostSnowball(this.level(), this, p_33317_);
         Vec3 vec3 = p_33317_.getDeltaMovement();
         double d0 = p_33317_.getX() + vec3.x - this.getX();
         double d1 = p_33317_.getY() + vec3.y - this.getEyeY();

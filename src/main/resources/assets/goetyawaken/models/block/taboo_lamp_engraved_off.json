@@ -2,6 +2,6 @@
   "parent": "minecraft:block/cube_all",
   "render_type": "cutout",
   "textures": {
-    "all": "goetyawaken:block/taboo_blocks/taboo_lamp_engraved"
+    "all": "goetyawaken:block/taboo_blocks/taboo_bricks_engraved"
   }
 }

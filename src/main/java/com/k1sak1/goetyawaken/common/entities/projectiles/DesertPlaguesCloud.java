@@ -165,7 +165,7 @@ public class DesertPlaguesCloud extends AbstractSpellCloud {
         if (livingEntity != null) {
             float baseDamage = SpellConfig.HailDamage.get().floatValue() * WandUtil.damageMultiply();
             baseDamage += this.getExtraDamage();
-            if (livingEntity.hurt(ModDamageSource.frostBreath(this, this.getOwner()), baseDamage)) {
+            if (livingEntity.hurt(ModDamageSource.frostBreath(this, this.getOwner()), baseDamage / 2)) {
                 livingEntity
                         .addEffect(new MobEffectInstance(GoetyEffects.FREEZING.get(), MathHelper.secondsToTicks(5)));
             }
@@ -182,7 +182,7 @@ public class DesertPlaguesCloud extends AbstractSpellCloud {
                     livingEntity.hurt(livingEntity.damageSources().indirectMagic(this, this.getOwner()), 1.0F);
                 }
                 if (livingEntity.hurt(ModDamageSource.swarm(this, this.getOwner()),
-                        SpellConfig.SwarmDamage.get().floatValue() * WandUtil.damageMultiply())) {
+                        SpellConfig.SwarmDamage.get().floatValue() * WandUtil.damageMultiply() / 2)) {
                     if (livingEntity instanceof LivingEntity) {
                         LivingEntity livingTarget = livingEntity;
                         MobEffect mobEffect = MobEffects.POISON;
@@ -224,7 +224,7 @@ public class DesertPlaguesCloud extends AbstractSpellCloud {
                         Vec3 vec31 = new Vec3(livingEntity.getX(), livingEntity.getY() + livingEntity.getBbHeight() / 2,
                                 livingEntity.getZ());
                         ModNetwork.sendToALL(new SThunderBoltPacket(vec3, vec31, colorUtil, 10));
-                        if (livingEntity.hurt(ModDamageSource.indirectShock(this, this.getOwner()), damage)) {
+                        if (livingEntity.hurt(ModDamageSource.indirectShock(this, this.getOwner()), damage / 2)) {
                             float chance = this.isStaff() ? 0.25F : 0.05F;
                             float chainDamage = damage / 2.0F;
                             if (serverLevel.isThundering() && serverLevel.isRainingAt(livingEntity.blockPosition())) {

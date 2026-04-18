@@ -7,7 +7,15 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnGroupData;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.animal.IronGolem;
+import net.minecraft.world.entity.animal.Turtle;
 import net.minecraft.world.entity.monster.Enemy;
+import net.minecraft.world.entity.monster.ZombifiedPiglin;
+import net.minecraft.world.entity.npc.AbstractVillager;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.nbt.CompoundTag;
@@ -22,14 +30,25 @@ public class HostileDrownedNecromancer extends DrownedNecromancer implements Ene
     public HostileDrownedNecromancer(EntityType<? extends DrownedNecromancer> type, Level level) {
         super(type, level);
         this.setHostile(true);
+        this.setPersistenceRequired();
         this.bossInfo = new ModServerBossInfo(this, BossEvent.BossBarColor.BLUE, false, false);
     }
 
     @Override
-    public void targetSelectGoal() {
-        this.targetSelector.addGoal(1, new net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal<>(this,
-                net.minecraft.world.entity.player.Player.class, true));
-        this.targetSelector.addGoal(2, new net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal(this));
+    protected void registerGoals() {
+        super.registerGoals();
+        this.addBehaviourGoals();
+    }
+
+    protected void addBehaviourGoals() {
+        this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, (double) 1.0F));
+        this.targetSelector.addGoal(1,
+                (new HurtByTargetGoal(this, new Class[0])).setAlertOthers(new Class[] { ZombifiedPiglin.class }));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal(this, Player.class, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal(this, AbstractVillager.class, false));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal(this, IronGolem.class, true));
+        this.targetSelector.addGoal(5,
+                new NearestAttackableTargetGoal(this, Turtle.class, 10, true, false, Turtle.BABY_ON_LAND_SELECTOR));
     }
 
     @Override

@@ -10,7 +10,7 @@
     {
       "type": "goety:ritual",
       "recipe": "goetyawaken:dauntless_gloves",
-      "text": "When worn, increases the attack speed of claymore-type weapons by 50%."
+      "text": "When worn, increases the attack speed of claymore-type weapons by 25%."
     }
   ]
 }

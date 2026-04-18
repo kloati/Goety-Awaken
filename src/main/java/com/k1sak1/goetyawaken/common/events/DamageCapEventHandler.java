@@ -16,7 +16,7 @@ public class DamageCapEventHandler {
         if (event.getEntity() instanceof AbstractNamelessOne namelessOne) {
             DamageCapManager damageCapManager = namelessOne.getDamageCapManager();
             if (damageCapManager != null) {
-                float limitedDamage = damageCapManager.applyHardDamageLimit(event.getSource(), event.getAmount());
+                float limitedDamage = damageCapManager.enforceHardDamageCap(event.getSource(), event.getAmount());
                 event.setAmount(limitedDamage);
             }
         }
@@ -28,7 +28,7 @@ public class DamageCapEventHandler {
             DamageCapManager damageCapManager = namelessOne.getDamageCapManager();
 
             if (damageCapManager != null) {
-                float limitedDamage = damageCapManager.applyHardDamageLimit(event.getSource(), event.getAmount());
+                float limitedDamage = damageCapManager.enforceHardDamageCap(event.getSource(), event.getAmount());
                 event.setAmount(limitedDamage);
             }
         }
@@ -39,10 +39,10 @@ public class DamageCapEventHandler {
         if (event.getEntity() instanceof AbstractNamelessOne namelessOne) {
             DamageCapManager damageCapManager = namelessOne.getDamageCapManager();
             if (damageCapManager != null) {
-                float maxAllowedDamage = namelessOne.getMaxHealth() * DamageCapManager.getDamageThresholdPercent();
+                float maxAllowedDamage = namelessOne.getMaxHealth() * DamageCapManager.getHealthLossThresholdRatio();
                 if (event.getAmount() > maxAllowedDamage) {
                     event.setAmount(maxAllowedDamage);
-                    damageCapManager.notifyIllegalDamage(event.getAmount() - maxAllowedDamage,
+                    damageCapManager.recordIllegalDamage(event.getAmount() - maxAllowedDamage,
                             event.getSource().getEntity());
                 }
             }
@@ -54,10 +54,10 @@ public class DamageCapEventHandler {
         if (event.getEntity() instanceof AbstractNamelessOne namelessOne) {
             DamageCapManager damageCapManager = namelessOne.getDamageCapManager();
             if (damageCapManager != null) {
-                float maxAllowedDamage = namelessOne.getMaxHealth() * DamageCapManager.getDamageThresholdPercent();
+                float maxAllowedDamage = namelessOne.getMaxHealth() * DamageCapManager.getHealthLossThresholdRatio();
                 if (event.getAmount() > maxAllowedDamage) {
                     event.setAmount(maxAllowedDamage);
-                    damageCapManager.notifyIllegalDamage(event.getAmount() - maxAllowedDamage,
+                    damageCapManager.recordIllegalDamage(event.getAmount() - maxAllowedDamage,
                             event.getSource().getEntity());
                 }
             }

@@ -1,8 +1,7 @@
 package com.k1sak1.goetyawaken.common.blocks.entity;
 
 import com.k1sak1.goetyawaken.common.blocks.VaultBlock;
-import com.Polarice3.Goety.client.particles.MagicAshSmokeParticle;
-import com.Polarice3.Goety.client.particles.ModParticleTypes;
+import com.Polarice3.Goety.client.particles.MagicAshSmokeParticleOption;
 import com.k1sak1.goetyawaken.init.ModSounds;
 import com.google.common.annotations.VisibleForTesting;
 import com.k1sak1.goetyawaken.common.blocks.ModBlockEntities;
@@ -155,12 +154,12 @@ public class VaultBlockEntity extends BlockEntity {
             for (int i = 0; i < 20; i++) {
                 Vec3 vec3d = getRegularParticlesPos(pos, random);
                 if (world instanceof ServerLevel serverLevel) {
-                    serverLevel.sendParticles(new MagicAshSmokeParticle.Option(0x3a0637, 0x691575), vec3d.x(),
+                    serverLevel.sendParticles(new MagicAshSmokeParticleOption(0x000000, 0x000000), vec3d.x(),
                             vec3d.y(), vec3d.z(), 1, 0.0, 0.0, 0.0, 0.0F);
                     serverLevel.sendParticles(ParticleTypes.SCULK_SOUL, vec3d.x(), vec3d.y(), vec3d.z(), 1,
                             0.0, 0.0, 0.0, 0.0F);
                 } else {
-                    world.addParticle(new MagicAshSmokeParticle.Option(0x3a0637, 0x691575), vec3d.x(), vec3d.y(),
+                    world.addParticle(new MagicAshSmokeParticleOption(0x000000, 0x000000), vec3d.x(), vec3d.y(),
                             vec3d.z(), 0.0, 0.0, 0.0);
                     world.addParticle(ParticleTypes.SOUL, vec3d.x(), vec3d.y(), vec3d.z(), 0.0, 0.0,
                             0.0);
@@ -189,14 +188,14 @@ public class VaultBlockEntity extends BlockEntity {
             if (random.nextFloat() <= 0.5F) {
                 Vec3 vec3d = getRegularParticlesPos(pos, random);
                 if (world instanceof ServerLevel serverLevel) {
-                    serverLevel.sendParticles(new MagicAshSmokeParticle.Option(0x3a0637, 0x691575), vec3d.x(),
+                    serverLevel.sendParticles(new MagicAshSmokeParticleOption(0x000000, 0x000000), vec3d.x(),
                             vec3d.y(), vec3d.z(), 1, 0.0, 0.0, 0.0, 0.0F);
                     if (hasDisplayItem(sharedData)) {
                         serverLevel.sendParticles(ParticleTypes.SCULK_SOUL, vec3d.x(), vec3d.y(),
                                 vec3d.z(), 1, 0.0, 0.0, 0.0, 0.0F);
                     }
                 } else {
-                    world.addParticle(new MagicAshSmokeParticle.Option(0x3a0637, 0x691575), vec3d.x(), vec3d.y(),
+                    world.addParticle(new MagicAshSmokeParticleOption(0x000000, 0x000000), vec3d.x(), vec3d.y(),
                             vec3d.z(), 0.0, 0.0, 0.0);
                     if (hasDisplayItem(sharedData)) {
                         world.addParticle(ParticleTypes.SOUL, vec3d.x(), vec3d.y(), vec3d.z(), 0.0,

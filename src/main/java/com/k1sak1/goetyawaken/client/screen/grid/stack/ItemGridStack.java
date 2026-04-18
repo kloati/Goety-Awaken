@@ -3,7 +3,6 @@ package com.k1sak1.goetyawaken.client.screen.grid.stack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -143,6 +142,7 @@ public class ItemGridStack implements IGridStack {
     @Override
     public void draw(GuiGraphics graphics, int x, int y) {
         graphics.renderItem(stack, x, y);
+        graphics.renderItemDecorations(Minecraft.getInstance().font, stack, x, y, "");
 
         String text;
         int color;
@@ -199,13 +199,7 @@ public class ItemGridStack implements IGridStack {
             buf.writeBoolean(true);
             buf.writeId(BuiltInRegistries.ITEM, stack.getItem());
             buf.writeInt(stack.getCount());
-            CompoundTag tag = null;
-            if (stack.getItem().isDamageable(stack) || stack.getItem().shouldOverrideMultiplayerNbt()) {
-                tag = stack.getTag();
-            } else if (stack.hasTag()) {
-                tag = stack.getTag();
-            }
-            buf.writeNbt(tag);
+            buf.writeNbt(stack.getItem().getShareTag(stack));
         }
     }
 
@@ -216,7 +210,7 @@ public class ItemGridStack implements IGridStack {
             Item item = buf.readById(BuiltInRegistries.ITEM);
             int count = buf.readInt();
             ItemStack stack = new ItemStack(item, count);
-            stack.setTag(buf.readNbt());
+            item.readShareTag(stack, buf.readNbt());
             return stack;
         }
     }

@@ -72,13 +72,7 @@ public class ItemStorageDisk implements IStorageDisk<ItemStack> {
     }
 
     private CompoundTag serializeStackToNbt(ItemStack stack) {
-        CompoundTag tag = new CompoundTag();
-        tag.putString("id", stack.getItem().builtInRegistryHolder().key().location().toString());
-        tag.putInt("Count", stack.getCount());
-        if (stack.hasTag()) {
-            tag.put("tag", stack.getTag());
-        }
-        return tag;
+        return stack.save(new CompoundTag());
     }
 
     @Override

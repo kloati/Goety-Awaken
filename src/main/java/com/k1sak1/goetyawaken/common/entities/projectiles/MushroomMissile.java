@@ -1,5 +1,6 @@
 package com.k1sak1.goetyawaken.common.entities.projectiles;
 
+import com.k1sak1.goetyawaken.Config;
 import com.k1sak1.goetyawaken.common.entities.ModEntityType;
 import com.Polarice3.Goety.client.particles.ModParticleTypes;
 import com.Polarice3.Goety.common.entities.projectiles.SpellHurtingProjectile;
@@ -14,11 +15,13 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.AreaEffectCloud;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -29,6 +32,7 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Arrays;
 import java.util.List;
@@ -38,6 +42,17 @@ import java.util.Collection;
 public class MushroomMissile extends SpellHurtingProjectile {
     private static final EntityDataAccessor<Boolean> DATA_HAS_TARGET = SynchedEntityData.defineId(MushroomMissile.class,
             EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<String> DATA_EFFECT_TYPE = SynchedEntityData.defineId(MushroomMissile.class,
+            EntityDataSerializers.STRING);
+    private static final EntityDataAccessor<Integer> DATA_EFFECT_DURATION = SynchedEntityData.defineId(
+            MushroomMissile.class,
+            EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> DATA_EFFECT_AMPLIFIER = SynchedEntityData.defineId(
+            MushroomMissile.class,
+            EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> DATA_LASTING_LEVEL = SynchedEntityData.defineId(
+            MushroomMissile.class,
+            EntityDataSerializers.INT);
     private double xd;
     private double yd;
     private double zd;
@@ -67,14 +82,30 @@ public class MushroomMissile extends SpellHurtingProjectile {
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(DATA_HAS_TARGET, false);
+        this.entityData.define(DATA_EFFECT_TYPE, "");
+        this.entityData.define(DATA_EFFECT_DURATION, 0);
+        this.entityData.define(DATA_EFFECT_AMPLIFIER, 0);
+        this.entityData.define(DATA_LASTING_LEVEL, 0);
     }
 
     public void readAdditionalSaveData(CompoundTag compound) {
         super.readAdditionalSaveData(compound);
+        if (compound.contains("EffectType")) {
+            this.setEffectType(compound.getString("EffectType"));
+            this.setEffectDuration(compound.getInt("EffectDuration"));
+            this.setEffectAmplifier(compound.getInt("EffectAmplifier"));
+            this.setLastingLevel(compound.getInt("LastingLevel"));
+        }
     }
 
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
+        if (!this.getEffectType().isEmpty()) {
+            compound.putString("EffectType", this.getEffectType());
+            compound.putInt("EffectDuration", this.getEffectDuration());
+            compound.putInt("EffectAmplifier", this.getEffectAmplifier());
+            compound.putInt("LastingLevel", this.getLastingLevel());
+        }
     }
 
     protected static float lerpRotation(float pCurrentRotation, float pTargetRotation) {
@@ -164,23 +195,55 @@ public class MushroomMissile extends SpellHurtingProjectile {
                             target.push(dx * 0.5D, 0.3D, dz * 0.5D);
                         }
                         target.addEffect(new MobEffectInstance(GoetyEffects.ACID_VENOM.get(), 100, 1));
+
+                        if (!this.getEffectType().isEmpty()) {
+                            try {
+                                ResourceLocation effectLocation = new ResourceLocation(this.getEffectType());
+                                net.minecraft.world.effect.MobEffect effect = ForgeRegistries.MOB_EFFECTS
+                                        .getValue(effectLocation);
+                                if (effect != null) {
+                                    int duration = this.getEffectDuration();
+                                    int amplifier = this.getEffectAmplifier();
+                                    target.addEffect(new MobEffectInstance(effect, duration, amplifier));
+                                }
+                            } catch (Exception e) {
+
+                            }
+                        }
                     }
                 }
             }
+
+            if (!this.getEffectType().isEmpty()) {
+                try {
+                    ResourceLocation effectLocation = new ResourceLocation(this.getEffectType());
+                    net.minecraft.world.effect.MobEffect effect = ForgeRegistries.MOB_EFFECTS.getValue(effectLocation);
+                    if (effect != null) {
+                        AreaEffectCloud cloud = new AreaEffectCloud(EntityType.AREA_EFFECT_CLOUD, this.level());
+                        cloud.setPos(vec3.x, vec3.y, vec3.z);
+                        cloud.setRadius(1.5F);
+                        int cloudDuration = Math.min(Config.mushroomMissileAreaCloudDuration,
+                                this.getEffectDuration());
+                        cloud.setDuration(cloudDuration);
+                        cloud.setWaitTime(0);
+                        cloud.addEffect(
+                                new MobEffectInstance(effect, this.getEffectDuration(), this.getEffectAmplifier()));
+                        cloud.setOwner(this.getOwner() instanceof LivingEntity ? (LivingEntity) this.getOwner() : null);
+                        this.level().addFreshEntity(cloud);
+                    }
+                } catch (Exception e) {
+
+                }
+            }
+
             if (this.level() instanceof ServerLevel serverLevel) {
                 com.Polarice3.Goety.utils.ServerParticleUtil.addParticlesAroundSelf(serverLevel,
                         ModParticleTypes.BIG_FIRE.get(), this);
-                com.Polarice3.Goety.utils.ColorUtil colorUtil = new com.Polarice3.Goety.utils.ColorUtil(0xdd9c16);
+                com.Polarice3.Goety.utils.ColorUtil redColor = new com.Polarice3.Goety.utils.ColorUtil(0xdd9c16);
                 serverLevel.sendParticles(
-                        new com.Polarice3.Goety.client.particles.CircleExplodeParticleOption(colorUtil.red,
-                                colorUtil.green, colorUtil.blue, 4, 1),
-                        vec3.x, com.Polarice3.Goety.utils.BlockFinder.moveDownToGround(this), vec3.z, 1, 0.0D, 0.0D,
-                        0.0D, 0.0D);
-                serverLevel.sendParticles(
-                        new com.Polarice3.Goety.client.particles.CircleExplodeParticleOption(colorUtil.red,
-                                colorUtil.green, colorUtil.blue, 5, 1),
-                        vec3.x, com.Polarice3.Goety.utils.BlockFinder.moveDownToGround(this), vec3.z, 1, 0.0D, 0.0D,
-                        0.0D, 0.0D);
+                        new com.Polarice3.Goety.client.particles.SphereExplodeParticleOption(redColor, 5.0F, 1),
+                        vec3.x, vec3.y, vec3.z, 1, 0.0D, 0.0D, 0.0D, 0.0D);
+
                 org.joml.Vector3f vector3f = new org.joml.Vector3f(
                         net.minecraft.world.phys.Vec3.fromRGB24(0x7a6664).toVector3f());
                 org.joml.Vector3f vector3f2 = new org.joml.Vector3f(
@@ -191,10 +254,10 @@ public class MushroomMissile extends SpellHurtingProjectile {
                         vector3f2, 1.0F);
                 for (int i = 0; i < 2; ++i) {
                     com.Polarice3.Goety.utils.ServerParticleUtil.circularParticles(serverLevel, cloudParticleOptions,
-                            vec3.x, this.getY() + 0.25D, vec3.z, 0, 0.14D, 0, 2.0F * 2);
+                            vec3.x, this.getY() + 0.5D, vec3.z, 0, 0.14D, 0, 2.0F);
                 }
                 com.Polarice3.Goety.utils.ServerParticleUtil.circularParticles(serverLevel, cloudParticleOptions2,
-                        vec3.x, this.getY() + 0.25D, vec3.z, 0, 0.14D, 0, 2.0F * 2);
+                        vec3.x, this.getY() + 0.5D, vec3.z, 0, 0.14D, 0, 2.0F);
             }
 
             this.playSound(net.minecraft.sounds.SoundEvents.GENERIC_EXPLODE, 4.0F, 1.0F);
@@ -316,6 +379,38 @@ public class MushroomMissile extends SpellHurtingProjectile {
 
     protected boolean shouldBurn() {
         return false;
+    }
+
+    public String getEffectType() {
+        return this.entityData.get(DATA_EFFECT_TYPE);
+    }
+
+    public void setEffectType(String effectType) {
+        this.entityData.set(DATA_EFFECT_TYPE, effectType);
+    }
+
+    public int getEffectDuration() {
+        return this.entityData.get(DATA_EFFECT_DURATION);
+    }
+
+    public void setEffectDuration(int duration) {
+        this.entityData.set(DATA_EFFECT_DURATION, duration);
+    }
+
+    public int getEffectAmplifier() {
+        return this.entityData.get(DATA_EFFECT_AMPLIFIER);
+    }
+
+    public void setEffectAmplifier(int amplifier) {
+        this.entityData.set(DATA_EFFECT_AMPLIFIER, amplifier);
+    }
+
+    public int getLastingLevel() {
+        return this.entityData.get(DATA_LASTING_LEVEL);
+    }
+
+    public void setLastingLevel(int lastingLevel) {
+        this.entityData.set(DATA_LASTING_LEVEL, lastingLevel);
     }
 
     @Override

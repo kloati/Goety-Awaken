@@ -1,8 +1,12 @@
 package com.k1sak1.goetyawaken.common.entities.projectiles;
 
+import com.Polarice3.Goety.client.particles.SphereExplodeParticleOption;
+import com.Polarice3.Goety.utils.BlockFinder;
+import com.Polarice3.Goety.utils.ColorUtil;
 import com.k1sak1.goetyawaken.common.entities.ally.SilverfishServant;
 import com.k1sak1.goetyawaken.common.entities.ModEntityType;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -109,6 +113,15 @@ public class SilverfishEggEntity extends ThrowableProjectile {
                         });
             }
             this.spawnSilverfish();
+
+            if (this.level() instanceof ServerLevel serverLevel) {
+                ColorUtil colorUtil = new ColorUtil(0x808080);
+                serverLevel.sendParticles(
+                        new SphereExplodeParticleOption(colorUtil, explosionRadius * 2.0F, 1),
+                        this.getX(), BlockFinder.moveDownToGround(this) + 0.5F, this.getZ(),
+                        1, 0, 0, 0, 0);
+            }
+
             for (int i = 0; i < 8; ++i) {
                 this.level().addParticle(ParticleTypes.CRIT,
                         this.getX(), this.getY(), this.getZ(),

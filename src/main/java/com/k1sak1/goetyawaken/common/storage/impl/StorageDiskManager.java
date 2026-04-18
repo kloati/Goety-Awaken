@@ -4,7 +4,6 @@ import com.k1sak1.goetyawaken.common.storage.api.*;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.saveddata.SavedData;
@@ -160,23 +159,6 @@ public class StorageDiskManager extends SavedData implements IStorageDiskManager
     }
 
     private ItemStack deserializeStackFromNbt(CompoundTag tag) {
-        if (!tag.contains("id")) {
-            return ItemStack.EMPTY;
-        }
-
-        ResourceLocation itemId = new ResourceLocation(tag.getString("id"));
-        net.minecraft.world.item.Item item = net.minecraftforge.registries.ForgeRegistries.ITEMS.getValue(itemId);
-        if (item == null) {
-            return ItemStack.EMPTY;
-        }
-
-        int count = tag.getInt("Count");
-        ItemStack stack = new ItemStack(item, count);
-
-        if (tag.contains("tag")) {
-            stack.setTag(tag.getCompound("tag"));
-        }
-
-        return stack;
+        return ItemStack.of(tag);
     }
 }

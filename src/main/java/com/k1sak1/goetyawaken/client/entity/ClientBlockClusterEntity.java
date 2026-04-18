@@ -29,7 +29,6 @@ import javax.annotation.Nullable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-
 public class ClientBlockClusterEntity extends BlockClusterEntity {
     private final BlockClusterWorld blockGetter;
     private Map<RenderType, Map<BlockPos, BlockState>> toRender = new LinkedHashMap<>();
@@ -47,7 +46,7 @@ public class ClientBlockClusterEntity extends BlockClusterEntity {
     @Override
     public void onSyncedDataUpdated(EntityDataAccessor<?> parameter) {
         super.onSyncedDataUpdated(parameter);
-        if (parameter.equals(BLOCKS)) {
+        if (parameter.equals(this.BLOCK_STATE_MAP)) {
             this.toRender.clear();
             this.tilesToRender.clear();
 
@@ -75,7 +74,7 @@ public class ClientBlockClusterEntity extends BlockClusterEntity {
             }
 
             this.toRenderUniqueId = this.toRender.toString();
-        } else if (parameter.equals(FADE_POINT)) {
+        } else if (parameter.equals(this.FADE_ORIGIN)) {
             this.calculateFade();
             this.fadeAmountO = this.fadeAmount;
         }
@@ -122,7 +121,6 @@ public class ClientBlockClusterEntity extends BlockClusterEntity {
     public float lerpFadeAmount(float partialTicks) {
         return Mth.lerp(partialTicks, this.fadeAmountO, this.fadeAmount);
     }
-
 
     public static class BlockClusterWorld implements BlockAndTintGetter {
         private final Level wrapped;

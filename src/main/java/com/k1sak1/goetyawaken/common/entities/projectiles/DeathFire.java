@@ -1,7 +1,7 @@
 package com.k1sak1.goetyawaken.common.entities.projectiles;
 
 import com.Polarice3.Goety.api.entities.IOwned;
-import com.Polarice3.Goety.client.particles.MagicSmokeParticle;
+import com.Polarice3.Goety.client.particles.MagicSmokeParticleOption;
 import com.Polarice3.Goety.common.entities.projectiles.GroundProjectile;
 import com.Polarice3.Goety.utils.MathHelper;
 import com.Polarice3.Goety.utils.MobUtil;
@@ -106,7 +106,7 @@ public class DeathFire extends GroundProjectile {
                 --this.lifeTicks;
             }
             this.level().addParticle(
-                    new MagicSmokeParticle.Option(0x00ff00, 0x007f00, 10 + this.level().getRandom().nextInt(10), 0.2F),
+                    new MagicSmokeParticleOption(0x00ff00, 0x007f00, 10 + this.level().getRandom().nextInt(10), 0.2F),
                     this.getRandomX(0.5D), this.getRandomY(), this.getRandomZ(0.5D), 0.0D, 0.0D, 0.0D);
             if (this.level().random.nextInt(24) == 0) {
                 this.level().playLocalSound((double) this.blockPosition().getX() + 0.5D,

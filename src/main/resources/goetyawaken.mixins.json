@@ -4,7 +4,7 @@
   "package": "com.k1sak1.goetyawaken.mixin",
   "compatibilityLevel": "JAVA_17",
   "refmap": "goetyawaken.refmap.json",
-  "plugin": "com.k1sak1.goetyawaken.mixin.GoetyAwakenMixinConfigPlugin",
+  "plugin": "com.k1sak1.goetyawaken.mixin.ConditionalMixinLoader",
   "mixins": [
     "AbstractSkeletonServantMixin",
     "ApostleRangedSummonMixin",
@@ -17,14 +17,14 @@
     "ChatFormattingMixin",
     "FontMixin",
     "TextColorMixin",
+    "StyleMixin",
     "NecroBrazierBlockEntityMixin",
     "BrewCauldronBlockEntityMixin",
     "PurifyBrewEffectMixin",
     "EntityAncientHuntMixin",
     "EntityAncientBossBarMixin",
     "ChunkGeneratorSurfaceMixin",
-    "GrindstoneMenuMixin",
-    "compat.modernui.ModernTextRendererMixin"
+    "GrindstoneMenuMixin"
   ],
   "client": [
     "client.LivingEntityRendererMixin"

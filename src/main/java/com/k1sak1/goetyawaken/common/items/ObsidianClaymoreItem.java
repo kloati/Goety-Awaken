@@ -111,8 +111,13 @@ public class ObsidianClaymoreItem extends SwordItem implements ISoulRepair {
         float enchantmentBonus = EnchantmentHelper.getDamageBonus(stack, MobType.UNDEFINED);
         float totalBaseDamage = baseDamage + enchantmentBonus;
         int sweepingLevel = EnchantmentHelper.getEnchantmentLevel(Enchantments.SWEEPING_EDGE, player);
-        float sweepRatio = 0.1F * sweepingLevel;
-        float damage = totalBaseDamage * (1.0F + sweepRatio);
+        float sweepRatio = 0.0F;
+        if (sweepingLevel <= 3) {
+            sweepRatio = 0.25F * sweepingLevel;
+        } else {
+            sweepRatio = 0.75F + 0.15F * sweepingLevel;
+        }
+        float damage = totalBaseDamage * (0.25F + sweepRatio);
 
         double range = 2.5D;
         double entityReach = player.getAttributeValue(ForgeMod.ENTITY_REACH.get());

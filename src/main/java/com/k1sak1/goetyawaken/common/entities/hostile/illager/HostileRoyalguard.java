@@ -357,15 +357,23 @@ public class HostileRoyalguard extends AbstractIllager implements ICustomAttribu
     }
 
     @Override
-    protected void actuallyHurt(DamageSource source, float amount) {
+    public boolean hurt(DamageSource source, float amount) {
+
         if (!this.level().isClientSide) {
             if (this.hasShield() && !source.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
                 this.absorbDamageWithShield(amount);
-                this.invulnerableTime = 10;
-                return;
+                return false;
+            }
+            if (this.getTarget() != null) {
+                if (source.getEntity() instanceof LivingEntity livingEntity) {
+                    LivingEntity target = this.getTarget();
+                    double d0 = target != null ? this.distanceTo(target) : 0.0D;
+                    double d1 = this.distanceTo(livingEntity);
+                }
             }
         }
-        super.actuallyHurt(source, amount);
+
+        return super.hurt(source, amount);
     }
 
     @Override

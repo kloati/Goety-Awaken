@@ -141,9 +141,14 @@ public class StarlessNightItem extends SwordItem implements ISoulRepair, IFocus 
         float enchantmentBonus = EnchantmentHelper.getDamageBonus(stack, MobType.UNDEFINED);
         float totalBaseDamage = baseDamage + enchantmentBonus;
         int sweepingLevel = EnchantmentHelper.getEnchantmentLevel(Enchantments.SWEEPING_EDGE, player);
-        float sweepRatio = 0.1F * sweepingLevel;
-        float damage = totalBaseDamage * (1.0F + sweepRatio);
-        double range = 3.5D;
+        float sweepRatio = 0.0F;
+        if (sweepingLevel <= 3) {
+            sweepRatio = 0.25F * sweepingLevel;
+        } else {
+            sweepRatio = 0.75F + 0.15F * sweepingLevel;
+        }
+        float damage = totalBaseDamage * (0.25F + sweepRatio);
+        double range = 3.0D;
         double entityReach = player.getAttributeValue(ForgeMod.ENTITY_REACH.get());
         AABB sweepBox = player.getBoundingBox().inflate(range, 0.25D, range);
         java.util.List<LivingEntity> entities = player.level().getEntitiesOfClass(LivingEntity.class, sweepBox);
@@ -185,8 +190,8 @@ public class StarlessNightItem extends SwordItem implements ISoulRepair, IFocus 
             float radius = 0.0F;
             if (sword.isEnchanted()) {
                 potency = sword.getEnchantmentLevel(ModEnchantments.POTENCY.get()) / 10.0F;
-                speed += sword.getEnchantmentLevel(ModEnchantments.VELOCITY.get()) / 2.0F;
-                radius += sword.getEnchantmentLevel(ModEnchantments.RADIUS.get()) / 3.0F;
+                speed += sword.getEnchantmentLevel(ModEnchantments.VELOCITY.get()) / 5.0F;
+                radius += sword.getEnchantmentLevel(ModEnchantments.RADIUS.get()) / 4.0F;
             }
             Vec3 vector3d = pPlayer.getViewVector(1.0F);
             VoidSlash slash = new VoidSlash(pLevel, pPlayer);
@@ -194,10 +199,10 @@ public class StarlessNightItem extends SwordItem implements ISoulRepair, IFocus 
                     pPlayer.getEyeY() - 0.2,
                     pPlayer.getZ() + vector3d.z / 2);
             slash.setDamage((float) pPlayer.getAttributeValue(Attributes.ATTACK_DAMAGE) * (0.5F + potency));
-            slash.setMaxLifeSpan(MathHelper.secondsToTicks(1.5F));
+            slash.setMaxLifeSpan(MathHelper.secondsToTicks(0.75F));
             slash.setRadius(slash.getRadius() + radius);
             slash.setMaxRadius(slash.getMaxRadius() + radius);
-            slash.slash(vector3d, 0.7F + speed);
+            slash.slash(vector3d, 0.6F + speed);
             slash.setVoidLevel(1);
             pLevel.addFreshEntity(slash);
         }

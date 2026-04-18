@@ -1,0 +1,43 @@
+{
+    "name": "Cursed Presence",
+    "icon": "goetyawaken:glaive",
+    "category": "goety:anecdote/anecdote",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "\"Sentenced to death while living, entered the underworld after death, still longing for plumes to this day—how abundant the plumes are\" $(br)— qu promin$(br)$(br)$(0)Dark magician who reads this, I shall tell you a very sorrowful tale—so sorrowful that it faintly reminds me of my former self."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "The \"Cursed Presence\" was once a soldier in life. He came into this world during the time when the Nameless One still bore a name. His parents were from a wealthy local family and wanted him to carve out a grand future. In those days, the Nameless One's power was at its zenith, and joining his ranks represented, in their eyes, a gateway to a better world. Thus, they nurtured him from childhood, scolding him endlessly, pushing him to exceed his quotas, forcing him to excel in every martial practice and examination. And indeed, it seemed to work—he stood out among his village, his small town, and eventually his city, earning a place in the Nameless One's army."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "\"But the others there were not the brutish, muscular figures he had imagined; they were flesh-and-blood companions with their own hobbies and interests, sharing laughter and conversation together. More than once, his comrades suggested he stop advancing further, to settle down with the main army and garrison a city, living a stable life. But he—or perhaps someone else—wanted to climb the highest mountain and reach the very summit. So he politely refused each time, charging ever forward, fighting fiercely and slaying enemies."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "Until, at some unknown moment, he charged deep into the enemy formation. They surrounded him with poison, spells, and traps—his path seemed nearly at an end. Just then, the Nameless One flashed into the enemy ranks, slammed his staff upon the ground, and instantly slew all the foes. The soldier wanted to open his mouth in shock, but the poisonous fumes and traps would not permit it, nor could he physically manage it...$(br)$(2)\"Are you about to fall, soldier...\"$(br)$(0)He could not speak, yet he was certain that voice was not human!$(br)$(2)\"You are too ordinary... Do not charge so far ahead anymore... You would only cause more casualties...\""
+        },
+        {
+            "type": "patchouli:text",
+            "text": "The hood fell away—his ruler, the Nameless One, was a lich! Of course, we now know that was the Nameless One's lich form.$(br)$(2)\"What a pity... It would be better for you to take this form instead...\"$(br)$(0)A flash of green light. The vanguard rose, only to find that his entire body had turned to bone. Poisonous fumes swirled around him, protecting him. A cold, icy gleam transformed into chilling air. He had become a Skeleton Vanguard—a form immune to poison."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "He was unwilling to accept this—or rather, he felt he should be unwilling. Having excelled since childhood, he refused to acknowledge his own mediocrity. As an undead, he became even more fearless in battle, charging ever forward with renewed vigor. Empowered by the Soul Ruby, he no longer feared death. When the Nameless Kingdom was in its twilight days, he finally received an opportunity to formally meet the Nameless One. As he ascended the steps of the grand hall, a nonexistent heart ached as if pierced by a blade. Flanking the hall stood the imperial guards known as the \"Enchanted Vanguard Champion\" (today's Rearguards). As the Nameless One introduced them, he came to realize how vast the gap was between himself and those purple-glowing \"monsters\": they could transform their blade-light into illusions to strike distant foes, and they could repair or even conjure shields at will..."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "They were the true might of the Nameless Kingdom—its strongest soldiers and commanders. He was merely a slightly more presentable piece of scrap. At that moment, the hall's doors shut completely. The Nameless Kingdom fell into eternal twilight. The Nameless One entered his long slumber. The soldier's long-cherished hopes and dreams shattered then and there. They all became the remnants of a fallen nation within a colossal sarcophagus. He collapsed to the ground, his heart more lost and empty than the void of the Far Lands... And then, a pack of ministrosities that had escaped from a forge found him. These little creatures were crafted from discarded scraps meant for creating Redstone Monstrosities—he knew this well. But he had no desire to dwell on it. He embraced one of the ministrosities, and instead of weeping, he let out an uncontrollable, booming laugh."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "From life to unlife, he had never once asked himself what he truly wanted. He had never known. Cursed across two lifetimes, it was only now, accompanied by these ministrosities, that he finally felt contentment for the first time."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "He died—even though he was already dead.$(br)$(br)Now, the last vestiges of will within the \"Cursed Presence\" pilot this hollow shell, attempting to prove its remaining worth to the Nameless One. The ministrosities, carrying their master's resentment and fury, fight with all their might to send you back to the Arca. And you, dark magician—can you withstand an attack forged from grudges and wrath that have crossed the boundary of life and death?"
+        }
+    ]
+}

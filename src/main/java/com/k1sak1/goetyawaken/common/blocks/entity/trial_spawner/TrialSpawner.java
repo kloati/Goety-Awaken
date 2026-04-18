@@ -1,7 +1,7 @@
 package com.k1sak1.goetyawaken.common.blocks.entity.trial_spawner;
 
 import com.Polarice3.Goety.api.entities.ally.IServant;
-import com.Polarice3.Goety.client.particles.MagicAshSmokeParticle;
+import com.Polarice3.Goety.client.particles.MagicAshSmokeParticleOption;
 import com.Polarice3.Goety.client.particles.ModParticleTypes;
 import com.Polarice3.Goety.config.MobsConfig;
 import com.k1sak1.goetyawaken.init.ModSounds;
@@ -292,7 +292,7 @@ public class TrialSpawner {
             double d = blockPos.getX() + 0.5D + (randomSource.nextDouble() - 0.5D) * 2.0D;
             double e = blockPos.getY() + 0.5D + (randomSource.nextDouble() - 0.5D) * 2.0D;
             double f = blockPos.getZ() + 0.5D + (randomSource.nextDouble() - 0.5D) * 2.0D;
-            level.sendParticles(new MagicAshSmokeParticle.Option(0x3a0637, 0x691575), d, e, f, 1, 0.0D, 0.0D, 0.0D,
+            level.sendParticles(new MagicAshSmokeParticleOption(0x000000, 0x000000), d, e, f, 1, 0.0D, 0.0D, 0.0D,
                     0.0F);
             level.sendParticles(ParticleTypes.SOUL, d, e, f, 1, 0.0D, 0.0D, 0.0D, 0.0F);
             level.sendParticles(ParticleTypes.SCULK_SOUL, d, e, f, 1, 0.0D, 0.0D, 0.0D, 0.0F);
@@ -320,7 +320,7 @@ public class TrialSpawner {
             double h = randomSource.nextGaussian() * 0.02D;
             double j = randomSource.nextGaussian() * 0.02D;
             level.sendParticles(ModParticleTypes.BIG_SOUL_FIRE.get(), d, e, f, 0, g, h, j * 0.25D, 0.5F);
-            level.sendParticles(new MagicAshSmokeParticle.Option(0x3a0637, 0x691575), d, e, f, 0, g, h, j, 0.5F);
+            level.sendParticles(new MagicAshSmokeParticleOption(0x000000, 0x000000), d, e, f, 0, g, h, j, 0.5F);
         }
     }
 

@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "__comment": "ownable entities that takes up 2 spaces in Esoteric Tesseracts",
+  "values": [
+    "goetyawaken:pale_golem_servant",
+    "goetyawaken:sorcerer_servant",
+    "goetyawaken:minister_servant",
+    "goetyawaken:crone_servant",
+    "goetyawaken:bound_sorcerer",
+    "goetyawaken:vanguard_champion"
+  ]
+}

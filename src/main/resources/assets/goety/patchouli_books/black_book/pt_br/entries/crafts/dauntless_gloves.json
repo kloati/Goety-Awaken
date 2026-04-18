@@ -10,7 +10,7 @@
     {
       "type": "goety:ritual",
       "recipe": "goetyawaken:dauntless_gloves",
-      "text": "Quando equipadas, aumentam a velocidade de ataque de armas do tipo claymore em 50%."
+      "text": "Quando equipadas, aumentam a velocidade de ataque de armas do tipo claymore em 25%."
     }
   ]
 }

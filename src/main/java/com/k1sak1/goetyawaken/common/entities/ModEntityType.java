@@ -65,6 +65,7 @@ import com.k1sak1.goetyawaken.common.entities.ally.SpiderCreeder;
 import com.k1sak1.goetyawaken.common.entities.ally.CorruptedSlime;
 import com.k1sak1.goetyawaken.common.entities.projectiles.PureLightEntity;
 import com.k1sak1.goetyawaken.common.entities.projectiles.ModSwordProjectile;
+import com.k1sak1.goetyawaken.common.entities.projectiles.NamelessBolt;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.registries.DeferredRegister;
@@ -742,6 +743,14 @@ public class ModEntityType {
                                         .clientTrackingRange(4)
                                         .updateInterval(20)
                                         .build("explosive_arrow"));
+
+        public static final RegistryObject<EntityType<NamelessBolt>> NAMELESS_BOLT = ENTITY_TYPE.register(
+                        "nameless_bolt",
+                        () -> EntityType.Builder.<NamelessBolt>of(NamelessBolt::new, MobCategory.MISC)
+                                        .sized(1.0F, 1.0F)
+                                        .clientTrackingRange(4)
+                                        .updateInterval(1)
+                                        .build("nameless_bolt"));
         public static final RegistryObject<EntityType<NamelessOne>> NAMELESS_ONE = ENTITY_TYPE.register(
                         "nameless_one",
                         () -> EntityType.Builder.of(NamelessOne::new, MobCategory.MONSTER)

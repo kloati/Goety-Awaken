@@ -1,6 +1,7 @@
 package com.k1sak1.goetyawaken.client.renderer.layers;
 
 import com.k1sak1.goetyawaken.client.model.undead.necromancer.NamelessOneModel;
+import com.k1sak1.goetyawaken.client.renderer.GAModRenderTypes;
 import com.k1sak1.goetyawaken.common.entities.hostile.undead.necromancer.NamelessOne;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -35,6 +36,6 @@ public class NamelessOneEmissiveLayer
 
     @Override
     public RenderType renderType() {
-        return com.k1sak1.goetyawaken.client.renderer.ModRenderTypes.brightEmissive(this.texture);
+        return GAModRenderTypes.getEmissiveGlowType(this.texture);
     }
 }

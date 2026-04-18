@@ -3,6 +3,7 @@ package com.k1sak1.goetyawaken.common.entities.ally;
 import com.Polarice3.Goety.api.entities.ICustomAttributes;
 import com.Polarice3.Goety.client.particles.CircleExplodeParticleOption;
 import com.Polarice3.Goety.client.particles.VerticalCircleExplodeParticleOption;
+import com.Polarice3.Goety.client.particles.SphereExplodeParticleOption;
 import com.Polarice3.Goety.common.entities.ally.Summoned;
 import com.Polarice3.Goety.common.entities.neutral.Owned;
 import com.Polarice3.Goety.common.effects.GoetyEffects;
@@ -276,6 +277,11 @@ public class IceCreeperServant extends Summoned implements ICustomAttributes {
                         new VerticalCircleExplodeParticleOption(colorUtil.red(), colorUtil.green(), colorUtil.blue(),
                                 explosionRadius * 2, 1),
                         vec3.x, vec3.y, vec3.z, 1, 0.0D, 0.0D, 0.0D, 0.0D);
+                serverLevel.sendParticles(
+                        new SphereExplodeParticleOption(colorUtil.red(), colorUtil.green(), colorUtil.blue(),
+                                explosionRadius * 2.0F, 1),
+                        vec3.x, vec3.y + 0.5D, vec3.z, 1, 0, 0, 0, 0);
+
                 for (int i = 0; i < 100; i++) {
                     double offsetX = (this.random.nextDouble() - 0.5D) * explosionRadius * 2;
                     double offsetY = (this.random.nextDouble() - 0.5D) * explosionRadius * 2;

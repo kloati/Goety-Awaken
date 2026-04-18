@@ -19,8 +19,10 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class ArchIllusionerServantRenderer
         extends MobRenderer<ArchIllusionerServant, IllusionerServantModel<ArchIllusionerServant>> {
-    private static final ResourceLocation ARCH_ILLUSIONER_SERVANT_LOCATION = new ResourceLocation(GoetyAwaken.MODID,
+    private static final ResourceLocation TEXTURE = new ResourceLocation(GoetyAwaken.MODID,
             "textures/entity/illager/arch_illusioner_servant.png");
+    private static final ResourceLocation HOSTILE_TEXTURE = new ResourceLocation(GoetyAwaken.MODID,
+            "textures/entity/illager/arch_illusioner.png");
 
     public ArchIllusionerServantRenderer(EntityRendererProvider.Context p_174186_) {
         super(p_174186_, new IllusionerServantModel<>(p_174186_.bakeLayer(IllusionerServantModel.LAYER_LOCATION)),
@@ -43,8 +45,12 @@ public class ArchIllusionerServantRenderer
         this.model.getHat().visible = true;
     }
 
+    @Override
     public ResourceLocation getTextureLocation(ArchIllusionerServant pEntity) {
-        return ARCH_ILLUSIONER_SERVANT_LOCATION;
+        if (pEntity.isHostile()) {
+            return HOSTILE_TEXTURE;
+        }
+        return TEXTURE;
     }
 
     public void render(ArchIllusionerServant pEntity, float pEntityYaw, float pPartialTicks, PoseStack pPoseStack,

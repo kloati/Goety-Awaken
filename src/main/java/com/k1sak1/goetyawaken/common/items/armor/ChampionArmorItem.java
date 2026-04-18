@@ -1,7 +1,7 @@
 package com.k1sak1.goetyawaken.common.items.armor;
 
 import com.Polarice3.Goety.api.items.ISoulRepair;
-import com.Polarice3.Goety.init.ModAttributes;
+import com.Polarice3.Goety.api.items.armor.ISoulDiscount;
 import com.k1sak1.goetyawaken.GoetyAwaken;
 import com.k1sak1.goetyawaken.client.model.armor.ChampionArmorModel;
 import net.minecraft.ChatFormatting;
@@ -27,7 +27,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.ProtectionEnchantment;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
-import net.minecraftforge.fml.ModList;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -39,24 +38,19 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.function.Consumer;
 
-public class ChampionArmorItem extends ArmorItem implements ISoulRepair {
+public class ChampionArmorItem extends ArmorItem implements ISoulRepair, ISoulDiscount {
 
     private static final String TAG_SERVANT_VARIANT = "ServantVariant";
     private static final EquipmentSlot[] ARMOR_SLOTS = new EquipmentSlot[] {
             EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET
     };
 
-    private static final UUID COOLDOWN_UUID_HELMET = UUID.fromString("a1b2c3d4-e5f6-7890-abcd-ef1234567890");
-    private static final UUID COOLDOWN_UUID_CHESTPLATE = UUID.fromString("b2c3d4e5-f6a7-8901-bcde-f12345678901");
-    private static final UUID COOLDOWN_UUID_LEGGINGS = UUID.fromString("c3d4e5f6-a7b8-9012-cdef-123456789012");
-    private static final UUID COOLDOWN_UUID_BOOTS = UUID.fromString("d4e5f6a7-b8c9-0123-defa-234567890123");
     private static final UUID SPEED_UUID_BOOTS = UUID.fromString("e5f6a7b8-c9d0-1234-efab-345678901234");
 
     private final float magicResistance;
     private final float fireResistance;
     private final float explosionResistance;
     private final float projectileResistance;
-    private final float spellCooldownReduction;
     private final float movementSpeedBonus;
 
     public ChampionArmorItem(ArmorItem.Type type) {
@@ -68,7 +62,6 @@ public class ChampionArmorItem extends ArmorItem implements ISoulRepair {
                 this.fireResistance = 0.20F;
                 this.explosionResistance = 0.25F;
                 this.projectileResistance = 0.10F;
-                this.spellCooldownReduction = 0.03F;
                 this.movementSpeedBonus = 0.0F;
             }
             case CHESTPLATE -> {
@@ -76,7 +69,6 @@ public class ChampionArmorItem extends ArmorItem implements ISoulRepair {
                 this.fireResistance = 0.35F;
                 this.explosionResistance = 0.25F;
                 this.projectileResistance = 0.10F;
-                this.spellCooldownReduction = 0.05F;
                 this.movementSpeedBonus = 0.0F;
             }
             case LEGGINGS -> {
@@ -84,7 +76,6 @@ public class ChampionArmorItem extends ArmorItem implements ISoulRepair {
                 this.fireResistance = 0.20F;
                 this.explosionResistance = 0.25F;
                 this.projectileResistance = 0.10F;
-                this.spellCooldownReduction = 0.04F;
                 this.movementSpeedBonus = 0.0F;
             }
             case BOOTS -> {
@@ -92,7 +83,6 @@ public class ChampionArmorItem extends ArmorItem implements ISoulRepair {
                 this.fireResistance = 0.25F;
                 this.explosionResistance = 0.25F;
                 this.projectileResistance = 0.10F;
-                this.spellCooldownReduction = 0.03F;
                 this.movementSpeedBonus = 0.02F;
             }
             default -> {
@@ -100,7 +90,6 @@ public class ChampionArmorItem extends ArmorItem implements ISoulRepair {
                 this.fireResistance = 0.0F;
                 this.explosionResistance = 0.0F;
                 this.projectileResistance = 0.0F;
-                this.spellCooldownReduction = 0.0F;
                 this.movementSpeedBonus = 0.0F;
             }
         }
@@ -112,18 +101,6 @@ public class ChampionArmorItem extends ArmorItem implements ISoulRepair {
         builder.putAll(super.getAttributeModifiers(slot, stack));
 
         if (slot == this.getType().getSlot()) {
-            if (this.spellCooldownReduction > 0) {
-                Attribute cooldownAttribute = getCooldownDiscountAttribute();
-                if (cooldownAttribute != null) {
-                    UUID uuid = getCooldownUUID();
-                    builder.put(cooldownAttribute, new AttributeModifier(
-                            uuid,
-                            "Champion armor cooldown reduction",
-                            this.spellCooldownReduction,
-                            AttributeModifier.Operation.ADDITION));
-                }
-            }
-
             if (this.type == Type.BOOTS && this.movementSpeedBonus > 0) {
                 builder.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(
                         SPEED_UUID_BOOTS,
@@ -134,35 +111,6 @@ public class ChampionArmorItem extends ArmorItem implements ISoulRepair {
         }
 
         return builder.build();
-    }
-
-    private Attribute getCooldownDiscountAttribute() {
-        boolean revelationLoaded = ModList.get().isLoaded("revelation") ||
-                ModList.get().isLoaded("revelationfix");
-
-        if (revelationLoaded) {
-            try {
-                var revelationAttributes = Class.forName("com.mega.revelationfix.common.init.ModAttributes");
-                var spellCooldownField = revelationAttributes.getField("SPELL_COOLDOWN");
-                var spellCooldown = (net.minecraftforge.registries.RegistryObject<Attribute>) spellCooldownField
-                        .get(null);
-                return spellCooldown.get();
-            } catch (Exception e) {
-                return ModAttributes.COOLDOWN_DISCOUNT.get();
-            }
-        } else {
-            return ModAttributes.COOLDOWN_DISCOUNT.get();
-        }
-    }
-
-    private UUID getCooldownUUID() {
-        return switch (this.type) {
-            case HELMET -> COOLDOWN_UUID_HELMET;
-            case CHESTPLATE -> COOLDOWN_UUID_CHESTPLATE;
-            case LEGGINGS -> COOLDOWN_UUID_LEGGINGS;
-            case BOOTS -> COOLDOWN_UUID_BOOTS;
-            default -> UUID.randomUUID();
-        };
     }
 
     @Override
@@ -264,6 +212,11 @@ public class ChampionArmorItem extends ArmorItem implements ISoulRepair {
     }
 
     @Override
+    public int getSoulDiscount(EquipmentSlot equipmentSlot, ItemStack itemStack) {
+        return 5;
+    }
+
+    @Override
     public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, @NotNull List<Component> tooltip,
             @NotNull TooltipFlag flag) {
         super.appendHoverText(stack, level, tooltip, flag);
@@ -290,10 +243,7 @@ public class ChampionArmorItem extends ArmorItem implements ISoulRepair {
                 tooltip.add(Component.translatable("tooltip.goetyawaken.armor.reduce_projectile_damage",
                         String.format("%.0f%%", projectileResistance * 100)).withStyle(ChatFormatting.GREEN));
             }
-            if (spellCooldownReduction > 0) {
-                tooltip.add(Component.translatable("tooltip.goetyawaken.armor.spell_cooldown_reduction",
-                        String.format("%.2f", spellCooldownReduction)).withStyle(ChatFormatting.AQUA));
-            }
+
             if (movementSpeedBonus > 0) {
                 tooltip.add(Component.translatable("tooltip.goetyawaken.armor.movement_speed",
                         String.format("%.2f", movementSpeedBonus)).withStyle(ChatFormatting.YELLOW));
@@ -301,6 +251,11 @@ public class ChampionArmorItem extends ArmorItem implements ISoulRepair {
 
             tooltip.add(Component.translatable("tooltip.goetyawaken.armor.protection_enchantment_level")
                     .withStyle(ChatFormatting.DARK_PURPLE));
+
+            Component discountTooltip = this.soulDiscountTooltip(stack);
+            if (!discountTooltip.getString().isEmpty()) {
+                tooltip.add(discountTooltip);
+            }
 
             tooltip.add(Component.empty());
             tooltip.add(Component.translatable("tooltip.goetyawaken.setEffect").withStyle(ChatFormatting.LIGHT_PURPLE));
@@ -325,10 +280,6 @@ public class ChampionArmorItem extends ArmorItem implements ISoulRepair {
 
     public float getProjectileResistance() {
         return projectileResistance;
-    }
-
-    public float getSpellCooldownReduction() {
-        return spellCooldownReduction;
     }
 
     public float getMovementSpeedBonus() {

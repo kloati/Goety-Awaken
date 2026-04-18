@@ -22,60 +22,64 @@ import org.jetbrains.annotations.Nullable;
  */
 public class DamageCapManager {
 
-    private final AbstractNamelessOne entity;
-    private int hitCooldown = 0;
-    private int lastHurtTick = 0;
-    private int lastProcessedHurtTick = 0;
-    private boolean hurtCall = false;
-    private boolean actuallyHurtCall = false;
-    private boolean hurtFinalCall = false;
-    private float illegalDamage = 0;
-    private static final EntityDataAccessor<Float> COMBAT_PROGRESS = SynchedEntityData
-            .defineId(AbstractNamelessOne.class, EntityDataSerializers.FLOAT);
-    private static final EntityDataAccessor<Float> MAX_COMBAT_PROGRESS = SynchedEntityData
-            .defineId(AbstractNamelessOne.class, EntityDataSerializers.FLOAT);
+    private final AbstractNamelessOne controlledEntity;
+    private int damageCooldownTicks = 0;
+    private int lastDamageReceivedTick = 0;
+    private int lastProcessedDamageTick = 0;
+    private boolean damageCallInitiated = false;
+    private boolean actuallyHurtInvoked = false;
+    private boolean finalHurtProcessed = false;
+    private float accumulatedIllegalDamage = 0;
+    private float clientCurrentHealth = -1;
+    private float clientPeakHealth = -1;
 
-    private static final float DAMAGE_THRESHOLD_PERCENT = com.k1sak1.goetyawaken.config.AttributesConfig.NamelessOneDamageCapPercent
+    private static final class DataAccessors {
+        static final EntityDataAccessor<Float> CURRENT_COMBAT_HEALTH = SynchedEntityData
+                .defineId(AbstractNamelessOne.class, EntityDataSerializers.FLOAT);
+        static final EntityDataAccessor<Float> PEAK_COMBAT_HEALTH = SynchedEntityData
+                .defineId(AbstractNamelessOne.class, EntityDataSerializers.FLOAT);
+    }
+
+    private static final float HEALTH_LOSS_THRESHOLD_RATIO = com.k1sak1.goetyawaken.config.AttributesConfig.NamelessOneDamageCapPercent
             .get().floatValue();
-    private static final int DEFAULT_HIT_COOLDOWN = com.k1sak1.goetyawaken.config.AttributesConfig.NamelessOneHitCooldown
+    private static final int BASE_DAMAGE_COOLDOWN = com.k1sak1.goetyawaken.config.AttributesConfig.NamelessOneHitCooldown
             .get();
-    private static final int DEFAULT_DYNAMIC_REDUCTION_TIME = com.k1sak1.goetyawaken.config.AttributesConfig.NamelessOneDynamicReductionTime
+    private static final int DYNAMIC_REDUCTION_WINDOW = com.k1sak1.goetyawaken.config.AttributesConfig.NamelessOneDynamicReductionTime
             .get();
 
-    public DamageCapManager(AbstractNamelessOne entity) {
-        this.entity = entity;
+    public DamageCapManager(AbstractNamelessOne controlledEntity) {
+        this.controlledEntity = controlledEntity;
     }
 
-    public void defineSynchedData() {
-        float defaultHealth = com.k1sak1.goetyawaken.config.AttributesConfig.NamelessOneHealth.get().floatValue();
-        entity.getEntityDataAccessor().define(COMBAT_PROGRESS, defaultHealth);
-        entity.getEntityDataAccessor().define(MAX_COMBAT_PROGRESS, defaultHealth);
+    public void initializeSyncedData() {
+        float defaultMaxHealth = com.k1sak1.goetyawaken.config.AttributesConfig.NamelessOneHealth.get().floatValue();
+        controlledEntity.getEntityDataAccessor().define(DataAccessors.CURRENT_COMBAT_HEALTH, defaultMaxHealth);
+        controlledEntity.getEntityDataAccessor().define(DataAccessors.PEAK_COMBAT_HEALTH, defaultMaxHealth);
     }
 
-    public void tick() {
-        if (hitCooldown > 0) {
-            hitCooldown--;
+    public void performTick() {
+        if (damageCooldownTicks > 0) {
+            damageCooldownTicks--;
         }
 
-        if (entity.tickCount == 1) {
-            float maxHealth = entity.getMaxHealth();
-            if (maxHealth > 0 && Math.abs(getMaxCombatProgress() - maxHealth) > 0.1F) {
-                setMaxCombatProgress(maxHealth);
-                if (getCombatProgress() > maxHealth) {
-                    setCombatProgress(maxHealth);
+        if (controlledEntity.tickCount == 1) {
+            float maximumHealth = controlledEntity.getMaxHealth();
+            if (maximumHealth > 0 && Math.abs(getPeakCombatHealth() - maximumHealth) > 0.1F) {
+                setPeakCombatHealth(maximumHealth);
+                if (getCurrentCombatHealth() > maximumHealth) {
+                    setCurrentCombatHealth(maximumHealth);
                 }
             }
         }
 
-        validateCombatProgress();
-
+        validateHealthConsistency();
     }
 
     public boolean handleHurt(DamageSource source, float amount) {
-        this.hurtCall = true;
+        this.damageCallInitiated = true;
 
-        if (hitCooldown > 0) {
-            this.hurtCall = false;
+        if (damageCooldownTicks > 0) {
+            this.damageCallInitiated = false;
             return false;
         }
 
@@ -94,56 +98,56 @@ public class DamageCapManager {
     }
 
     public float clampDamage(DamageSource source, float amount) {
-        if (!hurtCall && !hurtFinalCall) {
-            notifyIllegalDamage(amount, source.getEntity());
+        if (!damageCallInitiated && !finalHurtProcessed) {
+            recordIllegalDamage(amount, source.getEntity());
             return 0;
         }
 
         if (source.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
             if (source.getEntity() instanceof Player player) {
                 if (player.getAbilities().instabuild) {
-                    this.hurtCall = false;
+                    this.damageCallInitiated = false;
                     return amount;
                 }
             }
             if (source.is(DamageTypes.GENERIC_KILL)) {
-                this.hurtCall = false;
+                this.damageCallInitiated = false;
                 return amount;
             }
             if (source.is(DamageTypes.FELL_OUT_OF_WORLD)) {
-                if (amount > getMaxAllowedDamage()) {
-                    notifyIllegalDamage(amount - getMaxAllowedDamage(), source.getEntity());
+                if (amount > calculateMaximumAllowedDamage()) {
+                    recordIllegalDamage(amount - calculateMaximumAllowedDamage(), source.getEntity());
                 }
-                this.hurtCall = false;
-                return Math.min(getMaxAllowedDamage(), amount);
+                this.damageCallInitiated = false;
+                return Math.min(calculateMaximumAllowedDamage(), amount);
             }
         }
 
-        float maxDamage = getMaxAllowedDamage();
+        float maxDamage = calculateMaximumAllowedDamage();
         float cappedAmount = Math.min(amount, maxDamage);
 
-        float finalAmount = applyDynamicReduction(cappedAmount);
+        float finalAmount = applyTimeBasedReduction(cappedAmount);
 
         if (finalAmount > maxDamage) {
             finalAmount = maxDamage;
-            notifyIllegalDamage(finalAmount - maxDamage, source.getEntity());
+            recordIllegalDamage(finalAmount - maxDamage, source.getEntity());
         }
 
-        hitCooldown = DEFAULT_HIT_COOLDOWN;
-        lastHurtTick = entity.tickCount;
+        damageCooldownTicks = BASE_DAMAGE_COOLDOWN;
+        lastDamageReceivedTick = controlledEntity.tickCount;
         return finalAmount;
     }
 
     public boolean handleActuallyHurt(DamageSource source, float amount) {
-        this.actuallyHurtCall = true;
+        this.actuallyHurtInvoked = true;
 
-        if (!hurtCall && !hurtFinalCall) {
-            notifyIllegalDamage(amount, source.getEntity());
-            this.actuallyHurtCall = false;
+        if (!damageCallInitiated && !finalHurtProcessed) {
+            recordIllegalDamage(amount, source.getEntity());
+            this.actuallyHurtInvoked = false;
             return false;
         }
 
-        this.actuallyHurtCall = false;
+        this.actuallyHurtInvoked = false;
         return true;
     }
 
@@ -157,16 +161,16 @@ public class DamageCapManager {
             return;
         }
 
-        this.hurtFinalCall = true;
+        this.finalHurtProcessed = true;
 
-        float currentProgress = getCombatProgress();
+        float currentProgress = getCurrentCombatHealth();
         float newProgress = Math.max(0, currentProgress - amount);
-        setCombatProgress(newProgress);
-        syncToVanillaHealth(newProgress);
-        this.lastProcessedHurtTick = entity.tickCount;
-        this.hurtFinalCall = false;
-        this.hurtCall = false;
-        this.actuallyHurtCall = false;
+        setCurrentCombatHealth(newProgress);
+        synchronizeVanillaHealth(newProgress);
+        this.lastProcessedDamageTick = controlledEntity.tickCount;
+        this.finalHurtProcessed = false;
+        this.damageCallInitiated = false;
+        this.actuallyHurtInvoked = false;
     }
 
     public boolean handleSetHealth(float health) {
@@ -174,183 +178,220 @@ public class DamageCapManager {
             return false;
         }
 
-        if (entity.level().isClientSide()) {
-            setCombatProgress(health);
+        if (controlledEntity.level().isClientSide()) {
+            setCurrentCombatHealth(health);
             return false;
         }
 
-        float currentProgress = getCombatProgress();
+        float currentProgress = getCurrentCombatHealth();
         if (health <= currentProgress) {
-            if (!hurtCall && !actuallyHurtCall && !hurtFinalCall) {
+            if (!damageCallInitiated && !actuallyHurtInvoked && !finalHurtProcessed) {
                 float healthDrop = currentProgress - health;
-                notifyIllegalDamage(healthDrop, null);
-                float maxAllowedDrop = getMaxAllowedDamage();
+                recordIllegalDamage(healthDrop, null);
+                float maxAllowedDrop = calculateMaximumAllowedDamage();
                 if (healthDrop > maxAllowedDrop) {
                     return false;
                 }
             }
             float healthDrop = currentProgress - health;
-            float maxAllowedDrop = getMaxAllowedDamage();
+            float maxAllowedDrop = calculateMaximumAllowedDamage();
             if (healthDrop > maxAllowedDrop) {
                 health = currentProgress - maxAllowedDrop;
-                notifyIllegalDamage(healthDrop - maxAllowedDrop, null);
+                recordIllegalDamage(healthDrop - maxAllowedDrop, null);
             }
         }
 
-        setCombatProgress(health);
-        syncToVanillaHealth(health);
+        setCurrentCombatHealth(health);
+        synchronizeVanillaHealth(health);
         return true;
     }
 
-    public float getMaxAllowedDamage() {
-        return entity.getMaxHealth() * DAMAGE_THRESHOLD_PERCENT;
+    public float calculateMaximumAllowedDamage() {
+        return controlledEntity.getMaxHealth() * HEALTH_LOSS_THRESHOLD_RATIO;
     }
 
-    private float applyDynamicReduction(float amount) {
-        int timeSinceLastHit = entity.tickCount - lastProcessedHurtTick;
-        if (timeSinceLastHit < DEFAULT_DYNAMIC_REDUCTION_TIME) {
-            float reductionRatio = (float) timeSinceLastHit / DEFAULT_DYNAMIC_REDUCTION_TIME;
+    private float applyTimeBasedReduction(float amount) {
+        int timeSinceLastHit = controlledEntity.tickCount - lastProcessedDamageTick;
+        if (timeSinceLastHit < DYNAMIC_REDUCTION_WINDOW) {
+            float reductionRatio = (float) timeSinceLastHit / DYNAMIC_REDUCTION_WINDOW;
             return amount * reductionRatio;
         }
         return amount;
     }
 
-    public void notifyIllegalDamage(float amount, @Nullable Entity causer) {
-        this.illegalDamage += amount;
-        if (entity.level().isClientSide()) {
+    public void recordIllegalDamage(float amount, @Nullable Entity causer) {
+        this.accumulatedIllegalDamage += amount;
+        if (this.controlledEntity.level().isClientSide()) {
             return;
         }
     }
 
-    public void resetIllegalDamage() {
-        this.illegalDamage = 0;
+    public void clearIllegalDamage() {
+        this.accumulatedIllegalDamage = 0;
     }
 
-    public float getIllegalDamage() {
-        return this.illegalDamage;
+    public float getAccumulatedIllegalDamage() {
+        return this.accumulatedIllegalDamage;
     }
 
-    public boolean isInvulnerable() {
-        return hitCooldown > 0;
+    public boolean isInCooldownState() {
+        return damageCooldownTicks > 0;
     }
 
-    public float getCombatProgress() {
-        if (entity.getEntityDataAccessor() == null) {
-            return entity.getMaxHealth();
+    public float getCurrentCombatHealth() {
+        if (controlledEntity.level().isClientSide) {
+            if (clientCurrentHealth < 0) {
+                return controlledEntity.getVanillaHealth();
+            }
+            return clientCurrentHealth;
         }
-        return entity.getEntityDataAccessor().get(COMBAT_PROGRESS);
+
+        if (controlledEntity.getEntityDataAccessor() == null) {
+            return controlledEntity.getMaxHealth();
+        }
+        return controlledEntity.getEntityDataAccessor().get(DataAccessors.CURRENT_COMBAT_HEALTH);
     }
 
-    public void setCombatProgress(float amount) {
-        if (entity.getEntityDataAccessor() == null || !Float.isFinite(amount)) {
+    public void setCurrentCombatHealth(float amount) {
+        if (controlledEntity.getEntityDataAccessor() == null || !Float.isFinite(amount)) {
             return;
         }
-        float maxHealth = getMaxCombatProgress();
-        float currentProgress = getCombatProgress();
-        if (amount < currentProgress && !hurtCall && !actuallyHurtCall && !hurtFinalCall) {
-            notifyIllegalDamage(currentProgress - amount, null);
+        float maxHealth = getPeakCombatHealth();
+        float currentProgress = getCurrentCombatHealth();
+        if (amount < currentProgress && !damageCallInitiated && !actuallyHurtInvoked && !finalHurtProcessed) {
+            recordIllegalDamage(currentProgress - amount, null);
         }
 
         float clampedAmount = Math.max(0, Math.min(amount, maxHealth));
-        entity.getEntityDataAccessor().set(COMBAT_PROGRESS, clampedAmount);
-    }
-
-    public float getMaxCombatProgress() {
-        if (entity.getEntityDataAccessor() == null) {
-            return entity.getMaxHealth();
+        controlledEntity.getEntityDataAccessor().set(DataAccessors.CURRENT_COMBAT_HEALTH, clampedAmount);
+        if (!controlledEntity.level().isClientSide) {
+            syncToClients();
         }
-        return entity.getEntityDataAccessor().get(MAX_COMBAT_PROGRESS);
     }
 
-    public void setMaxCombatProgress(float max) {
-        if (entity.getEntityDataAccessor() == null || !Float.isFinite(max)) {
+    public float getPeakCombatHealth() {
+        if (controlledEntity.level().isClientSide) {
+            if (clientPeakHealth < 0) {
+                return controlledEntity.getMaxHealth();
+            }
+            return clientPeakHealth;
+        }
+        if (controlledEntity.getEntityDataAccessor() == null) {
+            return controlledEntity.getMaxHealth();
+        }
+        return controlledEntity.getEntityDataAccessor().get(DataAccessors.PEAK_COMBAT_HEALTH);
+    }
+
+    public void setClientCombatHealth(float currentHealth, float peakHealth) {
+        this.clientCurrentHealth = currentHealth;
+        this.clientPeakHealth = peakHealth;
+    }
+
+    private void syncToClients() {
+        if (controlledEntity.level().isClientSide)
+            return;
+
+        float currentHealth = getCurrentCombatHealth();
+        float peakHealth = getPeakCombatHealth();
+
+        com.k1sak1.goetyawaken.common.network.ModNetwork.sentToTrackingEntityAndPlayer(
+                controlledEntity,
+                new com.k1sak1.goetyawaken.common.network.client.CCombatHealthSyncPacket(
+                        controlledEntity.getId(),
+                        currentHealth,
+                        peakHealth));
+    }
+
+    public void setPeakCombatHealth(float max) {
+        if (controlledEntity.getEntityDataAccessor() == null || !Float.isFinite(max)) {
             return;
         }
-        entity.getEntityDataAccessor().set(MAX_COMBAT_PROGRESS, max);
+        controlledEntity.getEntityDataAccessor().set(DataAccessors.PEAK_COMBAT_HEALTH, max);
     }
 
-    private void syncToVanillaHealth(float progress) {
-        entity.setVanillaHealth(progress);
+    private void synchronizeVanillaHealth(float progress) {
+        controlledEntity.setVanillaHealth(progress);
     }
 
-    public boolean isHurtCall() {
-        return this.hurtCall;
+    public boolean isDamageCallInitiated() {
+        return this.damageCallInitiated;
     }
 
-    public void setHurtCall(boolean hurtCall) {
-        this.hurtCall = hurtCall;
+    public void setDamageCallInitiated(boolean damageCallInitiated) {
+        this.damageCallInitiated = damageCallInitiated;
     }
 
-    public boolean isActuallyHurtCall() {
-        return this.actuallyHurtCall;
+    public boolean isActuallyHurtInvoked() {
+        return this.actuallyHurtInvoked;
     }
 
-    public boolean isHurtFinalCall() {
-        return this.hurtFinalCall;
+    public boolean isFinalHurtProcessed() {
+        return this.finalHurtProcessed;
     }
 
-    public int getHitCooldown() {
-        return hitCooldown;
+    public int getDamageCooldownTicks() {
+        return damageCooldownTicks;
     }
 
-    public void setHitCooldown(int cooldown) {
-        this.hitCooldown = cooldown;
+    public void setDamageCooldownTicks(int cooldown) {
+        this.damageCooldownTicks = cooldown;
     }
 
-    public boolean isValidHealthChange(float newHealth) {
+    public boolean isHealthChangeValid(float newHealth) {
         if (!Float.isFinite(newHealth)) {
             return false;
         }
 
-        float currentHealth = getCombatProgress();
+        float currentHealth = getCurrentCombatHealth();
         if (newHealth > currentHealth) {
             return true;
         }
 
         float healthLoss = currentHealth - newHealth;
-        float maxAllowedLoss = getMaxAllowedDamage();
+        float maxAllowedLoss = calculateMaximumAllowedDamage();
 
         return healthLoss <= maxAllowedLoss;
     }
 
-    public void validateCombatProgress() {
-        float progress = getCombatProgress();
-        float maxHealth = getMaxCombatProgress();
+    public void validateHealthConsistency() {
+        float progress = getCurrentCombatHealth();
+        float maxHealth = getPeakCombatHealth();
 
         if (progress > maxHealth || progress < 0) {
-            setCombatProgress(maxHealth);
+            setCurrentCombatHealth(maxHealth);
         }
 
-        float vanillaHealth = entity.getHealth();
-        if (vanillaHealth < progress && !entity.level().isClientSide()) {
-            notifyIllegalDamage(progress - vanillaHealth, null);
-            syncToVanillaHealth(progress);
+        float vanillaHealth = controlledEntity.getHealth();
+        if (vanillaHealth < progress && !controlledEntity.level().isClientSide()) {
+            recordIllegalDamage(progress - vanillaHealth, null);
+            synchronizeVanillaHealth(progress);
         }
     }
 
-    public boolean isUnderAttack() {
-        return this.hurtCall || this.actuallyHurtCall || this.hurtFinalCall || this.hitCooldown > 0;
+    public boolean isCurrentlyUnderAttack() {
+        return this.damageCallInitiated || this.actuallyHurtInvoked || this.finalHurtProcessed
+                || this.damageCooldownTicks > 0;
     }
 
-    public float applyHardDamageLimit(DamageSource source, float rawDamage) {
-        float maxAllowedDamage = getMaxAllowedDamage();
+    public float enforceHardDamageCap(DamageSource source, float rawDamage) {
+        float maxAllowedDamage = calculateMaximumAllowedDamage();
         if (rawDamage > maxAllowedDamage) {
-            notifyIllegalDamage(rawDamage - maxAllowedDamage, source.getEntity());
+            recordIllegalDamage(rawDamage - maxAllowedDamage, source.getEntity());
             return maxAllowedDamage;
         }
         return rawDamage;
     }
 
-    public static float getDamageThresholdPercent() {
-        return DAMAGE_THRESHOLD_PERCENT;
+    public static float getHealthLossThresholdRatio() {
+        return HEALTH_LOSS_THRESHOLD_RATIO;
     }
 
-    public static int getDefaultHitCooldown() {
-        return DEFAULT_HIT_COOLDOWN;
+    public static int getBaseDamageCooldown() {
+        return BASE_DAMAGE_COOLDOWN;
     }
 
-    public static int getDefaultDynamicReductionTime() {
-        return DEFAULT_DYNAMIC_REDUCTION_TIME;
+    public static int getDynamicReductionWindow() {
+        return DYNAMIC_REDUCTION_WINDOW;
     }
 
 }

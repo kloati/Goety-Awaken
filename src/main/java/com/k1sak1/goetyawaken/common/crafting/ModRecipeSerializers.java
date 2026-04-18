@@ -21,11 +21,18 @@ public class ModRecipeSerializers {
         RECIPE_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
         RECIPE_SERIALIZERS.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
+
     public static final RegistryObject<RecipeType<ShulkerMissilePotionRecipe>> SHULKER_MISSILE_POTION_RECIPE_TYPE = register(
             "shulker_missile_potion");
     public static final RegistryObject<RecipeSerializer<ShulkerMissilePotionRecipe>> SHULKER_MISSILE_POTION_RECIPE = RECIPE_SERIALIZERS
             .register("shulker_missile_potion",
                     () -> new SimpleCraftingRecipeSerializer<>(ShulkerMissilePotionRecipe::new));
+
+    public static final RegistryObject<RecipeType<MushroomMissilePotionRecipe>> MUSHROOM_MISSILE_POTION_RECIPE_TYPE = register(
+            "mushroom_missile_potion");
+    public static final RegistryObject<RecipeSerializer<MushroomMissilePotionRecipe>> MUSHROOM_MISSILE_POTION_RECIPE = RECIPE_SERIALIZERS
+            .register("mushroom_missile_potion",
+                    () -> new SimpleCraftingRecipeSerializer<>(MushroomMissilePotionRecipe::new));
 
     static <T extends Recipe<?>> RegistryObject<RecipeType<T>> register(final String id) {
         return RECIPE_TYPES.register(id, () -> new RecipeType<T>() {

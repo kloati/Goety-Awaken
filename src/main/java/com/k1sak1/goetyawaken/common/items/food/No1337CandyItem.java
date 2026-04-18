@@ -18,7 +18,7 @@ public class No1337CandyItem extends Item {
     public No1337CandyItem() {
         super(new Properties().rarity(net.minecraft.world.item.Rarity.EPIC).food(new FoodProperties.Builder()
                 .nutrition(13)
-                .saturationMod(3.7f)
+                .saturationMod(0.37f)
                 .fast()
                 .alwaysEat()
                 .effect(() -> new MobEffectInstance(MobEffects.LUCK, 800, 2, false, false), 1.0f)

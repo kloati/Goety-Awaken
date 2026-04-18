@@ -6,6 +6,7 @@ import com.k1sak1.goetyawaken.config.AttributesConfig;
 import com.k1sak1.goetyawaken.Config;
 import com.Polarice3.Goety.api.entities.ICustomAttributes;
 import com.Polarice3.Goety.client.particles.ModParticleTypes;
+import com.Polarice3.Goety.client.particles.WindBlowParticleOption;
 import com.Polarice3.Goety.common.entities.ally.Summoned;
 import com.Polarice3.Goety.common.entities.ally.undead.skeleton.AbstractSkeletonServant;
 import com.Polarice3.Goety.common.entities.neutral.IRavager;
@@ -84,6 +85,7 @@ public class VanguardChampion extends AbstractSkeletonServant implements ICustom
     public boolean isCharging = false;
     private int chargeCooldown = 0;
     private int shieldInvulnTime = 0;
+    private int currentAttackType = 0;
 
     public VanguardChampion(EntityType<? extends Summoned> type, Level worldIn) {
         super(type, worldIn);
@@ -298,7 +300,19 @@ public class VanguardChampion extends AbstractSkeletonServant implements ICustom
     public void setMeleeAttacking(boolean attacking) {
         this.setVanguardFlags(1, attacking);
         this.attackTick = 0;
+        this.currentAttackType = 0;
         this.level().broadcastEntityEvent(this, (byte) 5);
+    }
+
+    public void setMeleeAttackingWithAttackType(boolean attacking, int attackType) {
+        this.setVanguardFlags(1, attacking);
+        this.attackTick = 0;
+        this.currentAttackType = attackType;
+        if (attackType == 1) {
+            this.level().broadcastEntityEvent(this, (byte) 4);
+        } else if (attackType == 2) {
+            this.level().broadcastEntityEvent(this, (byte) 7);
+        }
     }
 
     protected SoundEvent getAmbientSound() {
@@ -375,7 +389,13 @@ public class VanguardChampion extends AbstractSkeletonServant implements ICustom
             this.bobAnimationState.startIfStopped(this.tickCount);
             if (this.isAlive()) {
                 if (this.isMeleeAttacking()) {
-                    this.attackAnimationState.startIfStopped(this.tickCount);
+                    if (this.currentAttackType == 2) {
+                        this.attack2AnimationState.startIfStopped(this.tickCount);
+                        this.attackAnimationState.stop();
+                    } else {
+                        this.attackAnimationState.startIfStopped(this.tickCount);
+                        this.attack2AnimationState.stop();
+                    }
                     this.idleAnimationState.stop();
                     this.walkAnimationState.stop();
                 } else if (this.isMoving()) {
@@ -384,6 +404,7 @@ public class VanguardChampion extends AbstractSkeletonServant implements ICustom
                     this.idleAnimationState.startIfStopped(this.tickCount);
                     this.walkAnimationState.stop();
                     this.attackAnimationState.stop();
+                    this.attack2AnimationState.stop();
                 } else {
                     this.idleAnimationState.startIfStopped(this.tickCount);
                     this.walkAnimationState.stop();
@@ -425,7 +446,11 @@ public class VanguardChampion extends AbstractSkeletonServant implements ICustom
     @Override
     public boolean hurt(DamageSource source, float amount) {
         if (!this.level().isClientSide) {
-            if (this.hasShield() && !source.is(DamageTypeTags.BYPASSES_INVULNERABILITY) && this.shieldInvulnTime <= 0) {
+            if (this.hasShield() && this.shieldInvulnTime > 0) {
+                return false;
+            }
+
+            if (this.hasShield() && !source.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
                 if (amount < 3.0f && this.random.nextFloat() < 0.05f) {
                     return false;
                 }
@@ -474,6 +499,7 @@ public class VanguardChampion extends AbstractSkeletonServant implements ICustom
     @Override
     public void handleEntityEvent(byte p_21375_) {
         if (p_21375_ == 4) {
+            this.currentAttackType = 1;
             this.stopAllAnimations();
             this.attackAnimationState.start(this.tickCount);
         } else if (p_21375_ == 5) {
@@ -482,6 +508,7 @@ public class VanguardChampion extends AbstractSkeletonServant implements ICustom
             this.setShield(true);
             this.setShieldHealth(1);
         } else if (p_21375_ == 7) {
+            this.currentAttackType = 2;
             this.stopAllAnimations();
             this.attack2AnimationState.start(this.tickCount);
         } else if (p_21375_ == 8) {
@@ -744,15 +771,12 @@ public class VanguardChampion extends AbstractSkeletonServant implements ICustom
         @Override
         public void start() {
             LivingEntity target = VanguardChampion.this.getTarget();
-            VanguardChampion.this.setMeleeAttacking(true);
             if (target != null && target.isAlive()) {
                 double distance = VanguardChampion.this.distanceTo(target);
                 if (distance < 3.0D) {
-                    this.useAttack2 = true;
-                    VanguardChampion.this.level().broadcastEntityEvent(VanguardChampion.this, (byte) 7);
+                    VanguardChampion.this.setMeleeAttackingWithAttackType(true, 2);
                 } else {
-                    this.useAttack2 = false;
-                    VanguardChampion.this.level().broadcastEntityEvent(VanguardChampion.this, (byte) 4);
+                    VanguardChampion.this.setMeleeAttackingWithAttackType(true, 1);
                 }
             }
         }
@@ -1016,9 +1040,8 @@ public class VanguardChampion extends AbstractSkeletonServant implements ICustom
             this.target = VanguardChampion.this.getTarget();
             VanguardChampion.this.isCharging = true;
             VanguardChampion.this.chargeTick = 0;
-            if (VanguardChampion.this.chargeTick == 0) {
-                VanguardChampion.this.level().broadcastEntityEvent(VanguardChampion.this, (byte) 7);
-            }
+            VanguardChampion.this.currentAttackType = 2;
+            VanguardChampion.this.level().broadcastEntityEvent(VanguardChampion.this, (byte) 7);
         }
 
         @Override
@@ -1051,6 +1074,7 @@ public class VanguardChampion extends AbstractSkeletonServant implements ICustom
                     performThrustAttack(this.target);
                 } else if (VanguardChampion.this.chargeTick >= 40) {
                     VanguardChampion.this.isCharging = false;
+                    VanguardChampion.this.currentAttackType = 0;
                 }
 
                 VanguardChampion.this.getLookControl().setLookAt(this.target, 30.0F, 30.0F);
@@ -1127,7 +1151,7 @@ public class VanguardChampion extends AbstractSkeletonServant implements ICustom
                 Vec3 eyePos = VanguardChampion.this.getEyePosition().offsetRandom(serverLevel.getRandom(), 2.0F);
                 Vec3 lookAngle = VanguardChampion.this.getLookAngle().multiply(-1.0D, 1.0D, -1.0D);
                 serverLevel.sendParticles(
-                        new com.Polarice3.Goety.client.particles.WindBlowParticle.Option(
+                        new WindBlowParticleOption(
                                 new com.Polarice3.Goety.utils.ColorUtil(net.minecraft.ChatFormatting.AQUA), width,
                                 height),
                         eyePos.x, eyePos.y, eyePos.z, 0, lookAngle.x, lookAngle.y, lookAngle.z, 1.0F);

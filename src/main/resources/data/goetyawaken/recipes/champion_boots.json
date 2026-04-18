@@ -1,0 +1,46 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety:black_iron_boots"
+  },
+  "craftType": "necroturgy",
+  "soulCost": 100,
+  "duration": 15,
+  "research": "forbidden",
+  "ingredients": [
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "goetyawaken:nameless_platinum"
+    },
+    {
+      "item": "goetyawaken:mucilage"
+    },
+    {
+      "item": "goetyawaken:mucilage"
+    },
+    {
+      "item": "minecraft:blaze_powder"
+    },
+    {
+      "item": "minecraft:blaze_powder"
+    },
+    {
+      "item": "minecraft:blaze_powder"
+    },
+    {
+      "item": "goety:dark_ingot"
+    },
+    {
+      "item": "goety:dark_ingot"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:champion_boots"
+  }
+}

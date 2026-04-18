@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "__comment": "ownable entities that takes up all spaces in Esoteric Tesseracts",
+  "values": [
+    "goetyawaken:nameless_one_servant",
+    "goetyawaken:mushroom_monstrosity",
+    "goetyawaken:vizier_servant",
+    "goetyawaken:ender_keeper_servant",
+    "goetyawaken:apostle_servant"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "__comment": "ownable entities that takes up 4 spaces in Esoteric Tesseracts",
+  "values": [
+    "goetyawaken:warden_servant",
+    "goetyawaken:wither_servant",
+    "goetyawaken:wight_servant",
+    "goetyawaken:endersent_servant",
+    "goetyawaken:arch_illusioner_servant",
+    "goetyawaken:wraith_necromancer_servant",
+    "goetyawaken:parched_necromancer_servant",
+    "goetyawaken:skull_lord_servant"
+  ]
+}

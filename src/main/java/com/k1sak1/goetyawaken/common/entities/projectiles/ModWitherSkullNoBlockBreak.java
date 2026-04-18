@@ -1,11 +1,11 @@
 package com.k1sak1.goetyawaken.common.entities.projectiles;
 
-// import com.Polarice3.Goety.client.particles.CircleExplodeParticleOption;
-// import com.Polarice3.Goety.client.particles.VerticalCircleExplodeParticleOption;
+// import com.Polarice3.Goety.client.particles.SphereExplodeParticleOption;
 import com.Polarice3.Goety.common.entities.projectiles.ModWitherSkull;
+// import com.Polarice3.Goety.utils.ColorUtil;
 import com.Polarice3.Goety.utils.ExplosionUtil;
 import com.Polarice3.Goety.utils.LootingExplosion;
-import net.minecraft.server.level.ServerLevel;
+// import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
@@ -38,16 +38,16 @@ public class ModWitherSkullNoBlockBreak extends ModWitherSkull {
                             this.level().getBlockState(blockpos)));
         }
         if (!this.level().isClientSide) {
+            float radius = this.getExplosionPower();
             ExplosionUtil.lootExplode(this.level(), this, this.getX(), this.getY(), this.getZ(),
-                    this.getExplosionPower(), false, Explosion.BlockInteraction.KEEP, LootingExplosion.Mode.REGULAR);
-            ServerLevel serverLevel = (ServerLevel) this.level();
-            // float radius = this.getExplosionPower();
-            // serverLevel.sendParticles(new VerticalCircleExplodeParticleOption(0.0F, 0.0F,
-            // 0.0F, radius, 1),
+                    radius, false, Explosion.BlockInteraction.KEEP, LootingExplosion.Mode.REGULAR);
+            // if (this.level() instanceof ServerLevel serverLevel) {
+            // ColorUtil blackColor = new ColorUtil(0x000000);
+            // serverLevel.sendParticles(
+            // new SphereExplodeParticleOption(blackColor, 2.0F, 1),
             // this.getX(), this.getY(), this.getZ(), 1, 0.0D, 0.0D, 0.0D, 0.0D);
-            // serverLevel.sendParticles(new CircleExplodeParticleOption(0.0F, 0.0F, 0.0F,
-            // radius, 1),
-            // this.getX(), this.getY(), this.getZ(), 1, 0.0D, 0.0D, 0.0D, 0.0D);
+            // }
+
             this.discard();
         }
     }

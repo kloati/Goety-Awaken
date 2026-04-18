@@ -16,7 +16,7 @@ import com.Polarice3.Goety.utils.MobUtil;
 import com.Polarice3.Goety.utils.SoundUtil;
 import com.Polarice3.Goety.utils.ColorUtil;
 import com.Polarice3.Goety.utils.ServerParticleUtil;
-import com.Polarice3.Goety.client.particles.MagicSmokeParticle;
+import com.Polarice3.Goety.client.particles.MagicSmokeParticleOption;
 import com.Polarice3.Goety.config.MobsConfig;
 import com.Polarice3.Goety.init.ModTags;
 import com.k1sak1.goetyawaken.config.AttributesConfig;
@@ -548,7 +548,7 @@ public abstract class AbstractWraithNecromancer extends AbstractNecromancer {
                                 summoned.position());
                         for (int i2 = 0; i2 < serverLevel.getRandom().nextInt(10) + 10; ++i2) {
                             serverLevel.sendParticles(
-                                    new MagicSmokeParticle.Option(0x17b0e0, 0xffffff,
+                                    new MagicSmokeParticleOption(0x17b0e0, 0xffffff,
                                             10 + serverLevel.getRandom().nextInt(10), 0.2F),
                                     summoned.getRandomX(1.5D), summoned.getRandomY(),
                                     summoned.getRandomZ(1.5D), 0, 0.0F, 0.0F, 0.0F, 1.0F);

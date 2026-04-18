@@ -8,7 +8,6 @@ import com.k1sak1.goetyawaken.utils.GoetyAwakenNBTUtil;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
@@ -56,68 +55,68 @@ import java.util.UUID;
 import java.util.function.Predicate;
 
 public class BlockClusterEntity extends Entity {
-    protected static final EntityDataAccessor<Map<BlockPos, BlockState>> BLOCKS;
-    private static final EntityDataAccessor<List<CompoundTag>> TILE_DATA;
-    private static final EntityDataAccessor<BlockPos> START_POS;
-    private static final EntityDataAccessor<Vec2> ROTATION_DELTA;
-    private static final EntityDataAccessor<Boolean> PHYSICS;
-    private static final EntityDataAccessor<Boolean> FORCE_RENDER;
-    private static final EntityDataAccessor<Float> X_SIZE;
-    private static final EntityDataAccessor<Float> Y_SIZE;
-    private static final EntityDataAccessor<Float> Z_SIZE;
-    private static final EntityDataAccessor<Integer> SHAKE_TIME;
-    protected static final EntityDataAccessor<Optional<BlockPos>> FADE_POINT;
-    private static final EntityDataAccessor<Float> FADE_STRENGTH;
-    private static final EntityDataAccessor<Integer> FADE_DISTANCE_OFFSET;
+    protected static final EntityDataAccessor<Map<BlockPos, BlockState>> BLOCK_STATE_MAP;
+    private static final EntityDataAccessor<List<CompoundTag>> BLOCK_ENTITY_DATA;
+    private static final EntityDataAccessor<BlockPos> ORIGIN_POSITION;
+    private static final EntityDataAccessor<Vec2> ROTATION_INCREMENT;
+    private static final EntityDataAccessor<Boolean> ENABLE_PHYSICS;
+    private static final EntityDataAccessor<Boolean> ALWAYS_RENDER;
+    private static final EntityDataAccessor<Float> WIDTH_DIMENSION;
+    private static final EntityDataAccessor<Float> HEIGHT_DIMENSION;
+    private static final EntityDataAccessor<Float> DEPTH_DIMENSION;
+    private static final EntityDataAccessor<Integer> OSCILLATION_DURATION;
+    protected static final EntityDataAccessor<Optional<BlockPos>> FADE_ORIGIN;
+    private static final EntityDataAccessor<Float> FADE_INTENSITY;
+    private static final EntityDataAccessor<Integer> FADE_RANGE_BUFFER;
 
     @Nullable
-    private UUID ownerUUID;
+    private UUID launcherUUID;
     @Nullable
-    private Entity cachedOwner;
-    private boolean leftOwner;
-    private boolean hasBeenShot;
+    private Entity cachedLauncher;
+    private boolean hasLeftLauncher;
+    private boolean hasFired;
 
-    private static final float DEFAULT_INERTIA = 0.99F;
-    private static final float DEFAULT_GRAVITY = 0.03F;
+    private static final float MOTION_DAMPING = 0.99F;
+    private static final float GRAVITY_STRENGTH = 0.03F;
 
-    public int time;
-    public boolean dropItems;
-    public boolean resetGravityOnLoad;
-    private int shakeTime;
+    public int lifetime;
+    public boolean shouldDropItems;
+    public boolean resetGravityFlag;
+    private int oscillationTimer;
     @Nonnull
-    public Vec2 shakeO;
+    public Vec2 oscillationOffset;
     @Nonnull
-    public Vec2 shake;
-    private int sink;
-    private boolean antiStacking;
-    private boolean shouldCrumble;
-    private boolean shouldntCountToConsumedEntities;
-    private float xClusterRot;
-    private float xClusterRotO;
-    private float yClusterRot;
-    private float yClusterRotO;
-    private boolean createdFromBeam;
-    private boolean createdFromFallingBlock;
-    private int headCreatedFrom;
-    private double tractorBeamDistanceThreshold;
+    public Vec2 currentOscillation;
+    private int groundPenetration;
+    private boolean preventOverlap;
+    private boolean placeOnImpact;
+    private boolean excludeFromConsumedCount;
+    private float clusterPitchAngle;
+    private float prevClusterPitchAngle;
+    private float clusterYawAngle;
+    private float prevClusterYawAngle;
+    private boolean spawnedFromBeam;
+    private boolean spawnedFromFallingBlock;
+    private int spawnHeadIndex;
+    private double tractorBeamRange;
 
     public BlockClusterEntity(EntityType<?> entityType, Level world) {
         super(entityType, world);
-        this.dropItems = true;
-        this.resetGravityOnLoad = true;
-        this.shakeO = Vec2.ZERO;
-        this.shake = Vec2.ZERO;
-        this.headCreatedFrom = -1;
+        this.shouldDropItems = true;
+        this.resetGravityFlag = true;
+        this.oscillationOffset = Vec2.ZERO;
+        this.currentOscillation = Vec2.ZERO;
+        this.spawnHeadIndex = -1;
     }
 
-    public BlockClusterEntity(EntityType<?> entityType, Level world, LivingEntity owner) {
+    public BlockClusterEntity(EntityType<?> entityType, Level world, LivingEntity launcher) {
         super(entityType, world);
-        this.dropItems = true;
-        this.resetGravityOnLoad = true;
-        this.shakeO = Vec2.ZERO;
-        this.shake = Vec2.ZERO;
-        this.headCreatedFrom = -1;
-        this.setOwner(owner);
+        this.shouldDropItems = true;
+        this.resetGravityFlag = true;
+        this.oscillationOffset = Vec2.ZERO;
+        this.currentOscillation = Vec2.ZERO;
+        this.spawnHeadIndex = -1;
+        this.setOwner(launcher);
     }
 
     public static BlockClusterEntity createSphericalCluster(
@@ -132,7 +131,7 @@ public class BlockClusterEntity extends Entity {
             boolean noGravity,
             boolean glowing,
             boolean placeBlocks,
-            boolean dropItems) {
+            boolean shouldDropItems) {
 
         BlockClusterEntity cluster = new BlockClusterEntity(entityType, world, owner);
 
@@ -166,8 +165,8 @@ public class BlockClusterEntity extends Entity {
         cluster.setNoGravity(noGravity);
         cluster.setGlowingTag(glowing);
         cluster.setPhysics(true);
-        cluster.dropItems = dropItems;
-        cluster.shouldCrumble = placeBlocks;
+        cluster.shouldDropItems = shouldDropItems;
+        cluster.placeOnImpact = placeBlocks;
 
         if (velocity.lengthSqr() > 0.0D) {
             double d0 = velocity.horizontalDistance();
@@ -215,18 +214,18 @@ public class BlockClusterEntity extends Entity {
 
     public void setOwner(@Nullable Entity pOwner) {
         if (pOwner != null) {
-            this.ownerUUID = pOwner.getUUID();
-            this.cachedOwner = pOwner;
+            this.launcherUUID = pOwner.getUUID();
+            this.cachedLauncher = pOwner;
         }
     }
 
     @Nullable
-    public Entity getOwner() {
-        if (this.cachedOwner != null && !this.cachedOwner.isRemoved()) {
-            return this.cachedOwner;
-        } else if (this.ownerUUID != null && this.level() instanceof ServerLevel serverLevel) {
-            this.cachedOwner = serverLevel.getEntity(this.ownerUUID);
-            return this.cachedOwner;
+    public Entity getLauncher() {
+        if (this.cachedLauncher != null && !this.cachedLauncher.isRemoved()) {
+            return this.cachedLauncher;
+        } else if (this.launcherUUID != null && this.level() instanceof ServerLevel serverLevel) {
+            this.cachedLauncher = serverLevel.getEntity(this.launcherUUID);
+            return this.cachedLauncher;
         } else {
             return null;
         }
@@ -357,25 +356,25 @@ public class BlockClusterEntity extends Entity {
         }
     }
 
-    public void setTime(int time) {
-        this.time = time;
+    public void setTime(int lifetime) {
+        this.lifetime = lifetime;
     }
 
     @Override
     protected void defineSynchedData() {
-        this.entityData.define(START_POS, BlockPos.ZERO);
-        this.entityData.define(BLOCKS, new HashMap<>());
-        this.entityData.define(TILE_DATA, new ArrayList<>());
-        this.entityData.define(ROTATION_DELTA, new Vec2(0.0F, 0.0F));
-        this.entityData.define(PHYSICS, true);
-        this.entityData.define(FORCE_RENDER, false);
-        this.entityData.define(X_SIZE, 1.0F);
-        this.entityData.define(Y_SIZE, 1.0F);
-        this.entityData.define(Z_SIZE, 1.0F);
-        this.entityData.define(SHAKE_TIME, 0);
-        this.entityData.define(FADE_POINT, Optional.empty());
-        this.entityData.define(FADE_STRENGTH, 10.0F);
-        this.entityData.define(FADE_DISTANCE_OFFSET, 0);
+        this.entityData.define(ORIGIN_POSITION, BlockPos.ZERO);
+        this.entityData.define(BLOCK_STATE_MAP, new HashMap<>());
+        this.entityData.define(BLOCK_ENTITY_DATA, new ArrayList<>());
+        this.entityData.define(ROTATION_INCREMENT, new Vec2(0.0F, 0.0F));
+        this.entityData.define(ENABLE_PHYSICS, true);
+        this.entityData.define(ALWAYS_RENDER, false);
+        this.entityData.define(WIDTH_DIMENSION, 1.0F);
+        this.entityData.define(HEIGHT_DIMENSION, 1.0F);
+        this.entityData.define(DEPTH_DIMENSION, 1.0F);
+        this.entityData.define(OSCILLATION_DURATION, 0);
+        this.entityData.define(FADE_ORIGIN, Optional.empty());
+        this.entityData.define(FADE_INTENSITY, 10.0F);
+        this.entityData.define(FADE_RANGE_BUFFER, 0);
     }
 
     @Override
@@ -384,10 +383,10 @@ public class BlockClusterEntity extends Entity {
             this.setStartPos(NbtUtils.readBlockPos(compound.getCompound("StartPos")));
         }
 
-        if (compound.contains("Blocks")) {
+        if (compound.contains("BLOCK_STATE_MAP")) {
             this.setBlocks(com.k1sak1.goetyawaken.utils.GoetyAwakenNBTUtil.readBlockStatePosMap(
                     this.level().holderLookup(Registries.BLOCK),
-                    compound.getList("Blocks", 10)));
+                    compound.getList("BLOCK_STATE_MAP", 10)));
         }
 
         if (compound.contains("TileData")) {
@@ -400,108 +399,108 @@ public class BlockClusterEntity extends Entity {
         }
 
         if (compound.contains("Width")) {
-            this.entityData.set(X_SIZE, compound.getFloat("Width"));
-            this.entityData.set(Z_SIZE, compound.getFloat("Width"));
+            this.entityData.set(WIDTH_DIMENSION, compound.getFloat("Width"));
+            this.entityData.set(DEPTH_DIMENSION, compound.getFloat("Width"));
         } else {
-            this.entityData.set(X_SIZE, compound.getFloat("XSize"));
-            this.entityData.set(Z_SIZE, compound.getFloat("ZSize"));
+            this.entityData.set(WIDTH_DIMENSION, compound.getFloat("XSize"));
+            this.entityData.set(DEPTH_DIMENSION, compound.getFloat("ZSize"));
         }
 
         if (compound.contains("Height")) {
-            this.entityData.set(Y_SIZE, compound.getFloat("Height"));
+            this.entityData.set(HEIGHT_DIMENSION, compound.getFloat("Height"));
         } else {
-            this.entityData.set(Y_SIZE, compound.getFloat("YSize"));
+            this.entityData.set(HEIGHT_DIMENSION, compound.getFloat("YSize"));
         }
 
         this.refreshDimensions();
-        this.time = compound.getInt("Time");
-        this.dropItems = compound.getBoolean("DropItems");
-        this.resetGravityOnLoad = compound.getBoolean("ResetGravity");
-        if (this.resetGravityOnLoad) {
+        this.lifetime = compound.getInt("lifetime");
+        this.shouldDropItems = compound.getBoolean("shouldDropItems");
+        this.resetGravityFlag = compound.getBoolean("ResetGravity");
+        if (this.resetGravityFlag) {
             this.setNoGravity(false);
         }
 
         this.setForceRender(compound.getBoolean("ForceRender"));
-        this.setShakeTime(compound.getInt("ShakeTime"));
+        this.setShakeTime(compound.getInt("oscillationTimer"));
         this.setSink(compound.getInt("GroundSink"));
-        this.setAntiStacking(compound.getBoolean("AntiStacking"));
+        this.setAntiStacking(compound.getBoolean("preventOverlap"));
         if (compound.contains("StaticFadePos")) {
-            this.entityData.set(FADE_POINT, Optional.of(NbtUtils.readBlockPos(compound.getCompound("StaticFadePos"))));
+            this.entityData.set(FADE_ORIGIN, Optional.of(NbtUtils.readBlockPos(compound.getCompound("StaticFadePos"))));
         }
 
-        this.shouldCrumble = compound.getBoolean("ShouldCrumble");
-        this.shouldntCountToConsumedEntities = compound.getBoolean("ShouldntCountToConsumedEntities");
-        this.createdFromBeam = compound.getBoolean("CreatedFromBeam");
-        this.createdFromFallingBlock = compound.getBoolean("CreatedFromFallingBlock");
-        this.headCreatedFrom = compound.getInt("HeadCreatedFrom");
-        this.tractorBeamDistanceThreshold = compound.getDouble("TractorBeamDistanceThreshold");
+        this.placeOnImpact = compound.getBoolean("placeOnImpact");
+        this.excludeFromConsumedCount = compound.getBoolean("excludeFromConsumedCount");
+        this.spawnedFromBeam = compound.getBoolean("spawnedFromBeam");
+        this.spawnedFromFallingBlock = compound.getBoolean("spawnedFromFallingBlock");
+        this.spawnHeadIndex = compound.getInt("spawnHeadIndex");
+        this.tractorBeamRange = compound.getDouble("tractorBeamRange");
         if (compound.contains("HasPhysics")) {
             this.setPhysics(compound.getBoolean("HasPhysics"));
         }
 
         if (compound.hasUUID("Owner")) {
-            this.ownerUUID = compound.getUUID("Owner");
-            this.cachedOwner = null;
+            this.launcherUUID = compound.getUUID("Owner");
+            this.cachedLauncher = null;
         }
-        this.leftOwner = compound.getBoolean("LeftOwner");
-        this.hasBeenShot = compound.getBoolean("HasBeenShot");
+        this.hasLeftLauncher = compound.getBoolean("hasLeftLauncher");
+        this.hasFired = compound.getBoolean("hasFired");
     }
 
     @Override
     protected void addAdditionalSaveData(CompoundTag compound) {
         compound.put("StartPos", NbtUtils.writeBlockPos(this.getStartPos()));
-        compound.put("Blocks", GoetyAwakenNBTUtil.writeBlockStatePosMap(this.getBlocks()));
+        compound.put("BLOCK_STATE_MAP", GoetyAwakenNBTUtil.writeBlockStatePosMap(this.getBlocks()));
         compound.put("TileData", GoetyAwakenNBTUtil.writeCompoundList(this.getTileData()));
-        compound.putFloat("XSize", this.entityData.get(X_SIZE));
-        compound.putFloat("YSize", this.entityData.get(Y_SIZE));
-        compound.putFloat("ZSize", this.entityData.get(Z_SIZE));
-        compound.putInt("Time", this.time);
-        compound.putBoolean("DropItems", this.dropItems);
+        compound.putFloat("XSize", this.entityData.get(WIDTH_DIMENSION));
+        compound.putFloat("YSize", this.entityData.get(HEIGHT_DIMENSION));
+        compound.putFloat("ZSize", this.entityData.get(DEPTH_DIMENSION));
+        compound.putInt("lifetime", this.lifetime);
+        compound.putBoolean("shouldDropItems", this.shouldDropItems);
         compound.put("RotationDelta", GoetyAwakenNBTUtil.writeVector2f(this.getRotationDelta()));
-        compound.putBoolean("ResetGravity", this.resetGravityOnLoad);
+        compound.putBoolean("ResetGravity", this.resetGravityFlag);
         compound.putBoolean("ForceRender", this.forceRender());
-        compound.putInt("ShakeTime", this.shakeTime);
+        compound.putInt("oscillationTimer", this.oscillationTimer);
         compound.putInt("GroundSink", this.getSink());
-        compound.putBoolean("AntiStacking", this.antiStacking());
-        this.entityData.get(FADE_POINT).ifPresent((pos) -> compound.put("StaticFadePos", NbtUtils.writeBlockPos(pos)));
-        compound.putBoolean("ShouldCrumble", this.shouldCrumble);
-        compound.putBoolean("ShouldntCountToConsumedEntities", this.shouldntCountToConsumedEntities);
-        compound.putBoolean("CreatedFromBeam", this.createdFromBeam);
-        compound.putBoolean("CreatedFromFallingBlock", this.createdFromFallingBlock);
-        compound.putInt("HeadCreatedFrom", this.headCreatedFrom);
-        compound.putDouble("TractorBeamDistanceThreshold", this.tractorBeamDistanceThreshold);
+        compound.putBoolean("preventOverlap", this.preventOverlap());
+        this.entityData.get(FADE_ORIGIN).ifPresent((pos) -> compound.put("StaticFadePos", NbtUtils.writeBlockPos(pos)));
+        compound.putBoolean("placeOnImpact", this.placeOnImpact);
+        compound.putBoolean("excludeFromConsumedCount", this.excludeFromConsumedCount);
+        compound.putBoolean("spawnedFromBeam", this.spawnedFromBeam);
+        compound.putBoolean("spawnedFromFallingBlock", this.spawnedFromFallingBlock);
+        compound.putInt("spawnHeadIndex", this.spawnHeadIndex);
+        compound.putDouble("tractorBeamRange", this.tractorBeamRange);
         compound.putBoolean("HasPhysics", this.physicsEnabled());
 
-        if (this.ownerUUID != null) {
-            compound.putUUID("Owner", this.ownerUUID);
+        if (this.launcherUUID != null) {
+            compound.putUUID("Owner", this.launcherUUID);
         }
-        compound.putBoolean("LeftOwner", this.leftOwner);
-        compound.putBoolean("HasBeenShot", this.hasBeenShot);
+        compound.putBoolean("hasLeftLauncher", this.hasLeftLauncher);
+        compound.putBoolean("hasFired", this.hasFired);
     }
 
     @Override
     public void tick() {
-        if (!this.hasBeenShot) {
-            this.gameEvent(GameEvent.PROJECTILE_SHOOT, this.getOwner());
-            this.hasBeenShot = true;
+        if (!this.hasFired) {
+            this.gameEvent(GameEvent.PROJECTILE_SHOOT, this.getLauncher());
+            this.hasFired = true;
         }
 
-        if (!this.leftOwner) {
-            this.leftOwner = this.checkLeftOwner();
+        if (!this.hasLeftLauncher) {
+            this.hasLeftLauncher = this.checkHasLeftLauncher();
         }
 
-        this.shakeO = new Vec2(this.shake.x, this.shake.y);
-        if (this.shakeTime > 0) {
-            float shakeTime = (float) this.getShakeTime();
-            float x = Mth.cos(shakeTime * 4.5F) * 0.05F + (this.random.nextFloat() - 0.5F) * 0.05F;
-            float z = Mth.sin(shakeTime * 3.5F) * 0.15F + (this.random.nextFloat() - 0.5F) * 0.2F;
-            this.shake = new Vec2(x, z);
-            --this.shakeTime;
-            if (this.shakeTime == 0) {
+        this.oscillationOffset = new Vec2(this.currentOscillation.x, this.currentOscillation.y);
+        if (this.oscillationTimer > 0) {
+            float oscillationTimer = (float) this.getShakeTime();
+            float x = Mth.cos(oscillationTimer * 4.5F) * 0.05F + (this.random.nextFloat() - 0.5F) * 0.05F;
+            float z = Mth.sin(oscillationTimer * 3.5F) * 0.15F + (this.random.nextFloat() - 0.5F) * 0.2F;
+            this.currentOscillation = new Vec2(x, z);
+            --this.oscillationTimer;
+            if (this.oscillationTimer == 0) {
                 this.setShakeTime(0);
             }
         } else {
-            this.shake = new Vec2(0.0F, 0.0F);
+            this.currentOscillation = new Vec2(0.0F, 0.0F);
         }
 
         if (!this.level().isClientSide) {
@@ -515,10 +514,10 @@ public class BlockClusterEntity extends Entity {
                 this.discard();
             }
 
-            Map<BlockPos, BlockState> blocks = this.getBlocks();
+            Map<BlockPos, BlockState> BLOCK_STATE_MAP = this.getBlocks();
             boolean isAir = true;
 
-            for (Map.Entry<BlockPos, BlockState> entry : blocks.entrySet()) {
+            for (Map.Entry<BlockPos, BlockState> entry : BLOCK_STATE_MAP.entrySet()) {
                 BlockState state = entry.getValue();
                 if (isAir) {
                     isAir = state.isAir();
@@ -531,9 +530,9 @@ public class BlockClusterEntity extends Entity {
 
             if (!this.onGround()) {
                 if ((float) pos.getY() + this.getBbHeight() <= (float) this.level().getMinBuildHeight()
-                        || this.time > 600) {
-                    if (this.dropItems && this.level().getGameRules().getBoolean(GameRules.RULE_DOENTITYDROPS)) {
-                        for (Map.Entry<BlockPos, BlockState> entry : blocks.entrySet()) {
+                        || this.lifetime > 600) {
+                    if (this.shouldDropItems && this.level().getGameRules().getBoolean(GameRules.RULE_DOENTITYDROPS)) {
+                        for (Map.Entry<BlockPos, BlockState> entry : BLOCK_STATE_MAP.entrySet()) {
                             BlockState state = entry.getValue();
                             BlockPos position = pos.offset((Vec3i) entry.getKey());
                             this.spawnAtSpecificLocation(state.getBlock().asItem(), position);
@@ -550,14 +549,14 @@ public class BlockClusterEntity extends Entity {
             this.reapplyPosition();
         }
         this.travel();
-        ++this.time;
+        ++this.lifetime;
         this.noPhysics = !this.physicsEnabled();
         super.tick();
-        this.xClusterRotO = this.xClusterRot;
-        this.yClusterRotO = this.yClusterRot;
+        this.prevClusterPitchAngle = this.clusterPitchAngle;
+        this.prevClusterYawAngle = this.clusterYawAngle;
         if (this.getShakeTime() <= 0) {
-            this.xClusterRot += this.getRotationDelta().x;
-            this.yClusterRot += this.getRotationDelta().y;
+            this.clusterPitchAngle += this.getRotationDelta().x;
+            this.clusterYawAngle += this.getRotationDelta().y;
         }
     }
 
@@ -598,11 +597,11 @@ public class BlockClusterEntity extends Entity {
     }
 
     protected float getGravity() {
-        return this.isNoGravity() ? 0.0F : DEFAULT_GRAVITY;
+        return this.isNoGravity() ? 0.0F : GRAVITY_STRENGTH;
     }
 
-    private boolean checkLeftOwner() {
-        Entity entity = this.getOwner();
+    private boolean checkHasLeftLauncher() {
+        Entity entity = this.getLauncher();
         if (entity != null) {
             for (Entity entity1 : this.level().getEntities(this,
                     this.getBoundingBox().expandTowards(this.getDeltaMovement()).inflate(1.0D),
@@ -620,12 +619,12 @@ public class BlockClusterEntity extends Entity {
             return false;
         }
 
-        Entity entity = this.getOwner();
+        Entity entity = this.getLauncher();
         if (entity == null) {
             return true;
         }
 
-        if (this.leftOwner) {
+        if (this.hasLeftLauncher) {
             return true;
         }
 
@@ -633,7 +632,7 @@ public class BlockClusterEntity extends Entity {
             return false;
         }
 
-        Entity owner = this.getOwner();
+        Entity owner = this.getLauncher();
         if (owner != null && pTarget != owner) {
             if (MobUtil.areAllies(owner, pTarget)) {
                 return false;
@@ -676,9 +675,9 @@ public class BlockClusterEntity extends Entity {
 
     private float calculateTotalHardness() {
         float totalHardness = 0.0F;
-        Map<BlockPos, BlockState> blocks = this.getBlocks();
+        Map<BlockPos, BlockState> BLOCK_STATE_MAP = this.getBlocks();
         Level level = this.level();
-        for (Map.Entry<BlockPos, BlockState> entry : blocks.entrySet()) {
+        for (Map.Entry<BlockPos, BlockState> entry : BLOCK_STATE_MAP.entrySet()) {
             BlockState state = entry.getValue();
             if (!state.isAir()) {
                 BlockPos worldPos = this.getStartPos().offset(entry.getKey());
@@ -708,7 +707,7 @@ public class BlockClusterEntity extends Entity {
     public void place() {
         this.discard();
         BlockPos pos = this.blockPosition();
-        if (this.antiStacking()) {
+        if (this.preventOverlap()) {
             BlockPos currentPos = this.blockPosition();
             BlockState current = this.level().getBlockState(currentPos);
 
@@ -744,7 +743,7 @@ public class BlockClusterEntity extends Entity {
                 }
 
                 this.level().updateNeighborsAt(placementPos, state.getBlock());
-            } else if (this.dropItems && this.level().getGameRules().getBoolean(GameRules.RULE_DOENTITYDROPS)) {
+            } else if (this.shouldDropItems && this.level().getGameRules().getBoolean(GameRules.RULE_DOENTITYDROPS)) {
                 this.spawnAtSpecificLocation(state.getBlock().asItem(), placementPos);
             }
         }
@@ -773,54 +772,54 @@ public class BlockClusterEntity extends Entity {
     }
 
     public void setRotationDelta(Vec2 rotation) {
-        this.entityData.set(ROTATION_DELTA, rotation);
+        this.entityData.set(ROTATION_INCREMENT, rotation);
     }
 
     public Vec2 getRotationDelta() {
-        return this.entityData.get(ROTATION_DELTA);
+        return this.entityData.get(ROTATION_INCREMENT);
     }
 
     public Map<BlockPos, BlockState> getBlocks() {
-        return this.entityData.get(BLOCKS);
+        return this.entityData.get(BLOCK_STATE_MAP);
     }
 
     public void addBlock(BlockState state, BlockPos relativePosition) {
         Map<BlockPos, BlockState> map = Maps.newHashMap(this.getBlocks());
         map.put(relativePosition, state);
-        this.entityData.set(BLOCKS, map);
+        this.entityData.set(BLOCK_STATE_MAP, map);
     }
 
     public void setBlocks(Map<BlockPos, BlockState> blocks) {
-        this.entityData.set(BLOCKS, blocks);
+        this.entityData.set(BLOCK_STATE_MAP, blocks);
     }
 
     public void setStartPos(BlockPos pos) {
-        this.entityData.set(START_POS, pos);
+        this.entityData.set(ORIGIN_POSITION, pos);
     }
 
     public BlockPos getStartPos() {
-        return this.entityData.get(START_POS);
+        return this.entityData.get(ORIGIN_POSITION);
     }
 
     public List<CompoundTag> getTileData() {
-        return this.entityData.get(TILE_DATA);
+        return this.entityData.get(BLOCK_ENTITY_DATA);
     }
 
     public void addTileData(CompoundTag compound) {
         List<CompoundTag> list = Lists.newArrayList(this.getTileData());
         list.add(compound);
-        this.entityData.set(TILE_DATA, list, true);
+        this.entityData.set(BLOCK_ENTITY_DATA, list, true);
     }
 
     public void setTileData(List<CompoundTag> list) {
-        this.entityData.set(TILE_DATA, list);
+        this.entityData.set(BLOCK_ENTITY_DATA, list);
     }
 
     @Override
     public EntityDimensions getDimensions(Pose pose) {
         return EntityDimensions.scalable(
-                Math.max(this.entityData.get(X_SIZE), this.entityData.get(Z_SIZE)),
-                this.entityData.get(Y_SIZE));
+                Math.max(this.entityData.get(WIDTH_DIMENSION), this.entityData.get(DEPTH_DIMENSION)),
+                this.entityData.get(HEIGHT_DIMENSION));
     }
 
     @SuppressWarnings("unchecked")
@@ -833,11 +832,11 @@ public class BlockClusterEntity extends Entity {
     }
 
     public boolean physicsEnabled() {
-        return this.entityData.get(PHYSICS);
+        return this.entityData.get(ENABLE_PHYSICS);
     }
 
     public void setPhysics(boolean physics) {
-        this.entityData.set(PHYSICS, physics);
+        this.entityData.set(ENABLE_PHYSICS, physics);
         this.noPhysics = !physics;
     }
 
@@ -854,9 +853,10 @@ public class BlockClusterEntity extends Entity {
     @Override
     public void onSyncedDataUpdated(EntityDataAccessor<?> parameter) {
         super.onSyncedDataUpdated(parameter);
-        if (!parameter.equals(X_SIZE) && !parameter.equals(Y_SIZE) && !parameter.equals(Z_SIZE)) {
-            if (parameter.equals(SHAKE_TIME)) {
-                this.shakeTime = this.entityData.get(SHAKE_TIME);
+        if (!parameter.equals(WIDTH_DIMENSION) && !parameter.equals(HEIGHT_DIMENSION)
+                && !parameter.equals(DEPTH_DIMENSION)) {
+            if (parameter.equals(OSCILLATION_DURATION)) {
+                this.oscillationTimer = this.entityData.get(OSCILLATION_DURATION);
             }
         } else {
             this.refreshDimensions();
@@ -864,25 +864,25 @@ public class BlockClusterEntity extends Entity {
     }
 
     public boolean forceRender() {
-        return this.entityData.get(FORCE_RENDER);
+        return this.entityData.get(ALWAYS_RENDER);
     }
 
     public void setForceRender(boolean flag) {
-        this.entityData.set(FORCE_RENDER, flag);
+        this.entityData.set(ALWAYS_RENDER, flag);
     }
 
     public void setSize(float x, float y, float z) {
-        this.entityData.set(X_SIZE, x);
-        this.entityData.set(Y_SIZE, y);
-        this.entityData.set(Z_SIZE, z);
+        this.entityData.set(WIDTH_DIMENSION, x);
+        this.entityData.set(HEIGHT_DIMENSION, y);
+        this.entityData.set(DEPTH_DIMENSION, z);
         this.refreshDimensions();
     }
 
     @Override
     protected AABB makeBoundingBox() {
-        float x = this.entityData.get(X_SIZE);
-        float y = this.entityData.get(Y_SIZE);
-        float z = this.entityData.get(Z_SIZE);
+        float x = this.entityData.get(WIDTH_DIMENSION);
+        float y = this.entityData.get(HEIGHT_DIMENSION);
+        float z = this.entityData.get(DEPTH_DIMENSION);
         return new AABB(
                 this.getX() - (double) (x / 2.0F),
                 this.getY(),
@@ -897,78 +897,78 @@ public class BlockClusterEntity extends Entity {
         return false;
     }
 
-    public void setShakeTime(int time) {
-        this.shakeTime = time;
-        this.entityData.set(SHAKE_TIME, time);
+    public void setShakeTime(int lifetime) {
+        this.oscillationTimer = lifetime;
+        this.entityData.set(OSCILLATION_DURATION, lifetime);
     }
 
     public int getShakeTime() {
-        return this.shakeTime;
+        return this.oscillationTimer;
     }
 
-    public void setSink(int sink) {
-        this.sink = sink;
+    public void setSink(int groundPenetration) {
+        this.groundPenetration = groundPenetration;
     }
 
     public int getSink() {
-        return this.sink;
+        return this.groundPenetration;
     }
 
     public void setAntiStacking(boolean flag) {
-        this.antiStacking = flag;
+        this.preventOverlap = flag;
     }
 
-    public boolean antiStacking() {
-        return this.antiStacking;
+    public boolean preventOverlap() {
+        return this.preventOverlap;
     }
 
     @Nullable
     public BlockPos getFadePos() {
-        return this.entityData.get(FADE_POINT).orElse(null);
+        return this.entityData.get(FADE_ORIGIN).orElse(null);
     }
 
     public void setFadePos(@Nullable BlockPos pos) {
-        this.entityData.set(FADE_POINT, Optional.ofNullable(pos));
+        this.entityData.set(FADE_ORIGIN, Optional.ofNullable(pos));
     }
 
     public void setFadeStrength(float strength) {
-        this.entityData.set(FADE_STRENGTH, strength);
+        this.entityData.set(FADE_INTENSITY, strength);
     }
 
     public float getFadeStrength() {
-        return this.entityData.get(FADE_STRENGTH);
+        return this.entityData.get(FADE_INTENSITY);
     }
 
     public int getFadeDistanceOffset() {
-        return this.entityData.get(FADE_DISTANCE_OFFSET);
+        return this.entityData.get(FADE_RANGE_BUFFER);
     }
 
     public void setFadeDistanceOffset(int offset) {
-        this.entityData.set(FADE_DISTANCE_OFFSET, offset);
+        this.entityData.set(FADE_RANGE_BUFFER, offset);
     }
 
     public void setShouldCrumble(boolean flag) {
-        this.shouldCrumble = flag;
+        this.placeOnImpact = flag;
     }
 
-    public boolean shouldCrumble() {
-        return this.shouldCrumble;
+    public boolean placeOnImpact() {
+        return this.placeOnImpact;
     }
 
     public void setShouldntCountToConsumedEntities(boolean flag) {
-        this.shouldntCountToConsumedEntities = flag;
+        this.excludeFromConsumedCount = flag;
     }
 
-    public boolean shouldntCountToConsumedEntities() {
-        return this.shouldntCountToConsumedEntities;
+    public boolean excludeFromConsumedCount() {
+        return this.excludeFromConsumedCount;
     }
 
     public float getClusterXRot(float partialTicks) {
-        return Mth.lerp(partialTicks, this.xClusterRotO, this.xClusterRot);
+        return Mth.lerp(partialTicks, this.prevClusterPitchAngle, this.clusterPitchAngle);
     }
 
     public float getClusterYRot(float partialTicks) {
-        return Mth.lerp(partialTicks, this.yClusterRotO, this.yClusterRot);
+        return Mth.lerp(partialTicks, this.prevClusterYawAngle, this.clusterYawAngle);
     }
 
     @Override
@@ -982,18 +982,20 @@ public class BlockClusterEntity extends Entity {
     }
 
     static {
-        BLOCKS = SynchedEntityData.defineId(BlockClusterEntity.class, GoetyAwakenDataSerializers.BLOCK_STATE_POS_MAP);
-        TILE_DATA = SynchedEntityData.defineId(BlockClusterEntity.class, GoetyAwakenDataSerializers.COMPOUND_LIST);
-        START_POS = SynchedEntityData.defineId(BlockClusterEntity.class, EntityDataSerializers.BLOCK_POS);
-        ROTATION_DELTA = SynchedEntityData.defineId(BlockClusterEntity.class, GoetyAwakenDataSerializers.VECTOR_2F);
-        PHYSICS = SynchedEntityData.defineId(BlockClusterEntity.class, EntityDataSerializers.BOOLEAN);
-        FORCE_RENDER = SynchedEntityData.defineId(BlockClusterEntity.class, EntityDataSerializers.BOOLEAN);
-        X_SIZE = SynchedEntityData.defineId(BlockClusterEntity.class, EntityDataSerializers.FLOAT);
-        Y_SIZE = SynchedEntityData.defineId(BlockClusterEntity.class, EntityDataSerializers.FLOAT);
-        Z_SIZE = SynchedEntityData.defineId(BlockClusterEntity.class, EntityDataSerializers.FLOAT);
-        SHAKE_TIME = SynchedEntityData.defineId(BlockClusterEntity.class, EntityDataSerializers.INT);
-        FADE_POINT = SynchedEntityData.defineId(BlockClusterEntity.class, EntityDataSerializers.OPTIONAL_BLOCK_POS);
-        FADE_STRENGTH = SynchedEntityData.defineId(BlockClusterEntity.class, EntityDataSerializers.FLOAT);
-        FADE_DISTANCE_OFFSET = SynchedEntityData.defineId(BlockClusterEntity.class, EntityDataSerializers.INT);
+        BLOCK_STATE_MAP = SynchedEntityData.defineId(BlockClusterEntity.class,
+                GoetyAwakenDataSerializers.BLOCK_STATE_POS_MAP);
+        BLOCK_ENTITY_DATA = SynchedEntityData.defineId(BlockClusterEntity.class,
+                GoetyAwakenDataSerializers.COMPOUND_LIST);
+        ORIGIN_POSITION = SynchedEntityData.defineId(BlockClusterEntity.class, EntityDataSerializers.BLOCK_POS);
+        ROTATION_INCREMENT = SynchedEntityData.defineId(BlockClusterEntity.class, GoetyAwakenDataSerializers.VECTOR_2F);
+        ENABLE_PHYSICS = SynchedEntityData.defineId(BlockClusterEntity.class, EntityDataSerializers.BOOLEAN);
+        ALWAYS_RENDER = SynchedEntityData.defineId(BlockClusterEntity.class, EntityDataSerializers.BOOLEAN);
+        WIDTH_DIMENSION = SynchedEntityData.defineId(BlockClusterEntity.class, EntityDataSerializers.FLOAT);
+        HEIGHT_DIMENSION = SynchedEntityData.defineId(BlockClusterEntity.class, EntityDataSerializers.FLOAT);
+        DEPTH_DIMENSION = SynchedEntityData.defineId(BlockClusterEntity.class, EntityDataSerializers.FLOAT);
+        OSCILLATION_DURATION = SynchedEntityData.defineId(BlockClusterEntity.class, EntityDataSerializers.INT);
+        FADE_ORIGIN = SynchedEntityData.defineId(BlockClusterEntity.class, EntityDataSerializers.OPTIONAL_BLOCK_POS);
+        FADE_INTENSITY = SynchedEntityData.defineId(BlockClusterEntity.class, EntityDataSerializers.FLOAT);
+        FADE_RANGE_BUFFER = SynchedEntityData.defineId(BlockClusterEntity.class, EntityDataSerializers.INT);
     }
 }

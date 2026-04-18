@@ -43,6 +43,7 @@ public class MushroomMonstrosityHostile extends MushroomMonstrosity implements E
     public MushroomMonstrosityHostile(EntityType<? extends MushroomMonstrosity> type, Level worldIn) {
         super(type, worldIn);
         this.setHostile(true);
+        this.setPersistenceRequired();
         this.bossInfo = new ModServerBossInfo(this, BossEvent.BossBarColor.RED, false, false);
         this.xpReward = 4000;
     }

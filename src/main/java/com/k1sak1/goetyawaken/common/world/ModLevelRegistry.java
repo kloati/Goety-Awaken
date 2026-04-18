@@ -16,17 +16,17 @@ public class ModLevelRegistry {
             if (biome.is(ModTags.Biomes.ZOMBIE_DARKGUARD_SPAWN)) {
                 builder.getMobSpawnSettings().getSpawner(MobCategory.MONSTER).add(new MobSpawnSettings.SpawnerData(
                         ModEntityType.ZOMBIE_DARKGUARD.get(),
-                        5,
                         1,
-                        3));
+                        1,
+                        1));
             }
 
             if (biome.is(ModTags.Biomes.SKELETON_VANGUARD_SPAWN)) {
                 builder.getMobSpawnSettings().getSpawner(MobCategory.MONSTER).add(new MobSpawnSettings.SpawnerData(
                         ModEntityType.SKELETON_VANGUARD.get(),
-                        5,
                         1,
-                        3));
+                        1,
+                        1));
             }
 
             // if (biome.is(ModTags.Biomes.PARCHED_SPAWN)) {

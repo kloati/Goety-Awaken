@@ -78,7 +78,7 @@ public class DesertPlaguesSpell extends Spell {
 
         if (rightStaff(staff)) {
             range += 1;
-            potency += 4.0F * WandUtil.damageMultiply();
+            potency += 2.0F * WandUtil.damageMultiply();
             radius += 1.0D;
             duration += 1;
         }
@@ -88,7 +88,7 @@ public class DesertPlaguesSpell extends Spell {
 
         if (target != null) {
             DesertPlaguesCloud cloud = new DesertPlaguesCloud(worldIn, caster, target);
-            cloud.setExtraDamage(potency);
+            cloud.setExtraDamage(potency / 2);
             cloud.setRadius((float) radius);
             cloud.setLifeSpan(duration);
             cloud.setStaff(!staff.isEmpty());
@@ -96,7 +96,7 @@ public class DesertPlaguesSpell extends Spell {
         } else if (rayTraceResult instanceof BlockHitResult) {
             BlockPos blockPos = ((BlockHitResult) rayTraceResult).getBlockPos();
             DesertPlaguesCloud cloud = new DesertPlaguesCloud(worldIn, caster, null);
-            cloud.setExtraDamage(potency);
+            cloud.setExtraDamage(potency / 2);
             cloud.setRadius((float) radius);
             cloud.setLifeSpan(duration);
             cloud.setStaff(!staff.isEmpty());

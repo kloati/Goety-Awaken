@@ -1,6 +1,9 @@
 package com.k1sak1.goetyawaken.common.entities.ally;
 
 import com.Polarice3.Goety.client.particles.*;
+import com.Polarice3.Goety.client.particles.MagicSmokeParticleOption;
+import com.Polarice3.Goety.client.particles.GatherTrailParticleOption;
+import com.Polarice3.Goety.client.particles.WindBlowParticleOption;
 import com.Polarice3.Goety.common.blocks.entities.VoidShrineBlockEntity;
 import com.Polarice3.Goety.common.effects.GoetyEffects;
 import com.Polarice3.Goety.common.entities.ai.path.ModGroundNavigation;
@@ -918,7 +921,7 @@ public class NeoEnderKeeper extends AbstractEnderling {
             if (this.level() instanceof ServerLevel serverLevel) {
                 for (int i = 0; i < 8; ++i) {
                     serverLevel.sendParticles(
-                            new MagicSmokeParticle.Option(0, 0,
+                            new MagicSmokeParticleOption(0, 0,
                                     this.level().getRandom().nextIntBetweenInclusive(40, 80),
                                     0.25F),
                             this.getRandomX(0.5D), this.getRandomY(), this.getRandomZ(0.5D), 0,
@@ -1181,7 +1184,7 @@ public class NeoEnderKeeper extends AbstractEnderling {
                         Vec3 vec3 = this.getEyePosition().offsetRandom(serverLevel.getRandom(), 2.0F);
                         Vec3 angle = this.getLookAngle().multiply(-1.0D, 1.0D, -1.0D);
                         serverLevel.sendParticles(
-                                new WindBlowParticle.Option(new ColorUtil(ChatFormatting.LIGHT_PURPLE), width, height),
+                                new WindBlowParticleOption(new ColorUtil(ChatFormatting.LIGHT_PURPLE), width, height),
                                 vec3.x, vec3.y, vec3.z, 0, angle.x, angle.y, angle.z, 1.0F);
                     }
                     for (LivingEntity entityHit : this.level().getEntitiesOfClass(LivingEntity.class,
@@ -1226,7 +1229,7 @@ public class NeoEnderKeeper extends AbstractEnderling {
                     if (this.level() instanceof ServerLevel serverLevel) {
                         ColorUtil colorUtil = new ColorUtil(ChatFormatting.DARK_PURPLE);
                         ServerParticleUtil.gatheringParticles(
-                                new GatherTrailParticle.Option(colorUtil, this.position().add(0, 8, 0)), this,
+                                new GatherTrailParticleOption(colorUtil, this.position().add(0, 8, 0)), this,
                                 serverLevel, 2);
                     }
                 }
@@ -1299,7 +1302,7 @@ public class NeoEnderKeeper extends AbstractEnderling {
                     if (this.level() instanceof ServerLevel serverWorld) {
                         ColorUtil colorUtil = new ColorUtil(ChatFormatting.LIGHT_PURPLE);
                         ServerParticleUtil.gatheringParticles(
-                                new GatherTrailParticle.Option(colorUtil, this.position().add(0, 1, 0)), this,
+                                new GatherTrailParticleOption(colorUtil, this.position().add(0, 1, 0)), this,
                                 serverWorld, 4);
                         ServerParticleUtil.windParticle(serverWorld, colorUtil, (float) radius, 1.0F, this.getId(),
                                 this.position());
@@ -1343,7 +1346,7 @@ public class NeoEnderKeeper extends AbstractEnderling {
                                                 livingEntity.getZ());
                                         Vec3 vector3d1 = new Vec3(this.getRandomX(1.0F), this.getEyeY(),
                                                 this.getRandomZ(1.0F));
-                                        serverLevel.sendParticles(new GatherTrailParticle.Option(colorUtil, vector3d1),
+                                        serverLevel.sendParticles(new GatherTrailParticleOption(colorUtil, vector3d1),
                                                 vec3.x, vec3.y, vec3.z, 0, 0.0F, 0.0F, 0.0F, 0.5F);
                                         for (int i = 0; i < 8; ++i) {
                                             vec3 = new Vec3(livingEntity.getRandomX(1.0F), livingEntity.getRandomY(),

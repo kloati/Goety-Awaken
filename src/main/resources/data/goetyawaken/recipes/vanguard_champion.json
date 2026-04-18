@@ -27,10 +27,13 @@
       "item": "goety:weakening_focus"
     },
     {
-      "item": "goetyawaken:mucilage"
+      "item": "goetyawaken:nameless_platinum"
     },
     {
       "item": "goety:launch_focus"
+    },
+    {
+      "item": "goetyawaken:mucilage"
     }
   ],
   "result": {

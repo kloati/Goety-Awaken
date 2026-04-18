@@ -4,14 +4,6 @@ import net.minecraft.world.phys.Vec3;
 import org.joml.Matrix4f;
 import org.joml.Vector4f;
 
-/**
- * Inspired by perception
- * 
- * @author SSKirillSS(Original Author)
- * @see <a href=
- *       "https://github.com/Octo-Studios/perception/tree/master">perception
- *             Repository</a>  
- */
 public class TrailPosition {
 
     private final double x;

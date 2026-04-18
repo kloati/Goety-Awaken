@@ -6,6 +6,7 @@ import com.k1sak1.goetyawaken.common.network.server.SMobEnchantSyncPacket;
 import com.k1sak1.goetyawaken.common.network.server.SOpenAccessFocusMessage;
 import com.k1sak1.goetyawaken.common.network.client.CWardenRoarPacket;
 import com.k1sak1.goetyawaken.common.network.client.CAutoRideablePacket;
+import com.k1sak1.goetyawaken.common.network.client.CCombatHealthSyncPacket;
 import com.k1sak1.goetyawaken.common.network.server.SBossBarPacket;
 import com.k1sak1.goetyawaken.common.network.client.CWitherFlightPacket;
 import com.k1sak1.goetyawaken.common.network.client.CWitherRoarPacket;
@@ -76,6 +77,11 @@ public class ModNetwork {
                 channel.registerMessage(nextID(), CClaymoreSweepPacket.class, CClaymoreSweepPacket::encode,
                                 CClaymoreSweepPacket::decode,
                                 CClaymoreSweepPacket::consume);
+
+                channel.registerMessage(nextID(), CCombatHealthSyncPacket.class, CCombatHealthSyncPacket::encode,
+                                CCombatHealthSyncPacket::decode,
+                                CCombatHealthSyncPacket::handle,
+                                java.util.Optional.of(NetworkDirection.PLAY_TO_CLIENT));
 
                 channel.registerMessage(nextID(), GridItemExtractMessage.class, GridItemExtractMessage::encode,
                                 GridItemExtractMessage::decode,

@@ -2,6 +2,7 @@ package com.k1sak1.goetyawaken.client.renderer.undead;
 
 import com.Polarice3.Goety.Goety;
 import com.Polarice3.Goety.client.render.ModModelLayer;
+import com.k1sak1.goetyawaken.GoetyAwaken;
 import com.k1sak1.goetyawaken.client.model.undead.SkullLordServantModel;
 import com.k1sak1.goetyawaken.common.entities.ally.undead.BoneLordServant;
 import com.k1sak1.goetyawaken.common.entities.ally.undead.SkullLordServant;
@@ -22,10 +23,11 @@ public class SkullLordServantRenderer extends MobRenderer<SkullLordServant, Skul
     private static final ResourceLocation CONNECTION_TEXTURE = Goety
             .location("textures/entity/skull_lord/skull_lord_connection.png");
     public static final RenderType CONNECTION = RenderType.entityCutoutNoCull(CONNECTION_TEXTURE);
-    private static final ResourceLocation LOCATION = Goety.location("textures/entity/skull_lord/skull_lord.png");
-    private static final ResourceLocation VULNERABLE = Goety
-            .location("textures/entity/skull_lord/skull_lord_vulnerable.png");
-    private static final ResourceLocation CHARGE = Goety.location("textures/entity/skull_lord/skull_lord_charging.png");
+    private static final ResourceLocation LOCATION = GoetyAwaken.location("textures/entity/undead/skull_lord.png");
+    private static final ResourceLocation VULNERABLE = GoetyAwaken
+            .location("textures/entity/undead/skull_lord_vulnerable.png");
+    private static final ResourceLocation CHARGE = GoetyAwaken
+            .location("textures/entity/undead/skull_lord_charging.png");
 
     public SkullLordServantRenderer(EntityRendererProvider.Context p_174435_) {
         super(p_174435_, new SkullLordServantModel<>(p_174435_.bakeLayer(ModModelLayer.SKULL_LORD)), 0.5F);

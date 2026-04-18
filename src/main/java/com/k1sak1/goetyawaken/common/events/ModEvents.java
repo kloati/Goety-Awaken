@@ -7,6 +7,7 @@ import com.Polarice3.Goety.common.entities.hostile.servants.Damned;
 import com.Polarice3.Goety.common.items.magic.AnimationCore;
 import com.Polarice3.Goety.common.effects.GoetyEffects;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import com.k1sak1.goetyawaken.common.advancements.ModCriteriaTriggers;
 import com.k1sak1.goetyawaken.common.blocks.ModBlocks;
 import com.k1sak1.goetyawaken.common.entities.ally.ObsidianMonolithServant;
@@ -16,6 +17,7 @@ import com.k1sak1.goetyawaken.common.entities.ally.illager.ApostleServant;
 import com.k1sak1.goetyawaken.common.entities.ally.illager.RoyalguardServant;
 import com.k1sak1.goetyawaken.common.entities.ally.undead.skeleton.VanguardChampion;
 import com.k1sak1.goetyawaken.common.entities.hostile.undead.necromancer.AbstractNamelessOne;
+import com.k1sak1.goetyawaken.common.entities.hostile.undead.zombie.FrozenZombie;
 import com.k1sak1.goetyawaken.common.items.ModItems;
 import com.k1sak1.goetyawaken.common.magic.GolemTypeRegistry;
 import com.k1sak1.goetyawaken.init.ModTags;
@@ -44,6 +46,7 @@ import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -159,13 +162,21 @@ public class ModEvents {
             }
         }
 
-        if (!killed.level().isClientSide() && killed.getType().is(ModTags.EntityTypes.HIGHER_NECROMANCER)) {
-            Entity killerEntity = event.getSource().getEntity();
-            if (killerEntity instanceof Player player) {
-                if (event.getSource().is(net.minecraft.world.damagesource.DamageTypes.PLAYER_ATTACK)) {
-                    ItemStack mainHandItem = player.getMainHandItem();
-                    if (mainHandItem.getItem() instanceof com.k1sak1.goetyawaken.common.items.MoonlightCutItem) {
-                        if (killed.level().random.nextFloat() < 0.5f) {
+        if (!killed.level().isClientSide()) {
+            boolean isAbstractNecromancer = killed instanceof com.Polarice3.Goety.common.entities.neutral.AbstractNecromancer;
+
+            net.minecraft.tags.TagKey<net.minecraft.world.entity.EntityType<?>> goetyNecromancersTag = net.minecraft.tags.TagKey
+                    .create(
+                            net.minecraft.core.registries.Registries.ENTITY_TYPE,
+                            new net.minecraft.resources.ResourceLocation("goety", "necromancers"));
+            boolean hasGoetyNecromancerTag = killed.getType().is(goetyNecromancersTag);
+
+            if (isAbstractNecromancer || hasGoetyNecromancerTag) {
+                Entity killerEntity = event.getSource().getEntity();
+                if (killerEntity instanceof Player player) {
+                    if (event.getSource().is(net.minecraft.world.damagesource.DamageTypes.PLAYER_ATTACK)) {
+                        ItemStack mainHandItem = player.getMainHandItem();
+                        if (mainHandItem.getItem() instanceof com.k1sak1.goetyawaken.common.items.MoonlightCutItem) {
                             if (killed.level().getGameRules()
                                     .getBoolean(net.minecraft.world.level.GameRules.RULE_DOMOBLOOT)) {
                                 killed.spawnAtLocation(new ItemStack(ModItems.MUCILAGE.get(), 1));
@@ -354,6 +365,17 @@ public class ModEvents {
             }
         }
 
+    }
+
+    @SubscribeEvent
+    public static void onLivingAttack(LivingAttackEvent event) {
+        LivingEntity victim = event.getEntity();
+        Entity attacker = event.getSource().getEntity();
+        if (attacker instanceof FrozenZombie) {
+            if (!victim.hasEffect(MobEffects.MOVEMENT_SLOWDOWN)) {
+                victim.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 0, false, false));
+            }
+        }
     }
 
     @SubscribeEvent

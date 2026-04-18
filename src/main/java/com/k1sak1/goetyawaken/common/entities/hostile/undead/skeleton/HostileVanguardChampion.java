@@ -16,6 +16,7 @@ public class HostileVanguardChampion extends VanguardChampion implements Enemy {
     public HostileVanguardChampion(EntityType<? extends Summoned> type, Level worldIn) {
         super(type, worldIn);
         this.setHostile(true);
+        this.setPersistenceRequired();
     }
 
     @Override

@@ -34,7 +34,6 @@ import com.k1sak1.goetyawaken.client.model.SkeletonVanguardModel;
 import com.k1sak1.goetyawaken.client.model.SpiderCreederModel;
 import com.k1sak1.goetyawaken.client.model.VizierCloneServantModel;
 import com.k1sak1.goetyawaken.client.model.VizierServantModel;
-import com.k1sak1.goetyawaken.client.model.FrozenZombieModel;
 import com.k1sak1.goetyawaken.client.model.ZombieDarkguardModel;
 import com.k1sak1.goetyawaken.client.model.OminousPaintingModel;
 import com.k1sak1.goetyawaken.client.model.HostileSnapperModel;
@@ -290,7 +289,8 @@ public class ClientEventHandler {
                 event.registerLayerDefinition(DROWNED_NECROMANCER_LAYER,
                                 com.Polarice3.Goety.client.render.model.DrownedNecromancerModel::createBodyLayer);
                 event.registerLayerDefinition(SPIDER_CREEDER_LAYER, SpiderCreederModel::createBodyLayer);
-                event.registerLayerDefinition(FROZEN_ZOMBIE_LAYER, FrozenZombieModel::createBodyLayer);
+                event.registerLayerDefinition(FROZEN_ZOMBIE_LAYER,
+                                com.Polarice3.Goety.client.render.model.PlayerZombieModel::createBodyLayer);
                 event.registerLayerDefinition(TOWER_WRAITH_LAYER,
                                 com.k1sak1.goetyawaken.client.model.undead.TowerWraithModel::createBodyLayer);
                 event.registerLayerDefinition(TOWER_WITCH_LAYER,

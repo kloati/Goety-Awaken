@@ -1,18 +1,33 @@
 {
   "variants": {
-    "facing=east": {
+    "facing=east,active=false": {
       "model": "goetyawaken:block/ender_access_lectern",
       "y": 90
     },
-    "facing=north": {
+    "facing=north,active=false": {
       "model": "goetyawaken:block/ender_access_lectern"
     },
-    "facing=south": {
+    "facing=south,active=false": {
       "model": "goetyawaken:block/ender_access_lectern",
       "y": 180
     },
-    "facing=west": {
+    "facing=west,active=false": {
       "model": "goetyawaken:block/ender_access_lectern",
+      "y": 270
+    },
+    "facing=east,active=true": {
+      "model": "goetyawaken:block/ender_access_lectern_active",
+      "y": 90
+    },
+    "facing=north,active=true": {
+      "model": "goetyawaken:block/ender_access_lectern_active"
+    },
+    "facing=south,active=true": {
+      "model": "goetyawaken:block/ender_access_lectern_active",
+      "y": 180
+    },
+    "facing=west,active=true": {
+      "model": "goetyawaken:block/ender_access_lectern_active",
       "y": 270
     }
   }

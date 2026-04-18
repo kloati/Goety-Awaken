@@ -1,5 +1,6 @@
 package com.k1sak1.goetyawaken.client.renderer.undead;
 
+import com.k1sak1.goetyawaken.GoetyAwaken;
 import com.k1sak1.goetyawaken.common.entities.ally.undead.BoneLordServant;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.SkeletonModel;
@@ -13,8 +14,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 
 public class BoneLordServantRenderer extends HumanoidMobRenderer<BoneLordServant, SkeletonModel<BoneLordServant>> {
-    private static final ResourceLocation SKELETON_LOCATION = new ResourceLocation(
-            "textures/entity/skeleton/skeleton.png");
+    private static final ResourceLocation SKELETON_LOCATION = GoetyAwaken
+            .location("textures/entity/undead/skeleton_lord.png");
 
     public BoneLordServantRenderer(EntityRendererProvider.Context p_174380_) {
         this(p_174380_, ModelLayers.SKELETON, ModelLayers.SKELETON_INNER_ARMOR, ModelLayers.SKELETON_OUTER_ARMOR);

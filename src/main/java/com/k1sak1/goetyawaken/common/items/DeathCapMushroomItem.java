@@ -1,5 +1,6 @@
 package com.k1sak1.goetyawaken.common.items;
 
+import com.k1sak1.goetyawaken.Config;
 import com.k1sak1.goetyawaken.init.ModEffects;
 import com.k1sak1.goetyawaken.init.ModSounds;
 import net.minecraft.ChatFormatting;
@@ -41,15 +42,17 @@ public class DeathCapMushroomItem extends Item {
         }
 
         if (!world.isClientSide && entityLiving instanceof Player player) {
+            int effectDuration = Config.DEATH_CAP_MUSHROOM_EFFECT_DURATION.get();
+            int effectLevel = Config.DEATH_CAP_MUSHROOM_EFFECT_LEVEL.get();
+            player.addEffect(new MobEffectInstance(ModEffects.BERSERK.get(), effectDuration, effectLevel - 1));
 
-            player.addEffect(new MobEffectInstance(ModEffects.BERSERK.get(), 600, 3));
             int currentUsages = getUsages(stack);
             if (currentUsages <= 1) {
                 stack.shrink(1);
             } else {
                 setUsages(stack, currentUsages - 1);
             }
-            player.getCooldowns().addCooldown(this, 1200);
+            player.getCooldowns().addCooldown(this, Config.DEATH_CAP_MUSHROOM_COOLDOWN.get());
         }
 
         if (entityLiving != null) {
@@ -86,7 +89,7 @@ public class DeathCapMushroomItem extends Item {
         if (stack.hasTag() && stack.getTag().contains(USAGES_TAG)) {
             return stack.getTag().getInt(USAGES_TAG);
         }
-        return 10;
+        return Config.DEATH_CAP_MUSHROOM_MAX_USAGES.get();
     }
 
     public static void setUsages(ItemStack stack, int usages) {

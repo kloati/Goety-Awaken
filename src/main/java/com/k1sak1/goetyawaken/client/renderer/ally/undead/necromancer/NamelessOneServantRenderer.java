@@ -1,5 +1,6 @@
 package com.k1sak1.goetyawaken.client.renderer.ally.undead.necromancer;
 
+import com.k1sak1.goetyawaken.Config;
 import com.k1sak1.goetyawaken.client.model.undead.necromancer.NamelessOneModel;
 import com.k1sak1.goetyawaken.client.ClientEventHandler;
 import com.k1sak1.goetyawaken.client.renderer.layers.NamelessOneServantEmissiveLayer;
@@ -17,8 +18,10 @@ public class NamelessOneServantRenderer
         extends MobRenderer<NamelessOneServant, NamelessOneModel<NamelessOneServant>> {
     private static final ResourceLocation NAMELESS_ONE_SERVANT_TEXTURE = new ResourceLocation("goetyawaken",
             "textures/entity/undead/necromancer/nameless_one_servant.png");
-    private static final ResourceLocation NAMELESS_ONE_GLOW_TEXTURE = new ResourceLocation("goetyawaken",
-            "textures/entity/undead/necromancer/nameless_one_glow.png");
+    private static final ResourceLocation NAMELESS_ONE_NEW_TEXTURE = new ResourceLocation("goetyawaken",
+            "textures/entity/undead/necromancer/false_king.png");
+    private static final ResourceLocation NAMELESS_ONE_NEW_GLOW_TEXTURE = new ResourceLocation("goetyawaken",
+            "textures/entity/undead/necromancer/nameless_king_glow.png");
 
     public NamelessOneServantRenderer(EntityRendererProvider.Context renderManagerIn) {
         super(renderManagerIn,
@@ -26,7 +29,18 @@ public class NamelessOneServantRenderer
                         renderManagerIn
                                 .bakeLayer(ClientEventHandler.NAMELESS_ONE_LAYER)),
                 0.5F);
-        this.addLayer(new NamelessOneServantEmissiveLayer(this, NAMELESS_ONE_GLOW_TEXTURE));
+        this.addLayer(new NamelessOneServantEmissiveLayer(this, getGlowTexture()));
+    }
+
+    private static ResourceLocation getTexture() {
+        if (Config.ENABLE_NAMELESS_ONE_NEW_TEXTURE.get()) {
+            return NAMELESS_ONE_NEW_TEXTURE;
+        }
+        return NAMELESS_ONE_SERVANT_TEXTURE;
+    }
+
+    private static ResourceLocation getGlowTexture() {
+        return NAMELESS_ONE_NEW_GLOW_TEXTURE;
     }
 
     @Override
@@ -45,6 +59,6 @@ public class NamelessOneServantRenderer
 
     @Override
     public ResourceLocation getTextureLocation(NamelessOneServant entity) {
-        return NAMELESS_ONE_SERVANT_TEXTURE;
+        return getTexture();
     }
 }

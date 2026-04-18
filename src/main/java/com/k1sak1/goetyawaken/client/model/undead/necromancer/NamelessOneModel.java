@@ -19,42 +19,50 @@ public class NamelessOneModel<T extends AbstractNamelessOne> extends Hierarchica
         private final ModelPart body;
         private final ModelPart head;
         private final ModelPart hat;
+        private final ModelPart crown;
+        private final ModelPart crown1;
+        private final ModelPart crown2;
         private final ModelPart right_arm;
-        private final ModelPart right_pauldron;
         private final ModelPart staff;
         private final ModelPart handle;
         private final ModelPart group;
         private final ModelPart staffhead;
         private final ModelPart night1;
-        private final ModelPart night2;
         private final ModelPart night3;
+        private final ModelPart night2;
+        private final ModelPart right_pauldron;
         private final ModelPart left_arm;
         private final ModelPart leftItem;
         private final ModelPart left_pauldron;
         private final ModelPart pants;
         private final ModelPart middle;
         private final ModelPart cape;
+        private final ModelPart collar;
 
         public NamelessOneModel(ModelPart root) {
                 this.skeleton = root.getChild("skeleton");
                 this.body = this.skeleton.getChild("body");
                 this.head = this.body.getChild("head");
                 this.hat = this.head.getChild("hat");
+                this.crown = this.head.getChild("crown");
+                this.crown1 = this.crown.getChild("crown1");
+                this.crown2 = this.crown1.getChild("crown2");
                 this.right_arm = this.body.getChild("right_arm");
-                this.right_pauldron = this.right_arm.getChild("right_pauldron");
                 this.staff = this.right_arm.getChild("staff");
                 this.handle = this.staff.getChild("handle");
                 this.group = this.staff.getChild("group");
                 this.staffhead = this.staff.getChild("staffhead");
                 this.night1 = this.staffhead.getChild("night1");
+                this.night3 = this.night1.getChild("night3");
                 this.night2 = this.staffhead.getChild("night2");
-                this.night3 = this.staffhead.getChild("night3");
+                this.right_pauldron = this.right_arm.getChild("right_pauldron");
                 this.left_arm = this.body.getChild("left_arm");
                 this.leftItem = this.left_arm.getChild("leftItem");
                 this.left_pauldron = this.left_arm.getChild("left_pauldron");
                 this.pants = this.body.getChild("pants");
                 this.middle = this.pants.getChild("middle");
                 this.cape = this.body.getChild("cape");
+                this.collar = this.body.getChild("collar");
         }
 
         public static LayerDefinition createBodyLayer() {
@@ -64,96 +72,127 @@ public class NamelessOneModel<T extends AbstractNamelessOne> extends Hierarchica
                 PartDefinition skeleton = partdefinition.addOrReplaceChild("skeleton", CubeListBuilder.create(),
                                 PartPose.offset(0.0F, 24.0F, 0.0F));
 
-                PartDefinition body = skeleton.addOrReplaceChild("body",
-                                CubeListBuilder.create().texOffs(16, 16).addBox(-4.0F, -12.0F, -2.0F, 8.0F, 12.0F, 4.0F,
-                                                new CubeDeformation(0.0F)),
+                PartDefinition body = skeleton.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 44)
+                                .addBox(-4.0F, -12.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.0F))
+                                .texOffs(0, 112)
+                                .addBox(-4.0F, -12.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
                                 PartPose.offsetAndRotation(0.0F, -12.0F, 0.0F, 0.0F, -0.2618F, 0.0F));
 
                 PartDefinition head = body.addOrReplaceChild("head",
-                                CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F,
+                                CubeListBuilder.create().texOffs(42, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F,
                                                 new CubeDeformation(0.0F)),
                                 PartPose.offsetAndRotation(0.0F, -12.0F, 0.0F, 0.0F, 0.2618F, 0.0F));
 
                 PartDefinition hat = head
                                 .addOrReplaceChild("hat",
-                                                CubeListBuilder.create().texOffs(0, 96).addBox(-4.0F, -10.5F, -4.0F,
-                                                                8.0F, 6.0F, 8.0F, new CubeDeformation(0.5F)),
-                                                PartPose.offset(0.0F, 0.0F, 0.0F));
+                                                CubeListBuilder.create().texOffs(86, 103).addBox(-5.0F, -9.0F, -4.0F,
+                                                                8.0F, 8.0F, 8.0F, new CubeDeformation(0.5F)),
+                                                PartPose.offset(1.0F, -2.0F, 0.0F));
 
-                PartDefinition right_arm = body.addOrReplaceChild("right_arm",
-                                CubeListBuilder.create().texOffs(40, 16).addBox(-1.0F, -2.0F, -1.0F, 2.0F, 12.0F, 2.0F,
+                PartDefinition crown = head.addOrReplaceChild("crown", CubeListBuilder.create(),
+                                PartPose.offset(0.0F, -4.0F, 0.0F));
+
+                PartDefinition crown1 = crown.addOrReplaceChild("crown1", CubeListBuilder.create().texOffs(56, 45)
+                                .addBox(-4.0F, -1.0F, -4.0F, 8.0F, 0.0F, 8.0F, new CubeDeformation(0.0F))
+                                .texOffs(42, 16).addBox(-4.0F, -7.0F, -4.0F, 8.0F, 7.0F, 8.0F,
                                                 new CubeDeformation(0.0F)),
+                                PartPose.offset(0.0F, 0.0F, 0.0F));
+
+                PartDefinition crown2 = crown1.addOrReplaceChild(
+                                "crown2", CubeListBuilder.create().texOffs(42, 31).addBox(-4.0F, -6.0F, -4.0F, 8.0F,
+                                                6.0F, 8.0F, new CubeDeformation(0.0F)),
+                                PartPose.offset(0.0F, 0.0F, 0.0F));
+
+                PartDefinition right_arm = body.addOrReplaceChild("right_arm", CubeListBuilder.create().texOffs(70, 69)
+                                .addBox(-1.05F, -2.0F, -1.0F, 2.0F, 12.0F, 2.0F, new CubeDeformation(0.0F))
+                                .texOffs(0, 60)
+                                .addBox(-1.75F, -2.05F, -1.25F, 3.0F, 12.0F, 4.0F, new CubeDeformation(0.0F))
+                                .texOffs(86, 53)
+                                .addBox(-4.0F, -3.0F, -2.5F, 5.0F, 8.0F, 6.0F, new CubeDeformation(0.25F)),
                                 PartPose.offsetAndRotation(-5.0F, -10.0F, 0.0F, -1.3963F, 0.2618F, 0.0F));
-
-                PartDefinition right_pauldron = right_arm.addOrReplaceChild("right_pauldron",
-                                CubeListBuilder.create().texOffs(0, 49).addBox(-5.0F, -4.0F, -3.0F, 6.0F, 5.0F, 6.0F,
-                                                new CubeDeformation(0.0F)),
-                                PartPose.offsetAndRotation(0.0F, 0.0F, 1.0F, 1.0472F, -0.0873F, -0.2618F));
 
                 PartDefinition staff = right_arm.addOrReplaceChild("staff", CubeListBuilder.create(),
                                 PartPose.offsetAndRotation(0.0F, 10.0F, 5.5F, 1.4399F, 0.0F, 0.0F));
 
                 PartDefinition handle = staff.addOrReplaceChild(
-                                "handle", CubeListBuilder.create().texOffs(60, 39).addBox(0.5F, -16.0F, -19.0F, 1.0F,
+                                "handle", CubeListBuilder.create().texOffs(34, 61).addBox(0.5F, -16.0F, -19.0F, 1.0F,
                                                 24.0F, 1.0F, new CubeDeformation(0.0F)),
                                 PartPose.offset(-1.0F, 7.0F, 19.0F));
 
-                PartDefinition group = staff.addOrReplaceChild(
-                                "group", CubeListBuilder.create().texOffs(48, 43).addBox(-0.5F, -17.0F, -20.0F, 3.0F,
-                                                1.0F, 3.0F, new CubeDeformation(0.0F)),
+                PartDefinition group = staff.addOrReplaceChild("group", CubeListBuilder.create().texOffs(14, 71)
+                                .addBox(-0.5F, -18.0F, -20.0F, 3.0F, 2.0F, 3.0F, new CubeDeformation(0.0F))
+                                .texOffs(38, 82)
+                                .addBox(-0.5F, -17.0F, -20.0F, 3.0F, 1.0F, 3.0F, new CubeDeformation(0.0F))
+                                .texOffs(14, 61).addBox(-1.5F, -23.0F, -21.0F, 5.0F, 5.0F, 5.0F,
+                                                new CubeDeformation(0.0F)),
                                 PartPose.offset(-1.0F, 7.0F, 19.0F));
 
                 PartDefinition staffhead = staff.addOrReplaceChild("staffhead", CubeListBuilder.create(),
-                                PartPose.offset(1.6667F, -8.0F, -1.8333F));
+                                PartPose.offsetAndRotation(0.0F, -13.25F, 0.5F, 0.3927F, -0.3927F, -0.3927F));
 
                 PartDefinition night1 = staffhead.addOrReplaceChild("night1",
-                                CubeListBuilder.create().texOffs(44, 47).addBox(-2.0F, -2.0F, -2.0F, 4.0F, 4.0F, 4.0F,
+                                CubeListBuilder.create().texOffs(54, 67).addBox(-2.0F, -2.0F, -2.0F, 4.0F, 4.0F, 4.0F,
                                                 new CubeDeformation(-3.75F)),
-                                PartPose.offset(-1.6667F, -5.0F, 2.3333F));
+                                PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -0.3927F, 0.3927F, 0.3927F));
 
-                PartDefinition night2 = staffhead.addOrReplaceChild(
-                                "night2", CubeListBuilder.create().texOffs(44, 55).addBox(-2.0F, -2.0F, -2.0F, 4.0F,
-                                                4.0F, 4.0F, new CubeDeformation(-5.0F)),
-                                PartPose.offset(-1.6667F, -5.0F, 2.3333F));
+                PartDefinition night3 = night1.addOrReplaceChild(
+                                "night3", CubeListBuilder.create().texOffs(38, 67).addBox(-2.0F, -2.0F, -2.0F, 4.0F,
+                                                4.0F, 4.0F, new CubeDeformation(-1.25F)),
+                                PartPose.offset(0.0F, 0.0F, 0.0F));
 
-                PartDefinition night3 = staffhead.addOrReplaceChild(
-                                "night3", CubeListBuilder.create().texOffs(44, 35).addBox(-2.0F, -2.0F, -2.0F, 4.0F,
-                                                4.0F, 4.0F, new CubeDeformation(-3.0F)),
-                                PartPose.offset(-1.6667F, -5.0F, 2.3333F));
+                PartDefinition night2 = staffhead.addOrReplaceChild("night2", CubeListBuilder.create().texOffs(70, 61)
+                                .addBox(-2.0F, -2.0F, -2.0F, 4.0F, 4.0F, 4.0F, new CubeDeformation(-6.0F))
+                                .texOffs(70, 53).addBox(-2.0F, -2.0F, -2.0F, 4.0F, 4.0F, 4.0F,
+                                                new CubeDeformation(-4.75F)),
+                                PartPose.offset(0.0F, 0.0F, 0.0F));
 
-                PartDefinition left_arm = body.addOrReplaceChild("left_arm",
-                                CubeListBuilder.create().texOffs(40, 16).mirror()
-                                                .addBox(-1.0F, -2.0F, -1.0F, 2.0F, 12.0F, 2.0F,
-                                                                new CubeDeformation(0.0F))
-                                                .mirror(false),
-                                PartPose.offsetAndRotation(5.0F, -10.0F, 0.0F, 0.0F, 0.0F, -0.0873F));
+                PartDefinition right_pauldron = right_arm.addOrReplaceChild("right_pauldron",
+                                CubeListBuilder.create().texOffs(48, 53).addBox(-4.0F, -4.0F, -3.0F, 5.0F, 5.0F, 6.0F,
+                                                new CubeDeformation(0.0F)),
+                                PartPose.offsetAndRotation(0.0F, 0.0F, 1.0F, 1.0472F, -0.0873F, -0.2618F));
+
+                PartDefinition left_arm = body.addOrReplaceChild("left_arm", CubeListBuilder.create().texOffs(70, 69)
+                                .mirror().addBox(-0.95F, -2.0F, -1.0F, 2.0F, 12.0F, 2.0F, new CubeDeformation(0.0F))
+                                .mirror(false)
+                                .texOffs(0, 60).mirror()
+                                .addBox(-1.25F, -2.05F, -1.25F, 3.0F, 12.0F, 4.0F, new CubeDeformation(0.0F))
+                                .mirror(false)
+                                .texOffs(86, 53).mirror()
+                                .addBox(-1.0F, -3.0F, -2.5F, 5.0F, 8.0F, 6.0F, new CubeDeformation(0.25F))
+                                .mirror(false), PartPose.offsetAndRotation(5.0F, -10.0F, 0.0F, 0.0F, 0.0F, -0.0873F));
 
                 PartDefinition leftItem = left_arm.addOrReplaceChild("leftItem", CubeListBuilder.create(),
                                 PartPose.offset(1.0F, 7.0F, 1.0F));
 
                 PartDefinition left_pauldron = left_arm.addOrReplaceChild("left_pauldron",
-                                CubeListBuilder.create().texOffs(0, 49).mirror()
-                                                .addBox(-1.0F, -4.0F, -3.0F, 6.0F, 6.0F, 6.0F,
+                                CubeListBuilder.create().texOffs(48, 53).mirror()
+                                                .addBox(-1.0F, -4.0F, -3.0F, 5.0F, 5.0F, 6.0F,
                                                                 new CubeDeformation(0.0F))
                                                 .mirror(false),
                                 PartPose.offset(0.0F, 0.0F, 1.0F));
 
                 PartDefinition pants = body.addOrReplaceChild(
-                                "pants", CubeListBuilder.create().texOffs(16, 32).addBox(-4.0F, 0.0F, -2.0F, 8.0F,
+                                "pants", CubeListBuilder.create().texOffs(24, 45).addBox(-4.0F, 0.0F, -2.0F, 8.0F,
                                                 12.0F, 4.0F, new CubeDeformation(0.0F)),
                                 PartPose.offset(0.0F, 0.0F, 0.0F));
 
                 PartDefinition middle = pants.addOrReplaceChild(
-                                "middle", CubeListBuilder.create().texOffs(40, 36).addBox(-1.0F, 0.0F, 0.0F, 2.0F,
+                                "middle", CubeListBuilder.create().texOffs(26, 71).addBox(-1.0F, 0.0F, 0.0F, 2.0F,
                                                 10.0F, 0.0F, new CubeDeformation(0.0F)),
                                 PartPose.offset(0.0F, 0.0F, -2.0F));
 
-                PartDefinition cape = body.addOrReplaceChild(
-                                "cape", CubeListBuilder.create().texOffs(24, 64).addBox(-8.0F, 0.0F, -2.0F, 16.0F,
-                                                24.0F, 4.0F, new CubeDeformation(0.0F)),
+                PartDefinition cape = body.addOrReplaceChild("cape", CubeListBuilder.create().texOffs(88, 0)
+                                .addBox(-8.0F, 0.0F, -2.0F, 16.0F, 24.0F, 4.0F, new CubeDeformation(0.0F))
+                                .texOffs(0, 0).addBox(-8.0F, 0.0F, -3.0F, 16.0F, 24.0F, 5.0F,
+                                                new CubeDeformation(0.25F)),
                                 PartPose.offset(0.0F, -12.0F, 1.0F));
 
-                return LayerDefinition.create(meshdefinition, 64, 128);
+                PartDefinition collar = body.addOrReplaceChild("collar",
+                                CubeListBuilder.create().texOffs(0, 29).addBox(-5.5F, -4.0F, -1.5F, 11.0F, 5.0F, 10.0F,
+                                                new CubeDeformation(0.0F)),
+                                PartPose.offsetAndRotation(0.0F, -10.5F, 3.0F, 1.0036F, 0.0F, 0.0F));
+
+                return LayerDefinition.create(meshdefinition, 128, 128);
         }
 
         @Override
@@ -200,8 +239,7 @@ public class NamelessOneModel<T extends AbstractNamelessOne> extends Hierarchica
 
         @Override
         public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight,
-                        int packedOverlay,
-                        float red, float green, float blue, float alpha) {
+                        int packedOverlay, float red, float green, float blue, float alpha) {
                 skeleton.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
         }
 

@@ -2,6 +2,9 @@ package com.k1sak1.goetyawaken.common.entities.ally;
 
 import com.k1sak1.goetyawaken.config.AttributesConfig;
 import com.Polarice3.Goety.api.entities.ICustomAttributes;
+import com.Polarice3.Goety.client.particles.SphereExplodeParticleOption;
+import com.Polarice3.Goety.utils.BlockFinder;
+import com.Polarice3.Goety.utils.ColorUtil;
 import com.Polarice3.Goety.common.entities.ally.Summoned;
 import com.Polarice3.Goety.common.entities.neutral.Owned;
 import com.Polarice3.Goety.utils.MobUtil;
@@ -218,6 +221,15 @@ public class CreeperServant extends Summoned implements ICustomAttributes {
             this.dead = true;
             this.level().explode(this, this.getX(), this.getY(), this.getZ(), (float) this.explosionRadius * f,
                     Level.ExplosionInteraction.NONE);
+            if (this.level() instanceof ServerLevel serverLevel) {
+                ColorUtil colorUtil = new ColorUtil(0x00FF00);
+                float explosionSize = (float) this.explosionRadius * f;
+                serverLevel.sendParticles(
+                        new SphereExplodeParticleOption(colorUtil, explosionSize * 2.0F, 1),
+                        this.getX(), BlockFinder.moveDownToGround(this) + 0.5F, this.getZ(),
+                        1, 0, 0, 0, 0);
+            }
+
             this.discard();
         }
     }

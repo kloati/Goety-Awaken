@@ -38,8 +38,8 @@ public class BoulderClusterRenderer extends EntityRenderer<BlockClusterEntity> {
 
         poseStack.pushPose();
 
-        float xRot = Mth.lerp(partialTicks, entity.shakeO.x, entity.shake.x);
-        float zRot = Mth.lerp(partialTicks, entity.shakeO.y, entity.shake.y);
+        float xRot = Mth.lerp(partialTicks, entity.oscillationOffset.x, entity.currentOscillation.x);
+        float zRot = Mth.lerp(partialTicks, entity.oscillationOffset.y, entity.currentOscillation.y);
         double halfYSize = entity.getBoundingBox().getYsize() / 2.0D;
         poseStack.translate(0.0D, halfYSize, 0.0D);
         poseStack.mulPose(Axis.YP.rotationDegrees(-entity.getClusterYRot(partialTicks) - xRot * 50.0F));

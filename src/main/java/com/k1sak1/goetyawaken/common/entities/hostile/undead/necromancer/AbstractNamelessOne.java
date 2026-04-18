@@ -3,6 +3,7 @@ package com.k1sak1.goetyawaken.common.entities.hostile.undead.necromancer;
 import com.Polarice3.Goety.api.entities.ICustomAttributes;
 import com.Polarice3.Goety.api.entities.IOwned;
 import com.Polarice3.Goety.client.particles.*;
+import com.Polarice3.Goety.client.particles.GatherTrailParticleOption;
 import com.Polarice3.Goety.common.effects.GoetyEffects;
 import com.Polarice3.Goety.common.entities.ally.Summoned;
 import com.Polarice3.Goety.common.entities.ally.undead.PhantomServant;
@@ -218,7 +219,7 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
         if (this.damageCapManager == null) {
             this.damageCapManager = new DamageCapManager(this);
         }
-        this.damageCapManager.defineSynchedData();
+        this.damageCapManager.initializeSyncedData();
     }
 
     public int getAnimationState() {
@@ -252,8 +253,8 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
                 float maxProgress = (float) newMaxHealth;
                 float healthRatio = this.getHealth() / this.getMaxHealth();
                 float newHealth = maxProgress * healthRatio;
-                this.damageCapManager.setMaxCombatProgress(maxProgress);
-                this.damageCapManager.setCombatProgress(newHealth);
+                this.damageCapManager.setPeakCombatHealth(maxProgress);
+                this.damageCapManager.setCurrentCombatHealth(newHealth);
                 this.setVanillaHealth(newHealth);
             }
         }
@@ -509,7 +510,7 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
                                 this.getBoundingBox().inflate(64.0D),
                                 vex -> vex.isAlive() && this.equals(vex.getTrueOwner()));
 
-                if (existingScarletVexes.size() >= 5) {
+                if (existingScarletVexes.size() >= 4) {
                     return;
                 }
 
@@ -523,7 +524,7 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
                             Vec3 spawnVec = new Vec3(spawnPos.getX() + 0.5D, spawnPos.getY(), spawnPos.getZ() + 0.5D);
                             ColorUtil colorUtil = new ColorUtil(0xFF0000);
                             ServerParticleUtil.gatheringParticles(
-                                    new GatherTrailParticle.Option(colorUtil, spawnVec.add(0, 1, 0)),
+                                    new GatherTrailParticleOption(colorUtil, spawnVec.add(0, 1, 0)),
                                     this,
                                     serverLevel, 4);
 
@@ -552,7 +553,7 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
                                     this);
                             this.level().addFreshEntity(summonCircle);
                         }
-                        this.scarletVexSummonCool = 200;
+                        this.scarletVexSummonCool = 400;
                     }
                 }
             }
@@ -823,23 +824,23 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
             double rotatedX = targetVec.x * Math.cos(yawRad) - targetVec.z * Math.sin(yawRad);
             double rotatedZ = targetVec.x * Math.sin(yawRad) + targetVec.z * Math.cos(yawRad);
             Vec3 rotatedVec = new Vec3(rotatedX, targetVec.y, rotatedZ);
-            com.k1sak1.goetyawaken.common.entities.projectiles.NecroBolt necroBolt = new com.k1sak1.goetyawaken.common.entities.projectiles.NecroBolt(
+            com.k1sak1.goetyawaken.common.entities.projectiles.NamelessBolt namelessBolt = new com.k1sak1.goetyawaken.common.entities.projectiles.NamelessBolt(
                     this, rotatedVec.x, rotatedVec.y, rotatedVec.z, this.level());
 
-            necroBolt.setPos(this.getX(), this.getEyeY() - 0.3D, this.getZ());
-            necroBolt.setOwner(this);
+            namelessBolt.setPos(this.getX(), this.getEyeY() - 0.3D, this.getZ());
+            namelessBolt.setOwner(this);
             float healthbasedamage = 0;
             if (target != null && !AbstractNamelessOne.this.isEasyMode()) {
                 healthbasedamage = (float) (0.01 * target.getMaxHealth());
             }
 
-            necroBolt.setExtraDamage(2 * this.getNecroLevel() + (float) (attackDamage) / 4 + healthbasedamage);
-            necroBolt.setBoltSpeed((int) (0.9F + 0.2F * this.getNecroLevel()));
+            namelessBolt.setExtraDamage(2 * this.getNecroLevel() + (float) (attackDamage) / 4 + healthbasedamage);
+            namelessBolt.setBoltSpeed((int) (0.9F + 0.2F * this.getNecroLevel()));
             if (enableHoming) {
-                necroBolt.setHomingTarget(target);
+                namelessBolt.setHomingTarget(target);
             }
 
-            if (this.level().addFreshEntity(necroBolt)) {
+            if (this.level().addFreshEntity(namelessBolt)) {
                 if (i == startAngle) {
                     this.playSound(getRandomShootSound(), 1.0F, 1.0F);
                     this.swing(net.minecraft.world.InteractionHand.MAIN_HAND);
@@ -894,7 +895,7 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
     @Override
     public void tick() {
         super.tick();
-        this.damageCapManager.tick();
+        this.damageCapManager.performTick();
         if (!AbstractNamelessOne.this.isEasyMode()) {
             this.lowHealthSpellPushEntities();
             this.handleTeleportationLogic();
@@ -902,7 +903,7 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
         if (this.isOnFire() && !AbstractNamelessOne.this.isEasyMode()) {
             this.clearFire();
         }
-        this.damageCapManager.validateCombatProgress();
+        this.damageCapManager.validateHealthConsistency();
         if (!this.level().isClientSide && !this.isMirror() && !AbstractNamelessOne.this.isEasyMode()) {
             if (this.scarletVexSummonCool > 0) {
                 this.scarletVexSummonCool--;
@@ -1431,7 +1432,6 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
                 beneficialEffects.add(com.k1sak1.goetyawaken.init.ModEffects.ECHO.get());
                 beneficialEffects.add(com.k1sak1.goetyawaken.init.ModEffects.COMMITTED.get());
                 beneficialEffects.add(com.k1sak1.goetyawaken.init.ModEffects.CRITICAL_HIT.get());
-                beneficialEffects.add(com.k1sak1.goetyawaken.init.ModEffects.ENCHANTMENT_THORNS.get());
                 beneficialEffects.add(com.k1sak1.goetyawaken.init.ModEffects.ENCHANTMENT_SHARPNESS.get());
                 beneficialEffects.add(com.k1sak1.goetyawaken.init.ModEffects.CHAINS.get());
                 for (int i = 0; i < bonusCount && !beneficialEffects.isEmpty(); i++) {
@@ -1572,7 +1572,7 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
                     double radius = AbstractNamelessOne.this.getBoundingBox().getSize() * 2.0F;
                     ColorUtil colorUtil = new ColorUtil(ChatFormatting.GREEN);
                     ServerParticleUtil.gatheringParticles(
-                            new GatherTrailParticle.Option(colorUtil, AbstractNamelessOne.this.position().add(0, 1, 0)),
+                            new GatherTrailParticleOption(colorUtil, AbstractNamelessOne.this.position().add(0, 1, 0)),
                             AbstractNamelessOne.this,
                             serverLevel, 4);
                     ServerParticleUtil.windParticle(serverLevel, colorUtil, (float) radius, 1.0F,
@@ -1765,15 +1765,15 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
         }
         if (source.is(com.Polarice3.Goety.utils.ModDamageSource.DEATH) ||
                 (source.is(net.minecraft.world.damagesource.DamageTypes.INDIRECT_MAGIC) &&
-                        source.getDirectEntity() instanceof com.Polarice3.Goety.common.entities.projectiles.NecroBolt)) {
+                        source.getDirectEntity() instanceof com.k1sak1.goetyawaken.common.entities.projectiles.NamelessBolt)) {
             return false;
         }
         if (!this.level().isClientSide()) {
             this.increaseHitTime();
         }
         if (damageCapManager != null) {
-            if (amount >= damageCapManager.getMaxAllowedDamage()) {
-                amount = damageCapManager.getMaxAllowedDamage();
+            if (amount >= damageCapManager.calculateMaximumAllowedDamage()) {
+                amount = damageCapManager.calculateMaximumAllowedDamage();
             }
         }
         Entity attacker = source.getEntity();
@@ -1833,14 +1833,14 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
             return;
         }
         if (damageCapManager != null) {
-            if (amount >= damageCapManager.getMaxAllowedDamage()) {
-                amount = damageCapManager.getMaxAllowedDamage();
+            if (amount >= damageCapManager.calculateMaximumAllowedDamage()) {
+                amount = damageCapManager.calculateMaximumAllowedDamage();
             }
         }
         if (source.is(net.minecraft.world.damagesource.DamageTypes.LIGHTNING_BOLT)) {
             amount = amount * 1.3F;
         }
-        float maxAllowedDamage = this.getMaxHealth() * DamageCapManager.getDamageThresholdPercent();
+        float maxAllowedDamage = this.getMaxHealth() * DamageCapManager.getHealthLossThresholdRatio();
         float cappedAmount = Math.min(amount, maxAllowedDamage);
         float resistedAmount = cappedAmount;
         float servantDamageReduction = this.calculateServantDamageReduction();
@@ -1857,7 +1857,7 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
             resistedAmount = resistedAmount * 0.5F;
         }
         this.damageCapManager.hurtFinal(source, resistedAmount);
-        this.damageCapManager.setHurtCall(false);
+        this.damageCapManager.setDamageCallInitiated(false);
     }
 
     public void setVanillaHealth(float health) {
@@ -1874,22 +1874,22 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
             return;
         }
         if (this.level().isClientSide()) {
-            this.damageCapManager.setCombatProgress(health);
+            this.damageCapManager.setCurrentCombatHealth(health);
             return;
         }
-        this.damageCapManager.setCombatProgress(health);
+        this.damageCapManager.setCurrentCombatHealth(health);
     }
 
     @Override
     public float getHealth() {
-        return getCombatProgress();
+        return getCurrentCombatHealth();
     }
 
-    public float getCombatProgress() {
+    public float getCurrentCombatHealth() {
         if (this.damageCapManager == null) {
             return super.getHealth();
         }
-        return this.damageCapManager.getCombatProgress();
+        return this.damageCapManager.getCurrentCombatHealth();
     }
 
     public float getVanillaHealth() {
@@ -1901,7 +1901,7 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
         if (this.damageCapManager == null) {
             return super.isDeadOrDying();
         }
-        return this.damageCapManager.getCombatProgress() <= 0.0F;
+        return this.damageCapManager.getCurrentCombatHealth() <= 0.0F;
     }
 
     @Override
@@ -1912,7 +1912,7 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
         if (this.damageCapManager == null) {
             return super.isAlive();
         }
-        return this.damageCapManager.getCombatProgress() > 0.0F;
+        return this.damageCapManager.getCurrentCombatHealth() > 0.0F;
     }
 
     @Override
@@ -1920,7 +1920,7 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
         if (this.damageCapManager == null) {
             return super.isImmobile();
         }
-        return this.damageCapManager.getCombatProgress() <= 0.0F;
+        return this.damageCapManager.getCurrentCombatHealth() <= 0.0F;
     }
 
     public SynchedEntityData getEntityDataAccessor() {
@@ -2176,8 +2176,8 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
         compound.putInt("MirrorLifetime", this.getMirrorLifetime());
         compound.putBoolean("HasTriggeredSpawnQuote", this.hasTriggeredSpawnQuote);
         compound.putBoolean("HasTriggeredDiscoverEnemyQuote", this.hasTriggeredDiscoverEnemyQuote);
-        compound.putFloat("CombatProgress", this.getCombatProgress());
-        compound.putFloat("MaxCombatProgress", this.damageCapManager.getMaxCombatProgress());
+        compound.putFloat("CombatProgress", this.getCurrentCombatHealth());
+        compound.putFloat("MaxCombatProgress", this.damageCapManager.getPeakCombatHealth());
     }
 
     @Override
@@ -2236,10 +2236,10 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
         }
         if (compound.contains("CombatProgress")) {
             float combatProgress = compound.getFloat("CombatProgress");
-            this.damageCapManager.setCombatProgress(combatProgress);
+            this.damageCapManager.setCurrentCombatHealth(combatProgress);
             if (compound.contains("MaxCombatProgress")) {
                 float maxCombatProgress = compound.getFloat("MaxCombatProgress");
-                this.damageCapManager.setMaxCombatProgress(maxCombatProgress);
+                this.damageCapManager.setPeakCombatHealth(maxCombatProgress);
             }
             this.setVanillaHealth(combatProgress);
         }
@@ -2338,7 +2338,7 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
                     double radius = AbstractNamelessOne.this.getBoundingBox().getSize() * 2.0F;
                     ColorUtil colorUtil = new ColorUtil(ChatFormatting.GREEN);
                     ServerParticleUtil.gatheringParticles(
-                            new GatherTrailParticle.Option(colorUtil, AbstractNamelessOne.this.position().add(0, 1, 0)),
+                            new GatherTrailParticleOption(colorUtil, AbstractNamelessOne.this.position().add(0, 1, 0)),
                             AbstractNamelessOne.this,
                             serverLevel, 4);
                     ServerParticleUtil.windParticle(serverLevel, colorUtil, (float) radius, 1.0F,
@@ -2479,7 +2479,6 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
                 beneficialEffects.add(com.k1sak1.goetyawaken.init.ModEffects.ECHO.get());
                 beneficialEffects.add(com.k1sak1.goetyawaken.init.ModEffects.COMMITTED.get());
                 beneficialEffects.add(com.k1sak1.goetyawaken.init.ModEffects.CRITICAL_HIT.get());
-                beneficialEffects.add(com.k1sak1.goetyawaken.init.ModEffects.ENCHANTMENT_THORNS.get());
                 beneficialEffects.add(com.k1sak1.goetyawaken.init.ModEffects.ENCHANTMENT_SHARPNESS.get());
                 beneficialEffects.add(com.k1sak1.goetyawaken.init.ModEffects.CHAINS.get());
 
@@ -2561,7 +2560,7 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
                     double radius = AbstractNamelessOne.this.getBoundingBox().getSize() * 2.0F;
                     ColorUtil colorUtil = new ColorUtil(ChatFormatting.DARK_PURPLE);
                     ServerParticleUtil.gatheringParticles(
-                            new GatherTrailParticle.Option(colorUtil, AbstractNamelessOne.this.position().add(0, 1, 0)),
+                            new GatherTrailParticleOption(colorUtil, AbstractNamelessOne.this.position().add(0, 1, 0)),
                             AbstractNamelessOne.this,
                             serverLevel, 4);
                     ServerParticleUtil.windParticle(serverLevel, colorUtil, (float) radius * 2, 1.0F,
@@ -2893,6 +2892,11 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
             if (AbstractNamelessOne.this.isMirror()) {
                 return false;
             }
+            boolean thunderstormEnabled = com.k1sak1.goetyawaken.Config.ENABLE_NAMELESS_ONE_THUNDERSTORM.get();
+            boolean heavenRiftEnabled = com.k1sak1.goetyawaken.Config.ENABLE_NAMELESS_ONE_HEAVEN_RIFT.get();
+            if ((!thunderstormEnabled) && (!heavenRiftEnabled)) {
+                return false;
+            }
             return !AbstractNamelessOne.this.isSpellCasting()
                     && AbstractNamelessOne.this.getTarget() != null
                     && AbstractNamelessOne.this.getTarget().isAlive()
@@ -2909,8 +2913,16 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
         @Override
         public void start() {
             Level level = AbstractNamelessOne.this.level();
-            if (level instanceof ServerLevel serverLevel) {
-                this.useUpdraftVariant = serverLevel.getRandom().nextBoolean();
+            boolean thunderstormEnabled = com.k1sak1.goetyawaken.Config.ENABLE_NAMELESS_ONE_THUNDERSTORM.get();
+            boolean heavenRiftEnabled = com.k1sak1.goetyawaken.Config.ENABLE_NAMELESS_ONE_HEAVEN_RIFT.get();
+            if (thunderstormEnabled && heavenRiftEnabled) {
+                if (level instanceof ServerLevel serverLevel) {
+                    this.useUpdraftVariant = serverLevel.getRandom().nextBoolean();
+                } else {
+                    this.useUpdraftVariant = false;
+                }
+            } else if (heavenRiftEnabled) {
+                this.useUpdraftVariant = true;
             } else {
                 this.useUpdraftVariant = false;
             }
@@ -3050,6 +3062,9 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
             if (AbstractNamelessOne.this.isMirror() || AbstractNamelessOne.this.isEasyMode()) {
                 return false;
             }
+            if (!com.k1sak1.goetyawaken.Config.ENABLE_NAMELESS_ONE_DESERT_PLAGUES.get()) {
+                return false;
+            }
             boolean hasServants = false;
             if (AbstractNamelessOne.this.level() instanceof ServerLevel serverLevel) {
                 java.util.List<LivingEntity> nearbyEntities = serverLevel.getEntitiesOfClass(
@@ -3156,7 +3171,7 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
                                             AbstractNamelessOne.this.getRandomZ(1.0F));
 
                                     serverLevel.sendParticles(
-                                            new com.Polarice3.Goety.client.particles.GatherTrailParticle.Option(
+                                            new com.Polarice3.Goety.client.particles.GatherTrailParticleOption(
                                                     colorUtil, casterVec),
                                             targetVec.x, targetVec.y,
                                             targetVec.z, 0, 0.0F, 0.0F, 0.0F, 0.5F);
@@ -3190,7 +3205,7 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
                         com.Polarice3.Goety.utils.ColorUtil colorUtil = new com.Polarice3.Goety.utils.ColorUtil(
                                 net.minecraft.ChatFormatting.RED);
                         com.Polarice3.Goety.utils.ServerParticleUtil.gatheringParticles(
-                                new com.Polarice3.Goety.client.particles.GatherTrailParticle.Option(colorUtil,
+                                new com.Polarice3.Goety.client.particles.GatherTrailParticleOption(colorUtil,
                                         AbstractNamelessOne.this.position().add(0, 1, 0)),
                                 AbstractNamelessOne.this,
                                 serverLevel, 4);
@@ -3443,6 +3458,9 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
 
         @Override
         public boolean canUse() {
+            if (!com.k1sak1.goetyawaken.Config.ENABLE_NAMELESS_ONE_AVADA.get()) {
+                return false;
+            }
             return !AbstractNamelessOne.this.isMirror()
                     && !AbstractNamelessOne.this.isSpellCasting()
                     && AbstractNamelessOne.this.getTarget() != null
@@ -3507,7 +3525,7 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
                         for (int i = 0; i < 8; ++i) {
                             Vec3 vector3d = new Vec3(target.getX(), target.getEyeY(), target.getZ());
                             Vec3 vector3d1 = vector3d.offsetRandom(target.getRandom(), 8.0F);
-                            serverLevel.sendParticles(new GatherTrailParticle.Option(colorUtil, vector3d1), vector3d.x,
+                            serverLevel.sendParticles(new GatherTrailParticleOption(colorUtil, vector3d1), vector3d.x,
                                     vector3d.y, vector3d.z, 0, 0.0, 0.0, 0.0, 0.5);
                             ServerParticleUtil.windParticle(serverLevel, colorUtil, 1.0F, 0.0F, target.getId(),
                                     target.position());
@@ -3552,6 +3570,11 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
 
         @Override
         public boolean canUse() {
+            boolean enchantmentEnabled = com.k1sak1.goetyawaken.Config.ENABLE_NAMELESS_ONE_ENCHANTMENT.get();
+            boolean supportSpellsEnabled = com.k1sak1.goetyawaken.Config.ENABLE_NAMELESS_ONE_SUPPORT_SPELLS.get();
+            if ((!enchantmentEnabled) && (!supportSpellsEnabled)) {
+                return false;
+            }
             return !AbstractNamelessOne.this.isSpellCasting()
                     && AbstractNamelessOne.this.getTarget() != null
                     && AbstractNamelessOne.this.getTarget().isAlive()
@@ -3568,8 +3591,18 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
         @Override
         public void start() {
             Level level = AbstractNamelessOne.this.level();
-            if (level instanceof ServerLevel serverLevel) {
-                this.useVariant = serverLevel.random.nextBoolean();
+            boolean enchantmentEnabled = com.k1sak1.goetyawaken.Config.ENABLE_NAMELESS_ONE_ENCHANTMENT.get();
+            boolean supportSpellsEnabled = com.k1sak1.goetyawaken.Config.ENABLE_NAMELESS_ONE_SUPPORT_SPELLS.get();
+            if (AbstractNamelessOne.this.isMirror()) {
+                this.useVariant = false;
+            } else if (enchantmentEnabled && supportSpellsEnabled) {
+                if (level instanceof ServerLevel serverLevel) {
+                    this.useVariant = serverLevel.random.nextBoolean();
+                } else {
+                    this.useVariant = false;
+                }
+            } else if (enchantmentEnabled) {
+                this.useVariant = true;
             } else {
                 this.useVariant = false;
             }
@@ -3612,7 +3645,7 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
                             AbstractNamelessOne.this.getId(),
                             AbstractNamelessOne.this.position());
                     ServerParticleUtil.gatheringParticles(
-                            new GatherTrailParticle.Option(colorUtil, AbstractNamelessOne.this.position().add(0, 1, 0)),
+                            new GatherTrailParticleOption(colorUtil, AbstractNamelessOne.this.position().add(0, 1, 0)),
                             AbstractNamelessOne.this,
                             serverLevel, 4);
                 }
@@ -3628,7 +3661,7 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
                             AbstractNamelessOne.this.getId(),
                             AbstractNamelessOne.this.position());
                     ServerParticleUtil.gatheringParticles(
-                            new GatherTrailParticle.Option(colorUtil, AbstractNamelessOne.this.position().add(0, 1, 0)),
+                            new GatherTrailParticleOption(colorUtil, AbstractNamelessOne.this.position().add(0, 1, 0)),
                             AbstractNamelessOne.this,
                             serverLevel, 4);
                 }
@@ -3701,7 +3734,7 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
             int selectedSpell = availableSpells.get(serverLevel.random.nextInt(availableSpells.size()));
             ColorUtil colorUtil = new ColorUtil(0xFFFFFF);
             serverLevel.sendParticles(
-                    new CircleExplodeParticleOption(colorUtil.red(), colorUtil.green(), colorUtil.blue(), 16.0F, 1),
+                    new SmashParticleOption(colorUtil.red(), colorUtil.green(), colorUtil.blue(), 16.0F, 4.0F, 25),
                     AbstractNamelessOne.this.getX(),
                     AbstractNamelessOne.this.getY() + 0.5F,
                     AbstractNamelessOne.this.getZ(),
@@ -3711,9 +3744,10 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
         }
 
         private void executeVariantBehavior(ServerLevel serverLevel) {
-            ColorUtil greenColor = new ColorUtil(0x00FF00);
+            ColorUtil variantPurpleColor = new ColorUtil(0x8B00FF);
             serverLevel.sendParticles(
-                    new CircleExplodeParticleOption(greenColor.red(), greenColor.green(), greenColor.blue(), 16.0F, 1),
+                    new SmashParticleOption(variantPurpleColor.red(), variantPurpleColor.green(),
+                            variantPurpleColor.blue(), 32.0F, 7.0F, 40),
                     AbstractNamelessOne.this.getX(),
                     AbstractNamelessOne.this.getY() + 0.5F,
                     AbstractNamelessOne.this.getZ(),
@@ -3738,9 +3772,9 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
             net.minecraft.world.Difficulty difficulty = serverLevel.getDifficulty();
             int difficultyCoefficient = switch (difficulty) {
                 case PEACEFUL -> 0;
-                case EASY -> 1;
-                case NORMAL -> 1;
-                case HARD -> 2;
+                case EASY -> 0;
+                case NORMAL -> 0;
+                case HARD -> 1;
             };
 
             int duration = 30 * (1 + necroLevel + difficultyCoefficient);
@@ -3755,7 +3789,6 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
             beneficialEffects.add(com.k1sak1.goetyawaken.init.ModEffects.ECHO.get());
             beneficialEffects.add(com.k1sak1.goetyawaken.init.ModEffects.COMMITTED.get());
             beneficialEffects.add(com.k1sak1.goetyawaken.init.ModEffects.CRITICAL_HIT.get());
-            beneficialEffects.add(com.k1sak1.goetyawaken.init.ModEffects.ENCHANTMENT_THORNS.get());
             beneficialEffects.add(com.k1sak1.goetyawaken.init.ModEffects.ENCHANTMENT_SHARPNESS.get());
             if (!beneficialEffects.isEmpty()) {
                 MobEffect selectedEffect = beneficialEffects.get(serverLevel.random.nextInt(beneficialEffects.size()));
@@ -3767,7 +3800,33 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
                     if (ally instanceof IAncientGlint glint) {
                         glint.setAncientGlint(true);
                         glint.setGlintTextureType("enchant");
+                        applyRandomMobEnchantment(serverLevel, ally);
                     }
+                }
+            }
+        }
+
+        private void applyRandomMobEnchantment(ServerLevel serverLevel, LivingEntity ally) {
+            int enchantLevel = (int) AbstractNamelessOne.this.level()
+                    .getCurrentDifficultyAt(AbstractNamelessOne.this.blockPosition()).getEffectiveDifficulty();
+            com.k1sak1.goetyawaken.common.mobenchant.MobEnchantType[] availableEnchants = {
+                    com.k1sak1.goetyawaken.common.mobenchant.MobEnchantType.STRONG,
+                    com.k1sak1.goetyawaken.common.mobenchant.MobEnchantType.SPEEDY,
+                    com.k1sak1.goetyawaken.common.mobenchant.MobEnchantType.HUGE,
+                    com.k1sak1.goetyawaken.common.mobenchant.MobEnchantType.TOUGH,
+                    com.k1sak1.goetyawaken.common.mobenchant.MobEnchantType.PROTECTION,
+                    com.k1sak1.goetyawaken.common.mobenchant.MobEnchantType.HEALTH_BOOST
+            };
+
+            com.k1sak1.goetyawaken.common.mobenchant.MobEnchantType selectedEnchant = availableEnchants[serverLevel.random
+                    .nextInt(availableEnchants.length)];
+            com.k1sak1.goetyawaken.common.mobenchant.MobEnchantEventHandler.applyEnchantment(
+                    ally, selectedEnchant, enchantLevel);
+            if (ally instanceof net.minecraft.world.entity.monster.RangedAttackMob) {
+                if (serverLevel.random.nextBoolean()) {
+                    int multishotLevel = AbstractNamelessOne.this.getNecroLevel() + 1;
+                    com.k1sak1.goetyawaken.common.mobenchant.MobEnchantEventHandler.applyEnchantment(
+                            ally, com.k1sak1.goetyawaken.common.mobenchant.MobEnchantType.MULTISHOT, multishotLevel);
                 }
             }
         }

@@ -1,5 +1,6 @@
 package com.k1sak1.goetyawaken.common.crafting;
 
+import com.k1sak1.goetyawaken.Config;
 import com.k1sak1.goetyawaken.common.items.ModItems;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
@@ -90,8 +91,12 @@ public class ShulkerMissilePotionRecipe extends CustomRecipe {
                 ResourceLocation effectKey = ForgeRegistries.MOB_EFFECTS.getKey(effectInstance.getEffect());
                 if (effectKey != null) {
                     potionTag.putString("EffectName", effectKey.toString());
-                    potionTag.putInt("Duration", effectInstance.getDuration());
-                    potionTag.putInt("Amplifier", effectInstance.getAmplifier());
+                    int duration = effectInstance.getDuration();
+                    int amplifier = effectInstance.getAmplifier();
+                    duration = Math.min(duration, Config.SHULKER_MISSILE_MAX_POTION_DURATION.get());
+                    amplifier = Math.min(amplifier, Config.SHULKER_MISSILE_MAX_POTION_AMPLIFIER.get());
+                    potionTag.putInt("Duration", duration);
+                    potionTag.putInt("Amplifier", amplifier);
                 }
             }
         } else if (potion.getItem() instanceof com.Polarice3.Goety.common.items.brew.BrewItem) {
@@ -118,12 +123,29 @@ public class ShulkerMissilePotionRecipe extends CustomRecipe {
 
                         if (brewId != null && !brewId.isEmpty() && !brewId.equals("minecraft:")) {
                             potionTag.putString("EffectName", brewId);
-                            potionTag.putInt("Duration", effectTag.getInt("Duration"));
-                            potionTag.putInt("Amplifier", effectTag.getInt("Amplifier"));
+                            // Apply configuration limits for brew effects
+                            int duration = effectTag.getInt("Duration");
+                            int amplifier = effectTag.getInt("Amplifier");
+
+                            // Try to get the actual effect to check if it's instantaneous
+                            ResourceLocation brewEffectKey = new ResourceLocation(brewId);
+                            net.minecraft.world.effect.MobEffect effect = ForgeRegistries.MOB_EFFECTS
+                                    .getValue(brewEffectKey);
+
+                            if (effect != null && !effect.isInstantenous()) {
+                                // For non-instantaneous effects, apply duration and amplifier limits
+                                duration = Math.min(duration, Config.shulkerMissileMaxPotionDuration);
+                                amplifier = Math.min(amplifier, Config.shulkerMissileMaxPotionAmplifier);
+                            } else {
+                                // For instantaneous effects or unknown effects, only limit amplifier
+                                amplifier = Math.min(amplifier, Config.shulkerMissileMaxPotionAmplifier);
+                            }
+
+                            potionTag.putInt("Duration", duration);
+                            potionTag.putInt("Amplifier", amplifier);
                         }
                     }
-                }
-                else if (potion.getTag().contains("Potion")) {
+                } else if (potion.getTag().contains("Potion")) {
                     java.util.List<net.minecraft.world.effect.MobEffectInstance> effects = PotionUtils
                             .getMobEffects(potion);
                     if (!effects.isEmpty()) {
@@ -135,8 +157,21 @@ public class ShulkerMissilePotionRecipe extends CustomRecipe {
                             ResourceLocation effectKey = ForgeRegistries.MOB_EFFECTS.getKey(effectInstance.getEffect());
                             if (effectKey != null) {
                                 potionTag.putString("EffectName", effectKey.toString());
-                                potionTag.putInt("Duration", effectInstance.getDuration());
-                                potionTag.putInt("Amplifier", effectInstance.getAmplifier());
+                                // Apply configuration limits
+                                int duration = effectInstance.getDuration();
+                                int amplifier = effectInstance.getAmplifier();
+
+                                boolean isInstantaneous = effectInstance.getEffect().isInstantenous();
+
+                                if (!isInstantaneous) {
+                                    duration = Math.min(duration, Config.shulkerMissileMaxPotionDuration);
+                                    amplifier = Math.min(amplifier, Config.shulkerMissileMaxPotionAmplifier);
+                                } else {
+                                    amplifier = Math.min(amplifier, Config.shulkerMissileMaxPotionAmplifier);
+                                }
+
+                                potionTag.putInt("Duration", duration);
+                                potionTag.putInt("Amplifier", amplifier);
                             }
                         }
                     }

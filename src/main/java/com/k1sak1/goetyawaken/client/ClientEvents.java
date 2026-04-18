@@ -7,6 +7,7 @@ import com.k1sak1.goetyawaken.common.network.client.CWardenRoarPacket;
 import com.k1sak1.goetyawaken.common.entities.hostile.undead.necromancer.WraithNecromancer;
 import com.k1sak1.goetyawaken.common.entities.hostile.MushroomMonstrosityHostile;
 import com.k1sak1.goetyawaken.common.entities.hostile.undead.necromancer.NamelessOne;
+import com.k1sak1.goetyawaken.common.entities.ally.ender.EndersentServant;
 import com.k1sak1.goetyawaken.common.network.client.CAutoRideablePacket;
 import com.k1sak1.goetyawaken.common.network.client.CWitherFlightPacket;
 import com.k1sak1.goetyawaken.common.network.client.CWitherRoarPacket;
@@ -201,6 +202,16 @@ public class ClientEvents {
                         if (isTargetingPlayer) {
                             com.Polarice3.Goety.client.events.ClientEvents.playBossMusic(
                                     ModSounds.NAMELESS_FIGHT_MUSIC.get(), namelessOne, 0.75F, 1.0F);
+                        }
+                    }
+                    if (entity instanceof EndersentServant endersentServant
+                            && !endersentServant.isNoAi()
+                            && endersentServant.isHostile()) {
+                        if (isTargetingPlayer) {
+                            com.Polarice3.Goety.client.events.ClientEvents.playBossMusic(
+                                    com.Polarice3.Goety.init.ModSounds.ENDERSENT_THEME.get(),
+                                    com.Polarice3.Goety.init.ModSounds.ARENA_END.get(),
+                                    endersentServant, 0.75F, 1.0F);
                         }
                     }
                     if (entity instanceof Mob mob

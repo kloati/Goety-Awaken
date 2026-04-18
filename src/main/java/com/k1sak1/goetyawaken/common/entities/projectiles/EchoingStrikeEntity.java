@@ -1,5 +1,8 @@
 package com.k1sak1.goetyawaken.common.entities.projectiles;
 
+import com.Polarice3.Goety.client.particles.SphereExplodeParticleOption;
+import com.Polarice3.Goety.utils.BlockFinder;
+import com.Polarice3.Goety.utils.ColorUtil;
 import com.k1sak1.goetyawaken.common.entities.ModEntityType;
 import com.k1sak1.goetyawaken.common.events.EchoEffectHandler;
 import net.minecraft.core.particles.ParticleOptions;
@@ -58,6 +61,10 @@ public class EchoingStrikeEntity extends AoeEntity {
                             20,
                             true);
                     serverLevel.sendParticles(shockwaveOption, center.x, center.y, center.z, 0, 0.0D, 0.0D, 0.0D, 0);
+                    ColorUtil colorUtil = new ColorUtil(0xFFFFFF);
+                    serverLevel.sendParticles(
+                            new SphereExplodeParticleOption(colorUtil, getRadius() * 0.5F, 1),
+                            center.x, center.y + 0.5D, center.z, 1, 0, 0, 0, 0);
                 }
 
                 float explosionRadius = getRadius();

@@ -2,23 +2,40 @@ package com.k1sak1.goetyawaken.common.events;
 
 import com.Polarice3.Goety.common.effects.GoetyEffects;
 import com.k1sak1.goetyawaken.GoetyAwaken;
+import com.k1sak1.goetyawaken.common.items.GraveBaneSwordItem;
+import com.k1sak1.goetyawaken.common.items.GlaiveItem;
+import com.k1sak1.goetyawaken.common.items.MoonlightCutItem;
 import com.k1sak1.goetyawaken.common.items.armor.ChampionArmorItem;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.common.ForgeMod;
+
+import java.util.UUID;
 
 @Mod.EventBusSubscriber(modid = GoetyAwaken.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ChampionArmorEvents {
+
+    private static final UUID GLAIVE_REACH_UUID = UUID.fromString("f1a2b3c4-d5e6-7890-abcd-ef1234567801");
+    private static final UUID GLAIVE_ATTACK_SPEED_UUID = UUID.fromString("f1a2b3c4-d5e6-7890-abcd-ef1234567802");
 
     @SubscribeEvent(priority = EventPriority.HIGH)
     public static void championArmorDamageReduce(LivingDamageEvent event) {
@@ -70,6 +87,16 @@ public class ChampionArmorEvents {
                         effectLevel - 1,
                         false,
                         false));
+            }
+        }
+
+        if (living instanceof Player player) {
+            boolean hasGlaive = isGlaiveWeapon(player.getMainHandItem());
+
+            if (setCount >= 4 && hasGlaive) {
+                addGlaiveBonusAttributes(player);
+            } else {
+                removeGlaiveBonusAttributes(player);
             }
         }
     }
@@ -152,5 +179,86 @@ public class ChampionArmorEvents {
         }
 
         return count;
+    }
+
+    private static boolean isGlaiveWeapon(ItemStack stack) {
+        if (stack.isEmpty())
+            return false;
+        String itemId = ForgeRegistries.ITEMS.getKey(stack.getItem()).toString();
+        return (itemId.contains("glaive") ||
+                stack.getItem() instanceof GraveBaneSwordItem ||
+                stack.getItem() instanceof GlaiveItem ||
+                stack.getItem() instanceof MoonlightCutItem);
+    }
+
+    private static void addGlaiveBonusAttributes(Player player) {
+        if (player.getAttribute(ForgeMod.ENTITY_REACH.get()) != null &&
+                player.getAttribute(ForgeMod.ENTITY_REACH.get()).getModifier(GLAIVE_REACH_UUID) == null) {
+            player.getAttribute(ForgeMod.ENTITY_REACH.get()).addTransientModifier(
+                    new AttributeModifier(GLAIVE_REACH_UUID, "Champion glaive reach bonus", 1.0F,
+                            AttributeModifier.Operation.ADDITION));
+        }
+
+        if (player.getAttribute(Attributes.ATTACK_SPEED) != null &&
+                player.getAttribute(Attributes.ATTACK_SPEED).getModifier(GLAIVE_ATTACK_SPEED_UUID) == null) {
+            player.getAttribute(Attributes.ATTACK_SPEED).addTransientModifier(
+                    new AttributeModifier(GLAIVE_ATTACK_SPEED_UUID, "Champion glaive attack speed bonus", 0.10F,
+                            AttributeModifier.Operation.MULTIPLY_TOTAL));
+        }
+    }
+
+    private static void removeGlaiveBonusAttributes(Player player) {
+        if (player.getAttribute(ForgeMod.ENTITY_REACH.get()) != null) {
+            var instance = player.getAttribute(ForgeMod.ENTITY_REACH.get());
+            if (instance.getModifier(GLAIVE_REACH_UUID) != null) {
+                instance.removeModifier(GLAIVE_REACH_UUID);
+            }
+        }
+
+        if (player.getAttribute(Attributes.ATTACK_SPEED) != null) {
+            var instance = player.getAttribute(Attributes.ATTACK_SPEED);
+            if (instance.getModifier(GLAIVE_ATTACK_SPEED_UUID) != null) {
+                instance.removeModifier(GLAIVE_ATTACK_SPEED_UUID);
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void championArmorGlaiveRiptide(PlayerInteractEvent.RightClickItem event) {
+        Player player = event.getEntity();
+
+        if (!player.isShiftKeyDown())
+            return;
+
+        ItemStack mainHand = player.getMainHandItem();
+        if (!isGlaiveWeapon(mainHand))
+            return;
+
+        if (player.getCooldowns().isOnCooldown(mainHand.getItem()))
+            return;
+
+        int setCount = getChampionArmorSetCount(player);
+        if (setCount < 4)
+            return;
+
+        if (!player.level().isClientSide) {
+            float f7 = player.getYRot();
+            float f = player.getXRot();
+            float f1 = -Mth.sin(f7 * ((float) Math.PI / 180F)) * Mth.cos(f * ((float) Math.PI / 180F));
+            float f2 = -Mth.sin(f * ((float) Math.PI / 180F));
+            float f3 = Mth.cos(f7 * ((float) Math.PI / 180F)) * Mth.cos(f * ((float) Math.PI / 180F));
+            float f4 = Mth.sqrt(f1 * f1 + f2 * f2 + f3 * f3);
+            float f5 = 3.0F * 1.2F;
+            f1 *= f5 / f4;
+            f2 *= f5 / f4;
+            f3 *= f5 / f4;
+            player.push(f1, f2, f3);
+            player.startAutoSpinAttack(15);
+            player.getCooldowns().addCooldown(mainHand.getItem(), 100);
+            player.level().playSound(null, player, SoundEvents.TRIDENT_RIPTIDE_1, SoundSource.PLAYERS, 1.0F, 1.3F);
+            player.hurtMarked = true;
+        }
+
+        event.setCanceled(true);
     }
 }

@@ -8,9 +8,9 @@ import com.Polarice3.Goety.config.AttributesConfig;
 import com.Polarice3.Goety.init.ModSounds;
 import com.Polarice3.Goety.utils.*;
 import com.Polarice3.Goety.client.particles.CircleExplodeParticleOption;
+import com.Polarice3.Goety.client.particles.MagicSmokeParticleOption;
 import com.Polarice3.Goety.client.particles.VerticalCircleExplodeParticleOption;
 import com.Polarice3.Goety.client.particles.ModParticleTypes;
-import com.Polarice3.Goety.client.particles.MagicSmokeParticle;
 import com.Polarice3.Goety.common.network.ModServerBossInfo;
 import com.k1sak1.goetyawaken.init.ModEffects;
 import com.k1sak1.goetyawaken.common.items.ModItems;
@@ -1507,7 +1507,7 @@ public class EndersentServant extends com.Polarice3.Goety.common.entities.neutra
             if (this.level() instanceof ServerLevel serverLevel) {
                 for (int i = 0; i < 16; ++i) {
                     serverLevel.sendParticles(
-                            new MagicSmokeParticle.Option(0, 0,
+                            new MagicSmokeParticleOption(0, 0,
                                     this.level().getRandom().nextIntBetweenInclusive(40, 80), 0.25F),
                             this.getRandomX(0.5D), this.getRandomY(), this.getRandomZ(0.5D), 0,
                             this.level().getRandom().nextBoolean() ? 0.01D : -0.01D, 0.1D,

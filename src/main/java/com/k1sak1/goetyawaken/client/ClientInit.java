@@ -30,6 +30,8 @@ import com.k1sak1.goetyawaken.client.model.MushroomMonstrosityHeadModel;
 import com.k1sak1.goetyawaken.common.blocks.ModBlockEntities;
 import com.k1sak1.goetyawaken.common.entities.ModEntityType;
 import com.k1sak1.goetyawaken.init.ModContainerTypes;
+import com.k1sak1.goetyawaken.client.typography.GATextPipeline;
+import com.k1sak1.goetyawaken.client.typography.effects.GAErosionHandler;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraftforge.api.distmarker.Dist;
@@ -72,6 +74,8 @@ public class ClientInit {
                 event.enqueueWork(() -> {
                         MenuScreens.register(ModContainerTypes.ENDER_ACCESS_LECTERN.get(),
                                         EnderAccessLecternScreen::new);
+
+                        GATextPipeline.registerHandler(new GAErosionHandler());
 
                         EntityRenderers.register(ModEntityType.PALE_GOLEM_SERVANT.get(), PaleGolemRenderer::new);
                         EntityRenderers.register(ModEntityType.SILVERFISH_SERVANT.get(),
@@ -186,6 +190,8 @@ public class ClientInit {
                         EntityRenderers.register(ModEntityType.DEATH_FIRE.get(), DeathFireRenderer::new);
                         EntityRenderers.register(ModEntityType.DEATH_RAY.get(), DeathRayRenderer::new);
                         EntityRenderers.register(ModEntityType.PURE_LIGHT.get(), PureLightRenderer::new);
+                        EntityRenderers.register(ModEntityType.MUSHROOM_SCATTER_BOMB.get(),
+                                        com.Polarice3.Goety.client.render.ScatterBombRenderer::new);
                         EntityRenderers.register(ModEntityType.SKULL_LORD_SERVANT.get(), SkullLordServantRenderer::new);
                         EntityRenderers.register(ModEntityType.BONE_LORD_SERVANT.get(), BoneLordServantRenderer::new);
                         EntityRenderers.register(ModEntityType.BOUND_SORCERER.get(),
@@ -207,6 +213,7 @@ public class ClientInit {
                         EntityRenderers.register(ModEntityType.CORRUPTED_SOUL_BOLT.get(),
                                         CorruptedSoulBoltRenderer::new);
                         EntityRenderers.register(ModEntityType.BOULDER_CLUSTER.get(), BoulderClusterRenderer::new);
+                        EntityRenderers.register(ModEntityType.NAMELESS_BOLT.get(), NamelessBoltRenderer::new);
                         if (com.k1sak1.goetyawaken.common.compat.touhoulittlemaid.TouhouLittleMaidLoaded.TOUHOULITTLEMAID
                                         .isLoaded()) {
                                 EntityRenderers.register(ModEntityType.MAID_FAIRY_SERVANT.get(),

@@ -25,6 +25,7 @@ public class ArchIllusioner extends ArchIllusionerServant implements Enemy {
     public ArchIllusioner(EntityType<? extends ArchIllusionerServant> type, Level worldIn) {
         super(type, worldIn);
         this.setHostile(true);
+        this.setPersistenceRequired();
         this.bossInfo = new ModServerBossInfo(this, BossEvent.BossBarColor.RED, false, false);
     }
 
@@ -43,6 +44,7 @@ public class ArchIllusioner extends ArchIllusionerServant implements Enemy {
 
     @Override
     public void targetSelectGoal() {
+        super.targetSelectGoal();
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, IronGolem.class, true));
         this.targetSelector.addGoal(2, new HurtByTargetGoal(this, new Class[0]));

@@ -4,6 +4,8 @@ import com.Polarice3.Goety.api.entities.IAutoRideable;
 import com.Polarice3.Goety.api.entities.IGolem;
 import com.Polarice3.Goety.api.items.magic.IWand;
 import com.Polarice3.Goety.client.particles.ModParticleTypes;
+import com.Polarice3.Goety.client.particles.SmashParticleOption;
+import com.Polarice3.Goety.client.particles.SlamParticleOption;
 import com.Polarice3.Goety.common.blocks.ModBlocks;
 import com.Polarice3.Goety.common.effects.GoetyEffects;
 import com.Polarice3.Goety.common.entities.ally.golem.RaiderGolemServant;
@@ -717,8 +719,13 @@ public class MushroomMonstrosity extends RaiderGolemServant implements PlayerRid
                 && !this.isStarfeAttacking() && !this.isActivating() && super.hasLineOfSight(p_149755_);
     }
 
+    @Override
     public boolean canAnimateMove() {
-        return super.canAnimateMove() && this.getCurrentAnimation() == this.getAnimationState(WALK);
+        return this.isCurrentAnimation(IDLE);
+    }
+
+    public boolean isCurrentAnimation(String animation) {
+        return this.getCurrentAnimation() == this.getAnimationState(animation);
     }
 
     private boolean isActuallyMoving() {
@@ -1019,6 +1026,15 @@ public class MushroomMonstrosity extends RaiderGolemServant implements PlayerRid
                 } else {
                     this.glow();
                 }
+
+                if (this.level().isClientSide) {
+                    this.idleAnimationState.animateWhen(
+                            this.isCurrentAnimation(IDLE) && !this.walkAnimation.isMoving() && this.hurtTime <= 0,
+                            this.tickCount);
+                    this.sitAnimationState.animateWhen(
+                            this.isCurrentAnimation(SIT) && !this.walkAnimation.isMoving() && this.hurtTime <= 0,
+                            this.tickCount);
+                }
             }
         }
 
@@ -1173,7 +1189,7 @@ public class MushroomMonstrosity extends RaiderGolemServant implements PlayerRid
             adjustedAmount *= 0.15F;
         }
 
-        float maxAllowedDamage = this.damageCapHandler.getMaxAllowedDamage();
+        float maxAllowedDamage = this.damageCapHandler.calculateMaximumAllowedDamage();
         float firstCappedDamage = Math.min(adjustedAmount, maxAllowedDamage);
         if (this.canHurtRange(pSource) > 32.0D
                 && !pSource.is(net.minecraft.tags.DamageTypeTags.BYPASSES_INVULNERABILITY)) {
@@ -1274,7 +1290,7 @@ public class MushroomMonstrosity extends RaiderGolemServant implements PlayerRid
 
     @Override
     protected void actuallyHurt(DamageSource pDamageSource, float pDamage) {
-        float maxAllowedDamage = this.damageCapHandler.getMaxAllowedDamage();
+        float maxAllowedDamage = this.damageCapHandler.calculateMaximumAllowedDamage();
         float cappedDamage = Math.min(pDamage, maxAllowedDamage);
         double damageReduction = getMushroomDamageReduction();
         float reducedDamage = (float) (cappedDamage * (1.0 - damageReduction));
@@ -1559,19 +1575,18 @@ public class MushroomMonstrosity extends RaiderGolemServant implements PlayerRid
         if (this.level() instanceof ServerLevel serverLevel) {
             com.Polarice3.Goety.utils.ColorUtil colorUtil = new com.Polarice3.Goety.utils.ColorUtil(0xff8200);
             Vec3 vec31 = this.position().add(vec3.scale(5.0D));
-            com.Polarice3.Goety.utils.ServerParticleUtil.windShockwaveParticle(
-                    serverLevel, colorUtil, 2, 0, 20, -1, vec31.add(0.0D, 1.0D, 0.0D));
-            com.Polarice3.Goety.utils.ServerParticleUtil.windShockwaveParticle(
-                    serverLevel, colorUtil, 4, 0, 20, -1, vec31.add(0.0D, 1.0D, 0.0D));
 
             // for (int i = 0; i <= 5; ++i) {
             // surroundTremor(this, i, 3, 0.0F, false, 0.1F, attackPos);
             // }
 
             serverLevel.sendParticles(
-                    new com.Polarice3.Goety.client.particles.CircleExplodeParticleOption(
-                            colorUtil.red(), colorUtil.green(), colorUtil.blue(), 9.0F, 1),
-                    vec31.x, com.Polarice3.Goety.utils.BlockFinder.moveDownToGround(this), vec31.z,
+                    new SmashParticleOption(colorUtil, 3.0F, 1.5F, 10),
+                    attackPos.x, com.Polarice3.Goety.utils.BlockFinder.moveDownToGround(this), attackPos.z,
+                    1, 0.0D, 0.0D, 0.0D, 0.0D);
+            serverLevel.sendParticles(
+                    new SlamParticleOption(colorUtil, 9.0F, 20),
+                    attackPos.x, com.Polarice3.Goety.utils.BlockFinder.moveDownToGround(this), attackPos.z,
                     1, 0.0D, 0.0D, 0.0D, 0.0D);
         }
     }
@@ -1609,18 +1624,17 @@ public class MushroomMonstrosity extends RaiderGolemServant implements PlayerRid
         if (this.level() instanceof ServerLevel serverLevel) {
             com.Polarice3.Goety.utils.ColorUtil colorUtil = new com.Polarice3.Goety.utils.ColorUtil(0xff8200);
             Vec3 vec31 = this.position().add(vec3.scale(5.0D));
-            com.Polarice3.Goety.utils.ServerParticleUtil.windShockwaveParticle(
-                    serverLevel, colorUtil, 4, 0, 20, -1, vec31.add(0.0D, 1.0D, 0.0D));
-            com.Polarice3.Goety.utils.ServerParticleUtil.windShockwaveParticle(
-                    serverLevel, colorUtil, 8, 0, 20, -1, vec31.add(0.0D, 1.0D, 0.0D));
             // for (int i = 0; i <= 7; ++i) {
             // surroundTremor(this, i, 3, 0.0F, false, 0.1F, attackPos);
             // }
 
             serverLevel.sendParticles(
-                    new com.Polarice3.Goety.client.particles.CircleExplodeParticleOption(
-                            colorUtil.red(), colorUtil.green(), colorUtil.blue(), 16.0F, 1),
-                    vec31.x, com.Polarice3.Goety.utils.BlockFinder.moveDownToGround(this), vec31.z,
+                    new SmashParticleOption(colorUtil, 3.0F, 1.5F, 10),
+                    attackPos.x, com.Polarice3.Goety.utils.BlockFinder.moveDownToGround(this), attackPos.z,
+                    1, 0.0D, 0.0D, 0.0D, 0.0D);
+            serverLevel.sendParticles(
+                    new SlamParticleOption(colorUtil, 16.0F, 20),
+                    attackPos.x, com.Polarice3.Goety.utils.BlockFinder.moveDownToGround(this), attackPos.z,
                     1, 0.0D, 0.0D, 0.0D, 0.0D);
         }
     }
@@ -1892,16 +1906,7 @@ public class MushroomMonstrosity extends RaiderGolemServant implements PlayerRid
                                 0.0D, 0.0D, 0.0D, 0.5F);
                     }
                 }
-                if (spawnedCount == 6 || spawnedCount == 12) {
-                    com.Polarice3.Goety.utils.ColorUtil colorUtil = new com.Polarice3.Goety.utils.ColorUtil(
-                            0xff8200);
-                    serverLevel.sendParticles(
-                            new com.Polarice3.Goety.client.particles.CircleExplodeParticleOption(colorUtil.red(),
-                                    colorUtil.green(),
-                                    colorUtil.blue(), 3, 1),
-                            x, com.Polarice3.Goety.utils.BlockFinder.moveDownToGround(this), z, 1, 0.0D, 0.0D,
-                            0.0D, 0.0D);
-                }
+
             }
         }
     }
@@ -2509,7 +2514,7 @@ public class MushroomMonstrosity extends RaiderGolemServant implements PlayerRid
         float currentHealth = this.getHealth();
         if (health < currentHealth) {
             float damage = currentHealth - health;
-            float maxAllowedDamage = this.damageCapHandler.getMaxAllowedDamage();
+            float maxAllowedDamage = this.damageCapHandler.calculateMaximumAllowedDamage();
             if (damage > maxAllowedDamage) {
                 health = currentHealth - maxAllowedDamage;
             }

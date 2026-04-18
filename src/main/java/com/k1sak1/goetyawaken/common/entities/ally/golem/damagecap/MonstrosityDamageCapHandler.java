@@ -12,13 +12,13 @@ public class MonstrosityDamageCapHandler {
         this.entity = entity;
     }
 
-    public float getMaxAllowedDamage() {
+    public float calculateMaximumAllowedDamage() {
         return (float) entity.getAttributeValue(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH)
                 * (float) (double) com.k1sak1.goetyawaken.Config.MUSHROOM_MONSTROSITY_DAMAGE_CAP.get();
     }
 
     public float applyDamageCap(DamageSource source, float damage) {
-        float maxAllowedDamage = getMaxAllowedDamage();
+        float maxAllowedDamage = calculateMaximumAllowedDamage();
         if (damage > maxAllowedDamage) {
             return maxAllowedDamage;
         }
@@ -28,7 +28,7 @@ public class MonstrosityDamageCapHandler {
 
     public float adjustHealth(float targetHealth) {
         float currentHealth = entity.getHealth();
-        float maxAllowedDamage = getMaxAllowedDamage();
+        float maxAllowedDamage = calculateMaximumAllowedDamage();
         float healthDifference = currentHealth - targetHealth;
         if (healthDifference > maxAllowedDamage) {
             return currentHealth - maxAllowedDamage;
@@ -38,7 +38,7 @@ public class MonstrosityDamageCapHandler {
     }
 
     public boolean shouldProcessDamage(DamageSource source, float damage) {
-        float maxAllowedDamage = getMaxAllowedDamage();
+        float maxAllowedDamage = calculateMaximumAllowedDamage();
         return damage <= maxAllowedDamage;
     }
 }

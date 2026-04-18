@@ -462,6 +462,6 @@
   "item.goetyawaken.ominous_painting": "不吉な絵画",
   "item.goetyawaken.superaggregated_mycelial_circuit": "超集積菌糸回路",
   "item.goetyawaken.dauntless_gloves": "不敵な手袋",
-  "item.goetyawaken.dauntless_gloves.description": "クレイモア武器を使用する際、攻撃速度が50%増加します",
+  "item.goetyawaken.dauntless_gloves.description": "クレイモア武器を使用する際、攻撃速度が25%増加します",
   "death.attack.goetyawaken.mushroom_missile.fragmentation": "%1$s は %2$s のマッシュルームミサイルによって粉々に吹き飛ばされた！"
 }

@@ -2,6 +2,7 @@ package com.k1sak1.goetyawaken.common.entities.projectiles;
 
 import com.Polarice3.Goety.client.particles.CircleExplodeParticleOption;
 import com.Polarice3.Goety.client.particles.VerticalCircleExplodeParticleOption;
+import com.Polarice3.Goety.client.particles.SphereExplodeParticleOption;
 import com.Polarice3.Goety.utils.ColorUtil;
 import com.Polarice3.Goety.utils.MobUtil;
 import com.k1sak1.goetyawaken.client.renderer.trail.TrailPosition;
@@ -181,6 +182,10 @@ public class ExplosiveArrow extends AbstractArrow {
                         new VerticalCircleExplodeParticleOption(colorUtil.red(), colorUtil.green(), colorUtil.blue(),
                                 EXPLOSION_RADIUS, 1),
                         vec3.x, vec3.y, vec3.z, 1, 0.0D, 0.0D, 0.0D, 0.0D);
+                serverLevel.sendParticles(
+                        new SphereExplodeParticleOption(colorUtil.red(), colorUtil.green(), colorUtil.blue(),
+                                EXPLOSION_RADIUS * 2.0F, 1),
+                        vec3.x, vec3.y + 0.5D, vec3.z, 1, 0, 0, 0, 0);
             }
             this.level().playSound(null, this.getX(), this.getY(), this.getZ(),
                     getRandomIllusionerArrowSound(), this.getSoundSource(), 1.5F, 1.5F);

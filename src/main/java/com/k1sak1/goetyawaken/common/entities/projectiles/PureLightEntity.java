@@ -1,5 +1,6 @@
 package com.k1sak1.goetyawaken.common.entities.projectiles;
 
+import com.Polarice3.Goety.client.particles.SmashParticleOption;
 import com.Polarice3.Goety.utils.ColorUtil;
 import com.Polarice3.Goety.utils.ServerParticleUtil;
 import com.k1sak1.goetyawaken.Config;
@@ -45,21 +46,16 @@ public class PureLightEntity extends AoeEntity {
             if (!level().isClientSide) {
                 checkHits();
                 if (level() instanceof ServerLevel serverLevel) {
-                    com.Polarice3.Goety.client.particles.ShockwaveParticleOption shockwaveOption = new com.Polarice3.Goety.client.particles.ShockwaveParticleOption(
-                            1.0f, 1.0f, 1.0f,
-                            4.0f,
-                            getRadius() * 1.5f,
-                            5,
-                            40,
-                            true);
-                    serverLevel.sendParticles(shockwaveOption, getX(), getY() + 0.06D,
-                            getZ(), 0, 0.0D, 0.0D, 0.0D, 0);
-
                     if (random.nextFloat() <= 0.1F) {
                         ColorUtil whiteColor = new ColorUtil(0xFFFFFF);
                         ServerParticleUtil.windShockwaveParticle(serverLevel,
                                 whiteColor, 0.2f, 0.2f, -1, new Vec3(getX(), getY() + 0.1D, getZ()));
                     }
+
+                    ColorUtil whiteColor = new ColorUtil(0xFFFFFF);
+                    serverLevel.sendParticles(
+                            new SmashParticleOption(whiteColor, 2.5F, 1.0F, 15),
+                            getX(), getY(), getZ(), 1, 0.0D, 0.0D, 0.0D, 0.0D);
                 }
 
                 this.level().playSound(null, this.getX(), this.getY(), this.getZ(),
@@ -89,7 +85,6 @@ public class PureLightEntity extends AoeEntity {
         if (getOwner() != null && com.Polarice3.Goety.utils.MobUtil.areAllies(getOwner(), target)) {
             return;
         }
-
         float totalDamage = getDamage() + getExtraDamage();
         target.hurt(ModDamageSource.pureLight(this, getOwner()), totalDamage);
 

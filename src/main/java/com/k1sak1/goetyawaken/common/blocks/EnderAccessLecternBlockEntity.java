@@ -65,6 +65,7 @@ public class EnderAccessLecternBlockEntity extends BlockEntity implements MenuPr
         @Override
         public void slotsChanged(net.minecraft.world.Container container) {
             onCraftingMatrixChanged();
+            setChanged();
         }
     };
 
@@ -95,8 +96,12 @@ public class EnderAccessLecternBlockEntity extends BlockEntity implements MenuPr
         super.load(pTag);
         if (pTag.contains("CraftingMatrix", Tag.TAG_LIST)) {
             ListTag list = pTag.getList("CraftingMatrix", Tag.TAG_COMPOUND);
-            for (int i = 0; i < Math.min(list.size(), CRAFTING_GRID_SIZE); i++) {
-                craftingMatrix.setItem(i, ItemStack.of(list.getCompound(i)));
+            for (int i = 0; i < list.size(); i++) {
+                CompoundTag itemTag = list.getCompound(i);
+                int slot = itemTag.getInt("Slot");
+                if (slot >= 0 && slot < CRAFTING_GRID_SIZE) {
+                    craftingMatrix.setItem(slot, ItemStack.of(itemTag));
+                }
             }
         }
         if (pTag.contains(NBT_SORTING_DIRECTION)) {
@@ -118,9 +123,13 @@ public class EnderAccessLecternBlockEntity extends BlockEntity implements MenuPr
         super.saveAdditional(pTag);
         ListTag list = new ListTag();
         for (int i = 0; i < CRAFTING_GRID_SIZE; i++) {
-            CompoundTag itemTag = new CompoundTag();
-            craftingMatrix.getItem(i).save(itemTag);
-            list.add(itemTag);
+            ItemStack item = craftingMatrix.getItem(i);
+            if (!item.isEmpty()) {
+                CompoundTag itemTag = new CompoundTag();
+                itemTag.putInt("Slot", i);
+                item.save(itemTag);
+                list.add(itemTag);
+            }
         }
         pTag.put("CraftingMatrix", list);
         pTag.putInt(NBT_SORTING_DIRECTION, sortingDirection);
@@ -136,6 +145,12 @@ public class EnderAccessLecternBlockEntity extends BlockEntity implements MenuPr
         }
         if (level.getGameTime() % 40 == 0) {
             blockEntity.scanForShelves();
+        }
+
+        boolean hasEnergy = blockEntity.hasSoulEnergy();
+        boolean isActive = state.getValue(EnderAccessLecternBlock.ACTIVE);
+        if (hasEnergy != isActive) {
+            level.setBlock(pos, state.setValue(EnderAccessLecternBlock.ACTIVE, Boolean.valueOf(hasEnergy)), 3);
         }
     }
 

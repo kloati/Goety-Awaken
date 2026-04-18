@@ -8,10 +8,10 @@ import com.Polarice3.Goety.client.particles.CircleExplodeParticleOption;
 import com.Polarice3.Goety.client.particles.VerticalCircleExplodeParticleOption;
 import com.Polarice3.Goety.client.particles.DustCloudParticleOption;
 import com.Polarice3.Goety.client.particles.ModParticleTypes;
+import com.Polarice3.Goety.client.particles.SphereExplodeParticleOption;
 import com.Polarice3.Goety.utils.ServerParticleUtil;
 import com.Polarice3.Goety.utils.BlockFinder;
 import com.k1sak1.goetyawaken.common.blocks.ModBlocks;
-import com.k1sak1.goetyawaken.common.entities.hostile.MushroomMonstrosityHostile;
 import com.k1sak1.goetyawaken.Config;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -122,6 +122,9 @@ public class MushroomScatterBomb extends ScatterBomb {
                 serverLevel.sendParticles(
                         new CircleExplodeParticleOption(colorUtil.red, colorUtil.green, colorUtil.blue, 4.5F, 1),
                         this.getX(), BlockFinder.moveDownToGround(this), this.getZ(), 1, 0.0D, 0.0D, 0.0D, 0.0D);
+                serverLevel.sendParticles(
+                        new SphereExplodeParticleOption(colorUtil.red, colorUtil.green, colorUtil.blue, 4.5F, 1),
+                        this.getX(), BlockFinder.moveDownToGround(this) + 0.5F, this.getZ(), 1, 0, 0, 0, 0);
                 serverLevel
                         .sendParticles(
                                 new VerticalCircleExplodeParticleOption(colorUtil.red, colorUtil.green, colorUtil.blue,

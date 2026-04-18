@@ -1,0 +1,27 @@
+{
+    "name": "The Unending",
+    "icon": "minecraft:obsidian",
+    "category": "goety:anecdote/anecdote",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "\"Three thousand white snows return to green graves, ten thousand li of Styx wind around black mountains\"$(br)—Not written by me."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "Quoting this poem is my last resort to maintain a shred of elegance. This Obsidian Monolith, as hard as obsidian itself, made my blood boil again after all these years. I just don't understand why he left this thing here for so long—like a piece of rotting, decaying Ravager steak... This thing appeared the first time I passed by. I thought those heretics looked a bit different and didn't pay it much attention. Later, I returned with my apostles and tried everything: establishing connections to make it retract, using brute force to move it, roasting it with fire and blood rain—all useless. "
+        },
+        {
+            "type": "patchouli:text",
+            "text": "Eventually, we managed to break it apart with the Philosopher's Mace and a pickaxe, but after a while, it reappeared. What's the point? It's not trying to escape from worldly pursuit, nor is it ambushing anyone—leave it alone, and it doesn't move. Those heretics are just manifestations of the monolith's magic; they die and resurrect endlessly to protect it. They just stand there, doing nothing. What's the meaning? What's the point?Can't tear it down, can't be bothered to fight it—this thing just stands here like a small mountain... "
+        },
+        {
+            "type": "patchouli:text",
+            "text": "However, according to their research and speculation, there's one possibility: this monolith is one of the many summoned by Apollyon during his ascension long, long ago, using the power of Genesis. In the instant before divine punishment struck, Apollyon instinctively dodged away. As the monolith tried to follow Apollyon, divine punishment descended in that very moment, annihilating Apollyon in body and soul. All the other monoliths shattered together. But this one, lagging behind because it was farther away, survived—an ownerless monolith. Now it might be imitating Apollyon's form of Genesis... mistaking the heretics for monoliths, endlessly summoning them to imitate...?"
+        },
+        {
+            "type": "patchouli:text",
+            "text": "\"Gan'Dak, can't you learn something from this monolith's summoning frequency? A single monolith summons more diligently than you!\"$(br)$(br)I don't have time to teach you how to deal with this thing. Figure it out yourself, alright? Just grind it down and smack it until it breaks.$(br)$(br)\"How do you actually move this thing away?\""
+        }
+    ]
+}

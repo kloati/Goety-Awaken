@@ -21,6 +21,15 @@ public class DarkSoulCandleBlockEntity extends SoulCandlestickBlockEntity implem
     }
 
     @Override
+    public void tick() {
+        if (this.level != null) {
+            boolean flag = this.checkCage() && this.cursedCageTile != null && this.cursedCageTile.getSouls() > 0;
+            this.level.setBlock(this.getBlockPos(), this.getBlockState().setValue(
+                    com.Polarice3.Goety.common.blocks.NecroBrazierBlock.LIT, flag), 3);
+        }
+    }
+
+    @Override
     public net.minecraft.world.level.block.entity.BlockEntityType<?> getType() {
         return com.k1sak1.goetyawaken.common.blocks.ModBlockEntities.DARK_SOUL_CANDLE.get();
     }
@@ -57,7 +66,7 @@ public class DarkSoulCandleBlockEntity extends SoulCandlestickBlockEntity implem
         }
     }
 
-    private boolean checkCage() {
+    public boolean checkCage() {
         if (this.level == null) {
             return false;
         } else {

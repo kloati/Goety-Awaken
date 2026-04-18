@@ -32,7 +32,7 @@ public class LivingEntityEvents {
         AbstractNamelessOne namelessOne = getNamelessOneFromKiller(event);
         if (namelessOne != null) {
             if (!namelessOne.level().isClientSide) {
-                float healAmount = (float) (namelessOne.getMaxHealth() * 0.007);
+                float healAmount = (float) (namelessOne.getMaxHealth() * 0.002);
                 namelessOne.heal(healAmount);
             }
         }

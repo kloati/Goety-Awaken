@@ -1,6 +1,7 @@
 package com.k1sak1.goetyawaken.common.blocks;
 
 import com.Polarice3.Goety.client.particles.MagicSmokeParticle;
+import com.Polarice3.Goety.client.particles.MagicSmokeParticleOption;
 import com.k1sak1.goetyawaken.common.blocks.entity.GorgeousUrnBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -160,7 +161,7 @@ public class GorgeousUrnBlock extends BaseEntityBlock {
             double d0 = (double) pPos.getX() + 0.5D;
             double d1 = (double) pPos.getY() + 1.0D;
             double d2 = (double) pPos.getZ() + 0.5D;
-            pLevel.addParticle(new MagicSmokeParticle.Option(0x97F56A, 0x20C631, 40 + pRand.nextInt(20), 0.2F, 0.0F),
+            pLevel.addParticle(new MagicSmokeParticleOption(0x97F56A, 0x20C631, 40 + pRand.nextInt(20), 0.2F, 0.0F),
                     d0, d1, d2, pRand.nextBoolean() ? 0.01D : -0.01D, 0.025D, pRand.nextBoolean() ? 0.01D : -0.01D);
         }
     }

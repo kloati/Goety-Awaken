@@ -115,7 +115,13 @@ public class ShulkerMissileSpell extends Spell {
                 String effectName = potionTag.getString("EffectName");
                 int effectDuration = potionTag.getInt("Duration");
                 int effectAmplifier = potionTag.getInt("Amplifier");
-                effectDuration += duration * 20;
+                net.minecraft.world.effect.MobEffect effect = net.minecraftforge.registries.ForgeRegistries.MOB_EFFECTS
+                        .getValue(new net.minecraft.resources.ResourceLocation(effectName));
+                boolean isInstantaneous = (effect != null && effect.isInstantenous());
+                if (!isInstantaneous) {
+                    effectDuration += duration * 20;
+                }
+
                 missile.setEffectType(effectName);
                 missile.setEffectDuration(effectDuration);
                 missile.setEffectAmplifier(effectAmplifier);

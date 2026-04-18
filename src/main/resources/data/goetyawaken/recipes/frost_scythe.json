@@ -9,7 +9,7 @@
   "duration": 30,
   "ingredients": [
     {
-      "item": "goetyawaken:soul_sapphire"
+      "item": "goety:mystic_core"
     },
     {
       "item": "goety:ice_storm_focus"
@@ -18,10 +18,7 @@
       "item": "goety:frozen_blade"
     },
     {
-      "item": "goety:dark_ingot"
-    },
-    {
-      "item": "goety:dark_ingot"
+      "item": "minecraft:blue_ice"
     },
     {
       "item": "goety:chill_fabric"

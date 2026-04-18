@@ -350,7 +350,12 @@ public class RoyalguardServant extends AbstractIllagerServant implements ICustom
 
     @Override
     public boolean hurt(DamageSource source, float amount) {
+
         if (!this.level().isClientSide) {
+            if (this.hasShield() && !source.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
+                this.absorbDamageWithShield(amount);
+                return false;
+            }
             if (this.getTarget() != null) {
                 if (source.getEntity() instanceof LivingEntity livingEntity) {
                     LivingEntity target = this.getTarget();
@@ -373,18 +378,6 @@ public class RoyalguardServant extends AbstractIllagerServant implements ICustom
         if (!this.hasShield()) {
             super.knockback(p_147241_, p_147242_, p_147243_);
         }
-    }
-
-    @Override
-    protected void actuallyHurt(DamageSource source, float amount) {
-        if (!this.level().isClientSide) {
-            if (this.hasShield() && !source.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
-                this.absorbDamageWithShield(amount);
-                this.invulnerableTime = 10;
-                return;
-            }
-        }
-        super.actuallyHurt(source, amount);
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.k1sak1.goetyawaken.config.AttributesConfig;
 import com.k1sak1.goetyawaken.init.ModSounds;
 import com.Polarice3.Goety.client.particles.CircleExplodeParticleOption;
 import com.Polarice3.Goety.client.particles.VerticalCircleExplodeParticleOption;
+import com.Polarice3.Goety.client.particles.SphereExplodeParticleOption;
 import com.Polarice3.Goety.common.effects.GoetyEffects;
 import com.Polarice3.Goety.common.entities.ai.path.ModClimberNavigation;
 import com.Polarice3.Goety.common.entities.ally.Summoned;
@@ -368,6 +369,10 @@ public class SpiderCreeder extends Summoned {
                         new VerticalCircleExplodeParticleOption(colorUtil.red(), colorUtil.green(), colorUtil.blue(),
                                 actualExplosionRadius * 2, 1),
                         vec3.x, vec3.y, vec3.z, 1, 0.0D, 0.0D, 0.0D, 0.0D);
+                serverLevel.sendParticles(
+                        new SphereExplodeParticleOption(colorUtil.red(), colorUtil.green(), colorUtil.blue(),
+                                actualExplosionRadius * 2.0F, 1),
+                        vec3.x, vec3.y + 0.5D, vec3.z, 1, 0, 0, 0, 0);
                 for (int i = 0; i < 100; i++) {
                     double offsetX = (this.random.nextDouble() - 0.5D) * actualExplosionRadius * 2;
                     double offsetY = (this.random.nextDouble() - 0.5D) * actualExplosionRadius * 2;

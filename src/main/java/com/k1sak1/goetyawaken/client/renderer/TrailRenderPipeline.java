@@ -9,6 +9,7 @@ import com.mojang.blaze3d.vertex.*;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
@@ -24,19 +25,27 @@ import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-/**
- * Inspired by perception
- * 
- * @author SSKirillSS(Original Author)
- * @see <a href=
- *       "https://github.com/Octo-Studios/perception/tree/master">perception
- *             Repository</a>  
- */
 public class TrailRenderPipeline {
 
     public static final ResourceLocation WHITE_TEXTURE = new ResourceLocation(GoetyAwaken.MODID,
             "textures/particle/white.png");
     public static RenderType TRAIL_RENDER_TYPE = RenderType.entityTranslucent(WHITE_TEXTURE);
+    public static RenderType TRAIL_ENERGY_SWIRL_TYPE = RenderType.energySwirl(WHITE_TEXTURE, 1.0F, 1.0F);
+
+    public static RenderType GLOWING_TRAIL_RENDER_TYPE = GAModRenderTypes.getGlowingTrailEffect(WHITE_TEXTURE);
+
+    public static RenderType TRANSLUCENT_TRAIL_RENDER_TYPE = GAModRenderTypes.getTranslucentTrailEffect(WHITE_TEXTURE);
+
+    public static RenderType GLOWING_DARK_CORE_RENDER_TYPE = GAModRenderTypes
+            .getGlowingDarkCoreEffect(WHITE_TEXTURE);
+
+    public static RenderType getGlowingTrailRenderType() {
+        return GAModRenderTypes.getTrailRenderType(WHITE_TEXTURE);
+    }
+
+    public static RenderType getDarkCoreRenderType() {
+        return GAModRenderTypes.getDarkCoreRenderType(WHITE_TEXTURE);
+    }
 
     public TrailRenderPipeline() {
     }

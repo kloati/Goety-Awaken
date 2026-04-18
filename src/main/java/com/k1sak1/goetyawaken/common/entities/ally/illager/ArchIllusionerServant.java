@@ -136,7 +136,7 @@ public class ArchIllusionerServant extends SpellcasterIllagerServant implements 
 
     public void incrementIllusionHitCount() {
         this.illusionHitCount++;
-        if (this.illusionHitCount >= 2) {
+        if (this.illusionHitCount >= 1) {
             this.remove(net.minecraft.world.entity.Entity.RemovalReason.DISCARDED);
         }
     }
@@ -317,6 +317,8 @@ public class ArchIllusionerServant extends SpellcasterIllagerServant implements 
     public void performRangedAttack(LivingEntity pTarget, float pDistanceFactor) {
         ItemStack itemstack = this.getProjectile(this.getItemInHand(
                 ProjectileUtil.getWeaponHoldingHand(this, item -> item instanceof net.minecraft.world.item.BowItem)));
+        ItemStack bowStack = this.getItemInHand(
+                ProjectileUtil.getWeaponHoldingHand(this, item -> item instanceof net.minecraft.world.item.BowItem));
         if (this.isIllusion) {
             net.minecraft.world.entity.projectile.Arrow arrow = new net.minecraft.world.entity.projectile.Arrow(
                     this.level(), this);
@@ -328,6 +330,12 @@ public class ArchIllusionerServant extends SpellcasterIllagerServant implements 
             double d3 = Math.sqrt(d0 * d0 + d2 * d2);
             arrow.shoot(d0, d1 + d3 * (double) 0.2F, d2, 3.0F,
                     (float) (14 - this.level().getDifficulty().getId() * 4));
+
+            int powerLevel = net.minecraft.world.item.enchantment.EnchantmentHelper.getItemEnchantmentLevel(
+                    net.minecraft.world.item.enchantment.Enchantments.POWER_ARROWS, bowStack);
+            if (powerLevel > 0) {
+                arrow.setBaseDamage(arrow.getBaseDamage() + (double) powerLevel * 0.5D + 0.5D);
+            }
 
             this.playSound(SoundEvents.SKELETON_SHOOT, 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
             this.level().addFreshEntity(arrow);
@@ -341,6 +349,12 @@ public class ArchIllusionerServant extends SpellcasterIllagerServant implements 
             double d3 = Math.sqrt(d0 * d0 + d2 * d2);
             explosiveArrow.shoot(d0, d1 + d3 * (double) 0.2F, d2, 2.0F,
                     (float) (14 - this.level().getDifficulty().getId() * 4));
+
+            int powerLevel = net.minecraft.world.item.enchantment.EnchantmentHelper.getItemEnchantmentLevel(
+                    net.minecraft.world.item.enchantment.Enchantments.POWER_ARROWS, bowStack);
+            if (powerLevel > 0) {
+                explosiveArrow.setBaseDamage(explosiveArrow.getBaseDamage() + (double) powerLevel * 0.5D + 0.5D);
+            }
 
             this.playSound(SoundEvents.SKELETON_SHOOT, 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
             this.level().addFreshEntity(explosiveArrow);

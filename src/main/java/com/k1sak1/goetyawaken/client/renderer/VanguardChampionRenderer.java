@@ -10,7 +10,9 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.CustomHeadLayer;
+import net.minecraft.client.renderer.entity.layers.EyesLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -35,6 +37,7 @@ public class VanguardChampionRenderer extends MobRenderer<VanguardChampion, Vang
                 // this.addLayer(new VanguardChampionShieldLayer(this));
                 this.addLayer(new CustomHeadLayer<VanguardChampion, VanguardChampionModel<VanguardChampion>>(this,
                                 context.getModelSet(), context.getItemInHandRenderer()));
+                this.addLayer(new VanguardChampionGlowLayer(this));
         }
 
         @Override
@@ -107,5 +110,20 @@ public class VanguardChampionRenderer extends MobRenderer<VanguardChampion, Vang
 
         public ResourceLocation getGlowTextureLocation() {
                 return GLOW_TEXTURE;
+        }
+
+        public static class VanguardChampionGlowLayer
+                        extends EyesLayer<VanguardChampion, VanguardChampionModel<VanguardChampion>> {
+                private static final RenderType GLOW_RENDER_TYPE = RenderType.eyes(GLOW_TEXTURE);
+
+                public VanguardChampionGlowLayer(
+                                RenderLayerParent<VanguardChampion, VanguardChampionModel<VanguardChampion>> renderer) {
+                        super(renderer);
+                }
+
+                @Override
+                public RenderType renderType() {
+                        return GLOW_RENDER_TYPE;
+                }
         }
 }

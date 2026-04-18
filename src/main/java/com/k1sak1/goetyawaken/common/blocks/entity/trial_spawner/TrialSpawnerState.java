@@ -1,6 +1,6 @@
 package com.k1sak1.goetyawaken.common.blocks.entity.trial_spawner;
 
-import com.Polarice3.Goety.client.particles.MagicAshSmokeParticle;
+import com.Polarice3.Goety.client.particles.MagicAshSmokeParticleOption;
 import com.Polarice3.Goety.client.particles.ModParticleTypes;
 import com.k1sak1.goetyawaken.init.ModSounds;
 import net.minecraft.core.BlockPos;
@@ -172,14 +172,14 @@ public enum TrialSpawnerState implements StringRepresentable {
         };
         ParticleEmission FLAMES_AND_SMOKE = (level, randomSource, blockPos) -> {
             Vec3 vec3 = blockPos.getCenter().offsetRandom(randomSource, 1.0F);
-            addParticle(new MagicAshSmokeParticle.Option(0x3a0637, 0x691575), vec3, level);
+            addParticle(new MagicAshSmokeParticleOption(0x000000, 0x000000), vec3, level);
             addParticle(ModParticleTypes.BIG_FIRE.get(), vec3, level);
             addParticle(ModParticleTypes.BIG_FIRE_DROP.get(), vec3, level);
         };
         ParticleEmission SMOKE_INSIDE_AND_TOP_FACE = (level, randomSource, blockPos) -> {
             Vec3 vec3 = blockPos.getCenter().offsetRandom(randomSource, 0.9F);
             if (randomSource.nextInt(3) == 0) {
-                addParticle(new MagicAshSmokeParticle.Option(0x3a0637, 0x691575), vec3, level);
+                addParticle(new MagicAshSmokeParticleOption(0x000000, 0x000000), vec3, level);
             }
 
             if (level.getGameTime() % 20L == 0L) {
@@ -187,7 +187,7 @@ public enum TrialSpawnerState implements StringRepresentable {
                 int i = level.getRandom().nextInt(4) + 20;
 
                 for (int j = 0; j < i; j++) {
-                    addParticle(new MagicAshSmokeParticle.Option(0x3a0637, 0x691575), vec32, level);
+                    addParticle(new MagicAshSmokeParticleOption(0x000000, 0x000000), vec32, level);
                 }
             }
         };

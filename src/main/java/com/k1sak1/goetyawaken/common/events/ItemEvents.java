@@ -47,7 +47,7 @@ public class ItemEvents {
                             .isItemInDauntlessBoostTag(player.getMainHandItem())
                     || player.getMainHandItem().is(com.Polarice3.Goety.common.items.ModItems.BLADE_OF_ENDER.get());
 
-            float increaseAttackSpeed = 0.5F;
+            float increaseAttackSpeed = 0.25F;
             AttributeModifier attributemodifier = new AttributeModifier(
                     UUID.fromString("4f480e4c-3ef9-4ad6-b6d0-73681939724e"),
                     "Dauntless Proficiency",

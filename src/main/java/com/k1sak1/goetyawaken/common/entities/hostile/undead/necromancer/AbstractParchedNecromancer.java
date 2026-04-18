@@ -251,10 +251,10 @@ public abstract class AbstractParchedNecromancer extends AbstractNecromancer imp
         this.goalSelector.addGoal(priority, new ParchedNecromancerRangedGoal(this, 1.0D, 20, 12.0F));
     }
 
-    // public void avoidGoal(int priority) {
-    // this.goalSelector.addGoal(priority, AvoidRadiusGoal.newGoal(this, 2.0F, 6,
-    // 1.0, 1.6));
-    // }
+    @Override
+    public void avoidGoal(int priority) {
+
+    }
 
     @Override
     public void summonSpells(int priority) {

@@ -11,6 +11,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.LecternBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -34,13 +35,15 @@ import org.jetbrains.annotations.Nullable;
  */
 public class EnderAccessLecternBlock extends LecternBlock implements EntityBlock {
     public static final BooleanProperty HAS_BOOK = BlockStateProperties.HAS_BOOK;
+    public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
 
     public EnderAccessLecternBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(FACING, Direction.NORTH)
                 .setValue(POWERED, Boolean.valueOf(false))
-                .setValue(HAS_BOOK, Boolean.valueOf(true)));
+                .setValue(HAS_BOOK, Boolean.valueOf(true))
+                .setValue(ACTIVE, Boolean.valueOf(false)));
     }
 
     @Override
@@ -149,5 +152,10 @@ public class EnderAccessLecternBlock extends LecternBlock implements EntityBlock
     @Override
     public int getSignal(BlockState pBlockState, BlockGetter pBlockAccess, BlockPos pPos, Direction pSide) {
         return 0;
+    }
+
+    protected void createBlockStateDefinition(
+            net.minecraft.world.level.block.state.StateDefinition.Builder<Block, BlockState> pBuilder) {
+        pBuilder.add(FACING, POWERED, HAS_BOOK, ACTIVE);
     }
 }
