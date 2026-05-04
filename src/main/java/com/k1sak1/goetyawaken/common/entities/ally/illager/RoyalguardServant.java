@@ -352,7 +352,7 @@ public class RoyalguardServant extends AbstractIllagerServant implements ICustom
     public boolean hurt(DamageSource source, float amount) {
 
         if (!this.level().isClientSide) {
-            if (this.hasShield() && !source.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
+            if (this.hasShield() && !source.is(DamageTypeTags.BYPASSES_INVULNERABILITY) && !source.is(DamageTypeTags.BYPASSES_SHIELD) ) {
                 this.absorbDamageWithShield(amount);
                 return false;
             }
