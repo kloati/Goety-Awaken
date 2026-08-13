@@ -1,0 +1,27 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "minecraft:echo_shard"
+  },
+  "craftType": "magic",
+  "soulCost": 100,
+  "duration": 15,
+  "ingredients": [
+    {
+      "item": "goety:hunger_core"
+    },
+    {
+      "item": "goety:soul_ruby"
+    },
+    {
+      "item": "deeperdarker:reinforced_echo_shard"
+    },
+    {
+      "item": "deeperdarker:reinforced_echo_shard"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:profound_echoing_shard"
+  }
+}

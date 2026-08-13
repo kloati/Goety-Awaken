@@ -2,6 +2,7 @@
   "name": "Fairy Maid",
   "icon": "goetyawaken:maid_fairy_servant_spawn_egg",
   "category": "goety:goetyawaken_summons",
+  "flag": "goetyawaken:touhou_little_maid_loaded",
   "pages": [
     {
       "type": "text",

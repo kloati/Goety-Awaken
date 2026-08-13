@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "ABA",
+    "ACA"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:sculk"
+    },
+    "B": {
+      "item": "goetyawaken:infestation_focus"
+    },
+    "C": {
+      "item": "minecraft:spore_blossom"
+    }
+  },
+  "result": {
+    "item": "goetyawaken:sculk_spore",
+    "count": 4
+  }
+}

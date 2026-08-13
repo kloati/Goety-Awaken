@@ -12,15 +12,17 @@ import com.k1sak1.goetyawaken.common.items.curios.RippleWalkItem;
 import com.k1sak1.goetyawaken.common.items.curios.DauntlessGlovesItem;
 import com.k1sak1.goetyawaken.common.items.curios.AssassinGloveItem;
 import com.k1sak1.goetyawaken.common.items.curios.GatlingCharmItem;
+import com.k1sak1.goetyawaken.common.items.curios.DetonationRingItem;
+import com.k1sak1.goetyawaken.common.items.curios.SwellingPendantItem;
 import com.k1sak1.goetyawaken.common.items.magic.CreeperFocus;
 import com.k1sak1.goetyawaken.common.items.magic.StareFocus;
 import com.k1sak1.goetyawaken.common.items.magic.TormentFocus;
 import com.k1sak1.goetyawaken.common.items.magic.InfestationFocus;
 import com.k1sak1.goetyawaken.common.items.magic.KillerFocus;
+import com.k1sak1.goetyawaken.common.items.SorcererSpellConfigItem;
 import com.k1sak1.goetyawaken.common.items.magic.WololoFocus;
 import com.k1sak1.goetyawaken.common.items.magic.AgonyFocus;
 import com.k1sak1.goetyawaken.common.items.magic.BloodRainFocus;
-import com.k1sak1.goetyawaken.common.items.magic.FairyFocus;
 import com.k1sak1.goetyawaken.common.items.magic.MushroomMissileFocus;
 import com.k1sak1.goetyawaken.common.items.magic.ChampionFocus;
 import com.k1sak1.goetyawaken.common.items.magic.DesertPlaguesFocus;
@@ -28,6 +30,11 @@ import com.k1sak1.goetyawaken.common.items.magic.DeathRayFocus;
 import com.k1sak1.goetyawaken.common.items.magic.HeavenRiftFocus;
 import com.k1sak1.goetyawaken.common.items.magic.MarbleFocus;
 import com.k1sak1.goetyawaken.common.items.magic.AccessFocus;
+import com.k1sak1.goetyawaken.common.items.magic.ChasingFlameFocus;
+import com.k1sak1.goetyawaken.common.items.magic.FireballFeastFocus;
+import com.k1sak1.goetyawaken.common.items.magic.GreatMeteorFocus;
+import com.k1sak1.goetyawaken.common.items.magic.BurningShieldFocus;
+import com.k1sak1.goetyawaken.common.items.magic.MooshroomFocus;
 import com.k1sak1.goetyawaken.init.ModSounds;
 import com.k1sak1.goetyawaken.common.items.block.OminousPaintingItem;
 import com.k1sak1.goetyawaken.common.items.food.No1337CandyItem;
@@ -91,6 +98,9 @@ public class ModItems {
         public static final RegistryObject<Item> MACE = ITEMS.register("mace",
                         () -> new MaceItem());
 
+        public static final RegistryObject<Item> POTATO_STAFF = ITEMS.register("potato_staff",
+                        () -> new com.k1sak1.goetyawaken.common.items.magic.PotatoStaff());
+
         public static final RegistryObject<Item> SUN_GRACE = ITEMS.register("sun_grace",
                         () -> new SunGraceItem());
 
@@ -135,6 +145,9 @@ public class ModItems {
 
         public static final RegistryObject<Item> GATLING_CHARM = ITEMS.register("gatling_charm",
                         () -> new GatlingCharmItem());
+
+        public static final RegistryObject<Item> SWELLING_PENDANT = ITEMS.register("swelling_pendant",
+                        () -> new SwellingPendantItem());
 
         public static final RegistryObject<Item> OMINOUS_PAINTING = ITEMS.register("ominous_painting",
                         () -> new OminousPaintingItem());
@@ -197,6 +210,23 @@ public class ModItems {
         public static final RegistryObject<Item> ANCIENT_GONG = ITEMS.register("ancient_gong",
                         () -> new AncientGong());
 
+        public static final RegistryObject<Item> LAMENTING_HORN = ITEMS.register("lamenting_horn",
+                        () -> new LamentingHorn());
+
+        public static final RegistryObject<Item> GLOOMY_TEARS = ITEMS.register("gloomy_tears",
+                        () -> new GloomyTears());
+
+        public static final RegistryObject<Item> THREAT_BANNER = ITEMS.register("threat_banner",
+                        () -> new ThreatBanner());
+
+        public static final RegistryObject<Item> RAMPART_MANUSCRIPT = ITEMS.register("rampart_manuscript",
+                        () -> new Item(new Item.Properties()
+                                        .stacksTo(64)
+                                        .rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+
+        public static final RegistryObject<Item> DETONATION_RING = ITEMS.register("detonation_ring",
+                        () -> new DetonationRingItem());
+
         public static final RegistryObject<Item> GLOWING_EMBER = ITEMS.register("glowing_ember",
                         () -> new Item(new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)
                                         .stacksTo(64).fireResistant()));
@@ -254,6 +284,62 @@ public class ModItems {
                         "slant_sandstone",
                         () -> new BlockItem(ModBlocks.SLANT_SANDSTONE.get(), new Item.Properties()));
 
+        public static final RegistryObject<Item> CHISELED_SANDSTONE_CLASSIC = ITEMS.register(
+                        "chiseled_sandstone_classic",
+                        () -> new BlockItem(ModBlocks.CHISELED_SANDSTONE_CLASSIC.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> RIGHT_SLANT_SANDSTONE = ITEMS.register(
+                        "right_slant_sandstone",
+                        () -> new BlockItem(ModBlocks.RIGHT_SLANT_SANDSTONE.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> LEFT_SLANT_SANDSTONE = ITEMS.register(
+                        "left_slant_sandstone",
+                        () -> new BlockItem(ModBlocks.LEFT_SLANT_SANDSTONE.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> STAINED_CUT_SANDSTONE = ITEMS.register(
+                        "stained_cut_sandstone",
+                        () -> new BlockItem(ModBlocks.STAINED_CUT_SANDSTONE.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> STAINED_SANDSTONE_GRAVEL = ITEMS.register(
+                        "stained_sandstone_gravel",
+                        () -> new BlockItem(ModBlocks.STAINED_SANDSTONE_GRAVEL.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> STAINED_SANDSTONE_GRAVEL_STAIRS = ITEMS.register(
+                        "stained_sandstone_gravel_stairs",
+                        () -> new BlockItem(ModBlocks.STAINED_SANDSTONE_GRAVEL_STAIRS.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> STAINED_SANDSTONE_GRAVEL_SLAB = ITEMS.register(
+                        "stained_sandstone_gravel_slab",
+                        () -> new BlockItem(ModBlocks.STAINED_SANDSTONE_GRAVEL_SLAB.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> VARIANT_SANDSTONE_COLUMN = ITEMS.register(
+                        "variant_sandstone_column",
+                        () -> new BlockItem(ModBlocks.VARIANT_SANDSTONE_COLUMN.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> SANDSTONE_BRICKS = ITEMS.register(
+                        "sandstone_bricks",
+                        () -> new BlockItem(ModBlocks.SANDSTONE_BRICKS.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> SANDSTONE_BRICKS_STAIRS = ITEMS.register(
+                        "sandstone_bricks_stairs",
+                        () -> new BlockItem(ModBlocks.SANDSTONE_BRICKS_STAIRS.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> SANDSTONE_BRICKS_SLAB = ITEMS.register(
+                        "sandstone_bricks_slab",
+                        () -> new BlockItem(ModBlocks.SANDSTONE_BRICKS_SLAB.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> COBBLESTONE_SANDSTONE = ITEMS.register(
+                        "cobblestone_sandstone",
+                        () -> new BlockItem(ModBlocks.COBBLESTONE_SANDSTONE.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> COBBLESTONE_SANDSTONE_STAIRS = ITEMS.register(
+                        "cobblestone_sandstone_stairs",
+                        () -> new BlockItem(ModBlocks.COBBLESTONE_SANDSTONE_STAIRS.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> COBBLESTONE_SANDSTONE_SLAB = ITEMS.register(
+                        "cobblestone_sandstone_slab",
+                        () -> new BlockItem(ModBlocks.COBBLESTONE_SANDSTONE_SLAB.get(), new Item.Properties()));
+
         public static final RegistryObject<Item> TOWER_FLOWER_POT = ITEMS.register(
                         "tower_flowerpot",
                         () -> new BlockItem(ModBlocks.TOWER_FLOWER_POT.get(), new Item.Properties()));
@@ -275,6 +361,18 @@ public class ModItems {
 
         public static final RegistryObject<Item> MUSIC_DISC_ANCIENT = ITEMS.register("music_disc_ancient",
                         () -> MusicDiscAncient.create(ModSounds.MUSIC_DISC_ANCIENT));
+
+        public static final RegistryObject<Item> MUSIC_DISC_ARENA1 = ITEMS.register("music_disc_arena1",
+                        () -> MusicDiscArena1.create(ModSounds.RUBY_SORCERER_DISC));
+
+        public static final RegistryObject<Item> MUSIC_DISC_ARENA2 = ITEMS.register("music_disc_arena2",
+                        () -> MusicDiscArena2.create(ModSounds.ARCH_ILLUSIONER_FIGHT));
+
+        public static final RegistryObject<Item> MUSIC_DISC_SWASHES = ITEMS.register("music_disc_swashes",
+                        () -> MusicDiscSwashes.create(ModSounds.DROWNED_NECROMANCER_FIGHT));
+
+        public static final RegistryObject<Item> MUSIC_DISC_FLURRY = ITEMS.register("music_disc_flurry",
+                        () -> MusicDiscFlurry.create(ModSounds.RAMPART_CAPTAIN_FIGHT));
 
         public static final RegistryObject<Item> SHULKER_MISSILE_FOCUS = ITEMS.register("shulker_missile_focus",
                         () -> new ShulkerMissileFocus());
@@ -303,9 +401,6 @@ public class ModItems {
         public static final RegistryObject<Item> AGONY_FOCUS = ITEMS.register("agony_focus",
                         () -> new AgonyFocus());
 
-        public static final RegistryObject<Item> FAIRY_FOCUS = ITEMS.register("fairy_focus",
-                        () -> new FairyFocus());
-
         public static final RegistryObject<Item> MUSHROOM_MISSILE_FOCUS = ITEMS.register("mushroom_missile_focus",
                         () -> new MushroomMissileFocus());
 
@@ -326,6 +421,21 @@ public class ModItems {
 
         public static final RegistryObject<Item> ACCESS_FOCUS = ITEMS.register("access_focus",
                         () -> new AccessFocus());
+
+        public static final RegistryObject<Item> CHASING_FLAME_FOCUS = ITEMS.register("chasing_flame_focus",
+                        () -> new ChasingFlameFocus());
+
+        public static final RegistryObject<Item> FIREBALL_FEAST_FOCUS = ITEMS.register("fireball_feast_focus",
+                        () -> new FireballFeastFocus());
+
+        public static final RegistryObject<Item> GREAT_METEOR_FOCUS = ITEMS.register("great_meteor_focus",
+                        () -> new GreatMeteorFocus());
+
+        public static final RegistryObject<Item> BURNING_SHIELD_FOCUS = ITEMS.register("burning_shield_focus",
+                        () -> new BurningShieldFocus());
+
+        public static final RegistryObject<Item> MOOSHROOM_FOCUS = ITEMS.register("mooshroom_focus",
+                        () -> new MooshroomFocus());
 
         public static final RegistryObject<Item> CURSED_VAULT_KEY = ITEMS.register("cursed_trial_key",
                         () -> new Item(new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON)
@@ -459,6 +569,158 @@ public class ModItems {
         public static final RegistryObject<Item> TABOO_PILLAR_BASE = ITEMS.register("taboo_pillar_base",
                         () -> new BlockItem(ModBlocks.TABOO_PILLAR_BASE.get(), new Item.Properties()));
 
+        public static final RegistryObject<Item> CORNER_LARGE_CARPET = ITEMS.register("corner_large_carpet",
+                        () -> new BlockItem(ModBlocks.CORNER_LARGE_CARPET.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> EDGE_LARGE_CARPET = ITEMS.register("edge_large_carpet",
+                        () -> new BlockItem(ModBlocks.EDGE_LARGE_CARPET.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> CENTER_LARGE_CARPET = ITEMS.register("center_large_carpet",
+                        () -> new BlockItem(ModBlocks.CENTER_LARGE_CARPET.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> SANDY_CHISELED_SANDSTONE_BRICKS = ITEMS.register(
+                        "sandy_chiseled_sandstone_bricks",
+                        () -> new BlockItem(ModBlocks.SANDY_CHISELED_SANDSTONE_BRICKS.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> SANDY_CARVED_SANDSTONE_BRICKS = ITEMS.register(
+                        "sandy_carved_sandstone_bricks",
+                        () -> new BlockItem(ModBlocks.SANDY_CARVED_SANDSTONE_BRICKS.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> SANDY_SMOOTH_SANDSTONE_BRICKS = ITEMS.register(
+                        "sandy_smooth_sandstone_bricks",
+                        () -> new BlockItem(ModBlocks.SANDY_SMOOTH_SANDSTONE_BRICKS.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> SANDY_SANDSTONE_BRICKS = ITEMS.register("sandy_sandstone_bricks",
+                        () -> new BlockItem(ModBlocks.SANDY_SANDSTONE_BRICKS.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> SANDY_CHISELED_VARIANT_SANDSTONE_BRICKS = ITEMS.register(
+                        "sandy_chiseled_variant_sandstone_bricks",
+                        () -> new BlockItem(ModBlocks.SANDY_CHISELED_VARIANT_SANDSTONE_BRICKS.get(),
+                                        new Item.Properties()));
+
+        public static final RegistryObject<Item> SANDY_SANDSTONE_PILLAR = ITEMS.register("sandy_sandstone_pillar",
+                        () -> new BlockItem(ModBlocks.SANDY_SANDSTONE_PILLAR.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> SANDY_CRACKED_SANDSTONE_BRICKS = ITEMS.register(
+                        "sandy_cracked_sandstone_bricks",
+                        () -> new BlockItem(ModBlocks.SANDY_CRACKED_SANDSTONE_BRICKS.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> LIGHTLY_SANDED_ANDESITE_ROCK = ITEMS.register(
+                        "lightly_sanded_andesite_rock",
+                        () -> new BlockItem(ModBlocks.LIGHTLY_SANDED_ANDESITE_ROCK.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> HEAVILY_SANDED_ANDESITE_ROCK = ITEMS.register(
+                        "heavily_sanded_andesite_rock",
+                        () -> new BlockItem(ModBlocks.HEAVILY_SANDED_ANDESITE_ROCK.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> SANDED_ANDESITE_BRICKS = ITEMS.register("sanded_andesite_bricks",
+                        () -> new BlockItem(ModBlocks.SANDED_ANDESITE_BRICKS.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> SANDED_ANDESITE_BRICKS_STAIRS = ITEMS.register(
+                        "sanded_andesite_bricks_stairs",
+                        () -> new BlockItem(ModBlocks.SANDED_ANDESITE_BRICKS_STAIRS.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> SANDED_ANDESITE_BRICKS_SLAB = ITEMS.register(
+                        "sanded_andesite_bricks_slab",
+                        () -> new BlockItem(ModBlocks.SANDED_ANDESITE_BRICKS_SLAB.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> LIGHTLY_SANDED_ANDESITE_BRICKS = ITEMS.register(
+                        "lightly_sanded_andesite_bricks",
+                        () -> new BlockItem(ModBlocks.LIGHTLY_SANDED_ANDESITE_BRICKS.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> MODERATELY_SANDED_ANDESITE_BRICKS = ITEMS.register(
+                        "moderately_sanded_andesite_bricks",
+                        () -> new BlockItem(ModBlocks.MODERATELY_SANDED_ANDESITE_BRICKS.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> HEAVILY_SANDED_ANDESITE_BRICKS = ITEMS.register(
+                        "heavily_sanded_andesite_bricks",
+                        () -> new BlockItem(ModBlocks.HEAVILY_SANDED_ANDESITE_BRICKS.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> HEAVILY_SANDED_ANDESITE_BRICKS_VARIANT = ITEMS.register(
+                        "heavily_sanded_andesite_bricks_variant",
+                        () -> new BlockItem(ModBlocks.HEAVILY_SANDED_ANDESITE_BRICKS_VARIANT.get(),
+                                        new Item.Properties()));
+
+        public static final RegistryObject<Item> CHISELED_SANDED_ANDESITE_BRICKS = ITEMS.register(
+                        "chiseled_sanded_andesite_bricks",
+                        () -> new BlockItem(ModBlocks.CHISELED_SANDED_ANDESITE_BRICKS.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> CRACKED_SANDED_ANDESITE_BRICKS = ITEMS.register(
+                        "cracked_sanded_andesite_bricks",
+                        () -> new BlockItem(ModBlocks.CRACKED_SANDED_ANDESITE_BRICKS.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> POLISHED_SANDED_ANDESITE = ITEMS.register("polished_sanded_andesite",
+                        () -> new BlockItem(ModBlocks.POLISHED_SANDED_ANDESITE.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> POLISHED_SANDED_ANDESITE_STAIRS = ITEMS.register(
+                        "polished_sanded_andesite_stairs",
+                        () -> new BlockItem(ModBlocks.POLISHED_SANDED_ANDESITE_STAIRS.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> POLISHED_SANDED_ANDESITE_SLAB = ITEMS.register(
+                        "polished_sanded_andesite_slab",
+                        () -> new BlockItem(ModBlocks.POLISHED_SANDED_ANDESITE_SLAB.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> BOTTOM_SANDED_POLISHED_ANDESITE = ITEMS.register(
+                        "bottom_sanded_polished_andesite",
+                        () -> new BlockItem(ModBlocks.BOTTOM_SANDED_POLISHED_ANDESITE.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> CARVED_POLISHED_SANDED_ANDESITE = ITEMS.register(
+                        "carved_polished_sanded_andesite",
+                        () -> new BlockItem(ModBlocks.CARVED_POLISHED_SANDED_ANDESITE.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> CARVED_POLISHED_SANDED_ANDESITE_BRICKS = ITEMS.register(
+                        "carved_polished_sanded_andesite_bricks",
+                        () -> new BlockItem(ModBlocks.CARVED_POLISHED_SANDED_ANDESITE_BRICKS.get(),
+                                        new Item.Properties()));
+
+        public static final RegistryObject<Item> SANDED_ANDESITE_TILES = ITEMS.register("sanded_andesite_tiles",
+                        () -> new BlockItem(ModBlocks.SANDED_ANDESITE_TILES.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> LIGHTLY_SANDED_ANDESITE_TILES = ITEMS.register(
+                        "lightly_sanded_andesite_tiles",
+                        () -> new BlockItem(ModBlocks.LIGHTLY_SANDED_ANDESITE_TILES.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> SANDED_ANDESITE_PILLAR = ITEMS.register("sanded_andesite_pillar",
+                        () -> new BlockItem(ModBlocks.SANDED_ANDESITE_PILLAR.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> SANDED_DIRT_PATH = ITEMS.register("sanded_dirt_path",
+                        () -> new BlockItem(ModBlocks.SANDED_DIRT_PATH.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> LIGHTLY_SANDED_DIRT_PATH = ITEMS.register("lightly_sanded_dirt_path",
+                        () -> new BlockItem(ModBlocks.LIGHTLY_SANDED_DIRT_PATH.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> YELLOW_SAND = ITEMS.register("yellow_sand",
+                        () -> new BlockItem(ModBlocks.YELLOW_SAND.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> COIN_PILE = ITEMS.register(
+                        "coin_pile",
+                        () -> new BlockItem(ModBlocks.COIN_PILE.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> TOWER_KEEPER_STATUE = ITEMS.register(
+                        "tower_keeper_statue",
+                        () -> new TowerKeeperStatueBlockItem(ModBlocks.TOWER_KEEPER_STATUE.get(),
+                                        new Item.Properties()));
+
+        public static final RegistryObject<Item> CREEPER_STATUE = ITEMS.register(
+                        "creeper_statue",
+                        () -> new BlockItem(ModBlocks.CREEPER_STATUE.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> VILLAGER_STATUE = ITEMS.register(
+                        "villager_statue",
+                        () -> new BlockItem(ModBlocks.VILLAGER_STATUE.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> WILDFIRE_STATUE = ITEMS.register(
+                        "wildfire_statue",
+                        () -> new BlockItem(ModBlocks.WILDFIRE_STATUE.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> GARGOYLE_STATUE = ITEMS.register(
+                        "gargoyle_statue",
+                        () -> new BlockItem(ModBlocks.GARGOYLE_STATUE.get(), new Item.Properties()));
+
+        public static final RegistryObject<Item> SPIKE_TRAP_BLOCK = ITEMS.register(
+                        "spike_trap_block",
+                        () -> new BlockItem(ModBlocks.SPIKE_TRAP_BLOCK.get(), new Item.Properties()));
+
         public static final RegistryObject<Item> REDSTONE_CLUSTER = ITEMS.register(
                         "redstone_cluster",
                         () -> new BlockItem(ModBlocks.REDSTONE_CLUSTER.get(), new Item.Properties()));
@@ -516,6 +778,44 @@ public class ModItems {
                         () -> new ServantSpawnEggItem(ModEntityType.CREEPER_SERVANT, 0x0DA70B, 0x000000,
                                         new Item.Properties()));
 
+        public static final RegistryObject<Item> JITB_ZOMBIE_SPAWN_EGG = ITEMS.register("jitb_zombie_spawn_egg",
+                        () -> new ServantSpawnEggItem(ModEntityType.JITB_ZOMBIE_SERVANT, 0xFF6B6B, 0x4A4A4A,
+                                        new Item.Properties()));
+
+        public static final RegistryObject<Item> GIANT_SPAWN_EGG = ITEMS.register("giant_spawn_egg",
+                        () -> new ServantSpawnEggItem(ModEntityType.GIANT_SERVANT, 0x00A800, 0x799C65,
+                                        new Item.Properties()));
+
+        public static final RegistryObject<Item> POISONOUS_POTATO_ZOMBIE_SPAWN_EGG = ITEMS.register(
+                        "poisonous_potato_zombie_spawn_egg",
+                        () -> new ServantSpawnEggItem(ModEntityType.POISONOUS_POTATO_ZOMBIE_SERVANT, 0x5B8C3E, 0xD4A574,
+                                        new Item.Properties()));
+
+        public static final RegistryObject<Item> POISONOUS_POTATO_SKELETON_SPAWN_EGG = ITEMS.register(
+                        "poisonous_potato_skeleton_spawn_egg",
+                        () -> new ServantSpawnEggItem(ModEntityType.POISONOUS_POTATO_SKELETON_SERVANT, 0x6B8C4E,
+                                        0xC4B484,
+                                        new Item.Properties()));
+
+        public static final RegistryObject<Item> POISONOUS_POTATO_CREEPER_SPAWN_EGG = ITEMS.register(
+                        "poisonous_potato_creeper_spawn_egg",
+                        () -> new ServantSpawnEggItem(ModEntityType.POISONOUS_POTATO_CREEPER_SERVANT, 0x5B8C3E,
+                                        0xADFF2F,
+                                        new Item.Properties()));
+
+        public static final RegistryObject<Item> STATUE_CREEPER_SPAWN_EGG = ITEMS.register(
+                        "statue_creeper_spawn_egg",
+                        () -> new ServantSpawnEggItem(ModEntityType.STATUE_CREEPER, 0x888888, 0x555555,
+                                        new Item.Properties()));
+
+        public static final RegistryObject<Item> TOXIFIN_SPAWN_EGG = ITEMS.register("toxifin_spawn_egg",
+                        () -> new ServantSpawnEggItem(ModEntityType.TOXIFIN_SERVANT, 0x3B6E5E, 0x1A4A3A,
+                                        new Item.Properties()));
+
+        public static final RegistryObject<Item> PLAGUEWHALE_SPAWN_EGG = ITEMS.register("plaguewhale_spawn_egg",
+                        () -> new ServantSpawnEggItem(ModEntityType.PLAGUEWHALE_SLAB_SERVANT, 0x4A7B6B, 0x2A5A4A,
+                                        new Item.Properties()));
+
         public static final RegistryObject<Item> ENDERMAN_SPAWN_EGG = ITEMS.register("enderman_spawn_egg",
                         () -> new ServantSpawnEggItem(ModEntityType.ENDERMAN_SERVANT, 0x161616, 0x000000,
                                         new Item.Properties()));
@@ -540,6 +840,11 @@ public class ModItems {
         public static final RegistryObject<Item> HOSTILE_SPIDER_CREEDER_SPAWN_EGG = ITEMS.register(
                         "hostile_spider_creeder_spawn_egg",
                         () -> new ModSpawnEggItem(ModEntityType.HOSTILE_SPIDER_CREEDER, 0x8B0000, 0xFF0000,
+                                        new Item.Properties()));
+
+        public static final RegistryObject<Item> HOSTILE_STATUE_CREEPER_SPAWN_EGG = ITEMS.register(
+                        "hostile_statue_creeper_spawn_egg",
+                        () -> new ModSpawnEggItem(ModEntityType.HOSTILE_STATUE_CREEPER, 0x888888, 0x444444,
                                         new Item.Properties()));
 
         public static final RegistryObject<Item> WARDEN_SPAWN_EGG = ITEMS.register("warden_spawn_egg",
@@ -597,6 +902,10 @@ public class ModItems {
 
         public static final RegistryObject<Item> ROYALGUARD_SPAWN_EGG = ITEMS.register("royalguard_spawn_egg",
                         () -> new ServantSpawnEggItem(ModEntityType.ROYALGUARD_SERVANT, 0x4d2c5d, 0x925fa3,
+                                        new Item.Properties()));
+
+        public static final RegistryObject<Item> TOWER_GUARD_SPAWN_EGG = ITEMS.register("tower_guard_spawn_egg",
+                        () -> new ServantSpawnEggItem(ModEntityType.TOWER_GUARD_SERVANT, 0x4a5d6b, 0x8b9da9,
                                         new Item.Properties()));
 
         public static final RegistryObject<Item> ICE_CREEPER_SPAWN_EGG = ITEMS.register("ice_creeper_spawn_egg",
@@ -661,6 +970,11 @@ public class ModItems {
                         () -> new ServantSpawnEggItem(ModEntityType.APOSTLE_SERVANT, 0x4B0082, 0x8A2BE2,
                                         new Item.Properties()));
 
+        public static final RegistryObject<Item> HERESIARCH_SERVANT_SPAWN_EGG = ITEMS.register(
+                        "heresiarch_servant_spawn_egg",
+                        () -> new ServantSpawnEggItem(ModEntityType.HERESIARCH_SERVANT, 0x25252b, 0x1a131a,
+                                        new Item.Properties()));
+
         public static final RegistryObject<Item> ZOMBIE_DARKGUARD_SPAWN_EGG = ITEMS.register(
                         "zombie_darkguard_spawn_egg",
                         () -> new ModSpawnEggItem(ModEntityType.ZOMBIE_DARKGUARD, 0x000000,
@@ -683,6 +997,11 @@ public class ModItems {
                         "hostile_vanguard_champion_spawn_egg",
                         () -> new ModSpawnEggItem(ModEntityType.HOSTILE_VANGUARD_CHAMPION, 0x000000,
                                         0x660066,
+                                        new Item.Properties()));
+
+        public static final RegistryObject<Item> SPRITES_SPAWN_EGG = ITEMS.register(
+                        "sprites_spawn_egg",
+                        () -> new ServantSpawnEggItem(ModEntityType.SPRITES, 0xfef597, 0x88aaff,
                                         new Item.Properties()));
 
         public static final RegistryObject<Item> PARCHED_SPAWN_EGG = ITEMS.register(
@@ -757,9 +1076,9 @@ public class ModItems {
                         () -> new ModSpawnEggItem(ModEntityType.HOSTILE_ROYALGUARD, 0x4d2c5d, 0x925fa3,
                                         new Item.Properties()));
 
-        public static final RegistryObject<Item> MAID_FAIRY_SERVANT_SPAWN_EGG = ITEMS.register(
-                        "maid_fairy_servant_spawn_egg",
-                        () -> new ServantSpawnEggItem(ModEntityType.MAID_FAIRY_SERVANT, 0xFFB6C1, 0x9370DB,
+        public static final RegistryObject<Item> HOSTILE_TOWER_GUARD_SPAWN_EGG = ITEMS.register(
+                        "hostile_tower_guard_spawn_egg",
+                        () -> new ModSpawnEggItem(ModEntityType.HOSTILE_TOWER_GUARD, 0x6b3a3a, 0x4a2020,
                                         new Item.Properties()));
 
         public static final RegistryObject<Item> VINDICATOR_CHEF_SPAWN_EGG = ITEMS.register(
@@ -790,6 +1109,41 @@ public class ModItems {
         public static final RegistryObject<Item> HOSTILE_MINI_GHAST_SPAWN_EGG = ITEMS.register(
                         "hostile_mini_ghast_spawn_egg",
                         () -> new ModSpawnEggItem(ModEntityType.HOSTILE_MINI_GHAST, 0xFFFFFF, 0xFF0000,
+                                        new Item.Properties()));
+
+        public static final RegistryObject<Item> GIANT_GHAST_SPAWN_EGG = ITEMS.register(
+                        "giant_ghast_spawn_egg",
+                        () -> new ServantSpawnEggItem(ModEntityType.GIANT_GHAST, 0xE8E8E8, 0xA85C3C,
+                                        new Item.Properties()));
+
+        public static final RegistryObject<Item> HOSTILE_GIANT_GHAST_SPAWN_EGG = ITEMS.register(
+                        "hostile_giant_ghast_spawn_egg",
+                        () -> new ModSpawnEggItem(ModEntityType.HOSTILE_GIANT_GHAST, 0xA85C3C, 0xFF0000,
+                                        new Item.Properties()));
+
+        public static final RegistryObject<Item> RAMPART_CAPTAIN_SPAWN_EGG = ITEMS.register(
+                        "rampart_captain_spawn_egg",
+                        () -> new ServantSpawnEggItem(ModEntityType.RAMPART_CAPTAIN, 0x5C5C5C, 0xC0C0C0,
+                                        new Item.Properties()));
+
+        public static final RegistryObject<Item> HOSTILE_RAMPART_CAPTAIN_SPAWN_EGG = ITEMS.register(
+                        "hostile_rampart_captain_spawn_egg",
+                        () -> new ModSpawnEggItem(ModEntityType.HOSTILE_RAMPART_CAPTAIN, 0x5C5C5C, 0xC0C0C0,
+                                        new Item.Properties()));
+
+        public static final RegistryObject<Item> RUBY_SORCERER_SPAWN_EGG = ITEMS.register(
+                        "ruby_sorcerer_spawn_egg",
+                        () -> new ModSpawnEggItem(ModEntityType.RUBY_SORCERER, 0x0f1119, 0x959b9b,
+                                        new Item.Properties()));
+
+        public static final RegistryObject<Item> MOUNTAINEER_SPAWN_EGG = ITEMS.register(
+                        "mountaineer_spawn_egg",
+                        () -> new ModSpawnEggItem(ModEntityType.MOUNTAINEER, 0x5D4037, 0x8D6E63,
+                                        new Item.Properties()));
+
+        public static final RegistryObject<Item> WIND_CALLER_SPAWN_EGG = ITEMS.register(
+                        "wind_caller_spawn_egg",
+                        () -> new ModSpawnEggItem(ModEntityType.WIND_CALLER, 0x8D837D, 0x6D6363,
                                         new Item.Properties()));
 
         public static final RegistryObject<Item> JUNGLE_ZOMBIE_SPAWN_EGG = ITEMS.register(
@@ -858,5 +1212,9 @@ public class ModItems {
         public static final RegistryObject<Item> NBT_ENTITY_SPAWN_EGG = ITEMS.register(
                         "nbt_entity_spawn_egg",
                         () -> new NBTEntitySpawnEggItem(new Item.Properties()));
+
+        public static final RegistryObject<Item> SORCERER_SPELL_CONFIG = ITEMS.register(
+                        "sorcerer_spell_config",
+                        SorcererSpellConfigItem::new);
 
 }

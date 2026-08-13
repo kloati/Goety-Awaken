@@ -1,0 +1,16 @@
+{
+  "name": "Redstone Cluster",
+  "icon": "goetyawaken:redstone_cluster",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A decorative redstone cluster that looks quite nice—though your prisoners certainly wouldn't agree."
+    },
+    {
+      "type": "patchouli:stonecutting",
+      "recipe": "goetyawaken:redstone_cluster/redstone_cluster_1_1",
+      "text": "Prisoner: Memories of Misery"
+    }
+  ]
+}

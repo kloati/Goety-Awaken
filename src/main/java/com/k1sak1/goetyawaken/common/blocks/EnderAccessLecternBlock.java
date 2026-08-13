@@ -42,7 +42,7 @@ public class EnderAccessLecternBlock extends LecternBlock implements EntityBlock
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(FACING, Direction.NORTH)
                 .setValue(POWERED, Boolean.valueOf(false))
-                .setValue(HAS_BOOK, Boolean.valueOf(true))
+                .setValue(HAS_BOOK, Boolean.valueOf(false))
                 .setValue(ACTIVE, Boolean.valueOf(false)));
     }
 
@@ -84,14 +84,21 @@ public class EnderAccessLecternBlock extends LecternBlock implements EntityBlock
             BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
             if (blockEntity instanceof EnderAccessLecternBlockEntity lecternEntity) {
                 if (!lecternEntity.hasSoulEnergy()) {
+                    serverPlayer.displayClientMessage(
+                            net.minecraft.network.chat.Component
+                                    .translatable("message.goetyawaken.lectern.no_energy")
+                                    .withStyle(net.minecraft.ChatFormatting.RED),
+                            true);
                     return InteractionResult.FAIL;
                 }
                 net.minecraftforge.network.NetworkHooks.openScreen(serverPlayer, lecternEntity, buf -> {
                     buf.writeBlockPos(pPos);
+                    buf.writeResourceLocation(pLevel.dimension().location());
                     buf.writeInt(lecternEntity.getSortingDirection());
                     buf.writeInt(lecternEntity.getSortingType());
                     buf.writeInt(lecternEntity.getViewType());
                     buf.writeInt(lecternEntity.getSearchBoxMode());
+                    buf.writeInt(lecternEntity.getSize());
                 });
                 pPlayer.awardStat(Stats.INTERACT_WITH_LECTERN);
                 return InteractionResult.CONSUME;

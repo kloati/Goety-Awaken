@@ -25,7 +25,6 @@
       "text": "制作黑曜石之泪。"
     }
   ],
-  "advancement": "goety:goety/kill_a_apostle"
+  "advancement": "goety:goety/kill_a_apostle",
+  "extra_recipe_mappings": {"goetyawaken:obsidian_tear":0}
 }
-
-

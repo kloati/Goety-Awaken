@@ -47,8 +47,6 @@ public class GridItemExtractMessage {
     }
 
     private static void handleExtract(ServerPlayer player, UUID itemId, int flags) {
-        // TODO: 实现物品提取逻辑
-        // 需要获取玩家当前打开的容器并处理提取
         if (player.containerMenu instanceof com.k1sak1.goetyawaken.common.storage.container.EnderAccessLecternContainer container) {
             var gridHandler = container.getItemGridHandler();
             if (gridHandler != null) {

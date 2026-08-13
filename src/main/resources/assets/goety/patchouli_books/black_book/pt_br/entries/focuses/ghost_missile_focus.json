@@ -1,0 +1,18 @@
+{
+  "name": "Foco de Míssil Fantasma",
+  "icon": "goetyawaken:ghost_missile_focus",
+  "category": "goety:goetyawaken_focuses",
+  "flag": "goetyawaken:meetyourfight_loaded",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Dispara mísseis fantasmas no alvo. Agachar enquanto conjura dispara uma saraivada diferente. Estes mísseis mágicos razoavelmente poderosos — condensados até mesmo do espírito de um Sino — servem como uma boa ferramenta ofensiva para um mago que manipula almas."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:ghost_missile_focus",
+      "text": ""
+    }
+  ],
+  "extra_recipe_mappings": {"goetyawaken:ghost_missile_focus":0}
+}

@@ -13,14 +13,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-/**
- * Inspired by Refined Storage
- * 
- * @author raoulvdberge (Original Author)
- * @see <a href=
- *      "https://github.com/raoulvdberge/refinedstorage">Refined Storage
- *      Repository</a>
- */
 public class ItemStackList implements IStackList<ItemStack> {
     private final ArrayListMultimap<Item, StackListEntry<ItemStack>> stacks = ArrayListMultimap.create();
     private final Map<UUID, ItemStack> index = new HashMap<>();
@@ -179,5 +171,47 @@ public class ItemStackList implements IStackList<ItemStack> {
     @Override
     public int size() {
         return stacks.size();
+    }
+
+    public void rebuildPreservingIds(Collection<StackListEntry<ItemStack>> oldEntries,
+            Iterable<ItemStack> newStacks) {
+        stacks.clear();
+        index.clear();
+        for (ItemStack stack : newStacks) {
+            if (stack.isEmpty()) {
+                continue;
+            }
+            StackListEntry<ItemStack> existing = null;
+            for (StackListEntry<ItemStack> entry : stacks.get(stack.getItem())) {
+                if (StorageAPI.instance().getComparer().isEqualNoQuantity(entry.getStack(), stack)) {
+                    existing = entry;
+                    break;
+                }
+            }
+            if (existing != null) {
+                if ((long) existing.getStack().getCount() + (long) stack.getCount() > Integer.MAX_VALUE) {
+                    existing.getStack().setCount(Integer.MAX_VALUE);
+                } else {
+                    existing.getStack().grow(stack.getCount());
+                }
+            } else {
+                UUID existingId = findOldId(oldEntries, stack);
+                ItemStack copy = ItemHandlerHelper.copyStackWithSize(stack, stack.getCount());
+                StackListEntry<ItemStack> entry = existingId != null
+                        ? new StackListEntry<>(existingId, copy)
+                        : new StackListEntry<>(copy);
+                stacks.put(stack.getItem(), entry);
+                index.put(entry.getId(), entry.getStack());
+            }
+        }
+    }
+
+    private UUID findOldId(Collection<StackListEntry<ItemStack>> oldEntries, ItemStack stack) {
+        for (StackListEntry<ItemStack> old : oldEntries) {
+            if (StorageAPI.instance().getComparer().isEqualNoQuantity(old.getStack(), stack)) {
+                return old.getId();
+            }
+        }
+        return null;
     }
 }

@@ -12,5 +12,6 @@
       "recipe": "goetyawaken:glaive",
       "text": ""
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:glaive":0}
 }

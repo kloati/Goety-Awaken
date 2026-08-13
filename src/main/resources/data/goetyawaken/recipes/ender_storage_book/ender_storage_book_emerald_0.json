@@ -1,0 +1,39 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "minecraft:enchanted_book"
+  },
+  "craftType": "magic",
+  "soulCost": 16,
+  "duration": 8,
+  "ingredients": [
+    {
+      "item": "goety:jade"
+    },
+    {
+      "item": "goety:mystic_core"
+    },
+    {
+      "item": "goety:ender_chest_focus"
+    },
+    {
+      "item": "goety:forbidden_piece"
+    },
+    {
+      "item": "goety:pale_steel_block"
+    },
+    {
+      "item": "minecraft:amethyst_block"
+    },
+    {
+      "item": "goety:withered_manuscript"
+    },
+    {
+      "item": "goety:animation_core"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:ender_storage_book_emerald"
+  }
+}

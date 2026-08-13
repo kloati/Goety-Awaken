@@ -20,7 +20,13 @@
     "goetyawaken:skull_lord_servant",
     "goetyawaken:vanguard_champion",
     "goetyawaken:hostile_vanguard_champion",
-    "goety_cataclysm:draugr_necromancer",
-    "goety_cataclysm:draugr_necromancer_servant"
+    {
+      "id": "goety_cataclysm:draugr_necromancer",
+      "required": false
+    },
+    {
+      "id": "goety_cataclysm:draugr_necromancer_servant",
+      "required": false
+    }
   ]
 }

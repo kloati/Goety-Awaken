@@ -127,15 +127,8 @@ public class MooShroomMaceItem extends HammerItem {
                     1.8D, 0.15D, 1.8D,
                     0.0D);
 
-            RegistryObject<SoundEvent>[] windBurstSounds = new RegistryObject[] {
-                    ModSounds.WIND_BURST_1,
-                    ModSounds.WIND_BURST_2,
-                    ModSounds.WIND_BURST_3
-            };
-            RegistryObject<SoundEvent> randomSound = windBurstSounds[player.level().random
-                    .nextInt(windBurstSounds.length)];
             serverLevel.playSound(null, player.getX(), player.getY(), player.getZ(),
-                    randomSound.get(), SoundSource.PLAYERS, 1.5F, 1.0F);
+                    ModSounds.WIND_BURST.get(), SoundSource.PLAYERS, 1.5F, 1.0F);
         }
         Vec3 currentMotion = player.getDeltaMovement();
         double newUpwardVelocity = Math.max(y * 0.15, 0.4);

@@ -1,0 +1,22 @@
+{
+  "name": "Swampjaw Servant",
+  "icon": "meetyourfight:fossil_bait",
+  "category": "goety:goetyawaken_summons",
+  "flag": "goetyawaken:meetyourfight_loaded",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Swampjaw is a boss-level undead creature that has been 'reanimated' from the swamps using an ancient fossil as its vessel. Having broken free from the mire's grasp, its undead nature grants it the ability to hover and fly, and it can even generate explosive swamp mines from within its body—though that said, even a fledgling adventurer could easily smash it back into bone shards.$(br2)For a necromancer such as yourself, enslaving this fossilized skeleton requires little more than a wave of the hand. While this creature is still hardly a force to be reckoned with, it serves its purpose well enough as an aerial bomber and a distracting nuisance on the battlefield."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:swampjaw_servant",
+      "text": ""
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:swampjaw_servant",
+      "text": "Paleontologists might appreciate them."
+    }
+  ]
+}

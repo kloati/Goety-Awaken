@@ -1,0 +1,33 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goetyawaken:infestation_focus"
+  },
+  "craftType": "necroturgy",
+  "soulCost": 4,
+  "duration": 8,
+  "ingredients": [
+    {
+      "item": "deeperdarker:reinforced_echo_shard"
+    },
+    {
+      "item": "minecraft:sculk"
+    },
+    {
+      "item": "minecraft:experience_bottle"
+    },
+    {
+      "item": "minecraft:sculk_catalyst"
+    },
+    {
+      "item": "deeperdarker:ancient_vase"
+    },
+    {
+      "item": "deeperdarker:ancient_vase"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:deepdark_vermin_focus"
+  }
+}

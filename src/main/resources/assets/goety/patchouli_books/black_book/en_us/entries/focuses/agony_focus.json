@@ -12,5 +12,6 @@
       "recipe": "goetyawaken:agony_focus",
       "text": "Crafting the Agony Focus."
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:agony_focus":0}
 }

@@ -16,7 +16,10 @@
       "min_count": 1,
       "max_count": 2,
       "weight": 10,
-      "price": 8
+      "first_item_id": "goety:empty_focus",
+      "price": 1,
+      "second_item_id": "minecraft:emerald",
+      "second_price": 8
     },
     {
       "item_id": "goety:animation_core",
@@ -25,7 +28,10 @@
       "min_count": 1,
       "max_count": 2,
       "weight": 10,
-      "price": 8
+      "first_item_id": "goety:empty_focus",
+      "price": 1,
+      "second_item_id": "minecraft:emerald",
+      "second_price": 8
     },
     {
       "item_id": "goety:hunger_core",
@@ -34,7 +40,10 @@
       "min_count": 1,
       "max_count": 2,
       "weight": 10,
-      "price": 8
+      "first_item_id": "goety:empty_focus",
+      "price": 1,
+      "second_item_id": "minecraft:emerald",
+      "second_price": 8
     },
     {
       "item_id": "goety:wind_core",
@@ -43,7 +52,10 @@
       "min_count": 1,
       "max_count": 2,
       "weight": 10,
-      "price": 8
+      "first_item_id": "goety:empty_focus",
+      "price": 1,
+      "second_item_id": "minecraft:emerald",
+      "second_price": 8
     },
     {
       "item_id": "goety:ectoplasm",
@@ -61,7 +73,7 @@
       "min_count": 1,
       "max_count": 1,
       "weight": 1,
-      "price": 24
+      "price": 48
     },
     {
       "item_id": "goetyawaken:gold_grimoire",
@@ -70,7 +82,7 @@
       "min_count": 1,
       "max_count": 1,
       "weight": 1,
-      "price": 36
+      "price": 64
     },
     {
       "item_id": "goetyawaken:emerald_grimoire",
@@ -79,7 +91,9 @@
       "min_count": 1,
       "max_count": 1,
       "weight": 1,
-      "price": 48
+      "price": 64,
+      "second_item_id": "minecraft:emerald",
+      "second_price": 32
     },
     {
       "item_id": "goetyawaken:diamond_grimoire",
@@ -88,7 +102,9 @@
       "min_count": 1,
       "max_count": 1,
       "weight": 1,
-      "price": 64
+      "price": 64,
+      "second_item_id": "minecraft:emerald",
+      "second_price": 64
     },
     {
       "item_id": "minecraft:totem_of_undying",

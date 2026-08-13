@@ -1,0 +1,23 @@
+{
+    "name": "A Tempestade",
+    "icon": "goety:resonance_crystal",
+    "category": "goety:anecdote/anecdote",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "O Santuário da Vendaval no topo dos Picos Uivantes sempre foi um dos lugares mais misteriosos. Ele existia muito antes dos Illagers começarem suas campanhas, e os Golems de Vendaval e o Pergaminho de Mistral encontrados lá permanecem profundamente enigmáticos. A partir desses relatos dispersos, só posso oferecer um vislumbre do que aconteceu."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "Regimento de Armadura Pesada Illager #5152 Guarnição: Santuário da Vendaval, Picos Uivantes$(br)Data: ??/??/????$(br)Registro de Comunicação ao Vivo:$(br)$(4)\"Este Golem de Vendaval parece fácil de lidar. Esqueça o kiting — basta ficar em um degrau ligeiramente mais alto e você o tem na mão.\"$(br)$(1)\"Sério? Não acredito nisso.\"$(br)$(4)\"Deixe-me mostrar. É só ligar o interruptor uma vez.\"$(br)$(1)\"Isso é realmente uma boa ideia? Nada foi dito sobre podermos tocar nessa coisa.\"$(br)$(4)\"Ah, não se preocupe com isso. Quando descobrirmos a mecânica, estamos salvos.\"$(br)$(1)\"M-Mas isso é um Golem de Vendaval!\"$(br)$(4)\"Apenas observe.\"$(br)$(0)[Comunicação Interrompida]"
+        },
+        {
+            "type": "patchouli:text",
+            "text": "Energia de tempestade ambiente massiva detectada no local, misturada com pequenas quantidades de energias artificiais de vento e tempestade.$(br)Relatório de Investigação de Campo:$(br)Com base em dedução, este Golem de Vendaval foi ativado ao absorver energia de relâmpago por conta própria, depois amplificado por ataques de Conjuradores de Tempestade. Ele carrega uma quantidade imensa de energia de tempestade, gerando um campo magnético. Observadores no local testemunharam as almas dos Conjuradores de Tempestade mortos presas dentro do campo magnético, incapazes de se dispersar, e tentando atacar os observadores. Quanto ao motivo pelo qual este Golem de Vendaval em particular pode absorver tempestades para gerar um campo magnético enquanto outros não — não temos resposta.$(br)ID do Relatório: #5354"
+        },
+        {
+            "type": "patchouli:text",
+            "text": "Parece misterioso, não é, mago sombrio? No entanto, a Caçadora me disse que já enfrentou esta coisa — mas não a matou. Você conhece sua natureza: normalmente ela nunca deixa a presa escapar. Mas depois de investigar eu mesmo, entendo por que ela fez o que fez. Você também entenderá, quando tentar. Só lembre-se de trazer uma arma com algum alcance. Hehehehehe!"
+        }
+    ]
+}

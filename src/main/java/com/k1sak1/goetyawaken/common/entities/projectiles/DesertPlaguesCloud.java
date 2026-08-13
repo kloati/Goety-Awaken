@@ -139,7 +139,7 @@ public class DesertPlaguesCloud extends AbstractSpellCloud {
                 }
                 this.move(MoverType.SELF, this.getDeltaMovement());
             }
-            if (this.tickCount % 2 == 0) {
+            if (this.tickCount % 8 == 0) {
                 ServerLevel serverLevel = (ServerLevel) this.level();
                 float radius = this.getRadius();
                 float area = (float) Math.PI * radius * radius;
@@ -165,24 +165,22 @@ public class DesertPlaguesCloud extends AbstractSpellCloud {
         if (livingEntity != null) {
             float baseDamage = SpellConfig.HailDamage.get().floatValue() * WandUtil.damageMultiply();
             baseDamage += this.getExtraDamage();
-            if (livingEntity.hurt(ModDamageSource.frostBreath(this, this.getOwner()), baseDamage / 2)) {
+            if (livingEntity.hurt(ModDamageSource.frostBreath(this, this.getOwner()), baseDamage / 4)) {
                 livingEntity
-                        .addEffect(new MobEffectInstance(GoetyEffects.FREEZING.get(), MathHelper.secondsToTicks(5)));
+                        .addEffect(new MobEffectInstance(GoetyEffects.FREEZING.get(), MathHelper.secondsToTicks(2)));
             }
             livingEntity
-                    .addEffect(new MobEffectInstance(GoetyEffects.SAPPED.get(), MathHelper.secondsToTicks(5)));
-            livingEntity
-                    .addEffect(new MobEffectInstance(MobEffects.WEAKNESS, MathHelper.secondsToTicks(5)));
+                    .addEffect(new MobEffectInstance(GoetyEffects.SAPPED.get(), MathHelper.secondsToTicks(2)));
         }
         ColorUtil colorUtil = new ColorUtil(this.getLightningColor());
         if (this.level() instanceof ServerLevel serverLevel) {
             if (livingEntity != null && !livingEntity.isDeadOrDying()
                     && EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(livingEntity)) {
                 if (livingEntity.isSensitiveToWater()) {
-                    livingEntity.hurt(livingEntity.damageSources().indirectMagic(this, this.getOwner()), 1.0F);
+                    livingEntity.hurt(livingEntity.damageSources().indirectMagic(this, this.getOwner()), 0.1F);
                 }
                 if (livingEntity.hurt(ModDamageSource.swarm(this, this.getOwner()),
-                        SpellConfig.SwarmDamage.get().floatValue() * WandUtil.damageMultiply() / 2)) {
+                        SpellConfig.SwarmDamage.get().floatValue() * WandUtil.damageMultiply() / 4)) {
                     if (livingEntity instanceof LivingEntity) {
                         LivingEntity livingTarget = livingEntity;
                         MobEffect mobEffect = MobEffects.POISON;
@@ -191,9 +189,8 @@ public class DesertPlaguesCloud extends AbstractSpellCloud {
                         }
                         livingTarget.addEffect(
                                 new MobEffectInstance(mobEffect,
-                                        MathHelper.secondsToTicks(5)));
+                                        MathHelper.secondsToTicks(2)));
                     }
-
                     if (!livingEntity.isAlive()) {
                         InsectSwarm insectSwarm = new InsectSwarm(serverLevel, this.getOwner(),
                                 livingEntity.position());
@@ -224,7 +221,7 @@ public class DesertPlaguesCloud extends AbstractSpellCloud {
                         Vec3 vec31 = new Vec3(livingEntity.getX(), livingEntity.getY() + livingEntity.getBbHeight() / 2,
                                 livingEntity.getZ());
                         ModNetwork.sendToALL(new SThunderBoltPacket(vec3, vec31, colorUtil, 10));
-                        if (livingEntity.hurt(ModDamageSource.indirectShock(this, this.getOwner()), damage / 2)) {
+                        if (livingEntity.hurt(ModDamageSource.indirectShock(this, this.getOwner()), damage / 4)) {
                             float chance = this.isStaff() ? 0.25F : 0.05F;
                             float chainDamage = damage / 2.0F;
                             if (serverLevel.isThundering() && serverLevel.isRainingAt(livingEntity.blockPosition())) {
@@ -237,7 +234,7 @@ public class DesertPlaguesCloud extends AbstractSpellCloud {
                             }
                             if (this.isStaff()) {
                                 WandUtil.chainLightning(livingEntity, this.getOwner() != null ? this.getOwner() : null,
-                                        6.0D, chainDamage);
+                                        6.0D, chainDamage / 8);
                             }
                         }
                         serverLevel.playSound(null, this.getX(), this.getY(), this.getZ(), ModSounds.THUNDERBOLT.get(),
@@ -245,8 +242,8 @@ public class DesertPlaguesCloud extends AbstractSpellCloud {
                         if (!livingEntity.isAlive()) {
                             InsectSwarm insectSwarm = new InsectSwarm(serverLevel, this.getOwner(),
                                     livingEntity.position());
-                            insectSwarm.setLimitedLife(200);
-                            float extraDamage = this.getExtraDamage();
+                            insectSwarm.setLimitedLife(50);
+                            float extraDamage = this.getExtraDamage() / 4;
                             if (extraDamage > 0) {
                                 insectSwarm.addEffect(new MobEffectInstance(GoetyEffects.BUFF.get(),
                                         EffectsUtil.infiniteEffect(), (int) extraDamage, false, false));

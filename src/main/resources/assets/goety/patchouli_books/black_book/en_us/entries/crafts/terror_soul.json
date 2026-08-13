@@ -7,5 +7,6 @@
       "type": "text",
       "text": "The revival item for Wight, which can summon Wight more cheaply."
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:terror_soul":0}
 }

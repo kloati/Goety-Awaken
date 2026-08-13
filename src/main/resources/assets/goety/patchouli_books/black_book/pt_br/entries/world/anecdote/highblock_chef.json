@@ -1,0 +1,31 @@
+{
+    "name": "Chefe de Altomuro",
+    "icon": "minecraft:cake",
+    "category": "goety:anecdote/anecdote",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "O vento norte uivava. A guerra trovejava. Hordas de Draugrs e Aptrgangrs formavam linhas de batalha na montanha nevada, caçando um esquadrão em fuga.$(br)$(3)\"Me dê sua besta! Vou dar alguns tiros!\"$(br)$(8)\"Capitão, e você?\"$(br)$(3)\"Ficarei para trás para detê-los. Vão — a vanguarda não pode ser derrotada assim!\"$(br)$(0)O tempo de uma Jarra de Alma passou. Os reforços chegaram.$(br)$(8)\"Capitão, todos nós evacuamos!\"$(br)$(3)\"Entendido, então eu...\"$(br)$(0)Suas pernas afundaram na neve fofa. Ele não conseguia se mover.$(br)$(3)\"Urgh... Hah!\""
+        },
+        {
+            "type": "patchouli:text",
+            "text": "Um clarão de luz verde atingiu como um machado colossal. O capitão desviou com todas as suas forças — ele evitou o golpe fatal, mas perdeu uma perna.$(br)De volta à capital, o Capitão Vingador recebeu comendações, mas não pôde mais servir na linha de frente. O Vizir decidiu transferi-lo para a logística — cozinhando e cuidando dos Devastadores. No entanto, este soldado de temperamento explosivo e mente simples parecia tratar ambas as tarefas da mesma maneira. As refeições do Vizir frequentemente continham carne queimada e morta, dando à mandíbula do Vizir um bom exercício. Os cozinheiros zombavam dele sem parar por isso (embora eles mesmos não fossem muito melhores). E como sua força era completamente monstruosa — ele picava carne com uma concha, e um golpe era suficiente para estilhaçar osso e tendão — os cozinheiros o chamavam respeitosamente de \"Super-homem de Uma Concha\"."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "Uma noite chuvosa, na véspera da seleção de candidatos.$(br)$(5)\"Não tente mais me impedir. Esta é a última lição que deixo para este reino.\"$(br)$(3)\"Mas isso não é ir longe demais? Sua posição já é alta o suficiente! Você não sentirá que falhou com o império?\"$(br)$(5)\"Se o império tivesse algum senso de vergonha, viria me conter agora... Já chega. Não diga mais nada. Venha me visitar algum dia... Traga aqueles seus bichinhos de estimação? Ou pequenos ingredientes? Você sabe onde.\"$(br)$(3)\"...Cuide-se, então.\"$(br)$(5)\"Cuide-se.\""
+        },
+        {
+            "type": "patchouli:text",
+            "text": "Vendo sete homens e sete Pisoteadores avançarem em direção aos portões da cidade, o Chefe de Cozinha sentiu algo surgir dentro dele — muito mais complicado do que sua culinária. Ele queria correr atrás deles, mas o vento cortante uivou novamente em seus ouvidos. Ele não disse nada. Voltou-se para organizar o banquete noturno.$(br)O tempo fluiu. As estações mudaram. Florescências fúngicas brilhantes cresceram da pedra do Nether. Navios brancos ancoraram diante da cidade. O barulho da wok continuou, vendo partir geração após geração daqueles no poder (em todos os sentidos da palavra). O Chefe de Cozinha não tinha magia, e pouco a pouco, esqueceu muitas coisas. Até que um dia, ele serviu bolo e bolinhos juntos no banquete — e o Vizir decidiu que era hora dele se aposentar e aproveitar seus anos restantes. Ele não levou nada consigo — apenas seu Devastador e sua concha gigante — e lentamente deixou a capital. Cada folha de grama, cada árvore parecia familiar e estranha. Ele não conseguia dizer se havia esquecido, ou se elas realmente haviam sido renovadas. Ele caminhou, devagar, até chegar à soleira da propriedade do Timoneiro do Destino."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "$(5)\"Você veio?\"$(br)$(3)\"Vim.\"$(br)$(5)\"Às vezes saio. Você poderia ajudar a vigiar a propriedade?\"$(br)$(3)\"Não me lembro bem das coisas...\"$(br)$(5)\"Mate qualquer um que tente entrar. Isso é suficiente?\"$(br)$(3)\"Sim, senhor! Missão garantida!\"$(br)$(0)Desde aquele dia, mago sombrio, se você vier a esta propriedade, poderá ser impiedosamente expulso pelo Timoneiro do Destino. Se ele estiver fora a negócios, o Super-homem de Uma Concha o receberá com um golpe esmagador. É claro — se você simplesmente fugir, o som do vento da montanha voltará para ele."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "Os assuntos do velho reino fluíram como água — mas a fumaça da cozinha ainda sobe, e o homem permanece."
+        }
+    ]
+}

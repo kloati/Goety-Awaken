@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "goetyawaken:arch_illusioner",
+    "goetyawaken:vindicator_chef",
+    "goetyawaken:tower_witch",
+    "goetyawaken:hostile_rampart_captain",
+    "goetyawaken:ruby_sorcerer",
+    "goetyawaken:wind_caller",
+    "goetyawaken:mountaineer",
+    "goetyawaken:hostile_royalguard"
+  ]
+}

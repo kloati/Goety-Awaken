@@ -12,5 +12,6 @@
       "recipe": "goetyawaken:ominous_painting",
       "text": ""
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:ominous_painting":0}
 }

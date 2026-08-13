@@ -12,5 +12,6 @@
       "recipe": "goetyawaken:redstone_cluster/redstone_cluster_1_1",
       "text": "囚犯：霉嚎的回忆"
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:redstone_cluster":0}
 }

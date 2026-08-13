@@ -1,18 +1,58 @@
 {
   "replace": false,
   "values": [
-    "goety:fanged_dagger",
-    "goety:hungry_dagger",
     "goetyawaken:truth_seeker",
-    "cataclysm:athame",
-    "irons_spellbooks:amethyst_rapier",
-    "torchesbecomesunlight:winter_pass",
-    "alexscaves:desolate_dagger",
-    "graveyard:bone_dagger",
-    "mahoutsukai:dagger",
-    "epicfight:iron_dagger",
-    "born_in_chaos_v1:intoxicating_dagger",
-    "epicfight:netherite_dagger",
-    "epicfight:diamond_dagger"
+    {
+      "id": "goety:fanged_dagger",
+      "required": false
+    },
+    {
+      "id": "goety:hungry_dagger",
+      "required": false
+    },
+    {
+      "id": "cataclysm:athame",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:amethyst_rapier",
+      "required": false
+    },
+    {
+      "id": "torchesbecomesunlight:winter_pass",
+      "required": false
+    },
+    {
+      "id": "alexscaves:desolate_dagger",
+      "required": false
+    },
+    {
+      "id": "graveyard:bone_dagger",
+      "required": false
+    },
+    {
+      "id": "mahoutsukai:dagger",
+      "required": false
+    },
+    {
+      "id": "epicfight:iron_dagger",
+      "required": false
+    },
+    {
+      "id": "epicfight:golden_dagger",
+      "required": false
+    },
+    {
+      "id": "born_in_chaos_v1:intoxicating_dagger",
+      "required": false
+    },
+    {
+      "id": "epicfight:netherite_dagger",
+      "required": false
+    },
+    {
+      "id": "epicfight:diamond_dagger",
+      "required": false
+    }
   ]
 }

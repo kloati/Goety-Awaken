@@ -166,6 +166,12 @@ public class MushroomMonstrosityHostile extends MushroomMonstrosity implements E
     @Override
     public void tick() {
         super.tick();
+        com.Polarice3.Goety.utils.MiscCapHelper.updateMobTarget(this);
+
+        if (!this.level().isClientSide()) {
+            this.setAggressive(this.getTarget() != null);
+        }
+
         if (this.tickCount % 5 == 0) {
             this.bossInfo.update();
         }

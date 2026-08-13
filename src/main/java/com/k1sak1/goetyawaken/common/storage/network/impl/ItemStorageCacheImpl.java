@@ -1,13 +1,11 @@
 package com.k1sak1.goetyawaken.common.storage.network.impl;
 
 import com.k1sak1.goetyawaken.common.storage.api.*;
+import com.k1sak1.goetyawaken.common.storage.impl.ItemStackList;
 import com.k1sak1.goetyawaken.common.storage.impl.StorageAPI;
 import com.k1sak1.goetyawaken.common.storage.network.INetworkNodeGraphEntry;
 import com.k1sak1.goetyawaken.common.storage.network.IStorageProvider;
 import net.minecraft.world.item.ItemStack;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +20,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
  *      Repository</a>
  */
 public class ItemStorageCacheImpl implements IStorageCache<ItemStack> {
-    private static final Logger LOGGER = LogManager.getLogger(ItemStorageCacheImpl.class);
 
     private final EnderNetwork network;
     private final CopyOnWriteArrayList<IStorage<ItemStack>> storages = new CopyOnWriteArrayList<>();
@@ -35,8 +32,8 @@ public class ItemStorageCacheImpl implements IStorageCache<ItemStack> {
 
     @Override
     public void invalidate(InvalidateCause cause) {
-        LOGGER.debug("Invalidating item storage cache of network at position {} due to {}", network.getPosition(),
-                cause);
+
+        List<StackListEntry<ItemStack>> oldEntries = new ArrayList<>(list.getStacks());
 
         storages.clear();
         for (INetworkNodeGraphEntry entry : network.getNodeGraph().all()) {
@@ -45,21 +42,21 @@ public class ItemStorageCacheImpl implements IStorageCache<ItemStack> {
             }
         }
 
-        list.clear();
-
         sort();
 
+        List<ItemStack> newStacks = new ArrayList<>();
         for (IStorage<ItemStack> storage : storages) {
             if (storage.getAccessType() == AccessType.INSERT) {
                 continue;
             }
-
             for (ItemStack stack : storage.getStacks()) {
                 if (!stack.isEmpty()) {
-                    add(stack, stack.getCount(), true, false);
+                    newStacks.add(stack);
                 }
             }
         }
+
+        ((ItemStackList) list).rebuildPreservingIds(oldEntries, newStacks);
 
         listeners.forEach(IStorageCacheListener::onInvalidated);
     }
@@ -99,6 +96,11 @@ public class ItemStorageCacheImpl implements IStorageCache<ItemStack> {
     @Override
     public void removeListener(IStorageCacheListener<ItemStack> listener) {
         listeners.remove(listener);
+    }
+
+    public void removeAllListeners() {
+        listeners.clear();
+        list.clear();
     }
 
     @Override

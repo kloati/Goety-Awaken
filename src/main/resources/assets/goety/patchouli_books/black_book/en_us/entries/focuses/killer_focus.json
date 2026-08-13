@@ -12,5 +12,6 @@
       "recipe": "goetyawaken:killer_focus",
       "text": "Craft the Killer Focus."
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:killer_focus":0}
 }

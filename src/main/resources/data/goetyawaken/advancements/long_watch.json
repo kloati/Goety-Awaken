@@ -1,0 +1,28 @@
+{
+  "parent": "goety:goety/kill_an_ender_keeper",
+  "criteria": {
+    "long_watch": {
+      "trigger": "goetyawaken:long_watch"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.goetyawaken.long_watch.description"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "goetyawaken:eye_of_overwatch"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.goetyawaken.long_watch.title"
+    }
+  },
+  "requirements": [
+    [
+      "long_watch"
+    ]
+  ]
+}

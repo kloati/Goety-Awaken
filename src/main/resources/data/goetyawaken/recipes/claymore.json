@@ -12,13 +12,7 @@
       "item": "minecraft:iron_block"
     },
     {
-      "item": "minecraft:iron_ingot"
-    },
-    {
       "item": "goety:pale_steel_block"
-    },
-    {
-      "item": "minecraft:iron_ingot"
     },
     {
       "item": "goety:pale_steel_ingot"
@@ -31,9 +25,6 @@
     },
     {
       "item": "goety:occult_fabric"
-    },
-    {
-      "item": "minecraft:diamond"
     },
     {
       "item": "minecraft:diamond"

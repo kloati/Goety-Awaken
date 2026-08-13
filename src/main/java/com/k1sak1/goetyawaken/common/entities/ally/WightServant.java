@@ -18,6 +18,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -40,6 +41,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import com.Polarice3.Goety.config.AttributesConfig;
 import com.Polarice3.Goety.config.MainConfig;
+import com.k1sak1.goetyawaken.Config;
 import com.Polarice3.Goety.utils.SEHelper;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.util.Mth;
@@ -51,6 +53,8 @@ import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.SpawnGroupData;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.sounds.SoundSource;
@@ -139,6 +143,18 @@ public class WightServant extends Summoned {
     }
 
     @Override
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty,
+            MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
+        SpawnGroupData data = super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
+        if (this.getTrueOwner() instanceof Player player) {
+            int seAmount = SEHelper.getSoulAmountInt(player);
+            int sePercent = (int) ((seAmount / (double) MainConfig.MaxArcaSouls.get()) * 100);
+            this.upgradePower(sePercent);
+        }
+        return data;
+    }
+
+    @Override
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(1, new WightServantAttackGoal(this, 1.5D));
@@ -168,7 +184,10 @@ public class WightServant extends Summoned {
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return ModSounds.WIGHT_AMBIENT.get();
+        if (Config.WIGHT_SERVANT_AMBIENT_SOUND.get()) {
+            return ModSounds.WIGHT_AMBIENT.get();
+        }
+        return SoundEvents.EMPTY;
     }
 
     protected float getWaterSlowDown() {
@@ -181,6 +200,48 @@ public class WightServant extends Summoned {
 
     public boolean causeFallDamage(float p_148711_, float p_148712_, DamageSource p_148713_) {
         return false;
+    }
+
+    @Override
+    public void commandMode() {
+        if (!this.isCommanded()) {
+            return;
+        }
+        BlockPos targetPos = this.getCommandPos();
+        Entity targetEntity = this.getCommandPosEntity();
+        this.setCommandTick(this.getCommandTick() - 1);
+
+        if (targetEntity != null) {
+            this.getNavigation().moveTo(targetEntity, this.getCommandSpeed());
+        } else if (targetPos != null) {
+            this.getNavigation().moveTo(targetPos.getX() + 0.5D, targetPos.getY(), targetPos.getZ() + 0.5D, this.getCommandSpeed());
+        }
+
+        AABB aabb = targetPos != null ? new AABB(targetPos) : null;
+        Entity entity = this.getControlledVehicle() != null ? this.getControlledVehicle() : this;
+        if (this.getNavigation().isStuck() || this.getCommandTick() <= 0) {
+            this.setCommandPosEntity(null);
+            this.setCommandPos(null);
+        } else if (aabb != null && entity.getBoundingBox().inflate(0.5F).intersects(aabb)) {
+            if (this.getCommandPosEntity() != null &&
+                    this.getBoundingBox().inflate(1.25D).intersects(this.getCommandPosEntity().getBoundingBox())) {
+                if (this.isAbleToRide(this.getCommandPosEntity())) {
+                    if (this.startRiding(this.getCommandPosEntity())) {
+                        if (this.getTrueOwner() instanceof Player player) {
+                            player.displayClientMessage(net.minecraft.network.chat.Component.translatable("info.goety.servant.dismount"), true);
+                        }
+                    }
+                }
+                this.setCommandPosEntity(null);
+            }
+            if (this.isGuardingArea()) {
+                this.setBoundPos(targetPos);
+            }
+            this.getNavigation().stop();
+            this.getMoveControl().strafe(0.0F, 0.0F);
+            this.moveTo(targetPos, this.getYRot(), this.getXRot());
+            this.setCommandPos(null);
+        }
     }
 
     @Override
@@ -709,12 +770,6 @@ public class WightServant extends Summoned {
         super.tick();
 
         if (!this.level().isClientSide) {
-            if (this.tickCount == 1 && this.getTrueOwner() instanceof Player player) {
-                int seAmount = SEHelper.getSoulAmountInt(player);
-                int sePercent = (int) ((seAmount / (double) MainConfig.MaxArcaSouls.get()) * 100);
-                this.upgradePower(sePercent);
-            }
-
             if (!this.isDeadOrDying()) {
                 if (!this.isMeleeAttacking() && !this.isSummoning() && !this.isScreaming()) {
                     this.setAnimationState(IDLE);
@@ -1428,6 +1483,11 @@ public class WightServant extends Summoned {
             this.nodeEvaluator.setCanPassDoors(true);
             return new PathFinder(this.nodeEvaluator, p_33382_);
         }
+
+        @Override
+        public boolean isStableDestination(BlockPos pos) {
+            return !this.level.getBlockState(pos.below()).isAir();
+        }
     }
 
     static class WightServantNodeEvaluator extends WalkNodeEvaluator {
@@ -1518,7 +1578,6 @@ public class WightServant extends Summoned {
                         if (flag) {
                             this.tryToTeleportNearEntity();
                         } else {
-                            // Use the appropriate navigation based on the current state
                             if (this.summonedEntity.isInWater()) {
                                 ((WightServant) this.summonedEntity).waterNavigation.moveTo(this.owner,
                                         this.followSpeed);

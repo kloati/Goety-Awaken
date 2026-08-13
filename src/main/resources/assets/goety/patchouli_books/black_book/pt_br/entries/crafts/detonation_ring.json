@@ -1,0 +1,17 @@
+{
+  "name": "Anel de Detonação",
+  "icon": "goetyawaken:detonation_ring",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Os Arqu-Ilusionistas dominaram a arte viciosa de transformar flechas em projéteis explosivos através da magia. Este anel, forjado com seu poder, permite ao portador compreender a técnica de moldar magicamente flechas explosivas e auxilia o usuário a conjurá-la — concedendo às flechas comuns que ele dispara a chance de se transformarem em flechas explosivas."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:detonation_ring",
+      "text": ""
+    }
+  ],
+  "extra_recipe_mappings": {"goetyawaken:detonation_ring":0}
+}

@@ -1,0 +1,31 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:summon_tamed",
+  "activation_item": {
+    "item": "meetyourfight:rosalyne_head_cracked"
+  },
+  "craftType": "magic",
+  "entity_to_summon": "goetyawaken:rosalyne_servant",
+  "soulCost": 70,
+  "duration": 10,
+  "ingredients": [
+    {
+      "item": "meetyourfight:twilights_thorn"
+    },
+    {
+      "item": "meetyourfight:blossoming_mind"
+    },
+    {
+      "item": "meetyourfight:dusk_key"
+    },
+    {
+      "item": "minecraft:obsidian"
+    },
+    {
+      "item": "minecraft:crying_obsidian"
+    }
+  ],
+  "result": {
+    "item": "goety:jei_dummy/none"
+  }
+}

@@ -55,6 +55,21 @@
       "type": "patchouli:text",
       "title": "Illusioner Servant",
       "text": "需求: $(li)New villager with magical aptitude $(li)24 Wools $(li)4 Targets $(li)1 Pedestal holding a Mirror Focus."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Skirmisher Servant",
+      "text": "$(9)Requires It Takes a Pillage mod$(li)Neollager$(li)1 Banner $(li)64 Any Planks $(li)60 Ominous Stone $(li)10 Any Walls $(li)10 Any Wooden Fences $(li)2 Furnaces $(li)1 Crafting Table."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Archer Servant",
+      "text": "$(9)Requires It Takes a Pillage mod$(li)Neollager$(li)2 Hay Bales or Targets $(li)2 Carved Pumpkins $(li)16 Wooden Fences $(li)20 Ominous Stone."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Legioner Servant",
+      "text": "$(9)Requires It Takes a Pillage mod$(li)Neollager$(li)2 Grindstones $(li)2 Smithing Tables $(li)16 Iron Ores $(li)32 Logs $(li)4 Barrels $(li)4 Beds $(li)2 Anvils."
     }
   ],
   "extra_recipe_mappings": {

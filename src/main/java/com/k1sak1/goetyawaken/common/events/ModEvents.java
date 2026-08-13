@@ -1,39 +1,47 @@
 package com.k1sak1.goetyawaken.common.events;
 
+import com.Polarice3.Goety.api.entities.IOwned;
 import com.Polarice3.Goety.common.blocks.entities.AnimatorBlockEntity;
+import com.Polarice3.Goety.common.effects.GoetyEffects;
 import com.Polarice3.Goety.common.entities.ModEntityType;
 import com.Polarice3.Goety.common.entities.ally.illager.AbstractIllagerServant;
+import com.Polarice3.Goety.common.entities.boss.EnderKeeper;
+import com.Polarice3.Goety.common.entities.hostile.WitherNecromancer;
 import com.Polarice3.Goety.common.entities.hostile.servants.Damned;
 import com.Polarice3.Goety.common.items.magic.AnimationCore;
-import com.Polarice3.Goety.common.effects.GoetyEffects;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
+import com.Polarice3.Goety.utils.SEHelper;
 import com.k1sak1.goetyawaken.common.advancements.ModCriteriaTriggers;
-import com.k1sak1.goetyawaken.common.blocks.ModBlocks;
 import com.k1sak1.goetyawaken.common.entities.ally.ObsidianMonolithServant;
 import com.k1sak1.goetyawaken.common.entities.ally.WitherServant;
 import com.k1sak1.goetyawaken.common.entities.ally.ender.EndersentServant;
 import com.k1sak1.goetyawaken.common.entities.ally.illager.ApostleServant;
 import com.k1sak1.goetyawaken.common.entities.ally.illager.RoyalguardServant;
+import com.k1sak1.goetyawaken.common.entities.ally.Integration.RosalyneServant;
+import com.k1sak1.goetyawaken.common.entities.ally.Integration.RoseSpiritServant;
 import com.k1sak1.goetyawaken.common.entities.ally.undead.skeleton.VanguardChampion;
 import com.k1sak1.goetyawaken.common.entities.hostile.undead.necromancer.AbstractNamelessOne;
 import com.k1sak1.goetyawaken.common.entities.hostile.undead.zombie.FrozenZombie;
 import com.k1sak1.goetyawaken.common.items.ModItems;
+import com.k1sak1.goetyawaken.common.items.curios.RippleWalkItem;
 import com.k1sak1.goetyawaken.common.magic.GolemTypeRegistry;
-import com.k1sak1.goetyawaken.init.ModTags;
 import com.k1sak1.goetyawaken.api.IAncientGlint;
+import com.k1sak1.goetyawaken.common.world.data.GAWorldData;
 import com.k1sak1.goetyawaken.utils.AnimatorBlockEntityHelper;
 import com.k1sak1.goetyawaken.utils.GolemTypeHelper;
 import com.k1sak1.goetyawaken.utils.ModDamageSource;
-
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.AbstractIllager;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.npc.WanderingTrader;
@@ -43,15 +51,16 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.Structure;
-import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.player.AttackEntityEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHealEvent;
+import net.minecraftforge.event.entity.player.AttackEntityEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.apache.logging.log4j.LogManager;
@@ -111,6 +120,25 @@ public class ModEvents {
 
             if (triggeringPlayer != null) {
                 ModCriteriaTriggers.MUSHROOM_MONSTROSITY_KILL.trigger(triggeringPlayer);
+            }
+        }
+
+        if (killed.getType() == com.k1sak1.goetyawaken.common.entities.ModEntityType.PARCHED_NECROMANCER.get()) {
+            ServerPlayer triggeringPlayer = null;
+            if (killer instanceof ServerPlayer serverPlayer) {
+                triggeringPlayer = serverPlayer;
+            } else if (killer instanceof com.Polarice3.Goety.common.entities.ally.Summoned ownedKiller) {
+                if (ownedKiller.getMasterOwner() instanceof ServerPlayer masterPlayer) {
+                    triggeringPlayer = masterPlayer;
+                }
+            } else if (killer instanceof net.minecraft.world.entity.projectile.Projectile projectile) {
+                if (projectile.getOwner() instanceof ServerPlayer ownerPlayer) {
+                    triggeringPlayer = ownerPlayer;
+                }
+            }
+
+            if (triggeringPlayer != null) {
+                ModCriteriaTriggers.WALK_LIKE_NAMELESS.trigger(triggeringPlayer);
             }
         }
 
@@ -249,40 +277,18 @@ public class ModEvents {
     }
 
     @SubscribeEvent
-    public static void onItemPickup(net.minecraftforge.event.entity.player.PlayerEvent.ItemPickupEvent event) {
-        if (!event.getEntity().level().isClientSide() && event.getEntity() instanceof ServerPlayer player) {
-            ItemStack stack = event.getStack();
-            if (stack.is(ModBlocks.SHADOW_SHRIEKER.get().asItem())) {
-                ModCriteriaTriggers.GET_SHADOW_SHRIEKER.trigger(player);
-            }
-            if (stack.is(ModItems.CREEPER_FOCUS.get())) {
-                ModCriteriaTriggers.CREEPER_FOCUS.trigger(player);
-            }
-            if (stack.is(ModItems.STARE_FOCUS.get())) {
-                ModCriteriaTriggers.THE_END_ENVOY.trigger(player);
-            }
-            if (stack.is(ModItems.INFESTATION_FOCUS.get())) {
-                ModCriteriaTriggers.BED_LICE.trigger(player);
-            }
+    public static void onEntityLeaveLevel(net.minecraftforge.event.entity.EntityLeaveLevelEvent event) {
+        if (!event.getLevel().isClientSide()) {
+            com.k1sak1.goetyawaken.utils.AttributeModifierManager.onEntityRemoved(event.getEntity());
         }
     }
 
     @SubscribeEvent
-    public static void onCrafting(net.minecraftforge.event.entity.player.PlayerEvent.ItemCraftedEvent event) {
-        if (!event.getEntity().level().isClientSide() && event.getEntity() instanceof ServerPlayer player) {
-            if (event.getCrafting().is(ModBlocks.SHADOW_SHRIEKER.get().asItem())) {
-                ModCriteriaTriggers.GET_SHADOW_SHRIEKER.trigger(player);
-            }
-            if (event.getCrafting().is(ModItems.CREEPER_FOCUS.get().asItem())) {
-                ModCriteriaTriggers.CREEPER_FOCUS.trigger(player);
-            }
-            if (event.getCrafting().is(ModItems.STARE_FOCUS.get().asItem())) {
-                ModCriteriaTriggers.THE_END_ENVOY.trigger(player);
-            }
-            if (event.getCrafting().is(ModItems.INFESTATION_FOCUS.get().asItem())) {
-                ModCriteriaTriggers.BED_LICE.trigger(player);
-            }
-        }
+    public static void onPlayerLoggedOut(
+            net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedOutEvent event) {
+        UUID playerId = event.getEntity().getUUID();
+        playerHighAndDryAwarded.remove(playerId);
+        playerChaosPrisonAwarded.remove(playerId);
     }
 
     @SubscribeEvent
@@ -290,7 +296,15 @@ public class ModEvents {
         if (event.phase == TickEvent.Phase.END && !event.player.level().isClientSide()) {
             Player player = event.player;
             UUID playerId = player.getUUID();
-            if (!playerHighAndDryAwarded.getOrDefault(playerId, false)) {
+            boolean needsMirageCheck = !playerHighAndDryAwarded.getOrDefault(playerId, false);
+            boolean needsChaosPrisonCheck = !playerChaosPrisonAwarded.getOrDefault(playerId, false);
+            if (!needsMirageCheck && !needsChaosPrisonCheck) {
+                return;
+            }
+            if (player.tickCount % 100 != 0) {
+                return;
+            }
+            if (needsMirageCheck) {
                 if (isPlayerInMirageStructure(player)) {
                     if (player instanceof ServerPlayer serverPlayer) {
                         ModCriteriaTriggers.HIGH_AND_DRY.trigger(serverPlayer);
@@ -299,7 +313,7 @@ public class ModEvents {
                 }
             }
 
-            if (!playerChaosPrisonAwarded.getOrDefault(playerId, false)) {
+            if (needsChaosPrisonCheck) {
                 if (isPlayerInChaosPrisonStructure(player)) {
                     if (player instanceof ServerPlayer serverPlayer) {
                         ModCriteriaTriggers.CHAOS_PRISON.trigger(serverPlayer);
@@ -362,6 +376,18 @@ public class ModEvents {
                         }
                     }
                 }
+                if (mob.getTarget() instanceof RosalyneServant rosalyneServant) {
+                    if (rosalyneServant.isPowered()) {
+                        for (RoseSpiritServant roseSpiritServant : mob.level().getEntitiesOfClass(
+                                RoseSpiritServant.class,
+                                mob.getBoundingBox().inflate(followRange, 12.0D, followRange))) {
+                            if (roseSpiritServant.getTrueOwner() == rosalyneServant) {
+                                mob.setTarget(roseSpiritServant);
+                                break;
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -402,5 +428,103 @@ public class ModEvents {
                         true));
             }
         }
+    }
+
+    @SubscribeEvent
+    public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
+        if (event.getEntity() instanceof ServerPlayer serverPlayer
+                && SEHelper.hasResearch(serverPlayer, com.k1sak1.goetyawaken.common.research.ResearchList.ROYAL)) {
+            ModCriteriaTriggers.ROYAL_RESEARCH_COMPLETED.trigger(serverPlayer);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onWitherNecromancerDeath(LivingDeathEvent event) {
+        LivingEntity entity = event.getEntity();
+        if (entity instanceof WitherNecromancer witherNecromancer) {
+            Level level = witherNecromancer.level();
+            GAWorldData worldData = GAWorldData.get(level, Level.NETHER);
+            if (worldData != null) {
+                boolean prev = worldData.isWitherNecromancerDefeatedOnce();
+                if (!prev) {
+                    worldData.setWitherNecromancerDefeatedOnce(true);
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onFluidWalkTick(TickEvent.PlayerTickEvent event) {
+        if (event.phase != TickEvent.Phase.START) {
+            return;
+        }
+
+        LivingEntity player = event.player;
+
+        if (RippleWalkItem.hasRippleWalkItem(player) && RippleWalkItem.shouldEnableFluidWalking(player)) {
+            BlockPos blockUnderPlayer = new BlockPos((int) Math.floor(player.getX()),
+                    (int) Math.floor(player.getY() - 0.2), (int) Math.floor(player.getZ()));
+            FluidState fluidState = player.level().getFluidState(blockUnderPlayer);
+            if (!player.level().getBlockState(blockUnderPlayer).isCollisionShapeFullBlock(player.level(),
+                    blockUnderPlayer)) {
+                if (!fluidState.isEmpty() && fluidState.isSource()) {
+                    if (RippleWalkItem.canWalkOnFluid(player, fluidState)) {
+                        player.setOnGround(true);
+                        player.fallDistance = 0.0F;
+                        if (player.getDeltaMovement().y() < 0) {
+                            player.setDeltaMovement(
+                                    player.getDeltaMovement().x(),
+                                    0,
+                                    player.getDeltaMovement().z());
+                            if (fluidState.is(net.minecraft.tags.FluidTags.LAVA) && !player.fireImmune()
+                                    && !net.minecraft.world.item.enchantment.EnchantmentHelper.hasFrostWalker(player)) {
+                                player.hurt(player.damageSources().hotFloor(), 1);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onMiscDeathDrops(LivingDeathEvent event) {
+        if (event.getEntity() instanceof EnderKeeper enderKeeper) {
+            if (event.getSource().getEntity() != null
+                    && event.getSource().getEntity() instanceof Player) {
+                if (enderKeeper.getRandom().nextFloat() < 0.075F) {
+                    ItemStack eyeOfOverwatchStack = new ItemStack(ModItems.EYE_OF_OVERWATCH.get());
+                    ItemEntity itemEntity = enderKeeper.spawnAtLocation(eyeOfOverwatchStack);
+                    if (itemEntity != null) {
+                        itemEntity.setExtendedLifetime();
+                    }
+                }
+            }
+        }
+        AbstractNamelessOne namelessOne = getNamelessOneFromKiller(event);
+        if (namelessOne != null) {
+            if (!namelessOne.level().isClientSide) {
+                float healAmount = (float) (namelessOne.getMaxHealth() * 0.002);
+                namelessOne.heal(healAmount);
+            }
+        }
+    }
+
+    private static AbstractNamelessOne getNamelessOneFromKiller(LivingDeathEvent event) {
+        Entity killer = event.getSource().getEntity();
+        if (killer instanceof AbstractNamelessOne namelessOne) {
+            return namelessOne;
+        }
+        if (killer instanceof IOwned owned) {
+            LivingEntity trueOwner = owned.getTrueOwner();
+            if (trueOwner instanceof AbstractNamelessOne namelessOne) {
+                return namelessOne;
+            }
+            LivingEntity masterOwner = owned.getMasterOwner();
+            if (masterOwner instanceof AbstractNamelessOne namelessOne) {
+                return namelessOne;
+            }
+        }
+        return null;
     }
 }

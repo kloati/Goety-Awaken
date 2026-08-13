@@ -1,0 +1,16 @@
+{
+  "name": "Hostile Angry Mooshroom",
+  "icon": "goetyawaken:hostile_angry_mooshroom_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "The entrance to the mysterious structure on the Mushroom Islands is guarded by a herd of Mooshrooms that seem to be in a perpetual state of rage, charging violently at any creature before them. You can't help but wonder—what kind of force could turn these normally gentle creatures so ferocious..."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_angry_mooshroom",
+      "text": "Moo!"
+    }
+  ]
+}

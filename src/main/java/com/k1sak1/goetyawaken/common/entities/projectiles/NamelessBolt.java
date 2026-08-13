@@ -8,8 +8,6 @@ import com.Polarice3.Goety.utils.WandUtil;
 import com.k1sak1.goetyawaken.client.renderer.trail.TrailPosition;
 import com.k1sak1.goetyawaken.common.entities.ModEntityType;
 import com.k1sak1.goetyawaken.common.entities.hostile.undead.necromancer.AbstractNamelessOne;
-
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -30,9 +28,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class NamelessBolt extends SpellHurtingProjectile {
@@ -44,7 +40,7 @@ public class NamelessBolt extends SpellHurtingProjectile {
     public float getGlow;
     public float glowAmount = 0.05F;
 
-    private static final int MAX_TRAILS = 20;
+    private static final int MAX_TRAILS = 16;
     private static final EntityDataAccessor<Boolean> DATA_HAS_TRAIL = SynchedEntityData.defineId(NamelessBolt.class,
             EntityDataSerializers.BOOLEAN);
 
@@ -194,9 +190,18 @@ public class NamelessBolt extends SpellHurtingProjectile {
     }
 
     private void updateTrail() {
-        if (this.getTrailPositions().size() < MAX_TRAILS) {
-            Vec3 centerPos = this.getBoundingBox().getCenter();
-            this.getTrailPositions().add(new TrailPosition(centerPos, 0));
+        Vec3 centerPos = this.getBoundingBox().getCenter();
+        this.getTrailPositions().add(0, new TrailPosition(centerPos, 0));
+        while (this.getTrailPositions().size() > MAX_TRAILS) {
+            this.getTrailPositions().remove(this.getTrailPositions().size() - 1);
+        }
+    }
+
+    @Override
+    public void onRemovedFromWorld() {
+        super.onRemovedFromWorld();
+        if (this.level().isClientSide && this.trailPositions != null) {
+            this.trailPositions.clear();
         }
     }
 
@@ -243,7 +248,8 @@ public class NamelessBolt extends SpellHurtingProjectile {
 
     private void createDeathFire() {
         Entity owner = this.getOwner();
-        if (owner != null && owner instanceof AbstractNamelessOne namelessone && !namelessone.isEasyMode()) {
+        if (owner != null && owner instanceof AbstractNamelessOne namelessone && !namelessone.isEasyMode()
+                && com.k1sak1.goetyawaken.Config.ENABLE_NAMELESS_BOLT_DEATH_FIRE.get()) {
             if (owner instanceof LivingEntity livingOwner) {
                 DeathFire deathFire = new DeathFire(
                         this.level(),

@@ -1,0 +1,30 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety:empty_focus"
+  },
+  "craftType": "necroturgy",
+  "soulCost": 8,
+  "duration": 8,
+  "ingredients": [
+    {
+      "item": "deeperdarker:sculk_bone"
+    },
+    {
+      "item": "deeperdarker:reinforced_echo_shard"
+    },
+    {
+      "item": "minecraft:sculk_shrieker"
+    },
+    {
+      "item": "goety:sculk_converter"
+    },
+    {
+      "item": "minecraft:sculk_sensor"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:shattered_focus"
+  }
+}

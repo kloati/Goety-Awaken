@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "goetyawaken:item/deepdark_vermin_focus"
+  }
+}

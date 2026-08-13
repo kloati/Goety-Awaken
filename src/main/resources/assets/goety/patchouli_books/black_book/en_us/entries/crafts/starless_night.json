@@ -25,5 +25,6 @@
       "type": "patchouli:text",
       "text": "It can absorb Soul Energy for self-repair."
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:starless_night":0}
 }

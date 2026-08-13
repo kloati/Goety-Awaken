@@ -51,7 +51,6 @@ public class TormentorServant extends Summoned {
     public TormentorServant(EntityType<? extends Summoned> p_i50190_1_, Level p_i50190_2_) {
         super(p_i50190_1_, p_i50190_2_);
         this.moveControl = new MobUtil.MinionMoveControl(this);
-        this.xpReward = 6;
     }
 
     public void move(MoverType typeIn, Vec3 pos) {

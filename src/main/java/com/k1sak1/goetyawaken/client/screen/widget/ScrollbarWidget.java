@@ -1,5 +1,7 @@
 package com.k1sak1.goetyawaken.client.screen.widget;
 
+import com.k1sak1.goetyawaken.client.screen.widget.sidebutton.SideButton;
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.util.Mth;
 
@@ -50,18 +52,19 @@ public class ScrollbarWidget {
     }
 
     public void render(GuiGraphics graphics) {
-        graphics.fill(x, y, x + SCROLLER_WIDTH, y + height, 0xFF2B2B2B);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 
+        int scrollAreaHeight = height - SCROLLER_HEIGHT;
+        int scrollerY;
         if (enabled && maxOffset > 0) {
-            int scrollAreaHeight = height - SCROLLER_HEIGHT;
             float ratio = (float) offset / (float) maxOffset;
-            int scrollerY = y + (int) (ratio * scrollAreaHeight);
-            graphics.fill(x, scrollerY, x + SCROLLER_WIDTH, scrollerY + SCROLLER_HEIGHT, 0xFFCCCCCC);
-            graphics.fill(x, scrollerY, x + SCROLLER_WIDTH - 1, scrollerY + SCROLLER_HEIGHT - 1, 0xFFFFFFFF);
-            graphics.fill(x + 1, scrollerY + 1, x + SCROLLER_WIDTH - 1, scrollerY + SCROLLER_HEIGHT - 1, 0xFF8B8B8B);
+            scrollerY = y + Math.round(ratio * scrollAreaHeight);
         } else {
-            graphics.fill(x, y, x + SCROLLER_WIDTH, y + SCROLLER_HEIGHT, 0xFF6B6B6B);
+            scrollerY = y;
         }
+
+        int u = (enabled && maxOffset > 0) ? 232 : 244;
+        graphics.blit(SideButton.ICONS_TEXTURE, x, scrollerY, u, 0, SCROLLER_WIDTH, SCROLLER_HEIGHT);
     }
 
     public boolean mouseClicked(double mouseX, double mouseY, int button) {

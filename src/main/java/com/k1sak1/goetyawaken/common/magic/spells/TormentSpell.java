@@ -102,6 +102,7 @@ public class TormentSpell extends SummonSpell {
                 this.SummonSap(caster, summonedentity);
                 this.setTarget(caster, summonedentity);
                 worldIn.addFreshEntity(summonedentity);
+                this.summonParticles(worldIn, caster, staff, summonedentity);
                 this.summonAdvancement(caster, summonedentity);
             }
             this.SummonDown(caster);

@@ -1,0 +1,22 @@
+{
+  "name": "Dame Fortuna",
+  "icon": "meetyourfight:devils_ante",
+  "category": "goety:goetyawaken_summons",
+  "flag": "goetyawaken:meetyourfight_loaded",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Dame Fortuna is fortune's darling—she had never lost a wager, until she met you. After defeating her at what she was most proud of, you began to contemplate ways of binding her to your side. Ingenious as you are, you eventually discovered a method to forge a contract with a demon such as her—before she wins another wager against you (which, as you well know, is impossible for you), she must serve you."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:dame_fortuna_servant",
+      "text": ""
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:dame_fortuna_servant",
+      "text": "She really wants to win against you one more time."
+    }
+  ]
+}

@@ -20,5 +20,6 @@
       "recipe": "goetyawaken:shadow_shrieker",
       "text": "Craft the Shadow Shrieker."
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:shadow_shrieker":0}
 }

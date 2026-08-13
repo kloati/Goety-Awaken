@@ -1,0 +1,301 @@
+{
+  "trades": [
+    {
+      "item_id": "goety:brew",
+      "min_count": 1,
+      "max_count": 1,
+      "weight": 1,
+      "price": 16,
+      "is_brew": true,
+      "brew_type": "goety:brew",
+      "brew_effects": [
+        {
+          "id": "purify_debuff",
+          "amplifier": 0,
+          "duration": 100,
+          "is_brew_effect": true
+        }
+      ]
+    },
+    {
+      "item_id": "goety:splash_brew",
+      "min_count": 1,
+      "max_count": 1,
+      "weight": 1,
+      "price": 20,
+      "is_brew": true,
+      "brew_type": "goety:splash_brew",
+      "brew_effects": [
+        {
+          "id": "minecraft:strength",
+          "amplifier": 2,
+          "duration": 900,
+          "is_brew_effect": false
+        }
+      ]
+    },
+    {
+      "item_id": "goety:forbidden_piece",
+      "min_count": 1,
+      "max_count": 1,
+      "weight": 2,
+      "price": 26
+    },
+    {
+      "item_id": "minecraft:echo_shard",
+      "min_count": 1,
+      "max_count": 2,
+      "weight": 4,
+      "price": 16
+    },
+    {
+      "item_id": "minecraft:ghast_tear",
+      "min_count": 1,
+      "max_count": 2,
+      "weight": 4,
+      "price": 16
+    },
+    {
+      "item_id": "minecraft:wither_rose",
+      "min_count": 1,
+      "max_count": 2,
+      "weight": 4,
+      "price": 16
+    },
+    {
+      "item_id": "minecraft:ender_pearl",
+      "min_count": 1,
+      "max_count": 2,
+      "weight": 4,
+      "price": 16
+    },
+    {
+      "item_id": "minecraft:blaze_powder",
+      "min_count": 2,
+      "max_count": 4,
+      "weight": 4,
+      "price": 6
+    },
+    {
+      "item_id": "minecraft:rabbit_foot",
+      "min_count": 1,
+      "max_count": 1,
+      "weight": 4,
+      "price": 16
+    },
+    {
+      "item_id": "goety:raging_matter",
+      "min_count": 1,
+      "max_count": 1,
+      "weight": 4,
+      "price": 24
+    },
+    {
+      "item_id": "minecraft:turtle_egg",
+      "min_count": 1,
+      "max_count": 1,
+      "weight": 4,
+      "price": 16
+    },
+    {
+      "item_id": "minecraft:magma_cream",
+      "min_count": 1,
+      "max_count": 2,
+      "weight": 6,
+      "price": 12
+    },
+    {
+      "item_id": "minecraft:phantom_membrane",
+      "min_count": 1,
+      "max_count": 2,
+      "weight": 6,
+      "price": 12
+    },
+    {
+      "item_id": "minecraft:fermented_spider_eye",
+      "min_count": 1,
+      "max_count": 4,
+      "weight": 6,
+      "price": 12
+    },
+    {
+      "item_id": "minecraft:golden_carrot",
+      "min_count": 1,
+      "max_count": 2,
+      "weight": 6,
+      "price": 12
+    },
+    {
+      "item_id": "minecraft:glistering_melon_slice",
+      "min_count": 1,
+      "max_count": 2,
+      "weight": 6,
+      "price": 12
+    },
+    {
+      "item_id": "minecraft:nether_wart",
+      "min_count": 2,
+      "max_count": 4,
+      "weight": 6,
+      "price": 12
+    },
+    {
+      "item_id": "minecraft:potion",
+      "min_count": 1,
+      "max_count": 1,
+      "weight": 8,
+      "price": 8,
+      "potion": "minecraft:regeneration"
+    },
+    {
+      "item_id": "minecraft:splash_potion",
+      "min_count": 1,
+      "max_count": 1,
+      "weight": 8,
+      "price": 8,
+      "potion": "minecraft:regeneration"
+    },
+    {
+      "item_id": "minecraft:potion",
+      "min_count": 1,
+      "max_count": 1,
+      "weight": 8,
+      "price": 8,
+      "potion": "minecraft:healing"
+    },
+    {
+      "item_id": "minecraft:splash_potion",
+      "min_count": 1,
+      "max_count": 1,
+      "weight": 8,
+      "price": 8,
+      "potion": "minecraft:healing"
+    },
+    {
+      "item_id": "minecraft:prismarine_shard",
+      "min_count": 2,
+      "max_count": 4,
+      "weight": 8,
+      "price": 8
+    },
+    {
+      "item_id": "minecraft:honey_bottle",
+      "min_count": 1,
+      "max_count": 3,
+      "weight": 8,
+      "price": 14
+    },
+    {
+      "item_id": "minecraft:pufferfish",
+      "min_count": 1,
+      "max_count": 3,
+      "weight": 8,
+      "price": 8
+    },
+    {
+      "item_id": "goety:venomous_fang",
+      "min_count": 2,
+      "max_count": 4,
+      "weight": 10,
+      "price": 6
+    },
+    {
+      "item_id": "goety:spider_egg",
+      "min_count": 2,
+      "max_count": 4,
+      "weight": 10,
+      "price": 6
+    },
+    {
+      "item_id": "minecraft:ink_sac",
+      "min_count": 2,
+      "max_count": 4,
+      "weight": 10,
+      "price": 6
+    },
+    {
+      "item_id": "minecraft:red_mushroom",
+      "min_count": 2,
+      "max_count": 4,
+      "weight": 20,
+      "price": 1
+    },
+    {
+      "item_id": "minecraft:brown_mushroom",
+      "min_count": 2,
+      "max_count": 4,
+      "weight": 20,
+      "price": 1
+    },
+    {
+      "item_id": "minecraft:glowstone_dust",
+      "min_count": 2,
+      "max_count": 4,
+      "weight": 20,
+      "price": 2
+    },
+    {
+      "item_id": "minecraft:sugar",
+      "min_count": 2,
+      "max_count": 4,
+      "weight": 20,
+      "price": 2
+    },
+    {
+      "item_id": "minecraft:redstone",
+      "min_count": 2,
+      "max_count": 4,
+      "weight": 20,
+      "price": 1
+    },
+    {
+      "item_id": "minecraft:spider_eye",
+      "min_count": 1,
+      "max_count": 2,
+      "weight": 20,
+      "price": 2
+    },
+    {
+      "item_id": "minecraft:glass_bottle",
+      "min_count": 2,
+      "max_count": 6,
+      "weight": 20,
+      "price": 1
+    },
+    {
+      "item_id": "minecraft:gunpowder",
+      "min_count": 2,
+      "max_count": 4,
+      "weight": 20,
+      "price": 2
+    },
+    {
+      "item_id": "minecraft:slime_ball",
+      "min_count": 2,
+      "max_count": 4,
+      "weight": 20,
+      "price": 6
+    },
+    {
+      "item_id": "minecraft:hanging_roots",
+      "min_count": 2,
+      "max_count": 4,
+      "weight": 20,
+      "price": 8
+    },
+    {
+      "item_id": "goety:refuse_bottle",
+      "min_count": 1,
+      "max_count": 3,
+      "weight": 20,
+      "price": 4
+    },
+    {
+      "item_id": "goety:feet_of_frog",
+      "min_count": 1,
+      "max_count": 3,
+      "weight": 20,
+      "price": 16
+    }
+  ]
+}

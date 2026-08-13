@@ -1,0 +1,39 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "minecraft:blaze_powder"
+  },
+  "craftType": "forge",
+  "soulCost": 1,
+  "duration": 4,
+  "ingredients": [
+    {
+      "item": "minecraft:netherite_scrap"
+    },
+    {
+      "tag": "forge:armors/helmets"
+    },
+    {
+      "item": "goety:magic_emerald"
+    },
+    {
+      "item": "minecraft:shield"
+    },
+    {
+      "tag": "minecraft:stone_bricks"
+    },
+    {
+      "tag": "minecraft:stone_bricks"
+    },
+    {
+      "tag": "minecraft:stone_bricks"
+    },
+    {
+      "tag": "minecraft:stone_bricks"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:wildfire_statue"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "name": "巨型恶魂",
+  "icon": "goetyawaken:gloomy_tears",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "巨型恶魂是一种三首畸变恶魂，它正面的巨口能喷吐出炽烈的爆炸火球，而两侧的面孔则会射出阴险的追踪火球。它们的体型远胜寻常恶魂，身躯也因此坚韧异常。这头来自狱界的扭曲恶魂的火力极为狂暴，足以将毫无准备的冒险者瞬间化为灰烬。在动身狩猎之前，务必穿戴好能够抵御爆炸与烈焰的装备。"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goetyawaken:lamenting_horn",
+      "title": "悲泣号角",
+      "text": "在下界的玄武岩三角洲、下界荒地或灵魂沙峡谷区域使用悲泣号角，或许就可以得到巨型恶魂来自狱界的回应。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_giant_ghast",
+      "text": ""
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goetyawaken:gloomy_tears",
+      "title": "黑沉沉泪",
+      "text": "被击败后，它们会流下黑沉沉泪。这种浓缩了狱界力量和巨型恶魂临死前诅咒的泪滴是一种强大的爆炸性材料，可以用来强化下界法术，或者用来诅咒一个恶魂，使其转变为巨型恶魂。"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:convert_tamed",
+  "activation_item": {
+    "item": "goety:command_focus"
+  },
+  "craftType": "sky",
+  "entity_to_convert": {
+    "tag": "goetyawaken:mountaineers",
+    "display_name": "entity.goety.mountaineer_servant"
+  },
+  "entity_to_convert_into": "goetyawaken:rampart_captain",
+  "soulCost": 10,
+  "duration": 20,
+  "ingredients": [
+    {
+      "item": "goetyawaken:rampart_manuscript"
+    },
+    {
+      "item": "minecraft:leather"
+    },
+    {
+      "item": "goety:diamond_ice_axe"
+    },
+    {
+      "item": "minecraft:white_banner"
+    },
+    {
+      "item": "minecraft:copper_ingot"
+    },
+    {
+      "item": "goety:raiding_horn"
+    }
+  ],
+  "result": {
+    "item": "goety:jei_dummy/none"
+  }
+}

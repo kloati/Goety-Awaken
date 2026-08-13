@@ -1,0 +1,17 @@
+{
+  "name": "Swelling Pendant",
+  "icon": "goetyawaken:swelling_pendant",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Just as the Hunger Pendant devours rotten flesh to feed its wearer, this Swelling Pendant employs the same technique—only it craves slimeballs, and will only feed those slimeballs to the wearer's slimes, causing them to swell and grow. The Swelling Pendant absorbs slimeballs from your inventory, stores them, and makes your slimes far larger when you summon them."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:swelling_pendant",
+      "text": ""
+    }
+  ],
+  "extra_recipe_mappings": {"goetyawaken:swelling_pendant":0}
+}

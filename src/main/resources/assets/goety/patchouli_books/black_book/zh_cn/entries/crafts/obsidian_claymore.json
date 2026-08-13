@@ -12,5 +12,6 @@
       "recipe": "goetyawaken:obsidian_claymore",
       "text": ""
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:obsidian_claymore":0}
 }

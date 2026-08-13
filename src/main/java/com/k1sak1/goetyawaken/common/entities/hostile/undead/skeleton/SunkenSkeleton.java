@@ -4,9 +4,6 @@ import com.Polarice3.Goety.common.entities.ai.path.ModWaterPathNavigation;
 import com.Polarice3.Goety.common.entities.ally.undead.skeleton.SunkenSkeletonServant;
 import com.Polarice3.Goety.config.AttributesConfig;
 import com.Polarice3.Goety.utils.MobUtil;
-import com.k1sak1.goetyawaken.common.entities.ModEntityType;
-import com.k1sak1.goetyawaken.common.entities.ally.undead.skeleton.ParchedServant;
-
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;

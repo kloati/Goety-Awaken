@@ -59,4 +59,29 @@ public class ModRenderTypes {
     public static RenderType brightEmissive(ResourceLocation texture) {
         return BRIGHT_EMISSIVE.apply(texture);
     }
+
+    protected static final RenderStateShard.ShaderStateShard RENDERTYPE_ENTITY_TRANSLUCENT_SHADER = new RenderStateShard.ShaderStateShard(
+            GameRenderer::getRendertypeEntityTranslucentShader);
+    protected static final RenderStateShard.LightmapStateShard LIGHTMAP = new RenderStateShard.LightmapStateShard(true);
+
+    private static final Function<ResourceLocation, RenderType> ENTITY_TRANSLUCENT_NO_DEPTH = Util
+            .memoize(location -> RenderType.create("entity_translucent_no_depth",
+                    DefaultVertexFormat.NEW_ENTITY,
+                    VertexFormat.Mode.QUADS,
+                    256,
+                    false,
+                    true,
+                    RenderType.CompositeState.builder()
+                            .setShaderState(RENDERTYPE_ENTITY_TRANSLUCENT_SHADER)
+                            .setTextureState(new RenderStateShard.TextureStateShard(location, false, false))
+                            .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
+                            .setCullState(NO_CULL)
+                            .setWriteMaskState(COLOR_WRITE)
+                            .setLightmapState(LIGHTMAP)
+                            .setOverlayState(OVERLAY)
+                            .createCompositeState(true)));
+
+    public static RenderType entityTranslucentNoDepth(ResourceLocation location) {
+        return ENTITY_TRANSLUCENT_NO_DEPTH.apply(location);
+    }
 }

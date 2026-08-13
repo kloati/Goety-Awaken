@@ -1,6 +1,6 @@
 package com.k1sak1.goetyawaken.common.storage.impl;
 
-import com.k1sak1.goetyawaken.client.screen.grid.stack.ItemGridStack;
+import com.k1sak1.goetyawaken.common.storage.grid.stack.ItemGridStack;
 import com.k1sak1.goetyawaken.common.network.ModNetwork;
 import com.k1sak1.goetyawaken.common.storage.api.IStorageCacheListener;
 import com.k1sak1.goetyawaken.common.storage.api.StackListEntry;
@@ -15,14 +15,6 @@ import net.minecraftforge.network.PacketDistributor;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Inspired by Refined Storage
- * 
- * @author raoulvdberge (Original Author)
- * @see <a href=
- *      "https://github.com/raoulvdberge/refinedstorage">Refined Storage
- *      Repository</a>
- */
 public class ItemGridStorageCacheListener implements IStorageCacheListener<ItemStack> {
     private final ServerPlayer player;
     private final IStorageCache<ItemStack> cache;

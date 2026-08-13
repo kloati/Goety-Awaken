@@ -12,5 +12,6 @@
       "recipe": "goetyawaken:infestation_focus",
       "text": "Craft the Infestation Focus."
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:infestation_focus":0}
 }

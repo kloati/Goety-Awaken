@@ -1,0 +1,33 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goetyawaken:chip_focus"
+  },
+  "craftType": "magic",
+  "soulCost": 4,
+  "duration": 8,
+  "ingredients": [
+    {
+      "item": "meetyourfight:devils_ante"
+    },
+    {
+      "item": "meetyourfight:devils_ante"
+    },
+    {
+      "item": "meetyourfight:devils_ante"
+    },
+    {
+      "item": "meetyourfight:devils_ante"
+    },
+    {
+      "item": "meetyourfight:fortunes_favor"
+    },
+    {
+      "item": "goety:wind_core"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:chip_rain_focus"
+  }
+}

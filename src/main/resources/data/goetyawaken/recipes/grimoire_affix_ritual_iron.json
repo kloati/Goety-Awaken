@@ -1,0 +1,19 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goetyawaken:iron_grimoire"
+  },
+  "craftType": "magic",
+  "soulCost": 10,
+  "duration": 4,
+  "ingredients": [
+    {
+      "tag": "goetyawaken:grimoire_materials"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:iron_grimoire",
+    "nbt": "{goetyawaken_affix_roll:1b}"
+  }
+}

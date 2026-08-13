@@ -1,0 +1,17 @@
+{
+  "name": "Cajatata, Grande Cajado do Camponês",
+  "icon": "goetyawaken:potato_staff",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Poucos conhecem o imenso poder arcano contido nas batatas venenosas — e você é um deles. Este Cajado Selvagem, modificado usando batatas venenosas, pode infundir certos feitiços com o poder da batata venenosa, e pode até ser usado diretamente para compostagem."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:potato_staff",
+      "text": "Reza a lenda que sua criação foi apenas uma piada."
+    }
+  ],
+  "extra_recipe_mappings": {"goetyawaken:potato_staff":0}
+}

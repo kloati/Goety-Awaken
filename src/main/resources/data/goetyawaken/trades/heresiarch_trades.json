@@ -1,0 +1,167 @@
+{
+  "trades": [
+    {
+      "item_id": "goety:forbidden_piece",
+      "min_count": 1,
+      "max_count": 1,
+      "weight": 1,
+      "price": 12
+    },
+    {
+      "item_id": "goety:infernal_tome",
+      "min_count": 1,
+      "max_count": 1,
+      "weight": 32,
+      "price": 10
+    },
+    {
+      "item_id": "minecraft:potion",
+      "min_count": 1,
+      "max_count": 1,
+      "weight": 8,
+      "price": 12,
+      "potion": "minecraft:fire_resistance"
+    },
+    {
+      "item_id": "minecraft:potion",
+      "min_count": 1,
+      "max_count": 1,
+      "weight": 6,
+      "price": 24,
+      "potion": "minecraft:long_fire_resistance"
+    },
+    {
+      "item_id": "minecraft:splash_potion",
+      "min_count": 1,
+      "max_count": 1,
+      "weight": 8,
+      "price": 15,
+      "potion": "minecraft:fire_resistance"
+    },
+    {
+      "item_id": "minecraft:splash_potion",
+      "min_count": 1,
+      "max_count": 1,
+      "weight": 6,
+      "price": 24,
+      "potion": "minecraft:strong_healing"
+    },
+    {
+      "item_id": "minecraft:potion",
+      "min_count": 1,
+      "max_count": 1,
+      "weight": 10,
+      "price": 4,
+      "potion": "minecraft:water"
+    },
+    {
+      "item_id": "minecraft:splash_potion",
+      "min_count": 1,
+      "max_count": 1,
+      "weight": 4,
+      "price": 32,
+      "comment": "",
+      "custom_effects": [
+        {
+          "id": "goety:hysteria",
+          "amplifier": 1,
+          "duration": 1200,
+          "ambient": true,
+          "show_particles": true
+        }
+      ],
+      "color": 12605952
+    },
+    {
+      "item_id": "minecraft:iron_nugget",
+      "min_count": 10,
+      "max_count": 32,
+      "weight": 10,
+      "price": 6
+    },
+    {
+      "item_id": "minecraft:ender_pearl",
+      "min_count": 2,
+      "max_count": 4,
+      "weight": 10,
+      "price": 12
+    },
+    {
+      "item_id": "minecraft:string",
+      "min_count": 3,
+      "max_count": 9,
+      "weight": 20,
+      "price": 2
+    },
+    {
+      "item_id": "minecraft:quartz",
+      "min_count": 5,
+      "max_count": 12,
+      "weight": 20,
+      "price": 3
+    },
+    {
+      "item_id": "minecraft:obsidian",
+      "min_count": 1,
+      "max_count": 1,
+      "weight": 40,
+      "price": 2
+    },
+    {
+      "item_id": "minecraft:crying_obsidian",
+      "min_count": 1,
+      "max_count": 3,
+      "weight": 40,
+      "price": 3
+    },
+    {
+      "item_id": "minecraft:fire_charge",
+      "min_count": 1,
+      "max_count": 1,
+      "weight": 40,
+      "price": 2
+    },
+    {
+      "item_id": "minecraft:leather",
+      "min_count": 2,
+      "max_count": 4,
+      "weight": 40,
+      "price": 3
+    },
+    {
+      "item_id": "minecraft:soul_sand",
+      "min_count": 2,
+      "max_count": 8,
+      "weight": 40,
+      "price": 3
+    },
+    {
+      "item_id": "minecraft:nether_brick",
+      "min_count": 2,
+      "max_count": 8,
+      "weight": 40,
+      "price": 2
+    },
+    {
+      "item_id": "minecraft:spectral_arrow",
+      "min_count": 6,
+      "max_count": 12,
+      "weight": 40,
+      "price": 4
+    },
+    {
+      "item_id": "minecraft:gravel",
+      "min_count": 8,
+      "max_count": 16,
+      "weight": 40,
+      "price": 1
+    },
+    {
+      "item_id": "minecraft:blackstone",
+      "min_count": 8,
+      "max_count": 16,
+      "weight": 40,
+      "price": 2
+    }
+  ]
+}

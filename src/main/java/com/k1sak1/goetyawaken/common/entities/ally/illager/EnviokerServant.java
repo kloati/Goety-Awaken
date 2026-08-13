@@ -662,4 +662,19 @@ public class EnviokerServant extends SpellcasterIllagerServant {
     Mob getTramplerTarget() {
         return this.tramplerTarget;
     }
+
+    @Override
+    public boolean canWearArmor() {
+        return true;
+    }
+
+    @Override
+    public boolean canHaveWeapon() {
+        return true;
+    }
+
+    @Override
+    public boolean isMainWeapon(ItemStack itemStack) {
+        return itemStack.getItem() instanceof SwordItem || itemStack.is(ItemTags.SWORDS);
+    }
 }

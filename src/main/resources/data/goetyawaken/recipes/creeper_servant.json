@@ -11,9 +11,6 @@
   "ingredients": [
     {
       "tag": "forge:gunpowder"
-    },
-    {
-      "tag": "forge:gunpowder"
     }
   ],
   "result": {

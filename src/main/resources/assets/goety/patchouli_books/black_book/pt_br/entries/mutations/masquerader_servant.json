@@ -1,0 +1,22 @@
+{
+  "name": "Servo Mascarado",
+  "icon": "masquerader_mod:blank_mask",
+  "category": "goety:goetyawaken_mutations",
+  "flag": "goetyawaken:masquerader_mod_loaded",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "O Mascarado é um 'louco' envolto em vestes esplêndidas. Sua máscara mágica peculiar lhe concede a capacidade de mudar constantemente sua identidade — ao usar diferentes máscaras, ele pode roubar seus poderes correspondentes. Você uma vez forçou um Mascarado a fugir em uma escaramuça, deixando para trás apenas uma máscara em branco como seu troféu. Ao estudá-la, você descobriu que esta máscara abriga alguma arte das trevas de drenar 'identidade'. Por sorte, o feiticeiro sob seu comando já é experiente em todos os tipos de truques de conjuração, então você o fez usar esta máscara e, através de um ritual de conversão, o transformou no seu Mascarado."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:masquerader_servant",
+      "text": ""
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:masquerader_servant",
+      "text": "Kamen Rider (não exatamente)"
+    }
+  ]
+}

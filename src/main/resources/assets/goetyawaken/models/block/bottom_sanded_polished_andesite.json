@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "goetyawaken:block/andesite/bottom_sanded_polished_andesite",
+    "top": "goetyawaken:block/andesite/polished_sanded_andesite",
+    "side": "goetyawaken:block/andesite/bottom_sanded_polished_andesite"
+  }
+}

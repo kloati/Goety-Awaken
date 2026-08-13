@@ -12,5 +12,6 @@
       "recipe": "goetyawaken:dark_soul_candle",
       "text": "生命在于效率！"
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:dark_soul_candle":0}
 }

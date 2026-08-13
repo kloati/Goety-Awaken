@@ -1,0 +1,27 @@
+{
+    "name": "O Inquebrável",
+    "icon": "minecraft:redstone_block",
+    "category": "goety:anecdote/anecdote",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Quem diria que uma construção bruta de redstone, magia e pedra poderia verdadeiramente 'possuir' vida.$(br)A história do Inquebrável remonta aos primeiros dias das Minas de Redstone e da Forja Flamejante. Como um dos primeiros constructos daquela época, e combinado com minhas investigações sobre a Torre e a cultura Illager, acredito que a forma do Golem de Redstone tem alguma semelhança com o antigo ser do Overworld conhecido como 'Ação'. Golems de Redstone do passado provavelmente não eram diferentes dos de hoje — ainda assim, o Inquebrável se destaca como uma exceção entre exceções. Dê uma olhada nestes registros."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "“Relatório de Sentinela do Museu Militar”$(br)Data: %%Mês && Dia, Ano 5354$(br)No meio da noite, o Golem de Redstone protótipo 'Inquebrável' despertou repentinamente no salão de exposições central, destruiu as paredes e portas do museu e marchou para fora. Após múltiplas sentinelas não conseguirem detê-lo, a Guarda Real respondeu rapidamente e despachou soldados de elite para segui-lo. Como o Golem de Redstone não exibia ações hostis e tinha significado histórico especial, a Guarda Real manteve uma distância segura enquanto o seguia. A avaliação de danos e os reparos do museu foram colocados sob a autoridade total do Ministério Real de Obras."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "*Registro de Comunicação de Escolta - 'Inquebrável'*$(br)$(2)\"Qual é a situação? Relate da frente!\"$(br)$(1)\"Comandante, o Inquebrável não está mostrando comportamento agressivo — está simplesmente se movendo em uma direção!\"$(br)$(2)\"Qual direção? Puxe o mapa! ...Minas de Redstone? Está indo em direção às Minas de Redstone!\"$(br)$(1)\"O quê? O que está indo fazer lá? Aquele lugar foi abandonado há eras!\"$(br)$(2)\"Continue monitorando! Use sua varinha para gravar sons ambientes!\"$(br)$(1)\"Sim, senhor!\"$(br)$(4)\"A... vontade do deus... retornar à terra natal... em devido tempo...\"$(br)$(1)\"Está falando, Comandante!\"$(br)$(2)\"Eu ouvi! Mantenha a observação!\""
+        },
+        {
+            "type": "patchouli:text",
+            "text": "Não existem mais registros. O relato geral é que a corte real Illager designou aqueles poucos Guardas Reais de elite para vigiar dia e noite, observando este Golem de Redstone que parecia possuir vida — ou pelo menos uma vaga consciência. Afinal, você sabe o quão poderosa pode ser uma Monstruosidade de Cogumelo totalmente consciente. No entanto, este Golem de Redstone não mostrou resposta alguma. Eles apenas continuaram observando — eu pessoalmente vi equipes de suprimentos entregarem refeições dezenas de vezes..."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "Quando a Caçadora e eu fomos lá, este Golem de Redstone não mostrou reação alguma... Poderia ser que o comando que recebeu era esperar por você? Divindades antigas podem observar jogadores de eras posteriores! Se você pretende derrubá-lo, é melhor ficar em alerta máximo — porque o pior cenário é que este golem pode ter sido criado pelo próprio 'Conhecimento Antecipado', moldado à sua própria imagem. Nenhum outro Golem de Redstone jamais recebeu tal comando... O caminho à frente é longo e árduo..."
+        }
+    ]
+}

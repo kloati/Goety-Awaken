@@ -1,11 +1,6 @@
 package com.k1sak1.goetyawaken.common.entities.ally.illager;
 
 import net.minecraft.world.entity.ai.goal.Goal;
-import net.minecraft.world.entity.ai.util.DefaultRandomPos;
-import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.ai.navigation.PathNavigation;
-import net.minecraft.world.level.pathfinder.Path;
 import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
 
 import java.util.EnumSet;
@@ -29,7 +24,8 @@ public class SorcererTradeGoal extends Goal {
 
     @Override
     public boolean canContinueToUse() {
-        return this.sorcerer.isCurrentlyTrading() && this.sorcerer.getMoneyAmount() > 0 && this.tradeDuration < TRADE_DURATION;
+        return this.sorcerer.isCurrentlyTrading() && this.sorcerer.getMoneyAmount() > 0
+                && this.tradeDuration < TRADE_DURATION;
     }
 
     @Override
@@ -74,11 +70,13 @@ public class SorcererTradeGoal extends Goal {
         }
         int currentLevel = this.sorcerer.getSorcererLevel();
         int currentMoney = this.sorcerer.getMoneyAmount();
-        java.util.List<SorcererTrade> availableTrades = SorcererTradeManager.getAvailableTrades(currentLevel, currentMoney);
-        
+        java.util.List<SorcererTrade> availableTrades = SorcererTradeManager.getAvailableTrades(currentLevel,
+                currentMoney);
+
         if (!availableTrades.isEmpty()) {
-            SorcererTrade selectedTrade = SorcererTradeManager.getRandomTrade(availableTrades, this.sorcerer.getRandom());
-            
+            SorcererTrade selectedTrade = SorcererTradeManager.getRandomTrade(availableTrades,
+                    this.sorcerer.getRandom());
+
             if (selectedTrade != null && selectedTrade.isAffordable(currentMoney)) {
                 this.sorcerer.setMoneyAmount(currentMoney - selectedTrade.getPrice());
                 net.minecraft.world.item.ItemStack tradeItem = selectedTrade.getItemStack(this.sorcerer.level());

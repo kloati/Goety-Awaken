@@ -1,0 +1,45 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:summon_tamed",
+  "activation_item": {
+    "item": "goetyawaken:obsidian_tear"
+  },
+  "craftType": "sabbath",
+  "entity_to_summon": "goetyawaken:apostle_servant",
+  "entity_to_sacrifice": {
+    "tag": "goety:villagers",
+    "display_name": "entity.minecraft.villager"
+  },
+  "soulCost": 500,
+  "duration": 30,
+  "research": "royal",
+  "ingredients": [
+    {
+      "tag": "goety:sabbath_ritual"
+    },
+    {
+      "tag": "goety:sabbath_ritual"
+    },
+    {
+      "tag": "goety:sabbath_ritual"
+    },
+    {
+      "tag": "goety:sabbath_ritual"
+    },
+    {
+      "tag": "goety:sabbath_ritual"
+    },
+    {
+      "tag": "goety:sabbath_ritual"
+    },
+    {
+      "tag": "goety:sabbath_ritual"
+    },
+    {
+      "tag": "goety:sabbath_ritual"
+    }
+  ],
+  "result": {
+    "item": "goety:jei_dummy/none"
+  }
+}

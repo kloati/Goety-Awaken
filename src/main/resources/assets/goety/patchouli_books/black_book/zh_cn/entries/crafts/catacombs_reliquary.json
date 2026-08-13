@@ -12,5 +12,6 @@
       "recipe": "goetyawaken:catacombs_reliquary",
       "text": "用于为亡灵生物提供永久的日光免疫"
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:catacombs_reliquary":0}
 }

@@ -10,22 +10,13 @@
   "research": "buried",
   "ingredients": [
     {
-      "item": "goety:cryptic_eye"
-    },
-    {
       "item": "goety:skull_focus"
-    },
-    {
-      "item": "goety:soul_jar"
     },
     {
       "item": "goety:frozen_blade"
     },
     {
       "tag": "goetyawaken:cursed_paladin"
-    },
-    {
-      "item": "goety:shockwave_focus"
     },
     {
       "item": "minecraft:respawn_anchor"

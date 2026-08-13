@@ -1,0 +1,7 @@
+{
+  "name": "Sussurros dos Antigos",
+  "description": "Os segredos ocultos daqueles poderosos seres antigos, como contado em rumores e lendas...",
+  "icon": "goetyawaken:glowing_ember",
+  "parent": "goety:goetyawaken_world",
+  "sortnum": 1
+}

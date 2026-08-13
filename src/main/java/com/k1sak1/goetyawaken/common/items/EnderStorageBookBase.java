@@ -2,6 +2,7 @@ package com.k1sak1.goetyawaken.common.items;
 
 import com.k1sak1.goetyawaken.common.storage.StorageBookType;
 import com.k1sak1.goetyawaken.common.storage.api.IStorageDisk;
+import com.k1sak1.goetyawaken.common.storage.api.IStorageDiskManager;
 import com.k1sak1.goetyawaken.common.storage.api.IStorageDiskProvider;
 import com.k1sak1.goetyawaken.common.storage.api.StorageDiskSyncData;
 import com.k1sak1.goetyawaken.common.storage.impl.StorageAPI;
@@ -35,17 +36,43 @@ public abstract class EnderStorageBookBase extends Item implements IStorageDiskP
     @Override
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slot, boolean selected) {
         super.inventoryTick(stack, level, entity, slot, selected);
-        if (!level.isClientSide && !stack.hasTag()
-                && entity instanceof net.minecraft.world.entity.player.Player player) {
-            UUID id = UUID.randomUUID();
-
-            ServerLevel serverLevel = (ServerLevel) level;
-            IStorageDisk<ItemStack> disk = StorageAPI.instance().createItemDisk(serverLevel, type, player);
-            StorageAPI.instance().getStorageDiskManager(serverLevel).set(id, disk);
-            StorageAPI.instance().getStorageDiskManager(serverLevel).markForSaving();
-
-            setId(stack, id);
+        if (!level.isClientSide && level instanceof ServerLevel serverLevel) {
+            if (!stack.hasTag() && entity instanceof net.minecraft.world.entity.player.Player player) {
+                UUID id = UUID.randomUUID();
+                IStorageDisk<ItemStack> disk = StorageAPI.instance().createItemDisk(serverLevel, type, player);
+                StorageAPI.instance().getStorageDiskManager(serverLevel).set(id, disk);
+                StorageAPI.instance().getStorageDiskManager(serverLevel).markForSaving();
+                setId(stack, id);
+            } else {
+                ensureDiskExists(stack, serverLevel);
+            }
         }
+    }
+
+    public static boolean ensureDiskExists(ItemStack stack, net.minecraft.server.level.ServerLevel level) {
+        if (!(stack.getItem() instanceof IStorageDiskProvider provider)) {
+            return false;
+        }
+        IStorageDiskManager manager = StorageAPI.instance().getStorageDiskManager(level);
+        UUID id = provider.getId(stack);
+        if (id == null) {
+            UUID newId = UUID.randomUUID();
+            StorageBookType bookType = provider instanceof EnderStorageBookBase book
+                    ? book.getStorageType()
+                    : StorageBookType.fromCapacity(provider.getCapacity(stack));
+            IStorageDisk<ItemStack> disk = StorageAPI.instance().createItemDisk(level, bookType, null);
+            manager.set(newId, disk);
+            manager.markForSaving();
+            provider.setId(stack, newId);
+        } else if (manager.get(id) == null) {
+            StorageBookType bookType = provider instanceof EnderStorageBookBase book
+                    ? book.getStorageType()
+                    : StorageBookType.fromCapacity(provider.getCapacity(stack));
+            IStorageDisk<ItemStack> disk = StorageAPI.instance().createItemDisk(level, bookType, null);
+            manager.set(id, disk);
+            manager.markForSaving();
+        }
+        return true;
     }
 
     @Override

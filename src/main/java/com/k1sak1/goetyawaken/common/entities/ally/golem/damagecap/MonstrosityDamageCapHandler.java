@@ -14,7 +14,7 @@ public class MonstrosityDamageCapHandler {
 
     public float calculateMaximumAllowedDamage() {
         return (float) entity.getAttributeValue(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH)
-                * (float) (double) com.k1sak1.goetyawaken.Config.MUSHROOM_MONSTROSITY_DAMAGE_CAP.get();
+                * (float) (double) com.k1sak1.goetyawaken.config.AttributesConfig.MushroomMonstrosityDamageCap.get();
     }
 
     public float applyDamageCap(DamageSource source, float damage) {

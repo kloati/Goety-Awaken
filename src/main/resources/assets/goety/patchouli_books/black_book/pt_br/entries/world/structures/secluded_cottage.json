@@ -1,0 +1,20 @@
+{
+  "name": "Cabana Isolada",
+  "icon": "goety:mystic_core",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(0)Sois cordialmente convidado para a 'Cabana Isolada'$(br)$(br)$(0)Aqui não se ouvem tambores de guerra, nem bandeiras tremulam.$(br)$(0)Apenas um outrora grande líder habita, aguardando uma alma digna.$(br)$(br)$(0)Ele foi o primeiro seguidor do Império,$(br)$(0)Mas agora ele conduz sozinho seu próprio destino.$(br)$(0)Sua varinha, que outrora avançava pelo Império,$(br)$(0)Agora serve apenas para testar e guiar a juventude desorientada."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(0)Se quiseres dar ouvidos, ele te preparará uma xícara de chá,$(br)$(0)E te contará histórias nunca escritas na história:$(br)$(0)Das artes secretas do Rubi da Alma,$(br)$(0)Daquele voo sem entraves pela noite,$(br)$(0)De por que ele escolheu esta vida de eremita$(br)$(0)Em vez de trilhar mais uma vez aquele conflito frio e ensanguentado.$(br)$(br)$(0)A porta está entreaberta.$(br)$(0)Entrai com graça e cortesia.$(br)$(0)Ele já não teme mais a morte,$(br)$(0)Ele apenas preza esta paz duramente conquistada.$(br)$(br)$(0)— O Dono da Cabana Isolada"
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/secluded_cottage.png"],
+      "border": true
+    }
+  ]
+}

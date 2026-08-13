@@ -16,5 +16,6 @@
       "recipe": "goetyawaken:endersent_enchanted_book",
       "text": "制作末影遣使附魔书。"
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:endersent_enchanted_book":0}
 }

@@ -13,5 +13,6 @@
       "text": ""
     }
   ],
-  "advancement": "goety:goety/read_front_scroll"
+  "advancement": "goety:goety/read_front_scroll",
+  "extra_recipe_mappings": {"goetyawaken:grave_bane":0}
 }

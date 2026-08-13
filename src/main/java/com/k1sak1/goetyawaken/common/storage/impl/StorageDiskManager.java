@@ -8,6 +8,8 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.saveddata.SavedData;
 import javax.annotation.Nullable;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -22,6 +24,8 @@ import java.util.UUID;
  */
 public class StorageDiskManager extends SavedData implements IStorageDiskManager {
     public static final String NAME = "goetyawaken_storage";
+
+    private static final Logger DISK_LOGGER = LogManager.getLogger(StorageDiskManager.class);
 
     private static final String NBT_DISKS = "Disks";
     private static final String NBT_DISK_ID = "Id";
@@ -104,15 +108,19 @@ public class StorageDiskManager extends SavedData implements IStorageDiskManager
             ListTag disksTag = tag.getList(NBT_DISKS, Tag.TAG_COMPOUND);
 
             for (int i = 0; i < disksTag.size(); ++i) {
-                CompoundTag diskTag = disksTag.getCompound(i);
+                try {
+                    CompoundTag diskTag = disksTag.getCompound(i);
 
-                UUID id = diskTag.getUUID(NBT_DISK_ID);
-                CompoundTag data = diskTag.getCompound(NBT_DISK_DATA);
-                String type = diskTag.getString(NBT_DISK_TYPE);
+                    UUID id = diskTag.getUUID(NBT_DISK_ID);
+                    CompoundTag data = diskTag.getCompound(NBT_DISK_DATA);
+                    String type = diskTag.getString(NBT_DISK_TYPE);
 
-                if ("item".equals(type)) {
-                    ItemStorageDisk disk = createItemDiskFromNbt(data);
-                    disks.put(id, disk);
+                    if ("item".equals(type)) {
+                        ItemStorageDisk disk = createItemDiskFromNbt(data);
+                        disks.put(id, disk);
+                    }
+                } catch (Exception e) {
+                    DISK_LOGGER.warn("Failed to load storage disk entry #{}: {}", i, e.getMessage());
                 }
             }
         }
@@ -159,6 +167,11 @@ public class StorageDiskManager extends SavedData implements IStorageDiskManager
     }
 
     private ItemStack deserializeStackFromNbt(CompoundTag tag) {
+        if (tag.contains("Count", net.minecraft.nbt.Tag.TAG_INT)) {
+            ItemStack stack = ItemStack.of(tag);
+            stack.setCount(tag.getInt("Count"));
+            return stack;
+        }
         return ItemStack.of(tag);
     }
 }

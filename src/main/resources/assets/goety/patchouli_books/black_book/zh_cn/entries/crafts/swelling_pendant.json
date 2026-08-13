@@ -1,0 +1,17 @@
+{
+  "name": "膨胀吊坠",
+  "icon": "goetyawaken:swelling_pendant",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "正如饥饿吊坠能够吞噬腐肉并喂给佩戴者，这枚膨胀吊坠亦运用了相同的技术，只不过它渴求的是黏液球，并且只会把黏液球喂给佩戴者的史莱姆并促使其膨胀和成长。膨胀吊坠能吸收你物品栏中的黏液球，将它们储存起来，并在你召唤史莱姆时让它们变得更加庞大。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:swelling_pendant",
+      "text": ""
+    }
+  ],
+  "extra_recipe_mappings": {"goetyawaken:swelling_pendant":0}
+}

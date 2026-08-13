@@ -4,10 +4,10 @@
     {
       "rolls": {
         "type": "minecraft:uniform",
-        "min": 2.0,
-        "max": 5.0
+        "min": 1.0,
+        "max": 4.0
       },
-      "bonus_rolls": 0.0,
+      "bonus_rolls": 1.0,
       "entries": [
         {
           "type": "minecraft:item",
@@ -103,7 +103,7 @@
       "rolls": {
         "type": "minecraft:uniform",
         "min": 1.0,
-        "max": 3.0
+        "max": 5.0
       },
       "entries": [
         {
@@ -279,8 +279,8 @@
     {
       "rolls": {
         "type": "minecraft:uniform",
-        "min": 2.0,
-        "max": 6.0
+        "min": 1.0,
+        "max": 4.0
       },
       "entries": [
         {

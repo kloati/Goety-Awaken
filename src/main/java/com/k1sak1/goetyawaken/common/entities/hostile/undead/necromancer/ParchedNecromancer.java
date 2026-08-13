@@ -21,6 +21,7 @@ public class ParchedNecromancer extends AbstractParchedNecromancer implements En
 
     public ParchedNecromancer(EntityType<? extends AbstractParchedNecromancer> type, Level level) {
         super(type, level);
+        this.setPersistenceRequired();
         this.bossInfo = new ModServerBossInfo(this, BossEvent.BossBarColor.YELLOW, false, false);
         this.setHostile(true);
     }
@@ -33,6 +34,12 @@ public class ParchedNecromancer extends AbstractParchedNecromancer implements En
     @Override
     public void tick() {
         super.tick();
+        com.Polarice3.Goety.utils.MiscCapHelper.updateMobTarget(this);
+
+        if (!this.level().isClientSide()) {
+            this.setAggressive(this.getTarget() != null);
+        }
+
         if (this.tickCount % 5 == 0) {
             this.bossInfo.update();
         }

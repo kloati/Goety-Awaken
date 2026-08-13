@@ -16,5 +16,6 @@
       "recipe": "goetyawaken:ally_pithos",
       "text": ""
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:ally_pithos":0}
 }

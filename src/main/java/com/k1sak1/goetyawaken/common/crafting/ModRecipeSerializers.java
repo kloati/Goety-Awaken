@@ -11,34 +11,40 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 public class ModRecipeSerializers {
-    public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(
-            ForgeRegistries.RECIPE_TYPES, GoetyAwaken.MODID);
+        public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(
+                        ForgeRegistries.RECIPE_TYPES, GoetyAwaken.MODID);
 
-    public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(
-            ForgeRegistries.RECIPE_SERIALIZERS, GoetyAwaken.MODID);
+        public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(
+                        ForgeRegistries.RECIPE_SERIALIZERS, GoetyAwaken.MODID);
 
-    public static void init() {
-        RECIPE_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
-        RECIPE_SERIALIZERS.register(FMLJavaModLoadingContext.get().getModEventBus());
-    }
+        public static void init() {
+                RECIPE_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
+                RECIPE_SERIALIZERS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        }
 
-    public static final RegistryObject<RecipeType<ShulkerMissilePotionRecipe>> SHULKER_MISSILE_POTION_RECIPE_TYPE = register(
-            "shulker_missile_potion");
-    public static final RegistryObject<RecipeSerializer<ShulkerMissilePotionRecipe>> SHULKER_MISSILE_POTION_RECIPE = RECIPE_SERIALIZERS
-            .register("shulker_missile_potion",
-                    () -> new SimpleCraftingRecipeSerializer<>(ShulkerMissilePotionRecipe::new));
+        public static final RegistryObject<RecipeType<ShulkerMissilePotionRecipe>> SHULKER_MISSILE_POTION_RECIPE_TYPE = register(
+                        "shulker_missile_potion");
+        public static final RegistryObject<RecipeSerializer<ShulkerMissilePotionRecipe>> SHULKER_MISSILE_POTION_RECIPE = RECIPE_SERIALIZERS
+                        .register("shulker_missile_potion",
+                                        () -> new SimpleCraftingRecipeSerializer<>(ShulkerMissilePotionRecipe::new));
 
-    public static final RegistryObject<RecipeType<MushroomMissilePotionRecipe>> MUSHROOM_MISSILE_POTION_RECIPE_TYPE = register(
-            "mushroom_missile_potion");
-    public static final RegistryObject<RecipeSerializer<MushroomMissilePotionRecipe>> MUSHROOM_MISSILE_POTION_RECIPE = RECIPE_SERIALIZERS
-            .register("mushroom_missile_potion",
-                    () -> new SimpleCraftingRecipeSerializer<>(MushroomMissilePotionRecipe::new));
+        public static final RegistryObject<RecipeType<MushroomMissilePotionRecipe>> MUSHROOM_MISSILE_POTION_RECIPE_TYPE = register(
+                        "mushroom_missile_potion");
+        public static final RegistryObject<RecipeSerializer<MushroomMissilePotionRecipe>> MUSHROOM_MISSILE_POTION_RECIPE = RECIPE_SERIALIZERS
+                        .register("mushroom_missile_potion",
+                                        () -> new SimpleCraftingRecipeSerializer<>(MushroomMissilePotionRecipe::new));
 
-    static <T extends Recipe<?>> RegistryObject<RecipeType<T>> register(final String id) {
-        return RECIPE_TYPES.register(id, () -> new RecipeType<T>() {
-            public String toString() {
-                return id;
-            }
-        });
-    }
+        public static final RegistryObject<RecipeType<GrimoireAffixRecipe>> GRIMOIRE_AFFIX_RECIPE_TYPE = register(
+                        "grimoire_affix");
+        public static final RegistryObject<RecipeSerializer<GrimoireAffixRecipe>> GRIMOIRE_AFFIX_RECIPE = RECIPE_SERIALIZERS
+                        .register("grimoire_affix",
+                                        () -> new SimpleCraftingRecipeSerializer<>(GrimoireAffixRecipe::new));
+
+        static <T extends Recipe<?>> RegistryObject<RecipeType<T>> register(final String id) {
+                return RECIPE_TYPES.register(id, () -> new RecipeType<T>() {
+                        public String toString() {
+                                return id;
+                        }
+                });
+        }
 }

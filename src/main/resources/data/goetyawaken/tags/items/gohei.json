@@ -1,7 +1,13 @@
 {
   "replace": false,
   "values": [
-    "touhou_little_maid:hakurei_gohei",
-    "touhou_little_maid:sanae_gohei"
+    {
+      "id": "touhou_little_maid:sanae_gohei",
+      "required": false
+    },
+    {
+      "id": "touhou_little_maid:hakurei_gohei",
+      "required": false
+    }
   ]
 }

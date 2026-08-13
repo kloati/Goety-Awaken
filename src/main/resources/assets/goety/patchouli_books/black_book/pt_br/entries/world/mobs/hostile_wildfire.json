@@ -1,0 +1,16 @@
+{
+  "name": "Incêndio Selvagem",
+  "icon": "goetyawaken:hostile_wildfire_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Com a derrota dos Wither Necromantes, as entidades flamejantes que outrora guardavam começaram a se agitar. Desprovidos de seus únicos guardiões, estes Mestres Blaze agora vagueiam pelo Nether, desencadeando sobre qualquer aventureiro que ousa entrar na dimensão a fúria reprimida de seu antigo aprisionamento."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_wildfire",
+      "text": "Incêndio Selvagem, o Terceiro"
+    }
+  ]
+}

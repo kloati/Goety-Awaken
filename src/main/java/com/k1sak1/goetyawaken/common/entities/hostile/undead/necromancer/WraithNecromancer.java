@@ -49,19 +49,13 @@ public class WraithNecromancer extends AbstractWraithNecromancer implements Enem
     public double prevZ;
     private static final EntityDataAccessor<Byte> WRAITH_FLAGS = SynchedEntityData.defineId(WraithNecromancer.class,
             EntityDataSerializers.BYTE);
-    public AnimationState idleAnimationState = new AnimationState();
-    public AnimationState flyAnimationState = new AnimationState();
-    public AnimationState attackAnimationState = new AnimationState();
-    public AnimationState summonAnimationState = new AnimationState();
-    public AnimationState spellAnimationState = new AnimationState();
-    public AnimationState alertAnimationState = new AnimationState();
-    public AnimationState shockwaveAnimationState = new AnimationState();
     private AnimationState currentActiveAnimation = null;
 
     public WraithNecromancer(EntityType<? extends AbstractWraithNecromancer> type, Level level) {
         super(type, level);
         this.bossInfo = new ModServerBossInfo(this, BossEvent.BossBarColor.PURPLE, false, false);
         this.cantDo = 0;
+        this.setPersistenceRequired();
         this.setHostile(true);
     }
 
@@ -119,37 +113,6 @@ public class WraithNecromancer extends AbstractWraithNecromancer implements Enem
             this.setYRot(this.yHeadRot);
             this.yBodyRot = this.yHeadRot;
         }
-        if (ANIM_STATE.equals(p_33609_)) {
-            if (this.level().isClientSide) {
-                switch (this.entityData.get(ANIM_STATE)) {
-                    case 0:
-                        this.stopAllAnimations();
-                        break;
-                    case ATTACK_ANIM:
-                        this.attackAnimationState.startIfStopped(this.tickCount);
-                        this.stopMostAnimation(this.attackAnimationState);
-                        break;
-                    case SUMMON_ANIM:
-                        this.summonAnimationState.startIfStopped(this.tickCount);
-                        this.stopMostAnimation(this.summonAnimationState);
-                        break;
-                    case SPELL_ANIM:
-                        this.spellAnimationState.startIfStopped(this.tickCount);
-                        this.stopMostAnimation(this.spellAnimationState);
-                        break;
-                    case ALERT_ANIM:
-                        this.alertAnimationState.startIfStopped(this.tickCount);
-                        this.stopMostAnimation(this.alertAnimationState);
-                        break;
-                    case SHOCKWAVE_ANIM:
-                        this.shockwaveAnimationState.startIfStopped(this.tickCount);
-                        this.stopMostAnimation(this.shockwaveAnimationState);
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
 
         super.onSyncedDataUpdated(p_33609_);
     }
@@ -176,7 +139,7 @@ public class WraithNecromancer extends AbstractWraithNecromancer implements Enem
     @Override
     public void tick() {
         super.tick();
-
+        com.Polarice3.Goety.utils.MiscCapHelper.updateMobTarget(this);
         if (this.tickCount % 5 == 0) {
             this.bossInfo.update();
         }
@@ -188,14 +151,8 @@ public class WraithNecromancer extends AbstractWraithNecromancer implements Enem
                     this.spellCastParticles();
                 }
             }
-            this.idleAnimationState.animateWhen(this.getAnimationState() == IDLE_ANIM, this.tickCount);
-            this.flyAnimationState.animateWhen(this.getAnimationState() == FLY_ANIM, this.tickCount);
-            this.attackAnimationState.animateWhen(this.getAnimationState() == ATTACK_ANIM, this.tickCount);
-            this.summonAnimationState.animateWhen(this.getAnimationState() == SUMMON_ANIM, this.tickCount);
-            this.spellAnimationState.animateWhen(this.getAnimationState() == SPELL_ANIM, this.tickCount);
-            this.alertAnimationState.animateWhen(this.getAnimationState() == ALERT_ANIM, this.tickCount);
-            this.shockwaveAnimationState.animateWhen(this.getAnimationState() == SHOCKWAVE_ANIM, this.tickCount);
         } else {
+            this.setAggressive(this.getTarget() != null);
             if (!this.isShooting() && !this.isSpellCasting() &&
                     this.getAnimationState() != SUMMON_ANIM &&
                     this.getAnimationState() != SPELL_ANIM &&
@@ -203,7 +160,7 @@ public class WraithNecromancer extends AbstractWraithNecromancer implements Enem
                     this.getAnimationState() != ALERT_ANIM &&
                     this.getAnimationState() != SHOCKWAVE_ANIM) {
                 double speed = this.getDeltaMovement().horizontalDistance();
-                if (speed > 0.3D) {
+                if (speed > 0.1D) {
                     if (this.getAnimationState() != FLY_ANIM) {
                         this.setAnimationState(FLY_ANIM);
                     }

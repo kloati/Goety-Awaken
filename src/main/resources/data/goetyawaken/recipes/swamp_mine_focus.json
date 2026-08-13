@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " A ",
+    "CBC",
+    " C "
+  ],
+  "key": {
+    "A": {
+      "item": "meetyourfight:mossy_tooth"
+    },
+    "B": {
+      "item": "goety:empty_focus"
+    },
+    "C": {
+      "item": "minecraft:tnt"
+    }
+  },
+  "result": {
+    "item": "goetyawaken:swamp_mine_focus"
+  }
+}

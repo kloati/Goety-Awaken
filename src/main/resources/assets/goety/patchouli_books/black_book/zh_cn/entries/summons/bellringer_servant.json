@@ -1,0 +1,26 @@
+{
+  "name": "敲钟人仆从",
+  "icon": "meetyourfight:haunted_bell",
+  "category": "goety:goetyawaken_summons",
+  "flag": "goetyawaken:meetyourfight_loaded",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "利用敲钟人死后遗留的灵体，你得以复现一个听从你指挥的\"敲钟人\"——这对精通死灵学的你来说易如反掌。遗憾的是，虽然这种灵体比起普通的幽灵来说强了不少，但也就这样了。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:bellringer_servant",
+      "text": ""
+    },
+    {
+      "type": "patchouli:text",
+      "text": "不过你知道的，对于这种灵体性质的亡灵生物来说，同类的灵性是大补的滋养品，而对于灵体本身较为坚韧的敲钟人而言，其更是可以承受多个来自同类的幽魂质，这会让它们变得更为强大。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:bellringer_servant",
+      "text": "§c丧钟为谁而鸣？§r"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "entity_type": "goety:storm_caster",
+  "registry": {
+    "threshold_times": 2.5,
+    "max": 2,
+    "extra": 1,
+    "chance": 0.5,
+    "riding": {
+      "mount_type": "goety:trampler",
+      "ride_chance": 0.35
+    }
+  }
+}

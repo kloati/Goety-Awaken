@@ -1,0 +1,27 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety:fireball_focus"
+  },
+  "craftType": "expert_nether",
+  "soulCost": 6,
+  "duration": 4,
+  "ingredients": [
+    {
+      "item": "goetyawaken:gloomy_tears"
+    },
+    {
+      "item": "minecraft:fire_charge"
+    },
+    {
+      "item": "minecraft:fire_charge"
+    },
+    {
+      "item": "minecraft:fire_charge"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:chasing_flame_focus"
+  }
+}

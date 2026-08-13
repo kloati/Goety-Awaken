@@ -1,0 +1,30 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goetyawaken:gloomy_tears"
+  },
+  "craftType": "expert_nether",
+  "soulCost": 12,
+  "duration": 6,
+  "ingredients": [
+    {
+      "item": "goety:fireball_focus"
+    },
+    {
+      "item": "minecraft:dispenser"
+    },
+    {
+      "item": "goety:lavaball_focus"
+    },
+    {
+      "item": "minecraft:repeater"
+    },
+    {
+      "item": "minecraft:repeater"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:fireball_feast_focus"
+  }
+}

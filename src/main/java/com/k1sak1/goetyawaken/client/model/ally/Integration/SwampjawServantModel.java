@@ -1,0 +1,156 @@
+package com.k1sak1.goetyawaken.client.model.ally.Integration;
+
+import com.k1sak1.goetyawaken.common.entities.ally.Integration.SwampjawServant;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+
+import lykrast.meetyourfight.MeetYourFight;
+import lykrast.meetyourfight.misc.MYFUtils;
+import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeDeformation;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.util.Mth;
+
+//Based on https://https://github.com/Lykrast/MeetYourFight, Original by lykrast
+public class SwampjawServantModel extends EntityModel<SwampjawServant> {
+	public static final ModelLayerLocation MODEL = new ModelLayerLocation(MeetYourFight.rl("swampjaw"), "main");
+	public static final ModelLayerLocation MODEL_HEAD = new ModelLayerLocation(MeetYourFight.rl("swampjaw"), "head");
+	private final ModelPart bodyMain;
+	private final ModelPart finRight;
+	private final ModelPart finLeft;
+	private final ModelPart tailfinBottom;
+	private final ModelPart tailfinTop;
+	private final ModelPart tailOuter;
+	private final ModelPart tailInner;
+	private final ModelPart jaw;
+	private final ModelPart head;
+	private static final float TAILFIN_PITCH = 0.2618F;
+
+	private float tailYaw, tailPitch, twitchingYaw;
+	private float animProgress;
+
+	public SwampjawServantModel(ModelPart modelPart) {
+		bodyMain = modelPart.getChild("body");
+		finRight = bodyMain.getChild("fin_right");
+		finLeft = bodyMain.getChild("fin_left");
+		tailInner = bodyMain.getChild("tail_inner");
+		tailOuter = tailInner.getChild("tail_outer");
+		tailfinTop = tailOuter.getChild("tail_fin_top");
+		tailfinBottom = tailOuter.getChild("tail_fin_bottom");
+		head = bodyMain.getChild("head");
+		jaw = head.getChild("jaw");
+	}
+
+	public static LayerDefinition createBodyLayer() {
+		MeshDefinition meshdefinition = new MeshDefinition();
+		PartDefinition partdefinition = meshdefinition.getRoot();
+		PartDefinition body = partdefinition.addOrReplaceChild("body",
+				CubeListBuilder.create().texOffs(40, 0).addBox(-6, -5, -6, 12, 10, 12), PartPose.offset(0, 19, 0));
+		body.addOrReplaceChild("fin_right", CubeListBuilder.create().texOffs(0, 28).addBox(-8, 0, -2, 8, 1, 4),
+				PartPose.offsetAndRotation(-6, 0, 0, 0, 0, -0.4363F));
+		body.addOrReplaceChild("fin_left", CubeListBuilder.create().texOffs(0, 28).addBox(0, 0, -2, 8, 1, 4),
+				PartPose.offsetAndRotation(6, 0, 0, 0, 0, 0.4363F));
+		PartDefinition tailInner = body.addOrReplaceChild("tail_inner",
+				CubeListBuilder.create().texOffs(40, 22).addBox(-5, 0, 0, 10, 8, 8), PartPose.offset(0, -5, 6));
+		PartDefinition tailOuter = tailInner.addOrReplaceChild("tail_outer",
+				CubeListBuilder.create().texOffs(40, 38).addBox(-1, 0, 0, 2, 2, 6), PartPose.offset(0, 0, 8));
+		tailOuter.addOrReplaceChild("tail_fin_top",
+				CubeListBuilder.create().texOffs(0, 33).addBox(-0.5f, -10, 0, 1, 10, 5),
+				PartPose.offsetAndRotation(0, 1, 5, -TAILFIN_PITCH, 0, 0));
+		tailOuter.addOrReplaceChild("tail_fin_bottom",
+				CubeListBuilder.create().texOffs(12, 33).addBox(-0.5f, 0, 0, 1, 10, 5, new CubeDeformation(-0.1f)),
+				PartPose.offsetAndRotation(0, 1, 5, TAILFIN_PITCH, 0, 0));
+		PartDefinition head = body.addOrReplaceChild("head",
+				CubeListBuilder.create().texOffs(0, 0).addBox(-5, -4, -10, 10, 6, 10), PartPose.offset(0, 0, -6));
+		head.addOrReplaceChild("jaw", CubeListBuilder.create().texOffs(0, 16).addBox(-5, 0, -10, 10, 2, 10),
+				PartPose.offset(0, 2, 0));
+		return LayerDefinition.create(meshdefinition, 128, 64);
+	}
+
+	@Override
+	public void prepareMobModel(SwampjawServant entity, float limbSwing, float limbSwingAmount, float partialTick) {
+		super.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTick);
+		tailYaw = Mth.degreesDifference(entity.getYRot(), entity.getTailYaw(partialTick)) / 3F;
+		tailPitch = -Mth.degreesDifference(entity.getXRot(), entity.getTailPitch(partialTick)) / 1.5F;
+		tailYaw *= Mth.DEG_TO_RAD;
+		tailPitch *= Mth.DEG_TO_RAD;
+		animProgress = entity.getAnimProgress(partialTick);
+		if (entity.clientAnim == SwampjawServant.ANIM_SWIPE)
+			animProgress = MYFUtils.easeInOut(animProgress);
+		else if (entity.clientAnim == SwampjawServant.ANIM_STUN || entity.prevAnim == SwampjawServant.ANIM_SWOOP)
+			animProgress = MYFUtils.easeOutQuad(animProgress);
+		else
+			animProgress = MYFUtils.easeInQuad(animProgress);
+		if (entity.clientAnim == SwampjawServant.ANIM_STUN) {
+			twitchingYaw = Mth.sin((entity.tickCount + partialTick) * Mth.PI / 5) * 25 * Mth.DEG_TO_RAD * animProgress;
+			tailYaw += twitchingYaw;
+			tailPitch *= (1 - animProgress);
+		} else if (entity.prevAnim == SwampjawServant.ANIM_STUN && animProgress < 0.99) {
+			twitchingYaw = Mth.sin((entity.tickCount + partialTick) * Mth.PI / 5) * 25 * Mth.DEG_TO_RAD
+					* (1 - animProgress);
+			tailYaw += twitchingYaw;
+			tailPitch *= animProgress;
+		} else
+			twitchingYaw = 0;
+	}
+
+	@Override
+	public void setupAnim(SwampjawServant entity, float limbSwing, float limbSwingAmount, float ageInTicks,
+			float netHeadYaw, float headPitch) {
+
+		if (entity.clientAnim == SwampjawServant.ANIM_SWOOP) {
+			float offset = 15 * animProgress;
+			headPitch -= offset;
+			jaw.xRot = 3 * offset * Mth.DEG_TO_RAD;
+			bodyMain.zRot = 180 * Mth.DEG_TO_RAD;
+		} else if (entity.prevAnim == SwampjawServant.ANIM_SWOOP && animProgress < 0.99) {
+			float offset = 15 * (1 - animProgress);
+			headPitch -= offset;
+			if (entity.clientAnim == SwampjawServant.ANIM_STUN)
+				jaw.xRot = (offset + 30) * Mth.DEG_TO_RAD;
+			else
+				jaw.xRot = 3 * offset * Mth.DEG_TO_RAD;
+		} else if (entity.clientAnim == SwampjawServant.ANIM_STUN) {
+			jaw.xRot = 30 * Mth.DEG_TO_RAD;
+		} else if (entity.prevAnim == SwampjawServant.ANIM_STUN && animProgress < 0.99) {
+			float offset = 30 * (1 - animProgress);
+			jaw.xRot = offset * Mth.DEG_TO_RAD;
+		} else
+			jaw.xRot = 0;
+		if (entity.clientAnim == SwampjawServant.ANIM_STUN) {
+			bodyMain.zRot = 180 * animProgress * Mth.DEG_TO_RAD;
+		} else if (entity.prevAnim == SwampjawServant.ANIM_STUN && animProgress < 0.99) {
+			bodyMain.zRot = 180 * (1 + animProgress) * Mth.DEG_TO_RAD;
+		} else
+			bodyMain.zRot = 0;
+		if (entity.clientAnim == SwampjawServant.ANIM_SWIPE) {
+			bodyMain.yRot = 360 * animProgress * Mth.DEG_TO_RAD;
+		} else
+			bodyMain.yRot = -twitchingYaw;
+
+		head.xRot = headPitch * Mth.DEG_TO_RAD;
+		head.yRot = netHeadYaw * Mth.DEG_TO_RAD - twitchingYaw;
+
+		finLeft.yRot = Mth.cos(limbSwing * 0.2F) * 0.8F * limbSwingAmount;
+		finRight.yRot = Mth.cos(limbSwing * 0.2F + (float) Math.PI) * 0.8F * limbSwingAmount;
+
+		tailInner.xRot = tailPitch;
+		tailInner.yRot = tailYaw + Mth.cos(limbSwing * 0.35F) * 0.15F * limbSwingAmount + twitchingYaw;
+		tailOuter.xRot = tailPitch;
+		tailOuter.yRot = tailYaw + Mth.cos(limbSwing * 0.35F + (float) Math.PI / 3F) * 0.15F * limbSwingAmount;
+		tailfinTop.yRot = tailYaw + Mth.cos(limbSwing * 0.35F + 2F * (float) Math.PI / 3F) * 0.15F * limbSwingAmount;
+		tailfinBottom.yRot = tailfinTop.yRot;
+	}
+
+	@Override
+	public void renderToBuffer(PoseStack matrixStack, VertexConsumer buffer, int packedLight, int packedOverlay,
+			float red, float green, float blue, float alpha) {
+		bodyMain.render(matrixStack, buffer, packedLight, packedOverlay);
+	}
+}

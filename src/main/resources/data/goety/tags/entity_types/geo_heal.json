@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "__comment": "servants that heals and lose limited lifespan through Geo set.",
+  "values": [
+    "goetyawaken:statue_creeper",
+    "goetyawaken:hostile_statue_creeper"
+  ]
+}

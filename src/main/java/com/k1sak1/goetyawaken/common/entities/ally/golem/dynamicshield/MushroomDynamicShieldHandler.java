@@ -5,7 +5,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import java.lang.Math;
 
 public class MushroomDynamicShieldHandler {
-    public static int DEFAULT_LIMIT_TIME = com.k1sak1.goetyawaken.Config.MUSHROOM_DYNAMIC_SHIELD_DEFAULT_LIMIT_TIME
+    public static int DEFAULT_LIMIT_TIME = com.k1sak1.goetyawaken.config.AttributesConfig.MushroomMonstrosityDynamicShieldDefaultLimitTime
             .get();
 
     private final MushroomMonstrosity mushroomMonstrosity;

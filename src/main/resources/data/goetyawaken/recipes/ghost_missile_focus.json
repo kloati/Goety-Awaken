@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " A ",
+    "DBD",
+    " C "
+  ],
+  "key": {
+    "A": {
+      "item": "meetyourfight:passages_toll"
+    },
+    "B": {
+      "item": "goety:soul_bolt_focus"
+    },
+    "C": {
+      "item": "meetyourfight:phantoplasm"
+    },
+    "D": {
+      "item": "minecraft:soul_sand"
+    }
+  },
+  "result": {
+    "item": "goetyawaken:ghost_missile_focus"
+  }
+}

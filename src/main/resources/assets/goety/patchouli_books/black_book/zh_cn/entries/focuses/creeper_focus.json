@@ -12,5 +12,6 @@
       "recipe": "goetyawaken:creeper_focus",
       "text": "制作伏临聚晶。"
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:creeper_focus":0}
 }

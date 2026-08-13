@@ -1,8 +1,7 @@
 package com.k1sak1.goetyawaken.common.storage.container;
 
-import com.k1sak1.goetyawaken.client.screen.grid.view.GridViewImpl;
-import com.k1sak1.goetyawaken.client.screen.grid.view.IGridView;
 import com.k1sak1.goetyawaken.common.blocks.EnderAccessLecternBlockEntity;
+import com.k1sak1.goetyawaken.common.storage.api.GridConstants;
 import com.k1sak1.goetyawaken.common.storage.api.IStorageCache;
 import com.k1sak1.goetyawaken.common.storage.api.IStorageCacheListener;
 import com.k1sak1.goetyawaken.common.storage.container.slot.CraftingGridSlot;
@@ -11,7 +10,10 @@ import com.k1sak1.goetyawaken.common.storage.grid.IItemGridHandler;
 import com.k1sak1.goetyawaken.common.storage.impl.ItemGridStorageCacheListener;
 import com.k1sak1.goetyawaken.init.ModContainerTypes;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -21,16 +23,9 @@ import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.inventory.ResultContainer;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * Inspired by Refined Storage
- * 
- * @author raoulvdberge (Original Author)
- * @see <a href=
- *      "https://github.com/raoulvdberge/refinedstorage">Refined Storage
- *      Repository</a>
- */
 public class EnderAccessLecternContainer extends AbstractContainerMenu {
     public static final int VISIBLE_ROWS = 5;
     private static final int TOP_HEIGHT = 19;
@@ -39,9 +34,7 @@ public class EnderAccessLecternContainer extends AbstractContainerMenu {
     private final EnderAccessLecternBlockEntity blockEntity;
     private final ContainerLevelAccess access;
     private final Player player;
-
-    @Nullable
-    private IItemGridHandler itemGridHandler;
+    private final Inventory playerInventory;
 
     @Nullable
     private IStorageCache<ItemStack> storageCache;
@@ -49,25 +42,26 @@ public class EnderAccessLecternContainer extends AbstractContainerMenu {
     @Nullable
     private IStorageCacheListener<ItemStack> storageCacheListener;
 
-    private IGridView view;
+    private Object view;
     private int searchBoxMode = 0;
+    private int size = GridConstants.SIZE_MEDIUM;
 
     public EnderAccessLecternContainer(int containerId, Inventory playerInventory,
             EnderAccessLecternBlockEntity blockEntity) {
         super(ModContainerTypes.ENDER_ACCESS_LECTERN.get(), containerId);
         this.blockEntity = blockEntity;
         this.player = playerInventory.player;
+        this.playerInventory = playerInventory;
         this.access = ContainerLevelAccess.create(blockEntity.getLevel(), blockEntity.getBlockPos());
 
-        this.itemGridHandler = blockEntity.getItemGridHandler();
-
         if (playerInventory.player.level().isClientSide) {
-            this.view = new GridViewImpl();
+            this.view = new com.k1sak1.goetyawaken.client.screen.grid.view.GridViewImpl();
         }
 
         this.searchBoxMode = blockEntity.getSearchBoxMode();
+        this.size = blockEntity.getSize();
 
-        initSlots(playerInventory);
+        initSlots();
 
         if (!playerInventory.player.level().isClientSide) {
             blockEntity.onCraftingMatrixChanged();
@@ -81,17 +75,29 @@ public class EnderAccessLecternContainer extends AbstractContainerMenu {
             int sortType = data.readInt();
             int viewTypeVal = data.readInt();
             int searchBoxModeVal = data.isReadable() ? data.readInt() : 0;
-            if (this.view instanceof GridViewImpl impl) {
+            int sizeVal = data.isReadable() ? data.readInt() : GridConstants.SIZE_MEDIUM;
+            if (!GridConstants.isValidSize(sizeVal)) {
+                sizeVal = GridConstants.SIZE_MEDIUM;
+            }
+            if (this.view instanceof com.k1sak1.goetyawaken.client.screen.grid.view.GridViewImpl impl) {
                 impl.setSortingDirection(sortDir);
                 impl.setSortingType(sortType);
                 impl.setViewType(viewTypeVal);
             }
+            blockEntity.setSortingDirection(sortDir);
+            blockEntity.setSortingType(sortType);
+            blockEntity.setViewType(viewTypeVal);
+            blockEntity.setSize(sizeVal);
             this.searchBoxMode = searchBoxModeVal;
+            this.size = sizeVal;
+            initSlots();
         }
     }
 
-    private void initSlots(Inventory playerInventory) {
-        int headerAndSlots = TOP_HEIGHT + VISIBLE_ROWS * 18;
+    public void initSlots() {
+        this.slots.clear();
+
+        int headerAndSlots = TOP_HEIGHT + getVisibleRows() * 18;
 
         CraftingContainer matrix = blockEntity.getCraftingMatrix();
         for (int row = 0; row < 3; row++) {
@@ -131,10 +137,34 @@ public class EnderAccessLecternContainer extends AbstractContainerMenu {
         }
 
         BlockPos pos = data.readBlockPos();
-        if (playerInventory.player.level().getBlockEntity(pos) instanceof EnderAccessLecternBlockEntity blockEntity) {
+
+        ResourceLocation dimLoc = null;
+        if (data.isReadable()) {
+            dimLoc = data.readResourceLocation();
+        }
+
+        if (playerInventory.player instanceof ServerPlayer serverPlayer && serverPlayer.getServer() != null) {
+            Level targetLevel = playerInventory.player.level();
+            if (dimLoc != null) {
+                ResourceKey<Level> dimKey = ResourceKey.create(Registries.DIMENSION, dimLoc);
+                Level found = serverPlayer.getServer().getLevel(dimKey);
+                if (found != null) {
+                    targetLevel = found;
+                }
+            }
+            if (targetLevel.getBlockEntity(pos) instanceof EnderAccessLecternBlockEntity blockEntity) {
+                return blockEntity;
+            }
+            throw new IllegalStateException("Block entity not found at " + pos + " (server)");
+        }
+
+        Level clientLevel = playerInventory.player.level();
+        if (clientLevel.getBlockEntity(pos) instanceof EnderAccessLecternBlockEntity blockEntity) {
             return blockEntity;
         }
-        throw new IllegalStateException("Block entity not found at " + pos);
+        EnderAccessLecternBlockEntity dummy = new EnderAccessLecternBlockEntity(pos, clientLevel.getBlockState(pos));
+        dummy.setLevel(clientLevel);
+        return dummy;
     }
 
     @Override
@@ -142,24 +172,24 @@ public class EnderAccessLecternContainer extends AbstractContainerMenu {
         if (!player.level().isClientSide) {
             IStorageCache<ItemStack> currentCache = blockEntity.getStorageCache();
 
-            if (storageCacheListener != null && storageCache != currentCache) {
-                storageCache.removeListener(storageCacheListener);
-                storageCacheListener = null;
-                storageCache = null;
-            }
-
             if (currentCache == null) {
                 if (storageCacheListener != null) {
                     storageCache.removeListener(storageCacheListener);
                     storageCacheListener = null;
                     storageCache = null;
                 }
-            } else if (storageCacheListener == null) {
+            } else if (storageCache != currentCache) {
+
+                if (storageCacheListener != null) {
+                    storageCache.removeListener(storageCacheListener);
+                    storageCacheListener = null;
+                }
                 storageCacheListener = new ItemGridStorageCacheListener(
                         (ServerPlayer) player, currentCache);
                 storageCache = currentCache;
                 storageCache.addListener(storageCacheListener);
             }
+
         }
 
         super.broadcastChanges();
@@ -182,11 +212,12 @@ public class EnderAccessLecternContainer extends AbstractContainerMenu {
 
     @Nullable
     public IItemGridHandler getItemGridHandler() {
-        return itemGridHandler;
+
+        return blockEntity.getItemGridHandler();
     }
 
     @Nullable
-    public IGridView getView() {
+    public Object getView() {
         return view;
     }
 
@@ -195,7 +226,26 @@ public class EnderAccessLecternContainer extends AbstractContainerMenu {
     }
 
     public int getVisibleRows() {
-        return VISIBLE_ROWS;
+        switch (size) {
+            case GridConstants.SIZE_SMALL:
+                return 3;
+            case GridConstants.SIZE_LARGE:
+                return 8;
+            case GridConstants.SIZE_STRETCH:
+            case GridConstants.SIZE_MEDIUM:
+            default:
+                return VISIBLE_ROWS;
+        }
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        if (GridConstants.isValidSize(size)) {
+            this.size = size;
+        }
     }
 
     public int getTopHeight() {
@@ -238,18 +288,20 @@ public class EnderAccessLecternContainer extends AbstractContainerMenu {
                 return ItemStack.EMPTY;
             }
         } else if (index >= playerInvStart && index <= hotbarEnd) {
-            if (!player.level().isClientSide && itemGridHandler != null
-                    && player instanceof ServerPlayer serverPlayer) {
-                ItemStack remainder = itemGridHandler.onInsert(serverPlayer, slotStack.copy(), true);
-                if (remainder.getCount() != slotStack.getCount()) {
-                    int inserted = slotStack.getCount() - remainder.getCount();
-                    slotStack.shrink(inserted);
-                    if (slotStack.isEmpty()) {
-                        slot.set(ItemStack.EMPTY);
-                    } else {
-                        slot.setChanged();
+            if (!player.level().isClientSide && player instanceof ServerPlayer serverPlayer) {
+                IItemGridHandler handler = blockEntity.getItemGridHandler();
+                if (handler != null) {
+                    ItemStack remainder = handler.onInsert(serverPlayer, slotStack.copy(), true);
+                    if (remainder.getCount() != slotStack.getCount()) {
+                        int inserted = slotStack.getCount() - remainder.getCount();
+                        slotStack.shrink(inserted);
+                        if (slotStack.isEmpty()) {
+                            slot.set(ItemStack.EMPTY);
+                        } else {
+                            slot.setChanged();
+                        }
+                        return originalStack;
                     }
-                    return originalStack;
                 }
             }
 

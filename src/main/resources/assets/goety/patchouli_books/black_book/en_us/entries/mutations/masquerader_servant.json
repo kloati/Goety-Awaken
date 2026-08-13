@@ -1,0 +1,22 @@
+{
+  "name": "Masquerader Servant",
+  "icon": "masquerader_mod:blank_mask",
+  "category": "goety:goetyawaken_mutations",
+  "flag": "goetyawaken:masquerader_mod_loaded",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The Masquerader is a 'madman' draped in splendid robes. His uncanny magic mask grants him the ability to constantly shift his identity—by donning different masks, he can steal their corresponding powers. You once forced a Masquerader to flee in a skirmish, leaving behind nothing but a blank mask as your trophy. Upon studying it, you discovered that this mask harbors some dark art of draining 'identity'. As luck would have it, the sorcerer under your command is already well-versed in all manner of spellcasting tricks, so you had him don this mask and, through a conversion ritual, transformed him into a Masquerader of your own."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:masquerader_servant",
+      "text": ""
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:masquerader_servant",
+      "text": "Kamen Rider (not really)"
+    }
+  ]
+}

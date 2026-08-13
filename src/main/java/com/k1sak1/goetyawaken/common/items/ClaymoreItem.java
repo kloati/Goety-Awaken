@@ -63,18 +63,6 @@ public class ClaymoreItem extends SwordItem {
                 .withStyle(net.minecraft.ChatFormatting.LIGHT_PURPLE));
     }
 
-    @Override
-    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        boolean result = super.hurtEnemy(stack, target, attacker);
-        if (attacker instanceof Player player) {
-            if (player.getAttackStrengthScale(0) > 0.9F) {
-                performFullSweepAttack(stack, player);
-            }
-        }
-
-        return result;
-    }
-
     private void playSweepEffects(Player player) {
         player.level().playSound(null, player.getX(), player.getY(), player.getZ(),
                 SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 1.0F, 1.0F);
@@ -97,21 +85,13 @@ public class ClaymoreItem extends SwordItem {
 
     @Override
     public boolean canPerformAction(ItemStack stack, net.minecraftforge.common.ToolAction toolAction) {
-        return net.minecraftforge.common.ToolActions.DEFAULT_SWORD_ACTIONS.contains(toolAction);
+        return false;
     }
 
-    public void performFullSweepAttack(ItemStack stack, Player player) {
+    public void performFullSweepAttack(ItemStack stack, Player player, LivingEntity exemptTarget) {
         float baseDamage = (float) player.getAttributeValue(Attributes.ATTACK_DAMAGE);
-        float enchantmentBonus = EnchantmentHelper.getDamageBonus(stack, MobType.UNDEFINED);
-        float totalBaseDamage = baseDamage + enchantmentBonus;
         int sweepingLevel = EnchantmentHelper.getEnchantmentLevel(Enchantments.SWEEPING_EDGE, player);
-        float sweepRatio = 0.0F;
-        if (sweepingLevel <= 3) {
-            sweepRatio = 0.25F * sweepingLevel;
-        } else {
-            sweepRatio = 0.75F + 0.15F * sweepingLevel;
-        }
-        float damage = totalBaseDamage * (0.25F + sweepRatio);
+
         double range = 2.0D;
         double entityReach = player.getAttributeValue(ForgeMod.ENTITY_REACH.get());
         AABB sweepBox = player.getBoundingBox().inflate(range, 0.25D, range);
@@ -119,8 +99,8 @@ public class ClaymoreItem extends SwordItem {
         boolean hitAny = false;
 
         for (LivingEntity sweepTarget : entities) {
-
             if (sweepTarget != player &&
+                    sweepTarget != exemptTarget &&
                     !(sweepTarget instanceof net.minecraft.world.entity.decoration.ArmorStand armorStand
                             && armorStand.isMarker())
                     &&
@@ -129,6 +109,10 @@ public class ClaymoreItem extends SwordItem {
                 double entityReachSq = Mth.square(range + entityReach);
                 double distanceSquared = player.distanceToSqr(sweepTarget);
                 if (distanceSquared < entityReachSq) {
+                    float enchantmentBonus = EnchantmentHelper.getDamageBonus(stack, sweepTarget.getMobType());
+                    int sweepingLevelForDamage = Math.min(sweepingLevel, 10);
+                    float damage = (baseDamage + enchantmentBonus) * (1.0F + sweepingLevelForDamage * 0.1F);
+
                     sweepTarget.knockback(0.4F,
                             Mth.sin(player.getYRot() * ((float) Math.PI / 180F)),
                             -Mth.cos(player.getYRot() * ((float) Math.PI / 180F)));
@@ -137,6 +121,9 @@ public class ClaymoreItem extends SwordItem {
                 }
             }
         }
-        playSweepEffects(player);
+
+        if (hitAny) {
+            playSweepEffects(player);
+        }
     }
 }

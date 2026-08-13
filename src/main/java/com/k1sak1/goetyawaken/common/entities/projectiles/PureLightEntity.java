@@ -17,7 +17,7 @@ import java.util.Optional;
 
 public class PureLightEntity extends AoeEntity {
 
-    public static final int WARMUP_TIME = 30;
+    public static final int WARMUP_TIME = 50;
 
     public PureLightEntity(EntityType<? extends Projectile> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -62,17 +62,13 @@ public class PureLightEntity extends AoeEntity {
                         getRandomPureLightEntitySound(), this.getSoundSource(), 1.0F, 1.0F);
             }
         }
-        if (this.tickCount > WARMUP_TIME) {
+        if (this.tickCount > WARMUP_TIME + 10) {
             discard();
         }
     }
 
     private SoundEvent getRandomPureLightEntitySound() {
-        SoundEvent[] sounds = {
-                com.k1sak1.goetyawaken.init.ModSounds.PURE_LIGHT_1.get(),
-                com.k1sak1.goetyawaken.init.ModSounds.PURE_LIGHT_2.get()
-        };
-        return sounds[this.random.nextInt(sounds.length)];
+        return com.k1sak1.goetyawaken.init.ModSounds.PURE_LIGHT.get();
     }
 
     @Override

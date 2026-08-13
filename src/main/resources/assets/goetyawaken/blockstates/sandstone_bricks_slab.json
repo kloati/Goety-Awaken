@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "goetyawaken:block/sandstone_bricks_slab"
+    },
+    "type=double": {
+      "model": "goetyawaken:block/sandstone_bricks"
+    },
+    "type=top": {
+      "model": "goetyawaken:block/sandstone_bricks_slab_top"
+    }
+  }
+}

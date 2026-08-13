@@ -16,24 +16,6 @@
       "item": "minecraft:gold_block"
     },
     {
-      "item": "minecraft:gold_block"
-    },
-    {
-      "item": "minecraft:gold_block"
-    },
-    {
-      "item": "minecraft:apple"
-    },
-    {
-      "item": "minecraft:apple"
-    },
-    {
-      "item": "minecraft:apple"
-    },
-    {
-      "item": "minecraft:apple"
-    },
-        {
       "item": "minecraft:apple"
     },
     {
@@ -48,6 +30,6 @@
   ],
   "result": {
     "item": "minecraft:enchanted_golden_apple",
-    "count": 8
+    "count": 4
   }
 }

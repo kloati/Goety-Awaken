@@ -21,7 +21,6 @@ import com.Polarice3.Goety.common.effects.brew.WebbedBrewEffect;
 import com.Polarice3.Goety.common.effects.brew.block.HarvestBlockEffect;
 import com.Polarice3.Goety.common.effects.brew.block.SweetBerriedEffect;
 import com.Polarice3.Goety.common.entities.ally.illager.cultist.CultistServant;
-import com.Polarice3.Goety.common.entities.ally.illager.cultist.WarlockServant;
 import com.k1sak1.goetyawaken.common.entities.ai.NearestHealableAllyTargetGoal;
 import com.k1sak1.goetyawaken.common.entities.ai.SupportAllyGoal;
 import net.minecraft.world.entity.EntityType;
@@ -51,23 +50,26 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.SpawnGroupData;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.stats.Stats;
 import com.Polarice3.Goety.config.AttributesConfig;
 import com.Polarice3.Goety.config.MobsConfig;
 import com.Polarice3.Goety.utils.BrewUtils;
+import com.Polarice3.Goety.utils.CuriosFinder;
 import com.Polarice3.Goety.utils.MathHelper;
 import com.Polarice3.Goety.utils.MobUtil;
 import com.Polarice3.Goety.utils.ModDamageSource;
 import com.Polarice3.Goety.utils.ModLootTables;
 import com.Polarice3.Goety.utils.ServantUtil;
 import com.Polarice3.Goety.init.ModSounds;
-import com.Polarice3.Goety.init.ModTags;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.InteractionHand;
@@ -75,8 +77,12 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionUtils;
-import com.Polarice3.Goety.init.ModTags.Items;
+import net.minecraft.world.item.trading.Merchant;
+import net.minecraft.world.item.trading.MerchantOffer;
+import net.minecraft.world.item.trading.MerchantOffers;
+import com.k1sak1.goetyawaken.Config;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.Iterator;
@@ -98,7 +104,7 @@ import net.minecraftforge.event.ForgeEventFactory;
 
 import javax.annotation.Nullable;
 
-public class CroneServant extends CultistServant implements RangedAttackMob {
+public class CroneServant extends CultistServant implements RangedAttackMob, Merchant {
     private static final EntityDataAccessor<Integer> DATA_TITLE_INDEX = SynchedEntityData.defineId(CroneServant.class,
             EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> DATA_NAME_INDEX = SynchedEntityData.defineId(CroneServant.class,
@@ -114,6 +120,14 @@ public class CroneServant extends CultistServant implements RangedAttackMob {
     private int overwhelmed;
     private NearestHealableAllyTargetGoal healAlliesGoal;
     private SupportAllyGoal supportAllyGoal;
+
+    @Nullable
+    private Player tradingPlayer;
+    private MerchantOffers offers = new MerchantOffers();
+    private int villagerXp = 0;
+    private long lastRestockGameTime = 0;
+    private int numberOfRestocksToday = 0;
+    private long lastRestockCheckDayTime = 0;
 
     public CroneServant(EntityType<? extends CultistServant> type, Level worldIn) {
         super(type, worldIn);
@@ -164,6 +178,13 @@ public class CroneServant extends CultistServant implements RangedAttackMob {
         pCompound.putInt("overwhelmed", this.overwhelmed);
         pCompound.putInt("TitleIndex", this.entityData.get(DATA_TITLE_INDEX));
         pCompound.putInt("NameIndex", this.entityData.get(DATA_NAME_INDEX));
+        if (!this.offers.isEmpty()) {
+            pCompound.put("Offers", this.offers.createTag());
+        }
+        pCompound.putInt("CroneXp", this.villagerXp);
+        pCompound.putLong("LastRestockGameTime", this.lastRestockGameTime);
+        pCompound.putInt("NumberOfRestocksToday", this.numberOfRestocksToday);
+        pCompound.putLong("LastRestockCheckDayTime", this.lastRestockCheckDayTime);
     }
 
     public void readAdditionalSaveData(CompoundTag pCompound) {
@@ -177,6 +198,13 @@ public class CroneServant extends CultistServant implements RangedAttackMob {
         if (pCompound.contains("NameIndex")) {
             this.entityData.set(DATA_NAME_INDEX, pCompound.getInt("NameIndex"));
         }
+        if (pCompound.contains("Offers", 10)) {
+            this.offers = new MerchantOffers(pCompound.getCompound("Offers"));
+        }
+        this.villagerXp = pCompound.getInt("CroneXp");
+        this.lastRestockGameTime = pCompound.getLong("LastRestockGameTime");
+        this.numberOfRestocksToday = pCompound.getInt("NumberOfRestocksToday");
+        this.lastRestockCheckDayTime = pCompound.getLong("LastRestockCheckDayTime");
     }
 
     @Nullable
@@ -234,31 +262,28 @@ public class CroneServant extends CultistServant implements RangedAttackMob {
         if (p_37847_.getEntity() != null && p_37847_.getEntity() instanceof LivingEntity livingEntity) {
             livingEntity.addEffect(new MobEffectInstance(GoetyEffects.CURSED.get(), MathHelper.minutesToTicks(1)));
         }
-        if (!this.level().isClientSide) {
-            if (!this.canRevive(p_37847_)) {
-                ItemStack croneHat = new ItemStack(com.Polarice3.Goety.common.items.ModItems.CRONE_HAT.get());
-                if (this.getTrueOwner() != null) {
-                    com.Polarice3.Goety.common.entities.projectiles.FlyingItem flyingItem = new com.Polarice3.Goety.common.entities.projectiles.FlyingItem(
-                            com.Polarice3.Goety.common.entities.ModEntityType.FLYING_ITEM.get(),
-                            this.level(),
-                            this.getX(),
-                            this.getY() + 1.0D,
-                            this.getZ());
-
-                    flyingItem.setOwner(this.getTrueOwner());
-                    flyingItem.setItem(croneHat);
-                    flyingItem.setParticle(net.minecraft.core.particles.ParticleTypes.SOUL);
-                    flyingItem.setSecondsCool(30);
-                    this.level().addFreshEntity(flyingItem);
-                } else {
-                    net.minecraft.world.entity.item.ItemEntity itemEntity = this.spawnAtLocation(croneHat);
-                    if (itemEntity != null) {
-                        itemEntity.setExtendedLifetime();
-                    }
+        super.die(p_37847_);
+        if (this.isDeadOrDying() && !this.canRevive(p_37847_) && !this.level().isClientSide) {
+            ItemStack croneHat = new ItemStack(com.Polarice3.Goety.common.items.ModItems.CRONE_HAT.get());
+            if (this.getTrueOwner() != null) {
+                com.Polarice3.Goety.common.entities.projectiles.FlyingItem flyingItem = new com.Polarice3.Goety.common.entities.projectiles.FlyingItem(
+                        com.Polarice3.Goety.common.entities.ModEntityType.FLYING_ITEM.get(),
+                        this.level(),
+                        this.getX(),
+                        this.getY() + 1.0D,
+                        this.getZ());
+                flyingItem.setOwner(this.getTrueOwner());
+                flyingItem.setItem(croneHat);
+                flyingItem.setParticle(net.minecraft.core.particles.ParticleTypes.SOUL);
+                flyingItem.setSecondsCool(30);
+                this.level().addFreshEntity(flyingItem);
+            } else {
+                net.minecraft.world.entity.item.ItemEntity itemEntity = this.spawnAtLocation(croneHat);
+                if (itemEntity != null) {
+                    itemEntity.setExtendedLifetime();
                 }
             }
         }
-        super.die(p_37847_);
     }
 
     public void aiStep() {
@@ -779,17 +804,11 @@ public class CroneServant extends CultistServant implements RangedAttackMob {
                 Vec3 vec3 = trader != null ? trader.position() : this.witch.position();
                 if (!this.witch.level().isClientSide && this.witch.level().getServer() != null) {
                     float luck = 0.0F;
-                    if (this.witch.getMainHandItem().is(Items.WITCH_BETTER_CURRENCY)) {
+                    if (this.witch.getMainHandItem().is(com.Polarice3.Goety.init.ModTags.Items.WITCH_BETTER_CURRENCY)) {
                         luck = 1.0F;
                     }
-
                     LootTable loottable = this.witch.level().getServer().getLootData()
-                            .getLootTable(ModLootTables.WITCH_BARTER);
-                    if (this.witch instanceof WarlockServant) {
-                        loottable = this.witch.level().getServer().getLootData()
-                                .getLootTable(ModLootTables.WARLOCK_BARTER);
-                    }
-
+                            .getLootTable(ModLootTables.CRONE_BARTER);
                     List<ItemStack> list = loottable
                             .getRandomItems((new LootParams.Builder((ServerLevel) this.witch.level()))
                                     .withParameter(LootContextParams.THIS_ENTITY, this.witch)
@@ -807,8 +826,10 @@ public class CroneServant extends CultistServant implements RangedAttackMob {
             }
 
             if (this.witch.hurtTime != 0
-                    && (this.witch.getItemInHand(InteractionHand.MAIN_HAND).is(Items.WITCH_CURRENCY)
-                            || this.witch.getItemInHand(InteractionHand.MAIN_HAND).is(Items.WITCH_BETTER_CURRENCY))) {
+                    && (this.witch.getItemInHand(InteractionHand.MAIN_HAND)
+                            .is(com.Polarice3.Goety.init.ModTags.Items.WITCH_CURRENCY)
+                            || this.witch.getItemInHand(InteractionHand.MAIN_HAND)
+                                    .is(com.Polarice3.Goety.init.ModTags.Items.WITCH_BETTER_CURRENCY))) {
                 this.witch.spawnAtLocation(this.witch.getItemInHand(InteractionHand.MAIN_HAND));
                 this.clearTrade();
             }
@@ -831,8 +852,8 @@ public class CroneServant extends CultistServant implements RangedAttackMob {
         }
 
         public boolean canUse() {
-            return this.witch.getMainHandItem().is(Items.WITCH_CURRENCY)
-                    || this.witch.getMainHandItem().is(Items.WITCH_BETTER_CURRENCY);
+            return this.witch.getMainHandItem().is(com.Polarice3.Goety.init.ModTags.Items.WITCH_CURRENCY)
+                    || this.witch.getMainHandItem().is(com.Polarice3.Goety.init.ModTags.Items.WITCH_BETTER_CURRENCY);
         }
 
         public void start() {
@@ -856,29 +877,217 @@ public class CroneServant extends CultistServant implements RangedAttackMob {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
         Item item = itemstack.getItem();
         boolean isOwner = this.getTrueOwner() != null && pPlayer == this.getTrueOwner();
-        if (this.getMainHandItem().isEmpty() && pHand == InteractionHand.MAIN_HAND
-                && itemstack.is(ModTags.Items.WITCH_CURRENCY)) {
-            if (isOwner) {
-                if (!this.isAggressive()) {
-                    this.playSound(this.getCelebrateSound());
-                    ItemStack itemstack1;
-                    if (pPlayer.isCreative()) {
-                        itemstack1 = itemstack;
-                    } else {
-                        itemstack1 = itemstack.split(1);
+
+        if ((itemstack.isEmpty() || itemstack.getItem() == Items.EMERALD) && pHand == InteractionHand.MAIN_HAND) {
+            if (isOwner && !this.isAggressive()) {
+                if (!this.level().isClientSide) {
+                    if (this.shouldRestock()) {
+                        this.restock();
                     }
-                    this.setItemSlot(EquipmentSlot.MAINHAND, itemstack1);
-                    this.setTrader(pPlayer);
-                    return InteractionResult.SUCCESS;
+                    this.generateOffers();
+                    this.applyDynamicDiscount(pPlayer);
+                    this.setTradingPlayer(pPlayer);
+                    this.openTradingScreen(pPlayer, this.getDisplayName(), 1);
+                    pPlayer.awardStat(Stats.TALKED_TO_VILLAGER);
                 }
+                return InteractionResult.sidedSuccess(this.level().isClientSide);
             }
         }
-
+        /*
+         * if (this.getMainHandItem().isEmpty() && pHand == InteractionHand.MAIN_HAND
+         * && itemstack.is(com.Polarice3.Goety.init.ModTags.Items.WITCH_CURRENCY)) {
+         * if (isOwner) {
+         * if (!this.isAggressive()) {
+         * this.playSound(this.getCelebrateSound());
+         * ItemStack itemstack1;
+         * if (pPlayer.isCreative()) {
+         * itemstack1 = itemstack;
+         * } else {
+         * itemstack1 = itemstack.split(1);
+         * }
+         * this.setItemSlot(EquipmentSlot.MAINHAND, itemstack1);
+         * this.setTrader(pPlayer);
+         * return InteractionResult.SUCCESS;
+         * }
+         * }
+         * }
+         */
         if (isOwner) {
             return ServantUtil.equipServantArmor(pPlayer, this, itemstack, super.mobInteract(pPlayer, pHand));
         }
 
         return super.mobInteract(pPlayer, pHand);
+    }
+
+    @Override
+    public void setTradingPlayer(@Nullable Player pPlayer) {
+        this.tradingPlayer = pPlayer;
+    }
+
+    @Nullable
+    @Override
+    public Player getTradingPlayer() {
+        return this.tradingPlayer;
+    }
+
+    @Override
+    public MerchantOffers getOffers() {
+        return this.offers;
+    }
+
+    @Override
+    public void overrideOffers(MerchantOffers pOffers) {
+    }
+
+    @Override
+    public void notifyTrade(MerchantOffer pOffer) {
+        pOffer.increaseUses();
+        this.ambientSoundTime = -this.getAmbientSoundInterval();
+        this.villagerXp += pOffer.getXp();
+    }
+
+    @Override
+    public void notifyTradeUpdated(ItemStack pStack) {
+        if (!this.level().isClientSide && this.ambientSoundTime > -this.getAmbientSoundInterval() + 20) {
+            this.ambientSoundTime = -this.getAmbientSoundInterval();
+            this.playSound(this.getNotifyTradeSound(), this.getSoundVolume(), this.getVoicePitch());
+        }
+    }
+
+    @Override
+    public int getVillagerXp() {
+        return this.villagerXp;
+    }
+
+    @Override
+    public void overrideXp(int pXp) {
+        this.villagerXp = pXp;
+    }
+
+    @Override
+    public boolean showProgressBar() {
+        return false;
+    }
+
+    @Override
+    public SoundEvent getNotifyTradeSound() {
+        return ModSounds.CRONE_AMBIENT.get();
+    }
+
+    @Override
+    public boolean isClientSide() {
+        return this.level().isClientSide;
+    }
+
+    private void generateOffers() {
+        if (!this.offers.isEmpty()) {
+            return;
+        }
+        int tradeCount = Config.croneServantTradeCount;
+        this.offers = CroneTradeManager.generateOffers(this.level().random, tradeCount);
+        if (this.tradingPlayer instanceof ServerPlayer serverPlayer) {
+            serverPlayer.sendMerchantOffers(
+                    serverPlayer.containerMenu.containerId,
+                    this.offers,
+                    1,
+                    this.villagerXp,
+                    this.showProgressBar(),
+                    this.canRestock());
+        }
+    }
+
+    private void applyDynamicDiscount(Player player) {
+        float discountFactor = CuriosFinder.isWitchFriendly(player) ? 0.7f : 1.0f;
+        for (MerchantOffer offer : this.offers) {
+            int basePrice = offer.getBaseCostA().getCount();
+            int discountedPrice = (int) Math.ceil(basePrice * discountFactor);
+            offer.setSpecialPriceDiff(discountedPrice - basePrice);
+        }
+    }
+
+    public boolean canRestock() {
+        return this.hasBrewCauldron();
+    }
+
+    private boolean hasBrewCauldron() {
+        if (this.level() instanceof ServerLevel serverLevel) {
+            BlockPos center = this.blockPosition();
+            int range = 8;
+            for (BlockPos pos : BlockPos.betweenClosed(center.offset(-range, -4, -range),
+                    center.offset(range, 4, range))) {
+                if (serverLevel.getBlockState(pos).is(
+                        com.Polarice3.Goety.common.blocks.ModBlocks.BREWING_CAULDRON.get())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean needsToRestock() {
+        for (MerchantOffer offer : this.getOffers()) {
+            if (offer.needsRestock()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean allowedToRestock() {
+        return this.numberOfRestocksToday == 0 ||
+                (this.numberOfRestocksToday < Config.croneServantRestockLimit &&
+                        this.level().getGameTime() > this.lastRestockGameTime
+                                + Config.croneServantRestockInterval);
+    }
+
+    public boolean shouldRestock() {
+        if (!this.hasBrewCauldron()) {
+            return false;
+        }
+        long i = this.lastRestockGameTime + Config.croneServantRestockCooldown;
+        long j = this.level().getGameTime();
+        boolean flag = j > i;
+
+        long k = this.level().getDayTime();
+        if (this.lastRestockCheckDayTime > 0L) {
+            long l = this.lastRestockCheckDayTime / 24000L;
+            long i1 = k / 24000L;
+            flag |= i1 > l;
+        }
+
+        this.lastRestockCheckDayTime = k;
+        if (flag) {
+            this.lastRestockGameTime = j;
+            this.numberOfRestocksToday = 0;
+        }
+
+        return this.allowedToRestock() && this.needsToRestock();
+    }
+
+    public void restock() {
+        if (!this.level().isClientSide && this.hasBrewCauldron()) {
+            for (MerchantOffer offer : this.getOffers()) {
+                int currentPrice = offer.getCostA().getCount();
+                int basePrice = offer.getBaseCostA().getCount();
+                if (currentPrice > basePrice) {
+                    offer.addToSpecialPriceDiff(basePrice - currentPrice);
+                }
+                offer.resetUses();
+            }
+
+            this.lastRestockGameTime = this.level().getGameTime();
+            ++this.numberOfRestocksToday;
+
+            if (this.tradingPlayer instanceof ServerPlayer serverPlayer) {
+                serverPlayer.sendMerchantOffers(
+                        serverPlayer.containerMenu.containerId,
+                        this.offers,
+                        1,
+                        this.villagerXp,
+                        this.showProgressBar(),
+                        this.canRestock());
+            }
+        }
     }
 
     public void warnKill(Player player) {

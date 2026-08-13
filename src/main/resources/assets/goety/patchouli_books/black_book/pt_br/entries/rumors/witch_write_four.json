@@ -1,0 +1,74 @@
+{
+  "name": "Anotações da Bruxa III",
+  "icon": "goety:death_scythe",
+  "category": "goety:goetyawaken_rumors",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Ultimamente, descobri novas presenças à espreita nos covis deixados pelos antigos que abati. Parece que a velha lei da selva — sobrevivência do mais apto — se aplica até mesmo àqueles seres antigos. Eles absorvem o poder uns dos outros, tornando-se cada vez mais antigos, cada vez mais formidáveis."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety:muck_wraith",
+      "text": "Terror Antigo"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Foi uma das primeiras almas a perecer nestas terras, pairando muito antes de a morte ser entendida como um 'fim'. Tanto tempo se passou que já não se lembra de seu rosto vivo — apenas um ódio interminável e fervente pelos vivos."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety:obsidian_monolith",
+      "text": "O Infindável"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "O primeiro apóstolo do culto do Nether ergueu este monólito. Ninguém sabe por quê. Talvez para provar que a eternidade existe. Talvez simplesmente para mostrar às gerações futuras como é a teimosia. Ligados ao seu poder, hereges se ajoelham diante dele em oração, guardando algo que perdeu seu significado há muito tempo. Talvez este seja o fim da fé."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety:bound_geomancer",
+      "text": "Guardião do Gelo"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Ele foi um dos melhores geomantes dos Illagers. Enviado em uma missão para a Agulha Boreal, nunca mais voltou. Agora ligado por uma maldição imortal ao andar mais alto da torre, ele existe nem vivo nem morto — meramente um prisioneiro preso por feitiçaria incontrolável, guardando a própria prisão que o detém. Ele não busca liberdade. Ele só quer que você também fique."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "minecraft:guardian",
+      "text": "Olho Abissal"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Os marinheiros contam cem histórias do abismo. Noventa e nove são falsas. A centésima nunca foi contada — porque nenhum daqueles que a contaram viveu para chegar à costa. Os afogados não o guardam voluntariamente; eles simplesmente não podem escapar. Ex-marinheiros, agora pupilas ocas através das quais o abismo olha para fora."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety:squall_golem",
+      "text": "A Tempestade"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "O povo das terras altas diz que o primeiro Golem de Vendaval foi moldado pela própria tempestade. Ele vagou para cá vindo do Santuário da Tempestade, cada pedra ainda gravada com as cicatrizes do vento daquele lugar sagrado. Os conjuradores de tempestade aprisionados o seguem — não apenas porque estão ligados, mas porque em sua presença, sentem o verdadeiro poder que sempre buscaram."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety:web_spider",
+      "text": "Tecelão Abominável"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Aranhas de Teia já são irritantes o suficiente. Agora imagine uma que aprendeu paciência. Que aprendeu a esperar. Que aprendeu a fazer cada único fio de seda parte de sua armadilha. O Tecelão Abominável habita o Local de Enterro da Espadona — astuto, paciente, esperando até que seus lacaios o tenham despedaçado antes de festejar com seus restos."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Esses inimigos não são mais fáceis que os anteriores. São mais fortes, mais astutos — do tipo que me fazem hesitar até a mim. Mas lembre-se, medo e hesitação são seus maiores inimigos. Já que você busca provar sua coragem caçando os antigos, avance sem olhar para trás."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Que a sorte esteja do seu lado, $(playername)."
+    }
+  ]
+}

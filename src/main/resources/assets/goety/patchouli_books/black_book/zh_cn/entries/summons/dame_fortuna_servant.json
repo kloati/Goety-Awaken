@@ -1,0 +1,22 @@
+{
+  "name": "福尔图娜女爵",
+  "icon": "meetyourfight:devils_ante",
+  "category": "goety:goetyawaken_summons",
+  "flag": "goetyawaken:meetyourfight_loaded",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "福尔图娜女爵是命运的宠儿，她在赌局中从未输过——在遇到你之前。你在她最引以为傲的方面赢下她之后，开始思考将她约束在身边的方式。天才如你，你最终找到了与她这样的恶魔签订契约的方法——在她再一次在赌局中赢下你之前（你知道的，这对你来说是不可能的），她必须为你效劳。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:dame_fortuna_servant",
+      "text": ""
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:dame_fortuna_servant",
+      "text": "她真的很想再赢你一次。"
+    }
+  ]
+}

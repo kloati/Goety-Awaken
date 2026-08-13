@@ -1,0 +1,17 @@
+{
+  "name": "Mooshroom Focus",
+  "icon": "goetyawaken:mooshroom_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A skilled wilderness mage would never pass up the chance to make use of a Mooshroom in battle—after all, if wolves, bears, goats and sharks can all serve you, why not a Mooshroom?"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:mooshroom_focus",
+      "text": ""
+    }
+  ],
+  "extra_recipe_mappings": {"goetyawaken:mooshroom_focus":0}
+}

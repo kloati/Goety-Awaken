@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "meetyourfight:phantoplasm"
+    }
+  ],
+  "result": {
+    "item": "goety:ectoplasm",
+    "count": 9
+  }
+}

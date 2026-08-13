@@ -1,0 +1,38 @@
+{
+  "name": "Witch's Notes IV",
+  "icon": "goety:death_scythe",
+  "category": "goety:goetyawaken_rumors",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "New ancients have emerged. More dangerous than any I've faced before. But you've proven your courage in hunting this world. You've proven with blood and bone that you are a truly strong hunter. So I trust these prey in your hands."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety:minister",
+      "text": "Fate Helmsman"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A powerful mage abandoned by the Illager Empire. I understand his anger, but understanding is not forgiveness. He chose this path. He must bear its cost. Beware his wand. It is far more dangerous than it looks."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:vindicator_chef",
+      "text": "Highblock Chef"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "He lost a leg, but never lost his true heart. A man like that deserves respect. Pity he stands on the opposite side. Strong as an ox. Not much upstairs. Don't let him chase you too long. He'll stop to catch his breath on his own."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "You have achieved what I could not. The endless cursed pillar. The undying guardian of the greatsword. The spider that could level a whole town... You possess the soul of a truly great hunter. Perhaps one day our paths will cross. I await that day."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The moon has risen, the wind is still.$(br)The flowers are dead, the birds are dead.$(br)Only my shadow still lives,$(br)Waiting with me for dawn.$(br)$(br)The quiet village has forgotten me.$(br)The noisy town has drifted from me.$(br)Only this scythe still knows me,$(br)Knows this heart of mine — long dead."
+    }
+  ]
+}

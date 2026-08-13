@@ -1,0 +1,43 @@
+{
+    "name": "Presença Amaldiçoada",
+    "icon": "goetyawaken:glaive",
+    "category": "goety:anecdote/anecdote",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "\"Sentenciado à morte enquanto vivo, entrou no submundo após a morte, ainda ansiando por plumas até hoje — quão abundantes são as plumas\"$(br)— qu promin$(br)$(br)$(0)Mago das Trevas que lê isto, contar-te-ei uma história muito triste — tão triste que me lembra vagamente do meu antigo eu."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "A \"Presença Amaldiçoada\" foi um soldado em vida. Ele veio a este mundo na época em que o Nameless One ainda tinha um nome. Seus pais eram de uma família local rica e queriam que ele construísse um futuro grandioso. Naqueles dias, o poder do Nameless One estava em seu auge, e juntar-se às suas fileiras representava, aos olhos deles, uma porta de entrada para um mundo melhor. Assim, eles o nutriram desde a infância, repreendendo-o sem parar, pressionando-o a exceder seus limites, forçando-o a se destacar em cada prática marcial e exame. E de fato, parecia funcionar — ele se destacou entre sua vila, sua cidade pequena e eventualmente sua cidade, conquistando um lugar no exército do Nameless One."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "\"Mas os outros lá não eram as figuras brutais e musculosas que ele imaginava; eram companheiros de carne e osso com seus próprios hobbies e interesses, compartilhando risos e conversas juntos. Mais de uma vez, seus companheiros sugeriram que ele parasse de avançar, para se estabelecer com o exército principal e ocupar uma cidade, vivendo uma vida estável. Mas ele — ou talvez outra pessoa — queria escalar a montanha mais alta e chegar ao cume. Então ele recusou educadamente cada vez, avançando sempre, lutando ferozmente e matando inimigos."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "Até que, em algum momento desconhecido, ele avançou profundamente na formação inimiga. Eles o cercaram com veneno, feitiços e armadilhas — seu caminho parecia quase no fim. Nesse momento, o Nameless One surgiu nas fileiras inimigas, bateu com seu cajado no chão e instantaneamente matou todos os inimigos. O soldado quis abrir a boca em choque, mas os vapores venenosos e armadilhas não o permitiam, nem ele conseguia fisicamente...$(br)$(2)\"Você está prestes a cair, soldado...\"$(br)$(0)Ele não conseguia falar, mas tinha certeza de que aquela voz não era humana!$(br)$(2)\"Você é muito comum... Não avance mais tão longe... Você só causaria mais baixas...\""
+        },
+        {
+            "type": "patchouli:text",
+            "text": "O capuz caiu — seu governante, o Nameless One, era um lich! É claro, agora sabemos que essa era a forma de lich do Nameless One.$(br)$(2)\"Que pena... Seria melhor se você tomasse esta forma em vez disso...\"$(br)$(0)Um clarão de luz verde. A vanguarda se ergueu, apenas para descobrir que todo o seu corpo se transformara em osso. Vapores venenosos rodopiavam ao seu redor, protegendo-o. Um brilho frio e gelado se transformou em ar congelante. Ele se tornara uma Vanguarda Esquelética — uma forma imune a veneno."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "Ele estava relutante em aceitar isso — ou melhor, sentia que deveria estar relutante. Tendo se destacado desde a infância, ele se recusava a reconhecer sua própria mediocridade. Como morto-vivo, tornou-se ainda mais destemido em batalha, avançando sempre com vigor renovado. Empoderado pelo Rubi da Alma, já não temia a morte. Quando o Reino de Nameless estava em seus dias crepusculares, ele finalmente recebeu uma oportunidade de encontrar formalmente o Nameless One. Ao subir os degraus do grande salão, um coração inexistente doía como se fosse perfurado por uma lâmina. Flanqueando o salão estavam os guardas imperiais conhecidos como \"Campeões Encantados\" (os atuais Vanguarda de Elite). Enquanto o Nameless One os apresentava, ele percebeu quão vasto era o abismo entre ele e aqueles 'monstros' de brilho roxo: eles podiam transformar sua luz de lâmina em ilusões para atingir inimigos distantes, e podiam reparar ou até conjurar escudos à vontade..."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "Eles eram a verdadeira força do Reino Nameless — seus soldados e comandantes mais fortes. Ele era meramente um pedaço de sucata ligeiramente mais apresentável. Naquele momento, as portas do salão se fecharam completamente. O Reino Nameless caiu em crepúsculo eterno. O Nameless One entrou em seu longo sono. As esperanças e sonhos acalentados do soldado se despedaçaram ali mesmo. Todos eles se tornaram os remanescentes de uma nação caída dentro de um sarcófago colossal. Ele caiu no chão, seu coração mais perdido e vazio do que o vazio das Terras Distantes... E então, uma matilha de ministrosidades que escaparam de uma forja o encontrou. Essas pequenas criaturas foram criadas a partir de sucata descartada destinada à criação de Monstruosidades de Redstone — ele sabia disso bem. Mas não tinha vontade de pensar nisso. Ele abraçou uma das ministrosidades e, em vez de chorar, soltou uma risada incontrolável e estrondosa."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "Da vida à não-morte, ele nunca uma vez se perguntou o que realmente queria. Ele nunca soube. Amaldiçoado por duas vidas, foi só agora, acompanhado por essas ministrosidades, que finalmente se sentiu contente pela primeira vez."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "Ele morreu — mesmo já estando morto.$(br)$(br)Agora, os últimos vestígios de vontade dentro da \"Presença Amaldiçoada\" pilotam esta casca oca, tentando provar seu valor remanescente ao Nameless One. As ministrosidades, carregando o ressentimento e a fúria de seu mestre, lutam com todas as suas forças para enviá-lo de volta à Arca. E você, mago das trevas — pode suportar um ataque forjado a partir de rancores e iras que cruzaram a fronteira entre a vida e a morte?"
+        }
+    ]
+}

@@ -12,5 +12,6 @@
       "recipe": "goetyawaken:blood_rain_focus",
       "text": "制作血雨聚晶。"
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:blood_rain_focus":0}
 }

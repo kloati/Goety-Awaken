@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:ghast",
+    "goety:mini_ghast",
+    "goety:ghast_servant",
+    "goetyawaken:hostile_mini_ghast"
+  ]
+}

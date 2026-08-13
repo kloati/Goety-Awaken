@@ -94,8 +94,10 @@ public class AccessFocusSpell extends Spell {
             return;
         }
 
+        final net.minecraft.server.level.ServerLevel finalTargetLevel = targetLevel;
         NetworkHooks.openScreen(player, lecternEntity, buf -> {
             buf.writeBlockPos(pos);
+            buf.writeResourceLocation(finalTargetLevel.dimension().location());
             buf.writeInt(lecternEntity.getSortingDirection());
             buf.writeInt(lecternEntity.getSortingType());
             buf.writeInt(lecternEntity.getViewType());

@@ -1,0 +1,20 @@
+{
+  "name": "Capitão Rampart",
+  "icon": "goety:diamond_ice_axe",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "O Capitão Rampart é um illager de elite que preside um baluarte abandonado no topo de picos imponentes, guardando-o interminavelmente contra intrusos. Talvez ao carregar o Mau Presságio, criar um Chifre de Saque e usá-la no bioma da montanha possa atrair suas forças — servindo como uma provocação contra ele."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_rampart_captain",
+      "text": ""
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Não subestime este inimigo — seus ataques são poderosos e ele tem muitos truques na manga. Ao enfrentá-lo, cuidado com machados de gelo voadores e rajadas de vento ferozes, e você poderá derrotar esta ameaça."
+    }
+  ]
+}

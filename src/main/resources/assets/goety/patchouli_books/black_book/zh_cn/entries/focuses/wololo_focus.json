@@ -12,5 +12,6 @@
       "recipe": "goetyawaken:wololo_focus",
       "text": "Wololo！"
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:wololo_focus":0}
 }

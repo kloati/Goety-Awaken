@@ -66,6 +66,12 @@ public class HostileDrownedNecromancer extends DrownedNecromancer implements Ene
     @Override
     public void tick() {
         super.tick();
+        com.Polarice3.Goety.utils.MiscCapHelper.updateMobTarget(this);
+
+        if (!this.level().isClientSide()) {
+            this.setAggressive(this.getTarget() != null);
+        }
+
         if (this.bossInfo != null && this.level() instanceof net.minecraft.server.level.ServerLevel) {
             this.bossInfo.update();
         }

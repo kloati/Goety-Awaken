@@ -16,5 +16,6 @@
       "recipe": "goetyawaken:endersent_enchanted_book",
       "text": "Craft the Endersent Enchanted Book."
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:endersent_enchanted_book":0}
 }

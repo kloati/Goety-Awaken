@@ -16,7 +16,10 @@ public class HugeMobEnchant {
 
         LivingEntity livingEntity = event.getEntity();
         if (event.getSource().getEntity() instanceof LivingEntity attacker) {
-            MobEnchantCapability cap = MobEnchantEventHandler.getCapability(attacker);
+            if (!(attacker instanceof IMobEnchantable enchantable)) {
+                return;
+            }
+            MobEnchantCapability cap = enchantable.getMobEnchantCapabilityInstance();
             if (cap != null && cap.hasMobEnchantment()) {
                 int hugeLevel = cap.getMobEnchantLevel(MobEnchantType.HUGE);
                 if (hugeLevel > 0 && event.getAmount() > 0.0F) {

@@ -98,6 +98,10 @@ public class ApostleServantConverter {
             serverLevel.playSound(null, apostle.getX(), apostle.getY(), apostle.getZ(),
                     net.minecraft.sounds.SoundEvents.UI_TOAST_CHALLENGE_COMPLETE,
                     net.minecraft.sounds.SoundSource.PLAYERS, 0.5F, 1.0F);
+            if (player instanceof net.minecraft.server.level.ServerPlayer serverPlayer) {
+                com.k1sak1.goetyawaken.common.advancements.ModCriteriaTriggers.APOSTLE_ACTS
+                        .trigger(serverPlayer);
+            }
         }
 
         servant.discard();

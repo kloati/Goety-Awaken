@@ -12,5 +12,6 @@
       "recipe": "goetyawaken:mirage_eye",
       "text": "迷乱之眼"
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:mirage_eye":0}
 }

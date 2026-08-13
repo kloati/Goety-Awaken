@@ -1,0 +1,26 @@
+{
+  "name": "Servo Sino",
+  "icon": "meetyourfight:haunted_bell",
+  "category": "goety:goetyawaken_summons",
+  "flag": "goetyawaken:meetyourfight_loaded",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Usando o espírito persistente deixado por um Sino após sua morte, você conseguiu reproduzir um 'Sino' que obedece aos seus comandos — uma tarefa trivial para alguém tão adepto da necromancia quanto você. Infelizmente, embora este espírito seja consideravelmente mais forte do que fantasmas comuns, isso é basicamente tudo."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:bellringer_servant",
+      "text": ""
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Mas como você bem sabe, para criaturas mortas-vivas espectrais dessa natureza, a essência espiritual de sua própria espécie serve como um tônico muito nutritivo. E para um Sino, cujo espírito já é bastante resistente, ele pode até absorver múltiplas doses de ectoplasma de seus semelhantes — isso os tornaria muito mais poderosos."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:bellringer_servant",
+      "text": "§cPor quem os sinos dobram?§r"
+    }
+  ]
+}

@@ -12,12 +12,24 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class ObsidianTear extends Item {
     public ObsidianTear() {
         super(new Properties()
                 .stacksTo(64)
                 .rarity(Rarity.EPIC));
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltipComponents,
+            TooltipFlag isAdvanced) {
+        tooltipComponents.add(Component.translatable("item.goetyawaken.obsidian_tear.description")
+                .withStyle(ChatFormatting.GRAY));
     }
 
     @Override
@@ -37,19 +49,15 @@ public class ObsidianTear extends Item {
                 if (!player.isCreative()) {
                     stack.shrink(1);
                 }
-            }
-
-            entity.playSound(SoundEvents.GENERIC_DRINK, 1.0F, 1.0F);
-            if (entity.getCustomName() != null) {
-                player.displayClientMessage(Component
-                        .translatable("message.goetyawaken.servant.on_path", entity.getCustomName().getString())
-                        .withStyle(ChatFormatting.RED, ChatFormatting.BOLD), true);
-            } else {
+                entity.playSound(SoundEvents.GENERIC_DRINK, 1.0F, 1.0F);
+                String servantName = entity.getCustomName() != null ? entity.getCustomName().getString()
+                        : entity.getName().getString();
                 player.displayClientMessage(
-                        Component.translatable("message.goetyawaken.servant.on_path", entity.getName().getString())
+                        Component.translatable("message.goetyawaken.servant.on_path", servantName)
                                 .withStyle(ChatFormatting.RED, ChatFormatting.BOLD),
                         true);
             }
+
             return InteractionResult.SUCCESS;
         }
 
@@ -57,7 +65,6 @@ public class ObsidianTear extends Item {
     }
 
     private boolean isServant(LivingEntity entity) {
-        return entity instanceof com.Polarice3.Goety.common.entities.ally.illager.raider.RaiderServant
-                || entity instanceof com.Polarice3.Goety.common.entities.ally.illager.raider.RaiderServant;
+        return entity instanceof com.Polarice3.Goety.common.entities.ally.illager.raider.RaiderServant;
     }
 }

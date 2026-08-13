@@ -12,5 +12,6 @@
       "recipe": "goetyawaken:soul_sapphire",
       "text": "制作灵魂蓝宝石。"
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:soul_sapphire":0}
 }

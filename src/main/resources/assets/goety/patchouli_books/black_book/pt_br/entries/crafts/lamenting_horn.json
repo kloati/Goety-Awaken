@@ -1,0 +1,17 @@
+{
+  "name": "Chifre Lamentoso",
+  "icon": "goetyawaken:lamenting_horn",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Assim como soprar o Chifre Flamejante pode provocar uma resposta de uma fortaleza do Nether, soprar o Chifre Lamentoso também pode provocar uma resposta de certas criaturas do reino infernal..."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:lamenting_horn",
+      "text": ""
+    }
+  ],
+  "extra_recipe_mappings": {"goetyawaken:lamenting_horn":0}
+}

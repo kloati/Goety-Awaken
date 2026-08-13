@@ -18,6 +18,8 @@ public class AngryMooshroomRenderer extends MobRenderer<AngryMooshroom, AngryMoo
             "textures/entity/angrymooshroom.png");
     private static final ResourceLocation BROWN_TEXTURE = new ResourceLocation(
             "textures/entity/cow/brown_mooshroom.png");
+    private static final ResourceLocation POISONOUS_POTATO_TEXTURE = new ResourceLocation("goetyawaken",
+            "textures/entity/poisonous_potato_cow.png");
 
     public AngryMooshroomRenderer(EntityRendererProvider.Context p_174324_) {
         super(p_174324_, new AngryMooshroomModel<>(
@@ -27,6 +29,9 @@ public class AngryMooshroomRenderer extends MobRenderer<AngryMooshroom, AngryMoo
 
     @Override
     public ResourceLocation getTextureLocation(AngryMooshroom pEntity) {
+        if (pEntity.isPoisonousPotato()) {
+            return POISONOUS_POTATO_TEXTURE;
+        }
         return pEntity.isBrownVariant() ? BROWN_TEXTURE : RED_TEXTURE;
     }
 

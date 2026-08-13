@@ -10,22 +10,10 @@
   "duration": 20,
   "ingredients": [
     {
-      "item": "goety:void_barrel"
-    },
-    {
       "item": "minecraft:end_crystal"
     },
     {
       "item": "goety:void_eye"
-    },
-    {
-      "item": "goety:void_block"
-    },
-    {
-      "item": "goety:void_block"
-    },
-    {
-      "item": "goety:void_block"
     },
     {
       "item": "goety:watching_focus"

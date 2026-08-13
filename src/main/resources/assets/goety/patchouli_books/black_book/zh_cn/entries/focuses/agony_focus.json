@@ -12,5 +12,6 @@
       "recipe": "goetyawaken:agony_focus",
       "text": "制作痛楚聚晶。"
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:agony_focus":0}
 }

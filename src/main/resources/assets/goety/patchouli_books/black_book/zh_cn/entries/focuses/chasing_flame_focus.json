@@ -1,0 +1,17 @@
+{
+  "name": "逐焰聚晶",
+  "icon": "goetyawaken:chasing_flame_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "巨型恶魂侧面的面容吐出的追踪火球可谓阴险至极，在战斗中给你带来了很大的麻烦。在得到了黑沉沉泪后，你不禁开始思索复刻这种火球的可能性。你最终得到了能发射追踪火球的这枚逐焰聚晶。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:chasing_flame_focus",
+      "text": ""
+    }
+  ],
+  "extra_recipe_mappings": {"goetyawaken:chasing_flame_focus":0}
+}

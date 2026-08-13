@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "goetyawaken:block/stained_sandstone_gravel_slab"
+    },
+    "type=double": {
+      "model": "goetyawaken:block/stained_sandstone_gravel"
+    },
+    "type=top": {
+      "model": "goetyawaken:block/stained_sandstone_gravel_slab_top"
+    }
+  }
+}

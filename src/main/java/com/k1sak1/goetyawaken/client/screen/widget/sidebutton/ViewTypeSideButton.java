@@ -17,9 +17,14 @@ public class ViewTypeSideButton extends SideButton {
 
     private static void toggleViewType(GridViewImpl view) {
         int current = view.getViewType();
-        int newType = current == GridViewImpl.VIEW_TYPE_NORMAL
-                ? GridViewImpl.VIEW_TYPE_CRAFTABLES
-                : GridViewImpl.VIEW_TYPE_NORMAL;
+        int newType;
+        if (current == GridViewImpl.VIEW_TYPE_NORMAL) {
+            newType = GridViewImpl.VIEW_TYPE_NON_CRAFTABLES;
+        } else if (current == GridViewImpl.VIEW_TYPE_NON_CRAFTABLES) {
+            newType = GridViewImpl.VIEW_TYPE_CRAFTABLES;
+        } else {
+            newType = GridViewImpl.VIEW_TYPE_NORMAL;
+        }
         view.setViewType(newType);
         view.forceSort();
         ModNetwork.channel.sendToServer(
@@ -28,15 +33,24 @@ public class ViewTypeSideButton extends SideButton {
 
     @Override
     protected void renderButtonIcon(GuiGraphics graphics, int x, int y) {
-        int iconX = view.getViewType() == GridViewImpl.VIEW_TYPE_NORMAL ? 0 : 16;
-        graphics.blit(ICONS_TEXTURE, x, y, iconX, 112, 16, 16);
+        int type = view.getViewType();
+        if (!GridViewImpl.isValidViewType(type)) {
+            type = GridViewImpl.VIEW_TYPE_NORMAL;
+        }
+        graphics.blit(ICONS_TEXTURE, x, y, type * 16, 112, 16, 16);
     }
 
     @Override
     protected String getSideButtonTooltip() {
-        String key = view.getViewType() == GridViewImpl.VIEW_TYPE_NORMAL
-                ? "normal"
-                : "craftables";
+        int type = view.getViewType();
+        String key;
+        if (type == GridViewImpl.VIEW_TYPE_NON_CRAFTABLES) {
+            key = "non_craftables";
+        } else if (type == GridViewImpl.VIEW_TYPE_CRAFTABLES) {
+            key = "craftables";
+        } else {
+            key = "normal";
+        }
         return I18n.get("sidebutton.goetyawaken.grid.view_type") + "\n" + ChatFormatting.GRAY +
                 I18n.get("sidebutton.goetyawaken.grid.view_type." + key);
     }

@@ -25,6 +25,9 @@ public class EndermanServantRenderer extends MobRenderer<EndermanServant, Enderm
     private static final ResourceLocation ENDERMAN_SERVANT_GLOW_TEXTURE = new ResourceLocation(GoetyAwaken.MODID,
             "textures/entity/enderman_servant_glow.png");
 
+    private static final ResourceLocation POISONOUS_POTATO_ENDERMAN_TEXTURE = new ResourceLocation(GoetyAwaken.MODID,
+            "textures/entity/poisonous_potato_enderman.png");
+
     private final RandomSource random = RandomSource.create();
 
     public EndermanServantRenderer(EntityRendererProvider.Context context) {
@@ -35,7 +38,7 @@ public class EndermanServantRenderer extends MobRenderer<EndermanServant, Enderm
 
     @Override
     public ResourceLocation getTextureLocation(EndermanServant entity) {
-        return ENDERMAN_SERVANT_TEXTURE;
+        return entity.isPoisonousPotato() ? POISONOUS_POTATO_ENDERMAN_TEXTURE : ENDERMAN_SERVANT_TEXTURE;
     }
 
     @Override

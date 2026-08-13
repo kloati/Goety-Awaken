@@ -25,5 +25,6 @@
       "type": "patchouli:text",
       "text": "它可以吸收灵魂能量来进行修复。"
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:starless_night":0}
 }

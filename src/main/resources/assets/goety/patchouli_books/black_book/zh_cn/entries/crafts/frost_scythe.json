@@ -12,5 +12,6 @@
       "recipe": "goetyawaken:frost_scythe",
       "text": ""
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:frost_scythe":0}
 }

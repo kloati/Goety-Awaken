@@ -12,5 +12,6 @@
       "recipe": "goetyawaken:ripplewalk",
       "text": "穿戴者可以在流体上奔跑，一旦停下就会失效。"
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:ripplewalk":0}
 }

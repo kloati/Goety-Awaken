@@ -1,0 +1,21 @@
+{
+  "name": "Giant Ghast",
+  "icon": "goetyawaken:gloomy_tears",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "After obtaining the Gloomy Tears shed by a dying Giant Ghast, you keenly sensed the possibility of using them to curse a regular Ghast, transforming it into a Giant Ghast."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:giant_ghast_servant",
+      "text": "You can even have your Giant Ghast carry you through the skies!"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:giant_ghast",
+      "text": ""
+    }
+  ]
+}

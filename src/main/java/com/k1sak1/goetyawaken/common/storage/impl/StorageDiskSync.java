@@ -17,11 +17,20 @@ import java.util.UUID;
  *      Repository</a>
  */
 public class StorageDiskSync implements IStorageDiskSync {
+    private static final int THROTTLE_MS = 500;
+
     private final Map<UUID, StorageDiskSyncData> data = new HashMap<>();
+    private final Map<UUID, Long> syncTime = new HashMap<>();
 
     @Override
     public void sendRequest(UUID id) {
-        ModNetwork.channel.sendToServer(new StorageDiskSizeRequestMessage(id));
+        long lastSync = syncTime.getOrDefault(id, 0L);
+
+        if (System.currentTimeMillis() - lastSync > THROTTLE_MS) {
+            ModNetwork.channel.sendToServer(new StorageDiskSizeRequestMessage(id));
+
+            syncTime.put(id, System.currentTimeMillis());
+        }
     }
 
     @Override
@@ -36,5 +45,6 @@ public class StorageDiskSync implements IStorageDiskSync {
 
     public void clear() {
         data.clear();
+        syncTime.clear();
     }
 }

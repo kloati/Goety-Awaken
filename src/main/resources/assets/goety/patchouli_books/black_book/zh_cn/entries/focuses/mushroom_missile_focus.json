@@ -13,5 +13,6 @@
       "text": "制作蕈弹聚晶。"
     }
   ],
-  "advancement": "goetyawaken:mushroom_monstrosity_kill"
+  "advancement": "goetyawaken:mushroom_monstrosity_kill",
+  "extra_recipe_mappings": {"goetyawaken:mushroom_missile_focus":0}
 }

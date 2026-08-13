@@ -1,7 +1,7 @@
 package com.k1sak1.goetyawaken.common.blocks.entity;
 
 import com.k1sak1.goetyawaken.common.blocks.ModBlockEntities;
-import com.k1sak1.goetyawaken.Config;
+import com.k1sak1.goetyawaken.config.AttributesConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
@@ -109,7 +109,8 @@ public class PoisonousMushroomBlockEntity extends BlockEntity implements INBTSer
         this.existenceTimer++;
         if (this.existenceTimer >= 1200) {
             LivingEntity owner = getOwner();
-            if (owner != null && !owner.isDeadOrDying() && Config.ALLOW_POISONOUS_MUSHROOM_HEAL_SPECIAL_OWNERS.get()) {
+            if (owner != null && !owner.isDeadOrDying()
+                    && AttributesConfig.AllowPoisonousMushroomHealSpecialOwners.get()) {
                 float maxHealth = owner.getMaxHealth();
                 float healAmount = maxHealth * 0.001F;
                 if (owner.getHealth() < owner.getMaxHealth()) {
@@ -128,7 +129,7 @@ public class PoisonousMushroomBlockEntity extends BlockEntity implements INBTSer
                         owner instanceof com.k1sak1.goetyawaken.common.entities.ally.golem.MushroomMonstrosity ||
                         owner instanceof com.k1sak1.goetyawaken.common.entities.hostile.MushroomMonstrosityHostile;
 
-                if (isSpecialOwner && Config.ALLOW_POISONOUS_MUSHROOM_HEAL_SPECIAL_OWNERS.get()) {
+                if (isSpecialOwner && AttributesConfig.AllowPoisonousMushroomHealSpecialOwners.get()) {
                     float maxHealth = owner.getMaxHealth();
                     float healAmount = maxHealth * 0.0005F;
                     if (owner.getHealth() < owner.getMaxHealth()) {

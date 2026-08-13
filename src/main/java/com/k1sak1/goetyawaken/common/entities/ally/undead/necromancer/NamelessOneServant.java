@@ -67,7 +67,7 @@ public class NamelessOneServant extends AbstractNamelessOne {
             this.warnKill(player);
         } else {
             this.remove(net.minecraft.world.entity.Entity.RemovalReason.DISCARDED);
-            this.removeAllMinions();
+            this.removeAllServants();
             this.triggerDeathQuote();
         }
     }

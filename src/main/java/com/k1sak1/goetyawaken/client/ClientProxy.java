@@ -2,6 +2,7 @@ package com.k1sak1.goetyawaken.client;
 
 import com.k1sak1.goetyawaken.api.IAncientGlint;
 import com.k1sak1.goetyawaken.client.events.AncientBossBarEvent;
+import com.k1sak1.goetyawaken.client.events.MasqueraderBossBarEvent;
 import com.k1sak1.goetyawaken.client.events.MushroomBossBarEvent;
 import com.k1sak1.goetyawaken.client.events.NamelessOneBossBarEvent;
 import com.k1sak1.goetyawaken.init.ModProxy;
@@ -22,6 +23,8 @@ public class ClientProxy implements ModProxy {
         } else if (mob instanceof IAncientGlint glint && glint.hasAncientGlint()
                 && "ancient".equals(glint.getGlintTextureType())) {
             AncientBossBarEvent.addAncientBossBar(id, mob);
+        } else if (isMasquerader(mob)) {
+            MasqueraderBossBarEvent.addMasqueraderBossBar(id, mob);
         }
     }
 
@@ -34,6 +37,18 @@ public class ClientProxy implements ModProxy {
         } else if (mob instanceof IAncientGlint glint && glint.hasAncientGlint()
                 && "ancient".equals(glint.getGlintTextureType())) {
             AncientBossBarEvent.removeAncientBossBar(id, mob);
+        } else if (isMasquerader(mob)) {
+            MasqueraderBossBarEvent.removeMasqueraderBossBar(id, mob);
+        }
+    }
+
+    private static boolean isMasquerader(Mob mob) {
+        try {
+            Class<?> masqClass = Class.forName("net.random_something.masquerader_mod.entity.Masquerader");
+            Class<?> cloneClass = Class.forName("net.random_something.masquerader_mod.entity.MasqueraderClone");
+            return masqClass.isInstance(mob) && !cloneClass.isInstance(mob);
+        } catch (ClassNotFoundException e) {
+            return false;
         }
     }
 }

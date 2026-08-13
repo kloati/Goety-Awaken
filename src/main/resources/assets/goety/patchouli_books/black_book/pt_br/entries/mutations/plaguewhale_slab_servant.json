@@ -1,0 +1,21 @@
+{
+  "name": "Servo Baleia Pestilenta",
+  "icon": "goetyawaken:plaguewhale_spawn_egg",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Depois de invocar o Toxifin (uma variante de batata venenosa do Guardião) com aquele cajado de piada, você começou a se perguntar se poderia usá-lo para obter um tipo diferente de Guardião Ancião..."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:convert_toxifin_to_plaguewhale_slab_servant",
+      "text": "Transforme um Servo Toxifin em um Servo Baleia Pestilenta através de um ritual."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:plaguewhale_slab_servant",
+      "text": "Diz-se que a Baleia Pestilenta é um Guardião Ancião distorcido pelo poder da batata venenosa."
+    }
+  ]
+}

@@ -9,12 +9,6 @@
   "duration": 30,
   "ingredients": [
     {
-      "item": "goety:mystic_core"
-    },
-    {
-      "item": "goety:ice_storm_focus"
-    },
-    {
       "item": "goety:frozen_blade"
     },
     {

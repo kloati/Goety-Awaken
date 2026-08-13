@@ -1,0 +1,8 @@
+{
+  "parent": "block/slab",
+  "textures": {
+    "bottom": "goetyawaken:block/sandstone/sandstone_bricks",
+    "top": "goetyawaken:block/sandstone/sandstone_bricks",
+    "side": "goetyawaken:block/sandstone/sandstone_bricks"
+  }
+}

@@ -20,5 +20,6 @@
       "recipe": "goetyawaken:shadow_shrieker",
       "text": "制作暗影尖啸体。"
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:shadow_shrieker":0}
 }

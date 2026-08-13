@@ -1,0 +1,28 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety:empty_focus"
+  },
+  "craftType": "expert_nether",
+  "research": "bygone",
+  "soulCost": 4,
+  "duration": 6,
+  "ingredients": [
+    {
+      "item": "goety:blazing_helm"
+    },
+    {
+      "item": "minecraft:blaze_powder"
+    },
+    {
+      "item": "minecraft:nether_brick"
+    },
+    {
+      "item": "minecraft:nether_brick"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:burning_shield_focus"
+  }
+}

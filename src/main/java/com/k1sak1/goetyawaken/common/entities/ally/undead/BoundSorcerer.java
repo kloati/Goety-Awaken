@@ -13,6 +13,7 @@ import net.minecraft.world.entity.monster.AbstractIllager;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.DifficultyInstance;
@@ -26,6 +27,7 @@ import com.k1sak1.goetyawaken.config.AttributesConfig;
 import com.Polarice3.Goety.utils.MobUtil;
 import com.Polarice3.Goety.init.ModSounds;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.goal.Goal;
@@ -33,25 +35,28 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.BannerItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import oshi.util.tuples.Pair;
 import com.Polarice3.Goety.common.magic.Spell;
 import com.Polarice3.Goety.common.magic.SpellStat;
-import com.Polarice3.Goety.common.magic.spells.*;
-import com.Polarice3.Goety.common.magic.spells.abyss.*;
-import com.Polarice3.Goety.common.magic.spells.frost.*;
-import com.Polarice3.Goety.common.magic.spells.geomancy.*;
-import com.Polarice3.Goety.common.magic.spells.necromancy.*;
-import com.Polarice3.Goety.common.magic.spells.nether.*;
-import com.Polarice3.Goety.common.magic.spells.storm.*;
-import com.Polarice3.Goety.common.magic.spells.wild.*;
-import com.Polarice3.Goety.common.magic.spells.wind.*;
+import com.Polarice3.Goety.common.magic.SummonSpell;
+import com.Polarice3.Goety.api.magic.IChargingSpell;
+import com.Polarice3.Goety.api.magic.IBreathingSpell;
+import com.Polarice3.Goety.common.effects.GoetyEffects;
+import com.Polarice3.Goety.utils.WandUtil;
+import com.k1sak1.goetyawaken.common.magic.sorcerer.SorcererSpellCaster;
+import com.k1sak1.goetyawaken.common.magic.sorcerer.SorcererSpellConfig;
+import com.k1sak1.goetyawaken.common.magic.sorcerer.SorcererSpellEntry;
+import com.k1sak1.goetyawaken.common.magic.sorcerer.SorcererSpellData;
+import com.k1sak1.goetyawaken.common.entities.ai.SorcererCastingGoal;
+import com.k1sak1.goetyawaken.common.entities.ai.SorcererSpellAttackGoal;
+import java.util.Map;
+import java.util.HashMap;
 import com.Polarice3.Goety.common.items.ModItems;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 
-public class BoundSorcerer extends AbstractBoundIllager {
+public class BoundSorcerer extends AbstractBoundIllager implements SorcererSpellCaster {
     protected static final EntityDataAccessor<Byte> IS_CASTING_SPELL = SynchedEntityData.defineId(BoundSorcerer.class,
             EntityDataSerializers.BYTE);
     protected static final EntityDataAccessor<Boolean> CHARGING = SynchedEntityData.defineId(BoundSorcerer.class,
@@ -60,32 +65,67 @@ public class BoundSorcerer extends AbstractBoundIllager {
             EntityDataSerializers.BOOLEAN);
     protected static final EntityDataAccessor<Integer> LEVEL = SynchedEntityData.defineId(BoundSorcerer.class,
             EntityDataSerializers.INT);
+    protected static final EntityDataAccessor<String> CURRENT_SPELL_NAME = SynchedEntityData.defineId(
+            BoundSorcerer.class,
+            EntityDataSerializers.STRING);
     protected int castingTime;
-    protected int[] spellCoolDown = new int[SorcererSpell.values().length + 1];
-    protected int[] spellWeights = new int[SorcererSpell.values().length + 1];
+    private List<SorcererSpellEntry> spellEntries = List.of();
+    private Map<String, Integer> focusNameToIndex = Map.of();
+    private int[] spellCoolDown = new int[0];
+    private int[] spellWeights = new int[0];
+    private SorcererSpellEntry currentSpell;
+    private boolean needsSpellReload = true;
+    private static final int MAX_WEIGHT = 1000;
+    private static final int WEIGHT_RECOVERY = 20;
 
     public int coolDown = 0;
+    public int castTimeCounter;
     public boolean hasSpawned;
+    public SorcererSpellData spellData = new SorcererSpellData();
+
+    public SorcererSpellData getSpellData() {
+        return spellData;
+    }
+
+    public Mob self() {
+        return this;
+    }
+
+    public void setCurrentSpellName(String name) {
+        this.entityData.set(CURRENT_SPELL_NAME, name);
+    }
+
     public static int MIN_LEVEL = 1;
     public static int MAX_LEVEL = 6;
-    private SorcererSpell currentSpell = SorcererSpell.FLAMES;
 
     public BoundSorcerer(EntityType<? extends AbstractBoundIllager> type, Level worldIn) {
         super(type, worldIn);
-        for (int i = 0; i < this.spellWeights.length; i++) {
-            this.spellWeights[i] = 20;
-        }
     }
 
     public boolean shouldReduceCastTime() {
         return this.getSorcererLevel() >= 6;
     }
 
+    private void reloadSpellData() {
+        List<SorcererSpellEntry> entries = SorcererSpellConfig.getSpellEntries();
+        this.spellEntries = entries;
+        Map<String, Integer> indexMap = new HashMap<>();
+        int[] cooldowns = new int[entries.size()];
+        int[] weights = new int[entries.size()];
+        for (int i = 0; i < entries.size(); i++) {
+            indexMap.put(entries.get(i).getFocusRegistryName(), i);
+            weights[i] = entries.get(i).getWeight();
+        }
+        this.focusNameToIndex = indexMap;
+        this.spellCoolDown = cooldowns;
+        this.spellWeights = weights;
+    }
+
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(1, new CastingSpellGoal());
-        this.goalSelector.addGoal(2, new SpellGoal());
+        this.goalSelector.addGoal(1, new SorcererSpellAttackGoal(this, this));
+        this.goalSelector.addGoal(2, new SorcererCastingGoal(this, this));
         this.goalSelector.addGoal(3, new com.Polarice3.Goety.common.entities.ai.AvoidTargetGoal<>(this,
                 LivingEntity.class, 8.0F, 0.6D, 1.0D));
         this.goalSelector.addGoal(4, new com.Polarice3.Goety.common.entities.ai.SurroundGoal<>(this, 1.0F, 8.0F));
@@ -98,6 +138,7 @@ public class BoundSorcerer extends AbstractBoundIllager {
         this.entityData.define(CHARGING, false);
         this.entityData.define(SHOOT, false);
         this.entityData.define(LEVEL, 1);
+        this.entityData.define(CURRENT_SPELL_NAME, "");
     }
 
     public static AttributeSupplier.Builder setCustomAttributes() {
@@ -129,11 +170,32 @@ public class BoundSorcerer extends AbstractBoundIllager {
         }
     }
 
+    @Override
+    public boolean isUsingItem() {
+        return isCastingSpell2() && !spellData.virtualWand.isEmpty();
+    }
+
+    @Override
+    public ItemStack getUseItem() {
+        if (isCastingSpell2() && !spellData.virtualWand.isEmpty()) {
+            return spellData.virtualWand;
+        }
+        return ItemStack.EMPTY;
+    }
+
+    @Override
+    public int getUseItemRemainingTicks() {
+        if (isCastingSpell2()) {
+            return Math.max(0, spellData.spellUseTimeRemaining);
+        }
+        return 0;
+    }
+
     public boolean isCastingSpell2() {
         if (this.level().isClientSide) {
             return this.entityData.get(IS_CASTING_SPELL) > 0;
         } else {
-            return this.castingTime > 0;
+            return spellData.castingTime > 0;
         }
     }
 
@@ -157,6 +219,10 @@ public class BoundSorcerer extends AbstractBoundIllager {
         this.entityData.set(SHOOT, shoot);
     }
 
+    public String getCurrentSpellName() {
+        return this.entityData.get(CURRENT_SPELL_NAME);
+    }
+
     @Override
     public void handleEntityEvent(byte p_21375_) {
         if (p_21375_ == 4) {
@@ -175,9 +241,7 @@ public class BoundSorcerer extends AbstractBoundIllager {
     @Override
     protected void customServerAiStep() {
         super.customServerAiStep();
-        if (this.castingTime > 0) {
-            --this.castingTime;
-        }
+        spellData.decrementCastingTime();
     }
 
     @Override
@@ -200,74 +264,17 @@ public class BoundSorcerer extends AbstractBoundIllager {
             }
         }
         if (!this.level().isClientSide) {
-            for (SorcererSpell spell : SorcererSpell.values()) {
-                if (this.spellCoolDown[spell.trueId] > 0) {
-                    --this.spellCoolDown[spell.trueId];
-                }
-            }
-            if (this.coolDown > 0) {
-                --this.coolDown;
-            }
-            if (this.tickCount % 20 == 0) {
-                for (int i = 0; i < this.spellWeights.length; i++) {
-                    this.spellWeights[i] = Math.min(this.spellWeights[i] + 20, 1000);
-                }
-            }
-            if (this.tickCount % 20 == 0) {
-                this.updateHealSpellWeights();
-                this.updateRepelSpellWeights();
-            }
+            spellData.serverTick(this);
         }
     }
 
     @Override
     public boolean hurt(DamageSource pSource, float pAmount) {
-        boolean result = super.hurt(pSource, pAmount);
-        if (result) {
-            for (SorcererSpell spell : SorcererSpell.values()) {
-                if (spell == SorcererSpell.IRON_HIDE || spell == SorcererSpell.BULWARK
-                        || spell == SorcererSpell.CHILL_HIDE) {
-                    this.spellWeights[spell.trueId] = Math.min(this.spellWeights[spell.trueId] + 40, 1000);
-                }
-            }
-        }
-        return result;
-    }
-
-    public void updateHealSpellWeights() {
-        float healthRatio = this.getMaxHealth() > 0 ? this.getHealth() / this.getMaxHealth() : 0;
-        float lostHealthPercent = (1.0f - healthRatio) * 100;
-        int healWeightIncrease = (int) (2 * lostHealthPercent);
-
-        for (SorcererSpell spell : SorcererSpell.values()) {
-            if (spell == SorcererSpell.HEAL || spell == SorcererSpell.HEAL2) {
-                this.spellWeights[spell.trueId] = Math.min(this.spellWeights[spell.trueId] + healWeightIncrease, 1000);
-            }
-        }
-    }
-
-    public void updateRepelSpellWeights() {
-        LivingEntity target = this.getTarget();
-        if (target != null) {
-            double distance = this.distanceTo(target);
-            if (distance < 8.0) {
-                for (SorcererSpell spell : SorcererSpell.values()) {
-                    if (spell == SorcererSpell.ICE_STORM || spell == SorcererSpell.TIDAL
-                            || spell == SorcererSpell.FROST_NOVA ||
-                            spell == SorcererSpell.DISCHARGE || spell == SorcererSpell.WIND_HORN) {
-                        this.spellWeights[spell.trueId] = Math.min(this.spellWeights[spell.trueId] + 10, 1000);
-                    }
-                }
-            }
-        }
-    }
-
-    public void resetSpellWeight(SorcererSpell spell) {
-        this.spellWeights[spell.trueId] = 20;
+        return super.hurt(pSource, pAmount);
     }
 
     protected int getSpellCastingTime() {
-        return this.castingTime;
+        return spellData.castingTime;
     }
 
     @Override
@@ -289,7 +296,7 @@ public class BoundSorcerer extends AbstractBoundIllager {
             boolean heal = !compound.getBoolean("HasSpawned");
             this.setSorcererLevel(compound.getInt("Level"), heal);
         }
-        this.castingTime = compound.getInt("SorcererSpellTicks");
+        spellData.castingTime = compound.getInt("SorcererSpellTicks");
     }
 
     public void addAdditionalSaveData(CompoundTag compound) {
@@ -402,7 +409,15 @@ public class BoundSorcerer extends AbstractBoundIllager {
 
         public void stop() {
             super.stop();
+            if (BoundSorcerer.this.currentSpell != null) {
+                Spell sp = BoundSorcerer.this.currentSpell.getSpell();
+                sp.stopSpell((ServerLevel) BoundSorcerer.this.level(), BoundSorcerer.this,
+                        BoundSorcerer.this.currentSpell.resolveUpgradeStaff(BoundSorcerer.this.getSorcererLevel()),
+                        BoundSorcerer.this.currentSpell.getFocusStack(), BoundSorcerer.this.castTimeCounter,
+                        WandUtil.getStats(BoundSorcerer.this, sp));
+            }
             BoundSorcerer.this.setIsCastingSpell(0);
+            BoundSorcerer.this.entityData.set(CURRENT_SPELL_NAME, "");
             BoundSorcerer.this.level().broadcastEntityEvent(BoundSorcerer.this, (byte) 5);
             BoundSorcerer.this.level().broadcastEntityEvent(BoundSorcerer.this, (byte) 7);
             BoundSorcerer.this.coolDown = 20;
@@ -438,25 +453,39 @@ public class BoundSorcerer extends AbstractBoundIllager {
 
         public boolean canContinueToUse() {
             LivingEntity livingentity = BoundSorcerer.this.getTarget();
-            return livingentity != null && livingentity.isAlive() && this.attackWarmupDelay > 0;
+            return livingentity != null && livingentity.isAlive()
+                    && (this.attackWarmupDelay > 0 || BoundSorcerer.this.isCastingSpell2());
         }
 
         public void start() {
             this.attackWarmupDelay = this.adjustedTickDelay(this.getCastWarmupTime());
             BoundSorcerer.this.castingTime = this.getAdjustedCastingTime();
-            BoundSorcerer.this.spellCoolDown[this.getSpell().trueId] = this.getCastingInterval();
+            Integer idx = BoundSorcerer.this.focusNameToIndex.get(this.getSpell().getFocusRegistryName());
+            if (idx != null) {
+                BoundSorcerer.this.spellCoolDown[idx] = this.getCastingInterval();
+            }
             this.nextAttackTickCount = BoundSorcerer.this.tickCount + this.getCastingInterval();
             SoundEvent soundevent = this.getSpellPrepareSound();
             if (soundevent != null) {
                 BoundSorcerer.this.playSound(soundevent, 1.0F, 1.0F);
             }
-            BoundSorcerer.this.setIsCastingSpell(this.getSpell().trueId);
+            BoundSorcerer.this.setIsCastingSpell(1);
             BoundSorcerer.this.currentSpell = this.getSpell();
+            Spell spell = this.getSpell().getSpell();
+            SpellStat spellStat = WandUtil.getStats(BoundSorcerer.this, spell);
+            if (this.getSpell().isLevelIncrease()) {
+                spellStat.setPotency(BoundSorcerer.this.getSorcererLevel() - this.getSpell().getMinLevel());
+            }
+            spell.startSpell((ServerLevel) BoundSorcerer.this.level(), BoundSorcerer.this,
+                    this.getSpell().resolveUpgradeStaff(BoundSorcerer.this.getSorcererLevel()), spellStat);
+            BoundSorcerer.this.castTimeCounter = 0;
+            BoundSorcerer.this.entityData.set(CURRENT_SPELL_NAME, this.getSpell().getFocusRegistryName());
         }
 
         public void stop() {
             super.stop();
             BoundSorcerer.this.setIsCastingSpell(0);
+            BoundSorcerer.this.entityData.set(CURRENT_SPELL_NAME, "");
         }
 
         public void tick() {
@@ -492,278 +521,208 @@ public class BoundSorcerer extends AbstractBoundIllager {
         @Nullable
         protected abstract SoundEvent getSpellPrepareSound();
 
-        protected abstract SorcererSpell getSpell();
+        protected abstract SorcererSpellEntry getSpell();
     }
 
     class SpellGoal extends BoundSorcererUseSpellGoal {
-        public SorcererSpell spell;
+        public SorcererSpellEntry spellEntry;
         public int chargeTicks;
+        public int shotCooldown;
+        public boolean spellStopped;
 
         @Override
         public boolean canUse() {
-            List<SorcererSpell> spells = new ArrayList<>();
+            List<SorcererSpellEntry> entries = spellEntries;
+            if (entries == null || entries.isEmpty())
+                return false;
+
+            List<SorcererSpellEntry> spells = new ArrayList<>();
             List<Integer> weights = new ArrayList<>();
             int totalWeight = 0;
+            int level = getSorcererLevel();
 
-            for (SorcererSpell spell1 : SorcererSpell.values()) {
-                if (BoundSorcerer.this.getSorcererLevel() >= spell1.minLevel
-                        && BoundSorcerer.this.getSorcererLevel() <= spell1.maxLevel) {
-                    if (spell1.getSpell().conditionsMet(BoundSorcerer.this.level(), BoundSorcerer.this)) {
-                        if (BoundSorcerer.this.spellCoolDown[spell1.trueId] <= 0) {
-                            if (spell1.getSpell() instanceof com.Polarice3.Goety.common.magic.SummonSpell
-                                    && !BoundSorcerer.this.hasEffect(
-                                            com.Polarice3.Goety.common.effects.GoetyEffects.SUMMON_DOWN.get())) {
-                                spells.add(spell1);
-                                int weight = BoundSorcerer.this.spellWeights[spell1.trueId];
-                                weights.add(weight);
-                                totalWeight += weight;
-                            } else if (!(spell1.getSpell() instanceof com.Polarice3.Goety.common.magic.SummonSpell)) {
-                                spells.add(spell1);
-                                int weight = BoundSorcerer.this.spellWeights[spell1.trueId];
-                                weights.add(weight);
-                                totalWeight += weight;
-                            }
-                        }
-                    }
-                }
+            for (int i = 0; i < entries.size(); i++) {
+                SorcererSpellEntry entry = entries.get(i);
+                if (level < entry.getMinLevel() || level > entry.getMaxLevel())
+                    continue;
+                Spell spell = entry.getSpell();
+                if (spell == null)
+                    continue;
+                if (!spell.conditionsMet(BoundSorcerer.this.level(), BoundSorcerer.this))
+                    continue;
+                if (spellCoolDown[i] > 0)
+                    continue;
+                if (spell instanceof SummonSpell
+                        && BoundSorcerer.this.hasEffect(GoetyEffects.SUMMON_DOWN.get()))
+                    continue;
+                spells.add(entry);
+                weights.add(spellWeights[i]);
+                totalWeight += spellWeights[i];
             }
 
             if (!spells.isEmpty() && totalWeight > 0) {
                 int randomValue = BoundSorcerer.this.random.nextInt(totalWeight);
                 int currentWeight = 0;
-
                 for (int i = 0; i < spells.size(); i++) {
                     currentWeight += weights.get(i);
                     if (randomValue < currentWeight) {
-                        this.spell = spells.get(i);
+                        this.spellEntry = spells.get(i);
                         break;
                     }
                 }
             } else {
-                this.spell = null;
+                this.spellEntry = null;
             }
 
-            if (this.spell != null && this.spell.getSpell() instanceof com.Polarice3.Goety.api.magic.IChargingSpell) {
+            if (this.spellEntry != null && this.spellEntry.getSpell() instanceof IChargingSpell) {
                 this.chargeTicks = 20;
+                this.shotCooldown = 0;
             }
-            return this.spell != null && super.canUse();
+            this.spellStopped = false;
+            return this.spellEntry != null && super.canUse();
         }
 
         public void tick() {
             super.tick();
-            if (this.spell.getSpell() instanceof com.Polarice3.Goety.api.magic.IChargingSpell) {
-                if (!this.spell.getSpell().conditionsMet(BoundSorcerer.this.level(), BoundSorcerer.this)) {
-                    this.cancelSpell();
+            if (spellEntry != null && !SorcererSpellCaster.isSpellStillValid(spellEntry)) {
+                cancelSpell();
+                return;
+            }
+            BoundSorcerer.this.castTimeCounter++;
+            Spell spell = spellEntry.getSpell();
+            SpellStat spellStat = WandUtil.getStats(BoundSorcerer.this, spell);
+            if (spellEntry.isLevelIncrease()) {
+                spellStat.setPotency(BoundSorcerer.this.getSorcererLevel() - spellEntry.getMinLevel());
+            }
+            spell.useSpell((ServerLevel) BoundSorcerer.this.level(), BoundSorcerer.this,
+                    spellEntry.resolveUpgradeStaff(BoundSorcerer.this.getSorcererLevel()),
+                    BoundSorcerer.this.castTimeCounter, spellStat);
+            if (spell instanceof IChargingSpell chargingSpell) {
+                if (!spell.conditionsMet(BoundSorcerer.this.level(), BoundSorcerer.this)) {
+                    cancelSpell();
+                    return;
                 }
                 --this.chargeTicks;
-                if (this.chargeTicks <= 0) {
-                    com.Polarice3.Goety.common.magic.Spell spell1 = this.spell.getSpell();
-                    com.Polarice3.Goety.common.magic.SpellStat spellStat = com.Polarice3.Goety.utils.WandUtil
-                            .getStats(BoundSorcerer.this, spell1);
-                    if (this.spell.levelIncrease) {
-                        spellStat.setPotency(BoundSorcerer.this.getSorcererLevel() - this.spell.minLevel);
-                    }
-                    spell1.mobSpellResult(BoundSorcerer.this,
-                            BoundSorcerer.this.getSorcererLevel() >= this.spell.upgradeStaff.getB()
-                                    ? this.spell.upgradeStaff.getA()
-                                    : ItemStack.EMPTY,
-                            spellStat);
-                    if (this.spell.getSpell() instanceof com.Polarice3.Goety.api.magic.IBreathingSpell breathingSpell) {
-                        if (BoundSorcerer.this.getTarget() != null) {
-                            com.Polarice3.Goety.utils.MobUtil.instaLook(BoundSorcerer.this,
-                                    BoundSorcerer.this.getTarget());
+                if (this.shotCooldown > 0) {
+                    --this.shotCooldown;
+                }
+                if (this.chargeTicks <= 0 && this.shotCooldown <= 0) {
+                    if (spell.conditionsMet(BoundSorcerer.this.level(), BoundSorcerer.this)) {
+                        SpellStat chargeStat = WandUtil.getStats(BoundSorcerer.this, spell);
+                        if (spellEntry.isLevelIncrease()) {
+                            chargeStat.setPotency(getSorcererLevel() - spellEntry.getMinLevel());
                         }
-                        breathingSpell.showWandBreath(BoundSorcerer.this,
-                                com.Polarice3.Goety.utils.WandUtil.getStats(BoundSorcerer.this, breathingSpell));
+                        SorcererSpellCaster.castSpell(BoundSorcerer.this, spellEntry, chargeStat);
+                        if (spell instanceof IBreathingSpell breathingSpell) {
+                            if (getTarget() != null)
+                                MobUtil.instaLook(BoundSorcerer.this, getTarget());
+                            breathingSpell.showWandBreath(BoundSorcerer.this,
+                                    WandUtil.getStats(BoundSorcerer.this, breathingSpell));
+                        }
+                        Integer idx = focusNameToIndex.get(spellEntry.getFocusRegistryName());
+                        if (idx != null)
+                            spellWeights[idx] = spellEntry.getWeight();
+                        this.shotCooldown = chargingSpell.Cooldown();
+                        if (chargingSpell.everCharge()) {
+                            this.chargeTicks = chargingSpell.shotsNumber(BoundSorcerer.this, ItemStack.EMPTY);
+                            if (this.chargeTicks <= 0)
+                                this.chargeTicks = 10;
+                        }
+                    } else {
+                        cancelSpell();
+                        return;
                     }
-                    BoundSorcerer.this.resetSpellWeight(this.spell);
                 }
-                BoundSorcerer.this.level().broadcastEntityEvent(BoundSorcerer.this, (byte) 4);
-            } else {
-                BoundSorcerer.this.level().broadcastEntityEvent(BoundSorcerer.this, (byte) 5);
-                if (this.spell.throwingSpell()) {
-                    BoundSorcerer.this.level().broadcastEntityEvent(BoundSorcerer.this, (byte) 6);
-                } else {
-                    BoundSorcerer.this.level().broadcastEntityEvent(BoundSorcerer.this, (byte) 7);
-                }
+                level().broadcastEntityEvent(BoundSorcerer.this, (byte) 4);
             }
-            this.spell.getSpell().useParticle(BoundSorcerer.this.level(), BoundSorcerer.this, ItemStack.EMPTY);
+            spell.useParticle(BoundSorcerer.this.level(), BoundSorcerer.this, ItemStack.EMPTY);
         }
 
         public void cancelSpell() {
+            if (spellEntry != null && !spellStopped) {
+                Spell spell = spellEntry.getSpell();
+                spell.stopSpell((ServerLevel) BoundSorcerer.this.level(), BoundSorcerer.this,
+                        spellEntry.resolveUpgradeStaff(BoundSorcerer.this.getSorcererLevel()),
+                        spellEntry.getFocusStack(), BoundSorcerer.this.castTimeCounter,
+                        WandUtil.getStats(BoundSorcerer.this, spell));
+                spellStopped = true;
+                BoundSorcerer.this.currentSpell = null;
+            }
             this.attackWarmupDelay = 0;
             BoundSorcerer.this.castingTime = 0;
-            BoundSorcerer.this.setIsCastingSpell(0);
-            BoundSorcerer.this.level().broadcastEntityEvent(BoundSorcerer.this, (byte) 5);
-            BoundSorcerer.this.level().broadcastEntityEvent(BoundSorcerer.this, (byte) 7);
+            setIsCastingSpell(0);
+            BoundSorcerer.this.entityData.set(CURRENT_SPELL_NAME, "");
+            level().broadcastEntityEvent(BoundSorcerer.this, (byte) 5);
             BoundSorcerer.this.coolDown = 20;
         }
 
         @Override
         protected void performSpellCasting() {
-            if (BoundSorcerer.this.getTarget() != null) {
-                Spell spell1 = this.spell.getSpell();
-                SpellStat spellStat = com.Polarice3.Goety.utils.WandUtil.getStats(BoundSorcerer.this, spell1);
-                if (this.spell.levelIncrease) {
-                    spellStat.setPotency(
-                            spellStat.getPotency() + (BoundSorcerer.this.getSorcererLevel() - this.spell.minLevel));
+            if (spellEntry.getSpell() instanceof IChargingSpell)
+                return;
+            if (getTarget() != null) {
+                Spell spell = spellEntry.getSpell();
+                SpellStat spellStat = WandUtil.getStats(BoundSorcerer.this, spell);
+                if (spellEntry.isLevelIncrease()) {
+                    spellStat.setPotency(spellStat.getPotency() + (getSorcererLevel() - spellEntry.getMinLevel()));
                 }
-                if (this.spell.throwingSpell()) {
-                    BoundSorcerer.this.level().broadcastEntityEvent(BoundSorcerer.this, (byte) 6);
-                } else {
-                    BoundSorcerer.this.level().broadcastEntityEvent(BoundSorcerer.this, (byte) 7);
-                }
-                spell1.mobSpellResult(BoundSorcerer.this,
-                        BoundSorcerer.this.getSorcererLevel() >= this.spell.upgradeStaff.getB()
-                                ? this.spell.upgradeStaff.getA()
-                                : ItemStack.EMPTY,
-                        spellStat);
-                BoundSorcerer.this.resetSpellWeight(this.spell);
+                SorcererSpellCaster.castSpell(BoundSorcerer.this, spellEntry, spellStat);
+                Integer idx = focusNameToIndex.get(spellEntry.getFocusRegistryName());
+                if (idx != null)
+                    spellWeights[idx] = spellEntry.getWeight();
             }
         }
 
         @Override
         protected int getCastWarmupTime() {
-            if (this.spell.getSpell() instanceof com.Polarice3.Goety.api.magic.IChargingSpell chargingSpell) {
-                int warmupTime = chargingSpell.shotsNumber(BoundSorcerer.this, ItemStack.EMPTY);
-                if (BoundSorcerer.this.shouldReduceCastTime()) {
-                    warmupTime = warmupTime / 2;
-                }
-                return warmupTime;
+            Spell spell = spellEntry.getSpell();
+            int warmupTime;
+            if (spell instanceof IChargingSpell chargingSpell) {
+                warmupTime = chargingSpell.castUp(BoundSorcerer.this, ItemStack.EMPTY);
+            } else {
+                warmupTime = Math.max(1, spell.defaultCastDuration());
             }
-            int warmupTime = this.spell.getSpell().defaultCastDuration() + 5;
-            if (BoundSorcerer.this.shouldReduceCastTime()) {
+            if (shouldReduceCastTime())
                 warmupTime = warmupTime / 2;
-            }
-            return warmupTime;
+            return Math.max(1, warmupTime);
         }
 
         @Override
         protected int getCastingTime() {
-            if (this.spell.getSpell() instanceof com.Polarice3.Goety.api.magic.IChargingSpell chargingSpell) {
-                return chargingSpell.shotsNumber(BoundSorcerer.this, ItemStack.EMPTY);
+            Spell spell = spellEntry.getSpell();
+            if (spell instanceof IChargingSpell chargingSpell) {
+                if (chargingSpell.everCharge()) {
+                    int shots = chargingSpell.shotsNumber(BoundSorcerer.this, ItemStack.EMPTY);
+                    if (shots <= 0)
+                        shots = 200;
+                    return Math.min(shots * 4, 200);
+                } else {
+                    return Math.min(
+                            chargingSpell.Cooldown() * 5 + chargingSpell.castUp(BoundSorcerer.this, ItemStack.EMPTY),
+                            100);
+                }
             }
-            int castingTime = this.spell.getSpell().defaultCastDuration() + 5;
-            return castingTime;
+            return Math.max(1, spell.defaultCastDuration());
         }
 
         @Override
         protected int getCastingInterval() {
-            if (this.spell.getSpell() instanceof com.Polarice3.Goety.api.magic.IChargingSpell chargingSpell) {
-                int interval = chargingSpell.defaultSpellCooldown() * 2;
-                return interval;
+            Spell spell = spellEntry.getSpell();
+            if (spell instanceof IChargingSpell chargingSpell) {
+                return chargingSpell.defaultSpellCooldown() * 2;
             }
-            int interval = this.spell.getSpell().defaultSpellCooldown();
-            return interval;
+            return spell.defaultSpellCooldown();
         }
 
         @Nullable
         @Override
         protected SoundEvent getSpellPrepareSound() {
-            return this.spell.getSpell().CastingSound(BoundSorcerer.this);
+            return spellEntry.getSpell().CastingSound(BoundSorcerer.this);
         }
 
         @Override
-        protected SorcererSpell getSpell() {
-            return this.spell;
-        }
-
-    }
-
-    protected enum SorcererSpell {
-        FLAMES(new FireBreathSpell(), nextID(), 1, 3),
-        IRON_HIDE(new IronHideSpell(), nextID(), 1, 6, true),
-        SUMMON_HOUND(new HuntingSpell(), nextID(), 1, 1),
-        HEAL(new SoulHealSpell(), nextID(), 1, 6, true),
-        HEAL2(new SoulHealSpell(), nextID(), 6, 6, true),
-        FROST(new FrostBreathSpell(), nextID(), 2, 3),
-        SUMMON_BEAR(new MaulingSpell(), nextID(), 2, 6, true,
-                new Pair<ItemStack, Integer>(new ItemStack(ModItems.WILD_STAFF.get()), 6)),
-        FANGS(new FangSpell(), nextID(), 2, 6, true,
-                new Pair<ItemStack, Integer>(new ItemStack(ModItems.OMINOUS_STAFF.get()), 6)),
-        SUMMON_ICE_GOLEM(new IceGolemSpell(), nextID(), 3, 6, true,
-                new Pair<ItemStack, Integer>(new ItemStack(ModItems.FROST_STAFF.get()), 6)),
-        ICE_SPIKE(new IceSpikeSpell(), nextID(), 3, 6, true,
-                new Pair<ItemStack, Integer>(new ItemStack(ModItems.FROST_STAFF.get()), 6)),
-        THUNDERBOLT(new ThunderboltSpell(), nextID(), 3, 6, true,
-                new Pair<>(new ItemStack(ModItems.STORM_STAFF.get()), 4)),
-        SCATTER(new ScatterSpell(), nextID(), 3, 5, true),
-        ICE_STORM(new IceStormSpell(), nextID(), 4, 6, true,
-                new Pair<ItemStack, Integer>(new ItemStack(ModItems.FROST_STAFF.get()), 6)),
-        BULWARK(new BulwarkSpell(), nextID(), 4, 6, true),
-        ELECTRO(new ElectroOrbSpell(), nextID(), 4, 6, true,
-                new Pair<ItemStack, Integer>(new ItemStack(ModItems.STORM_STAFF.get()), 6)),
-        BOUNCY_BUBBLE(new BouncyBubbleSpell(), nextID(), 4, 5, true),
-        ARROW_RAIN(new ArrowRainSpell(), nextID(), 4, 5, true),
-        VEX(new VexSpell(), nextID(), 4, 6, true,
-                new Pair<ItemStack, Integer>(new ItemStack(ModItems.OMINOUS_STAFF.get()), 6)),
-        CYCLONE(new CycloneSpell(), nextID(), 5, 6, true,
-                new Pair<ItemStack, Integer>(new ItemStack(ModItems.WIND_STAFF.get()), 6)),
-        ERUPTION(new EruptionSpell(), nextID(), 5, 6, true,
-                new Pair<ItemStack, Integer>(new ItemStack(ModItems.GEO_STAFF.get()), 5)),
-        TIDAL(new TidalSpell(), nextID(), 5, 6, true),
-        BIOMINE(new BioMineSpell(), nextID(), 5, 6, true,
-                new Pair<ItemStack, Integer>(new ItemStack(ModItems.ABYSS_STAFF.get()), 6)),
-        BLOSSOM(new BlossomSpell(), nextID(), 6, 6, true,
-                new Pair<ItemStack, Integer>(new ItemStack(ModItems.WILD_STAFF.get()), 6)),
-        MAGMA_BOMB(new MagmaSpell(), nextID(), 6, 6, true,
-                new Pair<ItemStack, Integer>(new ItemStack(ModItems.NETHER_STAFF.get()), 6)),
-        RAZOR_WIND(new RazorWindSpell(), nextID(), 6, 6, true,
-                new Pair<ItemStack, Integer>(new ItemStack(ModItems.WIND_STAFF.get()), 6)),
-        WEAKENING(new WeakeningSpell(), nextID(), 5, 6, true),
-        MAGIC_BOLT(new MagicBoltSpell(), nextID(), 6, 6),
-        ENTANGLING(new EntanglingSpell(), nextID(), 5, 6, true,
-                new Pair<ItemStack, Integer>(new ItemStack(ModItems.WILD_STAFF.get()), 6)),
-        POISON_DART(new PoisonDartSpell(), nextID(), 1, 3, true),
-        SOUL_BOLT(new SoulBoltSpell(), nextID(), 1, 2, true),
-        CHILL_HIDE(new ChillHideSpell(), nextID(), 3, 6, true,
-                new Pair<ItemStack, Integer>(new ItemStack(ModItems.FROST_STAFF.get()), 6)),
-        FROST_NOVA(new FrostNovaSpell(), nextID(), 5, 6, true,
-                new Pair<ItemStack, Integer>(new ItemStack(ModItems.FROST_STAFF.get()), 6)),
-        ICE_BOUQUET(new IceBouquetSpell(), nextID(), 4, 6, true,
-                new Pair<ItemStack, Integer>(new ItemStack(ModItems.NECRO_STAFF.get()), 6)),
-        WIND_HORN(new WindHornSpell(), nextID(), 3, 6, true,
-                new Pair<ItemStack, Integer>(new ItemStack(ModItems.WIND_STAFF.get()), 6)),
-        DISCHARGE(new DischargeSpell(), nextID(), 6, 6, true,
-                new Pair<ItemStack, Integer>(new ItemStack(ModItems.STORM_STAFF.get()), 6));
-
-        final Spell spell;
-        private static int id = 0;
-        final int trueId;
-        final int minLevel;
-        final int maxLevel;
-        final boolean levelIncrease;
-        final Pair<ItemStack, Integer> upgradeStaff;
-
-        public static int nextID() {
-            return id++;
-        }
-
-        SorcererSpell(Spell spell, int id, int minLevel, int maxLevel) {
-            this(spell, id, minLevel, maxLevel, false, new Pair<>(ItemStack.EMPTY, 0));
-        }
-
-        SorcererSpell(Spell spell, int id, int minLevel, int maxLevel, boolean levelIncrease) {
-            this(spell, id, minLevel, maxLevel, levelIncrease, new Pair<>(ItemStack.EMPTY, 0));
-        }
-
-        SorcererSpell(Spell spell, int id, int minLevel, int maxLevel, boolean levelIncrease,
-                Pair<ItemStack, Integer> upgradeStaff) {
-            this.spell = spell;
-            this.trueId = id;
-            this.minLevel = minLevel;
-            this.maxLevel = maxLevel;
-            this.levelIncrease = levelIncrease;
-            this.upgradeStaff = upgradeStaff;
-        }
-
-        public Spell getSpell() {
-            return this.spell;
-        }
-
-        public boolean throwingSpell() {
-            return this == ICE_SPIKE || this == THUNDERBOLT || this == ELECTRO || this == CYCLONE || this == SOUL_BOLT
-                    || this == POISON_DART;
+        protected SorcererSpellEntry getSpell() {
+            return spellEntry;
         }
     }
 

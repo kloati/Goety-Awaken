@@ -1,0 +1,28 @@
+{
+  "parent": "goety:goety/kill_a_apostle",
+  "criteria": {
+    "apostle_acts": {
+      "trigger": "goetyawaken:apostle_acts"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.goetyawaken.apostle_acts.description"
+    },
+    "frame": "challenge",
+    "hidden": true,
+    "icon": {
+      "item": "goetyawaken:obsidian_tear"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.goetyawaken.apostle_acts.title"
+    }
+  },
+  "requirements": [
+    [
+      "apostle_acts"
+    ]
+  ]
+}

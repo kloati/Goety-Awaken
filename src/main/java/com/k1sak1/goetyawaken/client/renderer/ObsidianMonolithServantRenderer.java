@@ -1,10 +1,9 @@
 package com.k1sak1.goetyawaken.client.renderer;
 
+import com.k1sak1.goetyawaken.client.ClientEventHandler;
 import com.k1sak1.goetyawaken.client.model.ObsidianMonolithServantModel;
 import com.k1sak1.goetyawaken.common.entities.ally.ObsidianMonolithServant;
 import com.Polarice3.Goety.Goety;
-import com.Polarice3.Goety.client.render.ModModelLayer;
-import com.Polarice3.Goety.client.render.model.MonolithModel;
 import com.Polarice3.Goety.common.entities.neutral.AbstractMonolith;
 import com.google.common.collect.ImmutableMap;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -39,7 +38,7 @@ public class ObsidianMonolithServantRenderer<T extends ObsidianMonolithServant>
             Goety.location("textures/entity/monolith/obsidian_monolith_crack_3.png"));
     private static final RenderType CHAIN_RENDER_TYPE = RenderType
             .entityCutoutNoCull(Goety.location("textures/entity/monolith/obsidian_monolith_chain.png"), false);
-    private final RenderLayer<T, MonolithModel<T>> layer;
+    private final RenderLayer<T, ObsidianMonolithServantModel<T>> layer;
 
     public ObsidianMonolithServantRenderer(EntityRendererProvider.Context p_i47208_1_) {
         super(p_i47208_1_);
@@ -103,21 +102,23 @@ public class ObsidianMonolithServantRenderer<T extends ObsidianMonolithServant>
         return this.model;
     }
 
-    public static class OMShieldLayer<T extends AbstractMonolith> extends RenderLayer<T, MonolithModel<T>> {
+    public static class OMShieldLayer<T extends ObsidianMonolithServant>
+            extends RenderLayer<T, ObsidianMonolithServantModel<T>> {
         private static final ResourceLocation TEXTURE = Goety
                 .location("textures/entity/monolith/obsidian_monolith_shield.png");
-        private final MonolithModel<T> model;
+        private final ObsidianMonolithServantModel<T> model;
 
         public OMShieldLayer(RenderLayerParent<T, ?> p_116967_, EntityModelSet p_174555_) {
-            super((RenderLayerParent<T, MonolithModel<T>>) (RenderLayerParent<?, ?>) p_116967_);
-            this.model = new MonolithModel<>(p_174555_.bakeLayer(ModModelLayer.MONOLITH));
+            super((RenderLayerParent<T, ObsidianMonolithServantModel<T>>) (RenderLayerParent<?, ?>) p_116967_);
+            this.model = new ObsidianMonolithServantModel<>(p_174555_.bakeLayer(ClientEventHandler.MONOLITH));
         }
 
         @Override
         public void render(PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn, T monolith,
                 float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw,
                 float headPitch) {
-            if (monolith instanceof ObsidianMonolithServant monolith1) {
+            if (monolith instanceof ObsidianMonolithServant) {
+                ObsidianMonolithServant monolith1 = (ObsidianMonolithServant) monolith;
                 int shieldTime = monolith1.shieldTime;
                 if (shieldTime > 0) {
                     matrixStackIn.pushPose();
@@ -128,7 +129,12 @@ public class ObsidianMonolithServantRenderer<T extends ObsidianMonolithServant>
                     float alpha = (float) shieldTime / 10;
                     float f = (monolith.tickCount + partialTicks) * 0.6F;
                     this.model.prepareMobModel(monolith, limbSwing, limbSwingAmount, partialTicks);
-                    this.getParentModel().copyPropertiesTo(this.model);
+                    this.model.monolith.y = this.getParentModel().monolith.y;
+                    this.model.monolith.x = this.getParentModel().monolith.x;
+                    this.model.monolith.z = this.getParentModel().monolith.x;
+                    this.model.monolith.xRot = this.getParentModel().monolith.xRot;
+                    this.model.monolith.yRot = this.getParentModel().monolith.yRot;
+                    this.model.monolith.zRot = this.getParentModel().monolith.zRot;
                     RenderType renderType = RenderType.energySwirl(TEXTURE, f * 0.02F % 1.0F, f * 0.01F % 1.0F);
                     VertexConsumer vertexconsumer = bufferIn.getBuffer(renderType);
                     float f1 = Math.min(AbstractMonolith.getEmergingTime(), monolith.getAge());

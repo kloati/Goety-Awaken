@@ -1,5 +1,6 @@
 package com.k1sak1.goetyawaken.utils;
 
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -19,10 +20,6 @@ public class AttributeModifierManager {
     private static final Map<UUID, AttributeModifier> activeModifiers = new HashMap<>();
     private static final Map<UUID, Long> rampagingModifierEndTime = new HashMap<>();
 
-    /**
-     * @param entity
-     * @param amplifier
-     */
     public static void applyFrenziedModifier(LivingEntity entity, int amplifier) {
         double speedBonus = (amplifier + 1) * 0.1;
         AttributeInstance attackSpeedAttribute = entity.getAttribute(Attributes.ATTACK_SPEED);
@@ -53,9 +50,6 @@ public class AttributeModifierManager {
         }
     }
 
-    /**
-     * @param entity
-     */
     public static void removeFrenziedModifier(LivingEntity entity) {
         AttributeInstance attackSpeedAttribute = entity.getAttribute(Attributes.ATTACK_SPEED);
         if (attackSpeedAttribute != null && attackSpeedAttribute.getModifier(FRENZIED_ATTACK_SPEED_UUID) != null) {
@@ -72,10 +66,6 @@ public class AttributeModifierManager {
         activeModifiers.remove(FRENZIED_MOVEMENT_SPEED_UUID);
     }
 
-    /**
-     * @param entity
-     * @param amplifier
-     */
     public static void applyRampagingModifier(LivingEntity entity, int amplifier) {
         double speedBonus = 0.5;
         AttributeInstance attackSpeedAttribute = entity.getAttribute(Attributes.ATTACK_SPEED);
@@ -93,9 +83,6 @@ public class AttributeModifierManager {
         }
     }
 
-    /**
-     * @param entity
-     */
     public static void removeRampagingModifier(LivingEntity entity) {
         AttributeInstance attackSpeedAttribute = entity.getAttribute(Attributes.ATTACK_SPEED);
         if (attackSpeedAttribute != null && attackSpeedAttribute.getModifier(RAMPAGING_ATTACK_SPEED_UUID) != null) {
@@ -106,29 +93,27 @@ public class AttributeModifierManager {
         rampagingModifierEndTime.remove(entity.getUUID());
     }
 
-    /**
-     * @param entity
-     */
     public static void checkAndRemoveExpiredRampagingModifiers(LivingEntity entity) {
         Long endTime = rampagingModifierEndTime.get(entity.getUUID());
-        if (endTime != null && System.currentTimeMillis() > endTime) {
-            removeRampagingModifier(entity);
+        if (endTime != null) {
+            if (System.currentTimeMillis() > endTime
+                    || !entity.hasEffect(com.k1sak1.goetyawaken.init.ModEffects.RAMPAGING.get())) {
+                removeRampagingModifier(entity);
+            }
         }
     }
 
-    /**
-     * @param entity
-     * @param duration
-     */
     public static void setRampagingModifierEndTime(LivingEntity entity, int duration) {
         long endTime = System.currentTimeMillis() + (duration * 50);
         rampagingModifierEndTime.put(entity.getUUID(), endTime);
     }
 
-    /**
-     * @param entity
-     * @param amplifier
-     */
+    public static void onEntityRemoved(Entity entity) {
+        if (entity instanceof LivingEntity) {
+            rampagingModifierEndTime.remove(entity.getUUID());
+        }
+    }
+
     public static void applyBerserkModifier(LivingEntity entity, int amplifier) {
         double attackSpeedBonus = amplifier + 1;
         double movementSpeedBonus = (amplifier + 1) * 0.05;
@@ -162,9 +147,6 @@ public class AttributeModifierManager {
         }
     }
 
-    /**
-     * @param entity
-     */
     public static void removeBerserkModifier(LivingEntity entity) {
         AttributeInstance attackSpeedAttribute = entity.getAttribute(Attributes.ATTACK_SPEED);
         if (attackSpeedAttribute != null && attackSpeedAttribute.getModifier(BERSERK_ATTACK_SPEED_UUID) != null) {

@@ -11,6 +11,7 @@ import com.Polarice3.Goety.common.entities.ally.Summoned;
 import com.Polarice3.Goety.common.entities.ally.undead.skeleton.AbstractSkeletonServant;
 import com.Polarice3.Goety.common.entities.neutral.IRavager;
 import com.k1sak1.goetyawaken.common.entities.projectiles.ModSwordProjectile;
+import com.k1sak1.goetyawaken.client.particle.RingParticle;
 import com.Polarice3.Goety.init.ModSounds;
 import com.Polarice3.Goety.utils.ColorUtil;
 import com.Polarice3.Goety.utils.MobUtil;
@@ -54,7 +55,6 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import javax.annotation.Nullable;
-
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
@@ -71,7 +71,7 @@ public class VanguardChampion extends AbstractSkeletonServant implements ICustom
             VanguardChampion.class,
             EntityDataSerializers.INT);
     public int attackTick;
-    public int shieldHealth = 5;
+    public int shieldHealth = 3;
     public AnimationState bobAnimationState = new AnimationState();
     public AnimationState idleAnimationState = new AnimationState();
     public AnimationState walkAnimationState = new AnimationState();
@@ -86,6 +86,8 @@ public class VanguardChampion extends AbstractSkeletonServant implements ICustom
     private int chargeCooldown = 0;
     private int shieldInvulnTime = 0;
     private int currentAttackType = 0;
+    private int shootCooldown = 0;
+    private Vec3 chargeDirection = Vec3.ZERO;
 
     public VanguardChampion(EntityType<? extends Summoned> type, Level worldIn) {
         super(type, worldIn);
@@ -155,6 +157,9 @@ public class VanguardChampion extends AbstractSkeletonServant implements ICustom
         if (pCompound.contains("ProtectionPoints")) {
             this.setProtectionPoints(pCompound.getInt("ProtectionPoints"));
         }
+        if (pCompound.contains("ShootCooldown")) {
+            this.shootCooldown = pCompound.getInt("ShootCooldown");
+        }
     }
 
     public void addAdditionalSaveData(CompoundTag pCompound) {
@@ -167,6 +172,7 @@ public class VanguardChampion extends AbstractSkeletonServant implements ICustom
             pCompound.put("Banner", this.getBanner().save(new CompoundTag()));
         }
         pCompound.putInt("ProtectionPoints", this.getProtectionPoints());
+        pCompound.putInt("ShootCooldown", this.shootCooldown);
     }
 
     @Override
@@ -247,7 +253,7 @@ public class VanguardChampion extends AbstractSkeletonServant implements ICustom
             if (this.getShieldHealth() > 1) {
                 this.setShieldHealth(this.getShieldHealth() - 1);
                 this.playSound(SoundEvents.SHIELD_BLOCK);
-                this.shieldInvulnTime = 10;
+                this.shieldInvulnTime = 0;
             } else {
                 this.setShieldHealth(0);
                 this.setShield(false);
@@ -348,9 +354,8 @@ public class VanguardChampion extends AbstractSkeletonServant implements ICustom
     protected void populateDefaultEquipmentSlots(RandomSource randomSource, DifficultyInstance difficulty) {
         ItemStack weaponStack = new ItemStack(ModItems.MOONLIGHT_CUT.get());
         if (difficulty.getDifficulty() == Difficulty.HARD) {
-            EnchantmentHelper.enchantItem(randomSource, weaponStack, 20, false);
+            EnchantmentHelper.enchantItem(randomSource, weaponStack, 5, false);
         }
-        weaponStack.enchant(Enchantments.BINDING_CURSE, 1);
         weaponStack.enchant(Enchantments.VANISHING_CURSE, 1);
         this.setItemSlot(EquipmentSlot.MAINHAND, weaponStack);
         this.setDropChance(EquipmentSlot.MAINHAND, 0.0F);
@@ -385,6 +390,9 @@ public class VanguardChampion extends AbstractSkeletonServant implements ICustom
 
     public void tick() {
         super.tick();
+        if (this.shootCooldown > 0) {
+            --this.shootCooldown;
+        }
         if (this.level().isClientSide) {
             this.bobAnimationState.startIfStopped(this.tickCount);
             if (this.isAlive()) {
@@ -449,11 +457,7 @@ public class VanguardChampion extends AbstractSkeletonServant implements ICustom
             if (this.hasShield() && this.shieldInvulnTime > 0) {
                 return false;
             }
-
             if (this.hasShield() && !source.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
-                if (amount < 3.0f && this.random.nextFloat() < 0.05f) {
-                    return false;
-                }
                 this.destroyShield();
                 if (source.getEntity() instanceof LivingEntity livingEntity) {
                     if (!MobUtil.areAllies(this, livingEntity) && livingEntity != this.getTrueOwner()) {
@@ -477,7 +481,7 @@ public class VanguardChampion extends AbstractSkeletonServant implements ICustom
         }
 
         if (source.is(DamageTypeTags.WITCH_RESISTANT_TO)) {
-            amount *= 0.6;
+            amount *= 0.85;
         }
 
         int protectionPoints = this.getProtectionPoints();
@@ -611,24 +615,7 @@ public class VanguardChampion extends AbstractSkeletonServant implements ICustom
         SpawnGroupData spawnGroupData = super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
         this.setConfigurableAttributes();
         this.setHealth(this.getMaxHealth());
-        int basePoints = this.random.nextInt(4) + 1;
-        int difficultyBonus = 0;
-        switch (pDifficulty.getDifficulty()) {
-            case PEACEFUL:
-                difficultyBonus = 0;
-                break;
-            case EASY:
-                difficultyBonus = 1;
-                break;
-            case NORMAL:
-                difficultyBonus = 2;
-                break;
-            case HARD:
-                difficultyBonus = 4;
-                break;
-        }
-        int totalPoints = basePoints + difficultyBonus;
-        this.setProtectionPoints(totalPoints);
+        this.setProtectionPoints(0);
         return spawnGroupData;
     }
 
@@ -878,7 +865,7 @@ public class VanguardChampion extends AbstractSkeletonServant implements ICustom
     class ShootGoal extends Goal {
         private final VanguardChampion mob;
         private LivingEntity target;
-        private int attackInterval = 5;
+        private int attackInterval = 30;
         private int attackTime = -1;
         private int seeTime;
         private boolean strafingClockwise;
@@ -895,6 +882,9 @@ public class VanguardChampion extends AbstractSkeletonServant implements ICustom
             LivingEntity target = this.mob.getTarget();
             if (target == null || !target.isAlive() || this.mob.distanceToSqr(target) < 64.0D
                     || this.mob.isMeleeAttacking()) {
+                return false;
+            }
+            if (this.mob.shootCooldown > 0) {
                 return false;
             }
 
@@ -933,6 +923,7 @@ public class VanguardChampion extends AbstractSkeletonServant implements ICustom
             this.attackTime = -1;
             this.strafingTime = -1;
             this.mob.setAggressive(false);
+            this.mob.shootCooldown = 100;
         }
 
         @Override
@@ -972,7 +963,7 @@ public class VanguardChampion extends AbstractSkeletonServant implements ICustom
                 this.attackTime = Mth.floor(Mth.lerp(
                         Math.sqrt(d0) / 10.0F,
                         (float) this.attackInterval,
-                        10.0F));
+                        30.0F));
             }
         }
     }
@@ -987,7 +978,7 @@ public class VanguardChampion extends AbstractSkeletonServant implements ICustom
             double d3 = target.getZ() - this.getZ();
             double d4 = Math.sqrt(d1 * d1 + d3 * d3);
             ItemStack glaiveStack = new ItemStack(ModItems.MOONLIGHT_CUT.get());
-            EnchantmentHelper.enchantItem(this.random, glaiveStack, this.random.nextInt(11) + 5, false);
+            EnchantmentHelper.enchantItem(this.random, glaiveStack, 5, false);
             ModSwordProjectile magicGlaive = new ModSwordProjectile(this, this.level(), glaiveStack);
             magicGlaive.setPos(this.getX(), this.getEyeY() - 0.1F, this.getZ());
 
@@ -1026,7 +1017,8 @@ public class VanguardChampion extends AbstractSkeletonServant implements ICustom
             return VanguardChampion.this.getTarget() != null
                     && VanguardChampion.this.getTarget().isAlive()
                     && !VanguardChampion.this.hasShield()
-                    && VanguardChampion.this.chargeCooldown <= 0;
+                    && VanguardChampion.this.chargeCooldown <= 0
+                    && VanguardChampion.this.onGround();
         }
 
         @Override
@@ -1070,6 +1062,10 @@ public class VanguardChampion extends AbstractSkeletonServant implements ICustom
                     performLungeMovement(this.target);
                 } else if (VanguardChampion.this.chargeTick >= 25 && VanguardChampion.this.chargeTick <= 38) {
                     performChargeAttack();
+                    if (VanguardChampion.this.chargeTick > 25 && VanguardChampion.this.chargeTick % 2 == 0
+                            && VanguardChampion.this.isMoving()) {
+                        spawnChargeRing();
+                    }
                 } else if (VanguardChampion.this.chargeTick == 27) {
                     performThrustAttack(this.target);
                 } else if (VanguardChampion.this.chargeTick >= 40) {
@@ -1131,10 +1127,12 @@ public class VanguardChampion extends AbstractSkeletonServant implements ICustom
             if (target != null && target.isAlive()) {
                 Vec3 targetPos = target.position();
                 Vec3 currentPos = VanguardChampion.this.position();
-                direction = targetPos.subtract(currentPos).normalize();
+                direction = new Vec3(targetPos.x - currentPos.x, 0.0D, targetPos.z - currentPos.z).normalize();
             } else {
-                direction = VanguardChampion.this.getLookAngle();
+                Vec3 look = VanguardChampion.this.getLookAngle();
+                direction = new Vec3(look.x, 0.0D, look.z).normalize();
             }
+            VanguardChampion.this.chargeDirection = direction;
 
             double power = 4.0D;
             VanguardChampion.this.hurtMarked = true;
@@ -1142,6 +1140,19 @@ public class VanguardChampion extends AbstractSkeletonServant implements ICustom
             VanguardChampion.this.setDeltaMovement(direction.x * power, direction.y * power, direction.z * power);
             VanguardChampion.this.hasImpulse = true;
             VanguardChampion.this.fallDistance = 0;
+            spawnChargeRing();
+        }
+
+        private void spawnChargeRing() {
+            if (VanguardChampion.this.level() instanceof ServerLevel serverLevel) {
+                float yaw = (float) Math.atan2(-VanguardChampion.this.chargeDirection.x,
+                        VanguardChampion.this.chargeDirection.z);
+                serverLevel.sendParticles(
+                        new RingParticle.RingData(yaw, 0.0F, 60, 1.0f, 1.0f, 1.0f, 1.0f, 50f,
+                                false, RingParticle.EnumRingBehavior.GROW),
+                        VanguardChampion.this.getX(), VanguardChampion.this.getY() + 0.5D,
+                        VanguardChampion.this.getZ(), 1, 0.0D, 0.0D, 0.0D, 0.0D);
+            }
         }
 
         private void performChargeAttack() {
@@ -1149,12 +1160,12 @@ public class VanguardChampion extends AbstractSkeletonServant implements ICustom
                 int width = serverLevel.getRandom().nextIntBetweenInclusive(1, 4);
                 float height = serverLevel.getRandom().nextFloat() * 0.5F;
                 Vec3 eyePos = VanguardChampion.this.getEyePosition().offsetRandom(serverLevel.getRandom(), 2.0F);
-                Vec3 lookAngle = VanguardChampion.this.getLookAngle().multiply(-1.0D, 1.0D, -1.0D);
+                Vec3 windDirection = VanguardChampion.this.chargeDirection;
                 serverLevel.sendParticles(
                         new WindBlowParticleOption(
                                 new com.Polarice3.Goety.utils.ColorUtil(net.minecraft.ChatFormatting.AQUA), width,
                                 height),
-                        eyePos.x, eyePos.y, eyePos.z, 0, lookAngle.x, lookAngle.y, lookAngle.z, 1.0F);
+                        eyePos.x, eyePos.y, eyePos.z, 0, windDirection.x, windDirection.y, windDirection.z, 1.0F);
                 for (LivingEntity entityHit : serverLevel.getEntitiesOfClass(LivingEntity.class,
                         VanguardChampion.this.getBoundingBox().inflate(2.0F))) {
                     if (!com.Polarice3.Goety.utils.MobUtil.areAllies(VanguardChampion.this, entityHit)
@@ -1178,7 +1189,7 @@ public class VanguardChampion extends AbstractSkeletonServant implements ICustom
                             double d0 = entityHit.getX() - VanguardChampion.this.getX();
                             double d1 = entityHit.getZ() - VanguardChampion.this.getZ();
                             double d2 = Math.max(d0 * d0 + d1 * d1, 0.001D);
-                            entityHit.push(d0 / d2 * 2.5D, 0.18D, d1 / d2 * 2.2D);
+                            entityHit.push(d0 / d2 * 1.25D, 0.09D, d1 / d2 * 1.1D);
                         }
                     }
                 }

@@ -1,6 +1,8 @@
 package com.k1sak1.goetyawaken.client.screen.grid.view;
 
+import com.k1sak1.goetyawaken.client.screen.grid.filtering.GridFilterParser;
 import com.k1sak1.goetyawaken.client.screen.grid.stack.IGridStack;
+import com.k1sak1.goetyawaken.common.storage.api.GridConstants;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -8,14 +10,29 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class GridViewImpl implements IGridView {
-    public static final int SORTING_DIRECTION_ASCENDING = 0;
-    public static final int SORTING_DIRECTION_DESCENDING = 1;
 
-    public static final int SORTING_TYPE_NAME = 0;
-    public static final int SORTING_TYPE_QUANTITY = 1;
+    public static final int SORTING_DIRECTION_ASCENDING = GridConstants.SORTING_DIRECTION_ASCENDING;
+    public static final int SORTING_DIRECTION_DESCENDING = GridConstants.SORTING_DIRECTION_DESCENDING;
 
-    public static final int VIEW_TYPE_NORMAL = 0;
-    public static final int VIEW_TYPE_CRAFTABLES = 1;
+    public static final int SORTING_TYPE_NAME = GridConstants.SORTING_TYPE_NAME;
+    public static final int SORTING_TYPE_QUANTITY = GridConstants.SORTING_TYPE_QUANTITY;
+
+    public static final int VIEW_TYPE_NORMAL = GridConstants.VIEW_TYPE_NORMAL;
+    public static final int VIEW_TYPE_NON_CRAFTABLES = GridConstants.VIEW_TYPE_NON_CRAFTABLES;
+    public static final int VIEW_TYPE_CRAFTABLES = GridConstants.VIEW_TYPE_CRAFTABLES;
+
+    public static boolean isValidViewType(int type) {
+        return GridConstants.isValidViewType(type);
+    }
+
+    public static final int SIZE_STRETCH = GridConstants.SIZE_STRETCH;
+    public static final int SIZE_SMALL = GridConstants.SIZE_SMALL;
+    public static final int SIZE_MEDIUM = GridConstants.SIZE_MEDIUM;
+    public static final int SIZE_LARGE = GridConstants.SIZE_LARGE;
+
+    public static boolean isValidSize(int size) {
+        return GridConstants.isValidSize(size);
+    }
 
     private final Map<UUID, IGridStack> map = new HashMap<>();
     private List<IGridStack> stacks = new ArrayList<>();
@@ -106,10 +123,11 @@ public class GridViewImpl implements IGridView {
         if (sortingDirection == SORTING_DIRECTION_DESCENDING) {
             comparator = comparator.reversed();
         }
+        Comparator<IGridStack> stableComparator = comparator.thenComparing(IGridStack::getId);
 
         this.stacks = map.values().stream()
                 .filter(filter)
-                .sorted(comparator)
+                .sorted(stableComparator)
                 .collect(Collectors.toCollection(ArrayList::new));
         this.active = true;
 
@@ -118,54 +136,97 @@ public class GridViewImpl implements IGridView {
         }
     }
 
-    private Predicate<IGridStack> getFilter() {
-        if (searchQuery == null || searchQuery.isEmpty()) {
-            if (viewType == VIEW_TYPE_CRAFTABLES) {
-                return IGridStack::isCraftable;
-            }
-            return stack -> stack.getQuantity() > 0 || stack.isCraftable();
+    private void addStack(IGridStack stack) {
+        Predicate<IGridStack> filter = getFilter();
+        if (!filter.test(stack)) {
+            return;
         }
 
-        return stack -> {
-            if (viewType == VIEW_TYPE_CRAFTABLES && !stack.isCraftable()) {
+        Comparator<IGridStack> comparator;
+        if (sortingType == SORTING_TYPE_QUANTITY) {
+            comparator = Comparator.comparingInt(IGridStack::getQuantity);
+        } else {
+            comparator = Comparator.comparing(IGridStack::getName, String.CASE_INSENSITIVE_ORDER);
+        }
+
+        if (sortingDirection == SORTING_DIRECTION_DESCENDING) {
+            comparator = comparator.reversed();
+        }
+        Comparator<IGridStack> stableComparator = comparator.thenComparing(IGridStack::getId);
+
+        int insertionPos = Collections.binarySearch(stacks, stack, stableComparator);
+        if (insertionPos < 0) {
+            insertionPos = -insertionPos - 1;
+        }
+        stacks.add(insertionPos, stack);
+    }
+
+    private Predicate<IGridStack> getFilter() {
+        Predicate<IGridStack> base = stack -> {
+            if (viewType == VIEW_TYPE_NON_CRAFTABLES && stack.isCraftable()) {
                 return false;
             }
-            if (stack.getQuantity() <= 0 && !stack.isCraftable()) {
-                return false;
+            if (viewType == VIEW_TYPE_CRAFTABLES) {
+                if (stack.isCraftable()) {
+                    return true;
+                }
+                if (!CraftableItemCache.isCraftable(stack.getIngredient().getItem())) {
+                    return false;
+                }
             }
-
-            String query = searchQuery;
-
-            if (query.startsWith("@")) {
-                return stack.getModId().contains(query.substring(1));
-            }
-
-            if (query.startsWith("$")) {
-                String tagQuery = query.substring(1);
-                return stack.getTags().stream().anyMatch(tag -> tag.contains(tagQuery));
-            }
-
-            return stack.getName().toLowerCase().contains(query);
+            return stack.getQuantity() > 0 || stack.isCraftable();
         };
+
+        if (searchQuery == null || searchQuery.isEmpty()) {
+            return base;
+        }
+
+        List<Predicate<IGridStack>> orGroups = GridFilterParser.getFilters(searchQuery);
+        if (orGroups.isEmpty()) {
+            return base;
+        }
+
+        return base.and(stack -> {
+            for (Predicate<IGridStack> group : orGroups) {
+                if (group.test(stack)) {
+                    return true;
+                }
+            }
+            return false;
+        });
     }
 
     @Override
     public void postChange(IGridStack stack, int delta) {
+        if (!this.active) {
+            return;
+        }
+
         IGridStack existing = map.get(stack.getId());
 
         if (existing == null) {
+            if (delta < 0) {
+                return;
+            }
             stack.setQuantity(delta);
             map.put(stack.getId(), stack);
+            existing = stack;
+
+            addStack(existing);
         } else {
-            int newQty = existing.getQuantity() + delta;
-            if (newQty <= 0) {
+            existing.setQuantity(existing.getQuantity() + delta);
+            if (existing.getQuantity() <= 0) {
                 map.remove(existing.getId());
-            } else {
-                existing.setQuantity(newQty);
+                stacks.remove(existing);
+            } else if (sortingType == SORTING_TYPE_QUANTITY) {
+                stacks.remove(existing);
+                addStack(existing);
             }
         }
 
-        forceSort();
+        if (scrollbarUpdater != null) {
+            scrollbarUpdater.run();
+        }
     }
 
     @Override

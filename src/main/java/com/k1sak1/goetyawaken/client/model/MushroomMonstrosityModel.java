@@ -1,6 +1,8 @@
 package com.k1sak1.goetyawaken.client.model;
 
 import com.k1sak1.goetyawaken.common.entities.ally.golem.MushroomMonstrosity;
+import com.Polarice3.Goety.utils.ModelPartPose;
+import com.Polarice3.Goety.utils.ModelUtil;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.HierarchicalModel;
@@ -9,7 +11,11 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Stream;
 
 public class MushroomMonstrosityModel<T extends Entity> extends HierarchicalModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
@@ -44,6 +50,8 @@ public class MushroomMonstrosityModel<T extends Entity> extends HierarchicalMode
 	private final ModelPart pelvis;
 	private final ModelPart right_leg;
 	private final ModelPart left_leg;
+	public final List<String> allPartNames;
+	private static final int TRANSITION_DURATION = 5;
 
 	public MushroomMonstrosityModel(ModelPart root) {
 		this.root = root;
@@ -76,6 +84,7 @@ public class MushroomMonstrosityModel<T extends Entity> extends HierarchicalMode
 		this.pelvis = this.monstrosity.getChild("pelvis");
 		this.right_leg = this.monstrosity.getChild("right_leg");
 		this.left_leg = this.monstrosity.getChild("left_leg");
+		this.allPartNames = Stream.concat(Stream.of("root"), ModelUtil.getAllPartNames(this.root)).toList();
 	}
 
 	public static LayerDefinition createBodyLayer() {
@@ -270,54 +279,124 @@ public class MushroomMonstrosityModel<T extends Entity> extends HierarchicalMode
 	@Override
 	public void setupAnim(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
 			float headPitch) {
+		int transitionTick = 0;
+		String fromKey = "";
+		String toKey = "";
+		if (entity instanceof MushroomMonstrosity mushroomMonstrosity) {
+			transitionTick = mushroomMonstrosity.baseAnimTransitionTick;
+			if (transitionTick > 0) {
+				fromKey = mushroomMonstrosity.transitionFromKey;
+				toKey = mushroomMonstrosity.transitionToKey;
+			}
+		}
+		if (transitionTick > 0 && !fromKey.isEmpty()) {
+			float partialTick = ageInTicks - (float) entity.tickCount;
+			float t = 1.0F - ((float) transitionTick - partialTick) / (float) TRANSITION_DURATION;
+			t = Mth.clamp(t, 0.0F, 1.0F);
+			Map<String, ModelPartPose> fromPose = this.evaluatePass(fromKey, entity, limbSwing, limbSwingAmount,
+					ageInTicks);
+			Map<String, ModelPartPose> newPose = this.evaluatePass(toKey, entity, limbSwing, limbSwingAmount,
+					ageInTicks);
+			float eased = t < 0.5F ? 4.0F * t * t * t : 1.0F - (float) Math.pow(-2.0F * t + 2.0F, 3) / 2.0F;
+			this.blendPoses(fromPose, newPose, eased);
+		} else {
+			String activeKey = "";
+			if (entity instanceof MushroomMonstrosity mushroomMonstrosity) {
+				activeKey = mushroomMonstrosity.getCurrentAnimKey();
+			}
+			if (activeKey != null && !activeKey.isEmpty()) {
+				this.evaluatePass(activeKey, entity, limbSwing, limbSwingAmount, ageInTicks);
+			} else {
+				this.root().getAllParts().forEach(ModelPart::resetPose);
+			}
+		}
+	}
+
+	private Map<String, ModelPartPose> evaluatePass(String key, Entity entity, float limbSwing,
+			float limbSwingAmount, float ageInTicks) {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 		if (entity instanceof MushroomMonstrosity mushroomMonstrosity) {
-			this.animate(mushroomMonstrosity.activateAnimationState,
-					com.k1sak1.goetyawaken.client.animation.MushroomMonstrosityAnimations.ACTIVATE,
-					ageInTicks);
+			if (mushroomMonstrosity.canAnimateMove()) {
+				this.animateWalk(com.k1sak1.goetyawaken.client.animation.MushroomMonstrosityAnimations.WALK,
+						limbSwing, limbSwingAmount, 2.0F, 2.5F);
+			}
+			switch (key) {
+				case "activate":
+					this.animate(mushroomMonstrosity.activateAnimationState,
+							com.k1sak1.goetyawaken.client.animation.MushroomMonstrosityAnimations.ACTIVATE,
+							ageInTicks);
+					break;
+				case "idle":
+					this.animate(mushroomMonstrosity.idleAnimationState,
+							com.k1sak1.goetyawaken.client.animation.MushroomMonstrosityAnimations.IDLE, ageInTicks);
+					break;
+				case "to_sit":
+					this.animate(mushroomMonstrosity.toSitAnimationState,
+							com.k1sak1.goetyawaken.client.animation.MushroomMonstrosityAnimations.TO_SIT, ageInTicks);
+					break;
+				case "to_stand":
+					this.animate(mushroomMonstrosity.toStandAnimationState,
+							com.k1sak1.goetyawaken.client.animation.MushroomMonstrosityAnimations.TO_STAND,
+							ageInTicks);
+					break;
+				case "sit":
+					this.animate(mushroomMonstrosity.sitAnimationState,
+							com.k1sak1.goetyawaken.client.animation.MushroomMonstrosityAnimations.SIT, ageInTicks);
+					break;
+				case "death":
+					this.animate(mushroomMonstrosity.deathAnimationState,
+							com.k1sak1.goetyawaken.client.animation.MushroomMonstrosityAnimations.DEATH, ageInTicks);
+					break;
+				case "smash_old":
+					this.animate(mushroomMonstrosity.smashOldAnimationState,
+							com.k1sak1.goetyawaken.client.animation.MushroomMonstrosityAnimations.SMASH_OLD,
+							ageInTicks);
+					break;
+				case "smash":
+					this.animate(mushroomMonstrosity.smashAnimationState,
+							com.k1sak1.goetyawaken.client.animation.MushroomMonstrosityAnimations.SMASH,
+							ageInTicks);
+					break;
+				case "summon":
+					this.animate(mushroomMonstrosity.summonAnimationState,
+							com.k1sak1.goetyawaken.client.animation.MushroomMonstrosityAnimations.SUMMON,
+							ageInTicks);
+					break;
+				case "summon2":
+					this.animate(mushroomMonstrosity.summon2AnimationState,
+							com.k1sak1.goetyawaken.client.animation.MushroomMonstrosityAnimations.SUMMON2,
+							ageInTicks);
+					break;
+				case "spit":
+					this.animate(mushroomMonstrosity.spitAnimationState,
+							com.k1sak1.goetyawaken.client.animation.MushroomMonstrosityAnimations.SPIT,
+							ageInTicks);
+					break;
+				case "strafe":
+					this.animate(mushroomMonstrosity.strafeAnimationState,
+							com.k1sak1.goetyawaken.client.animation.MushroomMonstrosityAnimations.STRAFE,
+							ageInTicks);
+					break;
+			}
+		}
+		return ModelUtil.saveModelSnapshot(this.allPartNames, this::getAnyDescendantWithName);
+	}
 
-			this.animate(mushroomMonstrosity.idleAnimationState,
-					com.k1sak1.goetyawaken.client.animation.MushroomMonstrosityAnimations.IDLE, ageInTicks);
-
-			this.animateWalk(com.k1sak1.goetyawaken.client.animation.MushroomMonstrosityAnimations.WALK,
-					limbSwing, limbSwingAmount, 2.0F, 2.5F);
-
-			this.animate(mushroomMonstrosity.toSitAnimationState,
-					com.k1sak1.goetyawaken.client.animation.MushroomMonstrosityAnimations.TO_SIT, ageInTicks);
-
-			this.animate(mushroomMonstrosity.toStandAnimationState,
-					com.k1sak1.goetyawaken.client.animation.MushroomMonstrosityAnimations.TO_STAND,
-					ageInTicks);
-
-			this.animate(mushroomMonstrosity.sitAnimationState,
-					com.k1sak1.goetyawaken.client.animation.MushroomMonstrosityAnimations.SIT, ageInTicks);
-
-			this.animate(mushroomMonstrosity.deathAnimationState,
-					com.k1sak1.goetyawaken.client.animation.MushroomMonstrosityAnimations.DEATH, ageInTicks);
-
-			this.animate(mushroomMonstrosity.smashOldAnimationState,
-					com.k1sak1.goetyawaken.client.animation.MushroomMonstrosityAnimations.SMASH_OLD,
-					ageInTicks);
-
-			this.animate(mushroomMonstrosity.smashAnimationState,
-					com.k1sak1.goetyawaken.client.animation.MushroomMonstrosityAnimations.SMASH,
-					ageInTicks);
-
-			this.animate(mushroomMonstrosity.summonAnimationState,
-					com.k1sak1.goetyawaken.client.animation.MushroomMonstrosityAnimations.SUMMON,
-					ageInTicks);
-
-			this.animate(mushroomMonstrosity.summon2AnimationState,
-					com.k1sak1.goetyawaken.client.animation.MushroomMonstrosityAnimations.SUMMON2,
-					ageInTicks);
-
-			this.animate(mushroomMonstrosity.spitAnimationState,
-					com.k1sak1.goetyawaken.client.animation.MushroomMonstrosityAnimations.SPIT,
-					ageInTicks);
-
-			this.animate(mushroomMonstrosity.strafeAnimationState,
-					com.k1sak1.goetyawaken.client.animation.MushroomMonstrosityAnimations.STRAFE,
-					ageInTicks);
+	private void blendPoses(Map<String, ModelPartPose> from, Map<String, ModelPartPose> to, float progress) {
+		for (Map.Entry<String, ModelPartPose> entry : from.entrySet()) {
+			String boneName = entry.getKey();
+			ModelPartPose fromPose = entry.getValue();
+			ModelPartPose toPose = to.get(boneName);
+			if (toPose == null)
+				continue;
+			this.getAnyDescendantWithName(boneName).ifPresent(part -> {
+				part.xRot = fromPose.xRot() + (toPose.xRot() - fromPose.xRot()) * progress;
+				part.yRot = fromPose.yRot() + (toPose.yRot() - fromPose.yRot()) * progress;
+				part.zRot = fromPose.zRot() + (toPose.zRot() - fromPose.zRot()) * progress;
+				part.x = fromPose.x() + (toPose.x() - fromPose.x()) * progress;
+				part.y = fromPose.y() + (toPose.y() - fromPose.y()) * progress;
+				part.z = fromPose.z() + (toPose.z() - fromPose.z()) * progress;
+			});
 		}
 	}
 

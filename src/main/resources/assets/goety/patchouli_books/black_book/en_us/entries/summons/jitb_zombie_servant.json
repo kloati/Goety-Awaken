@@ -1,0 +1,16 @@
+{
+  "name": "Jack-in-the-Box Zombie",
+  "icon": "goetyawaken:jitb_zombie_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "These zombies charge at enemies holding a jack-in-the-box, and then... self-destruct? In any case, you can summon them by channeling the Creeper Focus through a Necro Staff."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:jitb_zombie_servant",
+      "text": "Plants vs. Zombies"
+    }
+  ]
+}

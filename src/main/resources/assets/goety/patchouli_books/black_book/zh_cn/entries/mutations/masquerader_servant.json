@@ -1,0 +1,22 @@
+{
+  "name": "假面愚者",
+  "icon": "masquerader_mod:blank_mask",
+  "category": "goety:goetyawaken_mutations",
+  "flag": "goetyawaken:masquerader_mod_loaded",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "假面愚者是个披着华袍的\"疯子\"，那张诡谲的魔法假面赋予了他不断变换身份的本事——戴上不同的面具，便能窃取对应的力量。你曾在一场遭遇战中逼得一位假面愚者落荒而逃，只留下一副空白假面作为战利品。研究之后你发现，这面具里藏着某种汲取\"身份\"的邪术。恰好你手下的巫师本就精通各种施法把戏，于是你让他戴上这副面具，经由一场转化仪式，将他变成了一个属于你的假面愚者。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:masquerader_servant",
+      "text": ""
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:masquerader_servant",
+      "text": "Kamen Rider（并不是）"
+    }
+  ]
+}

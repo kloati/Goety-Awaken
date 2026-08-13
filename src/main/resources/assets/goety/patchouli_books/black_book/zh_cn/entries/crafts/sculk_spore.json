@@ -1,0 +1,18 @@
+{
+  "name": "潜声孢子",
+  "icon": "goetyawaken:sculk_spore",
+  "category": "goety:goetyawaken_crafts",
+  "flag": "goetyawaken:deeperdarker_loaded",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "使用了与蠹虫有关的技术，从幽匿块中浓缩出的秽恶孢种。将其埋入幽匿块中，便能诱使一只潜藏在深暗中的尖啸匿蠕破土而出。由于孢子上沾染了你的信息素，这只被引诱来的尖啸匿蠕会成为你的盟友。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:sculk_spore",
+      "text": ""
+    }
+  ],
+  "extra_recipe_mappings": {"goetyawaken:sculk_spore":0}
+}

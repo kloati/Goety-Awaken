@@ -20,6 +20,10 @@
       "type": "patchouli:entity",
       "entity": "goetyawaken:crone_servant",
       "text": "Crone servants will fight for you using various potions."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Crones are master brewers, trading their concoctions for emeralds. Their shelves hold brews of strange and potent effects, alongside stranger reagents. If you dress like a witch—or go even further and masquerade as the pale-faced envoy of the Nether—they will take thirty percent off the price. They will only restock their wares when a brewing cauldron stands nearby."
     }
   ]
 }

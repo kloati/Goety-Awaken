@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
-    "goetyawaken:tower_flowerpot"
+    "goetyawaken:tower_flowerpot",
+    "goetyawaken:sanded_dirt_path",
+    "goetyawaken:lightly_sanded_dirt_path"
   ]
 }

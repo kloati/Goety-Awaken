@@ -1,0 +1,17 @@
+{
+  "name": "Chasing Flame Focus",
+  "icon": "goetyawaken:chasing_flame_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The tracking fireballs spat from the side faces of the Giant Ghast are insidious beyond measure, causing you great trouble in battle. After obtaining Gloomy Tears, you could not help but ponder the possibility of replicating such fireballs. You ultimately obtained this Chasing Flame Focus, capable of launching tracking fireballs."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:chasing_flame_focus",
+      "text": ""
+    }
+  ],
+  "extra_recipe_mappings": {"goetyawaken:chasing_flame_focus":0}
+}

@@ -134,7 +134,7 @@ public class EndermiteEggEntity extends ThrowableProjectile {
 
     private void spawnEndermite() {
         if (!this.level().isClientSide) {
-            int count = 1 + this.random.nextInt(2);
+            int count = this.random.nextFloat() < 0.6F ? 1 + (this.random.nextFloat() < 0.5F ? 1 : 0) : 0;
             for (int i = 0; i < count; i++) {
                 EndermiteServant endermite = new EndermiteServant(ModEntityType.ENDERMITE_SERVANT.get(), this.level());
                 endermite.setPos(this.getX(), this.getY(), this.getZ());

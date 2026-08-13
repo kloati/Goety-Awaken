@@ -17,7 +17,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -26,6 +25,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
@@ -38,8 +38,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.ForgeEventFactory;
-import net.minecraftforge.registries.RegistryObject;
-
 import java.util.Optional;
 import java.util.UUID;
 
@@ -50,18 +48,28 @@ public class TrialSpawner {
     private static final float SPAWNING_AMBIENT_SOUND_CHANCE = 0.02F;
     private final TrialSpawnerConfig config;
     private final TrialSpawnerData data;
-    private final StateAccessor stateAccessor;
+    private StateAccessor stateAccessor;
     private PlayerDetector playerDetector;
-    private final PlayerDetector.EntitySelector entitySelector;
+    private PlayerDetector.EntitySelector entitySelector;
     private boolean overridePeacefulAndMobSpawnRule;
 
-    public Codec<TrialSpawner> codec() {
-        return RecordCodecBuilder.create(
-                instance -> instance
-                        .group(TrialSpawnerConfig.MAP_CODEC.forGetter(TrialSpawner::getConfig),
-                                TrialSpawnerData.MAP_CODEC.forGetter(TrialSpawner::getData))
-                        .apply(instance, (trialSpawnerConfig, trialSpawnerData) -> new TrialSpawner(trialSpawnerConfig,
-                                trialSpawnerData, this.stateAccessor, this.playerDetector, this.entitySelector)));
+    public static final Codec<TrialSpawner> CODEC = RecordCodecBuilder.create(
+            instance -> instance
+                    .group(TrialSpawnerConfig.MAP_CODEC.forGetter(TrialSpawner::getConfig),
+                            TrialSpawnerData.MAP_CODEC.forGetter(TrialSpawner::getData))
+                    .apply(instance, (trialSpawnerConfig, trialSpawnerData) -> new TrialSpawner(trialSpawnerConfig,
+                            trialSpawnerData, null, null, null)));
+
+    public void setStateAccessor(StateAccessor stateAccessor) {
+        this.stateAccessor = stateAccessor;
+    }
+
+    public void setPlayerDetector(PlayerDetector playerDetector) {
+        this.playerDetector = playerDetector;
+    }
+
+    public void setEntitySelector(PlayerDetector.EntitySelector entitySelector) {
+        this.entitySelector = entitySelector;
     }
 
     public TrialSpawner(StateAccessor stateAccessor, PlayerDetector playerDetector,
@@ -119,7 +127,8 @@ public class TrialSpawner {
         if (this.overridePeacefulAndMobSpawnRule) {
             return true;
         } else {
-            return level.getDifficulty() != Difficulty.PEACEFUL;
+            return level.getDifficulty() != Difficulty.PEACEFUL
+                    && level.getGameRules().getBoolean(net.minecraft.world.level.GameRules.RULE_DOMOBSPAWNING);
         }
     }
 
@@ -148,14 +157,10 @@ public class TrialSpawner {
                     return Optional.empty();
                 } else {
                     BlockPos blockPos2 = BlockPos.containing(vec3);
-                    /*
-                     * if (!SpawnPlacements.checkSpawnRules(optional.get(), serverLevel,
-                     * MobSpawnType.SPAWNER, blockPos2, serverLevel.getRandom())) {
-                     * return Optional.empty();
-                     * } else {
-                     * 
-                     * }
-                     */
+                    if (!SpawnPlacements.checkSpawnRules(optional.get(), serverLevel,
+                            MobSpawnType.MOB_SUMMONED, blockPos2, serverLevel.getRandom())) {
+                        return Optional.empty();
+                    }
                     Entity entity = EntityType.loadEntityRecursive(compoundTag, serverLevel, entityx -> {
                         entityx.moveTo(d, e, f, randomSource.nextFloat() * 360.0F, 0.0F);
                         return entityx;
@@ -185,15 +190,7 @@ public class TrialSpawner {
                             return Optional.empty();
                         } else {
                             addSpawnParticles(serverLevel, blockPos, serverLevel.getRandom());
-                            RegistryObject<SoundEvent>[] spawnSounds = new RegistryObject[] {
-                                    ModSounds.TRIAL_SPAWNER_SPAWN_1,
-                                    ModSounds.TRIAL_SPAWNER_SPAWN_2,
-                                    ModSounds.TRIAL_SPAWNER_SPAWN_3,
-                                    ModSounds.TRIAL_SPAWNER_SPAWN_4
-                            };
-                            RegistryObject<SoundEvent> randomSound = spawnSounds[serverLevel.getRandom()
-                                    .nextInt(spawnSounds.length)];
-                            serverLevel.playSound(null, blockPos2, randomSound.get(),
+                            serverLevel.playSound(null, blockPos2, ModSounds.TRIAL_SPAWNER_SPAWN.get(),
                                     SoundSource.BLOCKS, 1.0F,
                                     (serverLevel.getRandom().nextFloat() - serverLevel.getRandom().nextFloat()) * 0.2F
                                             + 1.0F);
@@ -238,15 +235,7 @@ public class TrialSpawner {
             if (trialSpawnerState.isCapableOfSpawning()) {
                 RandomSource randomSource = level.getRandom();
                 if (randomSource.nextFloat() <= 0.02F) {
-                    RegistryObject<SoundEvent>[] ambientSounds = new RegistryObject[] {
-                            ModSounds.TRIAL_SPAWNER_AMBIENT_1,
-                            ModSounds.TRIAL_SPAWNER_AMBIENT_2,
-                            ModSounds.TRIAL_SPAWNER_AMBIENT_3,
-                            ModSounds.TRIAL_SPAWNER_AMBIENT_4,
-                            ModSounds.TRIAL_SPAWNER_AMBIENT_5
-                    };
-                    RegistryObject<SoundEvent> randomSound = ambientSounds[randomSource.nextInt(ambientSounds.length)];
-                    level.playLocalSound(blockPos, randomSound.get(), SoundSource.BLOCKS,
+                    level.playLocalSound(blockPos, ModSounds.TRIAL_SPAWNER_AMBIENT.get(), SoundSource.BLOCKS,
                             randomSource.nextFloat() * 0.25F + 0.75F, randomSource.nextFloat() + 0.5F, false);
                 }
             }

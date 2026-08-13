@@ -16,5 +16,6 @@
       "recipe": "goetyawaken:profound_echoing_shard",
       "text": "Craft the Profound Echoing Shard."
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:profound_echoing_shard":0}
 }

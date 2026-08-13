@@ -2,7 +2,16 @@
   "parent": "minecraft:adventure/avoid_vibration",
   "criteria": {
     "get_shadow_shrieker": {
-      "trigger": "goetyawaken:get_shadow_shrieker"
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "goetyawaken:shadow_shrieker"
+            ]
+          }
+        ]
+      }
     }
   },
   "display": {

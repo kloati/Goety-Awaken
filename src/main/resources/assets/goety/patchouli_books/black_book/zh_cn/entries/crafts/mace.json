@@ -12,5 +12,6 @@
       "recipe": "goetyawaken:mace",
       "text": ""
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:mace":0}
 }

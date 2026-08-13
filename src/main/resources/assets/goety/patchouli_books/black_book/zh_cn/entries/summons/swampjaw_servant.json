@@ -1,0 +1,22 @@
+{
+  "name": "沼泽巨颌仆从",
+  "icon": "meetyourfight:fossil_bait",
+  "category": "goety:goetyawaken_summons",
+  "flag": "goetyawaken:meetyourfight_loaded",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "沼泽巨颌是一种以远古化石为载体，从沼泽中重新\"活\"过来的头目级亡灵生物。它们挣脱了泥沼的束缚，而亡灵化让其得以浮空飞行，还能从体内制造出会爆炸的沼泽水雷——虽说如此，一个初出茅庐的冒险者就能轻易将它敲回碎骨。$(br2)对于你这样的死灵法师而言，奴役这具化石骸骨根本不费吹灰之力。虽说这孽物依旧难堪大用，但当作空中的轰炸机和牵制骚扰的炮灰，倒也算物尽其用。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:swampjaw_servant",
+      "text": ""
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:swampjaw_servant",
+      "text": "古生物学家或许会喜欢它们。"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+package com.k1sak1.goetyawaken.init;
+
+import com.k1sak1.goetyawaken.GoetyAwaken;
+import com.k1sak1.goetyawaken.common.commands.EliteAssaultCommand;
+import com.k1sak1.goetyawaken.common.commands.MobEnchantCommand;
+import com.mojang.brigadier.CommandDispatcher;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraftforge.event.RegisterCommandsEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+
+@Mod.EventBusSubscriber(modid = GoetyAwaken.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+public class MobCommandInit {
+
+    @SubscribeEvent
+    public static void onRegisterCommandEvent(RegisterCommandsEvent event) {
+        CommandDispatcher<CommandSourceStack> commandDispatcher = event.getDispatcher();
+        MobEnchantCommand.register(commandDispatcher, event.getBuildContext());
+        EliteAssaultCommand.register(commandDispatcher, event.getBuildContext());
+    }
+}

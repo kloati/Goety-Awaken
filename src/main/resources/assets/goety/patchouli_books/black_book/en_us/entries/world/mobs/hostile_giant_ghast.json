@@ -1,0 +1,28 @@
+{
+  "name": "Giant Ghast",
+  "icon": "goetyawaken:gloomy_tears",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The Giant Ghast is a three-headed aberrant ghast. Its front-facing giant maw can spew blazing explosive fireballs, while the faces on both sides fire insidious tracking fireballs. Their size far exceeds that of ordinary ghasts, and their bodies are therefore exceptionally tough. The firepower of this twisted ghast from the Nether is so devastatingly fierce that it can reduce unprepared adventurers to ash in an instant. Before hunting one, be sure to equip gear capable of withstanding explosions and flames."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goetyawaken:lamenting_horn",
+      "title": "Lamenting Horn",
+      "text": "Using the Lamenting Horn in the Basalt Deltas, Nether Wastes, or Soul Sand Valley biomes of the Nether may draw a response from a Giant Ghast from the hellish realm."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_giant_ghast",
+      "text": ""
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goetyawaken:gloomy_tears",
+      "title": "Gloomy Tears",
+      "text": "Upon defeat, they shed Gloomy Tears. These teardrops—condensed with nether power and the dying curse of the Giant Ghast—are powerful explosive materials that can be used to enhance nether magic, or to curse a regular Ghast, transforming it into a Giant Ghast."
+    }
+  ]
+}

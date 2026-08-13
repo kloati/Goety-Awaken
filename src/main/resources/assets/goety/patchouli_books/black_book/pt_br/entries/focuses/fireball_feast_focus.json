@@ -1,0 +1,17 @@
+{
+  "name": "Foco do Banquete de Bolas de Fogo",
+  "icon": "goetyawaken:fireball_feast_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "As bolas de fogo dos Blazes e Ghasts são certamente ferozes, mas tal poder de fogo simplesmente não é 'satisfatório' o suficiente para você — certamente deve haver uma maneira de liberar o orgulhoso poder de fogo da magia do Nether de forma ainda mais implacável?"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:fireball_feast_focus",
+      "text": "Fogo de supressão!"
+    }
+  ],
+  "extra_recipe_mappings": {"goetyawaken:fireball_feast_focus":0}
+}

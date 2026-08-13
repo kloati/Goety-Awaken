@@ -17,5 +17,6 @@
       "recipe": "goetyawaken:soul_ruby_from_block",
       "text": "Obtain Soul Ruby from Soul Ruby Block."
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:soul_ruby_block":0}
 }

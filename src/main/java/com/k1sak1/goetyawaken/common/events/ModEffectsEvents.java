@@ -5,17 +5,21 @@ import com.k1sak1.goetyawaken.utils.AttributeModifierManager;
 import com.Polarice3.Goety.common.entities.projectiles.RazorWind;
 import com.Polarice3.Goety.common.entities.util.MagicLightningTrap;
 import com.Polarice3.Goety.common.effects.GoetyEffects;
+import com.k1sak1.goetyawaken.common.entities.projectiles.EchoingStrikeEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.living.*;
+import net.minecraftforge.event.entity.living.MobEffectEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -23,10 +27,15 @@ import net.minecraftforge.fml.common.Mod;
 import java.util.List;
 import java.util.UUID;
 
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(modid = "goetyawaken", bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ModEffectsEvents {
 
     private static final UUID SHARPNESS_MODIFIER_UUID = UUID.fromString("5D6F0BA2-1186-46AC-B896-C12AE9BD4B65");
+
+    private static final String TAG_POTENT_VENOM_DOWNGRADE = "ga:potent_venom_downgrade";
+    private static final String TAG_POTENT_VENOM_DOWNGRADE_LEVEL = "ga:potent_venom_downgrade_level";
+
+    public static final String ECHO_DAMAGE_MARKER = "echo_damage";
 
     @SubscribeEvent
     public static void onLivingHurt(LivingHurtEvent event) {
@@ -92,8 +101,6 @@ public class ModEffectsEvents {
         LivingEntity victim = event.getEntity();
         Entity target = event.getSource().getEntity();
         Entity directEntity = event.getSource().getDirectEntity();
-
-        // 检查直接攻击者是否为LivingEntity并且拥有药水效果
         if (directEntity instanceof LivingEntity attacker) {
             if (attacker.hasEffect(ModEffects.COMMITTED.get())) {
                 handleCommittedEffect(attacker, victim);
@@ -125,6 +132,7 @@ public class ModEffectsEvents {
     public static void onLivingDeath(LivingDeathEvent event) {
         LivingEntity entity = event.getEntity();
         DamageSource source = event.getSource();
+        AttributeModifierManager.removeRampagingModifier(entity);
         if (source.getEntity() instanceof LivingEntity attacker &&
                 attacker.hasEffect(ModEffects.RAMPAGING.get())) {
             handleRampagingEffect(attacker);
@@ -147,6 +155,90 @@ public class ModEffectsEvents {
         }
 
         AttributeModifierManager.checkAndRemoveExpiredRampagingModifiers(entity);
+
+        handlePotentVenomDowngrade(entity);
+    }
+
+    @SubscribeEvent
+    public static void onPotentVenomAdded(MobEffectEvent.Added event) {
+        if (!ModEffects.POTENT_VENOM.isPresent()) {
+            return;
+        }
+        if (event.getEffectInstance().getEffect() != ModEffects.POTENT_VENOM.get()) {
+            return;
+        }
+
+        LivingEntity entity = event.getEntity();
+        MobEffectInstance newInstance = event.getEffectInstance();
+        MobEffectInstance existing = entity.getEffect(ModEffects.POTENT_VENOM.get());
+
+        if (existing != null && existing != newInstance) {
+            int existingLevel = existing.getAmplifier();
+            if (existingLevel < 2 && entity.getRandom().nextFloat() < 0.25F) {
+                int newLevel = existingLevel + 1;
+                int currentDuration = existing.getDuration();
+                int minDuration = 100;
+                int duration = Math.max(currentDuration, minDuration);
+                entity.removeEffect(ModEffects.POTENT_VENOM.get());
+                entity.addEffect(new MobEffectInstance(ModEffects.POTENT_VENOM.get(),
+                        duration, newLevel,
+                        existing.isAmbient(), existing.isVisible(), existing.showIcon()));
+            } else {
+                int currentDuration = existing.getDuration();
+                entity.removeEffect(ModEffects.POTENT_VENOM.get());
+                entity.addEffect(new MobEffectInstance(ModEffects.POTENT_VENOM.get(),
+                        currentDuration, existingLevel,
+                        existing.isAmbient(), existing.isVisible(), existing.showIcon()));
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onPotentVenomExpired(MobEffectEvent.Expired event) {
+        MobEffectInstance instance = event.getEffectInstance();
+        if (instance == null) {
+            return;
+        }
+        if (!ModEffects.POTENT_VENOM.isPresent()) {
+            return;
+        }
+        if (instance.getEffect() != ModEffects.POTENT_VENOM.get()) {
+            return;
+        }
+
+        LivingEntity entity = event.getEntity();
+        if (entity == null) {
+            return;
+        }
+
+        int level = instance.getAmplifier() + 1;
+        float damage = 3.0F * level * level;
+        entity.hurt(entity.damageSources().magic(), damage);
+        if (level > 1) {
+            entity.getPersistentData().putBoolean(TAG_POTENT_VENOM_DOWNGRADE, true);
+            entity.getPersistentData().putInt(TAG_POTENT_VENOM_DOWNGRADE_LEVEL, level - 2);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onEchoHurt(LivingHurtEvent event) {
+        if (event.getSource().getMsgId().equals(ECHO_DAMAGE_MARKER)) {
+            return;
+        }
+
+        if (event.getSource().getEntity() instanceof LivingEntity attacker &&
+                (event.getSource().getDirectEntity() == attacker
+                        || event.getSource().getDirectEntity() instanceof AbstractArrow)) {
+
+            MobEffectInstance effect = attacker.getEffect(ModEffects.ECHO.get());
+            if (effect != null) {
+                float echoDamage = event.getAmount() * 0.2f * (effect.getAmplifier() + 1);
+                EchoingStrikeEntity echo = new EchoingStrikeEntity(attacker.level(), attacker, echoDamage, 3.0f);
+                echo.setOriginalDamageSource(event.getSource());
+                echo.setPos(event.getEntity().getBoundingBox().getCenter().subtract(0, echo.getBbHeight() * .5f, 0));
+                attacker.level().addFreshEntity(echo);
+            }
+        }
     }
 
     private static void handleSharpnessEffect(LivingEntity attacker, LivingHurtEvent event) {
@@ -364,6 +456,35 @@ public class ModEffectsEvents {
             int amplifier = recoverEffect.getAmplifier();
             float extraHealAmount = amplifier + 1;
             event.setAmount(event.getAmount() + extraHealAmount);
+        }
+    }
+
+    private static void handlePotentVenomDowngrade(LivingEntity entity) {
+        if (entity.level().isClientSide()) {
+            return;
+        }
+
+        if (!entity.isAlive()) {
+            CompoundTag data = entity.getPersistentData();
+            data.remove(TAG_POTENT_VENOM_DOWNGRADE);
+            return;
+        }
+
+        if (!ModEffects.POTENT_VENOM.isPresent()) {
+            return;
+        }
+
+        CompoundTag data = entity.getPersistentData();
+        if (data.getBoolean(TAG_POTENT_VENOM_DOWNGRADE)) {
+            data.remove(TAG_POTENT_VENOM_DOWNGRADE);
+            int downgradeLevel = data.getInt(TAG_POTENT_VENOM_DOWNGRADE_LEVEL);
+            entity.addEffect(new MobEffectInstance(
+                    ModEffects.POTENT_VENOM.get(),
+                    100,
+                    downgradeLevel,
+                    false,
+                    true,
+                    true));
         }
     }
 }

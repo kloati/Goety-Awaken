@@ -28,7 +28,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.network.PacketDistributor;
-
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import com.Polarice3.Goety.api.items.ISoulRepair;
@@ -102,13 +101,6 @@ public class StarlessNightItem extends SwordItem implements ISoulRepair, IFocus 
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         boolean result = super.hurtEnemy(stack, target, attacker);
         target.addEffect(new MobEffectInstance(GoetyEffects.WANE.get(), 100, 0));
-
-        if (attacker instanceof Player player) {
-            if (player.getAttackStrengthScale(0) > 0.9F) {
-                performFullSweepAttack(stack, player);
-            }
-        }
-
         return result;
     }
 
@@ -133,21 +125,13 @@ public class StarlessNightItem extends SwordItem implements ISoulRepair, IFocus 
 
     @Override
     public boolean canPerformAction(ItemStack stack, net.minecraftforge.common.ToolAction toolAction) {
-        return net.minecraftforge.common.ToolActions.DEFAULT_SWORD_ACTIONS.contains(toolAction);
+        return false;
     }
 
-    public void performFullSweepAttack(ItemStack stack, Player player) {
+    public void performFullSweepAttack(ItemStack stack, Player player, LivingEntity exemptTarget) {
         float baseDamage = (float) player.getAttributeValue(Attributes.ATTACK_DAMAGE);
-        float enchantmentBonus = EnchantmentHelper.getDamageBonus(stack, MobType.UNDEFINED);
-        float totalBaseDamage = baseDamage + enchantmentBonus;
         int sweepingLevel = EnchantmentHelper.getEnchantmentLevel(Enchantments.SWEEPING_EDGE, player);
-        float sweepRatio = 0.0F;
-        if (sweepingLevel <= 3) {
-            sweepRatio = 0.25F * sweepingLevel;
-        } else {
-            sweepRatio = 0.75F + 0.15F * sweepingLevel;
-        }
-        float damage = totalBaseDamage * (0.25F + sweepRatio);
+
         double range = 3.0D;
         double entityReach = player.getAttributeValue(ForgeMod.ENTITY_REACH.get());
         AABB sweepBox = player.getBoundingBox().inflate(range, 0.25D, range);
@@ -156,13 +140,18 @@ public class StarlessNightItem extends SwordItem implements ISoulRepair, IFocus 
 
         for (LivingEntity sweepTarget : entities) {
             MobUtil.disableShield(sweepTarget, 30);
-            if (sweepTarget != player
-                    && !(sweepTarget instanceof net.minecraft.world.entity.decoration.ArmorStand armorStand
+            if (sweepTarget != player &&
+                    sweepTarget != exemptTarget &&
+                    !(sweepTarget instanceof net.minecraft.world.entity.decoration.ArmorStand armorStand
                             && armorStand.isMarker())
                     && player.canAttack(sweepTarget) && !MobUtil.areAllies(player, sweepTarget)) {
                 double entityReachSq = Mth.square(range + entityReach);
                 double distanceSquared = player.distanceToSqr(sweepTarget);
                 if (distanceSquared < entityReachSq) {
+                    float enchantmentBonus = EnchantmentHelper.getDamageBonus(stack, sweepTarget.getMobType());
+                    int sweepingLevelForDamage = Math.min(sweepingLevel, 10);
+                    float damage = (baseDamage + enchantmentBonus) * (1.0F + sweepingLevelForDamage * 0.1F);
+
                     sweepTarget.knockback(0.6F,
                             Mth.sin(player.getYRot() * ((float) Math.PI / 180F)),
                             -Mth.cos(player.getYRot() * ((float) Math.PI / 180F)));
@@ -177,7 +166,10 @@ public class StarlessNightItem extends SwordItem implements ISoulRepair, IFocus 
                 }
             }
         }
-        playSweepEffects(player);
+
+        if (hitAny) {
+            playSweepEffects(player);
+        }
     }
 
     public static void fireVoidSlashOnServer(Level pLevel, Player pPlayer) {

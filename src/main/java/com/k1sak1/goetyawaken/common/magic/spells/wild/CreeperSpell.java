@@ -11,8 +11,12 @@ import com.Polarice3.Goety.utils.MobUtil;
 import com.Polarice3.Goety.utils.WandUtil;
 import com.k1sak1.goetyawaken.Config;
 import com.k1sak1.goetyawaken.common.entities.ally.CreeperServant;
+import com.k1sak1.goetyawaken.common.entities.ally.StatueCreeper;
 import com.k1sak1.goetyawaken.common.entities.ally.IceCreeperServant;
+import com.k1sak1.goetyawaken.common.entities.ally.JITBZombieServant;
 import com.k1sak1.goetyawaken.common.entities.ally.SpiderCreeder;
+import com.k1sak1.goetyawaken.common.entities.ally.PoisonousPotatoCreeperServant;
+import com.Polarice3.Goety.common.items.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
@@ -51,7 +55,7 @@ public class CreeperSpell extends SummonSpell {
 
     @Override
     public int SummonDownDuration() {
-        return Config.creeperFocusCooldown;
+        return Config.CREEPER_FOCUS_COOLDOWN.get();
     }
 
     @Override
@@ -69,7 +73,10 @@ public class CreeperSpell extends SummonSpell {
 
     @Override
     public Predicate<LivingEntity> summonPredicate() {
-        return livingEntity -> livingEntity instanceof CreeperServant || livingEntity instanceof IceCreeperServant;
+        return livingEntity -> livingEntity instanceof CreeperServant || livingEntity instanceof StatueCreeper
+                || livingEntity instanceof IceCreeperServant
+                || livingEntity instanceof SpiderCreeder || livingEntity instanceof JITBZombieServant
+                || livingEntity instanceof PoisonousPotatoCreeperServant;
     }
 
     @Override
@@ -87,11 +94,31 @@ public class CreeperSpell extends SummonSpell {
             duration += WandUtil.getLevels(ModEnchantments.DURATION.get(), caster) + 1;
         }
         if (!isShifting(caster)) {
-            int i = 1;
-            if (rightStaff(staff)) {
-                i = worldIn.getRandom().nextInt(3) + 2;
+            int summonCount = 1;
+
+            if (typeStaff(staff, SpellType.NECROMANCY)
+                    || typeStaff(staff, SpellType.NETHER)
+                    || typeStaff(staff, SpellType.FROST)
+                    || typeStaff(staff, SpellType.GEOMANCY)
+                    || typeStaff(staff, SpellType.WILD)) {
+                summonCount += 1;
             }
-            for (int i1 = 0; i1 < i; ++i1) {
+
+            boolean isNamelessStaff = staff.getItem() == ModItems.NAMELESS_STAFF.get();
+            if (isNamelessStaff) {
+                summonCount += 2;
+            }
+
+            if (rightStaff(staff)) {
+                summonCount += worldIn.getRandom().nextInt(2) + 1;
+            }
+
+            boolean isGeoStaff = staff.is(ModItems.GEO_STAFF.get());
+            boolean hasGeoPower = this.GeoPower(caster);
+
+            for (int i1 = 0; i1 < summonCount; ++i1) {
+                boolean useJITBZombie = typeStaff(staff, SpellType.NECROMANCY);
+
                 boolean shouldSummonIceCreeper = false;
                 if (typeStaff(staff, SpellType.FROST) ||
                         (staff.getItem() instanceof com.Polarice3.Goety.common.items.magic.DarkWand &&
@@ -111,7 +138,23 @@ public class CreeperSpell extends SummonSpell {
                 }
 
                 com.Polarice3.Goety.common.entities.ally.Summoned summonedentity;
-                if (shouldSummonSpiderCreeder) {
+                if (isGeoStaff) {
+                    StatueCreeper statueCreeper = new StatueCreeper(
+                            ModEntityType.STATUE_CREEPER.get(), worldIn);
+                    int tier;
+                    if (hasGeoPower) {
+                        tier = worldIn.getRandom().nextInt(4) < 3 ? 2 : 3;
+                    } else {
+                        tier = 1;
+                    }
+                    statueCreeper.activate(tier);
+                    summonedentity = statueCreeper;
+                } else if (staff.getItem() == com.k1sak1.goetyawaken.common.items.ModItems.POTATO_STAFF.get()) {
+                    summonedentity = new PoisonousPotatoCreeperServant(
+                            ModEntityType.POISONOUS_POTATO_CREEPER_SERVANT.get(), worldIn);
+                } else if (useJITBZombie) {
+                    summonedentity = new JITBZombieServant(ModEntityType.JITB_ZOMBIE_SERVANT.get(), worldIn);
+                } else if (shouldSummonSpiderCreeder) {
                     summonedentity = new SpiderCreeder(ModEntityType.SPIDER_CREEDER.get(), worldIn);
                 } else if (shouldSummonIceCreeper) {
                     summonedentity = new IceCreeperServant(ModEntityType.ICE_CREEPER_SERVANT.get(), worldIn);
@@ -126,6 +169,8 @@ public class CreeperSpell extends SummonSpell {
                         iceCreeperServant.setPowered(true);
                     } else if (summonedentity instanceof SpiderCreeder creeder) {
                         creeder.setPowered(true);
+                    } else if (summonedentity instanceof JITBZombieServant jITBZombieServant) {
+                        jITBZombieServant.setPowered(true);
                     }
                 }
 
@@ -141,6 +186,7 @@ public class CreeperSpell extends SummonSpell {
                 this.SummonSap(caster, summonedentity);
                 this.setTarget(caster, summonedentity);
                 worldIn.addFreshEntity(summonedentity);
+                this.summonParticles(worldIn, caster, staff, summonedentity);
                 this.summonAdvancement(caster, summonedentity);
             }
             this.SummonDown(caster);

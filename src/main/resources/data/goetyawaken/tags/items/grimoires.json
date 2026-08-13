@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "goetyawaken:iron_grimoire",
+    "goetyawaken:gold_grimoire",
+    "goetyawaken:emerald_grimoire",
+    "goetyawaken:diamond_grimoire",
+    "goetyawaken:ruby_grimoire"
+  ]
+}

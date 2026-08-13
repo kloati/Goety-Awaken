@@ -22,10 +22,7 @@
       "item": "goety:blast_fungus"
     },
     {
-      "item": "goetyawaken:soul_sapphire_block"
-    },
-    {
-      "item": "goety:ominous_idol"
+      "item": "minecraft:totem_of_undying"
     },
     {
       "item": "goety:dark_metal_block"
@@ -36,6 +33,6 @@
   ],
   "result": {
     "item": "goetyawaken:superaggregated_mycelial_circuit",
-    "count": 4
+    "count": 8
   }
 }

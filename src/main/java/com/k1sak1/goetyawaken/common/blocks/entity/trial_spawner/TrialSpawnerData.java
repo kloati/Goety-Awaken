@@ -13,7 +13,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.random.SimpleWeightedRandomList;
@@ -22,7 +21,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.SpawnData;
-import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -126,14 +124,7 @@ public class TrialSpawnerData {
         boolean bl = this.detectedPlayers.addAll(list);
         if (bl) {
             this.nextMobSpawnsAt = Math.max(serverLevel.getGameTime() + 40L, this.nextMobSpawnsAt);
-            RegistryObject<SoundEvent>[] detectPlayerSounds = new RegistryObject[] {
-                    ModSounds.TRIAL_SPAWNER_DETECT_PLAYER_1,
-                    ModSounds.TRIAL_SPAWNER_DETECT_PLAYER_2,
-                    ModSounds.TRIAL_SPAWNER_DETECT_PLAYER_3
-            };
-            RegistryObject<SoundEvent> randomSound = detectPlayerSounds[serverLevel.getRandom()
-                    .nextInt(detectPlayerSounds.length)];
-            serverLevel.playSound(null, blockPos, randomSound.get(), SoundSource.BLOCKS, 1.0F,
+            serverLevel.playSound(null, blockPos, ModSounds.TRIAL_SPAWNER_DETECT_PLAYER.get(), SoundSource.BLOCKS, 1.0F,
                     (serverLevel.getRandom().nextFloat() - serverLevel.getRandom().nextFloat()) * 0.2F + 1.0F);
             TrialSpawner.addDetectPlayerParticles(serverLevel, blockPos, serverLevel.getRandom(),
                     this.detectedPlayers.size());

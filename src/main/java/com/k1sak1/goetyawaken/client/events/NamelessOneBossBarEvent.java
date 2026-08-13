@@ -29,8 +29,16 @@ public class NamelessOneBossBarEvent {
 
     public static Map<UUID, Mob> NAMELESS_ONE_BOSS_BARS = new HashMap<>();
 
+    private static void cleanInvalidEntries() {
+        NAMELESS_ONE_BOSS_BARS.entrySet().removeIf(entry -> {
+            Mob mob = entry.getValue();
+            return mob == null || mob.isRemoved();
+        });
+    }
+
     @SubscribeEvent
     public static void renderBossBar(CustomizeGuiOverlayEvent.BossEventProgress event) {
+        cleanInvalidEntries();
         Minecraft minecraft = Minecraft.getInstance();
         if (NAMELESS_ONE_BOSS_BARS.containsKey(event.getBossEvent().getId())) {
             Mob boss = NAMELESS_ONE_BOSS_BARS.get(event.getBossEvent().getId());
@@ -85,5 +93,9 @@ public class NamelessOneBossBarEvent {
 
     public static void removeNamelessOneBossBar(UUID id, Mob mob) {
         NAMELESS_ONE_BOSS_BARS.remove(id, mob);
+    }
+
+    public static void clearAll() {
+        NAMELESS_ONE_BOSS_BARS.clear();
     }
 }

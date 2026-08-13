@@ -1,0 +1,16 @@
+{
+  "name": "Dark Soul Candle",
+  "icon": "goetyawaken:dark_soul_candle",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "You've often felt that the Soul Candle works far too slowly—especially when forging Dark Metal or brewing Witch Brews. The only way to accelerate that painful process is through sheer quantity. After some tedious yet necessary experiments, you've crafted a more efficient candle. It supplies Soul Energy to devices at eight times the speed!"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:dark_soul_candle",
+      "text": "Efficiency is life!"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+    "name": "O Infindável",
+    "icon": "minecraft:obsidian",
+    "category": "goety:anecdote/anecdote",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "\"Três mil neves brancas retornam a sepulturas verdes, dez mil li do Rio Estígio cercam montanhas negras\"$(br)— Não escrito por mim."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "Citar este poema é meu último recurso para manter um pingo de elegância. Este Monólito de Obsidiana, duro como a própria obsidiana, fez meu sangue ferver novamente depois de todos esses anos. Eu simplesmente não entendo por que ele deixou esta coisa aqui por tanto tempo — como um pedaço de bife de Devastador apodrecido e em decomposição... Esta coisa apareceu na primeira vez que passei. Pensei que aqueles hereges pareciam um pouco diferentes e não prestei muita atenção. Mais tarde, voltei com meus apóstolos e tentei de tudo: estabelecer conexões para fazê-lo recuar, usar força bruta para movê-lo, assá-lo com fogo e chuva de sangue — tudo inútil."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "Eventualmente, conseguimos quebrá-lo com a Maça do Filósofo e uma picareta, mas depois de um tempo, ele reapareceu. Qual é o sentido? Não está tentando escapar da busca mundana, nem emboscando ninguém — deixe-o em paz, e ele não se move. Aqueles hereges são apenas manifestações da magia do monólito; eles morrem e ressuscitam infinitamente para protegê-lo. Eles apenas ficam ali, não fazendo nada. Qual é o significado? Qual é o sentido?Não consigo derrubá-lo, não tenho paciência para lutar contra ele — esta coisa apenas fica aqui como uma pequena montanha..."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "No entanto, de acordo com suas pesquisas e especulações, há uma possibilidade: este monólito é um dos muitos invocados por Apollyon durante sua ascensão há muito, muito tempo, usando o poder da Gênese. No instante antes do castigo divino cair, Apollyon desviou-se instintivamente. Enquanto o monólito tentava seguir Apollyon, o castigo divino desceu naquele exato momento, aniquilando Apollyon em corpo e alma. Todos os outros monólitos se estilhaçaram juntos. Mas este, ficando para trás porque estava mais distante, sobreviveu — um monólito sem dono. Agora pode estar imitando a forma de Gênese de Apollyon... confundindo os hereges com monólitos, invocando-os infinitamente para imitar...?"
+        },
+        {
+            "type": "patchouli:text",
+            "text": "\"Gan'Dak, você não pode aprender algo com a frequência de invocação deste monólito? Um único monólito invoca mais diligentemente do que você!\"$(br)$(br)Não tenho tempo para te ensinar como lidar com esta coisa. Descubra você mesmo, certo? Apenas moa-o e bata nele até quebrar.$(br)$(br)\"Como você realmente afasta esta coisa?\""
+        }
+    ]
+}

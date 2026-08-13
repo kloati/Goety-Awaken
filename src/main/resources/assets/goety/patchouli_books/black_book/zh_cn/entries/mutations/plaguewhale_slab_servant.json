@@ -1,0 +1,21 @@
+{
+  "name": "瘟疫鲸台阶仆从",
+  "icon": "goetyawaken:plaguewhale_spawn_egg",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "text",
+      "text": "在利用那柄玩笑一样的魔杖召唤出了毒鳍台阶（一种守卫者的毒马铃薯变种）后，你开始思考能不能通过它获得一种另类的远古守卫者......"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:convert_toxifin_to_plaguewhale_slab_servant",
+      "text": "通过仪式将毒鳍台阶仆从转化为瘟疫鲸台阶仆从"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:plaguewhale_slab_servant",
+      "text": "据说瘟疫鲸台阶是一种受毒马铃薯力量扭曲的远古守卫者。"
+    }
+  ]
+}

@@ -17,5 +17,6 @@
       "text": "Craft the Nether Reactor Core."
     }
   ],
-  "advancement": "minecraft:nether/summon_wither"
+  "advancement": "minecraft:nether/summon_wither",
+  "extra_recipe_mappings": {"goetyawaken:nether_reactor_core":0}
 }

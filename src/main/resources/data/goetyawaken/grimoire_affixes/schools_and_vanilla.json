@@ -1,0 +1,788 @@
+{
+  "affixes": [
+    {
+      "attribute": "goety:abyss_potency",
+      "cap": 4,
+      "op": "addition",
+      "weight": 8,
+      "tiers": [
+        {
+          "min": -0.5,
+          "max": 0.4
+        },
+        {
+          "min": 0.4,
+          "max": 1.3
+        },
+        {
+          "min": 1.3,
+          "max": 2.2
+        },
+        {
+          "min": 2.2,
+          "max": 3.1
+        },
+        {
+          "min": 3.1,
+          "max": 4.0
+        }
+      ]
+    },
+    {
+      "attribute": "goety:frost_potency",
+      "cap": 4,
+      "op": "addition",
+      "weight": 8,
+      "tiers": [
+        {
+          "min": -0.5,
+          "max": 0.4
+        },
+        {
+          "min": 0.4,
+          "max": 1.3
+        },
+        {
+          "min": 1.3,
+          "max": 2.2
+        },
+        {
+          "min": 2.2,
+          "max": 3.1
+        },
+        {
+          "min": 3.1,
+          "max": 4.0
+        }
+      ]
+    },
+    {
+      "attribute": "goety:geomancy_potency",
+      "cap": 4,
+      "op": "addition",
+      "weight": 8,
+      "tiers": [
+        {
+          "min": -0.5,
+          "max": 0.4
+        },
+        {
+          "min": 0.4,
+          "max": 1.3
+        },
+        {
+          "min": 1.3,
+          "max": 2.2
+        },
+        {
+          "min": 2.2,
+          "max": 3.1
+        },
+        {
+          "min": 3.1,
+          "max": 4.0
+        }
+      ]
+    },
+    {
+      "attribute": "goety:necromancy_potency",
+      "cap": 4,
+      "op": "addition",
+      "weight": 8,
+      "tiers": [
+        {
+          "min": -0.5,
+          "max": 0.4
+        },
+        {
+          "min": 0.4,
+          "max": 1.3
+        },
+        {
+          "min": 1.3,
+          "max": 2.2
+        },
+        {
+          "min": 2.2,
+          "max": 3.1
+        },
+        {
+          "min": 3.1,
+          "max": 4.0
+        }
+      ]
+    },
+    {
+      "attribute": "goety:nether_potency",
+      "cap": 4,
+      "op": "addition",
+      "weight": 8,
+      "tiers": [
+        {
+          "min": -0.5,
+          "max": 0.4
+        },
+        {
+          "min": 0.4,
+          "max": 1.3
+        },
+        {
+          "min": 1.3,
+          "max": 2.2
+        },
+        {
+          "min": 2.2,
+          "max": 3.1
+        },
+        {
+          "min": 3.1,
+          "max": 4.0
+        }
+      ]
+    },
+    {
+      "attribute": "goety:storm_potency",
+      "cap": 4,
+      "op": "addition",
+      "weight": 8,
+      "tiers": [
+        {
+          "min": -0.5,
+          "max": 0.4
+        },
+        {
+          "min": 0.4,
+          "max": 1.3
+        },
+        {
+          "min": 1.3,
+          "max": 2.2
+        },
+        {
+          "min": 2.2,
+          "max": 3.1
+        },
+        {
+          "min": 3.1,
+          "max": 4.0
+        }
+      ]
+    },
+    {
+      "attribute": "goety:void_potency",
+      "cap": 4,
+      "op": "addition",
+      "weight": 8,
+      "tiers": [
+        {
+          "min": -0.5,
+          "max": 0.4
+        },
+        {
+          "min": 0.4,
+          "max": 1.3
+        },
+        {
+          "min": 1.3,
+          "max": 2.2
+        },
+        {
+          "min": 2.2,
+          "max": 3.1
+        },
+        {
+          "min": 3.1,
+          "max": 4.0
+        }
+      ]
+    },
+    {
+      "attribute": "goety:wild_potency",
+      "cap": 4,
+      "op": "addition",
+      "weight": 8,
+      "tiers": [
+        {
+          "min": -0.5,
+          "max": 0.4
+        },
+        {
+          "min": 0.4,
+          "max": 1.3
+        },
+        {
+          "min": 1.3,
+          "max": 2.2
+        },
+        {
+          "min": 2.2,
+          "max": 3.1
+        },
+        {
+          "min": 3.1,
+          "max": 4.0
+        }
+      ]
+    },
+    {
+      "attribute": "goety:wind_potency",
+      "cap": 4,
+      "op": "addition",
+      "weight": 8,
+      "tiers": [
+        {
+          "min": -0.5,
+          "max": 0.4
+        },
+        {
+          "min": 0.4,
+          "max": 1.3
+        },
+        {
+          "min": 1.3,
+          "max": 2.2
+        },
+        {
+          "min": 2.2,
+          "max": 3.1
+        },
+        {
+          "min": 3.1,
+          "max": 4.0
+        }
+      ]
+    },
+    {
+      "attribute": "goety:abyss_discount",
+      "cap": 0.5,
+      "op": "addition",
+      "weight": 7,
+      "tiers": [
+        {
+          "min": -0.02,
+          "max": 0.084
+        },
+        {
+          "min": 0.084,
+          "max": 0.188
+        },
+        {
+          "min": 0.188,
+          "max": 0.292
+        },
+        {
+          "min": 0.292,
+          "max": 0.396
+        },
+        {
+          "min": 0.396,
+          "max": 0.5
+        }
+      ]
+    },
+    {
+      "attribute": "goety:frost_discount",
+      "cap": 0.5,
+      "op": "addition",
+      "weight": 7,
+      "tiers": [
+        {
+          "min": -0.02,
+          "max": 0.084
+        },
+        {
+          "min": 0.084,
+          "max": 0.188
+        },
+        {
+          "min": 0.188,
+          "max": 0.292
+        },
+        {
+          "min": 0.292,
+          "max": 0.396
+        },
+        {
+          "min": 0.396,
+          "max": 0.5
+        }
+      ]
+    },
+    {
+      "attribute": "goety:geomancy_discount",
+      "cap": 0.5,
+      "op": "addition",
+      "weight": 7,
+      "tiers": [
+        {
+          "min": -0.02,
+          "max": 0.084
+        },
+        {
+          "min": 0.084,
+          "max": 0.188
+        },
+        {
+          "min": 0.188,
+          "max": 0.292
+        },
+        {
+          "min": 0.292,
+          "max": 0.396
+        },
+        {
+          "min": 0.396,
+          "max": 0.5
+        }
+      ]
+    },
+    {
+      "attribute": "goety:necromancy_discount",
+      "cap": 0.5,
+      "op": "addition",
+      "weight": 7,
+      "tiers": [
+        {
+          "min": -0.02,
+          "max": 0.084
+        },
+        {
+          "min": 0.084,
+          "max": 0.188
+        },
+        {
+          "min": 0.188,
+          "max": 0.292
+        },
+        {
+          "min": 0.292,
+          "max": 0.396
+        },
+        {
+          "min": 0.396,
+          "max": 0.5
+        }
+      ]
+    },
+    {
+      "attribute": "goety:nether_discount",
+      "cap": 0.5,
+      "op": "addition",
+      "weight": 7,
+      "tiers": [
+        {
+          "min": -0.02,
+          "max": 0.084
+        },
+        {
+          "min": 0.084,
+          "max": 0.188
+        },
+        {
+          "min": 0.188,
+          "max": 0.292
+        },
+        {
+          "min": 0.292,
+          "max": 0.396
+        },
+        {
+          "min": 0.396,
+          "max": 0.5
+        }
+      ]
+    },
+    {
+      "attribute": "goety:storm_discount",
+      "cap": 0.5,
+      "op": "addition",
+      "weight": 7,
+      "tiers": [
+        {
+          "min": -0.02,
+          "max": 0.084
+        },
+        {
+          "min": 0.084,
+          "max": 0.188
+        },
+        {
+          "min": 0.188,
+          "max": 0.292
+        },
+        {
+          "min": 0.292,
+          "max": 0.396
+        },
+        {
+          "min": 0.396,
+          "max": 0.5
+        }
+      ]
+    },
+    {
+      "attribute": "goety:void_discount",
+      "cap": 0.5,
+      "op": "addition",
+      "weight": 7,
+      "tiers": [
+        {
+          "min": -0.02,
+          "max": 0.084
+        },
+        {
+          "min": 0.084,
+          "max": 0.188
+        },
+        {
+          "min": 0.188,
+          "max": 0.292
+        },
+        {
+          "min": 0.292,
+          "max": 0.396
+        },
+        {
+          "min": 0.396,
+          "max": 0.5
+        }
+      ]
+    },
+    {
+      "attribute": "goety:wild_discount",
+      "cap": 0.5,
+      "op": "addition",
+      "weight": 7,
+      "tiers": [
+        {
+          "min": -0.02,
+          "max": 0.084
+        },
+        {
+          "min": 0.084,
+          "max": 0.188
+        },
+        {
+          "min": 0.188,
+          "max": 0.292
+        },
+        {
+          "min": 0.292,
+          "max": 0.396
+        },
+        {
+          "min": 0.396,
+          "max": 0.5
+        }
+      ]
+    },
+    {
+      "attribute": "goety:wind_discount",
+      "cap": 0.5,
+      "op": "addition",
+      "weight": 7,
+      "tiers": [
+        {
+          "min": -0.02,
+          "max": 0.084
+        },
+        {
+          "min": 0.084,
+          "max": 0.188
+        },
+        {
+          "min": 0.188,
+          "max": 0.292
+        },
+        {
+          "min": 0.292,
+          "max": 0.396
+        },
+        {
+          "min": 0.396,
+          "max": 0.5
+        }
+      ]
+    },
+    {
+      "attribute": "minecraft:generic.max_health",
+      "cap": 10,
+      "op": "addition",
+      "weight": 3,
+      "tiers": [
+        {
+          "min": -1.0,
+          "max": 0.8
+        },
+        {
+          "min": 0.8,
+          "max": 2.6
+        },
+        {
+          "min": 2.6,
+          "max": 4.4
+        },
+        {
+          "min": 4.4,
+          "max": 6.2
+        },
+        {
+          "min": 6.2,
+          "max": 8.0
+        }
+      ]
+    },
+    {
+      "attribute": "minecraft:generic.movement_speed",
+      "cap": 0.5,
+      "op": "multiply_base",
+      "weight": 2,
+      "tiers": [
+        {
+          "min": -0.01,
+          "max": 0.042
+        },
+        {
+          "min": 0.042,
+          "max": 0.094
+        },
+        {
+          "min": 0.094,
+          "max": 0.146
+        },
+        {
+          "min": 0.146,
+          "max": 0.198
+        },
+        {
+          "min": 0.198,
+          "max": 0.25
+        }
+      ]
+    },
+    {
+      "attribute": "minecraft:generic.attack_damage",
+      "cap": 7,
+      "op": "addition",
+      "weight": 3,
+      "tiers": [
+        {
+          "min": -0.5,
+          "max": 0.4
+        },
+        {
+          "min": 0.4,
+          "max": 1.3
+        },
+        {
+          "min": 1.3,
+          "max": 2.2
+        },
+        {
+          "min": 2.2,
+          "max": 3.1
+        },
+        {
+          "min": 3.1,
+          "max": 4.0
+        }
+      ]
+    },
+    {
+      "attribute": "minecraft:generic.armor",
+      "cap": 10,
+      "op": "addition",
+      "weight": 3,
+      "tiers": [
+        {
+          "min": -0.5,
+          "max": 0.6
+        },
+        {
+          "min": 0.6,
+          "max": 1.7
+        },
+        {
+          "min": 1.7,
+          "max": 2.8
+        },
+        {
+          "min": 2.8,
+          "max": 3.9
+        },
+        {
+          "min": 3.9,
+          "max": 5.0
+        }
+      ]
+    },
+    {
+      "attribute": "minecraft:generic.knockback_resistance",
+      "cap": 1,
+      "op": "addition",
+      "weight": 2,
+      "tiers": [
+        {
+          "min": -0.03,
+          "max": 0.036
+        },
+        {
+          "min": 0.036,
+          "max": 0.102
+        },
+        {
+          "min": 0.102,
+          "max": 0.168
+        },
+        {
+          "min": 0.168,
+          "max": 0.234
+        },
+        {
+          "min": 0.234,
+          "max": 0.3
+        }
+      ]
+    },
+    {
+      "attribute": "irons_spellbooks:spell_power",
+      "cap": 0.1,
+      "op": "addition",
+      "weight": 6,
+      "tiers": [
+        {
+          "min": -0.01,
+          "max": 0.012
+        },
+        {
+          "min": 0.012,
+          "max": 0.034
+        },
+        {
+          "min": 0.034,
+          "max": 0.056
+        },
+        {
+          "min": 0.056,
+          "max": 0.078
+        },
+        {
+          "min": 0.078,
+          "max": 0.1
+        }
+      ]
+    },
+    {
+      "attribute": "irons_spellbooks:summon_damage",
+      "cap": 0.1,
+      "op": "addition",
+      "weight": 4,
+      "tiers": [
+        {
+          "min": -0.01,
+          "max": 0.012
+        },
+        {
+          "min": 0.012,
+          "max": 0.034
+        },
+        {
+          "min": 0.034,
+          "max": 0.056
+        },
+        {
+          "min": 0.056,
+          "max": 0.078
+        },
+        {
+          "min": 0.078,
+          "max": 0.1
+        }
+      ]
+    },
+    {
+      "attribute": "irons_spellbooks:spell_resist",
+      "cap": 0.1,
+      "op": "addition",
+      "weight": 4,
+      "tiers": [
+        {
+          "min": -0.01,
+          "max": 0.012
+        },
+        {
+          "min": 0.012,
+          "max": 0.034
+        },
+        {
+          "min": 0.034,
+          "max": 0.056
+        },
+        {
+          "min": 0.056,
+          "max": 0.078
+        },
+        {
+          "min": 0.078,
+          "max": 0.1
+        }
+      ]
+    },
+    {
+      "attribute": "irons_spellbooks:max_mana",
+      "cap": 600,
+      "op": "addition",
+      "weight": 4,
+      "tiers": [
+        {
+          "min": -10.0,
+          "max": 52.0
+        },
+        {
+          "min": 52.0,
+          "max": 114.0
+        },
+        {
+          "min": 114.0,
+          "max": 176.0
+        },
+        {
+          "min": 176.0,
+          "max": 238.0
+        },
+        {
+          "min": 238.0,
+          "max": 300.0
+        }
+      ]
+    },
+    {
+      "attribute": "irons_spellbooks:mana_regen",
+      "cap": 1,
+      "op": "addition",
+      "weight": 4,
+      "tiers": [
+        {
+          "min": -0.02,
+          "max": 0.084
+        },
+        {
+          "min": 0.084,
+          "max": 0.188
+        },
+        {
+          "min": 0.188,
+          "max": 0.292
+        },
+        {
+          "min": 0.292,
+          "max": 0.396
+        },
+        {
+          "min": 0.396,
+          "max": 0.5
+        }
+      ]
+    }
+  ]
+}

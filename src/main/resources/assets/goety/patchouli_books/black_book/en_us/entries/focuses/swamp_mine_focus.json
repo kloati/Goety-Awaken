@@ -1,0 +1,18 @@
+{
+  "name": "Swamp Mine Focus",
+  "icon": "goetyawaken:swamp_mine_focus",
+  "category": "goety:goetyawaken_focuses",
+  "flag": "goetyawaken:meetyourfight_loaded",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Creates swamp mines above the target's head. While the Swampjaw itself may not be particularly strong, this dirty trick is still well worth borrowing."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:swamp_mine_focus",
+      "text": ""
+    }
+  ],
+  "extra_recipe_mappings": {"goetyawaken:swamp_mine_focus":0}
+}

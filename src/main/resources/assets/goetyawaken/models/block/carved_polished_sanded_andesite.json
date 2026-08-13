@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "goetyawaken:block/andesite/carved_polished_sanded_andesite"
+  }
+}

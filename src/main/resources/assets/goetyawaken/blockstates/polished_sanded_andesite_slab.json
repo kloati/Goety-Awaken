@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "goetyawaken:block/polished_sanded_andesite_slab"
+    },
+    "type=double": {
+      "model": "goetyawaken:block/polished_sanded_andesite"
+    },
+    "type=top": {
+      "model": "goetyawaken:block/polished_sanded_andesite_slab_top"
+    }
+  }
+}

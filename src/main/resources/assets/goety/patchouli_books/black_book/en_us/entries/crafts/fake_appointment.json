@@ -16,5 +16,6 @@
       "recipe": "goetyawaken:fake_appointment",
       "text": "Forge an appointment letter."
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:fake_appointment":0}
 }

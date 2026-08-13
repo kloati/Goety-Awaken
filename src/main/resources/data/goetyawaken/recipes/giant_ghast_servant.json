@@ -1,0 +1,32 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:convert_complete_tamed",
+  "activation_item": {
+    "item": "goetyawaken:gloomy_tears"
+  },
+  "craftType": "expert_nether",
+  "entity_to_convert": {
+    "tag": "goetyawaken:ghast",
+    "display_name": "entity.minecraft.ghast"
+  },
+  "entity_to_convert_into": "goetyawaken:giant_ghast",
+  "soulCost": 30,
+  "duration": 10,
+  "ingredients": [
+    {
+      "item": "minecraft:ghast_tear"
+    },
+    {
+      "item": "minecraft:ghast_tear"
+    },
+    {
+      "item": "goety:lavaball_focus"
+    },
+    {
+      "item": "goety:ghastly_focus"
+    }
+  ],
+  "result": {
+    "item": "goety:jei_dummy/none"
+  }
+}

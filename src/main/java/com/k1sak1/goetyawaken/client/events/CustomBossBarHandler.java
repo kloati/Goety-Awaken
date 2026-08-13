@@ -16,6 +16,10 @@ public class CustomBossBarHandler {
 
     public static Map<UUID, Integer> BOSS_BAR_RENDER_TYPES = new HashMap<>();
 
+    public static void clearAll() {
+        BOSS_BAR_RENDER_TYPES.clear();
+    }
+
     public static void handleBossBarPacket(UUID barId, int bossId, boolean remove, int renderType) {
         Minecraft minecraft = Minecraft.getInstance();
         if (minecraft.level == null) {
@@ -31,6 +35,7 @@ public class CustomBossBarHandler {
             AncientBossBarEvent.removeAncientBossBar(barId, mob);
             NamelessOneBossBarEvent.removeNamelessOneBossBar(barId, mob);
             MushroomBossBarEvent.removeMushroomBossBar(barId, mob);
+            MasqueraderBossBarEvent.removeMasqueraderBossBar(barId, mob);
             BOSS_BAR_RENDER_TYPES.remove(barId);
         } else {
             switch (renderType) {
@@ -52,6 +57,10 @@ public class CustomBossBarHandler {
                         MushroomBossBarEvent.addMushroomBossBar(barId, mob);
                         BOSS_BAR_RENDER_TYPES.put(barId, renderType);
                     }
+                    break;
+                case SBossBarPacket.RENDER_TYPE_MASQUERADER:
+                    MasqueraderBossBarEvent.addMasqueraderBossBar(barId, mob);
+                    BOSS_BAR_RENDER_TYPES.put(barId, renderType);
                     break;
                 default:
                     break;

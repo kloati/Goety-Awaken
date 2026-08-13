@@ -12,5 +12,6 @@
       "recipe": "goetyawaken:truth_seeker",
       "text": ""
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:truth_seeker":0}
 }

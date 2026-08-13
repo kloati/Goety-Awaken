@@ -223,8 +223,9 @@ public class ChampionArmorItem extends ArmorItem implements ISoulRepair, ISoulDi
         tooltip.add(Component.translatable("tooltip.goetyawaken.holdShift").withStyle(ChatFormatting.GRAY,
                 ChatFormatting.ITALIC));
 
-        if (org.lwjgl.glfw.GLFW.glfwGetKey(Minecraft.getInstance().getWindow().getWindow(), 340) == 1 ||
-                org.lwjgl.glfw.GLFW.glfwGetKey(Minecraft.getInstance().getWindow().getWindow(), 344) == 1) {
+        if (net.minecraftforge.api.distmarker.Dist.CLIENT.isClient()
+                && (org.lwjgl.glfw.GLFW.glfwGetKey(Minecraft.getInstance().getWindow().getWindow(), 340) == 1
+                        || org.lwjgl.glfw.GLFW.glfwGetKey(Minecraft.getInstance().getWindow().getWindow(), 344) == 1)) {
             tooltip.add(Component.empty());
             tooltip.add(Component.translatable("tooltip.goetyawaken.specialEffect").withStyle(ChatFormatting.GOLD));
             if (magicResistance > 0) {

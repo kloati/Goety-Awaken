@@ -90,6 +90,9 @@ public class StareSpell extends SummonSpell {
             }
             for (int i1 = 0; i1 < i; ++i1) {
                 EndermanServant summonedentity = new EndermanServant(ModEntityType.ENDERMAN_SERVANT.get(), worldIn);
+                if (staff.getItem() == com.k1sak1.goetyawaken.common.items.ModItems.POTATO_STAFF.get()) {
+                    summonedentity.setPoisonousPotato(true);
+                }
                 BlockPos blockPos = BlockFinder.SummonRadius(caster.blockPosition(), summonedentity, worldIn);
                 summonedentity.setTrueOwner(caster);
                 summonedentity.moveTo(blockPos, 0.0F, 0.0F);

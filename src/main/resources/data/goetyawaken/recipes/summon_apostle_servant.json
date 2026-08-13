@@ -10,7 +10,7 @@
     "tag": "goety:villagers",
     "display_name": "entity.minecraft.villager"
   },
-  "soulCost": 1000,
+  "soulCost": 500,
   "duration": 30,
   "research": "royal",
   "ingredients": [
@@ -18,7 +18,7 @@
       "item": "goety:crone_hat"
     },
     {
-      "tag": "goety:witches_hat"
+      "tag": "goety:malefic_helm"
     },
     {
       "item": "goety:warlock_sash"

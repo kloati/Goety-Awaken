@@ -12,5 +12,6 @@
       "recipe": "goetyawaken:catacombs_reliquary",
       "text": "Used to grant undead creatures permanent immunity to sunlight."
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:catacombs_reliquary":0}
 }

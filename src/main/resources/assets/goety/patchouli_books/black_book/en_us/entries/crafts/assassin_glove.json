@@ -12,5 +12,6 @@
       "recipe": "goetyawaken:assassin_glove",
       "text": ""
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:assassin_glove":0}
 }

@@ -1,0 +1,20 @@
+{
+  "name": "Foco de Acesso",
+  "icon": "goetyawaken:access_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Oh não, não estou na minha base agora, mas de repente preciso acessar minha rede de Armazenamento do End! O que eu faço? Relaxa, amigo — você precisa deste Foco de Acesso, que mal parece um foco! Ele pode ser usado não apenas em sua varinha ou o seu cajado, mas também segurando na mão, ou até mesmo equipado em um slot de curiosidade! Basta pressionar a tecla de Acesso Remoto (padrão: [) para abrir sua rede de armazenamento a qualquer hora, em qualquer lugar!"
+    },
+    {
+      "type": "text",
+      "text": "Para usar este foco, além de uma pequena quantidade de Energia da Alma, você deve primeiro clicar com o botão direito para vinculá-lo a um Atril de Acesso ao End. Depois disso, o Foco de Acesso pode ser usado para abrir remotamente a rede de armazenamento do atril vinculado. Além disso, embora ignore as limitações de distância e dimensão, o chunk da rede deve estar carregado para que funcione."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:access_focus",
+      "text": ""
+    }
+  ]
+}

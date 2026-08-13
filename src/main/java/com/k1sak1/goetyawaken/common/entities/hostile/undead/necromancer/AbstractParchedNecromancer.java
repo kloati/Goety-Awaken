@@ -26,7 +26,6 @@ import com.k1sak1.goetyawaken.init.ModSounds;
 import com.google.common.base.Predicate;
 import com.k1sak1.goetyawaken.common.entities.ally.undead.skeleton.ParchedServant;
 import net.minecraft.world.entity.Pose;
-
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
@@ -43,7 +42,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
-import java.util.Random;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.MobType;
@@ -97,9 +95,12 @@ public abstract class AbstractParchedNecromancer extends AbstractNecromancer imp
     protected int rapidSpellCool = 0;
     protected int cycloneCool = 0;
     protected int DesertPlaguescooldown = 0;
+    protected int summonScanTimer = -999;
+    protected int summonCount = 0;
 
     public AbstractParchedNecromancer(EntityType<? extends AbstractNecromancer> type, Level level) {
         super(type, level);
+        this.setMaxUpStep(1.25F);
         this.setPathfindingMalus(net.minecraft.world.level.pathfinder.BlockPathTypes.LAVA, 8.0F);
     }
 
@@ -116,6 +117,7 @@ public abstract class AbstractParchedNecromancer extends AbstractNecromancer imp
         SpawnGroupData spawnGroupData = super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
         this.setConfigurableAttributes();
         this.setHealth(this.getMaxHealth());
+        this.DesertPlaguescooldown = 300;
         return spawnGroupData;
     }
 
@@ -336,12 +338,16 @@ public abstract class AbstractParchedNecromancer extends AbstractNecromancer imp
 
                 List<LivingEntity> nearbyHostiles = level.getEntitiesOfClass(LivingEntity.class,
                         AbstractParchedNecromancer.this.getBoundingBox().inflate(16.0));
+                int updraftCount = 0;
                 for (LivingEntity entity : nearbyHostiles) {
                     if (entity != AbstractParchedNecromancer.this &&
                             entity instanceof net.minecraft.world.entity.Mob mob &&
                             mob.getTarget() != null &&
                             mob.getTarget() == AbstractParchedNecromancer.this) {
                         createUpdraftBlast(serverLevel, entity.getX(), entity.getY(), entity.getZ(), damage);
+                        if (++updraftCount >= 6) {
+                            break;
+                        }
                     }
                 }
             }
@@ -404,6 +410,16 @@ public abstract class AbstractParchedNecromancer extends AbstractNecromancer imp
                 com.Polarice3.Goety.common.magic.spells.wind.WhirlwindSpell whirlwindSpell = new com.Polarice3.Goety.common.magic.spells.wind.WhirlwindSpell();
                 ItemStack windStaff = new ItemStack(com.Polarice3.Goety.common.items.ModItems.WIND_STAFF.get());
                 whirlwindSpell.mobSpellResult(AbstractParchedNecromancer.this, windStaff);
+                if (this.spellTime % 8 == 0
+                        && AbstractParchedNecromancer.this.level() instanceof ServerLevel serverLevel) {
+                    serverLevel.sendParticles(
+                            new com.k1sak1.goetyawaken.client.particle.RingParticle.RingData(
+                                    0.0F, (float) Math.PI / 2, 60, 0.85F, 0.85F, 0.8F, 0.9F, 80.0F,
+                                    false, com.k1sak1.goetyawaken.client.particle.RingParticle.EnumRingBehavior.SHRINK),
+                            AbstractParchedNecromancer.this.getX(),
+                            AbstractParchedNecromancer.this.getY() + 1.5D,
+                            AbstractParchedNecromancer.this.getZ(), 1, 0.0D, 0.0D, 0.0D, 0.0D);
+                }
             }
             if (this.spellTime == 5) {
                 com.Polarice3.Goety.common.magic.spells.wind.WindHornSpell windHornSpell = new com.Polarice3.Goety.common.magic.spells.wind.WindHornSpell();
@@ -557,18 +573,7 @@ public abstract class AbstractParchedNecromancer extends AbstractNecromancer imp
         if (hasArmor) {
             return getRandomHurtArmoredSound();
         } else {
-            Random random = new Random();
-            int choice = random.nextInt(3) + 1;
-            switch (choice) {
-                case 1:
-                    return ModSounds.PARCHED_HURT_1_NEW.get();
-                case 2:
-                    return ModSounds.PARCHED_HURT_2_NEW.get();
-                case 3:
-                    return ModSounds.PARCHED_HURT_3_NEW.get();
-                default:
-                    return ModSounds.PARCHED_HURT_1_NEW.get();
-            }
+            return ModSounds.PARCHED_HURT_NEW.get();
         }
     }
 
@@ -579,38 +584,12 @@ public abstract class AbstractParchedNecromancer extends AbstractNecromancer imp
 
     @Override
     protected SoundEvent getStepSound() {
-        Random random = new Random();
-        int choice = random.nextInt(4) + 1;
-        switch (choice) {
-            case 1:
-                return ModSounds.PARCHED_STEP_1.get();
-            case 2:
-                return ModSounds.PARCHED_STEP_2.get();
-            case 3:
-                return ModSounds.PARCHED_STEP_3.get();
-            case 4:
-                return ModSounds.PARCHED_STEP_4.get();
-            default:
-                return ModSounds.PARCHED_STEP_1.get();
-        }
+        return ModSounds.PARCHED_STEP.get();
     }
 
     @Override
     protected SoundEvent getAmbientSound() {
-        Random random = new Random();
-        int choice = random.nextInt(4) + 1;
-        switch (choice) {
-            case 1:
-                return ModSounds.PARCHED_IDLE_1.get();
-            case 2:
-                return ModSounds.PARCHED_IDLE_2.get();
-            case 3:
-                return ModSounds.PARCHED_IDLE_3.get();
-            case 4:
-                return ModSounds.PARCHED_IDLE_4.get();
-            default:
-                return ModSounds.PARCHED_IDLE_1.get();
-        }
+        return ModSounds.PARCHED_IDLE.get();
     }
 
     public int xpReward() {
@@ -929,23 +908,27 @@ public abstract class AbstractParchedNecromancer extends AbstractNecromancer imp
     public class SummonServantSpell extends AbstractNecromancer.SummoningSpellGoal {
         @Override
         public boolean canUse() {
-            Predicate<Entity> predicate = (entity) -> {
-                boolean var10000;
-                if (entity.isAlive() && entity instanceof IOwned owned) {
-                    if (owned.getTrueOwner() == AbstractParchedNecromancer.this) {
-                        var10000 = true;
-                        return var10000;
+            int currentTick = AbstractParchedNecromancer.this.tickCount;
+            if (currentTick - AbstractParchedNecromancer.this.summonScanTimer >= 20) {
+                AbstractParchedNecromancer.this.summonScanTimer = currentTick;
+                Predicate<Entity> predicate = (entity) -> {
+                    boolean var10000;
+                    if (entity.isAlive() && entity instanceof IOwned owned) {
+                        if (owned.getTrueOwner() == AbstractParchedNecromancer.this) {
+                            var10000 = true;
+                            return var10000;
+                        }
                     }
-                }
 
-                var10000 = false;
-                return var10000;
-            };
-            int i = AbstractParchedNecromancer.this.level()
-                    .getEntitiesOfClass(LivingEntity.class,
-                            AbstractParchedNecromancer.this.getBoundingBox().inflate(64.0, 16.0, 64.0), predicate)
-                    .size();
-            return super.canUse() && i < 6;
+                    var10000 = false;
+                    return var10000;
+                };
+                AbstractParchedNecromancer.this.summonCount = AbstractParchedNecromancer.this.level()
+                        .getEntitiesOfClass(LivingEntity.class,
+                                AbstractParchedNecromancer.this.getBoundingBox().inflate(64.0, 16.0, 64.0), predicate)
+                        .size();
+            }
+            return super.canUse() && AbstractParchedNecromancer.this.summonCount < 6;
         }
 
         @Override
@@ -1078,7 +1061,7 @@ public abstract class AbstractParchedNecromancer extends AbstractNecromancer imp
 
         @Override
         public void stop() {
-            AbstractParchedNecromancer.this.DesertPlaguescooldown = 1200;
+            AbstractParchedNecromancer.this.DesertPlaguescooldown = 2400;
             AbstractParchedNecromancer.this.setSpellCasting(false);
             AbstractParchedNecromancer.this.setAnimationState(AbstractParchedNecromancer.IDLE_ANIM);
             AbstractParchedNecromancer.this.setNecromancerSpellType(
@@ -1091,17 +1074,17 @@ public abstract class AbstractParchedNecromancer extends AbstractNecromancer imp
             if (this.spellTime == 34) {
                 com.k1sak1.goetyawaken.common.magic.spells.wind.DesertPlaguesSpell desertPlaguesSpell = new com.k1sak1.goetyawaken.common.magic.spells.wind.DesertPlaguesSpell();
                 ItemStack windStaff = new ItemStack(com.Polarice3.Goety.common.items.ModItems.WIND_STAFF.get());
-                windStaff.enchant(com.Polarice3.Goety.common.enchantments.ModEnchantments.RADIUS.get(), 3);
-                windStaff.enchant(com.Polarice3.Goety.common.enchantments.ModEnchantments.POTENCY.get(), 3);
-                windStaff.enchant(com.Polarice3.Goety.common.enchantments.ModEnchantments.DURATION.get(), 2);
+                windStaff.enchant(com.Polarice3.Goety.common.enchantments.ModEnchantments.RADIUS.get(), 2);
+                windStaff.enchant(com.Polarice3.Goety.common.enchantments.ModEnchantments.POTENCY.get(), 2);
+                windStaff.enchant(com.Polarice3.Goety.common.enchantments.ModEnchantments.DURATION.get(), 1);
                 desertPlaguesSpell.mobSpellResult(AbstractParchedNecromancer.this, windStaff);
             }
             if (this.spellTime == 15) {
                 com.Polarice3.Goety.common.magic.spells.wind.WindHornSpell windHornSpell = new com.Polarice3.Goety.common.magic.spells.wind.WindHornSpell();
                 ItemStack windStaff = new ItemStack(com.Polarice3.Goety.common.items.ModItems.WIND_STAFF.get());
-                windStaff.enchant(com.Polarice3.Goety.common.enchantments.ModEnchantments.RADIUS.get(), 3);
-                windStaff.enchant(com.Polarice3.Goety.common.enchantments.ModEnchantments.POTENCY.get(), 3);
-                windStaff.enchant(com.Polarice3.Goety.common.enchantments.ModEnchantments.DURATION.get(), 3);
+                windStaff.enchant(com.Polarice3.Goety.common.enchantments.ModEnchantments.RADIUS.get(), 2);
+                windStaff.enchant(com.Polarice3.Goety.common.enchantments.ModEnchantments.POTENCY.get(), 2);
+                windStaff.enchant(com.Polarice3.Goety.common.enchantments.ModEnchantments.DURATION.get(), 2);
                 windHornSpell.mobSpellResult(AbstractParchedNecromancer.this, windStaff);
             }
         }
@@ -1210,44 +1193,15 @@ public abstract class AbstractParchedNecromancer extends AbstractNecromancer imp
     }
 
     private SoundEvent getRandomShootSound() {
-        Random random = new Random();
-        int choice = random.nextInt(2);
-        switch (choice) {
-            case 0:
-                return ModSounds.PARCHED_SHOOT_1.get();
-            case 1:
-                return ModSounds.PARCHED_SHOOT_2.get();
-            default:
-                return ModSounds.PARCHED_SHOOT_1.get();
-        }
+        return ModSounds.PARCHED_SHOOT.get();
     }
 
     private SoundEvent getRandomLaughSound() {
-        Random random = new Random();
-        int choice = random.nextInt(3);
-        switch (choice) {
-            case 0:
-                return ModSounds.PARCHED_LAUGH_1.get();
-            case 1:
-                return ModSounds.PARCHED_LAUGH_2.get();
-            case 2:
-                return ModSounds.PARCHED_LAUGH_3.get();
-            default:
-                return ModSounds.PARCHED_LAUGH_1.get();
-        }
+        return ModSounds.PARCHED_LAUGH.get();
     }
 
     private SoundEvent getRandomHurtArmoredSound() {
-        Random random = new Random();
-        int choice = random.nextInt(2);
-        switch (choice) {
-            case 0:
-                return ModSounds.PARCHED_HURT_ARMORED_1.get();
-            case 1:
-                return ModSounds.PARCHED_HURT_ARMORED_2.get();
-            default:
-                return ModSounds.PARCHED_HURT_ARMORED_1.get();
-        }
+        return ModSounds.PARCHED_HURT_ARMORED.get();
     }
 
     public int getSummonLimit(LivingEntity owner) {

@@ -1,0 +1,25 @@
+{
+  "name": "Heresiarch Servant",
+  "icon": "goety:malefic_helm",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "You have already learned how to deceive those foolish villagers, sending them into the embrace of the Nether in their sleep and transforming them into followers who obey you. Among these followers, you may select the most gifted and elevate them through a dark ritual into a Heresiarch. The Heresiarch is not only well-versed in the dark lore of the Nether, but can also summon the fires of hell into the overworld, letting enemies experience firsthand what true piety means—they are among the rare few unholy priests who truly bring hell with them wherever they go."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:heresiarch_servant",
+      "text": "Elevate a Heretic into a Heresiarch through a ritual."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:heresiarch_servant",
+      "text": "If you disguise yourself as an unholy emissary of the Nether, the Heresiarch will also grow stronger—for a believer, this is the most effective inspiration."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "You can trade emeralds with a Heresiarch for the lore of the Nether—from blackened building blocks to infernal tomes. If you masquerade as an unholy emissary of the Nether, their devotion will be inflamed: they will restock more swiftly and offer you a fifty percent discount. Even dressing like them and wearing the same helm earns you a thirty percent discount. Let them sleep in a bed, and their wares will be renewed in time."
+    }
+  ]
+}

@@ -2,7 +2,16 @@
   "parent": "goety:goety/craft_empty_focus",
   "criteria": {
     "the_end_envoy": {
-      "trigger": "goetyawaken:the_end_envoy"
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "goetyawaken:stare_focus"
+            ]
+          }
+        ]
+      }
     }
   },
   "display": {

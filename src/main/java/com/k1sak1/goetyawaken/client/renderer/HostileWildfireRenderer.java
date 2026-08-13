@@ -4,7 +4,6 @@ import com.k1sak1.goetyawaken.common.entities.hostile.HostileWildfire;
 import com.Polarice3.Goety.Goety;
 import com.Polarice3.Goety.client.render.ModModelLayer;
 import com.Polarice3.Goety.client.render.model.WildfireModel;
-import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;

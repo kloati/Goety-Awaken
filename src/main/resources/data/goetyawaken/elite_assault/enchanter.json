@@ -1,0 +1,15 @@
+{
+  "entity_type": "enchantwithmob:enchanter",
+  "registry": {
+    "threshold_times": 2.5,
+    "max": 2,
+    "extra": 1,
+    "chance": 0.8
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "enchantwithmob"
+    }
+  ]
+}

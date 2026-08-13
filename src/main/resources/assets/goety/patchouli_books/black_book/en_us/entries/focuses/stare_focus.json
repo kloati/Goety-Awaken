@@ -12,5 +12,6 @@
       "recipe": "goetyawaken:stare_focus",
       "text": "Craft the Stare Focus."
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:stare_focus":0}
 }

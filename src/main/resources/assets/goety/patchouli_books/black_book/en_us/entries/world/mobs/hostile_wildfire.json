@@ -1,0 +1,16 @@
+{
+  "name": "Hostile Wildfire",
+  "icon": "goetyawaken:hostile_wildfire_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "With the defeat of the Wither Necromancers, the fiery entities they once guarded have begun to stir. Bereft of their only keepers, these Blaze Masters now wander the Nether, unleashing upon any adventurer who dares enter the dimension the pent-up fury of their former imprisonment."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_wildfire",
+      "text": "Wildfire the Third"
+    }
+  ]
+}

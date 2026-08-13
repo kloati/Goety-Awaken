@@ -1,7 +1,3 @@
 {
-  "parent": "block/cross",
-  "render_type": "cutout",
-  "textures": {
-    "cross": "block/red_mushroom"
-  }
+  "parent": "minecraft:block/red_mushroom"
 }

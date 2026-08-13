@@ -61,17 +61,17 @@ public class ExplosiveArrow extends AbstractArrow {
 
     public ExplosiveArrow(EntityType<? extends ExplosiveArrow> entityType, Level level) {
         super(entityType, level);
-        this.setBaseDamage(6.0D);
+        this.setBaseDamage(5.0D);
     }
 
     public ExplosiveArrow(Level level, LivingEntity shooter) {
         super(ModEntityType.EXPLOSIVE_ARROW.get(), shooter, level);
-        this.setBaseDamage(6.0D);
+        this.setBaseDamage(5.0D);
     }
 
     public ExplosiveArrow(Level level, double x, double y, double z) {
         super(ModEntityType.EXPLOSIVE_ARROW.get(), x, y, z, level);
-        this.setBaseDamage(6.0D);
+        this.setBaseDamage(5.0D);
     }
 
     @Override
@@ -194,14 +194,7 @@ public class ExplosiveArrow extends AbstractArrow {
     }
 
     private SoundEvent getRandomIllusionerArrowSound() {
-        SoundEvent[] sounds = {
-                com.k1sak1.goetyawaken.init.ModSounds.ILLUSIONER_ARROW1.get(),
-                com.k1sak1.goetyawaken.init.ModSounds.ILLUSIONER_ARROW2.get(),
-                com.k1sak1.goetyawaken.init.ModSounds.ILLUSIONER_ARROW3.get(),
-                com.k1sak1.goetyawaken.init.ModSounds.ILLUSIONER_ARROW4.get()
-        };
-
-        return sounds[this.random.nextInt(sounds.length)];
+        return com.k1sak1.goetyawaken.init.ModSounds.ILLUSIONER_ARROW.get();
     }
 
     private void applyVisualDisturbanceEffect(LivingEntity target) {
@@ -234,6 +227,7 @@ public class ExplosiveArrow extends AbstractArrow {
     @Override
     public void tick() {
         super.tick();
+        this.setNoGravity(this.tickCount < 10);
         if (!this.level().isClientSide) {
             if (!this.hasTrail()) {
                 this.setHasTrail(true);
@@ -260,19 +254,23 @@ public class ExplosiveArrow extends AbstractArrow {
 
     @OnlyIn(Dist.CLIENT)
     private void updateTrail() {
-        if (this.getTrailPositions().size() < MAX_TRAILS) {
-            this.getTrailPositions().add(new TrailPosition(this.position(), 0));
+        this.getTrailPositions().add(0, new TrailPosition(this.position(), 0));
+        while (this.getTrailPositions().size() > MAX_TRAILS) {
+            this.getTrailPositions().remove(this.getTrailPositions().size() - 1);
+        }
+    }
+
+    @Override
+    public void onRemovedFromWorld() {
+        super.onRemovedFromWorld();
+        if (this.level().isClientSide && this.trailPositions != null) {
+            this.trailPositions.clear();
         }
     }
 
     @Override
     public EntityType<?> getType() {
         return ModEntityType.EXPLOSIVE_ARROW.get();
-    }
-
-    @Override
-    public boolean isNoGravity() {
-        return false;
     }
 
     @Override

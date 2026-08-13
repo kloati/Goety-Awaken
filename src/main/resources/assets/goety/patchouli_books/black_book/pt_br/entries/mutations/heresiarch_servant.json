@@ -1,0 +1,21 @@
+{
+  "name": "Servo Heresiarca",
+  "icon": "goety:malefic_helm",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Você já aprendeu como enganar aqueles tolos aldeões, enviando-os para o abraço do Nether em seu sono e transformando-os em seguidores que obedecem a você. Entre esses seguidores, você pode selecionar o mais talentoso e elevá-lo através de um ritual sombrio a um Heresiarca. O Heresiarca não é apenas mais um com as sabedorias ardentes do Nether, mas também pode invocar os fogos do inferno no mundo superior, fazendo os inimigos experimentarem em primeira mão o que significa verdadeira piedade — eles estão entre os raros padres profanos que verdadeiramente trazem o inferno com eles para onde quer que vão."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:heresiarch_servant",
+      "text": "Eleve um Herege a Heresiarca através de um ritual."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:heresiarch_servant",
+      "text": "Se você se disfarçar de emissário profano do Nether, o Heresiarca também ficará mais forte — pois para um crente, esta é a inspiração mais eficaz."
+    }
+  ]
+}

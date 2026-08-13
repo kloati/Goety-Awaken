@@ -2,6 +2,11 @@
   "replace": false,
   "values": [
     "goetyawaken:hostile_spider_creeder",
-    "goetyawaken:spider_creeder_servant"
+    "goetyawaken:spider_creeder_servant",
+    "goetyawaken:toxifin_servant",
+    "goetyawaken:plaguewhale_slab_servant",
+    "goetyawaken:poisonous_potato_zombie_servant",
+    "goetyawaken:poisonous_potato_skeleton_servant",
+    "goetyawaken:poisonous_potato_creeper_servant"
   ]
 }

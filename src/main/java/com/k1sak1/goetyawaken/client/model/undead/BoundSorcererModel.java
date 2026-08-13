@@ -12,12 +12,9 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.UseAnim;
 
 public class BoundSorcererModel<T extends BoundSorcerer> extends HumanoidModel<T> implements HierarchicalArmor {
     public final ModelPart clothes;
@@ -107,7 +104,7 @@ public class BoundSorcererModel<T extends BoundSorcerer> extends HumanoidModel<T
 
     @Override
     protected Iterable<ModelPart> bodyParts() {
-        return Iterables.concat(super.bodyParts(), ImmutableList.of(this.arms, this.clothes));
+        return Iterables.concat(super.bodyParts(), ImmutableList.of(this.arms));
     }
 
     @Override
@@ -221,7 +218,7 @@ public class BoundSorcererModel<T extends BoundSorcerer> extends HumanoidModel<T
         this.rightArm.visible = !flag;
         boolean flag2 = entity.getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof ArmorItem
                 || entity.getItemBySlot(EquipmentSlot.LEGS).getItem() instanceof ArmorItem;
-        this.clothes.visible = false;
+        this.clothes.visible = !flag2;
         boolean flag3 = entity.getItemBySlot(EquipmentSlot.HEAD).getItem() instanceof ArmorItem;
         this.hat.visible = !flag3;
     }

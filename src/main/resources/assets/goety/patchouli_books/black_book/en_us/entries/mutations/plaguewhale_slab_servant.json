@@ -1,0 +1,21 @@
+{
+  "name": "Plaguewhale Slab Servant",
+  "icon": "goetyawaken:plaguewhale_spawn_egg",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "text",
+      "text": "After summoning the Toxifin Slab (a poisonous potato variant of the Guardian) with that joke of a staff, you began to wonder if you could use it to obtain a different kind of Elder Guardian..."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:convert_toxifin_to_plaguewhale_slab_servant",
+      "text": "Transform a Toxifin Slab Servant into a Plaguewhale Slab Servant through a ritual."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:plaguewhale_slab_servant",
+      "text": "It is said that the Plaguewhale Slab is an Elder Guardian twisted by the power of the poisonous potato."
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+    "name": "Barba de Vento",
+    "icon": "minecraft:goat_horn",
+    "category": "goety:anecdote/anecdote",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "O totem espiritual de uma antiga tribo, no topo de um pico varrido pelo vento sob a lua cheia, contemplando a lua brilhante, sua longa barba fluindo na tempestade como a capa de um guarda florestal — tal é a lenda de Barba de Vento."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "Suspeito fortemente que esta cabra já havia mostrado sua natureza única muito antes de o Santuário da Vendaval ser sequer construído. De acordo com os registros históricos Illager, quando suas forças marcharam para o Santuário da Vendaval, esta cabra bloqueou a entrada, recusando-se a deixá-los passar, e enviou muitos soldados da força principal voando com suas investidas. Até mesmo Devastadores e Golems de Redstone lutavam para igualar sua força. Ela só cedeu quando um Capitão Vingador altamente habilidoso conseguiu cortar seus chifres com um machado de ferro. No entanto, mesmo depois disso, ela ocasionalmente batia com seus chifres nas portas, destruindo seus rituais, dispositivos mágicos e equipamentos de forjamento em pedaços."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "Mais tarde, à medida que os Illagers aprofundaram sua pesquisa em magia de tempestade, surgiram os papéis dos Invocadores de Vento e Conjuradores de Tempestade. Eles podiam usar táticas de ataque e fuga com a cabra, impedindo que ela danificasse ainda mais o equipamento Illager. Dia e noite, os Invocadores de Vento mantiveram um impasse com Barba de Vento, desgastando-a até que a velha cabra eventualmente os aceitasse e cessasse sua hostilidade. Eventualmente, aquele Capitão Vingador foi transferido para inspecionar a Prisão Gelada — os Illagers não precisavam mais de sua ajuda para coexistir com Barba de Vento, embora alguns Invocadores de Vento ainda tivessem que acompanhar qualquer expedição para ficar de olho nas coisas. Depois disso, a cabra parou de atacar Illagers... embora ainda possa ser hostil com os jogadores — ela me deu uma cabeçada pelo menos uma vez."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "De onde veio esta cabra? Alguns dizem que era o animal de estimação do dono original do Santuário da Vendaval, deixado para guardar uma torre vazia após a partida de seu mestre. Outros afirmam que ela é a personificação do próprio dono do santuário — sua obsessão persistente manifestando-se como uma cabra para defender suas posses. E outros ainda insistem que ela nasceu da vontade condensada dos ventos da montanha — não me façam rir. Uma vontade forjada pela natureza não estaria presa neste nível. Quanto às histórias de ela guardar um local sagrado ou ser uma alma reencarnada pagando uma dívida de gratidão — pura bobagem."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "Independentemente disso, a natureza notável da cabra permitiu que os montanheses que outrora a guardavam sobrevivessem até hoje. Talvez tenham formado uma equipe? Talvez você os encontre quando subir a montanha... Relaxe! Esta chamada 'vigília justa' não é apenas o alvo tradicional para um mago sombrio esmagar?"
+        }
+    ]
+}

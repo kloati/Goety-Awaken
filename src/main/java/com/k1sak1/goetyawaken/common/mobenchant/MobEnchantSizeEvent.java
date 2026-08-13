@@ -15,8 +15,8 @@ public class MobEnchantSizeEvent {
     public static void onEntitySize(EntityEvent.Size event) {
         Entity entity = event.getEntity();
 
-        if (entity instanceof LivingEntity living) {
-            MobEnchantCapability cap = MobEnchantEventHandler.getCapabilityFromCache(living);
+        if (entity instanceof LivingEntity living && living instanceof IMobEnchantable enchantable) {
+            MobEnchantCapability cap = enchantable.getMobEnchantCapabilityInstance();
             if (cap != null && cap.hasMobEnchantment()) {
                 int hugeLevel = cap.getMobEnchantLevel(MobEnchantType.HUGE);
                 if (hugeLevel > 0) {

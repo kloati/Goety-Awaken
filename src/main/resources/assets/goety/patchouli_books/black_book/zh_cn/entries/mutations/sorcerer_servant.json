@@ -11,6 +11,10 @@
       "type": "patchouli:entity",
       "entity": "goetyawaken:sorcerer_servant",
       "text": "巫师仆从会使用强大的魔法为你战斗，你也可以用绿宝石与他们交易。"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "他们的等级越高，货品便愈发丰厚：各类魔法核心、魔法布料、魔导书、不死图腾，甚至是禁忌遗物。必须有一张床才能让他们安然补货。"
     }
   ]
 }

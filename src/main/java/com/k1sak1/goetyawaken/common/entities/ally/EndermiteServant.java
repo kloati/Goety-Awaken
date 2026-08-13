@@ -126,7 +126,7 @@ public class EndermiteServant extends Summoned implements ICustomAttributes {
             if (owner != null && this.distanceToSqr(owner) > 1024.0D && this.getTarget() == null
                     && this.teleportCooldown <= 0) {
                 this.teleportTowardsEntity(owner);
-                this.teleportCooldown = 40;
+                this.teleportCooldown = 80;
             }
         }
     }

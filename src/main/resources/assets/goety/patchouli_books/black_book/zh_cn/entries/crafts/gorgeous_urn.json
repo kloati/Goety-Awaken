@@ -27,5 +27,6 @@
       "recipe": "goetyawaken:gorgeous_urn_crimson",
       "text": "赤红"
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:gorgeous_urn_verdant":0,"goetyawaken:gorgeous_urn_pale":0,"goetyawaken:gorgeous_urn_crimson":0,"goetyawaken:gorgeous_urn_indigo":0}
 }

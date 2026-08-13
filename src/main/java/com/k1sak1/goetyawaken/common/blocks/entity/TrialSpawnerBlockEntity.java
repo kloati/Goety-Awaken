@@ -30,11 +30,15 @@ public class TrialSpawnerBlockEntity extends BlockEntity implements TrialSpawner
     @Override
     public void load(CompoundTag compoundTag) {
         super.load(compoundTag);
-        this.trialSpawner
-                .codec()
+        TrialSpawner.CODEC
                 .parse(NbtOps.INSTANCE, compoundTag)
                 .resultOrPartial(Goety.LOGGER::error)
-                .ifPresent(trialSpawner -> this.trialSpawner = trialSpawner);
+                .ifPresent(trialSpawner -> {
+                    trialSpawner.setStateAccessor(this);
+                    trialSpawner.setPlayerDetector(PlayerDetector.NO_CREATIVE_PLAYERS);
+                    trialSpawner.setEntitySelector(PlayerDetector.EntitySelector.SELECT_FROM_LEVEL);
+                    this.trialSpawner = trialSpawner;
+                });
         if (this.level != null) {
             this.markUpdated();
         }
@@ -43,8 +47,7 @@ public class TrialSpawnerBlockEntity extends BlockEntity implements TrialSpawner
     @Override
     protected void saveAdditional(CompoundTag compoundTag) {
         super.saveAdditional(compoundTag);
-        this.trialSpawner
-                .codec()
+        TrialSpawner.CODEC
                 .encodeStart(NbtOps.INSTANCE, this.trialSpawner)
                 .get()
                 .ifLeft(tag -> compoundTag.merge((CompoundTag) tag))

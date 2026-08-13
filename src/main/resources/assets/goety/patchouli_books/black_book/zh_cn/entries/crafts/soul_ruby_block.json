@@ -17,5 +17,6 @@
       "recipe": "goetyawaken:soul_ruby_from_block",
       "text": "从灵魂红宝石块中获得灵魂红宝石。"
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:soul_ruby_block":0}
 }

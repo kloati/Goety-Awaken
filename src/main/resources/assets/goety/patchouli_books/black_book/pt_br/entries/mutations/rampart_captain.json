@@ -1,0 +1,31 @@
+{
+  "name": "Capitão Rampart",
+  "icon": "goety:diamond_ice_axe",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Depois de confrontar o intrépido Capitão Rampart, você não pode deixar de se perguntar se também poderia adquirir tal proeza de combate e força. Usando materiais específicos e um de seus próprios servos Montanhistas, você conseguiu criar um aliado poderoso."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:convert_mountaineer_to_rampart_captain",
+      "text": "Transforme um Montanhista em um Capitão Rampart."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Os Capitães Rampart são muito mais resistentes do que seus parentes illagers e podem arremessar suas armas em inimigos distantes. A corneta em suas mãos pode comandar membros da esquadra próximos e desencadear poderosas rajadas de vento."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goetyawaken:threat_banner",
+      "title": "Estandarte de Ameaça",
+      "text": "Se seu Capitão Rampart cair em batalha, não tema. Ele deixará cair o Estandarte de Ameaça que carrega, e você pode usar este estandarte em outro servo Montanhista para trazer devolta como seu aliado."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:rampart_captain",
+      "text": ""
+    }
+  ]
+}

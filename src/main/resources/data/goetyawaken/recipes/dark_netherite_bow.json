@@ -15,9 +15,6 @@
       "item": "goety:dark_ingot"
     },
     {
-      "item": "goety:dark_ingot"
-    },
-    {
       "item": "minecraft:gold_ingot"
     },
     {
@@ -25,9 +22,6 @@
     },
     {
       "item": "minecraft:leather"
-    },
-    {
-      "item": "goety:shadow_essence"
     }
   ],
   "result": {

@@ -1,0 +1,246 @@
+package com.k1sak1.goetyawaken.client.model.ally.Integration;
+
+import com.k1sak1.goetyawaken.common.entities.ally.Integration.RosalyneServant;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import lykrast.meetyourfight.MeetYourFight;
+import lykrast.meetyourfight.misc.MYFUtils;
+import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeDeformation;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.util.Mth;
+
+public class RosalyneServantModel extends EntityModel<RosalyneServant> {
+	public static final ModelLayerLocation MODEL = new ModelLayerLocation(MeetYourFight.rl("rosalyne"), "main");
+	public static final ModelLayerLocation MODEL_ARMOR = new ModelLayerLocation(MeetYourFight.rl("rosalyne"), "armor");
+	public static final ModelLayerLocation MODEL_HEAD = new ModelLayerLocation(MeetYourFight.rl("rosalyne"), "head");
+	private final ModelPart head;
+	private final ModelPart body;
+	private final ModelPart rightArm;
+	private final ModelPart forearm;
+	private final ModelPart blade;
+	private final ModelPart leftArm;
+	private final ModelPart rightLeg;
+	private final ModelPart leftLeg;
+	private final ModelPart coffin;
+
+	private static final Pose[] RARM_POSE = {
+			new Pose(-5, 0, 0, 30, 0, 0, 15, 0, 0, false),
+			new Pose(-10, 0, 100, 0, 0, 0, 0, 0, 0),
+			new Pose(105, 0, 95, 80, 0, 0, 30, 0, 0),
+			new Pose(-10, 0, 80, 0, 0, 0, 0, 0, 0),
+			new Pose(100, 0, 120, 80, 0, 0, 30, 0, 0),
+			new Pose(-5, 0, 40, 30, 0, 0, 30, 0, 0),
+			new Pose(-30, 0, 0, 130, 0, 0, -100, 0, 0, false),
+			new Pose(-5, 0, 0, 30, 0, 0, 15, 0, 0, false),
+			new Pose(30, 35, 0, 110, 0, 0, 85, 0, 0, false),
+			new Pose(150, -10, 0, 35, 0, 0, 5, 0, 0),
+			new Pose(20, 20, 0, 15, 0, 0, 0, 0, 0)
+	};
+	private float animProgress;
+	private int phase;
+	private Pose pose, prevPose;
+
+	public RosalyneServantModel(ModelPart root) {
+		head = root.getChild("Head");
+		body = root.getChild("Body");
+		rightArm = root.getChild("RightArm");
+		forearm = rightArm.getChild("Forearm");
+		blade = forearm.getChild("Blade");
+		leftArm = root.getChild("LeftArm");
+		rightLeg = root.getChild("RightLeg");
+		leftLeg = root.getChild("LeftLeg");
+		coffin = root.getChild("Coffin");
+	}
+
+	public static LayerDefinition createBodyLayer(CubeDeformation deform, boolean hat) {
+		MeshDefinition meshdefinition = new MeshDefinition();
+		PartDefinition partdefinition = meshdefinition.getRoot();
+
+		CubeListBuilder headcubes = CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F,
+				deform);
+		if (hat) {
+			headcubes.texOffs(32, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, deform.extend(0.25f));
+		}
+		partdefinition.addOrReplaceChild("Head", headcubes, PartPose.offset(0.0F, 0.0F, 0.0F));
+		partdefinition.addOrReplaceChild("Body",
+				CubeListBuilder.create().texOffs(16, 16).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, deform),
+				PartPose.offset(0.0F, 0.0F, 0.0F));
+
+		PartDefinition RightArm = partdefinition.addOrReplaceChild("RightArm", CubeListBuilder.create().texOffs(0, 16)
+				.addBox(-3.0F, -2.0F, -2.0F, 4.0F, 14.0F, 4.0F, deform.extend(0.25f)),
+				PartPose.offset(-5.0F, 2.0F, 0.0F));
+		PartDefinition Forearm = RightArm.addOrReplaceChild("Forearm",
+				CubeListBuilder.create().texOffs(0, 34).addBox(-2.0F, -2.0F, -2.0F, 4.0F, 14.0F, 4.0F, deform),
+				PartPose.offset(-1.0F, 10.0F, 0.0F));
+		Forearm.addOrReplaceChild("Blade",
+				CubeListBuilder.create().texOffs(16, 32).addBox(-0.5F, -6.0F, -3.0F, 1.0F, 20.0F, 6.0F, deform)
+						.texOffs(0, 52).addBox(-3.0F, -1.0F, -1.0F, 6.0F, 2.0F, 2.0F, deform),
+				PartPose.offset(0.0F, 10.0F, 0.0F));
+
+		partdefinition.addOrReplaceChild("LeftArm",
+				CubeListBuilder.create().texOffs(40, 16).addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, deform),
+				PartPose.offset(5.0F, 2.0F, 0.0F));
+
+		partdefinition.addOrReplaceChild("RightLeg",
+				CubeListBuilder.create().texOffs(40, 32).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, deform),
+				PartPose.offset(-1.9F, 12.0F, 0.0F));
+
+		partdefinition.addOrReplaceChild("LeftLeg",
+				CubeListBuilder.create().texOffs(40, 48).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, deform),
+				PartPose.offset(1.9F, 12.0F, 0.0F));
+
+		partdefinition.addOrReplaceChild("Coffin",
+				CubeListBuilder.create().texOffs(0, 0).addBox(-8.0F, -32.0F, -8.0F, 16.0F, 32.0F, 16.0F, deform),
+				PartPose.offset(0.0F, 24.0F, 0.0F));
+
+		return LayerDefinition.create(meshdefinition, 64, 64);
+	}
+
+	@Override
+	public void prepareMobModel(RosalyneServant entityIn, float limbSwing, float limbSwingAmount, float partialTick) {
+		super.prepareMobModel(entityIn, limbSwing, limbSwingAmount, partialTick);
+		phase = entityIn.getPhase();
+		pose = RARM_POSE[entityIn.clientAnim];
+		prevPose = RARM_POSE[entityIn.prevAnim];
+		animProgress = entityIn.getAnimProgress(partialTick);
+		if (pose.fast)
+			animProgress = MYFUtils.easeOutQuart(animProgress);
+	}
+
+	@Override
+	public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay,
+			float red, float green, float blue, float alpha) {
+		if (phase == RosalyneServant.ENCASED || phase == RosalyneServant.BREAKING_OUT) {
+			coffin.render(poseStack, buffer, packedLight, packedOverlay);
+		} else {
+			head.render(poseStack, buffer, packedLight, packedOverlay);
+			body.render(poseStack, buffer, packedLight, packedOverlay);
+			rightArm.render(poseStack, buffer, packedLight, packedOverlay);
+			leftArm.render(poseStack, buffer, packedLight, packedOverlay);
+			rightLeg.render(poseStack, buffer, packedLight, packedOverlay);
+			leftLeg.render(poseStack, buffer, packedLight, packedOverlay);
+		}
+	}
+
+	@Override
+	public void setupAnim(RosalyneServant entityIn, float limbSwing, float limbSwingAmount, float ageInTicks,
+			float netHeadYaw, float headPitch) {
+
+		if (phase == RosalyneServant.ENCASED || phase == RosalyneServant.BREAKING_OUT) {
+			coffin.yRot = netHeadYaw * Mth.DEG_TO_RAD;
+			return;
+		}
+
+		head.xRot = headPitch * Mth.DEG_TO_RAD;
+		head.yRot = netHeadYaw * Mth.DEG_TO_RAD;
+		leftArm.xRot = Mth.cos(limbSwing * 0.6662F) * 2.0F * limbSwingAmount * 0.5F;
+		leftArm.yRot = 0;
+		leftArm.zRot = 0;
+
+		if (entityIn.clientAnim == RosalyneServant.ANIM_MADDENING) {
+			if (animProgress >= 0.99) {
+
+				head.xRot = -25 * Mth.DEG_TO_RAD;
+				head.yRot = 0;
+				leftArm.xRot = -160 * Mth.DEG_TO_RAD;
+				leftArm.yRot = 30 * Mth.DEG_TO_RAD;
+			} else {
+
+				head.xRot = rotlerpRad(animProgress, head.xRot, 25 * Mth.DEG_TO_RAD);
+				head.yRot = rotlerpRad(animProgress, head.yRot, 0);
+				leftArm.xRot = rotlerpRad(animProgress, leftArm.xRot, -160 * Mth.DEG_TO_RAD);
+				leftArm.yRot = rotlerpRad(animProgress, leftArm.yRot, 30 * Mth.DEG_TO_RAD);
+			}
+		} else if (entityIn.prevAnim == RosalyneServant.ANIM_MADDENING) {
+
+			head.xRot = rotlerpRad(animProgress, 25 * Mth.DEG_TO_RAD, head.xRot);
+			head.yRot = rotlerpRad(animProgress, 0, head.yRot);
+			leftArm.xRot = rotlerpRad(animProgress, -160 * Mth.DEG_TO_RAD, leftArm.xRot);
+			leftArm.yRot = rotlerpRad(animProgress, 30 * Mth.DEG_TO_RAD, leftArm.yRot);
+		} else {
+
+			if (entityIn.clientAnim == RosalyneServant.ANIM_SUMMONING) {
+				if (animProgress >= 0.99) {
+
+					leftArm.xRot = Mth.cos(ageInTicks * 0.6662F) * 0.25F;
+					leftArm.zRot = -2.3561945F;
+				} else {
+
+					leftArm.xRot = rotlerpRad(animProgress, leftArm.xRot, Mth.cos(ageInTicks * 0.6662F) * 0.25F);
+					leftArm.zRot = rotlerpRad(animProgress, leftArm.zRot, -2.3561945F);
+				}
+			} else if (entityIn.prevAnim == RosalyneServant.ANIM_SUMMONING) {
+
+				leftArm.xRot = rotlerpRad(animProgress, Mth.cos(ageInTicks * 0.6662F) * 0.25F, leftArm.xRot);
+				leftArm.zRot = rotlerpRad(animProgress, -2.3561945F, leftArm.zRot);
+			}
+		}
+
+		rightLeg.xRot = Mth.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+		leftLeg.xRot = Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
+
+		if (animProgress >= 0.99) {
+			rightArm.xRot = pose.armX;
+			rightArm.yRot = pose.armY;
+			rightArm.zRot = pose.armZ;
+			forearm.xRot = pose.foreX;
+			forearm.yRot = pose.foreY;
+			forearm.zRot = pose.foreZ;
+			blade.xRot = pose.bladeX;
+			blade.yRot = pose.bladeY;
+			blade.zRot = pose.bladeZ;
+		} else {
+			rightArm.xRot = rotlerpRad(animProgress, prevPose.armX, pose.armX);
+			rightArm.yRot = rotlerpRad(animProgress, prevPose.armY, pose.armY);
+			rightArm.zRot = rotlerpRad(animProgress, prevPose.armZ, pose.armZ);
+			forearm.xRot = rotlerpRad(animProgress, prevPose.foreX, pose.foreX);
+			forearm.yRot = rotlerpRad(animProgress, prevPose.foreY, pose.foreY);
+			forearm.zRot = rotlerpRad(animProgress, prevPose.foreZ, pose.foreZ);
+			blade.xRot = rotlerpRad(animProgress, prevPose.bladeX, pose.bladeX);
+			blade.yRot = rotlerpRad(animProgress, prevPose.bladeY, pose.bladeY);
+			blade.zRot = rotlerpRad(animProgress, prevPose.bladeZ, pose.bladeZ);
+		}
+	}
+
+	private float rotlerpRad(float progress, float start, float end) {
+		float diff = (end - start) % Mth.TWO_PI;
+		if (diff < -Mth.PI)
+			diff += Mth.TWO_PI;
+		if (diff >= Mth.PI)
+			diff -= Mth.TWO_PI;
+		return start + progress * diff;
+	}
+
+	private static class Pose {
+		public final float armX, armY, armZ, foreX, foreY, foreZ, bladeX, bladeY, bladeZ;
+		public final boolean fast;
+
+		public Pose(float armX, float armY, float armZ, float foreX, float foreY, float foreZ, float bladeX,
+				float bladeY, float bladeZ) {
+			this(armX, armY, armZ, foreX, foreY, foreZ, bladeX, bladeY, bladeZ, true);
+		}
+
+		public Pose(float armX, float armY, float armZ, float foreX, float foreY, float foreZ, float bladeX,
+				float bladeY, float bladeZ, boolean fast) {
+
+			this.armX = armX * -Mth.DEG_TO_RAD;
+			this.armY = armY * -Mth.DEG_TO_RAD;
+			this.armZ = armZ * Mth.DEG_TO_RAD;
+			this.foreX = foreX * -Mth.DEG_TO_RAD;
+			this.foreY = foreY * -Mth.DEG_TO_RAD;
+			this.foreZ = foreZ * Mth.DEG_TO_RAD;
+			this.bladeX = bladeX * -Mth.DEG_TO_RAD;
+			this.bladeY = bladeY * -Mth.DEG_TO_RAD;
+			this.bladeZ = bladeZ * Mth.DEG_TO_RAD;
+			this.fast = fast;
+		}
+	}
+
+}

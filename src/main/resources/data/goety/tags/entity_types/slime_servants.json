@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "goetyawaken:corrupted_slime_servant",
+    {
+      "id": "goetyawaken:sludge_servant",
+      "required": false
+    }
+  ]
+}

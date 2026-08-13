@@ -126,13 +126,7 @@ public enum VaultState implements StringRepresentable {
     private void ejectItem(ServerLevel world, BlockPos pos, ItemStack stack, float pitchModifier) {
         DefaultDispenseItemBehavior.spawnItem(world, stack, 2, Direction.UP,
                 Vec3.atBottomCenterOf(pos).relative(Direction.UP, 1.2));
-        RegistryObject<SoundEvent>[] ejectSounds = new RegistryObject[] {
-                ModSounds.VAULT_EJECT_1,
-                ModSounds.VAULT_EJECT_2,
-                ModSounds.VAULT_EJECT_3
-        };
-        RegistryObject<SoundEvent> randomSound = ejectSounds[world.getRandom().nextInt(ejectSounds.length)];
-        world.playSound(null, pos, randomSound.get(), SoundSource.BLOCKS, 1.0F,
+        world.playSound(null, pos, ModSounds.VAULT_EJECT.get(), SoundSource.BLOCKS, 1.0F,
                 0.8F + 0.4F * pitchModifier);
     }
 

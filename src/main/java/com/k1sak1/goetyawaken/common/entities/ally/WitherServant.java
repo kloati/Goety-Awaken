@@ -88,11 +88,12 @@ public class WitherServant extends Summoned
     public WitherServant(EntityType<? extends WitherServant> type, Level world) {
         super(type, world);
         this.moveControl = new FlyingMoveControl(this, 10, false);
-        this.setHealth(this.getMaxHealth() / 2.0F);
         this.xpReward = 50;
-
         if (this.isFirstSpawn()) {
             this.makeInvulnerable();
+            this.setHealth(this.getMaxHealth() / 2.0F);
+        } else {
+            this.setHealth(this.getMaxHealth());
         }
         for (int i = 0; i < this.nextHeadUpdate.length; ++i) {
             this.nextHeadUpdate[i] = 40 + this.random.nextInt(40);
@@ -122,6 +123,7 @@ public class WitherServant extends Summoned
             MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
         pSpawnData = super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
         this.setConfigurableAttributes();
+        this.setFirstSpawn(true);
         this.setHealth(this.getMaxHealth() / 2);
         return pSpawnData;
     }
@@ -156,7 +158,6 @@ public class WitherServant extends Summoned
         this.goalSelector.addGoal(3, new WaterAvoidingRandomFlyingGoal(this, 1.0D));
         this.goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(5, new RandomLookAroundGoal(this));
-        super.registerGoals();
     }
 
     public static AttributeSupplier.Builder setCustomAttributes() {
@@ -655,24 +656,6 @@ public class WitherServant extends Summoned
     }
 
     @Override
-    public boolean canAttack(LivingEntity target) {
-        if (target == this.getTrueOwner()) {
-            return false;
-        }
-
-        if (MobUtil.areAllies(this, target)) {
-            return false;
-        }
-
-        if (target instanceof TamableAnimal tamableAnimal && this.getTrueOwner() != null &&
-                tamableAnimal.isTame() && tamableAnimal.getOwner() == this.getTrueOwner()) {
-            return false;
-        }
-
-        return super.canAttack(target);
-    }
-
-    @Override
     public boolean canTrample(BlockState state, BlockPos pos, float fallDistance) {
         return false;
     }
@@ -803,32 +786,6 @@ public class WitherServant extends Summoned
 
     public boolean canTarget() {
         return this.servantInvulnerableTicks <= 0;
-    }
-
-    @Override
-    public void setTarget(@Nullable LivingEntity target) {
-        if (target != null) {
-            if (target == this.getTrueOwner()) {
-                return;
-            }
-
-            if (MobUtil.areAllies(this, target)) {
-                return;
-            }
-
-            if (target instanceof TamableAnimal tamableAnimal && this.getTrueOwner() != null &&
-                    tamableAnimal.isTame() && tamableAnimal.getOwner() == this.getTrueOwner()) {
-                return;
-            }
-        }
-
-        if (this.canTarget()) {
-            super.setTarget(target);
-        } else if (target != null) {
-            return;
-        } else {
-            super.setTarget(null);
-        }
     }
 
     private void checkForArmorEffect() {

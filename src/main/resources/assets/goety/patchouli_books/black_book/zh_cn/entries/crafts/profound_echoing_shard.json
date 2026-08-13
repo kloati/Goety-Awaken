@@ -16,5 +16,6 @@
       "recipe": "goetyawaken:profound_echoing_shard",
       "text": "制作深邃回响碎片。"
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:profound_echoing_shard":0}
 }

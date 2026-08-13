@@ -1,0 +1,31 @@
+{
+  "name": "堡垒队长",
+  "icon": "goety:diamond_ice_axe",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "在与无畏的壁垒队长交战后，你不禁想知道自己是否也能获得那样的战斗技巧与力量。利用一些特定的材料和你自己的一名登山者仆从，你设法创造出了一位强大的盟友。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:convert_mountaineer_to_rampart_captain",
+      "text": "将登山者转化为堡垒队长"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "壁垒队长比他们的灾厄村民同胞要强壮不少，还能将武器掷向远处的敌人。他们的手中的号角可以号令周围的队员和释放强风冲击。"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goetyawaken:threat_banner",
+      "title": "威胁旗帜",
+      "text": "如果你的壁垒队长在战斗中倒下，不必担心。他们会掉落自身携带的威胁旗帜，你可以通过对着另一名登山者仆从使用威胁旗帜，借此旗帜重新任命你的盟友。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:rampart_captain",
+      "text": ""
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "Rampart Captain",
+  "icon": "goety:diamond_ice_axe",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The Rampart Captain is an elite illager who presides over an abandoned rampart atop towering peaks, zealously guarding it against intruders. Perhaps when bearing Bad Omen, crafting a Raiding Horn and using it in the mountain biome may lure his forces out—serving as a provocation against him."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_rampart_captain",
+      "text": ""
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Do not underestimate this foe—his attacks are powerful and he has many tricks up his sleeve. When facing him, beware of flying ice axes and fierce wind blasts, and you may just manage to defeat this threat."
+    }
+  ]
+}

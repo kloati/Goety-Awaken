@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "goetyawaken:parched_necromancer",
+    "goetyawaken:wraith_necromancer",
+    "goetyawaken:hostile_drowned_necromancer",
+    "goetyawaken:nameless_one"
+  ]
+}

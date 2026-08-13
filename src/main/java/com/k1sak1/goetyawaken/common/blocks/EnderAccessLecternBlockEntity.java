@@ -40,14 +40,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
-/**
- * Inspired by Refined Storage
- * 
- * @author raoulvdberge (Original Author)
- * @see <a href=
- *      "https://github.com/raoulvdberge/refinedstorage">Refined Storage
- *      Repository</a>
- */
 public class EnderAccessLecternBlockEntity extends BlockEntity implements MenuProvider {
     private static final int CRAFTING_GRID_SIZE = 9;
 
@@ -78,14 +70,19 @@ public class EnderAccessLecternBlockEntity extends BlockEntity implements MenuPr
     private boolean networkInitialized = false;
     private final List<EchoingEnderShelfBlockEntity> connectedShelves = new ArrayList<>();
 
+    private boolean cachedHasSoulEnergy = false;
+    private long lastEnergyCheckTick = Long.MIN_VALUE;
+
     private static final String NBT_SORTING_DIRECTION = "SortingDirection";
     private static final String NBT_SORTING_TYPE = "SortingType";
     private static final String NBT_VIEW_TYPE = "ViewType";
     private static final String NBT_SEARCH_BOX_MODE = "SearchBoxMode";
+    private static final String NBT_SIZE = "GridSize";
     private int sortingDirection = 0;
     private int sortingType = 0;
     private int viewType = 0;
     private int searchBoxMode = 0;
+    private int size = GridConstants.SIZE_MEDIUM;
 
     public EnderAccessLecternBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntities.ENDER_ACCESS_LECTERN.get(), pPos, pBlockState);
@@ -116,6 +113,12 @@ public class EnderAccessLecternBlockEntity extends BlockEntity implements MenuPr
         if (pTag.contains(NBT_SEARCH_BOX_MODE)) {
             searchBoxMode = pTag.getInt(NBT_SEARCH_BOX_MODE);
         }
+        if (pTag.contains(NBT_SIZE)) {
+            int s = pTag.getInt(NBT_SIZE);
+            if (GridConstants.isValidSize(s)) {
+                size = s;
+            }
+        }
     }
 
     @Override
@@ -136,6 +139,7 @@ public class EnderAccessLecternBlockEntity extends BlockEntity implements MenuPr
         pTag.putInt(NBT_SORTING_TYPE, sortingType);
         pTag.putInt(NBT_VIEW_TYPE, viewType);
         pTag.putInt(NBT_SEARCH_BOX_MODE, searchBoxMode);
+        pTag.putInt(NBT_SIZE, size);
     }
 
     public static void serverTick(Level level, BlockPos pos, BlockState state,
@@ -147,7 +151,13 @@ public class EnderAccessLecternBlockEntity extends BlockEntity implements MenuPr
             blockEntity.scanForShelves();
         }
 
-        boolean hasEnergy = blockEntity.hasSoulEnergy();
+        blockEntity.refreshSoulEnergy();
+
+        if (blockEntity.network != null) {
+            blockEntity.network.update();
+        }
+
+        boolean hasEnergy = blockEntity.cachedHasSoulEnergy;
         boolean isActive = state.getValue(EnderAccessLecternBlock.ACTIVE);
         if (hasEnergy != isActive) {
             level.setBlock(pos, state.setValue(EnderAccessLecternBlock.ACTIVE, Boolean.valueOf(hasEnergy)), 3);
@@ -156,8 +166,9 @@ public class EnderAccessLecternBlockEntity extends BlockEntity implements MenuPr
 
     @Nullable
     public CursedCageBlockEntity getCursedCage() {
-        if (level == null)
+        if (level == null) {
             return null;
+        }
         BlockPos below = worldPosition.below();
         net.minecraft.world.level.block.entity.BlockEntity be = level.getBlockEntity(below);
         if (be instanceof CursedCageBlockEntity cage) {
@@ -167,12 +178,48 @@ public class EnderAccessLecternBlockEntity extends BlockEntity implements MenuPr
     }
 
     public boolean hasSoulEnergy() {
+        if (level != null && !level.isClientSide) {
+            long gameTime = level.getGameTime();
+            if (gameTime - lastEnergyCheckTick < 20) {
+                return cachedHasSoulEnergy;
+            }
+            refreshSoulEnergy();
+        }
+        return cachedHasSoulEnergy;
+    }
+
+    public void refreshSoulEnergy() {
+        lastEnergyCheckTick = level != null ? level.getGameTime() : -1;
+        cachedHasSoulEnergy = computeSoulEnergy();
+    }
+
+    private boolean computeSoulEnergy() {
         CursedCageBlockEntity cage = getCursedCage();
-        return cage != null && cage.getSouls() > 0;
+        boolean hasEnergy = false;
+        if (cage != null) {
+            int souls = cage.getSouls();
+            if (souls == 0 && !cage.getItem().isEmpty()) {
+                net.minecraft.world.item.ItemStack item = cage.getItem();
+                if (item.hasTag() && item.getTag().contains("owner")) {
+                    java.util.UUID ownerUUID = item.getTag().getUUID("owner");
+                    if (level instanceof net.minecraft.server.level.ServerLevel serverLevel) {
+                        net.minecraft.server.MinecraftServer server = serverLevel.getServer();
+                        if (server != null) {
+                            net.minecraft.server.level.ServerPlayer owner = server.getPlayerList().getPlayer(ownerUUID);
+                            if (owner != null) {
+                                souls = com.Polarice3.Goety.utils.SEHelper.getSESouls(owner);
+                            }
+                        }
+                    }
+                }
+            }
+            hasEnergy = souls > 0;
+        }
+        return hasEnergy;
     }
 
     private void initializeNetwork() {
-        if (level == null || level.isClientSide) {
+        if (level == null || level.isClientSide || isRemoved()) {
             return;
         }
 
@@ -213,6 +260,20 @@ public class EnderAccessLecternBlockEntity extends BlockEntity implements MenuPr
         }
 
         if (oldShelfPositions.equals(newShelfPositions)) {
+            boolean bound = false;
+            for (EchoingEnderShelfBlockEntity shelf : newShelves) {
+                if (!shelf.getNetworks().contains(network)) {
+                    shelf.bindNetwork(network);
+                    shelf.addConnectedLectern(this);
+                    bound = true;
+                }
+            }
+            connectedShelves.clear();
+            connectedShelves.addAll(newShelves);
+            if (bound) {
+                network.getNodeGraph().invalidate();
+                network.getItemStorageCache().invalidate(InvalidateCause.CONNECTED_STATE_CHANGED);
+            }
             return;
         }
 
@@ -224,7 +285,7 @@ public class EnderAccessLecternBlockEntity extends BlockEntity implements MenuPr
 
         for (EchoingEnderShelfBlockEntity shelf : newShelves) {
             if (!oldShelfPositions.contains(shelf.getBlockPos())) {
-                shelf.setNetwork(network);
+                shelf.bindNetwork(network);
                 shelf.addConnectedLectern(this);
             }
         }
@@ -455,14 +516,24 @@ public class EnderAccessLecternBlockEntity extends BlockEntity implements MenuPr
         setChanged();
     }
 
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        if (GridConstants.isValidSize(size)) {
+            this.size = size;
+            setChanged();
+        }
+    }
+
     public void onRecipeTransfer(Player player, ItemStack[][] recipe) {
         for (int i = 0; i < craftingMatrix.getContainerSize(); ++i) {
             ItemStack slot = craftingMatrix.getItem(i);
 
             if (!slot.isEmpty()) {
                 if (network != null) {
-                    ItemStack remainder = network.insertItem(slot, slot.getCount(), Action.SIMULATE);
-                    if (!remainder.isEmpty()) {
+                    if (!network.insertItem(slot, slot.getCount(), Action.SIMULATE).isEmpty()) {
                         return;
                     }
                     network.insertItem(slot, slot.getCount(), Action.PERFORM);
@@ -484,8 +555,8 @@ public class EnderAccessLecternBlockEntity extends BlockEntity implements MenuPr
                     for (ItemStack possibility : possibilities) {
                         if (possibility.isEmpty())
                             continue;
-                        ItemStack took = network.extractItem(possibility, 1, IComparer.COMPARE_NBT,
-                                Action.PERFORM, s -> true);
+                        ItemStack took = network.extractItem(possibility, possibility.getCount(),
+                                IComparer.COMPARE_NBT, Action.PERFORM, s -> true);
                         if (!took.isEmpty()) {
                             craftingMatrix.setItem(i, took);
                             found = true;
@@ -498,6 +569,7 @@ public class EnderAccessLecternBlockEntity extends BlockEntity implements MenuPr
                     for (ItemStack possibility : possibilities) {
                         if (possibility.isEmpty())
                             continue;
+                        boolean match = false;
                         for (int j = 0; j < player.getInventory().getContainerSize(); ++j) {
                             ItemStack invStack = player.getInventory().getItem(j);
                             if (StorageAPI.instance().getComparer().isEqual(possibility, invStack,
@@ -505,11 +577,11 @@ public class EnderAccessLecternBlockEntity extends BlockEntity implements MenuPr
                                 craftingMatrix.setItem(i,
                                         ItemHandlerHelper.copyStackWithSize(invStack, 1));
                                 player.getInventory().removeItem(j, 1);
-                                found = true;
+                                match = true;
                                 break;
                             }
                         }
-                        if (found)
+                        if (match)
                             break;
                     }
                 }
@@ -526,11 +598,26 @@ public class EnderAccessLecternBlockEntity extends BlockEntity implements MenuPr
 
     @Nullable
     public IItemGridHandler getItemGridHandler() {
+        if (isRemoved()) {
+            return null;
+        }
+        if (!networkInitialized && level != null && !level.isClientSide) {
+            initializeNetwork();
+        }
+
         return network != null ? network.getItemGridHandler() : null;
     }
 
     @Nullable
     public IStorageCache<ItemStack> getStorageCache() {
+        if (isRemoved()) {
+            return null;
+        }
+        if (!networkInitialized && level != null && !level.isClientSide) {
+
+            initializeNetwork();
+        }
+
         return network != null ? network.getItemStorageCache() : null;
     }
 
@@ -577,7 +664,9 @@ public class EnderAccessLecternBlockEntity extends BlockEntity implements MenuPr
 
     public void onShelfRemoved(EchoingEnderShelfBlockEntity shelf) {
         connectedShelves.remove(shelf);
-        networkInitialized = false;
+        if (network != null) {
+            network.getItemStorageCache().invalidate(InvalidateCause.NETWORK_CHANGED);
+        }
     }
 
     @Override
@@ -590,7 +679,9 @@ public class EnderAccessLecternBlockEntity extends BlockEntity implements MenuPr
 
         if (network != null) {
             network.onRemoved();
+            network = null;
         }
+        networkInitialized = false;
     }
 
     @Override

@@ -187,7 +187,8 @@ public class GATextStyleUtils {
       s = Mth.clamp(s, 0.0F, 1.0F);
       v = Mth.clamp(v, 0.0F, 1.0F);
       if (s == 0.0F) {
-         return (int) (v * 1.6777215E7F);
+         int gray = Mth.clamp((int) (v * 255.0F), 0, 255);
+         return gray << 16 | gray << 8 | gray;
       } else {
          float hPrime = h / 60.0F;
          int sector = (int) Math.floor((double) hPrime);
@@ -233,8 +234,10 @@ public class GATextStyleUtils {
                throw new IllegalStateException("Unexpected sector: " + sector);
          }
 
-         return Mth.clamp((int) (rf * 255.0F * 255.0F * 255.0F), 0, 16711425)
-               + Mth.clamp((int) (gf * 255.0F * 255.0F), 0, 65535) + Mth.clamp((int) (bf * 255.0F), 0, 255);
+         int ri = Mth.clamp((int) (rf * 255.0F), 0, 255);
+         int gi = Mth.clamp((int) (gf * 255.0F), 0, 255);
+         int bi = Mth.clamp((int) (bf * 255.0F), 0, 255);
+         return ri << 16 | gi << 8 | bi;
       }
    }
 }

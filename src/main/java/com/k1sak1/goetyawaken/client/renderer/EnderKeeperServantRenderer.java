@@ -1,13 +1,17 @@
 package com.k1sak1.goetyawaken.client.renderer;
 
 import com.Polarice3.Goety.Goety;
+import com.Polarice3.Goety.utils.MathHelper;
+import com.Polarice3.Goety.utils.ModelUtil;
+import com.Polarice3.Goety.utils.ModelSnapshot;
 import com.k1sak1.goetyawaken.GoetyAwaken;
 import com.k1sak1.goetyawaken.client.model.EnderKeeperServantModel;
 import com.k1sak1.goetyawaken.client.ClientEventHandler;
 import com.k1sak1.goetyawaken.common.entities.ally.EnderKeeperServant;
-import com.Polarice3.Goety.utils.MathHelper;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.datafixers.util.Pair;
+import com.mojang.math.Axis;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -17,8 +21,10 @@ import net.minecraft.client.renderer.entity.layers.EyesLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
+import java.util.Map;
 
 public class EnderKeeperServantRenderer
         extends MobRenderer<EnderKeeperServant, EnderKeeperServantModel<EnderKeeperServant>> {
@@ -26,10 +32,20 @@ public class EnderKeeperServantRenderer
             "textures/entity/ender_keeper_servant.png");
     protected static final ResourceLocation DEATH = Goety.location("textures/entity/enderling/keeper/keeper_death.png");
 
+    private static final RenderType TRAIL_RENDER_TYPE = ModRenderTypes
+            .entityTranslucentNoDepth(ENDER_KEEPER_SERVANT_TEXTURE);
+
+    private static final float SNAPSHOT_INTERVAL = 1.5F;
+    private static final float SNAPSHOT_LIFESPAN = 4.5F;
+
+    private final EnderKeeperServantModel<EnderKeeperServant> shadowModel;
+
     public EnderKeeperServantRenderer(EntityRendererProvider.Context context) {
         super(context, new EnderKeeperServantModel<>(context.bakeLayer(ClientEventHandler.ENDER_KEEPER_SERVANT_LAYER)),
                 0.5F);
         this.addLayer(new GlowLayer<>(this));
+        this.shadowModel = new EnderKeeperServantModel<>(
+                context.bakeLayer(ClientEventHandler.ENDER_KEEPER_SERVANT_SHADOW_LAYER));
     }
 
     @Override
@@ -60,6 +76,65 @@ public class EnderKeeperServantRenderer
             this.model.renderToBuffer(matrixStack, ivertexbuilder1, packedLight, OverlayTexture.pack(0.0F, flag), f10,
                     f10, f10, 1.0F);
             matrixStack.popPose();
+        }
+
+        if (entity.isAlive()) {
+            double currentX = Mth.lerp(partialTicks, entity.xo, entity.getX());
+            double currentY = Mth.lerp(partialTicks, entity.yo, entity.getY());
+            double currentZ = Mth.lerp(partialTicks, entity.zo, entity.getZ());
+            float currentTick = getBob(entity, partialTicks);
+
+            if (entity.trailSnapshots.isEmpty() || currentTick - entity.lastTrailTick > SNAPSHOT_INTERVAL) {
+                if (entity.shouldAddTrailSnapshot()) {
+                    Map<String, com.Polarice3.Goety.utils.ModelPartPose> snapshot = ModelUtil.saveModelSnapshot(
+                            this.getModel().allPartNames,
+                            this.getModel()::getAnyDescendantWithName);
+                    entity.trailSnapshots.add(0, Pair.of(
+                            new Vec3(currentX, currentY, currentZ),
+                            new ModelSnapshot(
+                                    0,
+                                    Mth.rotLerp(partialTicks, entity.yBodyRotO, entity.yBodyRot),
+                                    currentTick,
+                                    snapshot)));
+                    entity.lastTrailTick = currentTick;
+                }
+
+                entity.trailSnapshots.removeIf(p -> currentTick - p.getSecond().timestamp() > SNAPSHOT_LIFESPAN);
+
+                while (entity.trailSnapshots.size() > 32) {
+                    entity.trailSnapshots.remove(entity.trailSnapshots.size() - 1);
+                }
+            }
+
+            for (int i = 0; i < entity.trailSnapshots.size(); i++) {
+                matrixStack.pushPose();
+
+                Vec3 trailPos = entity.trailSnapshots.get(i).getFirst();
+                ModelSnapshot snapshot = entity.trailSnapshots.get(i).getSecond();
+
+                ModelUtil.loadPoseFromSnapshot(snapshot.poses(), this.shadowModel::getAnyDescendantWithName);
+
+                matrixStack.translate(trailPos.x - currentX, trailPos.y - currentY, trailPos.z - currentZ);
+
+                matrixStack.mulPose(Axis.YP.rotationDegrees(180.0F - snapshot.yRot()));
+
+                matrixStack.scale(-1.0F, -1.0F, 1.0F);
+
+                this.scale(entity, matrixStack, partialTicks);
+                matrixStack.translate(0.0F, -1.5F, 0.0F);
+
+                float modelAlpha = (1
+                        - Mth.clamp(currentTick - snapshot.timestamp(), 0, SNAPSHOT_LIFESPAN) / SNAPSHOT_LIFESPAN)
+                        * 0.35F;
+
+                if (modelAlpha > 0) {
+                    VertexConsumer vertexConsumer = buffer.getBuffer(TRAIL_RENDER_TYPE);
+                    this.shadowModel.renderToBuffer(matrixStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY,
+                            1.0F, 1.0F, 1.0F, modelAlpha);
+                }
+
+                matrixStack.popPose();
+            }
         }
     }
 

@@ -13,16 +13,7 @@
       "item": "minecraft:gold_block"
     },
     {
-      "item": "minecraft:gold_block"
-    },
-    {
       "item": "goetyawaken:glowing_ember"
-    },
-    {
-      "item": "goetyawaken:glowing_ember"
-    },
-    {
-      "item": "minecraft:netherite_scrap"
     },
     {
       "item": "minecraft:netherite_scrap"
@@ -34,20 +25,11 @@
       "item": "goety:dark_ingot"
     },
     {
-      "item": "goety:dark_ingot"
-    },
-    {
-      "item": "goety:dark_ingot"
-    },
-    {
-      "item": "goety:dark_ingot"
-    },
-    {
       "item": "goety:mystic_core"
     }
   ],
   "result": {
     "item": "goetyawaken:gilded_ingot",
-    "count": 2
+    "count": 1
   }
 }

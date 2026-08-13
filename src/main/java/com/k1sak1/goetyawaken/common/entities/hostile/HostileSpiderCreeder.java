@@ -3,7 +3,6 @@ package com.k1sak1.goetyawaken.common.entities.hostile;
 import com.Polarice3.Goety.common.entities.neutral.Owned;
 import com.Polarice3.Goety.utils.LootingExplosion;
 import com.k1sak1.goetyawaken.common.entities.ally.SpiderCreeder;
-
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;

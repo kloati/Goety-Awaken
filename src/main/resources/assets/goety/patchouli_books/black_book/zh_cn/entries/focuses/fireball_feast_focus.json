@@ -1,0 +1,17 @@
+{
+  "name": "火球盛宴聚晶",
+  "icon": "goetyawaken:fireball_feast_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "烈焰人和恶魂的火球固然凶猛，但是对你而言这样的火力还是不够\"爽\"——有没有更猛烈地倾泻下界法术引以为傲的火力的方法呢？"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:fireball_feast_focus",
+      "text": "火力压制！"
+    }
+  ],
+  "extra_recipe_mappings": {"goetyawaken:fireball_feast_focus":0}
+}

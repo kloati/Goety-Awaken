@@ -1,0 +1,22 @@
+{
+  "name": "Stalker Servant",
+  "icon": "deeperdarker:soul_crystal",
+  "category": "goety:goetyawaken_summons",
+  "flag": "goetyawaken:deeperdarker_loaded",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Since even a creature as twisted and horrifying as the Warden—a sculk abomination—can be bound by the power of dark magic, the Stalker from the deep dark dimension is naturally no exception. After all, they share the same origin as the Warden, and this weaker sculk creature is of course even easier to enslave. Simply slay one to obtain a crystal condensed from nearly all of its soul power—and you know better than anyone what that means for a wizard who manipulates souls."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:stalker_servant",
+      "text": ""
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:stalker_servant",
+      "text": "The Stalker Servant retains its curious symbiotic relationship with Sculk Leeches. It can incubate these voracious little creatures on its own body and fling them at enemies during combat, letting them gnaw through flesh on your behalf."
+    }
+  ]
+}

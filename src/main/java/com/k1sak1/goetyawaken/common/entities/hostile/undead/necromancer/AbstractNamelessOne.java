@@ -3,7 +3,6 @@ package com.k1sak1.goetyawaken.common.entities.hostile.undead.necromancer;
 import com.Polarice3.Goety.api.entities.ICustomAttributes;
 import com.Polarice3.Goety.api.entities.IOwned;
 import com.Polarice3.Goety.client.particles.*;
-import com.Polarice3.Goety.client.particles.GatherTrailParticleOption;
 import com.Polarice3.Goety.common.effects.GoetyEffects;
 import com.Polarice3.Goety.common.entities.ally.Summoned;
 import com.Polarice3.Goety.common.entities.ally.undead.PhantomServant;
@@ -31,7 +30,9 @@ import com.Polarice3.Goety.utils.BlockFinder;
 import com.Polarice3.Goety.utils.ColorUtil;
 import com.Polarice3.Goety.utils.EffectsUtil;
 import com.Polarice3.Goety.utils.MobUtil;
+import com.Polarice3.Goety.utils.ModelSnapshot;
 import com.Polarice3.Goety.utils.ServerParticleUtil;
+import com.mojang.datafixers.util.Pair;
 import com.Polarice3.Goety.utils.SoundUtil;
 import com.Polarice3.Goety.common.magic.spells.storm.ThunderboltSpell;
 import com.Polarice3.Goety.common.magic.SpellStat;
@@ -72,6 +73,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.tags.FluidTags;
 import java.util.Random;
 import net.minecraft.util.Mth;
@@ -164,9 +166,20 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
     public final AnimationState stabAnimationState = new AnimationState();
     public final AnimationState breatheAnimationState = new AnimationState();
     public final AnimationState deathAnimationState = new AnimationState();
+    public int baseAnimTransitionTick = 0;
+    public static final int BASE_ANIM_TRANSITION_DURATION = 5;
+    public String transitionFromKey = "";
+    public String transitionToKey = "";
+    private String currentAnimKey = "";
     protected int mirrorSpellCool = 0;
     protected int soldierSpellCool = 0;
     protected int necromancerSpellCool = 0;
+    protected int summonScanTimer = -999;
+    protected int summonCount = 0;
+    protected int mirrorScanTimer = -999;
+    protected int mirrorCount = 0;
+    protected int soldierScanTimer = -999;
+    protected int soldierCount = 0;
     protected int rangespellattackCool = 0;
     protected int thunderstormCool = 0;
     protected int desertPlaguesCool = 0;
@@ -189,22 +202,42 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
     private boolean hasTriggeredSpawnQuote = false;
     private boolean hasTriggeredDiscoverEnemyQuote = false;
 
+    public final List<Pair<Vec3, ModelSnapshot>> trailSnapshots = new java.util.ArrayList<>(50);
+    private Vec3 lastTrailPosition = null;
+
     public AbstractNamelessOne(EntityType<? extends AbstractNecromancer> type, Level level) {
         super(type, level);
+        this.setMaxUpStep(1.25F);
         this.damageCapManager = new DamageCapManager(this);
         this.setPathfindingMalus(net.minecraft.world.level.pathfinder.BlockPathTypes.LAVA, 8.0F);
         this.setAnimationState(HEART_OF_THE_NIGHT_ANIM);
         this.prevVecPos = this.position();
         this.setPersistenceRequired();
+        this.noCulling = true;
     }
 
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty,
             MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
         SpawnGroupData spawnGroupData = super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
-        this.setConfigurableAttributes();
-        this.setHealth(this.getMaxHealth());
         return spawnGroupData;
+    }
+
+    @Override
+    public boolean isNatural() {
+        return false;
+    }
+
+    @Nullable
+    @Override
+    public EntityType<?> getVariant(@Nullable Player player, Level level, BlockPos blockPos) {
+        return null;
+    }
+
+    @Nullable
+    @Override
+    public EntityType<?> getVariant(Level level, BlockPos blockPos) {
+        return null;
     }
 
     @Override
@@ -249,14 +282,11 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
             double newMaxHealth = com.k1sak1.goetyawaken.config.AttributesConfig.NamelessOneHealth.get() *
                     Math.max(0.5 * clampedLevel + 0.75F, 1);
             attributeInstance.setBaseValue(newMaxHealth);
-            if (this.damageCapManager != null) {
-                float maxProgress = (float) newMaxHealth;
-                float healthRatio = this.getHealth() / this.getMaxHealth();
-                float newHealth = maxProgress * healthRatio;
-                this.damageCapManager.setPeakCombatHealth(maxProgress);
-                this.damageCapManager.setCurrentCombatHealth(newHealth);
-                this.setVanillaHealth(newHealth);
-            }
+            float maxProgress = (float) newMaxHealth;
+            float healthRatio = this.getHealth() / this.getMaxHealth();
+            float newHealth = maxProgress * healthRatio;
+            this.setHealth(newHealth);
+
         }
         this.reapplyPosition();
         this.refreshDimensions();
@@ -324,110 +354,6 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
             this.setYRot(this.yHeadRot);
             this.yBodyRot = this.yHeadRot;
         }
-
-        if (ANIM_STATE.equals(dataAccessor)) {
-            if (this.level().isClientSide) {
-                switch (this.getAnimationState()) {
-                    case 0:
-                        this.stopAllAnimations();
-                        break;
-                    case ATTACK_ANIM:
-                        this.attackAnimationState.startIfStopped(this.tickCount);
-                        this.stopOtherAnimations(this.attackAnimationState);
-                        break;
-                    case SUMMON_ANIM:
-                        this.summonAnimationState.startIfStopped(this.tickCount);
-                        this.stopOtherAnimations(this.summonAnimationState);
-                        break;
-                    case SPELL_ANIM:
-                        this.spellAnimationState.startIfStopped(this.tickCount);
-                        this.stopOtherAnimations(this.spellAnimationState);
-                        break;
-                    case ALERT_ANIM:
-                        this.alertAnimationState.startIfStopped(this.tickCount);
-                        this.stopOtherAnimations(this.alertAnimationState);
-                        break;
-                    case FLY_ANIM:
-                        this.flyAnimationState.startIfStopped(this.tickCount);
-                        this.stopOtherAnimations(this.flyAnimationState);
-                        break;
-                    case WALK_ANIM:
-                        this.walkAnimationState.startIfStopped(this.tickCount);
-                        this.stopOtherAnimations(this.walkAnimationState);
-                        break;
-                    case WALK2_ANIM:
-                        this.walk2AnimationState.startIfStopped(this.tickCount);
-                        this.stopOtherAnimations(this.walk2AnimationState);
-                        break;
-                    case UPDRAFT_ANIM:
-                        this.updrafAnimationState.startIfStopped(this.tickCount);
-                        this.stopOtherAnimations(this.updrafAnimationState);
-                        break;
-                    case STORM_ANIM:
-                        this.stormAnimationState.startIfStopped(this.tickCount);
-                        this.stopOtherAnimations(this.stormAnimationState);
-                        break;
-                    case STORM2_ANIM:
-                        this.storm2AnimationState.startIfStopped(this.tickCount);
-                        this.stopOtherAnimations(this.storm2AnimationState);
-                        break;
-                    case RAPID_ANIM:
-                        this.rapidAnimationState.startIfStopped(this.tickCount);
-                        this.stopOtherAnimations(this.rapidAnimationState);
-                        break;
-                    case TELEPORTOUT_ANIM:
-                        this.teleportoutAnimationState.startIfStopped(this.tickCount);
-                        this.stopOtherAnimations(this.teleportoutAnimationState);
-                        break;
-                    case TELEPORTIN_ANIM:
-                        this.teleportinAnimationState.startIfStopped(this.tickCount);
-                        this.stopOtherAnimations(this.teleportinAnimationState);
-                        break;
-                    case RANGE_SPELL_ATTACK_ANIM:
-                        this.rangeSpellAttackAnimationState.startIfStopped(this.tickCount);
-                        this.stopOtherAnimations(this.rangeSpellAttackAnimationState);
-                        break;
-                    case WAKE_ANIM:
-                        this.wakeAnimationState.startIfStopped(this.tickCount);
-                        this.stopOtherAnimations(this.wakeAnimationState);
-                        break;
-                    case AVADA_ANIM:
-                        this.avadaAnimationState.startIfStopped(this.tickCount);
-                        this.stopOtherAnimations(this.avadaAnimationState);
-                        break;
-                    case QUAKE1_ANIM:
-                        this.quake1AnimationState.startIfStopped(this.tickCount);
-                        this.stopOtherAnimations(this.quake1AnimationState);
-                        break;
-                    case QUAKE2_ANIM:
-                        this.quake2AnimationState.startIfStopped(this.tickCount);
-                        this.stopOtherAnimations(this.quake2AnimationState);
-                        break;
-                    case SLOW_SPELL_ANIM:
-                        this.slowSpellAnimationState.startIfStopped(this.tickCount);
-                        this.stopOtherAnimations(this.slowSpellAnimationState);
-                        break;
-                    case LEECHING_SPELL_ANIM:
-                        this.leechingSpellAnimationState.startIfStopped(this.tickCount);
-                        this.stopOtherAnimations(this.leechingSpellAnimationState);
-                        break;
-                    case STAB_ANIM:
-                        this.stabAnimationState.startIfStopped(this.tickCount);
-                        this.stopOtherAnimations(this.stabAnimationState);
-                        break;
-                    case BREATHE_ANIM:
-                        this.breatheAnimationState.startIfStopped(this.tickCount);
-                        this.stopOtherAnimations(this.breatheAnimationState);
-                        break;
-                    case DEAD_ANIM:
-                        this.deathAnimationState.startIfStopped(this.tickCount);
-                        this.stopOtherAnimations(this.deathAnimationState);
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
         super.onSyncedDataUpdated(dataAccessor);
     }
 
@@ -484,21 +410,7 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        Random random = new Random();
-        int choice = random.nextInt(4) + 1;
-        switch (choice) {
-            case 1:
-                return ModSounds.NAMELESS_ONE_HURT_1.get();
-            case 2:
-                return ModSounds.NAMELESS_ONE_HURT_2.get();
-            case 3:
-                return ModSounds.NAMELESS_ONE_HURT_3.get();
-            case 4:
-                return ModSounds.NAMELESS_ONE_HURT_4.get();
-            default:
-                return ModSounds.NAMELESS_ONE_HURT_1.get();
-        }
-
+        return ModSounds.NAMELESS_ONE_HURT.get();
     }
 
     protected void trySummonScarletVex() {
@@ -517,7 +429,7 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
                 LivingEntity target = this.getTarget();
                 if (target != null && target.isAlive()) {
                     ServerLevel serverLevel = (ServerLevel) this.level();
-                    int summonCount = this.random.nextInt(2) + 1;
+                    int summonCount = 1;
                     List<BlockPos> spawnPositions = this.findValidSpawnPositionsAroundTarget(target, 8, summonCount);
                     if (!spawnPositions.isEmpty()) {
                         for (BlockPos spawnPos : spawnPositions) {
@@ -532,7 +444,6 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
                                     com.k1sak1.goetyawaken.common.entities.ModEntityType.SCARLET_VEX.get(),
                                     this.level());
                             scarletVex.moveTo(spawnVec.x, spawnVec.y, spawnVec.z, this.getYRot(), this.getXRot());
-
                             scarletVex.setTrueOwner(this);
                             scarletVex.setLifespan(1200);
                             scarletVex.setHasLifespan(true);
@@ -603,42 +514,12 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
 
     @Override
     protected SoundEvent getStepSound() {
-        Random random = new Random();
-        int choice = random.nextInt(4) + 1;
-        switch (choice) {
-            case 1:
-                return ModSounds.NAMELESS_ONE_FLY_1.get();
-            case 2:
-                return ModSounds.NAMELESS_ONE_FLY_2.get();
-            case 3:
-                return ModSounds.NAMELESS_ONE_FLY_3.get();
-            case 4:
-                return ModSounds.NAMELESS_ONE_FLY_4.get();
-            default:
-                return ModSounds.NAMELESS_ONE_FLY_1.get();
-        }
+        return ModSounds.NAMELESS_ONE_FLY.get();
     }
 
     @Override
     protected SoundEvent getAmbientSound() {
-        Random random = new Random();
-        int choice = random.nextInt(6) + 1;
-        switch (choice) {
-            case 1:
-                return ModSounds.NAMELESS_ONE_IDLE_1.get();
-            case 2:
-                return ModSounds.NAMELESS_ONE_IDLE_2.get();
-            case 3:
-                return ModSounds.NAMELESS_ONE_IDLE_3.get();
-            case 4:
-                return ModSounds.NAMELESS_ONE_LAUGH_SHORT_1.get();
-            case 5:
-                return ModSounds.NAMELESS_ONE_LAUGH_SHORT_2.get();
-            case 6:
-                return ModSounds.NAMELESS_ONE_LAUGH_SHORT_3.get();
-            default:
-                return ModSounds.NAMELESS_ONE_IDLE_1.get();
-        }
+        return ModSounds.NAMELESS_ONE_IDLE.get();
     }
 
     public int xpReward() {
@@ -792,30 +673,27 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
         int startAngle = 0;
         int endAngle = 0;
 
-        if (this.isMirror()) {
-            startAngle = 0;
-            endAngle = 0;
-        } else {
-            float healthPercentage = this.getHealth() / this.getMaxHealth();
-            float damageTakenPercentage = 1.0F - healthPercentage;
-            float random = this.level().random.nextFloat();
-            if (random < damageTakenPercentage) {
-                startAngle = -2;
-                endAngle = 2;
-            } else if (random < damageTakenPercentage * 2) {
-                startAngle = -1;
-                endAngle = 1;
-            } else {
-                startAngle = 0;
-                endAngle = 0;
-            }
-        }
         boolean enableHoming = false;
-        if (!AbstractNamelessOne.this.isEasyMode()) {
-            enableHoming = this.getHealth() < this.getMaxHealth() * 0.4F;
-        } else {
-            startAngle = 0;
-            endAngle = 0;
+        net.minecraft.world.Difficulty currentDifficulty = this.level().getDifficulty();
+        boolean allowMultiShot = com.k1sak1.goetyawaken.Config.NAMELESS_ONE_MULTI_SHOT.get();
+        if (currentDifficulty == net.minecraft.world.Difficulty.HARD && !AbstractNamelessOne.this.isEasyMode()
+                && allowMultiShot) {
+            // enableHoming = this.getHealth() < this.getMaxHealth() * 0.2F;
+            if (!this.isMirror()) {
+                float healthPercentage = this.getHealth() / this.getMaxHealth();
+                float damageTakenPercentage = 1.0F - healthPercentage;
+                float random = this.level().random.nextFloat();
+                if (random < damageTakenPercentage) {
+                    startAngle = -2;
+                    endAngle = 2;
+                } else if (random < damageTakenPercentage * 2) {
+                    startAngle = -1;
+                    endAngle = 1;
+                } else {
+                    startAngle = 0;
+                    endAngle = 0;
+                }
+            }
         }
 
         for (int i = startAngle; i <= endAngle; i++) {
@@ -826,7 +704,6 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
             Vec3 rotatedVec = new Vec3(rotatedX, targetVec.y, rotatedZ);
             com.k1sak1.goetyawaken.common.entities.projectiles.NamelessBolt namelessBolt = new com.k1sak1.goetyawaken.common.entities.projectiles.NamelessBolt(
                     this, rotatedVec.x, rotatedVec.y, rotatedVec.z, this.level());
-
             namelessBolt.setPos(this.getX(), this.getEyeY() - 0.3D, this.getZ());
             namelessBolt.setOwner(this);
             float healthbasedamage = 0;
@@ -866,8 +743,6 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
                         livingTarget.hurt(
                                 com.Polarice3.Goety.utils.ModDamageSource.deathCurse(this),
                                 deathDamageWithPercentage);
-                        livingTarget.addEffect(new net.minecraft.world.effect.MobEffectInstance(
-                                com.Polarice3.Goety.common.effects.GoetyEffects.FREEZING.get(), 45 * 20, 0));
                         livingTarget.invulnerableTime = 0;
                     }
                 }
@@ -894,23 +769,51 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
 
     @Override
     public void tick() {
+        Vec3 posBeforeTick = this.position();
         super.tick();
         this.damageCapManager.performTick();
-        if (!AbstractNamelessOne.this.isEasyMode()) {
-            this.lowHealthSpellPushEntities();
+        if (this.level().isClientSide && !this.isMirror()) {
+            float currentTick = this.tickCount;
+            this.trailSnapshots.removeIf(p -> currentTick - p.getSecond().timestamp() > p.getSecond().xRot());
+            Vec3 currentPos = this.position();
+            if (this.lastTrailPosition != null) {
+                double delta = posBeforeTick.distanceTo(currentPos);
+                if (delta > 2.0) {
+                    Vec3 oldPos = this.lastTrailPosition;
+                    int numSnapshots = 4;
+                    for (int k = 0; k <= numSnapshots; k++) {
+                        double t = (double) k / numSnapshots;
+                        Vec3 trailPos = oldPos.add(currentPos.subtract(oldPos).scale(t));
+                        float lifespan = 5.0F + (float) t * 5.0F;
+                        this.trailSnapshots.add(0, Pair.of(trailPos, new ModelSnapshot(
+                                lifespan,
+                                this.yBodyRot,
+                                currentTick,
+                                java.util.Collections.emptyMap())));
+                    }
+                }
+            }
+            this.lastTrailPosition = posBeforeTick;
+        }
+        if (!this.isDeadOrDying() && !AbstractNamelessOne.this.isEasyMode()) {
+            if (this.level().getDifficulty() == net.minecraft.world.Difficulty.HARD) {
+                this.lowHealthSpellPushEntities();
+            }
             this.handleTeleportationLogic();
         }
         if (this.isOnFire() && !AbstractNamelessOne.this.isEasyMode()) {
             this.clearFire();
         }
         this.damageCapManager.validateHealthConsistency();
-        if (!this.level().isClientSide && !this.isMirror() && !AbstractNamelessOne.this.isEasyMode()) {
+        if (!this.isDeadOrDying() && !this.level().isClientSide && !this.isMirror()
+                && !AbstractNamelessOne.this.isEasyMode()
+                && com.k1sak1.goetyawaken.Config.ENABLE_NAMELESS_ONE_SCARLET_VEX_SUMMON.get()) {
             if (this.scarletVexSummonCool > 0) {
                 this.scarletVexSummonCool--;
             }
             this.trySummonScarletVex();
         }
-        if (!this.level().isClientSide) {
+        if (!this.level().isClientSide && !this.isDeadOrDying()) {
             if (this.isHostile()) {
                 if (!this.hasTriggeredSpawnQuote && this.tickCount % 20 == 0) {
                     if (this.level() instanceof ServerLevel serverLevel) {
@@ -1003,125 +906,7 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
                 }
             }
             this.heartofthenightAnimationState.startIfStopped(this.tickCount);
-            switch (this.getAnimationState()) {
-                case IDLE_ANIM:
-                    this.idleAnimationState.startIfStopped(this.tickCount);
-                    this.stopOtherAnimations(this.idleAnimationState);
-                    break;
-                case WALK_ANIM:
-                    this.walkAnimationState.startIfStopped(this.tickCount);
-                    this.stopOtherAnimations(this.walkAnimationState);
-                    break;
-                case ATTACK_ANIM:
-                    this.attackAnimationState.startIfStopped(this.tickCount);
-                    this.stopOtherAnimations(this.attackAnimationState);
-                    break;
-                case SUMMON_ANIM:
-                    this.summonAnimationState.startIfStopped(this.tickCount);
-                    this.stopOtherAnimations(this.summonAnimationState);
-                    break;
-                case SPELL_ANIM:
-                    this.spellAnimationState.startIfStopped(this.tickCount);
-                    this.stopOtherAnimations(this.spellAnimationState);
-                    break;
-                case ALERT_ANIM:
-                    this.alertAnimationState.startIfStopped(this.tickCount);
-                    this.stopOtherAnimations(this.alertAnimationState);
-                    break;
-                case FLY_ANIM:
-                    this.flyAnimationState.startIfStopped(this.tickCount);
-                    this.stopOtherAnimations(this.flyAnimationState);
-                    break;
-                case WALK2_ANIM:
-                    this.walk2AnimationState.startIfStopped(this.tickCount);
-                    this.stopOtherAnimations(this.walk2AnimationState);
-                    break;
-                case UPDRAFT_ANIM:
-                    this.updrafAnimationState.startIfStopped(this.tickCount);
-                    this.stopOtherAnimations(this.updrafAnimationState);
-                    break;
-                case STORM_ANIM:
-                    this.stormAnimationState.startIfStopped(this.tickCount);
-                    this.stopOtherAnimations(this.stormAnimationState);
-                    break;
-                case STORM2_ANIM:
-                    this.storm2AnimationState.startIfStopped(this.tickCount);
-                    this.stopOtherAnimations(this.storm2AnimationState);
-                    break;
-                case RAPID_ANIM:
-                    this.rapidAnimationState.startIfStopped(this.tickCount);
-                    this.stopOtherAnimations(this.rapidAnimationState);
-                    break;
-                case TELEPORTOUT_ANIM:
-                    this.teleportoutAnimationState.startIfStopped(this.tickCount);
-                    this.stopOtherAnimations(this.teleportoutAnimationState);
-                    break;
-                case TELEPORTIN_ANIM:
-                    this.teleportinAnimationState.startIfStopped(this.tickCount);
-                    this.stopOtherAnimations(this.teleportinAnimationState);
-                    break;
-                case RANGE_SPELL_ATTACK_ANIM:
-                    this.rangeSpellAttackAnimationState.startIfStopped(this.tickCount);
-                    this.stopOtherAnimations(this.rangeSpellAttackAnimationState);
-                    break;
-                case WAKE_ANIM:
-                    this.wakeAnimationState.startIfStopped(this.tickCount);
-                    this.stopOtherAnimations(this.wakeAnimationState);
-                    break;
-                case AVADA_ANIM:
-                    this.avadaAnimationState.startIfStopped(this.tickCount);
-                    this.stopOtherAnimations(this.avadaAnimationState);
-                    break;
-                case QUAKE1_ANIM:
-                    this.quake1AnimationState.startIfStopped(this.tickCount);
-                    this.stopOtherAnimations(this.quake1AnimationState);
-                    break;
-                case QUAKE2_ANIM:
-                    this.quake2AnimationState.startIfStopped(this.tickCount);
-                    this.stopOtherAnimations(this.quake2AnimationState);
-                    break;
-                case SLOW_SPELL_ANIM:
-                    this.slowSpellAnimationState.startIfStopped(this.tickCount);
-                    this.stopOtherAnimations(this.slowSpellAnimationState);
-                    break;
-                case LEECHING_SPELL_ANIM:
-                    this.leechingSpellAnimationState.startIfStopped(this.tickCount);
-                    this.stopOtherAnimations(this.leechingSpellAnimationState);
-                    break;
-                case STAB_ANIM:
-                    this.stabAnimationState.startIfStopped(this.tickCount);
-                    this.stopOtherAnimations(this.stabAnimationState);
-                    break;
-                case BREATHE_ANIM:
-                    this.breatheAnimationState.startIfStopped(this.tickCount);
-                    this.stopOtherAnimations(this.breatheAnimationState);
-                    break;
-                case DEAD_ANIM:
-                    this.deathAnimationState.startIfStopped(this.tickCount);
-                    this.stopOtherAnimations(this.deathAnimationState);
-                    break;
-                default:
-                    this.idleAnimationState.startIfStopped(this.tickCount);
-                    this.stopOtherAnimations(this.idleAnimationState);
-                    break;
-            }
-            if (this.isDeadOrDying()) {
-                this.deathAnimationState.startIfStopped(this.tickCount);
-                for (AnimationState animationState : new AnimationState[] {
-                        this.idleAnimationState, this.walkAnimationState, this.attackAnimationState,
-                        this.summonAnimationState, this.spellAnimationState, this.alertAnimationState,
-                        this.flyAnimationState, this.walk2AnimationState, this.updrafAnimationState,
-                        this.stormAnimationState, this.storm2AnimationState, this.rapidAnimationState,
-                        this.teleportoutAnimationState,
-                        this.teleportinAnimationState, this.rangeSpellAttackAnimationState,
-                        this.wakeAnimationState, this.avadaAnimationState, this.quake1AnimationState,
-                        this.quake2AnimationState, this.slowSpellAnimationState, this.leechingSpellAnimationState,
-                        this.stabAnimationState,
-                        this.breatheAnimationState
-                }) {
-                    animationState.stop();
-                }
-            }
+            this.tickAnimationTransitions();
         } else {
             if (!this.isShooting() && !this.isSpellCasting() &&
                     this.getAnimationState() != SUMMON_ANIM &&
@@ -1210,6 +995,232 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
         for (AnimationState state : this.getAnimations()) {
             if (state != exception && state != this.heartofthenightAnimationState) {
                 state.stop();
+            }
+        }
+    }
+
+    public String getCurrentAnimKey() {
+        return this.currentAnimKey;
+    }
+
+    private String computeDesiredAnimKey() {
+        switch (this.getAnimationState()) {
+            case IDLE_ANIM:
+                return "idle";
+            case WALK_ANIM:
+                return "walk";
+            case ATTACK_ANIM:
+                return "attack";
+            case SUMMON_ANIM:
+                return "summon";
+            case SPELL_ANIM:
+                return "spell";
+            case ALERT_ANIM:
+                return "alert";
+            case FLY_ANIM:
+                return "fly";
+            case WALK2_ANIM:
+                return "walk2";
+            case UPDRAFT_ANIM:
+                return "updraft";
+            case STORM_ANIM:
+                return "storm";
+            case RAPID_ANIM:
+                return "rapid";
+            case HEART_OF_THE_NIGHT_ANIM:
+                return "heart";
+            case TELEPORTOUT_ANIM:
+                return "teleportout";
+            case TELEPORTIN_ANIM:
+                return "teleportin";
+            case RANGE_SPELL_ATTACK_ANIM:
+                return "range_spell_attack";
+            case WAKE_ANIM:
+                return "wake";
+            case AVADA_ANIM:
+                return "avada";
+            case QUAKE1_ANIM:
+                return "quake1";
+            case QUAKE2_ANIM:
+                return "quake2";
+            case SLOW_SPELL_ANIM:
+                return "slow_spell";
+            case STAB_ANIM:
+                return "stab";
+            case BREATHE_ANIM:
+                return "breathe";
+            case DEAD_ANIM:
+                return "death";
+            case STORM2_ANIM:
+                return "storm2";
+            case LEECHING_SPELL_ANIM:
+                return "leeching_spell";
+            default:
+                return "idle";
+        }
+    }
+
+    private void startAnimationForKey(String key) {
+        switch (key) {
+            case "idle":
+                this.idleAnimationState.startIfStopped(this.tickCount);
+                break;
+            case "walk":
+                this.walkAnimationState.startIfStopped(this.tickCount);
+                break;
+            case "attack":
+                this.attackAnimationState.startIfStopped(this.tickCount);
+                break;
+            case "summon":
+                this.summonAnimationState.startIfStopped(this.tickCount);
+                break;
+            case "spell":
+                this.spellAnimationState.startIfStopped(this.tickCount);
+                break;
+            case "alert":
+                this.alertAnimationState.startIfStopped(this.tickCount);
+                break;
+            case "fly":
+                this.flyAnimationState.startIfStopped(this.tickCount);
+                break;
+            case "walk2":
+                this.walk2AnimationState.startIfStopped(this.tickCount);
+                break;
+            case "updraft":
+                this.updrafAnimationState.startIfStopped(this.tickCount);
+                break;
+            case "storm":
+                this.stormAnimationState.startIfStopped(this.tickCount);
+                break;
+            case "rapid":
+                this.rapidAnimationState.startIfStopped(this.tickCount);
+                break;
+            case "heart":
+                this.heartofthenightAnimationState.startIfStopped(this.tickCount);
+                break;
+            case "teleportout":
+                this.teleportoutAnimationState.startIfStopped(this.tickCount);
+                break;
+            case "teleportin":
+                this.teleportinAnimationState.startIfStopped(this.tickCount);
+                break;
+            case "range_spell_attack":
+                this.rangeSpellAttackAnimationState.startIfStopped(this.tickCount);
+                break;
+            case "wake":
+                this.wakeAnimationState.startIfStopped(this.tickCount);
+                break;
+            case "avada":
+                this.avadaAnimationState.startIfStopped(this.tickCount);
+                break;
+            case "quake1":
+                this.quake1AnimationState.startIfStopped(this.tickCount);
+                break;
+            case "quake2":
+                this.quake2AnimationState.startIfStopped(this.tickCount);
+                break;
+            case "slow_spell":
+                this.slowSpellAnimationState.startIfStopped(this.tickCount);
+                break;
+            case "leeching_spell":
+                this.leechingSpellAnimationState.startIfStopped(this.tickCount);
+                break;
+            case "stab":
+                this.stabAnimationState.startIfStopped(this.tickCount);
+                break;
+            case "breathe":
+                this.breatheAnimationState.startIfStopped(this.tickCount);
+                break;
+            case "death":
+                this.deathAnimationState.startIfStopped(this.tickCount);
+                break;
+            case "storm2":
+                this.storm2AnimationState.startIfStopped(this.tickCount);
+                break;
+        }
+    }
+
+    private void stopAnimationsNotForKey(String key) {
+        if (!key.equals("idle"))
+            this.idleAnimationState.stop();
+        if (!key.equals("walk"))
+            this.walkAnimationState.stop();
+        if (!key.equals("attack"))
+            this.attackAnimationState.stop();
+        if (!key.equals("summon"))
+            this.summonAnimationState.stop();
+        if (!key.equals("spell"))
+            this.spellAnimationState.stop();
+        if (!key.equals("alert"))
+            this.alertAnimationState.stop();
+        if (!key.equals("fly"))
+            this.flyAnimationState.stop();
+        if (!key.equals("walk2"))
+            this.walk2AnimationState.stop();
+        if (!key.equals("updraft"))
+            this.updrafAnimationState.stop();
+        if (!key.equals("storm"))
+            this.stormAnimationState.stop();
+        if (!key.equals("rapid"))
+            this.rapidAnimationState.stop();
+        if (!key.equals("teleportout"))
+            this.teleportoutAnimationState.stop();
+        if (!key.equals("teleportin"))
+            this.teleportinAnimationState.stop();
+        if (!key.equals("range_spell_attack"))
+            this.rangeSpellAttackAnimationState.stop();
+        if (!key.equals("wake"))
+            this.wakeAnimationState.stop();
+        if (!key.equals("avada"))
+            this.avadaAnimationState.stop();
+        if (!key.equals("quake1"))
+            this.quake1AnimationState.stop();
+        if (!key.equals("quake2"))
+            this.quake2AnimationState.stop();
+        if (!key.equals("slow_spell"))
+            this.slowSpellAnimationState.stop();
+        if (!key.equals("leeching_spell"))
+            this.leechingSpellAnimationState.stop();
+        if (!key.equals("stab"))
+            this.stabAnimationState.stop();
+        if (!key.equals("breathe"))
+            this.breatheAnimationState.stop();
+        if (!key.equals("death"))
+            this.deathAnimationState.stop();
+        if (!key.equals("storm2"))
+            this.storm2AnimationState.stop();
+    }
+
+    private void tickAnimationTransitions() {
+        if (this.baseAnimTransitionTick > 0) {
+            this.baseAnimTransitionTick--;
+            String midDesired = this.computeDesiredAnimKey();
+            if (!midDesired.isEmpty() && !midDesired.equals(this.transitionToKey)) {
+                this.startAnimationForKey(midDesired);
+                this.transitionFromKey = this.transitionToKey;
+                this.transitionToKey = midDesired;
+                this.baseAnimTransitionTick = BASE_ANIM_TRANSITION_DURATION;
+                this.currentAnimKey = midDesired;
+            } else if (this.baseAnimTransitionTick == 0) {
+                this.stopAnimationsNotForKey(this.transitionToKey);
+            }
+        } else {
+            String desiredKey = this.computeDesiredAnimKey();
+            if (!desiredKey.isEmpty() && !desiredKey.equals(this.currentAnimKey)) {
+                if (!this.currentAnimKey.isEmpty()) {
+                    this.startAnimationForKey(desiredKey);
+                    this.transitionFromKey = this.currentAnimKey;
+                    this.transitionToKey = desiredKey;
+                    this.baseAnimTransitionTick = BASE_ANIM_TRANSITION_DURATION;
+                } else {
+                    this.startAnimationForKey(desiredKey);
+                    this.stopAnimationsNotForKey(desiredKey);
+                }
+                this.currentAnimKey = desiredKey;
+            } else {
+                this.startAnimationForKey(desiredKey);
+                this.stopAnimationsNotForKey(desiredKey);
+                this.currentAnimKey = desiredKey;
             }
         }
     }
@@ -1305,7 +1316,6 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
 
     public Summoned getSummon() {
         Summoned summoned = getDefaultSummon();
-
         if (this.getSummonList().contains(com.Polarice3.Goety.common.entities.ModEntityType.PHANTOM_SERVANT.get())) {
             if (this.level().random.nextFloat() <= 0.05F) {
                 summoned = new PhantomServant(
@@ -1318,26 +1328,30 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
     public class SummonServantSpell extends AbstractNecromancer.SummoningSpellGoal {
         @Override
         public boolean canUse() {
+            int currentTick = AbstractNamelessOne.this.tickCount;
+            if (currentTick - AbstractNamelessOne.this.summonScanTimer >= 20) {
+                AbstractNamelessOne.this.summonScanTimer = currentTick;
+                Predicate<Entity> predicate = (entity) -> {
+                    boolean var10000;
+                    if (entity.isAlive() && entity instanceof IOwned owned) {
+                        if (owned.getTrueOwner() == AbstractNamelessOne.this) {
+                            var10000 = true;
+                            return var10000;
+                        }
+                    }
+
+                    var10000 = false;
+                    return var10000;
+                };
+                AbstractNamelessOne.this.summonCount = AbstractNamelessOne.this.level()
+                        .getEntitiesOfClass(LivingEntity.class,
+                                AbstractNamelessOne.this.getBoundingBox().inflate(64.0, 16.0, 64.0), predicate)
+                        .size();
+            }
             if (AbstractNamelessOne.this.isMirror()) {
                 return false;
             }
-            Predicate<Entity> predicate = (entity) -> {
-                boolean var10000;
-                if (entity.isAlive() && entity instanceof IOwned owned) {
-                    if (owned.getTrueOwner() == AbstractNamelessOne.this) {
-                        var10000 = true;
-                        return var10000;
-                    }
-                }
-
-                var10000 = false;
-                return var10000;
-            };
-            int i = AbstractNamelessOne.this.level()
-                    .getEntitiesOfClass(LivingEntity.class,
-                            AbstractNamelessOne.this.getBoundingBox().inflate(64.0, 16.0, 64.0), predicate)
-                    .size();
-            return super.canUse() && i < 8;
+            return super.canUse() && AbstractNamelessOne.this.summonCount < 8;
         }
 
         @Override
@@ -1380,7 +1394,7 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
             int potency = AbstractNamelessOne.this.getNecroLevel();
             potency += AbstractNamelessOne.this.level().random.nextInt(1, 5);
             if (var2 instanceof ServerLevel serverLevel) {
-                int summonCount = 2 + serverLevel.random.nextInt(6);
+                int summonCount = 2 + serverLevel.random.nextInt(3);
                 for (int i1 = 0; i1 < summonCount; ++i1) {
                     Summoned summoned = AbstractNamelessOne.this.getSummon();
                     BlockPos blockPos = BlockFinder.SummonRadius(AbstractNamelessOne.this.blockPosition(),
@@ -1412,36 +1426,37 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
                         EffectsUtil.infiniteEffect(), boost, false, false));
             }
 
-            Level level = caster.level();
-            if (level instanceof ServerLevel serverLevel) {
-                int bonusCount = 1;
-                if (caster instanceof AbstractNamelessOne namelessOne) {
-                    bonusCount += namelessOne.getNecroLevel();
-                    if (caster.getHealth() < caster.getMaxHealth() * 0.5F) {
-                        bonusCount += 1;
-                    }
-                }
+            // Level level = caster.level();
+            // if (level instanceof ServerLevel serverLevel) {
+            // int bonusCount = 1;
+            // if (caster instanceof AbstractNamelessOne namelessOne) {
+            // bonusCount += namelessOne.getNecroLevel();
+            // if (caster.getHealth() < caster.getMaxHealth() * 0.5F) {
+            // bonusCount += 1;
+            // }
+            // }
 
-                java.util.List<MobEffect> beneficialEffects = new java.util.ArrayList<>();
-                beneficialEffects.add(net.minecraft.world.effect.MobEffects.DAMAGE_BOOST);
-                beneficialEffects.add(net.minecraft.world.effect.MobEffects.MOVEMENT_SPEED);
-                beneficialEffects.add(net.minecraft.world.effect.MobEffects.DAMAGE_RESISTANCE);
-                beneficialEffects.add(com.Polarice3.Goety.common.effects.GoetyEffects.RALLYING.get());
-                beneficialEffects.add(com.Polarice3.Goety.common.effects.GoetyEffects.SHIELDING.get());
-                beneficialEffects.add(com.Polarice3.Goety.common.effects.GoetyEffects.SWIRLING.get());
-                beneficialEffects.add(com.k1sak1.goetyawaken.init.ModEffects.ECHO.get());
-                beneficialEffects.add(com.k1sak1.goetyawaken.init.ModEffects.COMMITTED.get());
-                beneficialEffects.add(com.k1sak1.goetyawaken.init.ModEffects.CRITICAL_HIT.get());
-                beneficialEffects.add(com.k1sak1.goetyawaken.init.ModEffects.ENCHANTMENT_SHARPNESS.get());
-                beneficialEffects.add(com.k1sak1.goetyawaken.init.ModEffects.CHAINS.get());
-                for (int i = 0; i < bonusCount && !beneficialEffects.isEmpty(); i++) {
-                    MobEffect selectedEffect = beneficialEffects
-                            .get(serverLevel.random.nextInt(beneficialEffects.size()));
-                    int randomLevel = serverLevel.random.nextInt(2);
-                    summoned.addEffect(new MobEffectInstance(selectedEffect, EffectsUtil.infiniteEffect(),
-                            randomLevel, false, false, false));
-                }
-            }
+            // java.util.List<MobEffect> beneficialEffects = new java.util.ArrayList<>();
+            // beneficialEffects.add(net.minecraft.world.effect.MobEffects.DAMAGE_BOOST);
+            // beneficialEffects.add(net.minecraft.world.effect.MobEffects.MOVEMENT_SPEED);
+            // beneficialEffects.add(net.minecraft.world.effect.MobEffects.DAMAGE_RESISTANCE);
+            // beneficialEffects.add(com.Polarice3.Goety.common.effects.GoetyEffects.RALLYING.get());
+            // beneficialEffects.add(com.Polarice3.Goety.common.effects.GoetyEffects.SHIELDING.get());
+            // beneficialEffects.add(com.Polarice3.Goety.common.effects.GoetyEffects.SWIRLING.get());
+            // beneficialEffects.add(com.k1sak1.goetyawaken.init.ModEffects.ECHO.get());
+            // beneficialEffects.add(com.k1sak1.goetyawaken.init.ModEffects.COMMITTED.get());
+            // beneficialEffects.add(com.k1sak1.goetyawaken.init.ModEffects.CRITICAL_HIT.get());
+            // beneficialEffects.add(com.k1sak1.goetyawaken.init.ModEffects.ENCHANTMENT_SHARPNESS.get());
+            // beneficialEffects.add(com.k1sak1.goetyawaken.init.ModEffects.CHAINS.get());
+            // for (int i = 0; i < bonusCount && !beneficialEffects.isEmpty(); i++) {
+            // MobEffect selectedEffect = beneficialEffects
+            // .get(serverLevel.random.nextInt(beneficialEffects.size()));
+            // int randomLevel = serverLevel.random.nextInt(2);
+            // summoned.addEffect(new MobEffectInstance(selectedEffect,
+            // EffectsUtil.infiniteEffect(),
+            // randomLevel, false, false, false));
+            // }
+            // }
         }
 
         protected int getCastingInterval() {
@@ -1472,7 +1487,7 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
     public void incrementMirrorHitCount() {
         int count = this.entityData.get(MIRROR_HIT_COUNT) + 1;
         this.entityData.set(MIRROR_HIT_COUNT, count);
-        if (count >= 5) {
+        if (count >= 2) {
             this.remove(net.minecraft.world.entity.Entity.RemovalReason.DISCARDED);
         }
     }
@@ -1498,20 +1513,14 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
     }
 
     public int hitTimeTeleport() {
-        return 3;
+        return 7;
     }
 
     public void incrementMirrorLifetime() {
         int lifetime = this.entityData.get(MIRROR_LIFETIME) + 1;
         this.entityData.set(MIRROR_LIFETIME, lifetime);
-        if (!AbstractNamelessOne.this.isEasyMode()) {
-            if (lifetime >= 1200) {
-                this.remove(net.minecraft.world.entity.Entity.RemovalReason.DISCARDED);
-            }
-        } else {
-            if (lifetime >= 100) {
-                this.remove(net.minecraft.world.entity.Entity.RemovalReason.DISCARDED);
-            }
+        if (lifetime >= 90) {
+            this.remove(net.minecraft.world.entity.Entity.RemovalReason.DISCARDED);
         }
 
     }
@@ -1521,23 +1530,30 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
 
         @Override
         public boolean canUse() {
+            int currentTick = AbstractNamelessOne.this.tickCount;
+            if (currentTick - AbstractNamelessOne.this.mirrorScanTimer >= 20) {
+                AbstractNamelessOne.this.mirrorScanTimer = currentTick;
+                java.util.function.Predicate<Entity> predicate = entity -> entity.isAlive()
+                        && entity instanceof AbstractNamelessOne namelessOne
+                        && namelessOne.isMirror()
+                        && entity != AbstractNamelessOne.this;
+
+                AbstractNamelessOne.this.mirrorCount = AbstractNamelessOne.this.level()
+                        .getEntitiesOfClass(AbstractNamelessOne.class,
+                                AbstractNamelessOne.this.getBoundingBox().inflate(32.0D, 16.0D, 32.0D), predicate)
+                        .size();
+            }
+
             if (AbstractNamelessOne.this.isSpellCasting() || AbstractNamelessOne.this.isMirror()) {
                 return false;
             }
+            if (AbstractNamelessOne.this.mirrorSpellCool > 0
+                    || AbstractNamelessOne.this.getTarget() == null
+                    || !AbstractNamelessOne.this.getTarget().isAlive()) {
+                return false;
+            }
 
-            java.util.function.Predicate<Entity> predicate = entity -> entity.isAlive()
-                    && entity instanceof AbstractNamelessOne namelessOne
-                    && namelessOne.isMirror()
-                    && entity != AbstractNamelessOne.this;
-
-            int nearbyMirrors = AbstractNamelessOne.this.level()
-                    .getEntitiesOfClass(AbstractNamelessOne.class,
-                            AbstractNamelessOne.this.getBoundingBox().inflate(32.0D, 16.0D, 32.0D), predicate)
-                    .size();
-
-            return nearbyMirrors <= 0 && AbstractNamelessOne.this.mirrorSpellCool <= 0
-                    && AbstractNamelessOne.this.getTarget() != null
-                    && AbstractNamelessOne.this.getTarget().isAlive();
+            return AbstractNamelessOne.this.mirrorCount <= 0;
         }
 
         public boolean canContinueToUse() {
@@ -1677,14 +1693,12 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
     public void lowHealthSpellPushEntities() {
         if (this.level() instanceof ServerLevel serverLevel) {
             float healthPercentage = this.getHealth() / this.getMaxHealth();
-            if (healthPercentage >= 0.5F) {
+            if (healthPercentage >= 0.4F) {
                 return;
             }
-
             if (this.isSpellCasting()) {
                 return;
             }
-
             float radius = 3.0f;
             for (Entity entity : serverLevel.getEntitiesOfClass(Entity.class, this.getBoundingBox().inflate(radius))) {
                 if (entity != this && (this.getVehicle() == null || this.getVehicle() != entity)) {
@@ -1755,7 +1769,7 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
                 && amount > this.getMaxHealth() * 5F
                 && source.getEntity() == null) {
             this.remove(RemovalReason.KILLED);
-            this.removeAllMinions();
+            this.removeAllServants();
             this.triggerDeathQuote();
             return false;
         }
@@ -1772,8 +1786,9 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
             this.increaseHitTime();
         }
         if (damageCapManager != null) {
-            if (amount >= damageCapManager.calculateMaximumAllowedDamage()) {
-                amount = damageCapManager.calculateMaximumAllowedDamage();
+            amount = damageCapManager.applyDamageCap(source, amount);
+            if (amount <= 0.0F) {
+                return false;
             }
         }
         Entity attacker = source.getEntity();
@@ -1783,10 +1798,6 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
         }
         if (source.getEntity() == null) {
             amount *= 0.1F;
-        }
-        boolean canProceed = this.damageCapManager.handleHurt(source, amount);
-        if (!canProceed) {
-            return false;
         }
 
         if (!this.level().isClientSide()) {
@@ -1802,25 +1813,25 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
             this.teleport();
         }
 
-        if (result && (source.is(net.minecraft.world.damagesource.DamageTypes.ON_FIRE) ||
+        if (result && (source.is(DamageTypeTags.IS_FIRE) ||
                 source.is(net.minecraft.world.damagesource.DamageTypes.IN_FIRE) ||
                 source.is(net.minecraft.world.damagesource.DamageTypes.LAVA) ||
                 source.is(net.minecraft.world.damagesource.DamageTypes.FIREBALL) ||
                 source.is(net.minecraft.world.damagesource.DamageTypes.UNATTRIBUTED_FIREBALL))) {
-            this.fireDamageSuppressTimer = 100;
+            this.fireDamageSuppressTimer = Math.min(this.fireDamageSuppressTimer + 30, 200);
         }
 
         if (result && source.getEntity() instanceof LivingEntity livingAttacker) {
             int soulEaterLevel = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.SOUL_EATER.get(),
                     livingAttacker);
             if (soulEaterLevel > 0) {
-                this.fireDamageSuppressTimer = Math.min(this.fireDamageSuppressTimer + 30, 100);
+                this.fireDamageSuppressTimer = Math.min(this.fireDamageSuppressTimer + 30, 200);
             }
         }
 
         if (result && this.isMirror()) {
             this.incrementMirrorHitCount();
-        } else if (result && amount > 4.0F && !this.isMirror()) {
+        } else if (result && amount > 1.0F && !this.isMirror()) {
             this.removeRandomMirror();
         }
         return result;
@@ -1828,26 +1839,13 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
 
     @Override
     protected void actuallyHurt(DamageSource source, float amount) {
-        boolean canProceed = this.damageCapManager.handleActuallyHurt(source, amount);
-        if (!canProceed) {
-            return;
-        }
-        if (damageCapManager != null) {
-            if (amount >= damageCapManager.calculateMaximumAllowedDamage()) {
-                amount = damageCapManager.calculateMaximumAllowedDamage();
-            }
-        }
-        if (source.is(net.minecraft.world.damagesource.DamageTypes.LIGHTNING_BOLT)) {
+        if (source.is(DamageTypeTags.IS_LIGHTNING)
+                || source.is(net.minecraft.world.damagesource.DamageTypes.LIGHTNING_BOLT)) {
             amount = amount * 1.3F;
         }
-        float maxAllowedDamage = this.getMaxHealth() * DamageCapManager.getHealthLossThresholdRatio();
-        float cappedAmount = Math.min(amount, maxAllowedDamage);
-        float resistedAmount = cappedAmount;
+        float resistedAmount = amount;
         float servantDamageReduction = this.calculateServantDamageReduction();
         resistedAmount = resistedAmount * (1.0F - servantDamageReduction);
-        float healthBasedDamageReduction = this.calculateHealthBasedDamageReduction();
-        resistedAmount = resistedAmount * (1.0F - healthBasedDamageReduction);
-
         if (source.is(net.minecraft.world.damagesource.DamageTypes.MOB_ATTACK) ||
                 source.is(net.minecraft.world.damagesource.DamageTypes.PLAYER_ATTACK) ||
                 source.is(net.minecraft.world.damagesource.DamageTypes.MOB_ATTACK_NO_AGGRO)) {
@@ -1856,8 +1854,7 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
         if (source.is(net.minecraft.world.damagesource.DamageTypes.FREEZE)) {
             resistedAmount = resistedAmount * 0.5F;
         }
-        this.damageCapManager.hurtFinal(source, resistedAmount);
-        this.damageCapManager.setDamageCallInitiated(false);
+        this.damageCapManager.applyCombatHealthReduction(resistedAmount);
     }
 
     public void setVanillaHealth(float health) {
@@ -1870,14 +1867,12 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
             super.setHealth(health);
             return;
         }
-        if (!this.damageCapManager.handleSetHealth(health)) {
-            return;
+        float peak = damageCapManager.getPeakCombatHealth();
+        if (health > peak) {
+            damageCapManager.setPeakCombatHealth(health);
         }
-        if (this.level().isClientSide()) {
-            this.damageCapManager.setCurrentCombatHealth(health);
-            return;
-        }
-        this.damageCapManager.setCurrentCombatHealth(health);
+        damageCapManager.setCurrentCombatHealth(health);
+        this.setVanillaHealth(health);
     }
 
     @Override
@@ -1961,7 +1956,7 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
         }
     }
 
-    public void removeAllMinions() {
+    public void removeAllServants() {
         if (this.level() instanceof ServerLevel serverLevel && !this.level().isClientSide) {
             List<LivingEntity> minions = serverLevel.getEntitiesOfClass(
                     LivingEntity.class,
@@ -1979,7 +1974,7 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
 
     @Override
     public void onRemovedFromWorld() {
-        this.removeAllMinions();
+        this.removeAllServants();
         if (this.isMirror()) {
             this.transferServantsToOwner();
         }
@@ -1988,24 +1983,35 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
 
     @Override
     public void remove(Entity.RemovalReason p_276115_) {
-        this.removeAllMinions();
+        this.removeAllServants();
         super.remove(p_276115_);
     }
 
     @Override
     public void die(DamageSource pCause) {
+        if (this.damageCapManager != null) {
+            this.damageCapManager.setCurrentCombatHealth(0.0F);
+        }
         if (this.level() instanceof ServerLevel serverLevel && !this.level().isClientSide) {
             this.level().broadcastEntityEvent(this, (byte) 10);
             this.deathRotation = this.getYRot();
             this.triggerDeathQuote();
         }
         this.setAnimationState(DEAD_ANIM);
-        this.removeAllMinions();
+        this.removeAllServants();
         super.die(pCause);
     }
 
     @Override
     protected void tickDeath() {
+        if (this.isMirror()) {
+            ++this.deathTime;
+            if (this.deathTime >= 4) {
+                this.remove(RemovalReason.KILLED);
+            }
+            return;
+        }
+
         ++this.deathTime;
         if (this.deathTime > 0) {
             if (this.getAnimationState() != this.DEAD_ANIM) {
@@ -2019,11 +2025,11 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
 
         if (this.deathTime == 21) {
             if (!this.level().isClientSide()) {
-                this.playSound(ModSounds.NAMELESS_ONE_LAUGH_SHORT_1.get(), this.getSoundVolume(), this.getVoicePitch());
+                this.playSound(ModSounds.NAMELESS_ONE_LAUGH_SHORT.get(), this.getSoundVolume(), this.getVoicePitch());
             }
         } else if (this.deathTime == 50) {
             if (!this.level().isClientSide()) {
-                this.playSound(ModSounds.NAMELESS_ONE_LAUGH_LONG_1.get(), this.getSoundVolume(), this.getVoicePitch());
+                this.playSound(ModSounds.NAMELESS_ONE_LAUGH_LONG.get(), this.getSoundVolume(), this.getVoicePitch());
             }
         }
 
@@ -2085,7 +2091,7 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
                 this.getBoundingBox().inflate(48.0D, 16.0D, 48.0D),
                 vanguard -> vanguard.isAlive() &&
                         vanguard.getTrueOwner() == this);
-        result += vanguardChampions.size() * 0.2F;
+        result += vanguardChampions.size() * 0.05F;
 
         List<LivingEntity> nearbyServants = serverLevel.getEntitiesOfClass(
                 LivingEntity.class,
@@ -2096,19 +2102,9 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
                         entity != this);
 
         int servantCount = nearbyServants.size();
-        result += servantCount * 0.04F;
+        result += servantCount * 0.01F;
         float damageReduction = Math.min(result, 0.75F);
         return damageReduction;
-    }
-
-    protected float calculateHealthBasedDamageReduction() {
-        float healthPercentage = this.getHealth() / this.getMaxHealth();
-
-        if (healthPercentage >= 0.5F) {
-            return 0.0F;
-        }
-        float damageReduction = 1.0F - healthPercentage;
-        return damageReduction / 2;
     }
 
     public net.minecraft.world.InteractionResult mobInteract(net.minecraft.world.entity.player.Player player,
@@ -2246,39 +2242,13 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
     }
 
     private SoundEvent getRandomShootSound() {
-        Random random = new Random();
-        int choice = random.nextInt(3);
-        switch (choice) {
-            case 0:
-                return ModSounds.NAMELESS_ONE_SHOOT_1.get();
-            case 1:
-                return ModSounds.NAMELESS_ONE_SHOOT_2.get();
-            case 2:
-                return ModSounds.NAMELESS_ONE_SHOOT_3.get();
-            default:
-                return ModSounds.NAMELESS_ONE_SHOOT_1.get();
-        }
+        return ModSounds.NAMELESS_ONE_SHOOT.get();
     }
 
     private SoundEvent getRandomLaughSound() {
         Random random = new Random();
-        int choice = random.nextInt(6);
-        switch (choice) {
-            case 0:
-                return ModSounds.NAMELESS_ONE_LAUGH_SHORT_1.get();
-            case 1:
-                return ModSounds.NAMELESS_ONE_LAUGH_SHORT_2.get();
-            case 2:
-                return ModSounds.NAMELESS_ONE_LAUGH_SHORT_3.get();
-            case 3:
-                return ModSounds.NAMELESS_ONE_LAUGH_LONG_1.get();
-            case 4:
-                return ModSounds.NAMELESS_ONE_LAUGH_LONG_2.get();
-            case 5:
-                return ModSounds.NAMELESS_ONE_LAUGH_LONG_3.get();
-            default:
-                return ModSounds.NAMELESS_ONE_LAUGH_SHORT_1.get();
-        }
+        return random.nextBoolean() ? ModSounds.NAMELESS_ONE_LAUGH_SHORT.get()
+                : ModSounds.NAMELESS_ONE_LAUGH_LONG.get();
     }
 
     public class SummonSoldierGoal extends Goal {
@@ -2290,16 +2260,20 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
                 return false;
             }
 
-            Predicate<Entity> predicate = entity -> entity.isAlive() && entity instanceof IOwned owned &&
-                    owned.getTrueOwner() == AbstractNamelessOne.this;
+            int currentTick = AbstractNamelessOne.this.tickCount;
+            if (currentTick - AbstractNamelessOne.this.soldierScanTimer >= 20) {
+                AbstractNamelessOne.this.soldierScanTimer = currentTick;
+                Predicate<Entity> predicate = entity -> entity.isAlive() && entity instanceof IOwned owned &&
+                        owned.getTrueOwner() == AbstractNamelessOne.this;
 
-            int servantCount = AbstractNamelessOne.this.level()
-                    .getEntitiesOfClass(LivingEntity.class,
-                            AbstractNamelessOne.this.getBoundingBox().inflate(32.0D, 16.0D, 32.0D),
-                            predicate)
-                    .size();
+                AbstractNamelessOne.this.soldierCount = AbstractNamelessOne.this.level()
+                        .getEntitiesOfClass(LivingEntity.class,
+                                AbstractNamelessOne.this.getBoundingBox().inflate(32.0D, 16.0D, 32.0D),
+                                predicate)
+                        .size();
+            }
             LivingEntity target = AbstractNamelessOne.this.getTarget();
-            return servantCount < 7 && target != null
+            return AbstractNamelessOne.this.soldierCount < 7 && target != null
                     && target.isAlive()
                     && !AbstractNamelessOne.this.isShooting()
                     && !AbstractNamelessOne.this.isSpellCasting();
@@ -2325,7 +2299,7 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
             AbstractNamelessOne.this.setSpellCasting(false);
             AbstractNamelessOne.this.setNecromancerSpellType(
                     com.Polarice3.Goety.common.entities.neutral.AbstractNecromancer.NecromancerSpellType.NONE);
-            AbstractNamelessOne.this.soldierSpellCool = 600;
+            AbstractNamelessOne.this.soldierSpellCool = 800;
         }
 
         @Override
@@ -2378,7 +2352,7 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
             double stepZ = direction.getStepZ();
             int summonType;
             if (!AbstractNamelessOne.this.isEasyMode()) {
-                summonType = vanguardChampionCount >= 3 ? worldIn.random.nextInt(1) : 2;
+                summonType = vanguardChampionCount >= 2 ? worldIn.random.nextInt(1) : 2;
             } else {
                 summonType = 1;
             }
@@ -2414,7 +2388,6 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
                 summonedentity.setPos(vec32);
                 MobUtil.moveDownToGround(summonedentity);
                 summonedentity.setPersistenceRequired();
-
                 summonedentity.finalizeSpawn(worldIn,
                         caster.level().getCurrentDifficultyAt(caster.blockPosition()),
                         MobSpawnType.MOB_SUMMONED, null, null);
@@ -2449,7 +2422,6 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
                 summoned.addEffect(new MobEffectInstance((MobEffect) GoetyEffects.BUFF.get(),
                         EffectsUtil.infiniteEffect(), boost, false, false));
             }
-
             if (summonType == 2
                     && summoned instanceof com.k1sak1.goetyawaken.common.entities.ally.undead.skeleton.VanguardChampion vanguardChampion) {
                 int currentPoints = vanguardChampion.getProtectionPoints();
@@ -2461,35 +2433,36 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
                     glint.setGlintTextureType("enchant");
                 }
             }
-            Level level = caster.level();
-            if (level instanceof ServerLevel serverLevel) {
-                int bonusCount = 1;
-                if (caster instanceof AbstractNamelessOne namelessOne) {
-                    bonusCount += namelessOne.getNecroLevel();
-                    if (caster.getHealth() < caster.getMaxHealth() * 0.5F) {
-                        bonusCount += 1;
-                    }
-                }
+            // Level level = caster.level();
+            // if (level instanceof ServerLevel serverLevel) {
+            // int bonusCount = 1;
+            // if (caster instanceof AbstractNamelessOne namelessOne) {
+            // bonusCount += namelessOne.getNecroLevel();
+            // if (caster.getHealth() < caster.getMaxHealth() * 0.5F) {
+            // bonusCount += 1;
+            // }
+            // }
 
-                java.util.List<MobEffect> beneficialEffects = new java.util.ArrayList<>();
-                beneficialEffects.add(net.minecraft.world.effect.MobEffects.DAMAGE_BOOST);
-                beneficialEffects.add(net.minecraft.world.effect.MobEffects.MOVEMENT_SPEED);
-                beneficialEffects.add(com.Polarice3.Goety.common.effects.GoetyEffects.RALLYING.get());
-                beneficialEffects.add(com.Polarice3.Goety.common.effects.GoetyEffects.SWIRLING.get());
-                beneficialEffects.add(com.k1sak1.goetyawaken.init.ModEffects.ECHO.get());
-                beneficialEffects.add(com.k1sak1.goetyawaken.init.ModEffects.COMMITTED.get());
-                beneficialEffects.add(com.k1sak1.goetyawaken.init.ModEffects.CRITICAL_HIT.get());
-                beneficialEffects.add(com.k1sak1.goetyawaken.init.ModEffects.ENCHANTMENT_SHARPNESS.get());
-                beneficialEffects.add(com.k1sak1.goetyawaken.init.ModEffects.CHAINS.get());
+            // java.util.List<MobEffect> beneficialEffects = new java.util.ArrayList<>();
+            // beneficialEffects.add(net.minecraft.world.effect.MobEffects.DAMAGE_BOOST);
+            // beneficialEffects.add(net.minecraft.world.effect.MobEffects.MOVEMENT_SPEED);
+            // beneficialEffects.add(com.Polarice3.Goety.common.effects.GoetyEffects.RALLYING.get());
+            // beneficialEffects.add(com.Polarice3.Goety.common.effects.GoetyEffects.SWIRLING.get());
+            // beneficialEffects.add(com.k1sak1.goetyawaken.init.ModEffects.ECHO.get());
+            // beneficialEffects.add(com.k1sak1.goetyawaken.init.ModEffects.COMMITTED.get());
+            // beneficialEffects.add(com.k1sak1.goetyawaken.init.ModEffects.CRITICAL_HIT.get());
+            // beneficialEffects.add(com.k1sak1.goetyawaken.init.ModEffects.ENCHANTMENT_SHARPNESS.get());
+            // beneficialEffects.add(com.k1sak1.goetyawaken.init.ModEffects.CHAINS.get());
 
-                for (int i = 0; i < bonusCount && !beneficialEffects.isEmpty(); i++) {
-                    MobEffect selectedEffect = beneficialEffects
-                            .get(serverLevel.random.nextInt(beneficialEffects.size()));
-                    int randomLevel = serverLevel.random.nextInt(2);
-                    summoned.addEffect(new MobEffectInstance(selectedEffect, EffectsUtil.infiniteEffect(),
-                            randomLevel, false, false, false));
-                }
-            }
+            // for (int i = 0; i < bonusCount && !beneficialEffects.isEmpty(); i++) {
+            // MobEffect selectedEffect = beneficialEffects
+            // .get(serverLevel.random.nextInt(beneficialEffects.size()));
+            // int randomLevel = serverLevel.random.nextInt(2);
+            // summoned.addEffect(new MobEffectInstance(selectedEffect,
+            // EffectsUtil.infiniteEffect(),
+            // randomLevel, false, false, false));
+            // }
+            // }
         }
 
         private void setTarget(AbstractNamelessOne caster, Summoned summoned) {
@@ -2754,6 +2727,7 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
                     && !AbstractNamelessOne.this.isShooting()
                     && AbstractNamelessOne.this.getTarget() != null
                     && AbstractNamelessOne.this.getTarget().isAlive()
+                    && !AbstractNamelessOne.this.isMirror()
                     && !AbstractNamelessOne.this.isEasyMode()
                     && AbstractNamelessOne.this.rangespellattackCool <= 0;
         }
@@ -3003,17 +2977,17 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
                             AbstractNamelessOne.this.position());
                 }
                 if (this.spelltick >= 15) {
-                    for (int i = 0; i < 2; ++i) {
+                    for (int i = 0; i < 1; ++i) {
                         int potency = AbstractNamelessOne.this.getNecroLevel();
                         net.minecraft.world.Difficulty difficulty = serverLevel.getDifficulty();
 
                         int difficultyBonus = switch (difficulty) {
                             case PEACEFUL -> 0;
-                            case EASY -> 1;
-                            case NORMAL -> 2;
-                            case HARD -> 3;
+                            case EASY -> 0;
+                            case NORMAL -> 1;
+                            case HARD -> 2;
                         };
-                        potency += difficultyBonus + 2;
+                        potency += difficultyBonus + 1;
                         BlockPos blockPos = AbstractNamelessOne.this.blockPosition();
                         LivingEntity target = AbstractNamelessOne.this.getTarget();
                         if (target != null) {
@@ -3025,10 +2999,8 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
                                 serverLevel.getRandom().nextInt(-16, 16));
                         Vec3 vec3 = Vec3.atBottomCenterOf(blockPos1);
                         Vec3 vec32 = Vec3.atBottomCenterOf(blockPos2);
-
                         com.Polarice3.Goety.common.entities.util.MagicLightningTrap trap = new com.Polarice3.Goety.common.entities.util.MagicLightningTrap(
                                 serverLevel, vec3.x, vec3.y, vec3.z);
-
                         trap.setColor(0xa7fc3e);
                         trap.setOwner(AbstractNamelessOne.this);
                         trap.setDuration(40);
@@ -3190,9 +3162,9 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
                                         target.addEffect(new net.minecraft.world.effect.MobEffectInstance(
                                                 net.minecraft.world.effect.MobEffects.WEAKNESS, 60, 0));
                                         if (AbstractNamelessOne.this.fireDamageSuppressTimer > 0) {
-                                            AbstractNamelessOne.this.heal(potency / 6);
+                                            AbstractNamelessOne.this.heal(potency / 8);
                                         } else {
-                                            AbstractNamelessOne.this.heal(potency / 3);
+                                            AbstractNamelessOne.this.heal(potency / 4);
                                         }
                                         serverLevel.playSound(null, AbstractNamelessOne.this.getX(),
                                                 AbstractNamelessOne.this.getY(), AbstractNamelessOne.this.getZ(),
@@ -3356,7 +3328,7 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
                 if (flag) {
                     if (this.randomTeleport(d3, d4, d5, false)) {
                         this.teleportHits();
-                        this.teleportCooldown = 60;
+                        this.teleportCooldown = 100;
                         teleported = true;
                         break;
                     }
@@ -3388,7 +3360,7 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
                     if (com.Polarice3.Goety.utils.BlockFinder.canSeeBlock(entity, blockPos1)) {
                         if (this.randomTeleport(d1, d2, d3, false)) {
                             this.teleportHits();
-                            this.teleportCooldown = 60;
+                            this.teleportCooldown = 100;
                             break;
                         }
                     }
@@ -3402,8 +3374,8 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
             this.prevX = this.getX();
             this.prevY = this.getY();
             this.prevZ = this.getZ();
-            for (int i = 0; i < 128; ++i) {
-                double blockRange = 128.0D;
+            for (int i = 0; i < 64; ++i) {
+                double blockRange = 32.0D;
                 double d3 = this.getX() + (this.getRandom().nextDouble() - 0.5D) * blockRange;
                 double d4 = this.getY() + (this.getRandom().nextDouble() - 0.5D) * (blockRange / 2.0D);
                 double d5 = this.getZ() + (this.getRandom().nextDouble() - 0.5D) * blockRange;
@@ -3412,7 +3384,7 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
                     this.resetHitTime();
                     this.level().broadcastEntityEvent(this, (byte) 100);
                     this.level().gameEvent(GameEvent.TELEPORT, this.position(), GameEvent.Context.of(this));
-                    this.teleportCooldown = 60;
+                    this.teleportCooldown = 100;
                     break;
                 }
             }
@@ -3580,6 +3552,7 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
                     && AbstractNamelessOne.this.getTarget().isAlive()
                     && AbstractNamelessOne.this.quakespellcool <= 0
                     && !AbstractNamelessOne.this.isEasyMode()
+                    && !AbstractNamelessOne.this.isMirror()
                     && !AbstractNamelessOne.this.isShooting();
         }
 
@@ -3777,33 +3750,35 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
                 case HARD -> 1;
             };
 
-            int duration = 30 * (1 + necroLevel + difficultyCoefficient);
-            int amplifier = difficultyCoefficient;
-            java.util.List<MobEffect> beneficialEffects = new java.util.ArrayList<>();
-            beneficialEffects.add(net.minecraft.world.effect.MobEffects.DAMAGE_BOOST);
-            beneficialEffects.add(net.minecraft.world.effect.MobEffects.MOVEMENT_SPEED);
-            beneficialEffects.add(net.minecraft.world.effect.MobEffects.DAMAGE_RESISTANCE);
-            beneficialEffects.add(com.Polarice3.Goety.common.effects.GoetyEffects.RALLYING.get());
-            beneficialEffects.add(com.Polarice3.Goety.common.effects.GoetyEffects.SHIELDING.get());
-            beneficialEffects.add(com.Polarice3.Goety.common.effects.GoetyEffects.SWIRLING.get());
-            beneficialEffects.add(com.k1sak1.goetyawaken.init.ModEffects.ECHO.get());
-            beneficialEffects.add(com.k1sak1.goetyawaken.init.ModEffects.COMMITTED.get());
-            beneficialEffects.add(com.k1sak1.goetyawaken.init.ModEffects.CRITICAL_HIT.get());
-            beneficialEffects.add(com.k1sak1.goetyawaken.init.ModEffects.ENCHANTMENT_SHARPNESS.get());
-            if (!beneficialEffects.isEmpty()) {
-                MobEffect selectedEffect = beneficialEffects.get(serverLevel.random.nextInt(beneficialEffects.size()));
-                ColorUtil purpleColor = new ColorUtil(0x800080);
-                for (LivingEntity ally : allies) {
-                    ally.addEffect(
-                            new MobEffectInstance(selectedEffect, duration * 20, amplifier, false, false, false));
-                    ServerParticleUtil.summonUndeadParticles(serverLevel, ally, purpleColor, 0x800080, 0xFFFFFF);
-                    if (ally instanceof IAncientGlint glint) {
-                        glint.setAncientGlint(true);
-                        glint.setGlintTextureType("enchant");
-                        applyRandomMobEnchantment(serverLevel, ally);
-                    }
+            // int duration = 30 * (1 + necroLevel + difficultyCoefficient);
+            // int amplifier = difficultyCoefficient;
+            // java.util.List<MobEffect> beneficialEffects = new java.util.ArrayList<>();
+            // beneficialEffects.add(net.minecraft.world.effect.MobEffects.DAMAGE_BOOST);
+            // beneficialEffects.add(net.minecraft.world.effect.MobEffects.MOVEMENT_SPEED);
+            // beneficialEffects.add(net.minecraft.world.effect.MobEffects.DAMAGE_RESISTANCE);
+            // beneficialEffects.add(com.Polarice3.Goety.common.effects.GoetyEffects.RALLYING.get());
+            // beneficialEffects.add(com.Polarice3.Goety.common.effects.GoetyEffects.SHIELDING.get());
+            // beneficialEffects.add(com.Polarice3.Goety.common.effects.GoetyEffects.SWIRLING.get());
+            // beneficialEffects.add(com.k1sak1.goetyawaken.init.ModEffects.ECHO.get());
+            // beneficialEffects.add(com.k1sak1.goetyawaken.init.ModEffects.COMMITTED.get());
+            // beneficialEffects.add(com.k1sak1.goetyawaken.init.ModEffects.CRITICAL_HIT.get());
+            // beneficialEffects.add(com.k1sak1.goetyawaken.init.ModEffects.ENCHANTMENT_SHARPNESS.get());
+            // if (!beneficialEffects.isEmpty()) {
+            // MobEffect selectedEffect =
+            // beneficialEffects.get(serverLevel.random.nextInt(beneficialEffects.size()));
+            ColorUtil purpleColor = new ColorUtil(0x800080);
+            for (LivingEntity ally : allies) {
+                // ally.addEffect(
+                // new MobEffectInstance(selectedEffect, duration * 20, amplifier, false, false,
+                // false));
+                ServerParticleUtil.summonUndeadParticles(serverLevel, ally, purpleColor, 0x800080, 0xFFFFFF);
+                if (ally instanceof IAncientGlint glint) {
+                    glint.setAncientGlint(true);
+                    glint.setGlintTextureType("enchant");
+                    applyRandomMobEnchantment(serverLevel, ally);
                 }
             }
+            // }
         }
 
         private void applyRandomMobEnchantment(ServerLevel serverLevel, LivingEntity ally) {
@@ -3822,13 +3797,14 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
                     .nextInt(availableEnchants.length)];
             com.k1sak1.goetyawaken.common.mobenchant.MobEnchantEventHandler.applyEnchantment(
                     ally, selectedEnchant, enchantLevel);
-            if (ally instanceof net.minecraft.world.entity.monster.RangedAttackMob) {
-                if (serverLevel.random.nextBoolean()) {
-                    int multishotLevel = AbstractNamelessOne.this.getNecroLevel() + 1;
-                    com.k1sak1.goetyawaken.common.mobenchant.MobEnchantEventHandler.applyEnchantment(
-                            ally, com.k1sak1.goetyawaken.common.mobenchant.MobEnchantType.MULTISHOT, multishotLevel);
-                }
-            }
+            // if (ally instanceof net.minecraft.world.entity.monster.RangedAttackMob) {
+            // if (serverLevel.random.nextBoolean()) {
+            // int multishotLevel = AbstractNamelessOne.this.getNecroLevel() + 1;
+            // com.k1sak1.goetyawaken.common.mobenchant.MobEnchantEventHandler.applyEnchantment(
+            // ally, com.k1sak1.goetyawaken.common.mobenchant.MobEnchantType.MULTISHOT,
+            // multishotLevel);
+            // }
+            // }
         }
 
         private void castSelectedSpell(ServerLevel serverLevel, int spellId) {
@@ -4224,6 +4200,11 @@ public abstract class AbstractNamelessOne extends AbstractNecromancer implements
     }
 
     protected void createLootChest(BlockState blockState, BlockPos blockPos, DamageSource cause) {
+
+        if (this.isMirror()) {
+            return;
+        }
+
         if (this.level() instanceof ServerLevel serverLevel) {
             this.level().setBlockAndUpdate(blockPos, blockState);
             net.minecraft.world.level.storage.loot.LootParams.Builder lootParamsBuilder = new net.minecraft.world.level.storage.loot.LootParams.Builder(

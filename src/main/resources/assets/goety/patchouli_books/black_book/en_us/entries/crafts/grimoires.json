@@ -5,11 +5,27 @@
   "pages": [
     {
       "type": "text",
-      "text": "These grimoires are not meant to prop up wobbly table legs. They are key to your servants' advancement. Each grimoire — be it common iron or precious ruby — can directly elevate a sorcerer servant's power by one rank. Simply use it once."
+      "text": "These grimoires are not meant to prop up wobbly table legs. Each grimoire — be it common iron or precious ruby — can directly elevate a sorcerer servant's power to its own rank. Simply use it once."
     },
     {
       "type": "text",
       "text": "Each grimoire has its own rank, which determines the limit of power it can bestow. An iron grimoire cannot cultivate a diamond-level sorcerer, and a diamond grimoire can never reach the truth of ruby level. If you wish to obtain a ruby-level servant, you must first have a ruby grimoire in hand."
+    },
+    {
+      "type": "text",
+      "text": "Grimoires can be worn in your curios slots, deepening your understanding of rituals and hastening your work at the altar. The higher the grimoire's rank, the more pronounced this effect becomes."
+    },
+    {
+      "type": "text",
+      "text": "You may infuse the power of magical materials into a grimoire through the crafting table or a magic ritual, enriching its knowledge so that it serves you better while worn. Every grimoire holds a magic capacity matched to its rank: the higher the rank, the more arcane power it can contain. The more mysterious the materials offered, the greater your chance of inscribing deeper knowledge into its pages."
+    },
+    {
+      "type": "text",
+      "text": "The ritual held at the altar is the traditional path of infusion. Place your grimoire upon the altar, offer souls and any number of materials, and the pages will inscribe new knowledge of their own accord. Ritual infusion is slow and taxing, yet it never records harmful knowledge; it also makes better use of your materials, granting even deeper knowledge in return."
+    },
+    {
+      "type": "text",
+      "text": "For the impatient, the crafting table offers a swifter road — place the grimoire alongside any recognized magical material. Yet convenience carries its price: knowledge gained this way has not been sifted by ritual, so it is far likelier to turn sour; and even if you luckily receive the knowledge you seek, it is halved at the stroke of a pen. The greatest boon of this method, however, is foresight — you can see exactly which knowledge these materials will bestow."
     },
     {
       "type": "patchouli:crafting",
@@ -51,5 +67,6 @@
       "recipe": "goetyawaken:ruby_grimoire",
       "text": "Ruby Grimoire Recipe."
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:iron_grimoire":0,"goetyawaken:ruby_grimoire":0,"goetyawaken:gold_grimoire":0,"goetyawaken:emerald_grimoire":0,"goetyawaken:diamond_grimoire":0}
 }

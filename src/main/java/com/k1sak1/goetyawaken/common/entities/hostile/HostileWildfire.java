@@ -52,6 +52,7 @@ public class HostileWildfire extends Wildfire implements Enemy {
     @Override
     public void tick() {
         super.tick();
+        com.Polarice3.Goety.utils.MiscCapHelper.updateMobTarget(this);
         if (!this.isNaturalSpawn && this.bossInfo != null && this.level() instanceof ServerLevel) {
             this.bossInfo.update();
         }
@@ -116,7 +117,7 @@ public class HostileWildfire extends Wildfire implements Enemy {
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn,
             MobSpawnType reason, @javax.annotation.Nullable SpawnGroupData spawnData,
             @javax.annotation.Nullable CompoundTag dataTag) {
-        if (reason == MobSpawnType.NATURAL) {
+        if (reason == MobSpawnType.NATURAL || reason == MobSpawnType.SPAWNER) {
             this.isNaturalSpawn = true;
         }
         return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnData, dataTag);

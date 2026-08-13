@@ -1,7 +1,7 @@
 {
   "type": "minecraft:chest",
   "pools": [
-        {
+    {
       "rolls": {
         "type": "minecraft:uniform",
         "min": 0.0,
@@ -28,11 +28,6 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:end_crystal",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:recovery_compass",
           "weight": 1
         },
         {
@@ -122,67 +117,12 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:pufferfish_bucket",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:axolotl_bucket",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:powder_snow_bucket",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:ender_eye",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:infernal_tome",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:chorus_flower",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:bell",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
           "name": "minecraft:totem_of_undying",
           "weight": 1
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:dragon_breath",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
           "name": "minecraft:echo_shard",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:shulker_shell",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:heart_of_the_sea",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:nautilus_shell",
           "weight": 1
         },
         {
@@ -193,11 +133,6 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:rabbit_foot",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:scute",
           "weight": 1
         },
         {
@@ -217,16 +152,6 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:pitcher_pod",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:end_rod",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
           "name": "minecraft:honey_block",
           "weight": 1
         },
@@ -237,22 +162,12 @@
         },
         {
           "type": "minecraft:item",
-          "name": "goety:dark_wand",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
           "name": "minecraft:netherite_scrap",
           "weight": 1
         },
         {
           "type": "minecraft:item",
           "name": "minecraft:golden_apple",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:void_shard",
           "weight": 1
         },
         {
@@ -272,78 +187,13 @@
         },
         {
           "type": "minecraft:item",
-          "name": "goety:ominous_shard",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
           "name": "minecraft:wither_skeleton_skull",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:treasure_pouch",
           "weight": 1
         },
         {
           "type": "minecraft:item",
           "name": "goety:grave_dust",
           "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:silt_marble_heavy",
-          "weight": 1
-        },
-         {
-          "type": "minecraft:item",
-          "name": "goety:blazing_focus",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:whispering_focus",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 1.0,
-                "max": 1.0
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:reaping_focus",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 1.0,
-                "max": 1.0
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:hunting_focus",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 1.0,
-                "max": 1.0
-              }
-            }
-          ]
         },
         {
           "type": "minecraft:item",
@@ -522,206 +372,6 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:crossbow",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:enchant_with_levels",
-              "levels": {
-                "type": "minecraft:uniform",
-                "min": 20.0,
-                "max": 30.0
-              },
-              "treasure": true
-            },
-            {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 1.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:diamond_ice_axe",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:enchant_with_levels",
-              "levels": {
-                "type": "minecraft:uniform",
-                "min": 20.0,
-                "max": 30.0
-              },
-              "treasure": true
-            },
-            {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 1.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:bow",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:enchant_with_levels",
-              "levels": {
-                "type": "minecraft:uniform",
-                "min": 20.0,
-                "max": 30.0
-              },
-              "treasure": true
-            },
-            {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 1.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:great_hammer",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:enchant_with_levels",
-              "levels": {
-                "type": "minecraft:uniform",
-                "min": 20.0,
-                "max": 30.0
-              },
-              "treasure": true
-            },
-            {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 1.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:rampaging_axe",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:enchant_with_levels",
-              "levels": {
-                "type": "minecraft:uniform",
-                "min": 20.0,
-                "max": 30.0
-              },
-              "treasure": true
-            },
-            {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 1.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:eerie_pickaxe",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:enchant_with_levels",
-              "levels": {
-                "type": "minecraft:uniform",
-                "min": 20.0,
-                "max": 30.0
-              },
-              "treasure": true
-            },
-            {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 1.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:fanged_dagger",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:enchant_with_levels",
-              "levels": {
-                "type": "minecraft:uniform",
-                "min": 20.0,
-                "max": 30.0
-              },
-              "treasure": true
-            },
-            {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 1.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:bonehead_hammer",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:enchant_with_levels",
-              "levels": {
-                "type": "minecraft:uniform",
-                "min": 20.0,
-                "max": 30.0
-              },
-              "treasure": true
-            },
-            {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 1.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
           "name": "goety:iron_ice_axe",
           "weight": 1,
           "functions": [
@@ -747,122 +397,12 @@
         },
         {
           "type": "minecraft:item",
-          "name": "goety:hunters_bow",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:enchant_with_levels",
-              "levels": {
-                "type": "minecraft:uniform",
-                "min": 20.0,
-                "max": 30.0
-              },
-              "treasure": true
-            },
-            {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 1.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:graverobber_shovel",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:enchant_with_levels",
-              "levels": {
-                "type": "minecraft:uniform",
-                "min": 20.0,
-                "max": 30.0
-              },
-              "treasure": true
-            },
-            {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 1.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:dark_scythe",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:enchant_with_levels",
-              "levels": {
-                "type": "minecraft:uniform",
-                "min": 20.0,
-                "max": 30.0
-              },
-              "treasure": true
-            },
-            {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 1.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:dark_metal_scythe",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:enchant_with_levels",
-              "levels": {
-                "type": "minecraft:uniform",
-                "min": 20.0,
-                "max": 30.0
-              },
-              "treasure": true
-            },
-            {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 1.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:indented_gold",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
           "name": "minecraft:experience_bottle",
           "weight": 1
         },
         {
           "type": "minecraft:item",
           "name": "minecraft:netherite_upgrade_smithing_template",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goetydelight:frenzied_fungus_pop_rocks",
           "weight": 1
         },
         {
@@ -907,11 +447,6 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:recovery_compass",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
           "name": "minecraft:goat_horn",
           "weight": 1
         },
@@ -997,67 +532,12 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:pufferfish_bucket",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:axolotl_bucket",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:powder_snow_bucket",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:ender_eye",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:infernal_tome",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:chorus_flower",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:bell",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
           "name": "minecraft:totem_of_undying",
           "weight": 1
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:dragon_breath",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
           "name": "minecraft:echo_shard",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:shulker_shell",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:heart_of_the_sea",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:nautilus_shell",
           "weight": 1
         },
         {
@@ -1068,11 +548,6 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:rabbit_foot",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:scute",
           "weight": 1
         },
         {
@@ -1092,16 +567,6 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:pitcher_pod",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:end_rod",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
           "name": "minecraft:honey_block",
           "weight": 1
         },
@@ -1112,22 +577,12 @@
         },
         {
           "type": "minecraft:item",
-          "name": "goety:dark_wand",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
           "name": "minecraft:netherite_scrap",
           "weight": 1
         },
         {
           "type": "minecraft:item",
           "name": "minecraft:golden_apple",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:void_shard",
           "weight": 1
         },
         {
@@ -1147,27 +602,12 @@
         },
         {
           "type": "minecraft:item",
-          "name": "goety:ominous_shard",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
           "name": "minecraft:wither_skeleton_skull",
           "weight": 1
         },
         {
           "type": "minecraft:item",
-          "name": "goety:treasure_pouch",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
           "name": "goety:grave_dust",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:silt_marble_heavy",
           "weight": 1
         },
         {
@@ -1347,206 +787,6 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:crossbow",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:enchant_with_levels",
-              "levels": {
-                "type": "minecraft:uniform",
-                "min": 20.0,
-                "max": 30.0
-              },
-              "treasure": true
-            },
-            {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 1.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:diamond_ice_axe",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:enchant_with_levels",
-              "levels": {
-                "type": "minecraft:uniform",
-                "min": 20.0,
-                "max": 30.0
-              },
-              "treasure": true
-            },
-            {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 1.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:bow",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:enchant_with_levels",
-              "levels": {
-                "type": "minecraft:uniform",
-                "min": 20.0,
-                "max": 30.0
-              },
-              "treasure": true
-            },
-            {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 1.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:great_hammer",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:enchant_with_levels",
-              "levels": {
-                "type": "minecraft:uniform",
-                "min": 20.0,
-                "max": 30.0
-              },
-              "treasure": true
-            },
-            {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 1.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:rampaging_axe",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:enchant_with_levels",
-              "levels": {
-                "type": "minecraft:uniform",
-                "min": 20.0,
-                "max": 30.0
-              },
-              "treasure": true
-            },
-            {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 1.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:eerie_pickaxe",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:enchant_with_levels",
-              "levels": {
-                "type": "minecraft:uniform",
-                "min": 20.0,
-                "max": 30.0
-              },
-              "treasure": true
-            },
-            {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 1.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:fanged_dagger",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:enchant_with_levels",
-              "levels": {
-                "type": "minecraft:uniform",
-                "min": 20.0,
-                "max": 30.0
-              },
-              "treasure": true
-            },
-            {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 1.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:bonehead_hammer",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:enchant_with_levels",
-              "levels": {
-                "type": "minecraft:uniform",
-                "min": 20.0,
-                "max": 30.0
-              },
-              "treasure": true
-            },
-            {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 1.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
           "name": "goety:iron_ice_axe",
           "weight": 1,
           "functions": [
@@ -1572,111 +812,6 @@
         },
         {
           "type": "minecraft:item",
-          "name": "goety:hunters_bow",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:enchant_with_levels",
-              "levels": {
-                "type": "minecraft:uniform",
-                "min": 20.0,
-                "max": 30.0
-              },
-              "treasure": true
-            },
-            {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 1.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:graverobber_shovel",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:enchant_with_levels",
-              "levels": {
-                "type": "minecraft:uniform",
-                "min": 20.0,
-                "max": 30.0
-              },
-              "treasure": true
-            },
-            {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 1.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:dark_scythe",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:enchant_with_levels",
-              "levels": {
-                "type": "minecraft:uniform",
-                "min": 20.0,
-                "max": 30.0
-              },
-              "treasure": true
-            },
-            {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 1.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:dark_metal_scythe",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:enchant_with_levels",
-              "levels": {
-                "type": "minecraft:uniform",
-                "min": 20.0,
-                "max": 30.0
-              },
-              "treasure": true
-            },
-            {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 1.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:indented_gold",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
           "name": "minecraft:experience_bottle",
           "weight": 1
         },
@@ -1691,36 +826,6 @@
           "weight": 1
         },
         {
-          "type": "minecraft:item",
-          "name": "goety:ravaging_scroll",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:dark_scroll",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:warred_scroll",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:haunting_scroll",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:mistral_scroll",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:floral_scroll",
-          "weight": 1
-        },
-        {
           "type": "minecraft:empty",
           "weight": 4
         }
@@ -1729,8 +834,8 @@
     {
       "rolls": {
         "type": "minecraft:uniform",
-        "min": 4.0,
-        "max": 8.0
+        "min": 2.0,
+        "max": 4.0
       },
       "bonus_rolls": 0.0,
       "entries": [
@@ -1816,22 +921,6 @@
         },
         {
           "type": "minecraft:item",
-          "name": "goety:empty_focus",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 2.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
           "name": "goety:occult_fabric",
           "weight": 1,
           "functions": [
@@ -1880,22 +969,6 @@
         },
         {
           "type": "minecraft:item",
-          "name": "goety:silt_marble_heavy",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 2.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
           "name": "goety:void_barrel",
           "weight": 1,
           "functions": [
@@ -1912,151 +985,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "goety:stripped_haunted_log",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 2.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
           "name": "goety:snap_fungus",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 2.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:end_mud_bottle",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 2.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:haunted_log",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 2.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:haunted_sapling",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 2.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:totem_of_souls",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 2.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:haunted_planks",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 2.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:pine_log",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 2.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:cooked_feet_of_frog",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 2.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:void_bottle",
           "weight": 1,
           "functions": [
             {
@@ -2153,22 +1082,6 @@
         {
           "type": "minecraft:item",
           "name": "goety:chorus_growth",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 2.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:cooked_cod",
           "weight": 1,
           "functions": [
             {
@@ -2328,70 +1241,6 @@
         },
         {
           "type": "minecraft:item",
-          "name": "goety:chorus_log",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 2.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:overgrown_roots",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 2.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:corpse_blossom",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 2.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:feet_of_frog",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 2.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
           "name": "goety:forbidden_piece",
           "weight": 1,
           "functions": [
@@ -2440,150 +1289,6 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:pufferfish",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 2.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:haunted_wood",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 2.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:raiding_horn",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 2.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:waystone",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 2.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:stripped_haunted_wood",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 2.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:empty_soul_jar",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 2.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:soul_pottery_sherd",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 2.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:haunt_pottery_sherd",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 2.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:windswept_log",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 2.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
           "name": "goety:cursed_ingot",
           "weight": 1,
           "functions": [
@@ -2600,135 +1305,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "goety:dead_pottery_sherd",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 2.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:night_pottery_sherd",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 2.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:magic_emerald",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 2.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
           "name": "goety:savage_tooth",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 2.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:quick_growing_seed",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 2.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:poison_quill_seed",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 2.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:shade_stone",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 2.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:refuse_bottle",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 2.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:corrupt_chorus_log",
           "weight": 1,
           "functions": [
             {
@@ -2841,38 +1418,6 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:ender_pearl",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 2.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:ender_eye",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 2.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:ender_eye",
           "weight": 1,
           "functions": [
             {
@@ -3272,118 +1817,6 @@
         },
         {
           "type": "minecraft:item",
-          "name": "cataclysm:dying_ember",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 2.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "cataclysm:koboleton_bone",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 2.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "cataclysm:void_jaw",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 2.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "cataclysm:black_steel_nugget",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 2.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "cataclysm:ancient_metal_nugget",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 2.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "tetra:geode",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 2.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:cursed_cage",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 2.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
           "name": "minecraft:honeycomb",
           "weight": 1,
           "functions": [
@@ -3403,8 +1836,8 @@
     {
       "rolls": {
         "type": "minecraft:uniform",
-        "min": 6.0,
-        "max": 12.0
+        "min": 3.0,
+        "max": 5.0
       },
       "bonus_rolls": 0.0,
       "entries": [
@@ -4898,22 +3331,6 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:dark_oak_log",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 6.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
           "name": "minecraft:prismarine",
           "weight": 1,
           "functions": [
@@ -4931,22 +3348,6 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:red_sandstone",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 6.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:stone_bricks",
           "weight": 1,
           "functions": [
             {
@@ -4994,39 +3395,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:netherrack",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 6.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
           "name": "minecraft:bread",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 6.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:acacia_log",
           "weight": 1,
           "functions": [
             {
@@ -5059,38 +3428,6 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:spider_eye",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 6.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:granite",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 6.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:deepslate",
           "weight": 1,
           "functions": [
             {

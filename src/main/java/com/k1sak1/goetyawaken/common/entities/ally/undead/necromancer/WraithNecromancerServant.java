@@ -13,17 +13,8 @@ import java.util.Optional;
 import javax.annotation.Nullable;
 
 import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.entity.AnimationState;
 
 public class WraithNecromancerServant extends AbstractWraithNecromancer {
-    public final AnimationState idleAnimationState = new AnimationState();
-    public final AnimationState flyAnimationState = new AnimationState();
-    public final AnimationState attackAnimationState = new AnimationState();
-    public final AnimationState summonAnimationState = new AnimationState();
-    public final AnimationState spellAnimationState = new AnimationState();
-    public final AnimationState alertAnimationState = new AnimationState();
-    public final AnimationState shockwaveAnimationState = new AnimationState();
-
     public WraithNecromancerServant(EntityType<? extends AbstractWraithNecromancer> type, Level level) {
         super(type, level);
     }
@@ -57,15 +48,7 @@ public class WraithNecromancerServant extends AbstractWraithNecromancer {
     public void tick() {
         super.tick();
 
-        if (this.level().isClientSide) {
-            this.idleAnimationState.animateWhen(this.getAnimationState() == IDLE_ANIM, this.tickCount);
-            this.flyAnimationState.animateWhen(this.getAnimationState() == FLY_ANIM, this.tickCount);
-            this.attackAnimationState.animateWhen(this.getAnimationState() == ATTACK_ANIM, this.tickCount);
-            this.summonAnimationState.animateWhen(this.getAnimationState() == SUMMON_ANIM, this.tickCount);
-            this.spellAnimationState.animateWhen(this.getAnimationState() == SPELL_ANIM, this.tickCount);
-            this.alertAnimationState.animateWhen(this.getAnimationState() == ALERT_ANIM, this.tickCount);
-            this.shockwaveAnimationState.animateWhen(this.getAnimationState() == SHOCKWAVE_ANIM, this.tickCount);
-        } else {
+        if (!this.level().isClientSide) {
             if (!this.isShooting() && !this.isSpellCasting() &&
                     this.getAnimationState() != SUMMON_ANIM &&
                     this.getAnimationState() != SPELL_ANIM &&
@@ -73,7 +56,7 @@ public class WraithNecromancerServant extends AbstractWraithNecromancer {
                     this.getAnimationState() != ALERT_ANIM &&
                     this.getAnimationState() != SHOCKWAVE_ANIM) {
                 double speed = this.getDeltaMovement().horizontalDistance();
-                if (speed > 0.3D) {
+                if (speed > 0.1D) {
                     if (this.getAnimationState() != FLY_ANIM) {
                         this.setAnimationState(FLY_ANIM);
                     }

@@ -1,0 +1,18 @@
+{
+  "name": "Foco do Dado do Destino",
+  "icon": "goetyawaken:fate_dice_focus",
+  "category": "goety:goetyawaken_focuses",
+  "flag": "goetyawaken:meetyourfight_loaded",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Lança uma bomba de dado da Fortuna que espalha projéteis ao explodir. Usar o Dado do Estripador pode fazer com que mais sejam lançados — uma ressonância, talvez? Uma imitação do 'show' principal da Dama Fortuna."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:fate_dice_focus",
+      "text": ""
+    }
+  ],
+  "extra_recipe_mappings": {"goetyawaken:fate_dice_focus":0}
+}

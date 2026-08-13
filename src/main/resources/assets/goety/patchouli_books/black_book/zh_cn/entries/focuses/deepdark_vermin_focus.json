@@ -1,0 +1,18 @@
+{
+  "name": "深暗虫豸聚晶",
+  "icon": "goetyawaken:deepdark_vermin_focus",
+  "category": "goety:goetyawaken_focuses",
+  "flag": "goetyawaken:deeperdarker_loaded",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "幽匿水蛭和幽匿蜈蚣——这些幽匿生物中的小虫子往往寄居在远古花瓶中，而对幽匿生物有丰富处理经验的你很快就找到了让它们寄居在聚晶中的方式。在幽冥维度和幽匿群系中召唤的这些幽匿虫子将比在其他环境下召唤的那些更强。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:deepdark_vermin_focus",
+      "text": ""
+    }
+  ],
+  "extra_recipe_mappings": {"goetyawaken:deepdark_vermin_focus":0}
+}

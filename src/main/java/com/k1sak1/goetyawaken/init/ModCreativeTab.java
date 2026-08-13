@@ -1,6 +1,7 @@
 package com.k1sak1.goetyawaken.init;
 
 import com.k1sak1.goetyawaken.GoetyAwaken;
+import com.k1sak1.goetyawaken.common.ModIntegrationRegistry;
 import com.k1sak1.goetyawaken.common.items.ModItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -16,19 +17,16 @@ public class ModCreativeTab {
             () -> CreativeModeTab.builder()
                     .icon(() -> ModItems.BAKASMUSIC_DISC.get().getDefaultInstance())
                     .title(Component.translatable("itemGroup.goetyawaken"))
-                    .withSearchBar()
                     .displayItems((parameters, output) -> {
                         ModItems.ITEMS.getEntries().forEach(i -> {
                             if (i.isPresent()) {
-                                String itemName = i.getKey().location().getPath();
-                                if (itemName.equals("maid_fairy_servant_spawn_egg") || itemName.equals("fairy_focus")) {
-                                    if (com.k1sak1.goetyawaken.common.compat.touhoulittlemaid.TouhouLittleMaidLoaded.TOUHOULITTLEMAID
-                                            .isLoaded()) {
-                                        output.accept(i.get());
-                                    }
-                                } else {
-                                    output.accept(i.get());
-                                }
+                                output.accept(i.get());
+
+                            }
+                        });
+                        ModIntegrationRegistry.INTEGRATION_ITEMS.getEntries().forEach(i -> {
+                            if (i.isPresent()) {
+                                output.accept(i.get());
                             }
                         });
                     }).build());

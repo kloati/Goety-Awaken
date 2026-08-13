@@ -1,11 +1,15 @@
 package com.k1sak1.goetyawaken.common.entities.ally.illager;
 
+import com.Polarice3.Goety.utils.ModelSnapshot;
 import com.k1sak1.goetyawaken.config.AttributesConfig;
 import com.k1sak1.goetyawaken.utils.MobEffectUtils;
+import com.mojang.datafixers.util.Pair;
 import javax.annotation.Nullable;
 import com.Polarice3.Goety.common.effects.GoetyEffects;
+import com.Polarice3.Goety.client.particles.ShootIndicatorParticleOption;
 import com.Polarice3.Goety.common.entities.ally.illager.AbstractIllagerServant;
 import com.Polarice3.Goety.common.entities.ally.illager.SpellcasterIllagerServant;
+import com.Polarice3.Goety.common.entities.util.ShootIndicatorOwner;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
@@ -37,13 +41,22 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;
 import com.k1sak1.goetyawaken.init.ModSounds;
 
-public class ArchIllusionerServant extends SpellcasterIllagerServant implements RangedAttackMob {
+import java.util.ArrayList;
+import java.util.List;
+
+import org.joml.Vector3f;
+
+public class ArchIllusionerServant extends SpellcasterIllagerServant implements RangedAttackMob, ShootIndicatorOwner {
     private static final int NUM_ILLUSIONS = 4;
     private static final int ILLUSION_TRANSITION_TICKS = 3;
     private static final int ILLUSION_SPREAD = 3;
@@ -58,6 +71,25 @@ public class ArchIllusionerServant extends SpellcasterIllagerServant implements 
     private boolean isIllusion = false;
     private int illusionHitCount = 0;
     private int illusionLifetime = 0;
+    private int aboutToTeleport = 0;
+    private static final EntityDataAccessor<Boolean> START_TELEPORTING = SynchedEntityData.defineId(
+            ArchIllusionerServant.class,
+            EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Vector3f> SHOOT_INDICATOR_END = SynchedEntityData.defineId(
+            ArchIllusionerServant.class,
+            EntityDataSerializers.VECTOR3);
+    private static final EntityDataAccessor<Float> SHOOT_INDICATOR_PROGRESS = SynchedEntityData.defineId(
+            ArchIllusionerServant.class,
+            EntityDataSerializers.FLOAT);
+    public float clientShootIndicatorProgress, oClientShootIndicatorProgress;
+    public Vec3 clientShootIndicatorEnd = Vec3.ZERO, oClientShootIndicatorEnd = Vec3.ZERO;
+
+    public final List<Pair<Vec3, ModelSnapshot>> trailSnapshots = new ArrayList<>(50);
+    public float lastTrailTick = 0;
+
+    public boolean shouldAddTrailSnapshot() {
+        return this.isCastingSpell() || this.isStartTeleporting();
+    }
 
     public ArchIllusionerServant(EntityType<? extends ArchIllusionerServant> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -77,7 +109,7 @@ public class ArchIllusionerServant extends SpellcasterIllagerServant implements 
         this.goalSelector.addGoal(1, new ArchIllusionerServant.TrueMirrorSpellGoal());
         this.goalSelector.addGoal(1, new ArchIllusionerServant.IllusionerMirrorSpellGoal());
         this.goalSelector.addGoal(1, new ArchIllusionerServant.IllusionerBlindnessSpellGoal());
-        this.goalSelector.addGoal(6, new RangedBowAttackGoal<>(this, 1.0D, 20, 15.0F));
+        this.goalSelector.addGoal(6, new ArchIllusionerServantBowAttackGoal(this, 1.0D, 20, 15.0F));
     }
 
     public static AttributeSupplier.Builder setCustomAttributes() {
@@ -86,7 +118,8 @@ public class ArchIllusionerServant extends SpellcasterIllagerServant implements 
                 .add(Attributes.ARMOR, AttributesConfig.ArchIllusionerServantArmor.get())
                 .add(Attributes.ARMOR_TOUGHNESS, AttributesConfig.ArchIllusionerServantArmorToughness.get())
                 .add(Attributes.MOVEMENT_SPEED, AttributesConfig.ArchIllusionerServantMovementSpeed.get())
-                .add(Attributes.FOLLOW_RANGE, AttributesConfig.ArchIllusionerServantFollowRange.get());
+                .add(Attributes.FOLLOW_RANGE, AttributesConfig.ArchIllusionerServantFollowRange.get())
+                .add(Attributes.ATTACK_DAMAGE, AttributesConfig.ArchIllusionerDamage.get());
     }
 
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty,
@@ -98,6 +131,17 @@ public class ArchIllusionerServant extends SpellcasterIllagerServant implements 
 
     protected void defineSynchedData() {
         super.defineSynchedData();
+        this.entityData.define(START_TELEPORTING, false);
+        this.entityData.define(SHOOT_INDICATOR_END, new Vector3f(0.0F, 0.0F, 0.0F));
+        this.entityData.define(SHOOT_INDICATOR_PROGRESS, -1.0F);
+    }
+
+    public void setStartTeleporting(boolean startTeleporting) {
+        this.entityData.set(START_TELEPORTING, startTeleporting);
+    }
+
+    public boolean isStartTeleporting() {
+        return this.entityData.get(START_TELEPORTING);
     }
 
     @Override
@@ -158,6 +202,43 @@ public class ArchIllusionerServant extends SpellcasterIllagerServant implements 
 
     public void aiStep() {
         super.aiStep();
+        if (!this.level().isClientSide()) {
+            Vec3 targetPos = this.getViewVector(1.0F);
+            if (this.getTarget() != null) {
+                targetPos = new Vec3(this.getTarget().getX(), this.getTarget().getY(0.5F), this.getTarget().getZ());
+            }
+            this.setShootIndicatorEnd(targetPos.toVector3f());
+            if (!this.isIllusion() && this.isUsingItem() && this.getTicksUsingItem() >= 10
+                    && this.getTicksUsingItem() <= 20) {
+                this.setShootIndicatorProgress((this.getTicksUsingItem() - 10F) / 10F);
+                if (this.getTicksUsingItem() == 10
+                        && this.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
+                    serverLevel.sendParticles(new ShootIndicatorParticleOption(this.getId()),
+                            this.getX(), this.getY(), this.getZ(), 0, 0.65F, 0.35F, 0.95F, 1.0F);
+                }
+            } else {
+                this.setShootIndicatorProgress(-1.0F);
+            }
+        }
+        if (this.level().isClientSide) {
+            this.oClientShootIndicatorProgress = this.clientShootIndicatorProgress;
+            this.oClientShootIndicatorEnd = this.clientShootIndicatorEnd;
+            this.clientShootIndicatorProgress = this.getShootIndicatorProgress();
+            this.clientShootIndicatorEnd = new Vec3(this.getShootIndicatorEnd());
+        }
+
+        if (!this.level().isClientSide()) {
+            if (this.isStartTeleporting()) {
+                ++this.aboutToTeleport;
+                if (this.aboutToTeleport >= 5) {
+                    this.setStartTeleporting(false);
+                }
+            } else {
+                if (this.aboutToTeleport > 0) {
+                    this.aboutToTeleport = 0;
+                }
+            }
+        }
 
         if (this.isIllusion && !this.level().isClientSide()) {
             this.incrementIllusionLifetime();
@@ -273,6 +354,32 @@ public class ArchIllusionerServant extends SpellcasterIllagerServant implements 
         return SoundEvents.ILLUSIONER_AMBIENT;
     }
 
+    @Override
+    protected void tickDeath() {
+        if (this.isIllusion()) {
+            this.remove(net.minecraft.world.entity.Entity.RemovalReason.KILLED);
+            return;
+        }
+        super.tickDeath();
+    }
+
+    @Override
+    public void die(DamageSource pDamageSource) {
+        if (!this.level().isClientSide && !this.isIllusion()) {
+            List<ArchIllusionerServant> illusions = this.level().getEntitiesOfClass(ArchIllusionerServant.class,
+                    this.getBoundingBox().inflate(64.0D),
+                    entity -> entity.isIllusion() && entity.isAlive() && entity.getTrueOwner() == this);
+            for (ArchIllusionerServant illusion : illusions) {
+                illusion.remove(net.minecraft.world.entity.Entity.RemovalReason.DISCARDED);
+            }
+        }
+        if (this.isIllusion()) {
+            this.remove(net.minecraft.world.entity.Entity.RemovalReason.KILLED);
+            return;
+        }
+        super.die(pDamageSource);
+    }
+
     public Vec3[] getIllusionOffsets(float pPartialTick) {
         if (this.clientSideIllusionTicks <= 0) {
             return this.clientSideIllusionOffsets[1];
@@ -291,14 +398,28 @@ public class ArchIllusionerServant extends SpellcasterIllagerServant implements 
     }
 
     @Override
+    public boolean canWearArmor() {
+        return true;
+    }
+
+    @Override
+    public boolean canHaveWeapon() {
+        return true;
+    }
+
+    @Override
+    public boolean isMainWeapon(ItemStack itemStack) {
+        return itemStack.getItem() instanceof BowItem;
+    }
+
+    @Override
     protected SoundEvent getAmbientSound() {
         return SoundEvents.ILLUSIONER_AMBIENT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return this.random.nextBoolean() ? ModSounds.ARCH_ILLUSIONER_DEATH_1.get()
-                : ModSounds.ARCH_ILLUSIONER_DEATH_2.get();
+        return ModSounds.ARCH_ILLUSIONER_DEATH.get();
     }
 
     @Override
@@ -312,6 +433,22 @@ public class ArchIllusionerServant extends SpellcasterIllagerServant implements 
     }
 
     public void applyRaidBuffs(int pWave, boolean pUnusedFalse) {
+    }
+
+    static class ArchIllusionerServantBowAttackGoal extends RangedBowAttackGoal<ArchIllusionerServant> {
+        private final ArchIllusionerServant illusioner;
+
+        public ArchIllusionerServantBowAttackGoal(ArchIllusionerServant mob, double speedModifier, int attackInterval,
+                float attackRadius) {
+            super(mob, speedModifier, attackInterval, attackRadius);
+            this.illusioner = mob;
+        }
+
+        @Override
+        public void tick() {
+            this.setMinAttackInterval(this.illusioner.isIllusion() ? 20 : 30);
+            super.tick();
+        }
     }
 
     public void performRangedAttack(LivingEntity pTarget, float pDistanceFactor) {
@@ -344,11 +481,9 @@ public class ArchIllusionerServant extends SpellcasterIllagerServant implements 
             explosiveArrow.shootFromRotation(this, this.getXRot(), this.getYRot(), 0.0F, 2.0F, 1.0F);
 
             double d0 = pTarget.getX() - this.getX();
-            double d1 = pTarget.getY(0.3333333333333333D) - explosiveArrow.getY();
+            double d1 = pTarget.getY(0.5D) - this.getY(0.5D);
             double d2 = pTarget.getZ() - this.getZ();
-            double d3 = Math.sqrt(d0 * d0 + d2 * d2);
-            explosiveArrow.shoot(d0, d1 + d3 * (double) 0.2F, d2, 2.0F,
-                    (float) (14 - this.level().getDifficulty().getId() * 4));
+            explosiveArrow.shoot(d0, d1, d2, 2.0F, 1.0F);
 
             int powerLevel = net.minecraft.world.item.enchantment.EnchantmentHelper.getItemEnchantmentLevel(
                     net.minecraft.world.item.enchantment.Enchantments.POWER_ARROWS, bowStack);
@@ -366,6 +501,7 @@ public class ArchIllusionerServant extends SpellcasterIllagerServant implements 
             this.prevX = this.getX();
             this.prevY = this.getY();
             this.prevZ = this.getZ();
+            this.setStartTeleporting(true);
 
             for (int i = 0; i < 64; ++i) {
                 double blockRange = 32.0D;
@@ -386,6 +522,7 @@ public class ArchIllusionerServant extends SpellcasterIllagerServant implements 
             this.prevX = this.getX();
             this.prevY = this.getY();
             this.prevZ = this.getZ();
+            this.setStartTeleporting(true);
 
             for (int i = 0; i < 64; ++i) {
                 Vec3 vector3d = new Vec3(this.getX() - entity.getX(), this.getY(0.5D) - entity.getEyeY(),
@@ -412,6 +549,7 @@ public class ArchIllusionerServant extends SpellcasterIllagerServant implements 
             this.prevX = this.getX();
             this.prevY = this.getY();
             this.prevZ = this.getZ();
+            this.setStartTeleporting(true);
 
             for (int i = 0; i < 128; ++i) {
                 double blockRange = 128.0D;
@@ -420,6 +558,7 @@ public class ArchIllusionerServant extends SpellcasterIllagerServant implements 
                 double d5 = this.getZ() + (this.getRandom().nextDouble() - 0.5D) * blockRange;
 
                 if (this.randomTeleport(d3, d4, d5, false)) {
+                    this.spawnTeleportParticles();
                     this.stuckTime = 0;
                     this.level().broadcastEntityEvent(this, (byte) 100);
                     this.level().gameEvent(net.minecraft.world.level.gameevent.GameEvent.TELEPORT, this.position(),
@@ -437,6 +576,7 @@ public class ArchIllusionerServant extends SpellcasterIllagerServant implements 
     }
 
     public void teleportHits() {
+        this.spawnTeleportParticles();
         this.stuckTime = 0;
         this.level().broadcastEntityEvent(this, (byte) 100);
         this.level().gameEvent(net.minecraft.world.level.gameevent.GameEvent.TELEPORT, this.position(),
@@ -451,6 +591,47 @@ public class ArchIllusionerServant extends SpellcasterIllagerServant implements 
 
     public boolean teleportChance() {
         return this.level().random.nextFloat() <= 0.25F;
+    }
+
+    private void spawnTeleportParticles() {
+        if (this.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
+            Vec3 from = new Vec3(this.prevX, this.prevY, this.prevZ);
+            Vec3 to = this.position();
+            Vec3 direction = to.subtract(from).normalize();
+            for (int i = 0; i < 20; ++i) {
+                serverLevel.sendParticles(ParticleTypes.WITCH,
+                        from.x + (this.random.nextDouble() - 0.5D) * 1.2D,
+                        from.y + 1.0D + this.random.nextDouble() * 1.0D,
+                        from.z + (this.random.nextDouble() - 0.5D) * 1.2D,
+                        1, 0.0D, 0.0D, 0.0D, 0.0D);
+            }
+            for (int i = 0; i < 18; ++i) {
+                double speed = 0.15D + this.random.nextDouble() * 0.3D;
+                serverLevel.sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE,
+                        from.x + (this.random.nextDouble() - 0.5D) * 0.8D,
+                        from.y + 1.0D + this.random.nextDouble() * 1.2D,
+                        from.z + (this.random.nextDouble() - 0.5D) * 0.8D,
+                        0, direction.x * speed, direction.y * speed, direction.z * speed, 1.0D);
+            }
+            this.spawnTeleportRings(serverLevel, from, to);
+        }
+    }
+
+    private void spawnTeleportRings(net.minecraft.server.level.ServerLevel serverLevel, Vec3 from, Vec3 to) {
+        com.k1sak1.goetyawaken.client.particle.RingParticle.EnumRingBehavior shrink = com.k1sak1.goetyawaken.client.particle.RingParticle.EnumRingBehavior.SHRINK;
+        com.k1sak1.goetyawaken.client.particle.RingParticle.EnumRingBehavior grow = com.k1sak1.goetyawaken.client.particle.RingParticle.EnumRingBehavior.GROW;
+        for (float scale : new float[] { 20.0F, 30.0F, 40.0F }) {
+            serverLevel.sendParticles(
+                    new com.k1sak1.goetyawaken.client.particle.RingParticle.RingData(
+                            0.0F, (float) Math.PI / 2, 80, 0.75F, 0.65F, 0.85F, 0.8F, scale,
+                            false, shrink),
+                    from.x, from.y + 1.0D, from.z, 1, 0.0D, 0.0D, 0.0D, 0.0D);
+            serverLevel.sendParticles(
+                    new com.k1sak1.goetyawaken.client.particle.RingParticle.RingData(
+                            0.0F, (float) Math.PI / 2, 80, 0.75F, 0.65F, 0.85F, 0.8F, scale,
+                            false, grow),
+                    to.x, to.y + 1.0D, to.z, 1, 0.0D, 0.0D, 0.0D, 0.0D);
+        }
     }
 
     private boolean canSeeBlock(Entity entity, net.minecraft.core.BlockPos blockPos) {
@@ -472,6 +653,48 @@ public class ArchIllusionerServant extends SpellcasterIllagerServant implements 
             return this.isAggressive() ? AbstractIllagerServant.IllagerServantArmPose.BOW_AND_ARROW
                     : AbstractIllagerServant.IllagerServantArmPose.CROSSED;
         }
+    }
+
+    @Override
+    public Vec3 getShootIndicatorStart(float partialTicks) {
+        if (!this.shouldUpdateShootIndicator()) {
+            return this.getShootIndicatorEnd(partialTicks);
+        }
+        return new Vec3(
+                Mth.lerp(partialTicks, this.xo, this.getX()),
+                Mth.lerp(partialTicks, this.yo, this.getY()) + this.getEyeHeight(),
+                Mth.lerp(partialTicks, this.zo, this.getZ()));
+    }
+
+    @Override
+    public Vec3 getShootIndicatorEnd(float partialTicks) {
+        return this.oClientShootIndicatorEnd.lerp(this.clientShootIndicatorEnd, partialTicks);
+    }
+
+    @Override
+    public float getShootIndicatorProgress(float partialTicks) {
+        return Mth.lerp(partialTicks, this.oClientShootIndicatorProgress, this.clientShootIndicatorProgress);
+    }
+
+    @Override
+    public boolean shouldUpdateShootIndicator() {
+        return this.entityData.get(SHOOT_INDICATOR_PROGRESS) >= 0;
+    }
+
+    public void setShootIndicatorEnd(Vector3f vector3f) {
+        this.entityData.set(SHOOT_INDICATOR_END, vector3f);
+    }
+
+    public Vector3f getShootIndicatorEnd() {
+        return this.entityData.get(SHOOT_INDICATOR_END);
+    }
+
+    public void setShootIndicatorProgress(float progress) {
+        this.entityData.set(SHOOT_INDICATOR_PROGRESS, progress);
+    }
+
+    public float getShootIndicatorProgress() {
+        return this.entityData.get(SHOOT_INDICATOR_PROGRESS);
     }
 
     class IllusionerBlindnessSpellGoal extends SpellcasterIllagerServant.SpellcasterUseSpellGoal {
@@ -513,7 +736,7 @@ public class ArchIllusionerServant extends SpellcasterIllagerServant implements 
         protected void performSpellCasting() {
             MobEffectUtils.forceAdd(
                     ArchIllusionerServant.this.getTarget(),
-                    new MobEffectInstance(GoetyEffects.SENSE_LOSS.get(), 800, 1),
+                    new MobEffectInstance(GoetyEffects.SENSE_LOSS.get(), 300, 1),
                     ArchIllusionerServant.this);
         }
 
@@ -647,7 +870,8 @@ public class ArchIllusionerServant extends SpellcasterIllagerServant implements 
             java.util.List<ArchIllusionerServant> nearbyIllusions = ArchIllusionerServant.this.level()
                     .getEntitiesOfClass(ArchIllusionerServant.class,
                             ArchIllusionerServant.this.getBoundingBox().inflate(32.0D),
-                            entity -> entity.isIllusion() && entity.isAlive());
+                            entity -> entity.isIllusion() && entity.isAlive()
+                                    && com.Polarice3.Goety.utils.MobUtil.areAllies(ArchIllusionerServant.this, entity));
 
             return nearbyIllusions.size() <= 0;
         }
@@ -703,11 +927,7 @@ public class ArchIllusionerServant extends SpellcasterIllagerServant implements 
                             mobTarget.setTarget(illusion);
                         }
                     }
-
-                    if (ArchIllusionerServant.this.getTrueOwner() != null) {
-                        illusion.setTrueOwner(ArchIllusionerServant.this);
-                    }
-
+                    illusion.setTrueOwner(ArchIllusionerServant.this);
                     illusion.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.BOW));
                     for (EquipmentSlot slot : EquipmentSlot.values()) {
                         if (slot != EquipmentSlot.MAINHAND) {

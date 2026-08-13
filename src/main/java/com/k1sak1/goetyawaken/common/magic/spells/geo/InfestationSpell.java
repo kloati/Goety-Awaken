@@ -62,9 +62,7 @@ public class InfestationSpell extends Spell {
                 SoundEvents.EGG_THROW, SoundSource.PLAYERS, 0.5F, 0.4F / (worldIn.random.nextFloat() * 0.4F + 0.8F));
         boolean isVoidStaff = staff.is(ModItems.VOID_STAFF.get());
         Vec3 lookVec = entityLiving.getLookAngle();
-        boolean isGeoStaff = rightStaff(staff);
-
-        if (isGeoStaff) {
+        if (rightStaff(staff)) {
             shootEgg(worldIn, entityLiving, lookVec, isVoidStaff, 0, modifiedSpellStat);
             shootEgg(worldIn, entityLiving, lookVec, isVoidStaff, 15, modifiedSpellStat);
             shootEgg(worldIn, entityLiving, lookVec, isVoidStaff, -15, modifiedSpellStat);

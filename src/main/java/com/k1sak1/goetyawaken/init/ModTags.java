@@ -40,6 +40,8 @@ public class ModTags {
     public static class Items {
         public static final TagKey<Item> DAUNTLESS_GLOVE_BOOST = tag("dauntless_glove_boost");
         public static final TagKey<Item> ASSASSIN_GLOVE_BOOST = tag("assassin_glove_boost");
+        public static final TagKey<Item> GRIMOIRES = tag("grimoires");
+        public static final TagKey<Item> GRIMOIRE_MATERIALS = tag("grimoire_materials");
 
         private static TagKey<Item> tag(String name) {
             return ItemTags.create(GoetyAwaken.location(name));
@@ -63,9 +65,11 @@ public class ModTags {
         private static void init() {
         }
 
+        public static final TagKey<Biome> COMMON_BLACKLIST = tag("mob_spawn/common_blacklist");
         public static final TagKey<Biome> ZOMBIE_DARKGUARD_SPAWN = tag("zombie_darkguard_spawn");
         public static final TagKey<Biome> SKELETON_VANGUARD_SPAWN = tag("skeleton_vanguard_spawn");
         public static final TagKey<Biome> PARCHED_SPAWN = tag("parched_spawn");
+        public static final TagKey<Biome> PARCHED_EXCLUDE_SPAWN = tag("mob_spawn/parched_exclude");
         public static final TagKey<Biome> SUNKEN_SKELETON_SPAWN = tag("sunken_skeleton_spawn");
         public static final TagKey<Biome> HOSTILE_GNASHER_SPAWN = tag("hostile_gnasher_spawn");
         public static final TagKey<Biome> HOSTILE_TROPICAL_SLIME_SPAWN = tag("hostile_tropical_slime_spawn");
@@ -73,6 +77,16 @@ public class ModTags {
         public static final TagKey<Biome> HOSTILE_SNAPPER_SPAWN = tag("hostile_snapper_spawn");
         public static final TagKey<Biome> HOSTILE_SPIDER_CREEDER_SPAWN = tag("hostile_spider_creeder_spawn");
         public static final TagKey<Biome> HOSTILE_TWILIGHT_GOAT_SPAWN = tag("hostile_twilight_goat_spawn");
+        public static final TagKey<Biome> ICE_CREEPER_SPAWN = tag("ice_creeper_spawn");
+        public static final TagKey<Biome> ICE_CREEPER_EXCLUDE_SPAWN = tag("mob_spawn/ice_creeper_exclude");
+        public static final TagKey<Biome> BOULDERING_ZOMBIE_SPAWN = tag("bouldering_zombie_spawn");
+        public static final TagKey<Biome> BOULDERING_ZOMBIE_EXCLUDE_SPAWN = tag("mob_spawn/bouldering_zombie_exclude");
+        public static final TagKey<Biome> JUNGLE_ZOMBIE_SPAWN = tag("jungle_zombie_spawn");
+        public static final TagKey<Biome> JUNGLE_ZOMBIE_EXCLUDE_SPAWN = tag("mob_spawn/jungle_zombie_exclude");
+        public static final TagKey<Biome> FROZEN_ZOMBIE_SPAWN = tag("frozen_zombie_spawn");
+        public static final TagKey<Biome> FROZEN_ZOMBIE_EXCLUDE_SPAWN = tag("mob_spawn/frozen_zombie_exclude");
+        public static final TagKey<Biome> HOSTILE_WILDFIRE_SPAWN = tag("hostile_wildfire_spawn");
+        public static final TagKey<Biome> HOSTILE_WILDFIRE_EXCLUDE_SPAWN = tag("mob_spawn/hostile_wildfire_exclude");
 
         private static TagKey<Biome> tag(String name) {
             return create(GoetyAwaken.location(name));

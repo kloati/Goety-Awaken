@@ -1,0 +1,17 @@
+{
+  "name": "悲泣号角",
+  "icon": "goetyawaken:lamenting_horn",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "正如吹响炽烈号角能得到下界堡垒的回应那样，吹响悲泣号角或许也能得到一些来自狱界的生物的回应......"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:lamenting_horn",
+      "text": ""
+    }
+  ],
+  "extra_recipe_mappings": {"goetyawaken:lamenting_horn":0}
+}

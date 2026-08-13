@@ -2,6 +2,7 @@ package com.k1sak1.goetyawaken.common.magic.spells.wind;
 
 import com.Polarice3.Goety.api.magic.SpellType;
 import com.Polarice3.Goety.common.magic.SpellStat;
+import com.Polarice3.Goety.common.enchantments.ModEnchantments;
 import com.Polarice3.Goety.common.magic.ChargingSpell;
 import com.k1sak1.goetyawaken.Config;
 import com.Polarice3.Goety.utils.MobUtil;
@@ -24,6 +25,7 @@ public class HeavenRiftSpell extends ChargingSpell {
         return super.defaultStats().setRadius(32.0D);
     }
 
+    @Override
     public int defaultSoulCost() {
         return Config.HEAVEN_RIFT_FOCUS_SOUL_COST.get();
     }
@@ -92,13 +94,12 @@ public class HeavenRiftSpell extends ChargingSpell {
         RandomSource random = caster.getRandom();
         int extraDamage = 0;
         double radius = spellStat.getRadius();
+        int potency = spellStat.getPotency();
         if (WandUtil.enchantedFocus(caster)) {
-            extraDamage += (int) (WandUtil.getLevels(
-                    com.Polarice3.Goety.common.enchantments.ModEnchantments.POTENCY.get(),
-                    caster) * Config.heavenRiftPotencyDamage);
-            radius += WandUtil.getLevels(com.Polarice3.Goety.common.enchantments.ModEnchantments.RADIUS.get(), caster)
-                    * 4.0D;
+            potency += WandUtil.getLevels(ModEnchantments.POTENCY.get(), caster);
+            radius += WandUtil.getLevels(ModEnchantments.RADIUS.get(), caster) * 4.0D;
         }
+        extraDamage += potency * Config.heavenRiftPotencyDamage;
 
         if (this.rightStaff(staff)) {
             extraDamage += 4;

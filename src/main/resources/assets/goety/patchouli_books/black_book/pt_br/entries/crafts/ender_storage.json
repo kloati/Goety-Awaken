@@ -1,0 +1,60 @@
+{
+  "name": "Ender Storage",
+  "icon": "goetyawaken:echoing_ender_shelf",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Using the spatial properties of the End to store items may sound far-fetched, but the Ender Chest has already proven it's possible. Of course, that little box can't contain the ambition of a dark magician. You've discovered that you can harness the dark arts to craft a true Ender Storage repository worthy of a necromancer."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goetyawaken:ender_access_lectern",
+      "text": "The Ender Access Lectern serves as the controller and terminal for the entire Ender Storage network. It requires a Cursed Cage containing a Totem or A Soul Transfer beneath it to supply Soul Energy, and each access operation consumes a small amount of soul. You've noticed that this lectern possesses strange spatial properties—it can automatically detect and connect to Echoing Ender Shelves within a 2-block radius."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:ender_access_lectern",
+      "text": ""
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goetyawaken:echoing_ender_shelf",
+      "text": "To store your items, you've designed a shelf-like device that can hold certain Ender Storage Books. More books provide greater capacity for the Ender Storage network. The shelves themselves also offer an enchantment bonus based on remaining empty slots—every two books inserted grant 1 point of enchantment power."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:echoing_ender_shelf",
+      "text": ""
+    },
+    {
+      "type": "text",
+      "text": "To truly make your advanced Ender Storage network surpass old-fashioned wooden chests, you'll need to craft Ender Storage Books. These books provide capacity to the storage network and must be placed into Echoing Ender Shelves to function. If you wish to expand your storage network, you can craft more books—or even upgrade your existing ones, as higher-quality books offer greater storage capacity."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:ender_storage_book/ender_storage_book_iron",
+      "text": "Why can a book store items? Dark magic, of course. Amazing, isn't it?"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:ender_storage_book/ender_storage_book_gold",
+      "text": ""
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:ender_storage_book/ender_storage_book_emerald",
+      "text": ""
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:ender_storage_book/ender_storage_book_diamond",
+      "text": ""
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:ender_storage_book/ender_storage_book_sapphire",
+      "text": ""
+    }
+  ]
+}

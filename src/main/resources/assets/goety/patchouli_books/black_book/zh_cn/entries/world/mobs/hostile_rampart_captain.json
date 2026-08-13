@@ -1,0 +1,20 @@
+{
+  "name": "堡垒队长",
+  "icon": "goety:diamond_ice_axe",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "壁垒队长是一位精英灾厄村民，他控制着高耸山峰上的废弃壁垒，满怀热忱地守卫着它，抵御入侵者。或许在有着不祥之兆时，制作一个袭击号角并在山地使用它就能把他的队伍引出来——这是一种对他的挑衅。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_rampart_captain",
+      "text": ""
+    },
+    {
+      "type": "patchouli:text",
+      "text": "切莫低估这个敌人，他的攻击十分有力，而且还有许多花招。面对他时，小心飞来的冰斧和猛烈的风压冲击，这样你或许就能击败这个威胁。"
+    }
+  ]
+}

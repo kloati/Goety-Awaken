@@ -9,48 +9,8 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 1,
-          "name": "goety:rotting_focus"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 1,
-          "name": "goety:osseous_focus"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 1,
-          "name": "goety:skull_focus"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 1,
-          "name": "goety:raging_matter"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 1,
-          "name": "goety:ominous_shard"
-        },
-        {
-          "type": "minecraft:item",
           "weight": 4,
           "name": "goetyawaken:royal_scroll"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 1,
-          "name": "goety:diamond_trampler_armor"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 1,
-          "name": "goety:diamond_ravager_armor"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 1,
-          "name": "goety:ill_bomb"
         },
         {
           "type": "minecraft:item",
@@ -104,27 +64,7 @@
         {
           "type": "minecraft:item",
           "weight": 3,
-          "name": "goety:totem_of_roots"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 3,
           "name": "goety:mystic_core"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 3,
-          "name": "goety:gold_trampler_armor"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 3,
-          "name": "goety:gold_ravager_armor"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 3,
-          "name": "goety:ominous_shackles"
         },
         {
           "type": "minecraft:item",
@@ -147,25 +87,6 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 5,
-          "name": "minecraft:lapis_lazuli",
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 1,
-                "max": 5
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 4,
-          "name": "minecraft:saddle"
-        },
-        {
-          "type": "minecraft:item",
           "weight": 4,
           "name": "minecraft:golden_apple"
         },
@@ -182,26 +103,6 @@
               }
             }
           ]
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 3,
-          "name": "goety:pedestal"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 3,
-          "name": "goety:dark_altar"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 3,
-          "name": "goety:cursed_cage"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 3,
-          "name": "goety:cursed_infuser"
         },
         {
           "type": "minecraft:item",
@@ -267,100 +168,6 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 10,
-          "name": "minecraft:nether_wart",
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 1,
-                "max": 3
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 10,
-          "name": "minecraft:rabbit_hide",
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 1,
-                "max": 4
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 8,
-          "name": "minecraft:fire_charge",
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 1,
-                "max": 3
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 7,
-          "name": "minecraft:name_tag"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 8,
-          "name": "goety:tall_skull"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 10,
-          "name": "minecraft:rabbit_foot",
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 1,
-                "max": 2
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 15,
-          "name": "minecraft:stick",
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 1,
-                "max": 5
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 15,
-          "name": "minecraft:wheat",
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 1,
-                "max": 6
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
           "weight": 15,
           "name": "minecraft:bone",
           "functions": [
@@ -369,20 +176,6 @@
               "count": {
                 "min": 2,
                 "max": 8
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 15,
-          "name": "minecraft:string",
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 1,
-                "max": 6
               }
             }
           ]
@@ -411,48 +204,6 @@
               "count": {
                 "min": 1,
                 "max": 4
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 15,
-          "name": "minecraft:ink_sac",
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 1,
-                "max": 4
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 12,
-          "name": "minecraft:echo_shard",
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 1,
-                "max": 2
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 15,
-          "name": "minecraft:glow_ink_sac",
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 1,
-                "max": 3
               }
             }
           ]
@@ -516,20 +267,6 @@
         {
           "type": "minecraft:item",
           "weight": 15,
-          "name": "minecraft:raw_copper",
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 1,
-                "max": 5
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 15,
           "name": "minecraft:coal",
           "functions": [
             {
@@ -537,20 +274,6 @@
               "count": {
                 "min": 1,
                 "max": 8
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 15,
-          "name": "minecraft:charcoal",
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 1,
-                "max": 6
               }
             }
           ]
@@ -568,11 +291,6 @@
               }
             }
           ]
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 12,
-          "name": "minecraft:lead"
         },
         {
           "type": "minecraft:item",

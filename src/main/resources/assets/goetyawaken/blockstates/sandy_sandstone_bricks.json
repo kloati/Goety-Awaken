@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "": [
+      { "model": "goetyawaken:block/sandy_sandstone_bricks" },
+      { "model": "goetyawaken:block/sandy_sandstone_bricks_1" }
+    ]
+  }
+}

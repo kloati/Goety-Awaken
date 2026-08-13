@@ -334,4 +334,19 @@ public class IllusionerServant extends SpellcasterIllagerServant implements Rang
       }
       return super.mobInteract(pPlayer, pHand);
    }
+
+   @Override
+   public boolean canWearArmor() {
+      return true;
+   }
+
+   @Override
+   public boolean canHaveWeapon() {
+      return true;
+   }
+
+   @Override
+   public boolean isMainWeapon(ItemStack itemStack) {
+      return itemStack.getItem() instanceof BowItem;
+   }
 }

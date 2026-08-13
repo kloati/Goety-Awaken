@@ -17,16 +17,18 @@ public class GAWorldData extends SavedData {
     }
 
     public static GAWorldData get(Level world, ResourceKey<Level> dim) {
-        if (world instanceof ServerLevel) {
-            ServerLevel overworld = world.getServer().getLevel(dim);
-            DimensionDataStorage storage = overworld.getDataStorage();
-            GAWorldData data = storage.computeIfAbsent(GAWorldData::load, GAWorldData::new, IDENTIFIER);
-            if (data != null) {
-                data.setDirty();
+        if (world instanceof ServerLevel serverLevel && serverLevel.getServer() != null) {
+            ServerLevel targetLevel = serverLevel.getServer().getLevel(dim);
+            if (targetLevel != null) {
+                DimensionDataStorage storage = targetLevel.getDataStorage();
+                return storage.computeIfAbsent(GAWorldData::load, GAWorldData::new, IDENTIFIER);
             }
-            return data;
         }
         return null;
+    }
+
+    public static GAWorldData getReadOnly(Level world, ResourceKey<Level> dim) {
+        return get(world, dim);
     }
 
     public static GAWorldData load(CompoundTag nbt) {
@@ -46,6 +48,9 @@ public class GAWorldData extends SavedData {
     }
 
     public void setWitherNecromancerDefeatedOnce(boolean defeatedOnce) {
-        this.WitherNecromancerDefeatedOnce = defeatedOnce;
+        if (this.WitherNecromancerDefeatedOnce != defeatedOnce) {
+            this.WitherNecromancerDefeatedOnce = defeatedOnce;
+            this.setDirty();
+        }
     }
 }

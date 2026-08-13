@@ -1,0 +1,17 @@
+{
+  "name": "炽焰之盾聚晶",
+  "icon": "goetyawaken:burning_shield_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "野火的盾牌或许是烈焰人的烈焰棒的衍生形态。不过不管它是什么，它都为野火提供了不菲的防御力。在创造了一只属于自己的野火后，你终于得以安全接近这些危险的生物，进行更进一步的研究了。很快你就掌握了野火能够再生炽焰之盾的奥秘，并用奥术手段固化到了聚晶里。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:burning_shield_focus",
+      "text": "召唤拱卫施法者的炽焰之盾。"
+    }
+  ],
+  "extra_recipe_mappings": {"goetyawaken:burning_shield_focus":0}
+}

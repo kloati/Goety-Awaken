@@ -11,6 +11,7 @@ import com.Polarice3.Goety.common.entities.neutral.ender.AbstractBlastling;
 import com.Polarice3.Goety.common.entities.neutral.ender.AbstractSnareling;
 import com.Polarice3.Goety.common.entities.neutral.ender.AbstractWatchling;
 import com.k1sak1.goetyawaken.Config;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -23,12 +24,11 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 import java.util.UUID;
-import java.util.HashSet;
-import java.util.Set;
 
 @Mod.EventBusSubscriber(modid = "goetyawaken", bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class EnhancedEntityEvents {
-    private static final Set<Integer> enhancedEntities = new HashSet<>();
+    private static final String ENHANCED_NBT_KEY = "GoetyAwakenEnhanced";
+
     private static final UUID BLASTLING_DAMAGE_MODIFIER_UUID = UUID.fromString("cbbac6d5-7cc0-4b96-b7ba-35b02967f0bc");
     private static final UUID BLASTLING_HEALTH_MODIFIER_UUID = UUID.fromString("4289232c-04a8-49d5-bf1b-4e3a251e3b2a");
     private static final UUID SNARELING_DAMAGE_MODIFIER_UUID = UUID.fromString("8e7d1a3b-2f4c-4c9d-8e7d-1a3b2f4c9d8e");
@@ -56,50 +56,65 @@ public class EnhancedEntityEvents {
             return;
         }
 
-        if (enhancedEntities.contains(entity.getId())) {
+        LivingEntity livingEntity = (LivingEntity) entity;
+        CompoundTag persistentData = livingEntity.getPersistentData();
+        if (persistentData.getBoolean(ENHANCED_NBT_KEY)) {
             return;
         }
 
-        LivingEntity livingEntity = (LivingEntity) entity;
+        boolean enhanced = false;
+
         if (Config.enableBlastlingEnhancement) {
             if (isBlastlingType(livingEntity)) {
                 applyBlastlingEnhancement(livingEntity);
+                enhanced = true;
             }
         }
         if (Config.enableSnarelingEnhancement) {
             if (isSnarelingType(livingEntity)) {
                 applySnarelingEnhancement(livingEntity);
+                enhanced = true;
             }
         }
         if (Config.enableWatchlingEnhancement) {
             if (isWatchlingType(livingEntity)) {
                 applyWatchlingEnhancement(livingEntity);
+                enhanced = true;
             }
         }
         if (Config.enableSquallGolemEnhancement) {
             if (isSquallGolemType(livingEntity)) {
                 applySquallGolemEnhancement(livingEntity);
+                enhanced = true;
             }
         }
         if (Config.enableLeapleafEnhancement) {
             if (isLeapleafType(livingEntity)) {
                 applyLeapleafEnhancement(livingEntity);
+                enhanced = true;
             }
         }
         if (Config.enableWildfireEnhancement) {
             if (isWildfireType(livingEntity)) {
                 applyWildfireEnhancement(livingEntity);
+                enhanced = true;
             }
         }
         if (Config.enablePikerEnhancement) {
             if (isPikerType(livingEntity)) {
                 applyPikerEnhancement(livingEntity);
+                enhanced = true;
             }
         }
         if (Config.enableBroodMotherEnhancement) {
             if (isBroodMotherType(livingEntity)) {
                 applyBroodMotherEnhancement(livingEntity);
+                enhanced = true;
             }
+        }
+
+        if (enhanced) {
+            persistentData.putBoolean(ENHANCED_NBT_KEY, true);
         }
     }
 
@@ -156,8 +171,6 @@ public class EnhancedEntityEvents {
             maxHealth.addPermanentModifier(healthModifier);
             entity.setHealth(Math.min(entity.getMaxHealth(), entity.getHealth() + 8.0F));
         }
-
-        enhancedEntities.add(entity.getId());
     }
 
     private static void applySnarelingEnhancement(LivingEntity entity) {
@@ -181,8 +194,6 @@ public class EnhancedEntityEvents {
             maxHealth.addPermanentModifier(healthModifier);
             entity.setHealth(Math.min(entity.getMaxHealth(), entity.getHealth() + 14.0F));
         }
-
-        enhancedEntities.add(entity.getId());
     }
 
     private static void applyWatchlingEnhancement(LivingEntity entity) {
@@ -205,8 +216,6 @@ public class EnhancedEntityEvents {
             maxHealth.addPermanentModifier(healthModifier);
             entity.setHealth(Math.min(entity.getMaxHealth(), entity.getHealth() + 8.0F));
         }
-
-        enhancedEntities.add(entity.getId());
     }
 
     private static void applySquallGolemEnhancement(LivingEntity entity) {
@@ -230,8 +239,6 @@ public class EnhancedEntityEvents {
             maxHealth.addPermanentModifier(healthModifier);
             entity.setHealth(Math.min(entity.getMaxHealth(), entity.getHealth() + 52.0F));
         }
-
-        enhancedEntities.add(entity.getId());
     }
 
     private static void applyLeapleafEnhancement(LivingEntity entity) {
@@ -254,8 +261,6 @@ public class EnhancedEntityEvents {
             maxHealth.addPermanentModifier(healthModifier);
             entity.setHealth(Math.min(entity.getMaxHealth(), entity.getHealth() + 30.0F));
         }
-
-        enhancedEntities.add(entity.getId());
     }
 
     private static void applyWildfireEnhancement(LivingEntity entity) {
@@ -278,8 +283,6 @@ public class EnhancedEntityEvents {
             maxHealth.addPermanentModifier(healthModifier);
             entity.setHealth(Math.min(entity.getMaxHealth(), entity.getHealth() + 25.0F));
         }
-
-        enhancedEntities.add(entity.getId());
     }
 
     private static void applyPikerEnhancement(LivingEntity entity) {
@@ -292,8 +295,6 @@ public class EnhancedEntityEvents {
                     AttributeModifier.Operation.ADDITION);
             armor.addPermanentModifier(armorModifier);
         }
-
-        enhancedEntities.add(entity.getId());
     }
 
     private static void applyBroodMotherEnhancement(LivingEntity entity) {
@@ -303,7 +304,5 @@ public class EnhancedEntityEvents {
                 false, false, false));
         entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, MobEffectInstance.INFINITE_DURATION, 0, false,
                 false, false));
-
-        enhancedEntities.add(entity.getId());
     }
 }

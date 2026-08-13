@@ -39,9 +39,9 @@ public class DeathRayRenderer extends EntityRenderer<DeathRay> {
     private final ModelPart beamCore;
 
     private static final ResourceLocation CORE_TEXTURE_RESOURCE = GoetyAwaken
-            .location("textures/entity/projectiles/core.png");
+            .location("textures/entity/projectiles/corebeampart.png");
     private static final ResourceLocation OVERLAY_TEXTURE_RESOURCE = GoetyAwaken
-            .location("textures/entity/projectiles/overlay.png");
+            .location("textures/entity/projectiles/overlaypart.png");
 
     private static final float BEAM_SCALE_FACTOR = 0.25F;
     private static final float BASE_SEGMENT_LENGTH = 32.0F;

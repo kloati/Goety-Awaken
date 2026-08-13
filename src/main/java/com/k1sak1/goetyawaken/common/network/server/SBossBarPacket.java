@@ -12,6 +12,7 @@ public class SBossBarPacket {
     public static final int RENDER_TYPE_ANCIENT = 1;
     public static final int RENDER_TYPE_NAMELESS_ONE = 2;
     public static final int RENDER_TYPE_MUSHROOM = 3;
+    public static final int RENDER_TYPE_MASQUERADER = 4;
 
     private final java.util.UUID bar;
     private final int boss;

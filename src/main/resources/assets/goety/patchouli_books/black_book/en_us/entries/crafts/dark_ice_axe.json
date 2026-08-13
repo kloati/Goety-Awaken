@@ -13,5 +13,6 @@
       "text": ""
     }
   ],
-  "advancement": "goety:goety/craft_dark_ingot"
+  "advancement": "goety:goety/craft_dark_ingot",
+  "extra_recipe_mappings": {"goetyawaken:dark_ice_axe":0}
 }

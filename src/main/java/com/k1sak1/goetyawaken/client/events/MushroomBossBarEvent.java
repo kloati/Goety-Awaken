@@ -29,8 +29,16 @@ public class MushroomBossBarEvent {
 
     public static Map<UUID, Mob> MUSHROOM_BOSS_BARS = new HashMap<>();
 
+    private static void cleanInvalidEntries() {
+        MUSHROOM_BOSS_BARS.entrySet().removeIf(entry -> {
+            Mob mob = entry.getValue();
+            return mob == null || mob.isRemoved();
+        });
+    }
+
     @SubscribeEvent
     public static void renderBossBar(CustomizeGuiOverlayEvent.BossEventProgress event) {
+        cleanInvalidEntries();
         Minecraft minecraft = Minecraft.getInstance();
         if (MUSHROOM_BOSS_BARS.containsKey(event.getBossEvent().getId())) {
             Mob boss = MUSHROOM_BOSS_BARS.get(event.getBossEvent().getId());
@@ -83,5 +91,9 @@ public class MushroomBossBarEvent {
 
     public static void removeMushroomBossBar(UUID id, Mob mob) {
         MUSHROOM_BOSS_BARS.remove(id, mob);
+    }
+
+    public static void clearAll() {
+        MUSHROOM_BOSS_BARS.clear();
     }
 }

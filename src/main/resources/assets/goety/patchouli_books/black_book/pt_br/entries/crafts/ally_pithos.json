@@ -1,0 +1,20 @@
+{
+  "name": "Gorgeous Pithos",
+  "icon": "goetyawaken:ally_pithos",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "You have already learned the arcane art of using a Respawn Anchor on the pithos left behind by a Skull Lord to bring it back into the world. Yet, a question lingers in your mind: since the lingering power within that pithos can resurrect the wrathful lord, could there be a way to reshape it with dark magic—binding the lord to your will, to serve you?"
+    },
+    {
+      "type": "text",
+      "text": "Forcing that wrathful lord into submission proves far less convenient than simply creating a lord of your own. By employing a certain method, you have reforged and crafted a Gorgeous Pithos. When you open it, you shall release a Skull Lord bound utterly to your will."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:ally_pithos",
+      "text": ""
+    }
+  ]
+}

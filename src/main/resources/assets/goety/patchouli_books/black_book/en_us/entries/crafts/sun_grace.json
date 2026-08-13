@@ -12,5 +12,6 @@
       "recipe": "goetyawaken:sun_grace",
       "text": ""
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:sun_grace":0}
 }

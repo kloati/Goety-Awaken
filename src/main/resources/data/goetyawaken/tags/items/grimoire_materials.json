@@ -1,0 +1,431 @@
+{
+  "replace": false,
+  "values": [
+    "goety:animation_core",
+    "goety:brew",
+    "goety:chill_fabric",
+    "goety:cursed_ingot",
+    "goety:dark_fabric",
+    "goety:dark_ingot",
+    "goety:ectoplasm",
+    "goety:empty_focus",
+    "goety:forbidden_fragment",
+    "goety:forbidden_piece",
+    "goety:forbidden_scroll",
+    "goety:gale_fabric",
+    "goety:grave_dust",
+    "goety:heart_of_the_night",
+    "goety:hunger_core",
+    "goety:ice_cube",
+    "goety:jade",
+    "goety:magic_emerald",
+    "goety:magic_fabric",
+    "goety:mystic_core",
+    "goety:occult_fabric",
+    "goety:ominous_orb",
+    "goety:ominous_shard",
+    "goety:pale_steel_ingot",
+    "goety:philosophers_stone",
+    "goety:raging_matter",
+    "goety:refuse_bottle",
+    "goety:savage_tooth",
+    "goety:shadow_essence",
+    "goety:shrouded_blueprint",
+    "goety:soul_emerald",
+    "goety:soul_jar",
+    "goety:soul_ruby",
+    "goety:spent_totem",
+    "goety:spider_egg",
+    "goety:spirit_fabric",
+    "goety:totem_of_roots",
+    "goety:totem_of_souls",
+    "goety:undeath_potion",
+    "goety:unholy_blood",
+    "goety:unholy_fabric",
+    "goety:venomous_fang",
+    "goety:void_echo",
+    "goety:void_shard",
+    "goety:warped_wartful_egg",
+    "goety:wind_core",
+    "goetyawaken:delusive_fragment",
+    "goetyawaken:endersent_enchanted_book",
+    "goetyawaken:eye_of_overwatch",
+    "goetyawaken:gilded_ingot",
+    "goetyawaken:glacial_wraith_essence",
+    "goetyawaken:gloomy_tears",
+    "goetyawaken:glowing_ember",
+    "goetyawaken:mucilage",
+    "goetyawaken:nameless_platinum",
+    "goetyawaken:profound_echoing_shard",
+    "goetyawaken:soul_ruby_block",
+    "goetyawaken:soul_sapphire",
+    "goetyawaken:soul_sapphire_block",
+    "goetyawaken:superaggregated_mycelial_circuit",
+    "goetyawaken:taboo_fragment",
+    "goetyawaken:threat_banner",
+    "minecraft:amethyst_block",
+    "minecraft:amethyst_cluster",
+    "minecraft:amethyst_shard",
+    "minecraft:blaze_powder",
+    "minecraft:blaze_rod",
+    "minecraft:bone",
+    "minecraft:book",
+    "minecraft:budding_amethyst",
+    "minecraft:charcoal",
+    "minecraft:chorus_flower",
+    "minecraft:clock",
+    "minecraft:coal",
+    "minecraft:coal_block",
+    "minecraft:conduit",
+    "minecraft:copper_block",
+    "minecraft:copper_ingot",
+    "minecraft:creeper_head",
+    "minecraft:deepslate_emerald_ore",
+    "minecraft:diamond",
+    "minecraft:diamond_block",
+    "minecraft:dragon_breath",
+    "minecraft:dragon_egg",
+    "minecraft:dragon_head",
+    "minecraft:echo_shard",
+    "minecraft:egg",
+    "minecraft:emerald",
+    "minecraft:emerald_block",
+    "minecraft:enchanted_book",
+    "minecraft:enchanted_golden_apple",
+    "minecraft:end_crystal",
+    "minecraft:ender_eye",
+    "minecraft:ender_pearl",
+    "minecraft:experience_bottle",
+    "minecraft:feather",
+    "minecraft:fermented_spider_eye",
+    "minecraft:fire_charge",
+    "minecraft:firework_star",
+    "minecraft:ghast_tear",
+    "minecraft:glistering_melon_slice",
+    "minecraft:glowstone_dust",
+    "minecraft:gold_block",
+    "minecraft:gold_ingot",
+    "minecraft:gunpowder",
+    "minecraft:heart_of_the_sea",
+    "minecraft:honey_block",
+    "minecraft:honey_bottle",
+    "minecraft:honeycomb",
+    "minecraft:iron_block",
+    "minecraft:iron_ingot",
+    "minecraft:lapis_block",
+    "minecraft:lapis_lazuli",
+    "minecraft:leather",
+    "minecraft:nautilus_shell",
+    "minecraft:nether_star",
+    "minecraft:nether_wart",
+    "minecraft:netherite_block",
+    "minecraft:netherite_ingot",
+    "minecraft:netherite_scrap",
+    "minecraft:paper",
+    "minecraft:piglin_head",
+    "minecraft:pitcher_pod",
+    "minecraft:player_head",
+    "minecraft:poisonous_potato",
+    "minecraft:potion",
+    "minecraft:prismarine",
+    "minecraft:prismarine_crystals",
+    "minecraft:prismarine_shard",
+    "minecraft:pufferfish",
+    "minecraft:quartz",
+    "minecraft:redstone",
+    "minecraft:redstone_block",
+    "minecraft:reinforced_deepslate",
+    "minecraft:rotten_flesh",
+    "minecraft:sculk",
+    "minecraft:sculk_catalyst",
+    "minecraft:sculk_sensor",
+    "minecraft:sculk_shrieker",
+    "minecraft:scute",
+    "minecraft:shulker_shell",
+    "minecraft:skeleton_skull",
+    "minecraft:slime_ball",
+    "minecraft:sniffer_egg",
+    "minecraft:spider_eye",
+    "minecraft:torchflower_seeds",
+    "minecraft:totem_of_undying",
+    "minecraft:turtle_egg",
+    "minecraft:wither_skeleton_skull",
+    "minecraft:zombie_head",
+    {
+      "id": "eeeabsmobs:ancient_drive_crystal",
+      "required": false
+    },
+    {
+      "id": "eeeabsmobs:chain_gear",
+      "required": false
+    },
+    {
+      "id": "eeeabsmobs:guardian_cube",
+      "required": false
+    },
+    {
+      "id": "eeeabsmobs:heart_of_pagan",
+      "required": false
+    },
+    {
+      "id": "eeeabsmobs:immortal_ingot",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:ancient_knowledge_fragment",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:arcane_essence",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:arcane_ingot",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:arcane_rune",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:blank_rune",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:blood_rune",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:blood_upgrade_orb",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:blood_vial",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:bloody_vellum",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:cinder_essence",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:common_ink",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:cooldown_rune",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:cooldown_upgrade_orb",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:divine_pearl",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:divine_soulshard",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:dragonskin",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:eldritch_manuscript",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:ender_rune",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:ender_upgrade_orb",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:energized_core",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:epic_ink",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:evocation_rune",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:evocation_upgrade_orb",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:fire_rune",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:fire_upgrade_orb",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:frozen_bone",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:holy_rune",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:holy_upgrade_orb",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:ice_rune",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:ice_upgrade_orb",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:ice_venom_vial",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:icy_fang",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:legendary_ink",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:lightning_bottle",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:lightning_rune",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:lightning_upgrade_orb",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:magic_cloth",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:mana_upgrade_orb",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:mithril_ingot",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:mithril_scrap",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:nature_rune",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:nature_upgrade_orb",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:permafrost_shard",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:protection_rune",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:protection_upgrade_orb",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:pyrium_ingot",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:rare_ink",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:raw_mithril",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:ruined_book",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:timeless_slurry",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:uncommon_ink",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:upgrade_orb",
+      "required": false
+    },
+    {
+      "id": "twilightforest:borer_essence",
+      "required": false
+    },
+    {
+      "id": "twilightforest:carminite",
+      "required": false
+    },
+    {
+      "id": "twilightforest:fiery_blood",
+      "required": false
+    },
+    {
+      "id": "twilightforest:fiery_ingot",
+      "required": false
+    },
+    {
+      "id": "twilightforest:fiery_tears",
+      "required": false
+    },
+    {
+      "id": "twilightforest:ironwood_ingot",
+      "required": false
+    },
+    {
+      "id": "twilightforest:knightmetal_ingot",
+      "required": false
+    },
+    {
+      "id": "twilightforest:magic_beans",
+      "required": false
+    },
+    {
+      "id": "twilightforest:magic_map_focus",
+      "required": false
+    },
+    {
+      "id": "twilightforest:maze_map_focus",
+      "required": false
+    },
+    {
+      "id": "twilightforest:naga_scale",
+      "required": false
+    },
+    {
+      "id": "twilightforest:torchberries",
+      "required": false
+    }
+  ]
+}

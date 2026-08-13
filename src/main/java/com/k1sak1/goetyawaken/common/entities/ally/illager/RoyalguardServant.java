@@ -55,15 +55,35 @@ public class RoyalguardServant extends AbstractIllagerServant implements ICustom
             RoyalguardServant.class,
             EntityDataSerializers.BOOLEAN);
     public int attackTick;
-    public int shieldHealth = 0;
+    public float shieldHealth = 0;
+    private int shieldInvulnTime = 0;
     public AnimationState idleAnimationState = new AnimationState();
     public AnimationState standAnimationState = new AnimationState();
     public AnimationState attackAnimationState = new AnimationState();
     public AnimationState walkAnimationState = new AnimationState();
     public AnimationState patrolWalkAnimationState = new AnimationState();
 
+    public int baseAnimTransitionTick = 0;
+    public static final int BASE_ANIM_TRANSITION_DURATION = 5;
+    public String transitionFromKey = "";
+    public String transitionToKey = "";
+    private String currentAnimKey = "";
+
+    public String getCurrentAnimKey() {
+        return this.currentAnimKey;
+    }
+
     public RoyalguardServant(EntityType<? extends Summoned> type, Level worldIn) {
         super(type, worldIn);
+    }
+
+    @Override
+    public void setStaying(boolean staying) {
+        boolean wasStaying = this.isStaying();
+        super.setStaying(staying);
+        if (!this.level().isClientSide && staying && !wasStaying) {
+            this.getNavigation().stop();
+        }
     }
 
     @Override
@@ -123,20 +143,24 @@ public class RoyalguardServant extends AbstractIllagerServant implements ICustom
             this.setShield(pCompound.getBoolean("hasShield"));
         }
         if (pCompound.contains("ShieldHeath")) {
-            this.setShieldHealth(pCompound.getInt("ShieldHeath"));
+            this.setShieldHealth(pCompound.getFloat("ShieldHeath"));
         }
         if (pCompound.contains("ShieldHidden")) {
             this.setShieldHidden(pCompound.getBoolean("ShieldHidden"));
         } else if (pCompound.contains("hasShield")) {
             this.setShieldHidden(!pCompound.getBoolean("hasShield"));
         }
+        if (pCompound.contains("ShieldInvulnTime")) {
+            this.shieldInvulnTime = pCompound.getInt("ShieldInvulnTime");
+        }
     }
 
     public void addAdditionalSaveData(CompoundTag pCompound) {
         super.addAdditionalSaveData(pCompound);
         pCompound.putBoolean("hasShield", this.hasShield());
-        pCompound.putInt("ShieldHeath", this.getShieldHealth());
+        pCompound.putFloat("ShieldHeath", this.getShieldHealth());
         pCompound.putBoolean("ShieldHidden", this.isShieldHidden());
+        pCompound.putInt("ShieldInvulnTime", this.shieldInvulnTime);
     }
 
     @Override
@@ -176,11 +200,11 @@ public class RoyalguardServant extends AbstractIllagerServant implements ICustom
         this.entityData.set(SHIELD_HIDDEN, hidden);
     }
 
-    public int getShieldHealth() {
+    public float getShieldHealth() {
         return this.shieldHealth;
     }
 
-    public void setShieldHealth(int shieldHealth) {
+    public void setShieldHealth(float shieldHealth) {
         this.shieldHealth = shieldHealth;
     }
 
@@ -189,12 +213,8 @@ public class RoyalguardServant extends AbstractIllagerServant implements ICustom
             this.setShieldHealth(0);
             this.setShield(false);
             this.setShieldHidden(true);
-            SoundEvent[] shieldBreakSounds = {
-                    com.k1sak1.goetyawaken.init.ModSounds.ROYAL_GUARD_SHIELD_BREAK_1.get(),
-                    com.k1sak1.goetyawaken.init.ModSounds.ROYAL_GUARD_SHIELD_BREAK_2.get(),
-                    com.k1sak1.goetyawaken.init.ModSounds.ROYAL_GUARD_SHIELD_BREAK_3.get()
-            };
-            this.playSound(shieldBreakSounds[this.random.nextInt(shieldBreakSounds.length)], this.getSoundVolume(),
+            this.shieldInvulnTime = 10;
+            this.playSound(com.k1sak1.goetyawaken.init.ModSounds.ROYAL_GUARD_SHIELD_BREAK.get(), this.getSoundVolume(),
                     this.getVoicePitch());
             if (this.level() instanceof ServerLevel serverLevel) {
                 ServerParticleUtil.addParticlesAroundSelf(serverLevel, new BlockParticleOption(ParticleTypes.BLOCK,
@@ -203,10 +223,20 @@ public class RoyalguardServant extends AbstractIllagerServant implements ICustom
         }
     }
 
+    protected float getDamageAfterArmorReduce(DamageSource source, float amount) {
+        if (!source.is(DamageTypeTags.BYPASSES_ARMOR)) {
+            amount = net.minecraft.world.damagesource.CombatRules.getDamageAfterAbsorb(amount,
+                    (float) this.getArmorValue(),
+                    (float) this.getAttributeValue(Attributes.ARMOR_TOUGHNESS));
+        }
+        return amount;
+    }
+
     public void absorbDamageWithShield(float amount) {
-        int currentShieldHealth = this.getShieldHealth();
-        int newShieldHealth = currentShieldHealth + (int) Math.ceil(amount);
-        if (newShieldHealth >= 10) {
+        float currentShieldHealth = this.getShieldHealth();
+        float shieldCapacity = AttributesConfig.RoyalguardServantShieldCapacity.get().floatValue();
+        float newShieldHealth = currentShieldHealth + amount;
+        if (newShieldHealth >= shieldCapacity) {
             this.destroyShield();
         } else {
             this.setShieldHealth(newShieldHealth);
@@ -252,21 +282,13 @@ public class RoyalguardServant extends AbstractIllagerServant implements ICustom
     @Nullable
     @Override
     protected SoundEvent getDeathSound() {
-        SoundEvent[] deathSounds = {
-                com.k1sak1.goetyawaken.init.ModSounds.ROYAL_GUARD_DEATH_1.get(),
-                com.k1sak1.goetyawaken.init.ModSounds.ROYAL_GUARD_DEATH_2.get()
-        };
-        return deathSounds[this.random.nextInt(deathSounds.length)];
+        return com.k1sak1.goetyawaken.init.ModSounds.ROYAL_GUARD_DEATH.get();
     }
 
     @Nullable
     @Override
     protected SoundEvent getHurtSound(DamageSource pDamageSource) {
-        SoundEvent[] hurtSounds = {
-                com.k1sak1.goetyawaken.init.ModSounds.ROYAL_GUARD_HURT.get(),
-                com.k1sak1.goetyawaken.init.ModSounds.ROYAL_GUARD_HURT_3.get()
-        };
-        return hurtSounds[this.random.nextInt(hurtSounds.length)];
+        return com.k1sak1.goetyawaken.init.ModSounds.ROYAL_GUARD_HURT.get();
     }
 
     @Override
@@ -302,33 +324,42 @@ public class RoyalguardServant extends AbstractIllagerServant implements ICustom
     @Override
     public void tick() {
         super.tick();
-        if (this.level().isClientSide) {
-            if (this.isAlive()) {
-                this.idleAnimationState.animateWhen(!this.isMeleeAttacking() && !this.isStaying() && !this.isMoving(),
-                        this.tickCount);
-                this.standAnimationState.animateWhen(!this.isMeleeAttacking() && this.isStaying() && !this.isMoving(),
-                        this.tickCount);
+        if (this.shieldInvulnTime > 0) {
+            this.shieldInvulnTime--;
+        }
+        if (this.level().isClientSide && this.isAlive()) {
+            if (this.baseAnimTransitionTick > 0) {
+                this.baseAnimTransitionTick--;
 
-                boolean isMoving = this.isMoving();
-                float currentSpeed = this.walkAnimation.speed();
-                float patrolSpeedThreshold = 0.5f;
+                String midDesired = this.computeDesiredAnimKey();
+                if (!midDesired.isEmpty() && !midDesired.equals(this.transitionToKey)) {
+                    this.startAnimationForKey(midDesired);
+                    this.transitionFromKey = this.transitionToKey;
+                    this.transitionToKey = midDesired;
+                    this.baseAnimTransitionTick = BASE_ANIM_TRANSITION_DURATION;
+                    this.currentAnimKey = midDesired;
+                } else if (this.baseAnimTransitionTick == 0) {
+                    this.stopAnimationsNotForKey(this.transitionToKey);
+                }
+            } else {
+                String desiredKey = this.computeDesiredAnimKey();
 
-                if (!this.isMeleeAttacking() && isMoving) {
-                    if (currentSpeed <= patrolSpeedThreshold) {
-                        this.patrolWalkAnimationState.startIfStopped(this.tickCount);
-                        this.walkAnimationState.stop();
+                if (!desiredKey.isEmpty() && !desiredKey.equals(this.currentAnimKey)) {
+                    if (!this.currentAnimKey.isEmpty()) {
+                        this.startAnimationForKey(desiredKey);
+                        this.transitionFromKey = this.currentAnimKey;
+                        this.transitionToKey = desiredKey;
+                        this.baseAnimTransitionTick = BASE_ANIM_TRANSITION_DURATION;
                     } else {
-                        this.walkAnimationState.startIfStopped(this.tickCount);
-                        this.patrolWalkAnimationState.stop();
+                        this.startAnimationForKey(desiredKey);
+                        this.stopAnimationsNotForKey(desiredKey);
                     }
                 } else {
-                    this.walkAnimationState.stop();
-                    this.patrolWalkAnimationState.stop();
+                    this.startAnimationForKey(desiredKey);
+                    this.stopAnimationsNotForKey(desiredKey);
                 }
 
-                if (!this.isMeleeAttacking()) {
-                    this.attackAnimationState.stop();
-                }
+                this.currentAnimKey = desiredKey;
             }
         }
         if (this.isMeleeAttacking()) {
@@ -337,23 +368,69 @@ public class RoyalguardServant extends AbstractIllagerServant implements ICustom
 
         if (this.tickCount % 100 == 0 && this.random.nextInt(3) == 0 && !this.isMeleeAttacking() && this.isAlive() &&
                 !this.isMoving() && this.getTarget() == null) {
-            SoundEvent[] idleSounds = {
-                    com.k1sak1.goetyawaken.init.ModSounds.ROYAL_GUARD_IDLE_1.get(),
-                    com.k1sak1.goetyawaken.init.ModSounds.ROYAL_GUARD_IDLE_2.get(),
-                    com.k1sak1.goetyawaken.init.ModSounds.ROYAL_GUARD_IDLE_3.get(),
-                    com.k1sak1.goetyawaken.init.ModSounds.ROYAL_GUARD_IDLE_4.get()
-            };
-            this.playSound(idleSounds[this.random.nextInt(idleSounds.length)], this.getSoundVolume() * 0.8F,
+            this.playSound(com.k1sak1.goetyawaken.init.ModSounds.ROYAL_GUARD_IDLE.get(), this.getSoundVolume() * 0.8F,
                     this.getVoicePitch());
         }
+    }
+
+    private String computeDesiredAnimKey() {
+        if (this.isMeleeAttacking())
+            return "action_attack";
+
+        if (this.isStaying())
+            return "base_stand";
+        if (this.isMoving()) {
+            if (this.walkAnimation.speed() <= 0.5F)
+                return "base_patrol_walk";
+            return "base_walk";
+        }
+        return "base_idle";
+    }
+
+    private void startAnimationForKey(String key) {
+        switch (key) {
+            case "base_idle":
+                this.idleAnimationState.startIfStopped(this.tickCount);
+                break;
+            case "base_stand":
+                this.standAnimationState.startIfStopped(this.tickCount);
+                break;
+            case "base_walk":
+                this.walkAnimationState.startIfStopped(this.tickCount);
+                break;
+            case "base_patrol_walk":
+                this.patrolWalkAnimationState.startIfStopped(this.tickCount);
+                break;
+            case "action_attack":
+                this.attackAnimationState.startIfStopped(this.tickCount);
+                break;
+        }
+    }
+
+    private void stopAnimationsNotForKey(String key) {
+        if (!key.equals("base_idle"))
+            this.idleAnimationState.stop();
+        if (!key.equals("base_stand"))
+            this.standAnimationState.stop();
+        if (!key.equals("base_walk"))
+            this.walkAnimationState.stop();
+        if (!key.equals("base_patrol_walk"))
+            this.patrolWalkAnimationState.stop();
+        if (!key.equals("action_attack"))
+            this.attackAnimationState.stop();
     }
 
     @Override
     public boolean hurt(DamageSource source, float amount) {
 
         if (!this.level().isClientSide) {
+            if (this.hasShield() && this.shieldInvulnTime > 0) {
+                return false;
+            }
             if (this.hasShield() && !source.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
-                this.absorbDamageWithShield(amount);
+                float finalDamage = this.getDamageAfterArmorReduce(source, amount);
+                this.absorbDamageWithShield(finalDamage);
+                this.shieldInvulnTime = 10;
                 return false;
             }
             if (this.getTarget() != null) {
@@ -527,11 +604,11 @@ public class RoyalguardServant extends AbstractIllagerServant implements ICustom
 
         @Override
         public boolean canUse() {
+            if (RoyalguardServant.this.isStaying())
+                return false;
             boolean hasTarget = RoyalguardServant.this.getTarget() != null;
             boolean isTargetAlive = hasTarget && RoyalguardServant.this.getTarget().isAlive();
-            boolean result = hasTarget && isTargetAlive;
-
-            return result;
+            return hasTarget && isTargetAlive;
         }
 
         @Override
@@ -626,23 +703,13 @@ public class RoyalguardServant extends AbstractIllagerServant implements ICustom
             }
 
             if (RoyalguardServant.this.attackTick == 1) {
-                SoundEvent[] attackSounds = {
-                        com.k1sak1.goetyawaken.init.ModSounds.ROYAL_GUARD_ATTACK_1.get(),
-                        com.k1sak1.goetyawaken.init.ModSounds.ROYAL_GUARD_ATTACK_2.get(),
-                        com.k1sak1.goetyawaken.init.ModSounds.ROYAL_GUARD_ATTACK_3.get(),
-                        com.k1sak1.goetyawaken.init.ModSounds.ROYAL_GUARD_ATTACK_4.get()
-                };
                 RoyalguardServant.this.playSound(
-                        attackSounds[RoyalguardServant.this.random.nextInt(attackSounds.length)],
+                        com.k1sak1.goetyawaken.init.ModSounds.ROYAL_GUARD_ATTACK.get(),
                         RoyalguardServant.this.getSoundVolume() + 1.0F, RoyalguardServant.this.getVoicePitch());
             }
             if (RoyalguardServant.this.attackTick == 9) {
-                SoundEvent[] smashSounds = {
-                        com.k1sak1.goetyawaken.init.ModSounds.ROYAL_GUARD_SMASH_1.get(),
-                        com.k1sak1.goetyawaken.init.ModSounds.ROYAL_GUARD_SMASH_2.get(),
-                        com.k1sak1.goetyawaken.init.ModSounds.ROYAL_GUARD_SMASH_3.get()
-                };
-                RoyalguardServant.this.playSound(smashSounds[RoyalguardServant.this.random.nextInt(smashSounds.length)],
+                RoyalguardServant.this.playSound(
+                        com.k1sak1.goetyawaken.init.ModSounds.ROYAL_GUARD_SMASH.get(),
                         RoyalguardServant.this.getSoundVolume() + 1.0F, RoyalguardServant.this.getVoicePitch());
             }
             if (RoyalguardServant.this.attackTick == 14) {

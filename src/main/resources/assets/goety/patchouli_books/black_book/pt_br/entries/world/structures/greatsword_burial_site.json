@@ -1,0 +1,16 @@
+{
+  "name": "Local de Enterro da Espadona",
+  "icon": "goety:dark_sword",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Diz-se que o Local de Enterro da Espadona está na escuridão mais profunda do subsolo, uma lendária espadona que ninguém pode empunhar incrustada em um pedestal de pedra. As lendas contam que esta lâmina pode cortar a própria alma, no entanto, por mil anos, ninguém foi capaz de reivindicá-la das trevas do seu guardião — seja por força bruta ou força arcana."
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/greatsword_burial_site.png"],
+      "border": true
+    }
+  ]
+}

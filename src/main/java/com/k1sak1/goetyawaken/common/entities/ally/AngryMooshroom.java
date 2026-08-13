@@ -5,17 +5,22 @@ import com.Polarice3.Goety.common.entities.ai.ChargeGoal;
 import com.Polarice3.Goety.common.entities.neutral.Owned;
 import com.Polarice3.Goety.init.ModMobType;
 import com.Polarice3.Goety.utils.MobUtil;
+import com.k1sak1.goetyawaken.common.entities.ModEntityType;
 import com.k1sak1.goetyawaken.config.AttributesConfig;
+import com.k1sak1.goetyawaken.init.ModEffects;
+import com.k1sak1.goetyawaken.init.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -24,6 +29,7 @@ import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import net.minecraft.world.entity.animal.Cow;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -33,6 +39,7 @@ import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraftforge.event.ForgeEventFactory;
 import javax.annotation.Nullable;
 
 import java.util.UUID;
@@ -43,6 +50,9 @@ public class AngryMooshroom extends AnimalSummon implements com.Polarice3.Goety.
     private static final EntityDataAccessor<Boolean> DATA_IS_SCREAMING_MOOSHROOM = SynchedEntityData
             .defineId(AngryMooshroom.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> DATA_CHARGING = SynchedEntityData.defineId(AngryMooshroom.class,
+            EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> DATA_IS_POISONOUS_POTATO = SynchedEntityData.defineId(
+            AngryMooshroom.class,
             EntityDataSerializers.BOOLEAN);
     private static final AttributeModifier CHARGE_SPEED_BOOST = new AttributeModifier(
             UUID.fromString("1eaf83ad-340f-43f0-92c5-0f1e3c8e3b3d"), "Charge speed boost", 1.0D,
@@ -148,12 +158,22 @@ public class AngryMooshroom extends AnimalSummon implements com.Polarice3.Goety.
         this.entityData.define(DATA_TYPE, "red");
         this.entityData.define(DATA_IS_SCREAMING_MOOSHROOM, false);
         this.entityData.define(DATA_CHARGING, false);
+        this.entityData.define(DATA_IS_POISONOUS_POTATO, false);
+    }
+
+    public boolean isPoisonousPotato() {
+        return this.entityData.get(DATA_IS_POISONOUS_POTATO);
+    }
+
+    public void setPoisonousPotato(boolean poisonousPotato) {
+        this.entityData.set(DATA_IS_POISONOUS_POTATO, poisonousPotato);
     }
 
     public void addAdditionalSaveData(CompoundTag p_149385_) {
         super.addAdditionalSaveData(p_149385_);
         p_149385_.putString("Type", this.getVariant());
         p_149385_.putBoolean("IsScreamingMooshroom", this.isScreamingMooshroom());
+        p_149385_.putBoolean("PoisonousPotato", this.isPoisonousPotato());
     }
 
     public void readAdditionalSaveData(CompoundTag p_149373_) {
@@ -161,6 +181,9 @@ public class AngryMooshroom extends AnimalSummon implements com.Polarice3.Goety.
         this.setConfigurableAttributes();
         this.setVariant(p_149373_.getString("Type"));
         this.setScreamingMooshroom(p_149373_.getBoolean("IsScreamingMooshroom"));
+        if (p_149373_.contains("PoisonousPotato")) {
+            this.setPoisonousPotato(p_149373_.getBoolean("PoisonousPotato"));
+        }
     }
 
     @Override
@@ -248,6 +271,10 @@ public class AngryMooshroom extends AnimalSummon implements com.Polarice3.Goety.
                 target.addEffect(new MobEffectInstance(
                         com.Polarice3.Goety.common.effects.GoetyEffects.SAPPED.get(), 100, 0), this);
             }
+        }
+        if (this.isPoisonousPotato() && pEntity instanceof LivingEntity livingTarget) {
+            livingTarget.addEffect(new MobEffectInstance(ModEffects.POTENT_VENOM.get(),
+                    com.Polarice3.Goety.utils.MathHelper.secondsToTicks(5), 0, false, false));
         }
         return super.doHurtTarget(pEntity);
     }
@@ -340,6 +367,45 @@ public class AngryMooshroom extends AnimalSummon implements com.Polarice3.Goety.
             MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
         this.setHealth(this.getMaxHealth());
         return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
+    }
+
+    @Override
+    public boolean canBeAffected(MobEffectInstance effectInstance) {
+        if (this.isPoisonousPotato() && effectInstance.getEffect() == MobEffects.POISON) {
+            return false;
+        }
+        return super.canBeAffected(effectInstance);
+    }
+
+    @Override
+    public boolean killedEntity(ServerLevel world, LivingEntity killedEntity) {
+        boolean flag = super.killedEntity(world, killedEntity);
+        if (this.isPoisonousPotato() && killedEntity instanceof Cow cowEntity) {
+            if (ForgeEventFactory.canLivingConvert(cowEntity,
+                    ModEntityType.ANGRY_MOOSHROOM.get(), (timer) -> {
+                    })) {
+                AngryMooshroom servant = cowEntity.convertTo(
+                        ModEntityType.ANGRY_MOOSHROOM.get(), true);
+                if (servant != null) {
+                    servant.setPoisonousPotato(true);
+                    if (this.getTrueOwner() != null) {
+                        servant.setTrueOwner(this.getTrueOwner());
+                    }
+                    servant.finalizeSpawn(world, world.getCurrentDifficultyAt(servant.blockPosition()),
+                            MobSpawnType.CONVERSION, null, null);
+                    servant.setLimitedLife(10 * (15 + world.random.nextInt(45)));
+                    if (this.isHostile()) {
+                        servant.setHostile(true);
+                    }
+                    ForgeEventFactory.onLivingConvert(cowEntity, servant);
+                    this.playSound(ModSounds.POISONOUS_POTATO_ZOMBIE_INFECT.get(), 1.0F, 1.0F);
+                    if (!servant.isSilent()) {
+                        world.levelEvent(null, 1026, servant.blockPosition(), 0);
+                    }
+                }
+            }
+        }
+        return flag;
     }
 
     @Override

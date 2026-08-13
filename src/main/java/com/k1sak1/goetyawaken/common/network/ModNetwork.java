@@ -8,6 +8,7 @@ import com.k1sak1.goetyawaken.common.network.client.CWardenRoarPacket;
 import com.k1sak1.goetyawaken.common.network.client.CAutoRideablePacket;
 import com.k1sak1.goetyawaken.common.network.client.CCombatHealthSyncPacket;
 import com.k1sak1.goetyawaken.common.network.server.SBossBarPacket;
+import com.k1sak1.goetyawaken.common.network.client.CGiantGhastFlightPacket;
 import com.k1sak1.goetyawaken.common.network.client.CWitherFlightPacket;
 import com.k1sak1.goetyawaken.common.network.client.CWitherRoarPacket;
 import com.k1sak1.goetyawaken.common.network.client.CFrostScytheStrikePacket;
@@ -61,6 +62,9 @@ public class ModNetwork {
                 channel.registerMessage(nextID(), CWitherFlightPacket.class, CWitherFlightPacket::encode,
                                 CWitherFlightPacket::decode,
                                 CWitherFlightPacket::handle);
+                channel.registerMessage(nextID(), CGiantGhastFlightPacket.class, CGiantGhastFlightPacket::encode,
+                                CGiantGhastFlightPacket::decode,
+                                CGiantGhastFlightPacket::handle);
                 channel.registerMessage(nextID(), CWitherRoarPacket.class, CWitherRoarPacket::encode,
                                 CWitherRoarPacket::decode,
                                 CWitherRoarPacket::handle);
@@ -102,10 +106,12 @@ public class ModNetwork {
 
                 channel.registerMessage(nextID(), GridItemUpdateMessage.class, GridItemUpdateMessage::encode,
                                 GridItemUpdateMessage::decode,
-                                GridItemUpdateMessage::handle);
+                                GridItemUpdateMessage::handle,
+                                java.util.Optional.of(NetworkDirection.PLAY_TO_CLIENT));
                 channel.registerMessage(nextID(), GridItemDeltaMessage.class, GridItemDeltaMessage::encode,
                                 GridItemDeltaMessage::decode,
-                                GridItemDeltaMessage::handle);
+                                GridItemDeltaMessage::handle,
+                                java.util.Optional.of(NetworkDirection.PLAY_TO_CLIENT));
 
                 channel.registerMessage(nextID(), GridItemPullMessage.class, GridItemPullMessage::encode,
                                 GridItemPullMessage::decode,
@@ -131,16 +137,45 @@ public class ModNetwork {
 
                 channel.registerMessage(nextID(), SNamelessOneQuotePacket.class, SNamelessOneQuotePacket::encode,
                                 SNamelessOneQuotePacket::decode,
-                                SNamelessOneQuotePacket::handle);
+                                SNamelessOneQuotePacket::handle,
+                                java.util.Optional.of(NetworkDirection.PLAY_TO_CLIENT));
 
                 channel.registerMessage(nextID(), SMobEnchantSyncPacket.class, SMobEnchantSyncPacket::encode,
                                 SMobEnchantSyncPacket::decode,
-                                SMobEnchantSyncPacket::handle);
+                                SMobEnchantSyncPacket::handle,
+                                java.util.Optional.of(NetworkDirection.PLAY_TO_CLIENT));
 
                 channel.registerMessage(nextID(), SOpenAccessFocusMessage.class,
                                 SOpenAccessFocusMessage::encode,
                                 SOpenAccessFocusMessage::decode,
-                                SOpenAccessFocusMessage::handle);
+                                SOpenAccessFocusMessage::handle,
+                                java.util.Optional.of(NetworkDirection.PLAY_TO_SERVER));
+
+                channel.registerMessage(nextID(),
+                                com.k1sak1.goetyawaken.common.network.server.SSaveSpellConfigPacket.class,
+                                com.k1sak1.goetyawaken.common.network.server.SSaveSpellConfigPacket::encode,
+                                com.k1sak1.goetyawaken.common.network.server.SSaveSpellConfigPacket::decode,
+                                com.k1sak1.goetyawaken.common.network.server.SSaveSpellConfigPacket::handle,
+                                java.util.Optional.of(NetworkDirection.PLAY_TO_SERVER));
+                channel.registerMessage(nextID(),
+                                com.k1sak1.goetyawaken.common.network.client.CSyncSpellConfigPacket.class,
+                                com.k1sak1.goetyawaken.common.network.client.CSyncSpellConfigPacket::encode,
+                                com.k1sak1.goetyawaken.common.network.client.CSyncSpellConfigPacket::decode,
+                                com.k1sak1.goetyawaken.common.network.client.CSyncSpellConfigPacket::handle,
+                                java.util.Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+
+                channel.registerMessage(nextID(),
+                                com.k1sak1.goetyawaken.common.network.server.CApostleProgressRequestPacket.class,
+                                com.k1sak1.goetyawaken.common.network.server.CApostleProgressRequestPacket::encode,
+                                com.k1sak1.goetyawaken.common.network.server.CApostleProgressRequestPacket::decode,
+                                com.k1sak1.goetyawaken.common.network.server.CApostleProgressRequestPacket::handle);
+
+                channel.registerMessage(nextID(),
+                                com.k1sak1.goetyawaken.common.network.client.SApostleProgressSyncPacket.class,
+                                com.k1sak1.goetyawaken.common.network.client.SApostleProgressSyncPacket::encode,
+                                com.k1sak1.goetyawaken.common.network.client.SApostleProgressSyncPacket::decode,
+                                com.k1sak1.goetyawaken.common.network.client.SApostleProgressSyncPacket::handle,
+                                java.util.Optional.of(NetworkDirection.PLAY_TO_CLIENT));
         }
 
         public static <MSG> void sendTo(Player player, MSG msg) {

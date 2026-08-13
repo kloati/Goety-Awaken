@@ -12,5 +12,6 @@
       "recipe": "goetyawaken:torment_focus",
       "text": "制作折磨聚晶。"
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:torment_focus":0}
 }

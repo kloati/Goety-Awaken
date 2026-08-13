@@ -1,0 +1,17 @@
+{
+  "name": "Burning Shield Focus",
+  "icon": "goetyawaken:burning_shield_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A Wildfire's shield may be a derivative form of a Blaze's blaze rod—but whatever it is, it grants the Wildfire remarkable defensive power. After creating a Wildfire of your own, you were finally able to safely approach these dangerous creatures for further study. Before long, you unraveled the secret of how Wildfires regenerate their Burning Shields, and with arcane means, solidified this knowledge into a focus."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:burning_shield_focus",
+      "text": "Summons Burning Shields to guard the caster."
+    }
+  ],
+  "extra_recipe_mappings": {"goetyawaken:burning_shield_focus":0}
+}

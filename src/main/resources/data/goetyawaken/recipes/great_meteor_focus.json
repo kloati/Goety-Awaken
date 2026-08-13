@@ -1,0 +1,27 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety:lavaball_focus"
+  },
+  "craftType": "expert_nether",
+  "soulCost": 12,
+  "duration": 6,
+  "ingredients": [
+    {
+      "item": "minecraft:nether_star"
+    },
+    {
+      "item": "minecraft:tnt"
+    },
+    {
+      "item": "minecraft:tnt"
+    },
+    {
+      "item": "goetyawaken:gloomy_tears"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:great_meteor_focus"
+  }
+}

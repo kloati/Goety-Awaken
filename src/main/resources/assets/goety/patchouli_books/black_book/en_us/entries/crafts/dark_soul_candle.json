@@ -12,5 +12,6 @@
       "recipe": "goetyawaken:dark_soul_candle",
       "text": "Efficiency is life!"
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:dark_soul_candle":0}
 }

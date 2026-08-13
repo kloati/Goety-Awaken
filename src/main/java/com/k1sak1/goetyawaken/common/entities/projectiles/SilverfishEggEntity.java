@@ -136,7 +136,7 @@ public class SilverfishEggEntity extends ThrowableProjectile {
 
     private void spawnSilverfish() {
         if (!this.level().isClientSide) {
-            int count = 1 + this.random.nextInt(2);
+            int count = this.random.nextFloat() < 0.6F ? 1 + (this.random.nextFloat() < 0.5F ? 1 : 0) : 0;
 
             for (int i = 0; i < count; i++) {
                 SilverfishServant silverfish = new SilverfishServant(ModEntityType.SILVERFISH_SERVANT.get(),

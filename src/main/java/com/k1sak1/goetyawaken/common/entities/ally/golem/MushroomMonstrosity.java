@@ -101,6 +101,11 @@ public class MushroomMonstrosity extends RaiderGolemServant implements PlayerRid
     public float deathRotation = 0.0F;
     public int deathTime = 0;
     public boolean clientStop;
+    public int baseAnimTransitionTick = 0;
+    public static final int BASE_ANIM_TRANSITION_DURATION = 5;
+    public String transitionFromKey = "";
+    public String transitionToKey = "";
+    private String currentAnimKey = "";
     public AnimationState activateAnimationState = new AnimationState();
     public AnimationState idleAnimationState = new AnimationState();
     public AnimationState walkAnimationState = new AnimationState();
@@ -140,7 +145,7 @@ public class MushroomMonstrosity extends RaiderGolemServant implements PlayerRid
     private MonstrosityDamageCapHandler damageCapHandler;
     private static final Set<ResourceLocation> MUSHROOM_BLOCKS = new HashSet<>();
     private static final int MUSHROOM_CHECK_RADIUS = 16;
-    private static final double DAMAGE_REDUCTION_PER_BLOCK = 0.0005;
+    private static final double DAMAGE_REDUCTION_PER_BLOCK = 0.0001;
     private static final double MAX_DAMAGE_REDUCTION = 0.75;
     private int cachedMushroomCount = -1;
     private int lastMushroomCheckTick = -1;
@@ -230,7 +235,7 @@ public class MushroomMonstrosity extends RaiderGolemServant implements PlayerRid
         this.goalSelector.addGoal(2, new SmashOldGoal(this));
         this.goalSelector.addGoal(2, new Summon2Goal(this));
         this.goalSelector.addGoal(2, new SpitGoal(this));
-        this.goalSelector.addGoal(2, new DischargeGoal(this));
+        // this.goalSelector.addGoal(2, new DischargeGoal(this));
         this.goalSelector.addGoal(1, new StarfeGoal(this));
         this.goalSelector.addGoal(6, new MushroomMonstrosity.AttackGoal(this, 1.2D));
     }
@@ -453,6 +458,153 @@ public class MushroomMonstrosity extends RaiderGolemServant implements PlayerRid
 
     }
 
+    public String getCurrentAnimKey() {
+        return this.currentAnimKey;
+    }
+
+    private String computeDesiredAnimKey() {
+        if (this.getCurrentAnimation() == 2 && this.walkAnimation.isMoving()) {
+            return "walk";
+        }
+        switch (this.getCurrentAnimation()) {
+            case 1:
+                return "activate";
+            case 2:
+                return "idle";
+            case 4:
+                return "walk";
+            case 6:
+                return "to_sit";
+            case 7:
+                return "to_stand";
+            case 8:
+                return "sit";
+            case 10:
+                return "death";
+            case 11:
+                return "smash_old";
+            case 12:
+                return "smash";
+            case 13:
+                return "summon";
+            case 14:
+                return "summon2";
+            case 15:
+                return "spit";
+            case 16:
+                return "strafe";
+            default:
+                return "";
+        }
+    }
+
+    private void startAnimationForKey(String key) {
+        switch (key) {
+            case "activate":
+                this.activateAnimationState.startIfStopped(this.tickCount);
+                break;
+            case "idle":
+                this.idleAnimationState.startIfStopped(this.tickCount);
+                break;
+            case "walk":
+                this.walkAnimationState.startIfStopped(this.tickCount);
+                break;
+            case "to_sit":
+                this.toSitAnimationState.startIfStopped(this.tickCount);
+                break;
+            case "to_stand":
+                this.toStandAnimationState.startIfStopped(this.tickCount);
+                break;
+            case "sit":
+                this.sitAnimationState.startIfStopped(this.tickCount);
+                break;
+            case "death":
+                this.deathAnimationState.startIfStopped(this.tickCount);
+                break;
+            case "smash_old":
+                this.smashOldAnimationState.startIfStopped(this.tickCount);
+                break;
+            case "smash":
+                this.smashAnimationState.startIfStopped(this.tickCount);
+                break;
+            case "summon":
+                this.summonAnimationState.startIfStopped(this.tickCount);
+                break;
+            case "summon2":
+                this.summon2AnimationState.startIfStopped(this.tickCount);
+                break;
+            case "spit":
+                this.spitAnimationState.startIfStopped(this.tickCount);
+                break;
+            case "strafe":
+                this.strafeAnimationState.startIfStopped(this.tickCount);
+                break;
+        }
+    }
+
+    private void stopAnimationsNotForKey(String key) {
+        if (!key.equals("activate"))
+            this.activateAnimationState.stop();
+        if (!key.equals("idle"))
+            this.idleAnimationState.stop();
+        if (!key.equals("walk"))
+            this.walkAnimationState.stop();
+        if (!key.equals("to_sit"))
+            this.toSitAnimationState.stop();
+        if (!key.equals("to_stand"))
+            this.toStandAnimationState.stop();
+        if (!key.equals("sit"))
+            this.sitAnimationState.stop();
+        if (!key.equals("death"))
+            this.deathAnimationState.stop();
+        if (!key.equals("smash_old"))
+            this.smashOldAnimationState.stop();
+        if (!key.equals("smash"))
+            this.smashAnimationState.stop();
+        if (!key.equals("summon"))
+            this.summonAnimationState.stop();
+        if (!key.equals("summon2"))
+            this.summon2AnimationState.stop();
+        if (!key.equals("spit"))
+            this.spitAnimationState.stop();
+        if (!key.equals("strafe"))
+            this.strafeAnimationState.stop();
+    }
+
+    private void tickAnimationTransitions() {
+        if (this.baseAnimTransitionTick > 0) {
+            this.baseAnimTransitionTick--;
+            String midDesired = this.computeDesiredAnimKey();
+            if (!midDesired.isEmpty() && !midDesired.equals(this.transitionToKey)) {
+                this.startAnimationForKey(midDesired);
+                this.transitionFromKey = this.transitionToKey;
+                this.transitionToKey = midDesired;
+                this.baseAnimTransitionTick = BASE_ANIM_TRANSITION_DURATION;
+                this.currentAnimKey = midDesired;
+            } else if (this.baseAnimTransitionTick == 0) {
+                this.stopAnimationsNotForKey(this.transitionToKey);
+            }
+        } else {
+            String desiredKey = this.computeDesiredAnimKey();
+            if (!desiredKey.isEmpty() && !desiredKey.equals(this.currentAnimKey)) {
+                if (!this.currentAnimKey.isEmpty()) {
+                    this.startAnimationForKey(desiredKey);
+                    this.transitionFromKey = this.currentAnimKey;
+                    this.transitionToKey = desiredKey;
+                    this.baseAnimTransitionTick = BASE_ANIM_TRANSITION_DURATION;
+                } else {
+                    this.startAnimationForKey(desiredKey);
+                    this.stopAnimationsNotForKey(desiredKey);
+                }
+                this.currentAnimKey = desiredKey;
+            } else {
+                this.startAnimationForKey(desiredKey);
+                this.stopAnimationsNotForKey(desiredKey);
+                this.currentAnimKey = desiredKey;
+            }
+        }
+    }
+
     public void setAnimationState(String input) {
         this.setAnimationState(this.getAnimationState(input));
     }
@@ -521,69 +673,6 @@ public class MushroomMonstrosity extends RaiderGolemServant implements PlayerRid
 
     public int getCurrentAnimation() {
         return this.entityData.get(ANIM_STATE);
-    }
-
-    public void onSyncedDataUpdated(EntityDataAccessor<?> accessor) {
-        if (ANIM_STATE.equals(accessor)) {
-            if (this.level().isClientSide()) {
-                switch (this.entityData.get(ANIM_STATE)) {
-                    case 0:
-                        break;
-                    case 1:
-                        this.activateAnimationState.start(this.tickCount);
-                        this.stopMostAnimation(this.activateAnimationState);
-                        break;
-                    case 2:
-                        this.idleAnimationState.startIfStopped(this.tickCount);
-                        this.stopMostAnimation(this.idleAnimationState);
-                        break;
-                    case 4:
-                        this.walkAnimationState.startIfStopped(this.tickCount);
-                        // this.stopMostAnimation(this.walkAnimationState);
-                        break;
-                    case 6:
-                        this.stopMostAnimation(this.toSitAnimationState);
-                        this.toSitAnimationState.startIfStopped(this.tickCount);
-                        break;
-                    case 7:
-                        this.stopMostAnimation(this.toStandAnimationState);
-                        this.toStandAnimationState.startIfStopped(this.tickCount);
-                        break;
-                    case 8:
-                        this.sitAnimationState.startIfStopped(this.tickCount);
-                        this.stopMostAnimation(this.sitAnimationState);
-                        break;
-                    case 10:
-                        this.deathAnimationState.start(this.tickCount);
-                        this.stopMostAnimation(this.deathAnimationState);
-                        break;
-                    case 11:
-                        this.smashOldAnimationState.start(this.tickCount);
-                        this.stopMostAnimation(this.smashOldAnimationState);
-                        break;
-                    case 12:
-                        this.smashAnimationState.start(this.tickCount);
-                        this.stopMostAnimation(this.smashAnimationState);
-                        break;
-                    case 13:
-                        this.summonAnimationState.start(this.tickCount);
-                        this.stopMostAnimation(this.summonAnimationState);
-                        break;
-                    case 14:
-                        this.summon2AnimationState.start(this.tickCount);
-                        this.stopMostAnimation(this.summon2AnimationState);
-                        break;
-                    case 15:
-                        this.spitAnimationState.start(this.tickCount);
-                        this.stopMostAnimation(this.spitAnimationState);
-                        break;
-                    case 16:
-                        this.strafeAnimationState.start(this.tickCount);
-                        this.stopMostAnimation(this.strafeAnimationState);
-                        break;
-                }
-            }
-        }
     }
 
     private boolean getFlag(int mask) {
@@ -726,12 +815,6 @@ public class MushroomMonstrosity extends RaiderGolemServant implements PlayerRid
 
     public boolean isCurrentAnimation(String animation) {
         return this.getCurrentAnimation() == this.getAnimationState(animation);
-    }
-
-    private boolean isActuallyMoving() {
-        double d0 = this.getX() - this.xo;
-        double d1 = this.getZ() - this.zo;
-        return d0 * d0 + d1 * d1 > (double) 2.5000003E-7F;
     }
 
     public boolean isMoving() {
@@ -999,8 +1082,6 @@ public class MushroomMonstrosity extends RaiderGolemServant implements PlayerRid
                         } else {
                             this.setAnimationState(SIT);
                         }
-                    } else if (this.isActuallyMoving()) {
-                        this.setAnimationState(WALK);
                     } else {
                         if (this.isStandingUp > 0) {
                             --this.isStandingUp;
@@ -1026,16 +1107,8 @@ public class MushroomMonstrosity extends RaiderGolemServant implements PlayerRid
                 } else {
                     this.glow();
                 }
-
-                if (this.level().isClientSide) {
-                    this.idleAnimationState.animateWhen(
-                            this.isCurrentAnimation(IDLE) && !this.walkAnimation.isMoving() && this.hurtTime <= 0,
-                            this.tickCount);
-                    this.sitAnimationState.animateWhen(
-                            this.isCurrentAnimation(SIT) && !this.walkAnimation.isMoving() && this.hurtTime <= 0,
-                            this.tickCount);
-                }
             }
+            this.tickAnimationTransitions();
         }
 
         if (this.smashOldCool > 0) {
@@ -1101,6 +1174,17 @@ public class MushroomMonstrosity extends RaiderGolemServant implements PlayerRid
     public void die(DamageSource p_21014_) {
         this.deathRotation = this.getYRot();
         super.die(p_21014_);
+    }
+
+    @Override
+    protected void dropCustomDeathLoot(DamageSource pSource, int pLooting, boolean pRecentlyHit) {
+        super.dropCustomDeathLoot(pSource, pLooting, pRecentlyHit);
+        if (!this.isHostile()) {
+            int count = 1;
+            ItemStack circuitStack = new ItemStack(
+                    com.k1sak1.goetyawaken.common.items.ModItems.SUPERAGGREGATED_MYCELIAL_CIRCUIT.get(), count);
+            this.spawnAtLocation(circuitStack);
+        }
     }
 
     public void makeBigGlow() {
@@ -1186,72 +1270,21 @@ public class MushroomMonstrosity extends RaiderGolemServant implements PlayerRid
         Entity directEntity = pSource.getDirectEntity();
         Entity sourceEntity = pSource.getEntity();
         if (isPotionDamageSource(pSource, directEntity, sourceEntity)) {
-            adjustedAmount *= 0.15F;
+            adjustedAmount *= 0.25F;
         }
-
         float maxAllowedDamage = this.damageCapHandler.calculateMaximumAllowedDamage();
         float firstCappedDamage = Math.min(adjustedAmount, maxAllowedDamage);
-        if (this.canHurtRange(pSource) > 32.0D
-                && !pSource.is(net.minecraft.tags.DamageTypeTags.BYPASSES_INVULNERABILITY)) {
+        if (this.canHurtRange(pSource) > 32.0D || pSource.is(net.minecraft.tags.DamageTypeTags.IS_EXPLOSION)
+                || pSource.is(net.minecraft.tags.DamageTypeTags.IS_FALL)
+                || pSource.is(net.minecraft.world.damagesource.DamageTypes.THORNS)
+                || pSource.is(net.minecraft.world.damagesource.DamageTypes.CACTUS)
+                || pSource.is(net.minecraft.world.damagesource.DamageTypes.IN_WALL)
+                || pSource.is(net.minecraft.world.damagesource.DamageTypes.DROWN)
+                || pSource.is(net.minecraft.world.damagesource.DamageTypes.FLY_INTO_WALL)
+                || pSource.is(net.minecraft.world.damagesource.DamageTypes.SWEET_BERRY_BUSH)
+                        && !pSource.is(net.minecraft.tags.DamageTypeTags.BYPASSES_INVULNERABILITY)) {
             return false;
         }
-        if (pSource.is(net.minecraft.tags.DamageTypeTags.IS_EXPLOSION)
-                && !pSource.is(net.minecraft.tags.DamageTypeTags.BYPASSES_INVULNERABILITY)) {
-            return false;
-        }
-        // if (pSource.is(net.minecraft.tags.DamageTypeTags.IS_PROJECTILE)
-        // && !pSource.is(net.minecraft.tags.DamageTypeTags.BYPASSES_INVULNERABILITY)) {
-        // firstCappedDamage *= 0.15;
-        // }
-        if (pSource.is(net.minecraft.tags.DamageTypeTags.IS_FALL)
-                && !pSource.is(net.minecraft.tags.DamageTypeTags.BYPASSES_INVULNERABILITY)) {
-            return false;
-        }
-        if (pSource.is(net.minecraft.world.damagesource.DamageTypes.THORNS)
-                && !pSource.is(net.minecraft.tags.DamageTypeTags.BYPASSES_INVULNERABILITY)) {
-            return false;
-        }
-        if ((pSource.is(net.minecraft.world.damagesource.DamageTypes.CACTUS)
-                || pSource.is(net.minecraft.world.damagesource.DamageTypes.SWEET_BERRY_BUSH))
-                && !pSource.is(net.minecraft.tags.DamageTypeTags.BYPASSES_INVULNERABILITY)) {
-            return false;
-        }
-        if (pSource.is(net.minecraft.world.damagesource.DamageTypes.IN_WALL)
-                && !pSource.is(net.minecraft.tags.DamageTypeTags.BYPASSES_INVULNERABILITY)) {
-            return false;
-        }
-        if (pSource.is(net.minecraft.world.damagesource.DamageTypes.FLY_INTO_WALL)
-                && !pSource.is(net.minecraft.tags.DamageTypeTags.BYPASSES_INVULNERABILITY)) {
-            return false;
-        }
-        if (pSource.is(net.minecraft.world.damagesource.DamageTypes.CRAMMING)
-                && !pSource.is(net.minecraft.tags.DamageTypeTags.BYPASSES_INVULNERABILITY)) {
-            return false;
-        }
-        if (pSource.is(net.minecraft.world.damagesource.DamageTypes.DROWN)
-                && !pSource.is(net.minecraft.tags.DamageTypeTags.BYPASSES_INVULNERABILITY)) {
-            return false;
-        }
-        if (pSource.is(net.minecraft.world.damagesource.DamageTypes.DRY_OUT)
-                && !pSource.is(net.minecraft.tags.DamageTypeTags.BYPASSES_INVULNERABILITY)) {
-            return false;
-        }
-        if (pSource.is(net.minecraft.tags.DamageTypeTags.DAMAGES_HELMET)
-                && !pSource.is(net.minecraft.tags.DamageTypeTags.BYPASSES_INVULNERABILITY)) {
-            return false;
-        }
-        if (pSource.is(net.minecraft.tags.DamageTypeTags.IS_LIGHTNING)
-                && !pSource.is(net.minecraft.tags.DamageTypeTags.BYPASSES_INVULNERABILITY)) {
-            return false;
-        }
-        if (pSource.is(net.minecraft.world.damagesource.DamageTypes.STARVE)
-                && !pSource.is(net.minecraft.tags.DamageTypeTags.BYPASSES_INVULNERABILITY)) {
-            return false;
-        }
-        if (pSource.getEntity() == null) {
-            firstCappedDamage *= 0.1;
-        }
-
         float finalCappedDamage = Math.min(firstCappedDamage, maxAllowedDamage);
         // if (this.getMaxHealth() > 0 && this.getHealth() / this.getMaxHealth() <=
         // 0.5F) {
@@ -1295,12 +1328,10 @@ public class MushroomMonstrosity extends RaiderGolemServant implements PlayerRid
         double damageReduction = getMushroomDamageReduction();
         float reducedDamage = (float) (cappedDamage * (1.0 - damageReduction));
         float modifiedDamage = this.dynamicShieldHandler.calculateDamageWithDynamicShield(pDamageSource, reducedDamage);
-
         if (this.getMaxHealth() > 0 && this.getHealth() / this.getMaxHealth() <= 0.5F) {
             float healthRatio = (float) (this.getHealth() / this.getMaxHealth());
-            modifiedDamage *= Math.max(2.0F * healthRatio, 0.5F);
+            modifiedDamage *= Math.max(2.0F * healthRatio, 0.75F);
         }
-
         super.actuallyHurt(pDamageSource, modifiedDamage);
     }
 
@@ -1554,7 +1585,7 @@ public class MushroomMonstrosity extends RaiderGolemServant implements PlayerRid
             if (this.distanceToSqr(target.position()) <= 9.0D * 9.0D &&
                     !com.Polarice3.Goety.utils.MobUtil.areAllies(this, target) && target != this) {
                 if (!this.isEasyMode()) {
-                    this.hurtTarget(target, 2.0F);
+                    this.hurtTarget(target, 1.5F);
                     if (com.Polarice3.Goety.utils.MobUtil.healthIsHalved(this)) {
                         if (target instanceof LivingEntity) {
                             LivingEntity livingTarget = (LivingEntity) target;
@@ -1604,7 +1635,7 @@ public class MushroomMonstrosity extends RaiderGolemServant implements PlayerRid
             if (this.distanceToSqr(target.position()) <= 16.0D * 16.0D &&
                     !com.Polarice3.Goety.utils.MobUtil.areAllies(this, target) && target != this) {
                 if (!this.isEasyMode()) {
-                    this.hurtTarget(target, 3.0F);
+                    this.hurtTarget(target, 2.0F);
                     if (com.Polarice3.Goety.utils.MobUtil.healthIsHalved(this)) {
                         if (target instanceof LivingEntity) {
                             LivingEntity livingTarget = (LivingEntity) target;
@@ -1615,7 +1646,7 @@ public class MushroomMonstrosity extends RaiderGolemServant implements PlayerRid
                         }
                     }
                 } else {
-                    this.hurtTarget(target, 2.0F);
+                    this.hurtTarget(target, 1.0F);
                 }
             }
         }
@@ -1643,7 +1674,8 @@ public class MushroomMonstrosity extends RaiderGolemServant implements PlayerRid
         float f = (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE) * damageMultiplier;
         float f1 = (float) this.getAttributeValue(Attributes.ATTACK_KNOCKBACK);
         if (target instanceof LivingEntity livingEntity) {
-            f += (livingEntity.getMaxHealth() * 0.16F);
+            f += (livingEntity.getMaxHealth()
+                    * AttributesConfig.MushroomMonstrosityPercentageDamage.get().floatValue());
         }
         boolean flag = target.hurt(this.getServantAttack(), f);
         if (flag) {
@@ -2096,7 +2128,7 @@ public class MushroomMonstrosity extends RaiderGolemServant implements PlayerRid
                     break;
 
                 case 1:
-                    for (int i = 0; i < 12; i++) {
+                    for (int i = 0; i < 9; i++) {
                         com.k1sak1.goetyawaken.common.entities.projectiles.MushroomScatterBomb scatterBomb = new com.k1sak1.goetyawaken.common.entities.projectiles.MushroomScatterBomb(
                                 this, serverLevel);
                         scatterBomb.setPos(this.getX(), this.getY() + 4.5D, this.getZ());
@@ -2288,7 +2320,7 @@ public class MushroomMonstrosity extends RaiderGolemServant implements PlayerRid
                 double distance = this.mob.distanceTo(target);
                 boolean isOutOfRange = distance > 16.0F;
                 boolean isNotOnCooldown = this.mob.dischargeCool <= 0;
-                return isNotOnCooldown && isOutOfRange && this.mob.isEasyMode();
+                return isNotOnCooldown && isOutOfRange && !this.mob.isEasyMode();
             }
             return false;
         }
@@ -2343,7 +2375,7 @@ public class MushroomMonstrosity extends RaiderGolemServant implements PlayerRid
             this.mob.playSound(com.Polarice3.Goety.init.ModSounds.REDSTONE_MONSTROSITY_CHARGE.get());
             this.mob.setAnimationState("strafe");
             this.mob.setStarfeAttacking(true);
-            this.mob.starfeProjectileType = this.mob.level().random.nextInt(13);
+            this.mob.starfeProjectileType = this.mob.level().random.nextInt(12);
             this.mob.starfeFireCounter = 0;
             switch (this.mob.starfeProjectileType) {
                 case 0:
@@ -2359,9 +2391,6 @@ public class MushroomMonstrosity extends RaiderGolemServant implements PlayerRid
                     this.mob.starfeFireInterval = 2;
                     break;
                 case 11:
-                    this.mob.starfeFireInterval = 2;
-                    break;
-                case 12:
                     this.mob.starfeFireInterval = 10;
                     break;
                 default:
@@ -2721,22 +2750,6 @@ public class MushroomMonstrosity extends RaiderGolemServant implements PlayerRid
                 serverLevel.addFreshEntity(iceSpearSpread);
                 break;
             case 10:
-                com.k1sak1.goetyawaken.common.entities.projectiles.EndermiteEggEntity egg = new com.k1sak1.goetyawaken.common.entities.projectiles.EndermiteEggEntity(
-                        com.k1sak1.goetyawaken.common.entities.ModEntityType.ENDERMITE_EGG.get(), serverLevel);
-                egg.setPos(spawnX, spawnY, spawnZ);
-                egg.setOwner(this);
-                egg.setDeltaMovement(velocity);
-                egg.setPowerLevel(3);
-                serverLevel.addFreshEntity(egg);
-                com.k1sak1.goetyawaken.common.entities.projectiles.EndermiteEggEntity eggSpread = new com.k1sak1.goetyawaken.common.entities.projectiles.EndermiteEggEntity(
-                        com.k1sak1.goetyawaken.common.entities.ModEntityType.ENDERMITE_EGG.get(), serverLevel);
-                eggSpread.setPos(spawnX, spawnY, spawnZ);
-                eggSpread.setOwner(this);
-                eggSpread.setDeltaMovement(spreadVelocity);
-                eggSpread.setPowerLevel(3);
-                serverLevel.addFreshEntity(eggSpread);
-                break;
-            case 11:
                 com.k1sak1.goetyawaken.common.entities.projectiles.GhostFireBolt ghostFireBolt = new com.k1sak1.goetyawaken.common.entities.projectiles.GhostFireBolt(
                         com.k1sak1.goetyawaken.common.entities.ModEntityType.GHOST_FIRE_BOLT.get(), serverLevel);
                 ghostFireBolt.setPos(spawnX, spawnY, spawnZ);
@@ -2750,7 +2763,7 @@ public class MushroomMonstrosity extends RaiderGolemServant implements PlayerRid
                 ghostFireBoltSpread.setDeltaMovement(spreadVelocity);
                 serverLevel.addFreshEntity(ghostFireBoltSpread);
                 break;
-            case 12:
+            case 11:
                 com.Polarice3.Goety.common.entities.projectiles.ModDragonFireball dragonFireball = new com.Polarice3.Goety.common.entities.projectiles.ModDragonFireball(
                         serverLevel, this, velocity.x, velocity.y, velocity.z);
                 dragonFireball.setPos(spawnX, spawnY, spawnZ);

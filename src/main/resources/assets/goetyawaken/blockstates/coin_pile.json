@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=north,layers=1": { "model": "goetyawaken:block/coin_pile_1" },
+    "facing=east,layers=1": { "model": "goetyawaken:block/coin_pile_1", "y": 90 },
+    "facing=south,layers=1": { "model": "goetyawaken:block/coin_pile_1", "y": 180 },
+    "facing=west,layers=1": { "model": "goetyawaken:block/coin_pile_1", "y": 270 },
+    "facing=north,layers=2": { "model": "goetyawaken:block/coin_pile_2" },
+    "facing=east,layers=2": { "model": "goetyawaken:block/coin_pile_2", "y": 90 },
+    "facing=south,layers=2": { "model": "goetyawaken:block/coin_pile_2", "y": 180 },
+    "facing=west,layers=2": { "model": "goetyawaken:block/coin_pile_2", "y": 270 },
+    "facing=north,layers=3": { "model": "goetyawaken:block/coin_pile_3" },
+    "facing=east,layers=3": { "model": "goetyawaken:block/coin_pile_3", "y": 90 },
+    "facing=south,layers=3": { "model": "goetyawaken:block/coin_pile_3", "y": 180 },
+    "facing=west,layers=3": { "model": "goetyawaken:block/coin_pile_3", "y": 270 },
+    "facing=north,layers=4": { "model": "goetyawaken:block/coin_pile_4" },
+    "facing=east,layers=4": { "model": "goetyawaken:block/coin_pile_4", "y": 90 },
+    "facing=south,layers=4": { "model": "goetyawaken:block/coin_pile_4", "y": 180 },
+    "facing=west,layers=4": { "model": "goetyawaken:block/coin_pile_4", "y": 270 }
+  }
+}

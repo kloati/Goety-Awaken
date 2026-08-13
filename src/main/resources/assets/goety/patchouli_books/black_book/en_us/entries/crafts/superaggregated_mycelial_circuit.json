@@ -13,5 +13,6 @@
       "text": ""
     }
   ],
-  "advancement": "goetyawaken:royal_research_completed"
+  "advancement": "goetyawaken:royal_research_completed",
+  "extra_recipe_mappings": {"goetyawaken:superaggregated_mycelial_circuit":0}
 }

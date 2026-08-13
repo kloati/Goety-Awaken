@@ -1,0 +1,30 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety:cursed_ingot"
+  },
+  "craftType": "forge",
+  "soulCost": 4,
+  "duration": 8,
+  "ingredients": [
+    {
+      "item": "goetyawaken:delusive_fragment"
+    },
+    {
+      "item": "goety:cursed_ingot"
+    },
+    {
+      "item": "goety:cursed_ingot"
+    },
+    {
+      "item": "minecraft:firework_star"
+    },
+    {
+      "item": "goety:soul_emerald"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:detonation_ring"
+  }
+}

@@ -7,9 +7,7 @@ import com.Polarice3.Goety.client.particles.VerticalCircleExplodeParticleOption;
 import com.Polarice3.Goety.client.particles.SphereExplodeParticleOption;
 import com.Polarice3.Goety.common.effects.GoetyEffects;
 import com.Polarice3.Goety.common.entities.ai.path.ModClimberNavigation;
-import com.Polarice3.Goety.common.entities.ally.Summoned;
 import com.Polarice3.Goety.common.entities.neutral.Owned;
-import com.Polarice3.Goety.init.ModMobType;
 import com.Polarice3.Goety.utils.ColorUtil;
 import com.Polarice3.Goety.utils.LootingExplosion;
 import com.Polarice3.Goety.utils.MathHelper;
@@ -21,40 +19,32 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.Mth;
-import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.MobType;
-import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
-import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
-import net.minecraft.world.entity.animal.Cat;
-import net.minecraft.world.entity.animal.Ocelot;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.entity.AnimationState;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.LightningBolt;
+
 import javax.annotation.Nullable;
+
 import java.util.EnumSet;
 
-public class SpiderCreeder extends Summoned {
+public class SpiderCreeder extends AbstractCreeperServant {
     private static final EntityDataAccessor<Integer> DATA_SWELL_DIR = SynchedEntityData.defineId(SpiderCreeder.class,
             EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> DATA_IS_IGNITED = SynchedEntityData.defineId(SpiderCreeder.class,
@@ -64,21 +54,34 @@ public class SpiderCreeder extends Summoned {
     private static final EntityDataAccessor<Byte> DATA_FLAGS_ID = SynchedEntityData.defineId(SpiderCreeder.class,
             EntityDataSerializers.BYTE);
 
-    private int oldSwell;
-    private int swell;
-    private int maxSwell = 30;
-    private int explosionRadius = 4;
     public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState walkAnimationState = new AnimationState();
     public final AnimationState swellAnimationState = new AnimationState();
 
     public SpiderCreeder(EntityType<? extends Owned> type, Level worldIn) {
         super(type, worldIn);
+        this.explosionRadius = 4;
         this.moveControl = new net.minecraft.world.entity.ai.control.MoveControl(this);
     }
 
-    protected LootingExplosion.BlockInteraction getBlockInteraction() {
-        return LootingExplosion.BlockInteraction.KEEP;
+    @Override
+    protected EntityDataAccessor<Integer> getSwellDirAccessor() {
+        return DATA_SWELL_DIR;
+    }
+
+    @Override
+    protected EntityDataAccessor<Boolean> getPoweredAccessor() {
+        return DATA_IS_POWERED;
+    }
+
+    @Override
+    protected EntityDataAccessor<Boolean> getIgnitedAccessor() {
+        return DATA_IS_IGNITED;
+    }
+
+    @Override
+    protected void onSwellTargetApproach(LivingEntity target) {
+        this.getNavigation().stop();
     }
 
     @Override
@@ -108,22 +111,31 @@ public class SpiderCreeder extends Summoned {
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
-        this.entityData.define(DATA_SWELL_DIR, -1);
-        this.entityData.define(DATA_IS_IGNITED, false);
-        this.entityData.define(DATA_IS_POWERED, false);
         this.entityData.define(DATA_FLAGS_ID, (byte) 0);
     }
 
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new SpiderCreederSwellGoal(this));
+        this.goalSelector.addGoal(1, new SpiderCreederSwellGoal());
         this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.0D, false));
         this.goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 1.0D));
-        this.goalSelector.addGoal(5, new AvoidEntityGoal<>(this, Cat.class, 6.0F, 1.0D, 1.2D));
-        this.goalSelector.addGoal(5, new AvoidEntityGoal<>(this, Ocelot.class, 6.0F, 1.0D, 1.2D));
-        this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
         super.registerGoals();
+    }
+
+    public void ignite() {
+        this.entityData.set(getIgnitedAccessor(), true);
+    }
+
+    @Override
+    public void readAdditionalSaveData(CompoundTag pCompound) {
+        super.readAdditionalSaveData(pCompound);
+        if (pCompound.getBoolean("ignited")) {
+            this.ignite();
+        }
+        if (pCompound.getBoolean("powered")) {
+            this.setPowered(true);
+        }
     }
 
     public static AttributeSupplier.Builder setCustomAttributes() {
@@ -155,16 +167,6 @@ public class SpiderCreeder extends Summoned {
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource pDamageSource) {
-        return ModSounds.CREEDER_HURT.get();
-    }
-
-    @Override
-    protected SoundEvent getDeathSound() {
-        return ModSounds.CREEDER_DEATH.get();
-    }
-
-    @Override
     protected void playStepSound(BlockPos pPos, BlockState pBlock) {
         this.playSound(SoundEvents.SPIDER_STEP, 1.0F, 1.0F);
     }
@@ -188,7 +190,7 @@ public class SpiderCreeder extends Summoned {
 
             if (this.swell >= this.maxSwell) {
                 this.swell = this.maxSwell;
-                this.explodeSpiderCreeder();
+                this.explodeCreeper();
             }
             this.idleAnimationState.startIfStopped(this.tickCount);
             if (this.swell > 0) {
@@ -286,67 +288,12 @@ public class SpiderCreeder extends Summoned {
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundTag pCompound) {
-        super.readAdditionalSaveData(pCompound);
-        if (pCompound.contains("Fuse", 99)) {
-            this.maxSwell = pCompound.getShort("Fuse");
-        }
-
-        if (pCompound.contains("ExplosionRadius", 99)) {
-            this.explosionRadius = pCompound.getByte("ExplosionRadius");
-        }
-
-        if (pCompound.getBoolean("ignited")) {
-            this.ignite();
-        }
-
-        if (pCompound.getBoolean("powered")) {
-            this.setPowered(true);
-        }
-    }
-
-    @Override
-    public void addAdditionalSaveData(CompoundTag pCompound) {
-        super.addAdditionalSaveData(pCompound);
-        pCompound.putShort("Fuse", (short) this.maxSwell);
-        pCompound.putByte("ExplosionRadius", (byte) this.explosionRadius);
-        pCompound.putBoolean("ignited", this.isIgnited());
-        pCompound.putBoolean("powered", this.isPowered());
-    }
-
-    public int getSwellDir() {
-        return this.entityData.get(DATA_SWELL_DIR);
-    }
-
-    public void setSwellDir(int pState) {
-        this.entityData.set(DATA_SWELL_DIR, pState);
-    }
-
-    public boolean isIgnited() {
-        return this.entityData.get(DATA_IS_IGNITED);
-    }
-
-    public void ignite() {
-        this.entityData.set(DATA_IS_IGNITED, true);
-    }
-
-    public boolean isPowered() {
-        return this.entityData.get(DATA_IS_POWERED);
-    }
-
-    public void setPowered(boolean powered) {
-        this.entityData.set(DATA_IS_POWERED, powered);
-    }
-
     public int getSwell() {
         return this.swell;
     }
 
-    public float getSwelling(float pPartialTicks) {
-        return Mth.lerp(pPartialTicks, (float) this.oldSwell, (float) this.swell) / (float) (this.maxSwell - 2);
-    }
-
-    public void explodeSpiderCreeder() {
+    @Override
+    protected void explodeCreeper() {
         if (!this.level().isClientSide) {
             int actualExplosionRadius = this.isPowered() ? this.explosionRadius * 2 : this.explosionRadius;
             LootingExplosion explosion = new LootingExplosion(this.level(), this, this.getX(), this.getY(),
@@ -401,12 +348,7 @@ public class SpiderCreeder extends Summoned {
     }
 
     @Override
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty,
-            MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
-        pSpawnData = super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
-        this.setConfigurableAttributes();
-        this.setHealth(this.getMaxHealth());
-        return pSpawnData;
+    protected void spawnExplosionParticles(ServerLevel serverLevel, float explosionRadius) {
     }
 
     @Override
@@ -428,21 +370,24 @@ public class SpiderCreeder extends Summoned {
         super.thunderHit(p_19927_, p_19928_);
     }
 
-    static class SpiderCreederSwellGoal extends Goal {
-        private final SpiderCreeder spiderCreeder;
+    @Override
+    public int getSummonLimit(LivingEntity owner) {
+        return com.k1sak1.goetyawaken.Config.CREEPER_SERVANT_LIMIT.get();
+    }
+
+    class SpiderCreederSwellGoal extends Goal {
         @Nullable
         private LivingEntity target;
 
-        public SpiderCreederSwellGoal(SpiderCreeder pSpiderCreeder) {
-            this.spiderCreeder = pSpiderCreeder;
+        public SpiderCreederSwellGoal() {
             this.setFlags(EnumSet.of(Flag.MOVE));
         }
 
         @Override
         public boolean canUse() {
-            target = this.spiderCreeder.getTarget();
-            return this.spiderCreeder.getSwellDir() > 0
-                    || (target != null && this.spiderCreeder.distanceToSqr(target) < 16.0D);
+            target = SpiderCreeder.this.getTarget();
+            return SpiderCreeder.this.getSwellDir() > 0
+                    || (target != null && SpiderCreeder.this.distanceToSqr(target) < 16.0D);
         }
 
         @Override
@@ -451,23 +396,23 @@ public class SpiderCreeder extends Summoned {
                 return false;
             } else if (!this.target.isAlive()) {
                 return false;
-            } else if (this.spiderCreeder.distanceToSqr(this.target) > 64.0D) {
+            } else if (SpiderCreeder.this.distanceToSqr(this.target) > 64.0D) {
                 return false;
             } else {
-                return this.spiderCreeder.getSwellDir() > 0 || this.spiderCreeder.swell > 0;
+                return SpiderCreeder.this.getSwellDir() > 0 || SpiderCreeder.this.swell > 0;
             }
         }
 
         @Override
         public void start() {
-            this.spiderCreeder.getNavigation().stop();
-            this.target = this.spiderCreeder.getTarget();
+            SpiderCreeder.this.getNavigation().stop();
+            this.target = SpiderCreeder.this.getTarget();
         }
 
         @Override
         public void stop() {
             this.target = null;
-            this.spiderCreeder.setSwellDir(-1);
+            SpiderCreeder.this.setSwellDir(-1);
         }
 
         public boolean requiresUpdateEveryTick() {
@@ -477,14 +422,14 @@ public class SpiderCreeder extends Summoned {
         @Override
         public void tick() {
             if (this.target == null) {
-                this.spiderCreeder.setSwellDir(-1);
-            } else if (this.spiderCreeder.distanceToSqr(this.target) > 49.0D) {
-                this.spiderCreeder.setSwellDir(-1);
-            } else if (!this.spiderCreeder.getSensing().hasLineOfSight(this.target)) {
-                this.spiderCreeder.setSwellDir(-1);
+                SpiderCreeder.this.setSwellDir(-1);
+            } else if (SpiderCreeder.this.distanceToSqr(this.target) > 49.0D) {
+                SpiderCreeder.this.setSwellDir(-1);
+            } else if (!SpiderCreeder.this.getSensing().hasLineOfSight(this.target)) {
+                SpiderCreeder.this.setSwellDir(-1);
             } else {
-                this.spiderCreeder.getNavigation().stop();
-                this.spiderCreeder.setSwellDir(1);
+                SpiderCreeder.this.getNavigation().stop();
+                SpiderCreeder.this.setSwellDir(1);
             }
         }
     }

@@ -36,6 +36,9 @@ public class AngryMooshroomMushroomLayer extends RenderLayer<AngryMooshroom, Ang
     public void render(PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, AngryMooshroom pLivingEntity,
             float pLimbSwing, float pLimbSwingAmount, float pPartialTicks, float pAgeInTicks, float pNetHeadYaw,
             float pHeadPitch) {
+        if (pLivingEntity.isPoisonousPotato()) {
+            return;
+        }
         if (!pLivingEntity.isBaby()) {
             Minecraft minecraft = Minecraft.getInstance();
             boolean flag = minecraft.shouldEntityAppearGlowing(pLivingEntity) && pLivingEntity.isInvisible();

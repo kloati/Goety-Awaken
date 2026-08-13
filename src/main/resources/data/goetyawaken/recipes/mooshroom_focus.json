@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ABA",
+    "CDC",
+    "ACA"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:red_mushroom"
+    },
+    "B": {
+      "item": "goety:raging_matter"
+    },
+    "C": {
+      "item": "minecraft:beef"
+    },
+    "D": {
+      "item": "goety:hunting_focus"
+    }
+  },
+  "result": {
+    "item": "goetyawaken:mooshroom_focus"
+  }
+}

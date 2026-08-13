@@ -21,10 +21,10 @@ import com.Polarice3.Goety.config.MobsConfig;
 import com.Polarice3.Goety.init.ModTags;
 import com.k1sak1.goetyawaken.config.AttributesConfig;
 import com.k1sak1.goetyawaken.init.ModSounds;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -39,6 +39,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
 import com.k1sak1.goetyawaken.common.entities.projectiles.GhostFireBolt;
@@ -50,114 +51,37 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.EntityDimensions;
-import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.InteractionResult;
 
 public abstract class AbstractWraithNecromancer extends AbstractNecromancer {
     public int teleportCooldown = 0;
+    public final AnimationState idleAnimationState = new AnimationState();
+    public final AnimationState flyAnimationState = new AnimationState();
+    public final AnimationState attackAnimationState = new AnimationState();
+    public final AnimationState summonAnimationState = new AnimationState();
+    public final AnimationState spellAnimationState = new AnimationState();
+    public final AnimationState alertAnimationState = new AnimationState();
+    public final AnimationState shockwaveAnimationState = new AnimationState();
+    public int baseAnimTransitionTick = 0;
+    public static final int BASE_ANIM_TRANSITION_DURATION = 5;
+    public String transitionFromKey = "";
+    public String transitionToKey = "";
+    private String currentAnimKey = "";
+
+    public String getCurrentAnimKey() {
+        return this.currentAnimKey;
+    }
 
     private int floatSoundCooldown = 0;
-
-    static class WraithNecromancerMoveControl extends net.minecraft.world.entity.ai.control.MoveControl {
-        private float speed = 0.1F;
-
-        public WraithNecromancerMoveControl(Mob mob) {
-            super(mob);
-        }
-
-        @Override
-        public void tick() {
-            if (this.mob instanceof AbstractWraithNecromancer wraithNecromancer) {
-                if (wraithNecromancer.isSpellCasting() || wraithNecromancer.isShooting()) {
-                    return;
-                }
-
-                if (this.mob.horizontalCollision) {
-                    this.mob.setYRot(this.mob.getYRot() + 180.0F);
-                    this.speed = 0.1F;
-                }
-                LivingEntity target = wraithNecromancer.getTarget();
-                if (target != null && target.isAlive()) {
-                    double distanceToTarget = this.mob.distanceToSqr(target);
-                    if (distanceToTarget > 144.0D) {
-                        Vec3 targetPos = target.position();
-                        double d0 = targetPos.x - this.mob.getX();
-                        double d1 = targetPos.y - this.mob.getY();
-                        double d2 = targetPos.z - this.mob.getZ();
-                        double distance = Math.sqrt(d0 * d0 + d2 * d2);
-                        if (Math.abs(distance) > 1.0E-5F) {
-                            double verticalFactor = 1.0D - Math.abs(d1 * 0.7F) / distance;
-                            d0 *= verticalFactor;
-                            d2 *= verticalFactor;
-                            distance = Math.sqrt(d0 * d0 + d2 * d2);
-                            double totalDistance = Math.sqrt(d0 * d0 + d2 * d2 + d1 * d1);
-                            float f1 = (float) Mth.atan2(d2, d0);
-                            float f2 = Mth.wrapDegrees(this.mob.getYRot() + 90.0F);
-                            float f3 = Mth.wrapDegrees(f1 * (180F / (float) Math.PI));
-                            this.mob.setYRot(Mth.approachDegrees(f2, f3, 4.0F) - 90.0F);
-                            this.mob.yBodyRot = this.mob.getYRot();
-                            this.speed = Mth.approach(this.speed, 0.6F, 0.005F * (0.6F / this.speed));
-                            float pitch = (float) (-(Mth.atan2(-d1, distance) * (180F / (float) Math.PI)));
-                            this.mob.setXRot(pitch);
-                            float yawOffset = this.mob.getYRot() + 90.0F;
-                            double moveX = (double) (this.speed * Mth.cos(yawOffset * ((float) Math.PI / 180F)))
-                                    * Math.abs(d0 / totalDistance);
-                            double moveY = (double) (this.speed * Mth.sin(pitch * ((float) Math.PI / 180F)))
-                                    * Math.abs(d1 / totalDistance);
-                            double moveZ = (double) (this.speed * Mth.sin(yawOffset * ((float) Math.PI / 180F)))
-                                    * Math.abs(d2 / totalDistance);
-                            Vec3 currentMovement = this.mob.getDeltaMovement();
-                            this.mob.setDeltaMovement(currentMovement
-                                    .add((new Vec3(moveX, moveY, moveZ)).subtract(currentMovement).scale(0.2D)));
-                            return;
-                        }
-                    }
-                } else if (wraithNecromancer.getTrueOwner() != null && wraithNecromancer.isFollowing()) {
-                    LivingEntity owner = wraithNecromancer.getTrueOwner();
-                    double distanceToOwner = this.mob.distanceToSqr(owner);
-                    if (distanceToOwner > 144.0D) {
-                        Vec3 targetPos = owner.position().add(0, 2, 0);
-                        double d0 = targetPos.x - this.mob.getX();
-                        double d1 = targetPos.y - this.mob.getY();
-                        double d2 = targetPos.z - this.mob.getZ();
-                        double distance = Math.sqrt(d0 * d0 + d2 * d2);
-                        if (Math.abs(distance) > 1.0E-5F) {
-                            double verticalFactor = 1.0D - Math.abs(d1 * 0.7F) / distance;
-                            d0 *= verticalFactor;
-                            d2 *= verticalFactor;
-                            distance = Math.sqrt(d0 * d0 + d2 * d2);
-                            double totalDistance = Math.sqrt(d0 * d0 + d2 * d2 + d1 * d1);
-                            float f1 = (float) Mth.atan2(d2, d0);
-                            float f2 = Mth.wrapDegrees(this.mob.getYRot() + 90.0F);
-                            float f3 = Mth.wrapDegrees(f1 * (180F / (float) Math.PI));
-                            this.mob.setYRot(Mth.approachDegrees(f2, f3, 4.0F) - 90.0F);
-                            this.mob.yBodyRot = this.mob.getYRot();
-                            this.speed = Mth.approach(this.speed, 0.6F, 0.005F * (0.6F / this.speed));
-                            float pitch = (float) (-(Mth.atan2(-d1, distance) * (180F / (float) Math.PI)));
-                            this.mob.setXRot(pitch);
-                            float yawOffset = this.mob.getYRot() + 90.0F;
-                            double moveX = (double) (this.speed * Mth.cos(yawOffset * ((float) Math.PI / 180F)))
-                                    * Math.abs(d0 / totalDistance);
-                            double moveY = (double) (this.speed * Mth.sin(pitch * ((float) Math.PI / 180F)))
-                                    * Math.abs(d1 / totalDistance);
-                            double moveZ = (double) (this.speed * Mth.sin(yawOffset * ((float) Math.PI / 180F)))
-                                    * Math.abs(d2 / totalDistance);
-                            Vec3 currentMovement = this.mob.getDeltaMovement();
-                            this.mob.setDeltaMovement(currentMovement
-                                    .add((new Vec3(moveX, moveY, moveZ)).subtract(currentMovement).scale(0.2D)));
-                            return;
-                        }
-                    }
-                }
-            }
-        }
-    }
+    protected int summonScanTimer = -999;
+    protected int summonCount = 0;
 
     @Override
     public void tick() {
         super.tick();
+        this.setGravity();
         if (this.teleportCooldown > 0) {
             --this.teleportCooldown;
         }
@@ -175,29 +99,124 @@ public abstract class AbstractWraithNecromancer extends AbstractNecromancer {
                 }
             }
         }
+        if (this.level().isClientSide) {
+            this.tickAnimationTransitions();
+        }
+    }
+
+    private String computeDesiredAnimKey() {
+        switch (this.getAnimationState()) {
+            case IDLE_ANIM:
+                return "idle";
+            case FLY_ANIM:
+                return "fly";
+            case ATTACK_ANIM:
+                return "attack";
+            case SUMMON_ANIM:
+                return "summon";
+            case SPELL_ANIM:
+                return "spell";
+            case ALERT_ANIM:
+                return "alert";
+            case SHOCKWAVE_ANIM:
+                return "shockwave";
+            default:
+                return "";
+        }
+    }
+
+    private void startAnimationForKey(String key) {
+        switch (key) {
+            case "idle":
+                this.idleAnimationState.startIfStopped(this.tickCount);
+                break;
+            case "fly":
+                this.flyAnimationState.startIfStopped(this.tickCount);
+                break;
+            case "attack":
+                this.attackAnimationState.startIfStopped(this.tickCount);
+                break;
+            case "summon":
+                this.summonAnimationState.startIfStopped(this.tickCount);
+                break;
+            case "spell":
+                this.spellAnimationState.startIfStopped(this.tickCount);
+                break;
+            case "alert":
+                this.alertAnimationState.startIfStopped(this.tickCount);
+                break;
+            case "shockwave":
+                this.shockwaveAnimationState.startIfStopped(this.tickCount);
+                break;
+        }
+    }
+
+    private void stopAnimationsNotForKey(String key) {
+        if (!key.equals("idle"))
+            this.idleAnimationState.stop();
+        if (!key.equals("fly"))
+            this.flyAnimationState.stop();
+        if (!key.equals("attack"))
+            this.attackAnimationState.stop();
+        if (!key.equals("summon"))
+            this.summonAnimationState.stop();
+        if (!key.equals("spell"))
+            this.spellAnimationState.stop();
+        if (!key.equals("alert"))
+            this.alertAnimationState.stop();
+        if (!key.equals("shockwave"))
+            this.shockwaveAnimationState.stop();
+    }
+
+    private void tickAnimationTransitions() {
+        if (this.baseAnimTransitionTick > 0) {
+            this.baseAnimTransitionTick--;
+            String midDesired = this.computeDesiredAnimKey();
+            if (!midDesired.isEmpty() && !midDesired.equals(this.transitionToKey)) {
+                this.startAnimationForKey(midDesired);
+                this.transitionFromKey = this.transitionToKey;
+                this.transitionToKey = midDesired;
+                this.baseAnimTransitionTick = BASE_ANIM_TRANSITION_DURATION;
+                this.currentAnimKey = midDesired;
+            } else if (this.baseAnimTransitionTick == 0) {
+                this.stopAnimationsNotForKey(this.transitionToKey);
+            }
+        } else {
+            String desiredKey = this.computeDesiredAnimKey();
+            if (!desiredKey.isEmpty() && !desiredKey.equals(this.currentAnimKey)) {
+                if (!this.currentAnimKey.isEmpty()) {
+                    this.startAnimationForKey(desiredKey);
+                    this.transitionFromKey = this.currentAnimKey;
+                    this.transitionToKey = desiredKey;
+                    this.baseAnimTransitionTick = BASE_ANIM_TRANSITION_DURATION;
+                } else {
+                    this.startAnimationForKey(desiredKey);
+                    this.stopAnimationsNotForKey(desiredKey);
+                }
+                this.currentAnimKey = desiredKey;
+            } else {
+                this.startAnimationForKey(desiredKey);
+                this.stopAnimationsNotForKey(desiredKey);
+                this.currentAnimKey = desiredKey;
+            }
+        }
+    }
+
+    public void setGravity() {
+        this.setNoGravity(this.isUnderWater());
+    }
+
+    @Override
+    public void aiStep() {
+        super.aiStep();
+        Vec3 vector3d = this.getDeltaMovement();
+        if (!this.onGround() && vector3d.y < 0.0D && !this.isNoGravity()) {
+            this.setDeltaMovement(vector3d.multiply(1.0D, 0.6D, 1.0D));
+        }
     }
 
     private void playFloatSound() {
-        switch (this.getRandom().nextInt(5)) {
-            case 0:
-                this.playSound(ModSounds.WRAITH_NECROMANCER_FLOAT_1.get(), 1.5F, 1.0F);
-                break;
-            case 1:
-                this.playSound(ModSounds.WRAITH_NECROMANCER_FLOAT_2.get(), 1.5F, 1.0F);
-                break;
-            case 2:
-                this.playSound(ModSounds.WRAITH_NECROMANCER_FLOAT_3.get(), 1.5F, 1.0F);
-                break;
-            case 3:
-                this.playSound(ModSounds.WRAITH_NECROMANCER_FLOAT_4.get(), 1.5F, 1.0F);
-                break;
-            case 4:
-                this.playSound(ModSounds.WRAITH_NECROMANCER_FLOAT_5.get(), 1.5F, 1.0F);
-                break;
-            default:
-                this.playSound(ModSounds.WRAITH_NECROMANCER_FLOAT_1.get(), 1.5F, 1.0F);
-                break;
-        }
+        this.playSound(ModSounds.WRAITH_NECROMANCER_FLOAT.get(), 1.5F, 1.0F);
     }
 
     private static final EntityDataAccessor<Byte> WRAITH_FLAGS = SynchedEntityData.defineId(
@@ -223,29 +242,8 @@ public abstract class AbstractWraithNecromancer extends AbstractNecromancer {
     protected AbstractWraithNecromancer(EntityType<? extends AbstractNecromancer> type, Level level) {
         super(type, level);
         this.teleportCooldown = 0;
-        this.moveControl = new WraithNecromancerMoveControl(this);
-        this.setNoGravity(true);
-    }
-
-    @Override
-    public void travel(Vec3 pTravelVector) {
-        if (this.isEffectiveAi() || this.isControlledByLocalInstance()) {
-            if (this.isInWater()) {
-                this.moveRelative(0.02F, pTravelVector);
-                this.move(MoverType.SELF, this.getDeltaMovement());
-                this.setDeltaMovement(this.getDeltaMovement().scale(0.8F));
-            } else if (this.isInLava()) {
-                this.moveRelative(0.02F, pTravelVector);
-                this.move(MoverType.SELF, this.getDeltaMovement());
-                this.setDeltaMovement(this.getDeltaMovement().scale(0.5D));
-            } else {
-                this.moveRelative(this.getSpeed(), pTravelVector);
-                this.move(MoverType.SELF, this.getDeltaMovement());
-                this.setDeltaMovement(this.getDeltaMovement().scale((double) 0.9F));
-            }
-        }
-
-        this.calculateEntityAnimation(false);
+        this.setPersistenceRequired();
+        this.moveControl = new MobUtil.WraithMoveController(this);
     }
 
     @Override
@@ -290,6 +288,52 @@ public abstract class AbstractWraithNecromancer extends AbstractNecromancer {
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(7, new WraithNecromancerRandomMoveGoal(this));
+    }
+
+    @Override
+    public void commandMode() {
+        if (!this.isCommanded()) {
+            return;
+        }
+        BlockPos targetPos = this.getCommandPos();
+        Entity targetEntity = this.getCommandPosEntity();
+        this.setCommandTick(this.getCommandTick() - 1);
+
+        if (targetEntity != null) {
+            this.getMoveControl().setWantedPosition(targetEntity.getX(), targetEntity.getEyeY(), targetEntity.getZ(),
+                    this.getCommandSpeed());
+        } else if (targetPos != null) {
+            this.getMoveControl().setWantedPosition(targetPos.getX() + 0.5D, targetPos.getY(), targetPos.getZ() + 0.5D,
+                    this.getCommandSpeed());
+        }
+
+        AABB aabb = targetPos != null ? new AABB(targetPos) : null;
+        Entity entity = this.getControlledVehicle() != null ? this.getControlledVehicle() : this;
+        if (this.getCommandTick() <= 0) {
+            this.setCommandPosEntity(null);
+            this.setCommandPos(null);
+        } else if (aabb != null && entity.getBoundingBox().inflate(0.5F).intersects(aabb)) {
+            if (this.getCommandPosEntity() != null &&
+                    this.getBoundingBox().inflate(1.25D).intersects(this.getCommandPosEntity().getBoundingBox())) {
+                if (this.isAbleToRide(this.getCommandPosEntity())) {
+                    if (this.startRiding(this.getCommandPosEntity())) {
+                        if (this.getTrueOwner() instanceof Player player) {
+                            player.displayClientMessage(
+                                    net.minecraft.network.chat.Component.translatable("info.goety.servant.dismount"),
+                                    true);
+                        }
+                    }
+                }
+                this.setCommandPosEntity(null);
+            }
+            if (this.isGuardingArea()) {
+                this.setBoundPos(targetPos);
+            }
+            this.getNavigation().stop();
+            this.getMoveControl().strafe(0.0F, 0.0F);
+            this.moveTo(targetPos, this.getYRot(), this.getXRot());
+            this.setCommandPos(null);
+        }
     }
 
     static class WraithNecromancerRandomMoveGoal extends net.minecraft.world.entity.ai.goal.Goal {
@@ -449,21 +493,7 @@ public abstract class AbstractWraithNecromancer extends AbstractNecromancer {
             ghostFireBolt.rotateToMatchMovement();
             if (this.level().addFreshEntity(ghostFireBolt)) {
                 if (i == -1) {
-                    RandomSource random = this.getRandom();
-                    switch (random.nextInt(3)) {
-                        case 0:
-                            this.playSound(ModSounds.WRAITH_NECROMANCER_ATTACK_1.get(), 1.8F, 1.0F);
-                            break;
-                        case 1:
-                            this.playSound(ModSounds.WRAITH_NECROMANCER_ATTACK_2.get(), 1.8F, 1.0F);
-                            break;
-                        case 2:
-                            this.playSound(ModSounds.WRAITH_NECROMANCER_ATTACK_3.get(), 1.8F, 1.0F);
-                            break;
-                        default:
-                            this.playSound(ModSounds.WRAITH_NECROMANCER_ATTACK_1.get(), 1.8F, 1.0F);
-                            break;
-                    }
+                    this.playSound(ModSounds.WRAITH_NECROMANCER_ATTACK.get(), 1.8F, 1.0F);
                     this.playSound(com.Polarice3.Goety.init.ModSounds.HELL_BOLT_SHOOT.get());
                     this.swing(InteractionHand.MAIN_HAND);
                 }
@@ -473,14 +503,18 @@ public abstract class AbstractWraithNecromancer extends AbstractNecromancer {
 
     public class WraithSummoningSpell extends AbstractNecromancer.SummoningSpellGoal {
         public boolean canUse() {
-            Predicate<Entity> predicate = entity -> entity.isAlive()
-                    && entity instanceof IOwned owned
-                    && owned.getTrueOwner() == AbstractWraithNecromancer.this;
-            int i = AbstractWraithNecromancer.this.level()
-                    .getEntitiesOfClass(LivingEntity.class,
-                            AbstractWraithNecromancer.this.getBoundingBox().inflate(64.0D, 16.0D, 64.0D), predicate)
-                    .size();
-            return super.canUse() && i < 6;
+            int currentTick = AbstractWraithNecromancer.this.tickCount;
+            if (currentTick - AbstractWraithNecromancer.this.summonScanTimer >= 20) {
+                AbstractWraithNecromancer.this.summonScanTimer = currentTick;
+                Predicate<Entity> predicate = entity -> entity.isAlive()
+                        && entity instanceof IOwned owned
+                        && owned.getTrueOwner() == AbstractWraithNecromancer.this;
+                AbstractWraithNecromancer.this.summonCount = AbstractWraithNecromancer.this.level()
+                        .getEntitiesOfClass(LivingEntity.class,
+                                AbstractWraithNecromancer.this.getBoundingBox().inflate(64.0D, 16.0D, 64.0D), predicate)
+                        .size();
+            }
+            return super.canUse() && AbstractWraithNecromancer.this.summonCount < 6;
         }
 
         public void start() {
@@ -647,13 +681,13 @@ public abstract class AbstractWraithNecromancer extends AbstractNecromancer {
                     com.Polarice3.Goety.common.magic.spells.WeakeningSpell weakeningSpell = new com.Polarice3.Goety.common.magic.spells.WeakeningSpell();
                     com.Polarice3.Goety.common.magic.SpellStat spellStat = new com.Polarice3.Goety.common.magic.SpellStat(
                             0, 0, 0, 0.0D, 0, 0.0F);
-                    spellStat.setRadius(5.0D).setPotency(3).setDuration(5);
+                    spellStat.setRadius(4.0D).setPotency(1).setDuration(3);
                     weakeningSpell.SpellResult(serverLevel, AbstractWraithNecromancer.this,
                             net.minecraft.world.item.ItemStack.EMPTY, spellStat);
                     com.Polarice3.Goety.common.magic.spells.SoulHealSpell soulHealSpell = new com.Polarice3.Goety.common.magic.spells.SoulHealSpell();
                     com.Polarice3.Goety.common.magic.SpellStat healStat = new com.Polarice3.Goety.common.magic.SpellStat(
                             0, 0, 0, 0.0D, 0, 0.0F);
-                    healStat.setRadius(3.0D).setPotency(3);
+                    healStat.setRadius(2.0D).setPotency(1);
                     soulHealSpell.SpellResult(serverLevel, AbstractWraithNecromancer.this,
                             net.minecraft.world.item.ItemStack.EMPTY, healStat);
                 }
@@ -713,7 +747,7 @@ public abstract class AbstractWraithNecromancer extends AbstractNecromancer {
                 if (AbstractWraithNecromancer.this.level() instanceof ServerLevel serverLevel) {
                     com.Polarice3.Goety.common.magic.spells.ShockwaveSpell shockwaveSpell = new com.Polarice3.Goety.common.magic.spells.ShockwaveSpell();
                     com.Polarice3.Goety.common.magic.SpellStat spellStat = new com.Polarice3.Goety.common.magic.SpellStat(
-                            3, 3, 0, 4.0D, 3, 3.0F);
+                            2, 2, 0, 2.0D, 2, 2.0F);
                     shockwaveSpell.SpellResult(serverLevel, AbstractWraithNecromancer.this,
                             net.minecraft.world.item.ItemStack.EMPTY, spellStat);
                 }
@@ -883,43 +917,17 @@ public abstract class AbstractWraithNecromancer extends AbstractNecromancer {
 
     @Override
     protected SoundEvent getAmbientSound() {
-        RandomSource random = this.getRandom();
-        switch (random.nextInt(5)) {
-            case 0:
-                return ModSounds.WRAITH_NECROMANCER_AMBIENT_1.get();
-            case 1:
-                return ModSounds.WRAITH_NECROMANCER_AMBIENT_2.get();
-            case 2:
-                return ModSounds.WRAITH_NECROMANCER_AMBIENT_3.get();
-            case 3:
-                return ModSounds.WRAITH_NECROMANCER_AMBIENT_4.get();
-            case 4:
-                return ModSounds.WRAITH_NECROMANCER_AMBIENT_5.get();
-            default:
-                return ModSounds.WRAITH_NECROMANCER_AMBIENT_1.get();
-        }
+        return ModSounds.WRAITH_NECROMANCER_AMBIENT.get();
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        RandomSource random = this.getRandom();
-        switch (random.nextInt(3)) {
-            case 0:
-                return ModSounds.WRAITH_NECROMANCER_HURT_1.get();
-            case 1:
-                return ModSounds.WRAITH_NECROMANCER_HURT_2.get();
-            case 2:
-                return ModSounds.WRAITH_NECROMANCER_HURT_3.get();
-            default:
-                return ModSounds.WRAITH_NECROMANCER_HURT_1.get();
-        }
+        return ModSounds.WRAITH_NECROMANCER_HURT.get();
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        RandomSource random = this.getRandom();
-        return random.nextBoolean() ? ModSounds.WRAITH_NECROMANCER_DEATH_1.get()
-                : ModSounds.WRAITH_NECROMANCER_DEATH_2.get();
+        return ModSounds.WRAITH_NECROMANCER_DEATH.get();
     }
 
     @Override
@@ -940,10 +948,6 @@ public abstract class AbstractWraithNecromancer extends AbstractNecromancer {
     @Override
     protected boolean isSunSensitive() {
         return false;
-    }
-
-    public boolean isNoGravity() {
-        return true;
     }
 
     @Override
@@ -981,19 +985,15 @@ public abstract class AbstractWraithNecromancer extends AbstractNecromancer {
 
     @Override
     protected net.minecraft.world.entity.ai.navigation.PathNavigation createNavigation(Level level) {
-        net.minecraft.world.entity.ai.navigation.FlyingPathNavigation flyingPathNavigation = new net.minecraft.world.entity.ai.navigation.FlyingPathNavigation(
+        net.minecraft.world.entity.ai.navigation.GroundPathNavigation groundPathNavigation = new net.minecraft.world.entity.ai.navigation.GroundPathNavigation(
                 this, level) {
             public boolean isStableDestination(net.minecraft.core.BlockPos blockPos) {
                 return !this.level.getBlockState(blockPos.below()).isAir();
             }
-
-            public void tick() {
-                super.tick();
-            }
         };
-        flyingPathNavigation.setCanOpenDoors(false);
-        flyingPathNavigation.setCanFloat(true);
-        flyingPathNavigation.setCanPassDoors(true);
-        return flyingPathNavigation;
+        groundPathNavigation.setCanOpenDoors(false);
+        groundPathNavigation.setCanFloat(true);
+        groundPathNavigation.setCanPassDoors(true);
+        return groundPathNavigation;
     }
 }

@@ -33,6 +33,11 @@ public class ItemStorageDisk implements IStorageDisk<ItemStack> {
     public static final int VERSION = 1;
     public static final ResourceLocation FACTORY_ID = new ResourceLocation(GoetyAwaken.MODID, "item");
 
+    private static final String NBT_ITEM_ID = "id";
+    private static final String NBT_ITEM_QUANTITY = "Count";
+    private static final String NBT_ITEM_TAG = "tag";
+    private static final String NBT_ITEM_CAPS = "ForgeCaps";
+
     @Nullable
     private final ServerLevel level;
     private final int capacity;
@@ -72,7 +77,9 @@ public class ItemStorageDisk implements IStorageDisk<ItemStack> {
     }
 
     private CompoundTag serializeStackToNbt(ItemStack stack) {
-        return stack.save(new CompoundTag());
+        CompoundTag itemTag = stack.save(new CompoundTag());
+        itemTag.putInt(NBT_ITEM_QUANTITY, stack.getCount());
+        return itemTag;
     }
 
     @Override
@@ -88,7 +95,7 @@ public class ItemStorageDisk implements IStorageDisk<ItemStack> {
     @Override
     @Nonnull
     public ItemStack insert(@Nonnull ItemStack stack, int size, Action action) {
-        if (stack.isEmpty() || itemCount == capacity) {
+        if (stack.isEmpty() || (capacity != -1 && itemCount >= capacity)) {
             return ItemHandlerHelper.copyStackWithSize(stack, size);
         }
 

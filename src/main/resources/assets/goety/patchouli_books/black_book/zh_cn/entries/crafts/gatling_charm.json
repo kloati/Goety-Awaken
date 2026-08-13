@@ -16,5 +16,6 @@
       "recipe": "goetyawaken:gatling_charm",
       "text": ""
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:gatling_charm":0}
 }

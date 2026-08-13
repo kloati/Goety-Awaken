@@ -29,10 +29,12 @@ public class BloodRainSpell extends Spell {
         return super.defaultStats().setDuration(100).setRadius(2.0D);
     }
 
+    @Override
     public int defaultSoulCost() {
         return Config.BLOOD_RAIN_FOCUS_SOUL_COST.get();
     }
 
+    @Override
     public int defaultCastDuration() {
         return Config.BLOOD_RAIN_FOCUS_CAST_DURATION.get();
     }
@@ -66,16 +68,18 @@ public class BloodRainSpell extends Spell {
         int range = spellStat.getRange();
         int duration = spellStat.getDuration();
         double radius = spellStat.getRadius();
-        float potency = 0;
+
+        float potency = (float) (spellStat.getPotency() * Config.bloodRainPotencyDamage);
         boolean hasUnholySet = CuriosFinder.hasUnholySet(caster);
 
         if (WandUtil.enchantedFocus(caster)) {
             range += WandUtil.getLevels(ModEnchantments.RANGE.get(), caster);
             duration *= WandUtil.getLevels(ModEnchantments.DURATION.get(), caster) + 1;
-            potency += (WandUtil.getPotencyLevel(caster) * Config.bloodRainPotencyDamage + Config.bloodRainBaseDamage
-                    - 1) * WandUtil.damageMultiply();
+            potency += WandUtil.getPotencyLevel(caster) * Config.bloodRainPotencyDamage;
             radius += WandUtil.getLevels(ModEnchantments.RADIUS.get(), caster);
         }
+
+        potency = (float) ((potency + Config.bloodRainBaseDamage - 1) * WandUtil.damageMultiply());
 
         if (rightStaff(staff)) {
             radius += 2.0D;

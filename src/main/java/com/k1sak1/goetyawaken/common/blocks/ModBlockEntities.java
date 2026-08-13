@@ -1,8 +1,8 @@
 package com.k1sak1.goetyawaken.common.blocks;
 
 import com.k1sak1.goetyawaken.GoetyAwaken;
-import com.k1sak1.goetyawaken.common.blocks.ModBlocks;
 import com.k1sak1.goetyawaken.common.blocks.entity.*;
+import com.k1sak1.goetyawaken.common.blocks.entity.CreeperStatueBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -127,5 +127,47 @@ public class ModBlockEntities {
                                                         .of(MushroomMonstrosityHeadBlockEntity::new,
                                                                         ModBlocks.MOOSHROOM_MONSTROSITY_HEAD.get(),
                                                                         ModBlocks.WALL_MOOSHROOM_MONSTROSITY_HEAD.get())
+                                                        .build(null));
+
+        public static final RegistryObject<BlockEntityType<TowerKeeperStatueBlockEntity>> TOWER_KEEPER_STATUE = BLOCK_ENTITIES
+                        .register("tower_keeper_statue",
+                                        () -> BlockEntityType.Builder
+                                                        .of(TowerKeeperStatueBlockEntity::new,
+                                                                        ModBlocks.TOWER_KEEPER_STATUE.get())
+                                                        .build(null));
+
+        public static final RegistryObject<BlockEntityType<CreeperStatueBlockEntity>> CREEPER_STATUE = BLOCK_ENTITIES
+                        .register("creeper_statue",
+                                        () -> BlockEntityType.Builder
+                                                        .of(CreeperStatueBlockEntity::new,
+                                                                        ModBlocks.CREEPER_STATUE.get())
+                                                        .build(null));
+
+        public static final RegistryObject<BlockEntityType<VillagerStatueBlockEntity>> VILLAGER_STATUE = BLOCK_ENTITIES
+                        .register("villager_statue",
+                                        () -> BlockEntityType.Builder
+                                                        .of(VillagerStatueBlockEntity::new,
+                                                                        ModBlocks.VILLAGER_STATUE.get())
+                                                        .build(null));
+
+        public static final RegistryObject<BlockEntityType<WildfireStatueBlockEntity>> WILDFIRE_STATUE = BLOCK_ENTITIES
+                        .register("wildfire_statue",
+                                        () -> BlockEntityType.Builder
+                                                        .of(WildfireStatueBlockEntity::new,
+                                                                        ModBlocks.WILDFIRE_STATUE.get())
+                                                        .build(null));
+
+        public static final RegistryObject<BlockEntityType<GargoyleStatueBlockEntity>> GARGOYLE_STATUE = BLOCK_ENTITIES
+                        .register("gargoyle_statue",
+                                        () -> BlockEntityType.Builder
+                                                        .of(GargoyleStatueBlockEntity::new,
+                                                                        ModBlocks.GARGOYLE_STATUE.get())
+                                                        .build(null));
+
+        public static final RegistryObject<BlockEntityType<SpikeTrapBlockEntity>> SPIKE_TRAP_BLOCK = BLOCK_ENTITIES
+                        .register("spike_trap_block",
+                                        () -> BlockEntityType.Builder
+                                                        .of(SpikeTrapBlockEntity::new,
+                                                                        ModBlocks.SPIKE_TRAP_BLOCK.get())
                                                         .build(null));
 }

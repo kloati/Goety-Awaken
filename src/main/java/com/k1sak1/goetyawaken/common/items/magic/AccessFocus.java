@@ -31,6 +31,11 @@ public class AccessFocus extends MagicFocus implements ICurioItem {
 
     public static final String NBT_BOUND_POS = "BoundLecternPos";
     public static final String NBT_BOUND_DIMENSION = "BoundLecternDim";
+    public static final String NBT_SORTING_DIRECTION = "GridSortingDirection";
+    public static final String NBT_SORTING_TYPE = "GridSortingType";
+    public static final String NBT_VIEW_TYPE = "GridViewType";
+    public static final String NBT_SEARCH_BOX_MODE = "GridSearchBoxMode";
+    public static final String NBT_SIZE = "GridSize";
 
     public AccessFocus() {
         super(new AccessFocusSpell());
@@ -121,6 +126,99 @@ public class AccessFocus extends MagicFocus implements ICurioItem {
         }
     }
 
+    public static int getSortingDirection(ItemStack stack) {
+        CompoundTag tag = stack.getTag();
+        return tag != null ? tag.getInt(NBT_SORTING_DIRECTION) : 1;
+    }
+
+    public static int getSortingType(ItemStack stack) {
+        CompoundTag tag = stack.getTag();
+        return tag != null ? tag.getInt(NBT_SORTING_TYPE) : 1;
+    }
+
+    public static int getViewType(ItemStack stack) {
+        CompoundTag tag = stack.getTag();
+        return tag != null ? tag.getInt(NBT_VIEW_TYPE) : 0;
+    }
+
+    public static int getSearchBoxMode(ItemStack stack) {
+        CompoundTag tag = stack.getTag();
+        return tag != null ? tag.getInt(NBT_SEARCH_BOX_MODE) : 0;
+    }
+
+    public static int getSize(ItemStack stack) {
+        CompoundTag tag = stack.getTag();
+        if (tag == null || !tag.contains(NBT_SIZE)) {
+            return com.k1sak1.goetyawaken.client.screen.grid.view.GridViewImpl.SIZE_MEDIUM;
+        }
+        int s = tag.getInt(NBT_SIZE);
+        return com.k1sak1.goetyawaken.client.screen.grid.view.GridViewImpl.isValidSize(s)
+                ? s
+                : com.k1sak1.goetyawaken.client.screen.grid.view.GridViewImpl.SIZE_MEDIUM;
+    }
+
+    public static void setSortingDirection(ItemStack stack, int direction) {
+        CompoundTag tag = stack.getOrCreateTag();
+        tag.putInt(NBT_SORTING_DIRECTION, direction);
+    }
+
+    public static void setSortingType(ItemStack stack, int type) {
+        CompoundTag tag = stack.getOrCreateTag();
+        tag.putInt(NBT_SORTING_TYPE, type);
+    }
+
+    public static void setViewType(ItemStack stack, int type) {
+        CompoundTag tag = stack.getOrCreateTag();
+        tag.putInt(NBT_VIEW_TYPE, type);
+    }
+
+    public static void setSearchBoxMode(ItemStack stack, int mode) {
+        CompoundTag tag = stack.getOrCreateTag();
+        tag.putInt(NBT_SEARCH_BOX_MODE, mode);
+    }
+
+    public static void setSize(ItemStack stack, int size) {
+        if (!com.k1sak1.goetyawaken.client.screen.grid.view.GridViewImpl.isValidSize(size)) {
+            return;
+        }
+        CompoundTag tag = stack.getOrCreateTag();
+        tag.putInt(NBT_SIZE, size);
+    }
+
+    @javax.annotation.Nullable
+    public static ItemStack findAccessFocus(ServerPlayer player) {
+        for (ItemStack stack : player.getInventory().items) {
+            if (stack.getItem() instanceof AccessFocus) {
+                return stack;
+            }
+        }
+
+        ItemStack offhand = player.getInventory().getItem(40);
+        if (offhand.getItem() instanceof AccessFocus) {
+            return offhand;
+        }
+
+        try {
+            var curiosInventoryOpt = top.theillusivec4.curios.api.CuriosApi.getCuriosInventory(player).resolve();
+            if (curiosInventoryOpt.isPresent()) {
+                var curiosInventory = curiosInventoryOpt.get();
+                for (var entry : curiosInventory.getCurios().entrySet()) {
+                    var stacksHandler = entry.getValue();
+                    for (int i = 0; i < stacksHandler.getSlots(); i++) {
+                        ItemStack stack = stacksHandler.getStacks().getStackInSlot(i);
+                        if (stack.getItem() instanceof AccessFocus) {
+                            return stack;
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+
+        }
+
+        return null;
+    }
+
     public static void openBoundLectern(ItemStack stack, ServerPlayer player, Level level) {
         CompoundTag tag = stack.getTag();
         if (tag == null || !tag.contains(NBT_BOUND_POS)) {
@@ -161,16 +259,31 @@ public class AccessFocus extends MagicFocus implements ICurioItem {
             return;
         }
 
-        if (!lecternEntity.hasSoulEnergy()) {
+        boolean hasEnergy = lecternEntity.hasSoulEnergy();
+
+        if (!hasEnergy) {
+            player.displayClientMessage(
+                    Component.translatable("message.goetyawaken.lectern.no_energy")
+                            .withStyle(ChatFormatting.RED),
+                    true);
             return;
         }
 
+        int sortDir = getSortingDirection(stack);
+        int sortType = getSortingType(stack);
+        int viewType = getViewType(stack);
+        int searchBoxMode = getSearchBoxMode(stack);
+        int size = getSize(stack);
+
+        final net.minecraft.server.level.ServerLevel finalTargetLevel = targetLevel;
         NetworkHooks.openScreen(player, lecternEntity, buf -> {
             buf.writeBlockPos(pos);
-            buf.writeInt(lecternEntity.getSortingDirection());
-            buf.writeInt(lecternEntity.getSortingType());
-            buf.writeInt(lecternEntity.getViewType());
-            buf.writeInt(lecternEntity.getSearchBoxMode());
+            buf.writeResourceLocation(finalTargetLevel.dimension().location());
+            buf.writeInt(sortDir);
+            buf.writeInt(sortType);
+            buf.writeInt(viewType);
+            buf.writeInt(searchBoxMode);
+            buf.writeInt(size);
         });
         player.awardStat(Stats.INTERACT_WITH_LECTERN);
     }

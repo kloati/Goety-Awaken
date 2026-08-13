@@ -1,0 +1,37 @@
+{
+  "replace": false,
+  "values": [
+    "goetyawaken:tormentor_servant",
+    "goetyawaken:envioker_servant",
+    "goetyawaken:preacher_servant",
+    "goetyawaken:crone_servant",
+    "goetyawaken:minister_servant",
+    "goetyawaken:sorcerer_servant",
+    "goetyawaken:arch_illusioner_servant",
+    "goetyawaken:illusioner_servant",
+    "goetyawaken:vizier_clone_servant",
+    "goetyawaken:vizier_servant",
+    "goetyawaken:royalguard_servant",
+    "goetyawaken:tower_guard_servant",
+    "goetyawaken:apostle_servant",
+    "goetyawaken:heresiarch_servant",
+    "goetyawaken:rampart_captain",
+    "goetyawaken:tower_witch_servant",
+    {
+      "id": "goetyawaken:masquerader_servant",
+      "required": false
+    },
+    {
+      "id": "goetyawaken:archer_servant",
+      "required": false
+    },
+    {
+      "id": "goetyawaken:skirmisher_servant",
+      "required": false
+    },
+    {
+      "id": "goetyawaken:legioner_servant",
+      "required": false
+    }
+  ]
+}

@@ -9,16 +9,13 @@
   "duration": 15,
   "ingredients": [
     {
-      "item": "minecraft:diamond"
-    },
-    {
       "item": "goety:pale_steel_ingot"
     },
     {
       "item": "goetyawaken:taboo_fragment"
     },
     {
-      "item": "goetyawaken:soul_sapphire"
+      "item": "goety:soul_ruby"
     },
     {
       "item": "goety:ominous_shard"

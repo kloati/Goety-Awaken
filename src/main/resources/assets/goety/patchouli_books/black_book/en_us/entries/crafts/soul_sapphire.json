@@ -12,5 +12,6 @@
       "recipe": "goetyawaken:soul_sapphire",
       "text": "Craft the Soul Sapphire."
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:soul_sapphire":0}
 }

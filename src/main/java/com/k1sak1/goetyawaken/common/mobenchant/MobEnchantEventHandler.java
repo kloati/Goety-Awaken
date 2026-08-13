@@ -1,42 +1,21 @@
 package com.k1sak1.goetyawaken.common.mobenchant;
 
 import com.k1sak1.goetyawaken.GoetyAwaken;
+import com.k1sak1.goetyawaken.api.IAncientGlint;
 import com.k1sak1.goetyawaken.common.network.server.SMobEnchantSyncPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.PacketDistributor;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 @Mod.EventBusSubscriber(modid = GoetyAwaken.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class MobEnchantEventHandler {
-    private static final Map<Integer, MobEnchantCapability> CAPABILITY_CACHE = new ConcurrentHashMap<>();
-
-    @SubscribeEvent
-    public static void onEntityJoinLevel(EntityJoinLevelEvent event) {
-        Entity entity = event.getEntity();
-        if (entity instanceof LivingEntity living) {
-            if (entity instanceof IMobEnchantable enchantable) {
-                MobEnchantCapability existingCap = null;
-                existingCap = CAPABILITY_CACHE.get(entity.getId());
-                if (existingCap == null) {
-                    existingCap = new MobEnchantCapability(living);
-                    CAPABILITY_CACHE.put(entity.getId(), existingCap);
-                }
-            }
-        }
-    }
 
     @SubscribeEvent
     public static void onStartTracking(PlayerEvent.StartTracking event) {
@@ -46,7 +25,7 @@ public class MobEnchantEventHandler {
         if (!(event.getEntity() instanceof ServerPlayer serverPlayer))
             return;
 
-        MobEnchantCapability cap = CAPABILITY_CACHE.get(living.getId());
+        MobEnchantCapability cap = getCapabilityFromCache(living);
         if (cap != null && cap.getMobEnchantLevel(MobEnchantType.HUGE) > 0) {
             int hugeLevel = cap.getMobEnchantLevel(MobEnchantType.HUGE);
             SMobEnchantSyncPacket packet = new SMobEnchantSyncPacket(living.getId(), MobEnchantType.HUGE, hugeLevel);
@@ -55,9 +34,9 @@ public class MobEnchantEventHandler {
     }
 
     @SubscribeEvent
-    public static void onLivingTick(LivingEvent.LivingTickEvent event) {
-        LivingEntity entity = event.getEntity();
-        if (!entity.level().isClientSide && entity.level() instanceof ServerLevel serverLevel) {
+    public static void onWorldTick(net.minecraftforge.event.TickEvent.LevelTickEvent event) {
+        if (event.phase == net.minecraftforge.event.TickEvent.Phase.END
+                && event.level instanceof ServerLevel serverLevel) {
             MobEnchantResurrectionManager.processResurrection(serverLevel);
         }
     }
@@ -85,8 +64,7 @@ public class MobEnchantEventHandler {
         float thornPercent = capability.getThornPercentage();
         if (thornPercent > 0 && event.getSource().getEntity() instanceof LivingEntity attacker) {
             float thornDamage = event.getAmount() * thornPercent;
-            DamageSource thornSource = createThornDamageSource(entity, event.getSource());
-            attacker.hurt(thornSource, thornDamage);
+            attacker.hurt(entity.damageSources().thorns(entity), thornDamage);
         }
     }
 
@@ -119,43 +97,21 @@ public class MobEnchantEventHandler {
         }
     }
 
-    private static DamageSource createThornDamageSource(LivingEntity thornOwner, DamageSource originalSource) {
-        Entity directEntity = originalSource.getDirectEntity();
-        Entity trueEntity = originalSource.getEntity();
-        if (trueEntity != null) {
-            return thornOwner.damageSources().thorns(thornOwner);
-        }
-        return thornOwner.damageSources().thorns(thornOwner);
-    }
-
-    @SubscribeEvent
-    public static void onLivingDeath(LivingDeathEvent event) {
-        Entity entity = event.getEntity();
-
-        if (entity.level().isClientSide) {
-            return;
-        }
-
-        CAPABILITY_CACHE.remove(entity.getId());
-    }
-
     public static MobEnchantCapability getCapabilityFromCache(LivingEntity entity) {
-        return CAPABILITY_CACHE.get(entity.getId());
+        if (entity instanceof IMobEnchantable enchantable) {
+            return enchantable.getMobEnchantCapabilityInstance();
+        }
+        return null;
     }
 
     public static MobEnchantCapability getCapability(LivingEntity entity) {
-        MobEnchantCapability cached = CAPABILITY_CACHE.get(entity.getId());
-        if (cached != null) {
-            return cached;
+        if (entity instanceof IMobEnchantable enchantable) {
+            return enchantable.getMobEnchantCapabilityInstance();
         }
-
-        MobEnchantCapability capability = new MobEnchantCapability(entity);
-        CAPABILITY_CACHE.put(entity.getId(), capability);
-        return capability;
+        return null;
     }
 
     public static void syncCapabilityToCache(LivingEntity entity, MobEnchantCapability capability) {
-        CAPABILITY_CACHE.put(entity.getId(), capability);
     }
 
     public static void applyEnchantment(LivingEntity entity, MobEnchantType type, int level) {
@@ -166,6 +122,9 @@ public class MobEnchantEventHandler {
     public static void clearEnchantments(LivingEntity entity) {
         MobEnchantCapability capability = getCapability(entity);
         capability.clearMobEnchantments();
+        if (entity instanceof IAncientGlint glint && glint.hasAncientGlint()) {
+            glint.setAncientGlint(false);
+        }
     }
 
     public static int getEnchantmentLevel(LivingEntity entity, MobEnchantType type) {

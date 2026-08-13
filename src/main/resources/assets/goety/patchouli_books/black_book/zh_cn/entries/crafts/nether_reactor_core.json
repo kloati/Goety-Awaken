@@ -17,5 +17,6 @@
       "text": "制作下界反应核心。"
     }
   ],
-  "advancement": "minecraft:nether/summon_wither"
+  "advancement": "minecraft:nether/summon_wither",
+  "extra_recipe_mappings": {"goetyawaken:nether_reactor_core":0}
 }

@@ -19,6 +19,9 @@ public class ModCriteriaTriggers {
     public static final ChaosPrisonTrigger CHAOS_PRISON = new ChaosPrisonTrigger();
     public static final MushroomMonstrosityKillTrigger MUSHROOM_MONSTROSITY_KILL = new MushroomMonstrosityKillTrigger();
     public static final SporearmRaceTrigger SPOREARM_RACE = new SporearmRaceTrigger();
+    public static final ApostleActsTrigger APOSTLE_ACTS = new ApostleActsTrigger();
+    public static final LongWatchTrigger LONG_WATCH = new LongWatchTrigger();
+    public static final WalkLikeNamelessTrigger WALK_LIKE_NAMELESS = new WalkLikeNamelessTrigger();
 
     public static void init() {
         CriteriaTriggers.register(SUMMON_PALE_GOLEM);
@@ -36,5 +39,8 @@ public class ModCriteriaTriggers {
         CriteriaTriggers.register(CHAOS_PRISON);
         CriteriaTriggers.register(MUSHROOM_MONSTROSITY_KILL);
         CriteriaTriggers.register(SPOREARM_RACE);
+        CriteriaTriggers.register(APOSTLE_ACTS);
+        CriteriaTriggers.register(LONG_WATCH);
+        CriteriaTriggers.register(WALK_LIKE_NAMELESS);
     }
 }

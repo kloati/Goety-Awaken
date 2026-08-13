@@ -1,0 +1,16 @@
+{
+  "name": "Feiticeiro Aprisionado",
+  "icon": "goety:soul_emerald",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Você já aprendeu como criar um conjurador Illager morto-vivo — então por que não transformar seu Feiticeiro em um também! Basta garantir que seu Feiticeiro sofra uma pequena fatalidade enquanto você estiver usando o Conjunto do Nameless One, e você poderá ressuscitar um Feiticeiro Aprisionado com o Ídolo Sinistro. Eles mantêm seu nível anterior e, graças à falta de pernas, podem voar!"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:bound_sorcerer",
+      "text": "Feiticeiros Sombrios, esperem por mim! Apenas aguardem!"
+    }
+  ]
+}

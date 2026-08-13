@@ -12,5 +12,6 @@
       "recipe": "goetyawaken:ominous_eye",
       "text": "不祥之眼"
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:ominous_eye":0}
 }

@@ -434,4 +434,463 @@ public class ModBlocks {
         public static final RegistryObject<Block> WALL_MOOSHROOM_MONSTROSITY_HEAD = BLOCKS.register(
                         "wall_mooshroom_monstrosity_head",
                         () -> new WallMushroomMonstrosityHeadBlock());
+
+        public static final RegistryObject<Block> CORNER_LARGE_CARPET = BLOCKS.register("corner_large_carpet",
+                        () -> new LargeCarpetBlock(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.SAND)
+                                        .strength(0.1F)
+                                        .sound(SoundType.WOOL)
+                                        .noOcclusion()));
+
+        public static final RegistryObject<Block> EDGE_LARGE_CARPET = BLOCKS.register("edge_large_carpet",
+                        () -> new LargeCarpetBlock(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.SAND)
+                                        .strength(0.1F)
+                                        .sound(SoundType.WOOL)
+                                        .noOcclusion()));
+
+        public static final RegistryObject<Block> CENTER_LARGE_CARPET = BLOCKS.register("center_large_carpet",
+                        () -> new LargeCarpetBlock(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.SAND)
+                                        .strength(0.1F)
+                                        .sound(SoundType.WOOL)
+                                        .noOcclusion()));
+
+        public static final RegistryObject<Block> SANDY_CHISELED_SANDSTONE_BRICKS = BLOCKS.register(
+                        "sandy_chiseled_sandstone_bricks",
+                        () -> new Block(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.SAND)
+                                        .requiresCorrectToolForDrops()
+                                        .strength(1.5F, 6.0F)
+                                        .sound(SoundType.STONE)));
+
+        public static final RegistryObject<Block> SANDY_CARVED_SANDSTONE_BRICKS = BLOCKS.register(
+                        "sandy_carved_sandstone_bricks",
+                        () -> new Block(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.SAND)
+                                        .requiresCorrectToolForDrops()
+                                        .strength(1.5F, 6.0F)
+                                        .sound(SoundType.STONE)));
+
+        public static final RegistryObject<Block> SANDY_SMOOTH_SANDSTONE_BRICKS = BLOCKS.register(
+                        "sandy_smooth_sandstone_bricks",
+                        () -> new Block(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.SAND)
+                                        .requiresCorrectToolForDrops()
+                                        .strength(1.5F, 6.0F)
+                                        .sound(SoundType.STONE)));
+
+        public static final RegistryObject<Block> SANDY_SANDSTONE_BRICKS = BLOCKS.register("sandy_sandstone_bricks",
+                        () -> new Block(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.SAND)
+                                        .requiresCorrectToolForDrops()
+                                        .strength(1.5F, 6.0F)
+                                        .sound(SoundType.STONE)));
+
+        public static final RegistryObject<Block> SANDY_CHISELED_VARIANT_SANDSTONE_BRICKS = BLOCKS.register(
+                        "sandy_chiseled_variant_sandstone_bricks",
+                        () -> new Block(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.SAND)
+                                        .requiresCorrectToolForDrops()
+                                        .strength(1.5F, 6.0F)
+                                        .sound(SoundType.STONE)));
+
+        public static final RegistryObject<Block> SANDY_SANDSTONE_PILLAR = BLOCKS.register("sandy_sandstone_pillar",
+                        () -> new Block(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.SAND)
+                                        .requiresCorrectToolForDrops()
+                                        .strength(1.5F, 6.0F)
+                                        .sound(SoundType.STONE)));
+
+        public static final RegistryObject<Block> SANDY_CRACKED_SANDSTONE_BRICKS = BLOCKS.register(
+                        "sandy_cracked_sandstone_bricks",
+                        () -> new Block(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.SAND)
+                                        .requiresCorrectToolForDrops()
+                                        .strength(1.5F, 6.0F)
+                                        .sound(SoundType.STONE)));
+
+        public static final RegistryObject<Block> LIGHTLY_SANDED_ANDESITE_ROCK = BLOCKS.register(
+                        "lightly_sanded_andesite_rock",
+                        () -> new Block(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.STONE)
+                                        .instrument(NoteBlockInstrument.BASEDRUM)
+                                        .requiresCorrectToolForDrops()
+                                        .strength(1.5F, 6.0F)
+                                        .sound(SoundType.STONE)));
+
+        public static final RegistryObject<Block> HEAVILY_SANDED_ANDESITE_ROCK = BLOCKS.register(
+                        "heavily_sanded_andesite_rock",
+                        () -> new Block(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.STONE)
+                                        .instrument(NoteBlockInstrument.BASEDRUM)
+                                        .requiresCorrectToolForDrops()
+                                        .strength(1.5F, 6.0F)
+                                        .sound(SoundType.STONE)));
+
+        public static final RegistryObject<Block> SANDED_ANDESITE_BRICKS = BLOCKS.register("sanded_andesite_bricks",
+                        () -> new Block(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.STONE)
+                                        .instrument(NoteBlockInstrument.BASEDRUM)
+                                        .requiresCorrectToolForDrops()
+                                        .strength(1.5F, 6.0F)
+                                        .sound(SoundType.STONE)));
+
+        public static final RegistryObject<Block> SANDED_ANDESITE_BRICKS_STAIRS = BLOCKS.register(
+                        "sanded_andesite_bricks_stairs",
+                        () -> new StairBlock(() -> ModBlocks.SANDED_ANDESITE_BRICKS.get().defaultBlockState(),
+                                        BlockBehaviour.Properties.of()
+                                                        .mapColor(MapColor.STONE)
+                                                        .instrument(NoteBlockInstrument.BASEDRUM)
+                                                        .requiresCorrectToolForDrops()
+                                                        .strength(1.5F, 6.0F)
+                                                        .sound(SoundType.STONE)));
+
+        public static final RegistryObject<Block> SANDED_ANDESITE_BRICKS_SLAB = BLOCKS.register(
+                        "sanded_andesite_bricks_slab",
+                        () -> new SlabBlock(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.STONE)
+                                        .instrument(NoteBlockInstrument.BASEDRUM)
+                                        .requiresCorrectToolForDrops()
+                                        .strength(1.5F, 6.0F)
+                                        .sound(SoundType.STONE)));
+
+        public static final RegistryObject<Block> LIGHTLY_SANDED_ANDESITE_BRICKS = BLOCKS.register(
+                        "lightly_sanded_andesite_bricks",
+                        () -> new Block(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.STONE)
+                                        .instrument(NoteBlockInstrument.BASEDRUM)
+                                        .requiresCorrectToolForDrops()
+                                        .strength(1.5F, 6.0F)
+                                        .sound(SoundType.STONE)));
+
+        public static final RegistryObject<Block> MODERATELY_SANDED_ANDESITE_BRICKS = BLOCKS.register(
+                        "moderately_sanded_andesite_bricks",
+                        () -> new Block(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.STONE)
+                                        .instrument(NoteBlockInstrument.BASEDRUM)
+                                        .requiresCorrectToolForDrops()
+                                        .strength(1.5F, 6.0F)
+                                        .sound(SoundType.STONE)));
+
+        public static final RegistryObject<Block> HEAVILY_SANDED_ANDESITE_BRICKS = BLOCKS.register(
+                        "heavily_sanded_andesite_bricks",
+                        () -> new Block(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.STONE)
+                                        .instrument(NoteBlockInstrument.BASEDRUM)
+                                        .requiresCorrectToolForDrops()
+                                        .strength(1.5F, 6.0F)
+                                        .sound(SoundType.STONE)));
+
+        public static final RegistryObject<Block> HEAVILY_SANDED_ANDESITE_BRICKS_VARIANT = BLOCKS.register(
+                        "heavily_sanded_andesite_bricks_variant",
+                        () -> new Block(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.STONE)
+                                        .instrument(NoteBlockInstrument.BASEDRUM)
+                                        .requiresCorrectToolForDrops()
+                                        .strength(1.5F, 6.0F)
+                                        .sound(SoundType.STONE)));
+
+        public static final RegistryObject<Block> CHISELED_SANDED_ANDESITE_BRICKS = BLOCKS.register(
+                        "chiseled_sanded_andesite_bricks",
+                        () -> new Block(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.STONE)
+                                        .instrument(NoteBlockInstrument.BASEDRUM)
+                                        .requiresCorrectToolForDrops()
+                                        .strength(1.5F, 6.0F)
+                                        .sound(SoundType.STONE)));
+
+        public static final RegistryObject<Block> CRACKED_SANDED_ANDESITE_BRICKS = BLOCKS.register(
+                        "cracked_sanded_andesite_bricks",
+                        () -> new Block(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.STONE)
+                                        .instrument(NoteBlockInstrument.BASEDRUM)
+                                        .requiresCorrectToolForDrops()
+                                        .strength(1.5F, 6.0F)
+                                        .sound(SoundType.STONE)));
+
+        public static final RegistryObject<Block> POLISHED_SANDED_ANDESITE = BLOCKS.register("polished_sanded_andesite",
+                        () -> new Block(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.STONE)
+                                        .instrument(NoteBlockInstrument.BASEDRUM)
+                                        .requiresCorrectToolForDrops()
+                                        .strength(1.5F, 6.0F)
+                                        .sound(SoundType.STONE)));
+
+        public static final RegistryObject<Block> POLISHED_SANDED_ANDESITE_STAIRS = BLOCKS.register(
+                        "polished_sanded_andesite_stairs",
+                        () -> new StairBlock(() -> ModBlocks.POLISHED_SANDED_ANDESITE.get().defaultBlockState(),
+                                        BlockBehaviour.Properties.of()
+                                                        .mapColor(MapColor.STONE)
+                                                        .instrument(NoteBlockInstrument.BASEDRUM)
+                                                        .requiresCorrectToolForDrops()
+                                                        .strength(1.5F, 6.0F)
+                                                        .sound(SoundType.STONE)));
+
+        public static final RegistryObject<Block> POLISHED_SANDED_ANDESITE_SLAB = BLOCKS.register(
+                        "polished_sanded_andesite_slab",
+                        () -> new SlabBlock(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.STONE)
+                                        .instrument(NoteBlockInstrument.BASEDRUM)
+                                        .requiresCorrectToolForDrops()
+                                        .strength(1.5F, 6.0F)
+                                        .sound(SoundType.STONE)));
+
+        public static final RegistryObject<Block> BOTTOM_SANDED_POLISHED_ANDESITE = BLOCKS.register(
+                        "bottom_sanded_polished_andesite",
+                        () -> new Block(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.STONE)
+                                        .instrument(NoteBlockInstrument.BASEDRUM)
+                                        .requiresCorrectToolForDrops()
+                                        .strength(1.5F, 6.0F)
+                                        .sound(SoundType.STONE)));
+
+        public static final RegistryObject<Block> CARVED_POLISHED_SANDED_ANDESITE = BLOCKS.register(
+                        "carved_polished_sanded_andesite",
+                        () -> new Block(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.STONE)
+                                        .instrument(NoteBlockInstrument.BASEDRUM)
+                                        .requiresCorrectToolForDrops()
+                                        .strength(1.5F, 6.0F)
+                                        .sound(SoundType.STONE)));
+
+        public static final RegistryObject<Block> CARVED_POLISHED_SANDED_ANDESITE_BRICKS = BLOCKS.register(
+                        "carved_polished_sanded_andesite_bricks",
+                        () -> new Block(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.STONE)
+                                        .instrument(NoteBlockInstrument.BASEDRUM)
+                                        .requiresCorrectToolForDrops()
+                                        .strength(1.5F, 6.0F)
+                                        .sound(SoundType.STONE)));
+
+        public static final RegistryObject<Block> SANDED_ANDESITE_TILES = BLOCKS.register("sanded_andesite_tiles",
+                        () -> new Block(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.STONE)
+                                        .instrument(NoteBlockInstrument.BASEDRUM)
+                                        .requiresCorrectToolForDrops()
+                                        .strength(1.5F, 6.0F)
+                                        .sound(SoundType.STONE)));
+
+        public static final RegistryObject<Block> LIGHTLY_SANDED_ANDESITE_TILES = BLOCKS.register(
+                        "lightly_sanded_andesite_tiles",
+                        () -> new Block(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.STONE)
+                                        .instrument(NoteBlockInstrument.BASEDRUM)
+                                        .requiresCorrectToolForDrops()
+                                        .strength(1.5F, 6.0F)
+                                        .sound(SoundType.STONE)));
+
+        public static final RegistryObject<Block> SANDED_ANDESITE_PILLAR = BLOCKS.register("sanded_andesite_pillar",
+                        () -> new Block(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.STONE)
+                                        .instrument(NoteBlockInstrument.BASEDRUM)
+                                        .requiresCorrectToolForDrops()
+                                        .strength(1.5F, 6.0F)
+                                        .sound(SoundType.STONE)));
+
+        public static final RegistryObject<Block> SANDED_DIRT_PATH = BLOCKS.register("sanded_dirt_path",
+                        () -> new Block(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.DIRT)
+                                        .strength(0.5F)
+                                        .sound(SoundType.GRAVEL)));
+
+        public static final RegistryObject<Block> LIGHTLY_SANDED_DIRT_PATH = BLOCKS.register("lightly_sanded_dirt_path",
+                        () -> new Block(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.DIRT)
+                                        .strength(0.5F)
+                                        .sound(SoundType.GRAVEL)));
+
+        public static final RegistryObject<Block> YELLOW_SAND = BLOCKS.register("yellow_sand",
+                        () -> new YellowSandBlock(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.SAND)
+                                        .strength(0.5F)
+                                        .sound(SoundType.SAND)));
+
+        public static final RegistryObject<Block> COIN_PILE = BLOCKS.register("coin_pile",
+                        () -> new CoinPileBlock(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.GOLD)
+                                        .strength(3.0F, 6.0F)
+                                        .sound(SoundType.METAL)));
+
+        public static final RegistryObject<Block> TOWER_KEEPER_STATUE = BLOCKS.register("tower_keeper_statue",
+                        () -> new TowerKeeperStatueBlock(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.STONE)
+                                        .instrument(NoteBlockInstrument.BASEDRUM)
+                                        .requiresCorrectToolForDrops()
+                                        .strength(1.5F, 6.0F)
+                                        .noOcclusion()
+                                        .noLootTable()
+                                        .sound(SoundType.STONE)));
+
+        public static final RegistryObject<Block> CREEPER_STATUE = BLOCKS.register("creeper_statue",
+                        () -> new CreeperStatueBlock(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.STONE)
+                                        .instrument(NoteBlockInstrument.BASEDRUM)
+                                        .requiresCorrectToolForDrops()
+                                        .strength(1.5F, 6.0F)
+                                        .noOcclusion()
+                                        .noLootTable()
+                                        .sound(SoundType.STONE)));
+
+        public static final RegistryObject<Block> VILLAGER_STATUE = BLOCKS.register("villager_statue",
+                        () -> new VillagerStatueBlock(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.STONE)
+                                        .instrument(NoteBlockInstrument.BASEDRUM)
+                                        .requiresCorrectToolForDrops()
+                                        .strength(1.5F, 6.0F)
+                                        .noOcclusion()
+                                        .noLootTable()
+                                        .sound(SoundType.STONE)));
+
+        public static final RegistryObject<Block> WILDFIRE_STATUE = BLOCKS.register("wildfire_statue",
+                        () -> new WildfireStatueBlock(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.STONE)
+                                        .instrument(NoteBlockInstrument.BASEDRUM)
+                                        .requiresCorrectToolForDrops()
+                                        .strength(5.5F, 10.0F)
+                                        .noOcclusion()
+                                        .noLootTable()
+                                        .sound(SoundType.STONE)));
+
+        public static final RegistryObject<Block> GARGOYLE_STATUE = BLOCKS.register("gargoyle_statue",
+                        () -> new GargoyleStatueBlock(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.STONE)
+                                        .instrument(NoteBlockInstrument.BASEDRUM)
+                                        .requiresCorrectToolForDrops()
+                                        .strength(5.5F, 10.0F)
+                                        .noOcclusion()
+                                        .noLootTable()
+                                        .sound(SoundType.STONE)));
+
+        public static final RegistryObject<Block> SPIKE_TRAP_BLOCK = BLOCKS.register("spike_trap_block",
+                        () -> new SpikeTrapBlock(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.STONE)
+                                        .instrument(NoteBlockInstrument.BASEDRUM)
+                                        .requiresCorrectToolForDrops()
+                                        .strength(3.0F, 9.0F)
+                                        .noOcclusion()
+                                        .isViewBlocking((state, getter, pos) -> false)
+                                        .sound(SoundType.METAL)));
+
+        public static final RegistryObject<Block> CHISELED_SANDSTONE_CLASSIC = BLOCKS.register(
+                        "chiseled_sandstone_classic",
+                        () -> new Block(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.SAND)
+                                        .instrument(NoteBlockInstrument.BASEDRUM)
+                                        .requiresCorrectToolForDrops()
+                                        .strength(0.8F, 4.0F)
+                                        .sound(SoundType.STONE)));
+
+        public static final RegistryObject<Block> RIGHT_SLANT_SANDSTONE = BLOCKS.register("right_slant_sandstone",
+                        () -> new Block(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.SAND)
+                                        .instrument(NoteBlockInstrument.BASEDRUM)
+                                        .requiresCorrectToolForDrops()
+                                        .strength(0.8F, 4.0F)
+                                        .sound(SoundType.STONE)));
+
+        public static final RegistryObject<Block> LEFT_SLANT_SANDSTONE = BLOCKS.register("left_slant_sandstone",
+                        () -> new Block(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.SAND)
+                                        .instrument(NoteBlockInstrument.BASEDRUM)
+                                        .requiresCorrectToolForDrops()
+                                        .strength(0.8F, 4.0F)
+                                        .sound(SoundType.STONE)));
+
+        public static final RegistryObject<Block> STAINED_CUT_SANDSTONE = BLOCKS.register("stained_cut_sandstone",
+                        () -> new Block(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.SAND)
+                                        .instrument(NoteBlockInstrument.BASEDRUM)
+                                        .requiresCorrectToolForDrops()
+                                        .strength(0.8F, 4.0F)
+                                        .sound(SoundType.STONE)));
+
+        public static final RegistryObject<Block> STAINED_SANDSTONE_GRAVEL = BLOCKS.register("stained_sandstone_gravel",
+                        () -> new Block(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.SAND)
+                                        .instrument(NoteBlockInstrument.BASEDRUM)
+                                        .requiresCorrectToolForDrops()
+                                        .strength(0.8F, 4.0F)
+                                        .sound(SoundType.STONE)));
+
+        public static final RegistryObject<Block> STAINED_SANDSTONE_GRAVEL_STAIRS = BLOCKS.register(
+                        "stained_sandstone_gravel_stairs",
+                        () -> new StairBlock(() -> ModBlocks.STAINED_SANDSTONE_GRAVEL.get().defaultBlockState(),
+                                        BlockBehaviour.Properties.of()
+                                                        .mapColor(MapColor.SAND)
+                                                        .instrument(NoteBlockInstrument.BASEDRUM)
+                                                        .requiresCorrectToolForDrops()
+                                                        .strength(0.8F, 4.0F)
+                                                        .sound(SoundType.STONE)));
+
+        public static final RegistryObject<Block> STAINED_SANDSTONE_GRAVEL_SLAB = BLOCKS.register(
+                        "stained_sandstone_gravel_slab",
+                        () -> new SlabBlock(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.SAND)
+                                        .instrument(NoteBlockInstrument.BASEDRUM)
+                                        .requiresCorrectToolForDrops()
+                                        .strength(0.8F, 4.0F)
+                                        .sound(SoundType.STONE)));
+
+        public static final RegistryObject<Block> VARIANT_SANDSTONE_COLUMN = BLOCKS.register("variant_sandstone_column",
+                        () -> new Block(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.SAND)
+                                        .instrument(NoteBlockInstrument.BASEDRUM)
+                                        .requiresCorrectToolForDrops()
+                                        .strength(0.8F, 4.0F)
+                                        .sound(SoundType.STONE)));
+
+        public static final RegistryObject<Block> SANDSTONE_BRICKS = BLOCKS.register("sandstone_bricks",
+                        () -> new Block(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.SAND)
+                                        .instrument(NoteBlockInstrument.BASEDRUM)
+                                        .requiresCorrectToolForDrops()
+                                        .strength(0.8F, 4.0F)
+                                        .sound(SoundType.STONE)));
+
+        public static final RegistryObject<Block> SANDSTONE_BRICKS_STAIRS = BLOCKS.register(
+                        "sandstone_bricks_stairs",
+                        () -> new StairBlock(() -> ModBlocks.SANDSTONE_BRICKS.get().defaultBlockState(),
+                                        BlockBehaviour.Properties.of()
+                                                        .mapColor(MapColor.SAND)
+                                                        .instrument(NoteBlockInstrument.BASEDRUM)
+                                                        .requiresCorrectToolForDrops()
+                                                        .strength(0.8F, 4.0F)
+                                                        .sound(SoundType.STONE)));
+
+        public static final RegistryObject<Block> SANDSTONE_BRICKS_SLAB = BLOCKS.register(
+                        "sandstone_bricks_slab",
+                        () -> new SlabBlock(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.SAND)
+                                        .instrument(NoteBlockInstrument.BASEDRUM)
+                                        .requiresCorrectToolForDrops()
+                                        .strength(0.8F, 4.0F)
+                                        .sound(SoundType.STONE)));
+
+        public static final RegistryObject<Block> COBBLESTONE_SANDSTONE = BLOCKS.register("cobblestone_sandstone",
+                        () -> new Block(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.SAND)
+                                        .instrument(NoteBlockInstrument.BASEDRUM)
+                                        .requiresCorrectToolForDrops()
+                                        .strength(0.8F, 4.0F)
+                                        .sound(SoundType.STONE)));
+
+        public static final RegistryObject<Block> COBBLESTONE_SANDSTONE_STAIRS = BLOCKS.register(
+                        "cobblestone_sandstone_stairs",
+                        () -> new StairBlock(() -> ModBlocks.COBBLESTONE_SANDSTONE.get().defaultBlockState(),
+                                        BlockBehaviour.Properties.of()
+                                                        .mapColor(MapColor.SAND)
+                                                        .instrument(NoteBlockInstrument.BASEDRUM)
+                                                        .requiresCorrectToolForDrops()
+                                                        .strength(0.8F, 4.0F)
+                                                        .sound(SoundType.STONE)));
+
+        public static final RegistryObject<Block> COBBLESTONE_SANDSTONE_SLAB = BLOCKS.register(
+                        "cobblestone_sandstone_slab",
+                        () -> new SlabBlock(BlockBehaviour.Properties.of()
+                                        .mapColor(MapColor.SAND)
+                                        .instrument(NoteBlockInstrument.BASEDRUM)
+                                        .requiresCorrectToolForDrops()
+                                        .strength(0.8F, 4.0F)
+                                        .sound(SoundType.STONE)));
 }

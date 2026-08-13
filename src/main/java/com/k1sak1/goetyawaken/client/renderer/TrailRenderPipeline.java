@@ -9,7 +9,6 @@ import com.mojang.blaze3d.vertex.*;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
@@ -338,6 +337,7 @@ public class TrailRenderPipeline {
 
     public static class TrailTaskManager {
         public final List<TrailRenderTask> pendingTasks = Collections.synchronizedList(new ArrayList<>());
+        private TrailBufferBuilder cachedBuilder;
 
         TrailTaskManager() {
             this.bufferSource = Minecraft.getInstance().renderBuffers().bufferSource();
@@ -384,14 +384,18 @@ public class TrailRenderPipeline {
                             this.renderType = TRAIL_RENDER_TYPE;
                         }
 
-                        TrailBufferBuilder builder = TrailRenderPipeline.createWorldBuilder()
-                                .withRenderType(this.renderType);
-
-                        for (TrailRenderTask task : this.pendingTasks) {
-                            task.executeTask(poseStack, builder);
+                        if (cachedBuilder == null) {
+                            cachedBuilder = TrailRenderPipeline.createWorldBuilder()
+                                    .withRenderType(this.renderType);
+                        } else {
+                            cachedBuilder.withRenderType(this.renderType);
                         }
 
-                        builder.flushBuffers();
+                        for (TrailRenderTask task : this.pendingTasks) {
+                            task.executeTask(poseStack, cachedBuilder);
+                        }
+
+                        cachedBuilder.flushBuffers();
                         this.clearTasks();
                     }
                 }
@@ -400,6 +404,7 @@ public class TrailRenderPipeline {
 
         public void clearTasks() {
             this.pendingTasks.clear();
+            this.cachedBuilder = null;
         }
 
         public interface TrailRenderTask {

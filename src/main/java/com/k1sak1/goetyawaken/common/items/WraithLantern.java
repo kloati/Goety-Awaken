@@ -17,8 +17,14 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class WraithLantern extends Item {
 
@@ -26,6 +32,13 @@ public class WraithLantern extends Item {
         super(new Properties()
                 .stacksTo(1)
                 .rarity(net.minecraft.world.item.Rarity.UNCOMMON));
+    }
+
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
+        super.appendHoverText(stack, worldIn, tooltip, flagIn);
+        tooltip.add(Component.translatable("item.goetyawaken.wraith_lantern.desc").withStyle(ChatFormatting.GRAY));
     }
 
     @Override

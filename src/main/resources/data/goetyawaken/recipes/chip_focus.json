@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ADA",
+    "CBC",
+    "ADA"
+  ],
+  "key": {
+    "A": {
+      "item": "meetyourfight:velvet_fortune"
+    },
+    "B": {
+      "item": "goety:empty_focus"
+    },
+    "C": {
+      "item": "meetyourfight:devils_ante"
+    },
+    "D": {
+      "item": "minecraft:dispenser"
+    }
+  },
+  "result": {
+    "item": "goetyawaken:chip_focus"
+  }
+}

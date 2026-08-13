@@ -26,22 +26,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:name_tag",
-          "weight": 2
-        },
-        {
-          "type": "minecraft:item",
           "name": "minecraft:totem_of_undying",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:dark_wand",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:dark_ingot",
           "weight": 1
         },
         {
@@ -66,103 +51,8 @@
         },
         {
           "type": "minecraft:item",
-          "name": "goety:ominous_saddle",
-          "weight": 2
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:gold_trampler_armor",
-          "weight": 2
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:diamond_trampler_armor",
-          "weight": 2
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:netherite_trampler_armor",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:ominous_shard",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:totem_of_souls",
-          "weight": 2
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:spent_totem",
-          "weight": 4
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:raiding_horn",
-          "weight": 2
-        },
-        {
-          "type": "minecraft:item",
           "name": "goety:ill_bomb",
           "weight": 3
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:soul_emerald",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:void_bottle",
-          "weight": 2
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:netherite_ravager_armor",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:diamond_ravager_armor",
-          "weight": 2
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:gold_ravager_armor",
-          "weight": 2
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:warred_scroll",
-          "weight": 3
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:ring_of_want",
-          "weight": 2
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:dark_hat",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:dark_robe",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:biting_focus",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:vexing_focus",
-          "weight": 1
         },
         {
           "type": "minecraft:item",
@@ -198,11 +88,6 @@
           "type": "minecraft:item",
           "name": "minecraft:netherite_scrap",
           "weight": 2
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:rampaging_axe",
-          "weight": 4
         }
       ]
     },
@@ -210,7 +95,7 @@
       "rolls": {
         "type": "minecraft:uniform",
         "min": 1.0,
-        "max": 6.0
+        "max": 3.0
       },
       "bonus_rolls": 0.0,
       "entries": [
@@ -251,28 +136,8 @@
         },
         {
           "type": "minecraft:item",
-          "name": "goety:iron_trampler_armor",
-          "weight": 5
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:empty_focus",
-          "weight": 10
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:totem_of_roots",
-          "weight": 6
-        },
-        {
-          "type": "minecraft:item",
           "name": "goety:magic_emerald",
           "weight": 8
-        },
-        {
-          "type": "minecraft:item",
-          "name": "goety:iron_ravager_armor",
-          "weight": 5
         },
         {
           "type": "minecraft:item",
@@ -335,281 +200,6 @@
               "add": false
             }
           ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:iron_helmet",
-          "weight": 4,
-          "functions": [
-            {
-              "function": "minecraft:enchant_with_levels",
-              "levels": {
-                "type": "minecraft:uniform",
-                "min": 10.0,
-                "max": 30.0
-              },
-              "treasure": false
-            },
-            {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.1,
-                "max": 0.5
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:iron_chestplate",
-          "weight": 4,
-          "functions": [
-            {
-              "function": "minecraft:enchant_with_levels",
-              "levels": {
-                "type": "minecraft:uniform",
-                "min": 10.0,
-                "max": 30.0
-              },
-              "treasure": false
-            },
-            {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.1,
-                "max": 0.5
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:iron_leggings",
-          "weight": 4,
-          "functions": [
-            {
-              "function": "minecraft:enchant_with_levels",
-              "levels": {
-                "type": "minecraft:uniform",
-                "min": 10.0,
-                "max": 30.0
-              },
-              "treasure": false
-            },
-            {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.1,
-                "max": 0.5
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:iron_boots",
-          "weight": 4,
-          "functions": [
-            {
-              "function": "minecraft:enchant_with_levels",
-              "levels": {
-                "type": "minecraft:uniform",
-                "min": 10.0,
-                "max": 30.0
-              },
-              "treasure": false
-            },
-            {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.1,
-                "max": 0.5
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:diamond_sword",
-          "weight": 4,
-          "functions": [
-            {
-              "function": "minecraft:enchant_with_levels",
-              "levels": {
-                "type": "minecraft:uniform",
-                "min": 15.0,
-                "max": 25.0
-              },
-              "treasure": false
-            },
-            {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.1,
-                "max": 0.4
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:iron_sword",
-          "weight": 6,
-          "functions": [
-            {
-              "function": "minecraft:enchant_with_levels",
-              "levels": {
-                "type": "minecraft:uniform",
-                "min": 10.0,
-                "max": 20.0
-              },
-              "treasure": false
-            },
-            {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.1,
-                "max": 0.5
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:diamond_helmet",
-          "weight": 3,
-          "functions": [
-            {
-              "function": "minecraft:enchant_with_levels",
-              "levels": {
-                "type": "minecraft:uniform",
-                "min": 15.0,
-                "max": 25.0
-              },
-              "treasure": false
-            },
-            {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.1,
-                "max": 0.5
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:diamond_chestplate",
-          "weight": 3,
-          "functions": [
-            {
-              "function": "minecraft:enchant_with_levels",
-              "levels": {
-                "type": "minecraft:uniform",
-                "min": 15.0,
-                "max": 25.0
-              },
-              "treasure": false
-            },
-            {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.1,
-                "max": 0.5
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:diamond_leggings",
-          "weight": 3,
-          "functions": [
-            {
-              "function": "minecraft:enchant_with_levels",
-              "levels": {
-                "type": "minecraft:uniform",
-                "min": 15.0,
-                "max": 25.0
-              },
-              "treasure": false
-            },
-            {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.1,
-                "max": 0.5
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:diamond_boots",
-          "weight": 3,
-          "functions": [
-            {
-              "function": "minecraft:enchant_with_levels",
-              "levels": {
-                "type": "minecraft:uniform",
-                "min": 15.0,
-                "max": 25.0
-              },
-              "treasure": false
-            },
-            {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.1,
-                "max": 0.5
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:crossbow",
-          "weight": 5,
-          "functions": [
-            {
-              "function": "minecraft:enchant_with_levels",
-              "levels": {
-                "type": "minecraft:uniform",
-                "min": 15.0,
-                "max": 25.0
-              },
-              "treasure": false
-            },
-            {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.1,
-                "max": 0.5
-              },
-              "add": false
-            }
-          ]
         }
       ]
     },
@@ -617,7 +207,7 @@
       "rolls": {
         "type": "minecraft:uniform",
         "min": 1.0,
-        "max": 6.0
+        "max": 3.0
       },
       "bonus_rolls": 0.0,
       "entries": [
@@ -632,38 +222,6 @@
                 "type": "minecraft:uniform",
                 "min": 1.0,
                 "max": 4.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:rotten_flesh",
-          "weight": 20,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 2.0,
-                "max": 6.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:poisonous_potato",
-          "weight": 12,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 1.0,
-                "max": 2.0
               },
               "add": false
             }
@@ -1023,22 +581,6 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:rabbit_hide",
-          "weight": 10,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 1.0,
-                "max": 2.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
           "name": "minecraft:ink_sac",
           "weight": 12,
           "functions": [
@@ -1080,22 +622,6 @@
                 "type": "minecraft:uniform",
                 "min": 2.0,
                 "max": 6.0
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:brick",
-          "weight": 12,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 2.0,
-                "max": 4.0
               },
               "add": false
             }

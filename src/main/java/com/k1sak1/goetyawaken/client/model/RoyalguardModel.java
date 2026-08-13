@@ -4,6 +4,8 @@ import com.k1sak1.goetyawaken.client.animation.RoyalguardServantAnimations;
 import com.k1sak1.goetyawaken.common.entities.ally.illager.RoyalguardServant;
 import com.k1sak1.goetyawaken.common.entities.hostile.illager.HostileRoyalguard;
 import com.Polarice3.Goety.client.render.layer.HierarchicalArmor;
+import com.Polarice3.Goety.utils.ModelUtil;
+import com.Polarice3.Goety.utils.ModelPartPose;
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -13,10 +15,14 @@ import net.minecraft.client.model.HeadedModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Stream;
 
 @OnlyIn(Dist.CLIENT)
 public class RoyalguardModel<T extends LivingEntity> extends HierarchicalModel<T>
@@ -34,6 +40,10 @@ public class RoyalguardModel<T extends LivingEntity> extends HierarchicalModel<T
 	private final ModelPart head;
 	private final ModelPart nose;
 
+	public final List<String> allPartNames;
+
+	private static final int TRANSITION_DURATION = 5;
+
 	public RoyalguardModel(ModelPart root) {
 		this.root = root;
 		this.royalguard = root.getChild("royalguard");
@@ -47,6 +57,7 @@ public class RoyalguardModel<T extends LivingEntity> extends HierarchicalModel<T
 		this.shield = this.left_arm.getChild("shield");
 		this.head = this.body.getChild("head");
 		this.nose = this.head.getChild("nose");
+		this.allPartNames = Stream.concat(Stream.of("root"), ModelUtil.getAllPartNames(this.root)).toList();
 	}
 
 	public static LayerDefinition createBodyLayer() {
@@ -211,25 +222,114 @@ public class RoyalguardModel<T extends LivingEntity> extends HierarchicalModel<T
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
 			float headPitch) {
+		int transitionTick = 0;
+		String fromKey = "";
+		String toKey = "";
+
+		if (entity instanceof RoyalguardServant servant) {
+			transitionTick = servant.baseAnimTransitionTick;
+			if (transitionTick > 0) {
+				fromKey = servant.transitionFromKey;
+				toKey = servant.transitionToKey;
+			}
+		} else if (entity instanceof HostileRoyalguard hostile) {
+			transitionTick = hostile.baseAnimTransitionTick;
+			if (transitionTick > 0) {
+				fromKey = hostile.transitionFromKey;
+				toKey = hostile.transitionToKey;
+			}
+		}
+
+		if (transitionTick > 0 && !fromKey.isEmpty()) {
+			float partialTick = ageInTicks - (float) entity.tickCount;
+			float t = 1.0F - ((float) transitionTick - partialTick) / (float) TRANSITION_DURATION;
+			t = Mth.clamp(t, 0.0F, 1.0F);
+
+			Map<String, ModelPartPose> fromPose = this.evaluatePass(fromKey, entity, ageInTicks, netHeadYaw, headPitch);
+			Map<String, ModelPartPose> newPose = this.evaluatePass(toKey, entity, ageInTicks, netHeadYaw, headPitch);
+			float eased = t < 0.5F ? 4.0F * t * t * t : 1.0F - (float) Math.pow(-2.0F * t + 2.0F, 3) / 2.0F;
+			this.blendPoses(fromPose, newPose, eased);
+		} else {
+			String activeKey = null;
+			if (entity instanceof RoyalguardServant s) {
+				activeKey = s.getCurrentAnimKey();
+			} else if (entity instanceof HostileRoyalguard h) {
+				activeKey = h.getCurrentAnimKey();
+			}
+			if (activeKey != null && !activeKey.isEmpty()) {
+				this.evaluatePass(activeKey, entity, ageInTicks, netHeadYaw, headPitch);
+			} else {
+				this.root().getAllParts().forEach(ModelPart::resetPose);
+				this.head.yRot = netHeadYaw * ((float) Math.PI / 180F);
+				this.head.xRot = headPitch * ((float) Math.PI / 180F);
+			}
+		}
+	}
+
+	private Map<String, ModelPartPose> evaluatePass(String key, T entity, float ageInTicks, float netHeadYaw,
+			float headPitch) {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 		this.head.yRot = netHeadYaw * ((float) Math.PI / 180F);
 		this.head.xRot = headPitch * ((float) Math.PI / 180F);
-		if (entity instanceof RoyalguardServant) {
-			RoyalguardServant servant = (RoyalguardServant) entity;
+
+		if (entity instanceof RoyalguardServant servant) {
 			this.shield.visible = !servant.isShieldHidden();
-			this.animate(servant.idleAnimationState, RoyalguardServantAnimations.IDLE, ageInTicks);
-			this.animate(servant.walkAnimationState, RoyalguardServantAnimations.WALK, ageInTicks);
-			this.animate(servant.attackAnimationState, RoyalguardServantAnimations.ATTACK, ageInTicks);
-			this.animate(servant.standAnimationState, RoyalguardServantAnimations.STAND, ageInTicks);
-			this.animate(servant.patrolWalkAnimationState, RoyalguardServantAnimations.PATROL_WALK, ageInTicks);
-		} else if (entity instanceof HostileRoyalguard) {
-			HostileRoyalguard hostile = (HostileRoyalguard) entity;
+			switch (key) {
+				case "base_idle":
+					this.animate(servant.idleAnimationState, RoyalguardServantAnimations.IDLE, ageInTicks);
+					break;
+				case "base_walk":
+					this.animate(servant.walkAnimationState, RoyalguardServantAnimations.WALK, ageInTicks);
+					break;
+				case "base_patrol_walk":
+					this.animate(servant.patrolWalkAnimationState, RoyalguardServantAnimations.PATROL_WALK, ageInTicks);
+					break;
+				case "base_stand":
+					this.animate(servant.standAnimationState, RoyalguardServantAnimations.STAND, ageInTicks);
+					break;
+				case "action_attack":
+					this.animate(servant.attackAnimationState, RoyalguardServantAnimations.ATTACK, ageInTicks);
+					break;
+			}
+		} else if (entity instanceof HostileRoyalguard hostile) {
 			this.shield.visible = !hostile.isShieldHidden();
-			this.animate(hostile.idleAnimationState, RoyalguardServantAnimations.IDLE, ageInTicks);
-			this.animate(hostile.walkAnimationState, RoyalguardServantAnimations.WALK, ageInTicks);
-			this.animate(hostile.attackAnimationState, RoyalguardServantAnimations.ATTACK, ageInTicks);
-			this.animate(hostile.standAnimationState, RoyalguardServantAnimations.STAND, ageInTicks);
-			this.animate(hostile.patrolWalkAnimationState, RoyalguardServantAnimations.PATROL_WALK, ageInTicks);
+			switch (key) {
+				case "base_idle":
+					this.animate(hostile.idleAnimationState, RoyalguardServantAnimations.IDLE, ageInTicks);
+					break;
+				case "base_walk":
+					this.animate(hostile.walkAnimationState, RoyalguardServantAnimations.WALK, ageInTicks);
+					break;
+				case "base_patrol_walk":
+					this.animate(hostile.patrolWalkAnimationState, RoyalguardServantAnimations.PATROL_WALK, ageInTicks);
+					break;
+				case "base_stand":
+					this.animate(hostile.standAnimationState, RoyalguardServantAnimations.STAND, ageInTicks);
+					break;
+				case "action_attack":
+					this.animate(hostile.attackAnimationState, RoyalguardServantAnimations.ATTACK, ageInTicks);
+					break;
+			}
+		}
+		return ModelUtil.saveModelSnapshot(this.allPartNames, this::getAnyDescendantWithName);
+	}
+
+	private void blendPoses(Map<String, ModelPartPose> from, Map<String, ModelPartPose> to, float progress) {
+		for (Map.Entry<String, ModelPartPose> entry : from.entrySet()) {
+			String boneName = entry.getKey();
+			ModelPartPose fromPose = entry.getValue();
+			ModelPartPose toPose = to.get(boneName);
+			if (toPose == null)
+				continue;
+
+			this.getAnyDescendantWithName(boneName).ifPresent(part -> {
+				part.xRot = fromPose.xRot() + (toPose.xRot() - fromPose.xRot()) * progress;
+				part.yRot = fromPose.yRot() + (toPose.yRot() - fromPose.yRot()) * progress;
+				part.zRot = fromPose.zRot() + (toPose.zRot() - fromPose.zRot()) * progress;
+				part.x = fromPose.x() + (toPose.x() - fromPose.x()) * progress;
+				part.y = fromPose.y() + (toPose.y() - fromPose.y()) * progress;
+				part.z = fromPose.z() + (toPose.z() - fromPose.z()) * progress;
+			});
 		}
 	}
 

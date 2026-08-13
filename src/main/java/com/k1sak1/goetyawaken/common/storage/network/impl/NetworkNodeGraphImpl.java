@@ -30,10 +30,23 @@ public class NetworkNodeGraphImpl implements INetworkNodeGraph {
 
     @Override
     public void invalidate() {
+        Set<BlockPos> oldPositions = new HashSet<>();
+        for (INetworkNodeGraphEntry entry : entries) {
+            oldPositions.add(entry.getNode().getPosition());
+        }
+
         entries.clear();
         scanForNodes();
-        for (Runnable listener : listeners) {
-            listener.run();
+
+        Set<BlockPos> newPositions = new HashSet<>();
+        for (INetworkNodeGraphEntry entry : entries) {
+            newPositions.add(entry.getNode().getPosition());
+        }
+
+        if (!oldPositions.equals(newPositions)) {
+            for (Runnable listener : listeners) {
+                listener.run();
+            }
         }
     }
 

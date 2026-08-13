@@ -1,0 +1,17 @@
+{
+  "name": "Potatiesh, Greatstaff of the Peasant",
+  "icon": "goetyawaken:potato_staff",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Few know the immense arcane power contained within poisonous potatoes——and you are one of them. This Wild Staff, modified using poisonous potatoes, can infuse certain spells with the power of the poisonous potato, and can even be used for composting directly."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:potato_staff",
+      "text": "Rumor has it that its creation was merely a joke."
+    }
+  ],
+  "extra_recipe_mappings": {"goetyawaken:potato_staff":0}
+}

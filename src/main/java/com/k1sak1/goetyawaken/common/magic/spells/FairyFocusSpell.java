@@ -1,7 +1,7 @@
 package com.k1sak1.goetyawaken.common.magic.spells;
 
-import com.k1sak1.goetyawaken.common.compat.touhoulittlemaid.TouhouLittleMaidLoaded;
-import com.k1sak1.goetyawaken.common.entities.ModEntityType;
+import com.k1sak1.goetyawaken.common.ModIntegrationRegistry;
+import com.k1sak1.goetyawaken.common.compat.ModLoadedUtil;
 import com.k1sak1.goetyawaken.common.entities.ally.Integration.MaidFairyServant;
 import com.k1sak1.goetyawaken.Config;
 import com.k1sak1.goetyawaken.init.ModEffects;
@@ -66,7 +66,7 @@ public class FairyFocusSpell extends com.Polarice3.Goety.common.magic.SummonSpel
 
     @Override
     public boolean conditionsMet(net.minecraft.server.level.ServerLevel worldIn, LivingEntity caster) {
-        if (!TouhouLittleMaidLoaded.TOUHOULITTLEMAID.isLoaded()) {
+        if (!ModLoadedUtil.isModLoaded(ModLoadedUtil.TOUHOU_LITTLE_MAID)) {
             return false;
         }
         return super.conditionsMet(worldIn, caster);
@@ -97,7 +97,7 @@ public class FairyFocusSpell extends com.Polarice3.Goety.common.magic.SummonSpel
             }
 
             for (int i = 0; i < fairyCount; ++i) {
-                MaidFairyServant summonedentity = new MaidFairyServant(ModEntityType.MAID_FAIRY_SERVANT.get(), worldIn);
+                MaidFairyServant summonedentity = new MaidFairyServant(ModIntegrationRegistry.MAID_FAIRY_SERVANT.get(), worldIn);
                 BlockPos blockPos = BlockFinder.SummonRadius(caster.blockPosition(), summonedentity, worldIn);
                 summonedentity.setTrueOwner(caster);
                 summonedentity.moveTo(blockPos, 0.0F, 0.0F);
@@ -116,6 +116,7 @@ public class FairyFocusSpell extends com.Polarice3.Goety.common.magic.SummonSpel
                 this.SummonSap(caster, summonedentity);
                 this.setTarget(caster, summonedentity);
                 worldIn.addFreshEntity(summonedentity);
+                this.summonParticles(worldIn, caster, staff, summonedentity);
                 this.summonAdvancement(caster, summonedentity);
             }
             this.SummonDown(caster);

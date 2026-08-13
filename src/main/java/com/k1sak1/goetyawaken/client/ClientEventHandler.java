@@ -1,12 +1,16 @@
 package com.k1sak1.goetyawaken.client;
 
+import com.Polarice3.Goety.client.render.model.SorcererModel;
 import com.k1sak1.goetyawaken.GoetyAwaken;
 import com.k1sak1.goetyawaken.client.model.PaleGolemModel;
 import com.k1sak1.goetyawaken.client.renderer.layers.AncientGlintLayer;
 import com.k1sak1.goetyawaken.client.model.ParchedModel;
 import com.k1sak1.goetyawaken.client.model.SilverfishServantModel;
 import com.k1sak1.goetyawaken.client.model.CreeperServantModel;
+import com.k1sak1.goetyawaken.client.model.StatueCreeperModel;
+import com.k1sak1.goetyawaken.client.model.JITBZombieServantModel;
 import com.k1sak1.goetyawaken.client.model.IceCreeperServantModel;
+import com.k1sak1.goetyawaken.client.model.PoisonousPotatoCreeperServantModel;
 import com.k1sak1.goetyawaken.client.model.MushroomMonstrosityModel;
 import com.k1sak1.goetyawaken.client.model.EndermanServantModel;
 import com.k1sak1.goetyawaken.client.model.EndermiteServantModel;
@@ -30,6 +34,7 @@ import com.k1sak1.goetyawaken.client.model.illager.ApostleServantModel;
 import com.k1sak1.goetyawaken.client.model.illager.IllusionerServantModel;
 import com.k1sak1.goetyawaken.client.model.undead.skeleton.SunkenSkeletonModel;
 import com.k1sak1.goetyawaken.client.model.RoyalguardModel;
+import com.k1sak1.goetyawaken.client.model.TowerGuardModel;
 import com.k1sak1.goetyawaken.client.model.SkeletonVanguardModel;
 import com.k1sak1.goetyawaken.client.model.SpiderCreederModel;
 import com.k1sak1.goetyawaken.client.model.VizierCloneServantModel;
@@ -40,13 +45,40 @@ import com.k1sak1.goetyawaken.client.model.HostileSnapperModel;
 import com.k1sak1.goetyawaken.client.model.undead.SkullLordServantModel;
 import com.k1sak1.goetyawaken.client.model.VanguardChampionModel;
 import com.k1sak1.goetyawaken.client.model.ScarletVexModel;
+import com.k1sak1.goetyawaken.client.model.GiantGhastModel;
+import com.k1sak1.goetyawaken.client.model.RampartCaptainModel;
+import com.k1sak1.goetyawaken.client.model.BurningShieldModel;
+import com.k1sak1.goetyawaken.client.model.ToxifinModel;
+import com.k1sak1.goetyawaken.client.model.ally.Integration.SwampjawServantModel;
+import com.k1sak1.goetyawaken.client.model.ally.Integration.SwampMineModel;
+import com.k1sak1.goetyawaken.client.model.ally.Integration.BellringerServantModel;
+import com.k1sak1.goetyawaken.client.model.ally.Integration.DameFortunaServantModel;
+import com.k1sak1.goetyawaken.client.model.ally.Integration.FortunaDameBombModel;
+import com.k1sak1.goetyawaken.client.model.ally.Integration.FortunaDameCardModel;
+import com.k1sak1.goetyawaken.client.model.ally.Integration.RosalyneServantModel;
+import com.k1sak1.goetyawaken.client.model.ally.Integration.RoseSpiritServantModel;
+import com.k1sak1.goetyawaken.client.model.ally.Integration.SculkCentipedeServantModel;
+import com.k1sak1.goetyawaken.client.model.ally.Integration.SculkLeechServantModel;
+import com.k1sak1.goetyawaken.client.model.ally.Integration.ShatteredServantModel;
+import com.k1sak1.goetyawaken.client.model.ally.Integration.ShriekWormServantModel;
+import com.k1sak1.goetyawaken.client.model.ally.Integration.SludgeServantModel;
+import com.k1sak1.goetyawaken.client.model.ally.Integration.StalkerServantModel;
+import com.k1sak1.goetyawaken.client.renderer.ally.Integration.SculkCentipedeServantRenderer;
+import com.k1sak1.goetyawaken.client.renderer.ally.Integration.SculkLeechServantRenderer;
+import com.k1sak1.goetyawaken.client.renderer.ally.Integration.ShatteredservantRenderer;
+import com.k1sak1.goetyawaken.client.renderer.ally.Integration.ShriekWormServantRenderer;
+import com.k1sak1.goetyawaken.client.renderer.ally.Integration.SludgeServantRenderer;
+import com.k1sak1.goetyawaken.client.renderer.ally.Integration.SludgeServantOuterLayer;
+import com.k1sak1.goetyawaken.client.renderer.ally.Integration.StalkerServantRenderer;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.SkullModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import com.k1sak1.goetyawaken.common.compat.ModLoadedUtil;
 
 @Mod.EventBusSubscriber(modid = GoetyAwaken.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientEventHandler {
@@ -59,8 +91,17 @@ public class ClientEventHandler {
         public static final ModelLayerLocation CREEPER_SERVANT_LAYER = new ModelLayerLocation(
                         new ResourceLocation(GoetyAwaken.MODID, "creeper_servant"), "main");
 
+        public static final ModelLayerLocation JITB_ZOMBIE_SERVANT_LAYER = new ModelLayerLocation(
+                        new ResourceLocation(GoetyAwaken.MODID, "jitb_zombie_servant"), "main");
+
         public static final ModelLayerLocation ICE_CREEPER_SERVANT_LAYER = new ModelLayerLocation(
                         new ResourceLocation(GoetyAwaken.MODID, "ice_creeper_servant"), "main");
+
+        public static final ModelLayerLocation POISONOUS_POTATO_CREEPER_SERVANT_LAYER = new ModelLayerLocation(
+                        new ResourceLocation(GoetyAwaken.MODID, "poisonous_potato_creeper_servant"), "main");
+
+        public static final ModelLayerLocation STATUE_CREEPER_LAYER = new ModelLayerLocation(
+                        new ResourceLocation(GoetyAwaken.MODID, "statue_creeper"), "main");
 
         public static final ModelLayerLocation ICE_CREEPER_LAYER = new ModelLayerLocation(
                         new ResourceLocation(GoetyAwaken.MODID, "ice_creeper"), "main");
@@ -113,6 +154,9 @@ public class ClientEventHandler {
         public static final ModelLayerLocation ROYALGUARD_LAYER = new ModelLayerLocation(
                         new ResourceLocation(GoetyAwaken.MODID, "royalguard"), "main");
 
+        public static final ModelLayerLocation TOWER_GUARD_LAYER = new ModelLayerLocation(
+                        new ResourceLocation(GoetyAwaken.MODID, "tower_guard"), "main");
+
         public static final ModelLayerLocation WIGHT_SERVANT_LAYER = new ModelLayerLocation(
                         new ResourceLocation(GoetyAwaken.MODID, "wight_servant"), "main");
 
@@ -133,6 +177,9 @@ public class ClientEventHandler {
 
         public static final ModelLayerLocation ENDER_KEEPER_SERVANT_LAYER = new ModelLayerLocation(
                         new ResourceLocation(GoetyAwaken.MODID, "ender_keeper_servant"), "main");
+
+        public static final ModelLayerLocation ENDER_KEEPER_SERVANT_SHADOW_LAYER = new ModelLayerLocation(
+                        new ResourceLocation(GoetyAwaken.MODID, "ender_keeper_servant_shadow"), "main");
 
         public static final ModelLayerLocation APOSTLE_SERVANT_LAYER = new ModelLayerLocation(
                         new ResourceLocation(GoetyAwaken.MODID, "apostle_servant"), "main");
@@ -164,6 +211,9 @@ public class ClientEventHandler {
         public static final ModelLayerLocation NAMELESS_ONE_SERVANT_LAYER = new ModelLayerLocation(
                         new ResourceLocation(GoetyAwaken.MODID, "nameless_one_servant"), "main");
 
+        public static final ModelLayerLocation NAMELESS_ONE_SHADOW_LAYER = new ModelLayerLocation(
+                        new ResourceLocation(GoetyAwaken.MODID, "nameless_one"), "shadow");
+
         public static final ModelLayerLocation MEDIUM_PAINTING = new ModelLayerLocation(
                         new ResourceLocation(GoetyAwaken.MODID, "medium_painting"), "main");
 
@@ -190,6 +240,9 @@ public class ClientEventHandler {
 
         public static final ModelLayerLocation ARCH_ILLUSIONER_SERVANT_LAYER = new ModelLayerLocation(
                         new ResourceLocation(GoetyAwaken.MODID, "arch_illusioner_servant"), "main");
+
+        public static final ModelLayerLocation ARCH_ILLUSIONER_SERVANT_SHADOW_LAYER = new ModelLayerLocation(
+                        new ResourceLocation(GoetyAwaken.MODID, "arch_illusioner_servant"), "shadow");
 
         public static final ModelLayerLocation SKULL_LORD_SERVANT_LAYER = new ModelLayerLocation(
                         new ResourceLocation(GoetyAwaken.MODID, "skull_lord_servant"), "main");
@@ -224,6 +277,36 @@ public class ClientEventHandler {
         public static final ModelLayerLocation TOWER_WITCH_SERVANT_LAYER = new ModelLayerLocation(
                         new ResourceLocation(GoetyAwaken.MODID, "tower_witch_servant"), "main");
 
+        public static final ModelLayerLocation GIANT_GHAST_LAYER = new ModelLayerLocation(
+                        new ResourceLocation(GoetyAwaken.MODID, "giant_ghast"), "main");
+
+        public static final ModelLayerLocation RAMPART_CAPTAIN_LAYER = new ModelLayerLocation(
+                        new ResourceLocation(GoetyAwaken.MODID, "rampart_captain"), "main");
+
+        public static final ModelLayerLocation HOSTILE_RAMPART_CAPTAIN_LAYER = new ModelLayerLocation(
+                        new ResourceLocation(GoetyAwaken.MODID, "hostile_rampart_captain"), "main");
+
+        public static final ModelLayerLocation RUBY_SORCERER_LAYER = new ModelLayerLocation(
+                        new ResourceLocation(GoetyAwaken.MODID, "ruby_sorcerer"), "main");
+
+        public static final ModelLayerLocation GIANT_GHAST_FIREBALL_LAYER = new ModelLayerLocation(
+                        new ResourceLocation(GoetyAwaken.MODID, "giant_ghast_fireball"), "main");
+
+        public static final ModelLayerLocation GIANT_HELL_BLAST_LAYER = new ModelLayerLocation(
+                        new ResourceLocation(GoetyAwaken.MODID, "giant_hell_blast"), "main");
+
+        public static final ModelLayerLocation HERESIARCH_SERVANT_LAYER = new ModelLayerLocation(
+                        new ResourceLocation(GoetyAwaken.MODID, "heresiarch_servant"), "main");
+
+        public static final ModelLayerLocation HERESIARCH_SERVANT_SHADOW_LAYER = new ModelLayerLocation(
+                        new ResourceLocation(GoetyAwaken.MODID, "heresiarch_servant"), "shadow");
+
+        public static final ModelLayerLocation BURNING_SHIELD_LAYER = new ModelLayerLocation(
+                        new ResourceLocation(GoetyAwaken.MODID, "burning_shield"), "main");
+
+        public static final ModelLayerLocation TOXIFIN_LAYER = new ModelLayerLocation(
+                        new ResourceLocation(GoetyAwaken.MODID, "toxifin"), "main");
+
         @SubscribeEvent
         public static void onRegisterLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
                 event.registerLayerDefinition(SMALL_PAINTING, OminousPaintingModel::createSmallFrameLayer);
@@ -234,7 +317,11 @@ public class ClientEventHandler {
                 event.registerLayerDefinition(PALE_GOLEM_LAYER, PaleGolemModel::createBodyLayer);
                 event.registerLayerDefinition(SILVERFISH_SERVANT_LAYER, SilverfishServantModel::createBodyLayer);
                 event.registerLayerDefinition(CREEPER_SERVANT_LAYER, CreeperServantModel::createBodyLayer);
+                event.registerLayerDefinition(JITB_ZOMBIE_SERVANT_LAYER, JITBZombieServantModel::createBodyLayer);
                 event.registerLayerDefinition(ICE_CREEPER_SERVANT_LAYER, IceCreeperServantModel::createBodyLayer);
+                event.registerLayerDefinition(POISONOUS_POTATO_CREEPER_SERVANT_LAYER,
+                                PoisonousPotatoCreeperServantModel::createBodyLayer);
+                event.registerLayerDefinition(STATUE_CREEPER_LAYER, StatueCreeperModel::createBodyLayer);
                 event.registerLayerDefinition(ICE_CREEPER_LAYER, IceCreeperModel::createBodyLayer);
                 event.registerLayerDefinition(ENDERMAN_SERVANT_LAYER, EndermanServantModel::createBodyLayer);
                 event.registerLayerDefinition(ENDERMITE_SERVANT_LAYER, EndermiteServantModel::createBodyLayer);
@@ -252,6 +339,7 @@ public class ClientEventHandler {
                 event.registerLayerDefinition(BLACKGUARD_LAYER, ZombieDarkguardModel::createBodyLayer);
                 event.registerLayerDefinition(VANGUARD_LAYER, SkeletonVanguardModel::createBodyLayer);
                 event.registerLayerDefinition(ROYALGUARD_LAYER, RoyalguardModel::createBodyLayer);
+                event.registerLayerDefinition(TOWER_GUARD_LAYER, TowerGuardModel::createBodyLayer);
                 event.registerLayerDefinition(WIGHT_SERVANT_LAYER, WightServantModel::createBodyLayer);
                 event.registerLayerDefinition(WRAITH_NECROMANCER_LAYER,
                                 com.k1sak1.goetyawaken.client.model.undead.necromancer.WraithNecromancerModel::createBodyLayer);
@@ -261,6 +349,8 @@ public class ClientEventHandler {
                 event.registerLayerDefinition(CAERBANNOG_RABBIT_SERVANT_LAYER,
                                 CaerbannogRabbitServantModel::createBodyLayer);
                 event.registerLayerDefinition(ENDER_KEEPER_SERVANT_LAYER, EnderKeeperServantModel::createBodyLayer);
+                event.registerLayerDefinition(ENDER_KEEPER_SERVANT_SHADOW_LAYER,
+                                EnderKeeperServantModel::createShadowLayer);
                 event.registerLayerDefinition(APOSTLE_SERVANT_LAYER, ApostleServantModel::createBodyLayer);
                 event.registerLayerDefinition(MONOLITH,
                                 com.k1sak1.goetyawaken.client.model.ObsidianMonolithServantModel::createBodyLayer);
@@ -278,10 +368,14 @@ public class ClientEventHandler {
                 event.registerLayerDefinition(HOSTILE_SNAPPER_LAYER, HostileSnapperModel::createBodyLayer);
                 event.registerLayerDefinition(ILLUSIONER_SERVANT_LAYER, IllusionerServantModel::createBodyLayer);
                 event.registerLayerDefinition(ARCH_ILLUSIONER_SERVANT_LAYER, IllusionerServantModel::createBodyLayer);
+                event.registerLayerDefinition(ARCH_ILLUSIONER_SERVANT_SHADOW_LAYER,
+                                IllusionerServantModel::createShadowLayer);
                 event.registerLayerDefinition(NAMELESS_ONE_LAYER,
                                 com.k1sak1.goetyawaken.client.model.undead.necromancer.NamelessOneModel::createBodyLayer);
                 event.registerLayerDefinition(NAMELESS_ONE_SERVANT_LAYER,
                                 com.k1sak1.goetyawaken.client.model.undead.necromancer.NamelessOneModel::createBodyLayer);
+                event.registerLayerDefinition(NAMELESS_ONE_SHADOW_LAYER,
+                                com.k1sak1.goetyawaken.client.model.undead.necromancer.NamelessOneModel::createShadowLayer);
                 event.registerLayerDefinition(SKULL_LORD_SERVANT_LAYER, SkullLordServantModel::createBodyLayer);
                 event.registerLayerDefinition(BOUND_SORCERER_LAYER,
                                 com.k1sak1.goetyawaken.client.model.undead.BoundSorcererModel::createBodyLayer);
@@ -297,10 +391,90 @@ public class ClientEventHandler {
                                 com.k1sak1.goetyawaken.client.model.illager.TowerWitchModel::createBodyLayer);
                 event.registerLayerDefinition(TOWER_WITCH_SERVANT_LAYER,
                                 com.k1sak1.goetyawaken.client.model.illager.TowerWitchModel::createBodyLayer);
+                event.registerLayerDefinition(GIANT_GHAST_LAYER, GiantGhastModel::createBodyLayer);
+                event.registerLayerDefinition(RAMPART_CAPTAIN_LAYER, RampartCaptainModel::createBodyLayer);
+                event.registerLayerDefinition(HOSTILE_RAMPART_CAPTAIN_LAYER, RampartCaptainModel::createBodyLayer);
+                event.registerLayerDefinition(RUBY_SORCERER_LAYER, SorcererModel::createBodyLayer);
+                event.registerLayerDefinition(GIANT_GHAST_FIREBALL_LAYER,
+                                com.Polarice3.Goety.client.render.model.HellBlastModel::createBodyLayer);
+                event.registerLayerDefinition(GIANT_HELL_BLAST_LAYER,
+                                com.Polarice3.Goety.client.render.model.HellBlastModel::createBodyLayer);
+                event.registerLayerDefinition(HERESIARCH_SERVANT_LAYER,
+                                com.k1sak1.goetyawaken.client.model.HeresiarchServantModel::createBodyLayer);
+                event.registerLayerDefinition(HERESIARCH_SERVANT_SHADOW_LAYER,
+                                com.k1sak1.goetyawaken.client.model.HeresiarchServantModel::createShadowLayer);
+                event.registerLayerDefinition(BURNING_SHIELD_LAYER, BurningShieldModel::createBodyLayer);
+                event.registerLayerDefinition(TOXIFIN_LAYER, ToxifinModel::createBodyLayer);
+
+                if (ModLoadedUtil.isModLoaded(ModLoadedUtil.MASQUERADER)) {
+                        event.registerLayerDefinition(
+                                        com.k1sak1.goetyawaken.client.model.ally.Integration.MasqueraderServantModel.LAYER_LOCATION,
+                                        com.k1sak1.goetyawaken.client.model.ally.Integration.MasqueraderServantModel::createBodyLayer);
+                }
+
+                if (ModLoadedUtil.isModLoaded(ModLoadedUtil.MEET_YOUR_FIGHT)) {
+                        event.registerLayerDefinition(SwampjawServantModel.MODEL,
+                                        SwampjawServantModel::createBodyLayer);
+                        event.registerLayerDefinition(SwampMineModel.MODEL, SwampMineModel::createBodyLayer);
+                        event.registerLayerDefinition(BellringerServantModel.MODEL,
+                                        () -> BellringerServantModel.createBodyLayer(
+                                                        new net.minecraft.client.model.geom.builders.CubeDeformation(
+                                                                        0)));
+                        event.registerLayerDefinition(RosalyneServantModel.MODEL,
+                                        () -> RosalyneServantModel.createBodyLayer(
+                                                        new net.minecraft.client.model.geom.builders.CubeDeformation(0),
+                                                        true));
+                        event.registerLayerDefinition(RosalyneServantModel.MODEL_ARMOR,
+                                        () -> RosalyneServantModel.createBodyLayer(
+                                                        new net.minecraft.client.model.geom.builders.CubeDeformation(2),
+                                                        false));
+                        event.registerLayerDefinition(RosalyneServantModel.MODEL_HEAD,
+                                        SkullModel::createHumanoidHeadLayer);
+                        event.registerLayerDefinition(RoseSpiritServantModel.MODEL,
+                                        RoseSpiritServantModel::createBodyLayer);
+                        event.registerLayerDefinition(DameFortunaServantModel.MODEL,
+                                        () -> DameFortunaServantModel.createBodyLayer(
+                                                        new net.minecraft.client.model.geom.builders.CubeDeformation(
+                                                                        0)));
+                        event.registerLayerDefinition(DameFortunaServantModel.MODEL_ARMOR,
+                                        () -> DameFortunaServantModel.createBodyLayer(
+                                                        new net.minecraft.client.model.geom.builders.CubeDeformation(
+                                                                        2)));
+                        event.registerLayerDefinition(DameFortunaServantModel.MODEL_HEAD,
+                                        SkullModel::createHumanoidHeadLayer);
+                        event.registerLayerDefinition(FortunaDameBombModel.MODEL,
+                                        FortunaDameBombModel::createBodyLayer);
+                        event.registerLayerDefinition(FortunaDameCardModel.MODEL,
+                                        FortunaDameCardModel::createBodyLayer);
+                }
+
+                if (ModLoadedUtil.isModLoaded(ModLoadedUtil.DEEPER_DARKER)) {
+                        event.registerLayerDefinition(SculkCentipedeServantRenderer.MODEL,
+                                        SculkCentipedeServantModel::createBodyModel);
+                        event.registerLayerDefinition(SculkLeechServantRenderer.MODEL,
+                                        SculkLeechServantModel::createBodyModel);
+                        event.registerLayerDefinition(ShatteredservantRenderer.MODEL,
+                                        ShatteredServantModel::createBodyModel);
+                        event.registerLayerDefinition(ShriekWormServantRenderer.MODEL,
+                                        ShriekWormServantModel::createBodyModel);
+                        event.registerLayerDefinition(SludgeServantRenderer.MODEL,
+                                        SludgeServantModel::createInnerBodyModel);
+                        event.registerLayerDefinition(SludgeServantOuterLayer.OUTER_MODEL,
+                                        SludgeServantModel::createOuterBodyModel);
+                        event.registerLayerDefinition(StalkerServantRenderer.MODEL,
+                                        StalkerServantModel::createBodyModel);
+                }
         }
+
+        private static boolean layersAdded = false;
 
         @SubscribeEvent
         public static void onAddLayers(EntityRenderersEvent.AddLayers event) {
+                if (layersAdded) {
+                        return;
+                }
+                layersAdded = true;
+
                 event.getSkins().forEach(skin -> {
                         if (event.getSkin(skin) != null) {
                                 event.getSkin(skin).addLayer(new AncientGlintLayer(event.getSkin(skin)));

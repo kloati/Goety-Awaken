@@ -2,14 +2,13 @@ package com.k1sak1.goetyawaken.common.entities.ally.illager;
 
 import com.Polarice3.Goety.common.entities.ally.illager.SpellcasterIllagerServant;
 import com.k1sak1.goetyawaken.common.entities.ally.undead.BoundSorcerer;
-
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.monster.AbstractIllager;
+import net.minecraft.world.entity.raid.Raider;
 import net.minecraft.world.level.Level;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
@@ -30,32 +29,43 @@ import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.BannerItem;
 import net.minecraft.world.entity.EquipmentSlot;
-import oshi.util.tuples.Pair;
+import net.minecraft.world.item.trading.Merchant;
+import net.minecraft.world.item.trading.MerchantOffer;
+import net.minecraft.world.item.trading.MerchantOffers;
 import com.Polarice3.Goety.common.magic.Spell;
 import com.Polarice3.Goety.common.magic.SpellStat;
-import com.Polarice3.Goety.common.magic.spells.*;
-import com.Polarice3.Goety.common.magic.spells.abyss.*;
-import com.Polarice3.Goety.common.magic.spells.frost.*;
-import com.Polarice3.Goety.common.magic.spells.geomancy.*;
-import com.Polarice3.Goety.common.magic.spells.necromancy.*;
-import com.Polarice3.Goety.common.magic.spells.nether.*;
-import com.Polarice3.Goety.common.magic.spells.storm.*;
-import com.Polarice3.Goety.common.magic.spells.wild.*;
-import com.Polarice3.Goety.common.magic.spells.wind.*;
-import com.Polarice3.Goety.common.items.ModItems;
+import com.Polarice3.Goety.common.magic.SummonSpell;
+import com.Polarice3.Goety.api.magic.IChargingSpell;
+import com.Polarice3.Goety.api.magic.IBreathingSpell;
+import com.Polarice3.Goety.common.effects.GoetyEffects;
+import com.Polarice3.Goety.utils.WandUtil;
+import com.k1sak1.goetyawaken.common.magic.sorcerer.SorcererSpellCaster;
+import com.k1sak1.goetyawaken.common.magic.sorcerer.SorcererSpellConfig;
+import com.k1sak1.goetyawaken.common.magic.sorcerer.SorcererSpellEntry;
+import com.k1sak1.goetyawaken.common.magic.sorcerer.SorcererSpellData;
+import com.k1sak1.goetyawaken.common.entities.ai.SorcererCastingGoal;
+import com.k1sak1.goetyawaken.common.entities.ai.SorcererSpellAttackGoal;
+import com.k1sak1.goetyawaken.Config;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.stats.Stats;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.EnumSet;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import com.Polarice3.Goety.common.entities.projectiles.FlyingItem;
 import com.Polarice3.Goety.common.entities.ModEntityType;
 import net.minecraft.core.particles.ParticleTypes;
+import com.k1sak1.goetyawaken.common.upgrades.SpecialServantHandlers;
 
-public class SorcererServant extends SpellcasterIllagerServant {
+public class SorcererServant extends SpellcasterIllagerServant implements Merchant, SorcererSpellCaster {
     protected static final EntityDataAccessor<Byte> IS_CASTING_SPELL = SynchedEntityData.defineId(SorcererServant.class,
             EntityDataSerializers.BYTE);
     protected static final EntityDataAccessor<Boolean> CHARGING = SynchedEntityData.defineId(SorcererServant.class,
@@ -64,40 +74,85 @@ public class SorcererServant extends SpellcasterIllagerServant {
             EntityDataSerializers.BOOLEAN);
     protected static final EntityDataAccessor<Integer> LEVEL = SynchedEntityData.defineId(SorcererServant.class,
             EntityDataSerializers.INT);
+    protected static final EntityDataAccessor<String> CURRENT_SPELL_NAME = SynchedEntityData.defineId(
+            SorcererServant.class,
+            EntityDataSerializers.STRING);
     protected int castingTime;
-    protected int[] spellCoolDown = new int[SorcererSpell.values().length + 1];
-    protected int[] spellWeights = new int[SorcererSpell.values().length + 1];
+    private List<SorcererSpellEntry> spellEntries = List.of();
+    private Map<String, Integer> focusNameToIndex = Map.of();
+    private int[] spellCoolDown = new int[0];
+    private int[] spellWeights = new int[0];
+    private SorcererSpellEntry currentSpell;
+    private boolean needsSpellReload = true;
+    private static final int MAX_WEIGHT = 1000;
+    private static final int WEIGHT_RECOVERY = 20;
     protected static final EntityDataAccessor<Boolean> IS_TRADING = SynchedEntityData.defineId(SorcererServant.class,
             EntityDataSerializers.BOOLEAN);
+    public SorcererSpellData spellData = new SorcererSpellData();
+
+    public SorcererSpellData getSpellData() {
+        return spellData;
+    }
+
+    public Mob self() {
+        return this;
+    }
+
+    public void setCurrentSpellName(String name) {
+        this.entityData.set(CURRENT_SPELL_NAME, name);
+    }
+
     private boolean isCurrentlyTrading = false;
     private int moneyAmount = 0;
     private int tradingProgress = 0;
     private int tradingDelay = 0;
     private java.util.List<net.minecraft.world.item.ItemStack> tradeItems = new java.util.ArrayList<>();
 
+    @Nullable
+    private Player tradingPlayer;
+    private MerchantOffers offers = new MerchantOffers();
+    private int villagerXp = 0;
+    private int savedLevel = -1;
+
+    private long lastRestockGameTime = 0;
+    private int numberOfRestocksToday = 0;
+    private long lastRestockCheckDayTime = 0;
+
     public int coolDown = 0;
+    public int castTimeCounter;
     public boolean hasSpawned;
     public static int MIN_LEVEL = 1;
     public static int MAX_LEVEL = 6;
-    private SorcererSpell currentSpell = SorcererSpell.FLAMES;
 
     public SorcererServant(EntityType<? extends SorcererServant> type, Level worldIn) {
         super(type, worldIn);
-        for (int i = 0; i < this.spellWeights.length; i++) {
-            this.spellWeights[i] = 20;
-        }
     }
 
     public boolean shouldReduceCastTime() {
         return this.getSorcererLevel() >= 6;
     }
 
+    private void reloadSpellData() {
+        List<SorcererSpellEntry> entries = SorcererSpellConfig.getSpellEntries();
+        this.spellEntries = entries;
+        Map<String, Integer> indexMap = new HashMap<>();
+        int[] cooldowns = new int[entries.size()];
+        int[] weights = new int[entries.size()];
+        for (int i = 0; i < entries.size(); i++) {
+            indexMap.put(entries.get(i).getFocusRegistryName(), i);
+            weights[i] = entries.get(i).getWeight();
+        }
+        this.focusNameToIndex = indexMap;
+        this.spellCoolDown = cooldowns;
+        this.spellWeights = weights;
+    }
+
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(1, new SorcererTradeGoal(this));
-        this.goalSelector.addGoal(2, new CastingSpellGoal());
-        this.goalSelector.addGoal(3, new SpellGoal());
+        // this.goalSelector.addGoal(1, new SorcererTradeGoal(this));
+        this.goalSelector.addGoal(2, new SorcererSpellAttackGoal(this, this));
+        this.goalSelector.addGoal(3, new SorcererCastingGoal(this, this));
         this.goalSelector.addGoal(4, new com.Polarice3.Goety.common.entities.ai.SurroundGoal<>(this, 1.0F, 8.0F));
     }
 
@@ -108,6 +163,7 @@ public class SorcererServant extends SpellcasterIllagerServant {
         this.entityData.define(CHARGING, false);
         this.entityData.define(SHOOT, false);
         this.entityData.define(LEVEL, 1);
+        this.entityData.define(CURRENT_SPELL_NAME, "");
         this.entityData.define(IS_TRADING, false);
     }
 
@@ -126,14 +182,35 @@ public class SorcererServant extends SpellcasterIllagerServant {
     }
 
     public boolean isCastingSpell() {
-        return false;
+        return isCastingSpell2();
+    }
+
+    @Override
+    public boolean isUsingItem() {
+        return isCastingSpell2() && !spellData.virtualWand.isEmpty();
+    }
+
+    @Override
+    public ItemStack getUseItem() {
+        if (isCastingSpell2() && !spellData.virtualWand.isEmpty()) {
+            return spellData.virtualWand;
+        }
+        return ItemStack.EMPTY;
+    }
+
+    @Override
+    public int getUseItemRemainingTicks() {
+        if (isCastingSpell2()) {
+            return Math.max(0, spellData.spellUseTimeRemaining);
+        }
+        return 0;
     }
 
     public boolean isCastingSpell2() {
         if (this.level().isClientSide) {
             return this.entityData.get(IS_CASTING_SPELL) > 0;
         } else {
-            return this.castingTime > 0;
+            return spellData.castingTime > 0;
         }
     }
 
@@ -155,6 +232,10 @@ public class SorcererServant extends SpellcasterIllagerServant {
 
     public void setShoot(boolean shoot) {
         this.entityData.set(SHOOT, shoot);
+    }
+
+    public String getCurrentSpellName() {
+        return this.entityData.get(CURRENT_SPELL_NAME);
     }
 
     public boolean isCurrentlyTrading() {
@@ -240,9 +321,7 @@ public class SorcererServant extends SpellcasterIllagerServant {
     @Override
     protected void customServerAiStep() {
         super.customServerAiStep();
-        if (this.castingTime > 0) {
-            --this.castingTime;
-        }
+        spellData.decrementCastingTime();
     }
 
     @Override
@@ -252,75 +331,17 @@ public class SorcererServant extends SpellcasterIllagerServant {
             this.hasSpawned = true;
         }
         if (!this.level().isClientSide) {
-            for (SorcererSpell spell : SorcererSpell.values()) {
-                if (this.spellCoolDown[spell.trueId] > 0) {
-                    --this.spellCoolDown[spell.trueId];
-                }
-            }
-            if (this.coolDown > 0) {
-                --this.coolDown;
-            }
-
-            if (this.tickCount % 20 == 0) {
-                for (int i = 0; i < this.spellWeights.length; i++) {
-                    this.spellWeights[i] = Math.min(this.spellWeights[i] + 20, 1000);
-                }
-            }
-            if (this.tickCount % 20 == 0) {
-                this.updateHealSpellWeights();
-                this.updateRepelSpellWeights();
-            }
+            spellData.serverTick(this);
         }
     }
 
     @Override
     public boolean hurt(DamageSource pSource, float pAmount) {
-        boolean result = super.hurt(pSource, pAmount);
-        if (result) {
-            for (SorcererSpell spell : SorcererSpell.values()) {
-                if (spell == SorcererSpell.IRON_HIDE || spell == SorcererSpell.BULWARK
-                        || spell == SorcererSpell.CHILL_HIDE) {
-                    this.spellWeights[spell.trueId] = Math.min(this.spellWeights[spell.trueId] + 40, 1000);
-                }
-            }
-        }
-        return result;
-    }
-
-    public void updateHealSpellWeights() {
-        float healthRatio = this.getMaxHealth() > 0 ? this.getHealth() / this.getMaxHealth() : 0;
-        float lostHealthPercent = (1.0f - healthRatio) * 100;
-        int healWeightIncrease = (int) (2 * lostHealthPercent);
-
-        for (SorcererSpell spell : SorcererSpell.values()) {
-            if (spell == SorcererSpell.HEAL || spell == SorcererSpell.HEAL2) {
-                this.spellWeights[spell.trueId] = Math.min(this.spellWeights[spell.trueId] + healWeightIncrease, 1000);
-            }
-        }
-    }
-
-    public void updateRepelSpellWeights() {
-        LivingEntity target = this.getTarget();
-        if (target != null) {
-            double distance = this.distanceTo(target);
-            if (distance < 8.0) {
-                for (SorcererSpell spell : SorcererSpell.values()) {
-                    if (spell == SorcererSpell.ICE_STORM || spell == SorcererSpell.TIDAL
-                            || spell == SorcererSpell.FROST_NOVA ||
-                            spell == SorcererSpell.DISCHARGE || spell == SorcererSpell.WIND_HORN) {
-                        this.spellWeights[spell.trueId] = Math.min(this.spellWeights[spell.trueId] + 10, 1000);
-                    }
-                }
-            }
-        }
-    }
-
-    public void resetSpellWeight(SorcererSpell spell) {
-        this.spellWeights[spell.trueId] = 20;
+        return super.hurt(pSource, pAmount);
     }
 
     protected int getSpellCastingTime() {
-        return this.castingTime;
+        return spellData.castingTime;
     }
 
     @Override
@@ -342,14 +363,32 @@ public class SorcererServant extends SpellcasterIllagerServant {
             boolean heal = !compound.getBoolean("HasSpawned");
             this.setSorcererLevel(compound.getInt("Level"), heal);
         }
-        this.castingTime = compound.getInt("SorcererSpellTicks");
+        spellData.castingTime = compound.getInt("SorcererSpellTicks");
+        if (compound.contains("Offers", 10)) {
+            this.offers = new MerchantOffers(compound.getCompound("Offers"));
+        }
+        this.villagerXp = compound.getInt("SorcererXp");
+        this.savedLevel = compound.getInt("SavedLevel");
+
+        this.lastRestockGameTime = compound.getLong("LastRestockGameTime");
+        this.numberOfRestocksToday = compound.getInt("NumberOfRestocksToday");
+        this.lastRestockCheckDayTime = compound.getLong("LastRestockCheckDayTime");
     }
 
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
         compound.putInt("SorcererLevel", this.getSorcererLevel());
-        compound.putInt("SorcererSpellTicks", this.castingTime);
+        compound.putInt("SorcererSpellTicks", spellData.castingTime);
         compound.putBoolean("HasSpawned", this.hasSpawned);
+        if (!this.offers.isEmpty()) {
+            compound.put("Offers", this.offers.createTag());
+        }
+        compound.putInt("SorcererXp", this.villagerXp);
+        compound.putInt("SavedLevel", this.savedLevel);
+
+        compound.putLong("LastRestockGameTime", this.lastRestockGameTime);
+        compound.putInt("NumberOfRestocksToday", this.numberOfRestocksToday);
+        compound.putLong("LastRestockCheckDayTime", this.lastRestockCheckDayTime);
     }
 
     @Override
@@ -368,6 +407,7 @@ public class SorcererServant extends SpellcasterIllagerServant {
 
     public void setSorcererLevel(int level, boolean heal) {
         int i = net.minecraft.util.Mth.clamp(level, 1, 6);
+        int oldLevel = this.entityData.get(LEVEL);
         this.entityData.set(LEVEL, i);
         if (com.Polarice3.Goety.config.MobsConfig.SorcererHPIncrease.get()) {
             net.minecraft.world.entity.ai.attributes.AttributeInstance health = this
@@ -382,6 +422,9 @@ public class SorcererServant extends SpellcasterIllagerServant {
         }
 
         this.xpReward = i * 8;
+        if (oldLevel != i && !this.level().isClientSide && this.savedLevel != i) {
+            this.generateOffers();
+        }
     }
 
     @Nullable
@@ -463,7 +506,15 @@ public class SorcererServant extends SpellcasterIllagerServant {
 
         public void stop() {
             super.stop();
+            if (SorcererServant.this.currentSpell != null) {
+                Spell sp = SorcererServant.this.currentSpell.getSpell();
+                sp.stopSpell((ServerLevel) SorcererServant.this.level(), SorcererServant.this,
+                        SorcererServant.this.currentSpell.resolveUpgradeStaff(SorcererServant.this.getSorcererLevel()),
+                        SorcererServant.this.currentSpell.getFocusStack(), SorcererServant.this.castTimeCounter,
+                        WandUtil.getStats(SorcererServant.this, sp));
+            }
             SorcererServant.this.setIsCastingSpell(0);
+            SorcererServant.this.entityData.set(CURRENT_SPELL_NAME, "");
             SorcererServant.this.level().broadcastEntityEvent(SorcererServant.this, (byte) 5);
             SorcererServant.this.level().broadcastEntityEvent(SorcererServant.this, (byte) 7);
             SorcererServant.this.coolDown = 20;
@@ -499,25 +550,39 @@ public class SorcererServant extends SpellcasterIllagerServant {
 
         public boolean canContinueToUse() {
             LivingEntity livingentity = SorcererServant.this.getTarget();
-            return livingentity != null && livingentity.isAlive() && this.attackWarmupDelay > 0;
+            return livingentity != null && livingentity.isAlive()
+                    && (this.attackWarmupDelay > 0 || SorcererServant.this.isCastingSpell2());
         }
 
         public void start() {
             this.attackWarmupDelay = this.adjustedTickDelay(this.getCastWarmupTime());
             SorcererServant.this.castingTime = this.getAdjustedCastingTime();
-            SorcererServant.this.spellCoolDown[this.getSpell().trueId] = this.getCastingInterval();
+            Integer idx = SorcererServant.this.focusNameToIndex.get(this.getSpell().getFocusRegistryName());
+            if (idx != null) {
+                SorcererServant.this.spellCoolDown[idx] = this.getCastingInterval();
+            }
             this.nextAttackTickCount = SorcererServant.this.tickCount + this.getCastingInterval();
             SoundEvent soundevent = this.getSpellPrepareSound();
             if (soundevent != null) {
                 SorcererServant.this.playSound(soundevent, 1.0F, 1.0F);
             }
-            SorcererServant.this.setIsCastingSpell(this.getSpell().trueId);
+            SorcererServant.this.setIsCastingSpell(1);
             SorcererServant.this.currentSpell = this.getSpell();
+            Spell spell = this.getSpell().getSpell();
+            SpellStat spellStat = WandUtil.getStats(SorcererServant.this, spell);
+            if (this.getSpell().isLevelIncrease()) {
+                spellStat.setPotency(SorcererServant.this.getSorcererLevel() - this.getSpell().getMinLevel());
+            }
+            spell.startSpell((ServerLevel) SorcererServant.this.level(), SorcererServant.this,
+                    this.getSpell().resolveUpgradeStaff(SorcererServant.this.getSorcererLevel()), spellStat);
+            SorcererServant.this.castTimeCounter = 0;
+            SorcererServant.this.entityData.set(CURRENT_SPELL_NAME, this.getSpell().getFocusRegistryName());
         }
 
         public void stop() {
             super.stop();
             SorcererServant.this.setIsCastingSpell(0);
+            SorcererServant.this.entityData.set(CURRENT_SPELL_NAME, "");
         }
 
         public void tick() {
@@ -553,277 +618,208 @@ public class SorcererServant extends SpellcasterIllagerServant {
         @Nullable
         protected abstract SoundEvent getSpellPrepareSound();
 
-        protected abstract SorcererSpell getSpell();
+        protected abstract SorcererSpellEntry getSpell();
     }
 
     class SpellGoal extends SorcererUseSpellGoal {
-        public SorcererSpell spell;
+        public SorcererSpellEntry spellEntry;
         public int chargeTicks;
+        public int shotCooldown;
+        public boolean spellStopped;
 
         @Override
         public boolean canUse() {
-            List<SorcererSpell> spells = new ArrayList<>();
+            List<SorcererSpellEntry> entries = spellEntries;
+            if (entries == null || entries.isEmpty())
+                return false;
+
+            List<SorcererSpellEntry> spells = new ArrayList<>();
             List<Integer> weights = new ArrayList<>();
             int totalWeight = 0;
+            int level = getSorcererLevel();
 
-            for (SorcererSpell spell1 : SorcererSpell.values()) {
-                if (SorcererServant.this.getSorcererLevel() >= spell1.minLevel
-                        && SorcererServant.this.getSorcererLevel() <= spell1.maxLevel) {
-                    if (spell1.getSpell().conditionsMet(SorcererServant.this.level(), SorcererServant.this)) {
-                        if (SorcererServant.this.spellCoolDown[spell1.trueId] <= 0) {
-                            if (spell1.getSpell() instanceof com.Polarice3.Goety.common.magic.SummonSpell
-                                    && !SorcererServant.this.hasEffect(
-                                            com.Polarice3.Goety.common.effects.GoetyEffects.SUMMON_DOWN.get())) {
-                                spells.add(spell1);
-                                int weight = SorcererServant.this.spellWeights[spell1.trueId];
-                                weights.add(weight);
-                                totalWeight += weight;
-                            } else if (!(spell1.getSpell() instanceof com.Polarice3.Goety.common.magic.SummonSpell)) {
-                                spells.add(spell1);
-                                int weight = SorcererServant.this.spellWeights[spell1.trueId];
-                                weights.add(weight);
-                                totalWeight += weight;
-                            }
-                        }
-                    }
-                }
+            for (int i = 0; i < entries.size(); i++) {
+                SorcererSpellEntry entry = entries.get(i);
+                if (level < entry.getMinLevel() || level > entry.getMaxLevel())
+                    continue;
+                Spell spell = entry.getSpell();
+                if (spell == null)
+                    continue;
+                if (!spell.conditionsMet(SorcererServant.this.level(), SorcererServant.this))
+                    continue;
+                if (spellCoolDown[i] > 0)
+                    continue;
+                if (spell instanceof SummonSpell
+                        && SorcererServant.this.hasEffect(GoetyEffects.SUMMON_DOWN.get()))
+                    continue;
+                spells.add(entry);
+                weights.add(spellWeights[i]);
+                totalWeight += spellWeights[i];
             }
 
             if (!spells.isEmpty() && totalWeight > 0) {
                 int randomValue = SorcererServant.this.random.nextInt(totalWeight);
                 int currentWeight = 0;
-
                 for (int i = 0; i < spells.size(); i++) {
                     currentWeight += weights.get(i);
                     if (randomValue < currentWeight) {
-                        this.spell = spells.get(i);
+                        this.spellEntry = spells.get(i);
                         break;
                     }
                 }
             } else {
-                this.spell = null;
+                this.spellEntry = null;
             }
 
-            if (this.spell != null && this.spell.getSpell() instanceof com.Polarice3.Goety.api.magic.IChargingSpell) {
+            if (this.spellEntry != null && this.spellEntry.getSpell() instanceof IChargingSpell) {
                 this.chargeTicks = 20;
+                this.shotCooldown = 0;
             }
-            return this.spell != null && super.canUse();
+            this.spellStopped = false;
+            return this.spellEntry != null && super.canUse();
         }
 
         public void tick() {
             super.tick();
-            if (this.spell.getSpell() instanceof com.Polarice3.Goety.api.magic.IChargingSpell) {
-                if (!this.spell.getSpell().conditionsMet(SorcererServant.this.level(), SorcererServant.this)) {
-                    this.cancelSpell();
+            if (spellEntry != null && !SorcererSpellCaster.isSpellStillValid(spellEntry)) {
+                cancelSpell();
+                return;
+            }
+            SorcererServant.this.castTimeCounter++;
+            Spell spell = spellEntry.getSpell();
+            SpellStat spellStat = WandUtil.getStats(SorcererServant.this, spell);
+            if (spellEntry.isLevelIncrease()) {
+                spellStat.setPotency(SorcererServant.this.getSorcererLevel() - spellEntry.getMinLevel());
+            }
+            spell.useSpell((ServerLevel) SorcererServant.this.level(), SorcererServant.this,
+                    spellEntry.resolveUpgradeStaff(SorcererServant.this.getSorcererLevel()),
+                    SorcererServant.this.castTimeCounter, spellStat);
+            if (spell instanceof IChargingSpell chargingSpell) {
+                if (!spell.conditionsMet(SorcererServant.this.level(), SorcererServant.this)) {
+                    cancelSpell();
+                    return;
                 }
                 --this.chargeTicks;
-                if (this.chargeTicks <= 0) {
-                    com.Polarice3.Goety.common.magic.Spell spell1 = this.spell.getSpell();
-                    com.Polarice3.Goety.common.magic.SpellStat spellStat = com.Polarice3.Goety.utils.WandUtil
-                            .getStats(SorcererServant.this, spell1);
-                    if (this.spell.levelIncrease) {
-                        spellStat.setPotency(SorcererServant.this.getSorcererLevel() - this.spell.minLevel);
-                    }
-                    spell1.mobSpellResult(SorcererServant.this,
-                            SorcererServant.this.getSorcererLevel() >= this.spell.upgradeStaff.getB()
-                                    ? this.spell.upgradeStaff.getA()
-                                    : ItemStack.EMPTY,
-                            spellStat);
-                    if (this.spell.getSpell() instanceof com.Polarice3.Goety.api.magic.IBreathingSpell breathingSpell) {
-                        if (SorcererServant.this.getTarget() != null) {
-                            com.Polarice3.Goety.utils.MobUtil.instaLook(SorcererServant.this,
-                                    SorcererServant.this.getTarget());
+                if (this.shotCooldown > 0) {
+                    --this.shotCooldown;
+                }
+                if (this.chargeTicks <= 0 && this.shotCooldown <= 0) {
+                    if (spell.conditionsMet(SorcererServant.this.level(), SorcererServant.this)) {
+                        SpellStat chargeStat = WandUtil.getStats(SorcererServant.this, spell);
+                        if (spellEntry.isLevelIncrease()) {
+                            chargeStat.setPotency(getSorcererLevel() - spellEntry.getMinLevel());
                         }
-                        breathingSpell.showWandBreath(SorcererServant.this,
-                                com.Polarice3.Goety.utils.WandUtil.getStats(SorcererServant.this, breathingSpell));
+                        SorcererSpellCaster.castSpell(SorcererServant.this, spellEntry, chargeStat);
+                        if (spell instanceof IBreathingSpell breathingSpell) {
+                            if (getTarget() != null)
+                                MobUtil.instaLook(SorcererServant.this, getTarget());
+                            breathingSpell.showWandBreath(SorcererServant.this,
+                                    WandUtil.getStats(SorcererServant.this, breathingSpell));
+                        }
+                        Integer idx = focusNameToIndex.get(spellEntry.getFocusRegistryName());
+                        if (idx != null)
+                            spellWeights[idx] = spellEntry.getWeight();
+                        this.shotCooldown = chargingSpell.Cooldown();
+                        if (chargingSpell.everCharge()) {
+                            this.chargeTicks = chargingSpell.shotsNumber(SorcererServant.this, ItemStack.EMPTY);
+                            if (this.chargeTicks <= 0)
+                                this.chargeTicks = 10;
+                        }
+                    } else {
+                        cancelSpell();
+                        return;
                     }
-                    SorcererServant.this.resetSpellWeight(this.spell);
                 }
-                SorcererServant.this.level().broadcastEntityEvent(SorcererServant.this, (byte) 4);
-            } else {
-                SorcererServant.this.level().broadcastEntityEvent(SorcererServant.this, (byte) 5);
-                if (this.spell.throwingSpell()) {
-                    SorcererServant.this.level().broadcastEntityEvent(SorcererServant.this, (byte) 6);
-                } else {
-                    SorcererServant.this.level().broadcastEntityEvent(SorcererServant.this, (byte) 7);
-                }
+                level().broadcastEntityEvent(SorcererServant.this, (byte) 4);
             }
-            this.spell.getSpell().useParticle(SorcererServant.this.level(), SorcererServant.this, ItemStack.EMPTY);
+            spell.useParticle(SorcererServant.this.level(), SorcererServant.this, ItemStack.EMPTY);
         }
 
         public void cancelSpell() {
+            if (spellEntry != null && !spellStopped) {
+                Spell spell = spellEntry.getSpell();
+                spell.stopSpell((ServerLevel) SorcererServant.this.level(), SorcererServant.this,
+                        spellEntry.resolveUpgradeStaff(SorcererServant.this.getSorcererLevel()),
+                        spellEntry.getFocusStack(), SorcererServant.this.castTimeCounter,
+                        WandUtil.getStats(SorcererServant.this, spell));
+                spellStopped = true;
+                SorcererServant.this.currentSpell = null;
+            }
             this.attackWarmupDelay = 0;
             SorcererServant.this.castingTime = 0;
-            SorcererServant.this.setIsCastingSpell(0);
-            SorcererServant.this.level().broadcastEntityEvent(SorcererServant.this, (byte) 5);
-            SorcererServant.this.level().broadcastEntityEvent(SorcererServant.this, (byte) 7);
+            setIsCastingSpell(0);
+            SorcererServant.this.entityData.set(CURRENT_SPELL_NAME, "");
+            level().broadcastEntityEvent(SorcererServant.this, (byte) 5);
             SorcererServant.this.coolDown = 20;
         }
 
         @Override
         protected void performSpellCasting() {
-            if (SorcererServant.this.getTarget() != null) {
-                Spell spell1 = this.spell.getSpell();
-                SpellStat spellStat = com.Polarice3.Goety.utils.WandUtil.getStats(SorcererServant.this, spell1);
-                if (this.spell.levelIncrease) {
-                    spellStat.setPotency(
-                            spellStat.getPotency() + (SorcererServant.this.getSorcererLevel() - this.spell.minLevel));
+            if (spellEntry.getSpell() instanceof IChargingSpell)
+                return;
+            if (getTarget() != null) {
+                Spell spell = spellEntry.getSpell();
+                SpellStat spellStat = WandUtil.getStats(SorcererServant.this, spell);
+                if (spellEntry.isLevelIncrease()) {
+                    spellStat.setPotency(spellStat.getPotency() + (getSorcererLevel() - spellEntry.getMinLevel()));
                 }
-                if (this.spell.throwingSpell()) {
-                    SorcererServant.this.level().broadcastEntityEvent(SorcererServant.this, (byte) 6);
-                } else {
-                    SorcererServant.this.level().broadcastEntityEvent(SorcererServant.this, (byte) 7);
-                }
-                spell1.mobSpellResult(SorcererServant.this,
-                        SorcererServant.this.getSorcererLevel() >= this.spell.upgradeStaff.getB()
-                                ? this.spell.upgradeStaff.getA()
-                                : ItemStack.EMPTY,
-                        spellStat);
-                SorcererServant.this.resetSpellWeight(this.spell);
+                SorcererSpellCaster.castSpell(SorcererServant.this, spellEntry, spellStat);
+                Integer idx = focusNameToIndex.get(spellEntry.getFocusRegistryName());
+                if (idx != null)
+                    spellWeights[idx] = spellEntry.getWeight();
             }
         }
 
         @Override
         protected int getCastWarmupTime() {
-            if (this.spell.getSpell() instanceof com.Polarice3.Goety.api.magic.IChargingSpell chargingSpell) {
-                int warmupTime = chargingSpell.shotsNumber(SorcererServant.this, ItemStack.EMPTY);
-                if (SorcererServant.this.shouldReduceCastTime()) {
-                    warmupTime = warmupTime / 2;
-                }
-                return warmupTime;
+            Spell spell = spellEntry.getSpell();
+            int warmupTime;
+            if (spell instanceof IChargingSpell chargingSpell) {
+                warmupTime = chargingSpell.castUp(SorcererServant.this, ItemStack.EMPTY);
+            } else {
+                warmupTime = Math.max(1, spell.defaultCastDuration());
             }
-            int warmupTime = this.spell.getSpell().defaultCastDuration() + 5;
-            if (SorcererServant.this.shouldReduceCastTime()) {
+            if (shouldReduceCastTime())
                 warmupTime = warmupTime / 2;
-            }
-            return warmupTime;
+            return Math.max(1, warmupTime);
         }
 
         @Override
         protected int getCastingTime() {
-            if (this.spell.getSpell() instanceof com.Polarice3.Goety.api.magic.IChargingSpell chargingSpell) {
-                return chargingSpell.shotsNumber(SorcererServant.this, ItemStack.EMPTY);
+            Spell spell = spellEntry.getSpell();
+            if (spell instanceof IChargingSpell chargingSpell) {
+                if (chargingSpell.everCharge()) {
+                    int shots = chargingSpell.shotsNumber(SorcererServant.this, ItemStack.EMPTY);
+                    if (shots <= 0)
+                        shots = 200;
+                    return Math.min(shots * 4, 200);
+                } else {
+                    return Math.min(
+                            chargingSpell.Cooldown() * 5 + chargingSpell.castUp(SorcererServant.this, ItemStack.EMPTY),
+                            100);
+                }
             }
-            int castingTime = this.spell.getSpell().defaultCastDuration() + 5;
-            return castingTime;
+            return Math.max(1, spell.defaultCastDuration());
         }
 
         @Override
         protected int getCastingInterval() {
-            if (this.spell.getSpell() instanceof com.Polarice3.Goety.api.magic.IChargingSpell chargingSpell) {
-                int interval = chargingSpell.defaultSpellCooldown() * 2;
-                return interval;
+            Spell spell = spellEntry.getSpell();
+            if (spell instanceof IChargingSpell chargingSpell) {
+                return chargingSpell.defaultSpellCooldown() * 2;
             }
-            int interval = this.spell.getSpell().defaultSpellCooldown();
-            return interval;
+            return spell.defaultSpellCooldown();
         }
 
         @Nullable
         @Override
         protected SoundEvent getSpellPrepareSound() {
-            return this.spell.getSpell().CastingSound(SorcererServant.this);
+            return spellEntry.getSpell().CastingSound(SorcererServant.this);
         }
 
         @Override
-        protected SorcererSpell getSpell() {
-            return this.spell;
-        }
-    }
-
-    protected enum SorcererSpell {
-        FLAMES(new FireBreathSpell(), nextID(), 1, 3),
-        IRON_HIDE(new IronHideSpell(), nextID(), 1, 6, true),
-        SUMMON_HOUND(new HuntingSpell(), nextID(), 1, 1),
-        HEAL(new SoulHealSpell(), nextID(), 1, 6, true),
-        HEAL2(new SoulHealSpell(), nextID(), 6, 6, true),
-        FROST(new FrostBreathSpell(), nextID(), 2, 3),
-        SUMMON_BEAR(new MaulingSpell(), nextID(), 2, 6, true,
-                new Pair<ItemStack, Integer>(new ItemStack(ModItems.WILD_STAFF.get()), 6)),
-        FANGS(new FangSpell(), nextID(), 2, 6, true,
-                new Pair<ItemStack, Integer>(new ItemStack(ModItems.OMINOUS_STAFF.get()), 6)),
-        SUMMON_ICE_GOLEM(new IceGolemSpell(), nextID(), 3, 6, true,
-                new Pair<ItemStack, Integer>(new ItemStack(ModItems.FROST_STAFF.get()), 6)),
-        ICE_SPIKE(new IceSpikeSpell(), nextID(), 3, 6, true,
-                new Pair<ItemStack, Integer>(new ItemStack(ModItems.FROST_STAFF.get()), 6)),
-        THUNDERBOLT(new ThunderboltSpell(), nextID(), 3, 6, true,
-                new Pair<>(new ItemStack(ModItems.STORM_STAFF.get()), 4)),
-        SCATTER(new ScatterSpell(), nextID(), 3, 5, true),
-        ICE_STORM(new IceStormSpell(), nextID(), 4, 6, true,
-                new Pair<ItemStack, Integer>(new ItemStack(ModItems.FROST_STAFF.get()), 6)),
-        BULWARK(new BulwarkSpell(), nextID(), 4, 6, true),
-        ELECTRO(new ElectroOrbSpell(), nextID(), 4, 6, true,
-                new Pair<ItemStack, Integer>(new ItemStack(ModItems.STORM_STAFF.get()), 6)),
-        BOUNCY_BUBBLE(new BouncyBubbleSpell(), nextID(), 4, 5, true),
-        ARROW_RAIN(new ArrowRainSpell(), nextID(), 4, 5, true),
-        VEX(new VexSpell(), nextID(), 4, 6, true,
-                new Pair<ItemStack, Integer>(new ItemStack(ModItems.OMINOUS_STAFF.get()), 6)),
-        CYCLONE(new CycloneSpell(), nextID(), 5, 6, true,
-                new Pair<ItemStack, Integer>(new ItemStack(ModItems.WIND_STAFF.get()), 6)),
-        ERUPTION(new EruptionSpell(), nextID(), 5, 6, true,
-                new Pair<ItemStack, Integer>(new ItemStack(ModItems.GEO_STAFF.get()), 5)),
-        TIDAL(new TidalSpell(), nextID(), 5, 6, true),
-        BIOMINE(new BioMineSpell(), nextID(), 5, 6, true,
-                new Pair<ItemStack, Integer>(new ItemStack(ModItems.ABYSS_STAFF.get()), 6)),
-        BLOSSOM(new BlossomSpell(), nextID(), 6, 6, true,
-                new Pair<ItemStack, Integer>(new ItemStack(ModItems.WILD_STAFF.get()), 6)),
-        MAGMA_BOMB(new MagmaSpell(), nextID(), 6, 6, true,
-                new Pair<ItemStack, Integer>(new ItemStack(ModItems.NETHER_STAFF.get()), 6)),
-        RAZOR_WIND(new RazorWindSpell(), nextID(), 6, 6, true,
-                new Pair<ItemStack, Integer>(new ItemStack(ModItems.WIND_STAFF.get()), 6)),
-        WEAKENING(new WeakeningSpell(), nextID(), 5, 6, true),
-        MAGIC_BOLT(new MagicBoltSpell(), nextID(), 6, 6),
-        ENTANGLING(new EntanglingSpell(), nextID(), 5, 6, true,
-                new Pair<ItemStack, Integer>(new ItemStack(ModItems.WILD_STAFF.get()), 6)),
-        POISON_DART(new PoisonDartSpell(), nextID(), 1, 3, true),
-        SOUL_BOLT(new SoulBoltSpell(), nextID(), 1, 2, true),
-        CHILL_HIDE(new ChillHideSpell(), nextID(), 3, 6, true,
-                new Pair<ItemStack, Integer>(new ItemStack(ModItems.FROST_STAFF.get()), 6)),
-        FROST_NOVA(new FrostNovaSpell(), nextID(), 5, 6, true,
-                new Pair<ItemStack, Integer>(new ItemStack(ModItems.FROST_STAFF.get()), 6)),
-        ICE_BOUQUET(new IceBouquetSpell(), nextID(), 4, 6, true,
-                new Pair<ItemStack, Integer>(new ItemStack(ModItems.NECRO_STAFF.get()), 6)),
-        WIND_HORN(new WindHornSpell(), nextID(), 3, 6, true,
-                new Pair<ItemStack, Integer>(new ItemStack(ModItems.WIND_STAFF.get()), 6)),
-        DISCHARGE(new DischargeSpell(), nextID(), 6, 6, true,
-                new Pair<ItemStack, Integer>(new ItemStack(ModItems.STORM_STAFF.get()), 6));
-
-        final Spell spell;
-        private static int id = 0;
-        final int trueId;
-        final int minLevel;
-        final int maxLevel;
-        final boolean levelIncrease;
-        final Pair<ItemStack, Integer> upgradeStaff;
-
-        public static int nextID() {
-            return id++;
-        }
-
-        SorcererSpell(Spell spell, int id, int minLevel, int maxLevel) {
-            this(spell, id, minLevel, maxLevel, false, new Pair<>(ItemStack.EMPTY, 0));
-        }
-
-        SorcererSpell(Spell spell, int id, int minLevel, int maxLevel, boolean levelIncrease) {
-            this(spell, id, minLevel, maxLevel, levelIncrease, new Pair<>(ItemStack.EMPTY, 0));
-        }
-
-        SorcererSpell(Spell spell, int id, int minLevel, int maxLevel, boolean levelIncrease,
-                Pair<ItemStack, Integer> upgradeStaff) {
-            this.spell = spell;
-            this.trueId = id;
-            this.minLevel = minLevel;
-            this.maxLevel = maxLevel;
-            this.levelIncrease = levelIncrease;
-            this.upgradeStaff = upgradeStaff;
-        }
-
-        public Spell getSpell() {
-            return this.spell;
-        }
-
-        public boolean throwingSpell() {
-            return this == ICE_SPIKE || this == THUNDERBOLT || this == ELECTRO || this == CYCLONE || this == SOUL_BOLT
-                    || this == POISON_DART;
+        protected SorcererSpellEntry getSpell() {
+            return spellEntry;
         }
     }
 
@@ -975,27 +971,22 @@ public class SorcererServant extends SpellcasterIllagerServant {
     public net.minecraft.world.InteractionResult mobInteract(net.minecraft.world.entity.player.Player pPlayer,
             net.minecraft.world.InteractionHand pHand) {
         net.minecraft.world.item.ItemStack itemstack = pPlayer.getItemInHand(pHand);
-        net.minecraft.world.item.Item item = itemstack.getItem();
         boolean isOwner = this.getTrueOwner() != null && pPlayer == this.getTrueOwner();
-        if (itemstack.getItem() == net.minecraft.world.item.Items.EMERALD
-                && pHand == net.minecraft.world.InteractionHand.MAIN_HAND) {
-            if (isOwner) {
-                if (!this.isAggressive() && !this.isCurrentlyTrading()) {
-                    this.playSound(this.getCelebrateSound());
-                    int emeraldCount = itemstack.getCount();
-                    this.setMoneyAmount(emeraldCount);
-                    this.setIsCurrentlyTrading(true);
-                    this.clearTradeItems();
-                    if (!pPlayer.isCreative()) {
-                        itemstack.shrink(emeraldCount);
+
+        if ((itemstack.isEmpty() || itemstack.getItem() == Items.EMERALD) && pHand == InteractionHand.MAIN_HAND) {
+            if (isOwner && !this.isAggressive()) {
+                if (!this.level().isClientSide) {
+                    if (this.shouldRestock()) {
+                        this.restock();
                     }
-
-                    return net.minecraft.world.InteractionResult.SUCCESS;
+                    this.generateOffers();
+                    this.setTradingPlayer(pPlayer);
+                    this.openTradingScreen(pPlayer, this.getDisplayName(), this.getSorcererLevel());
+                    pPlayer.awardStat(Stats.TALKED_TO_VILLAGER);
                 }
+                return net.minecraft.world.InteractionResult.sidedSuccess(this.level().isClientSide);
             }
-        }
-
-        if (isOwner) {
+        } else if (isOwner) {
             return com.Polarice3.Goety.utils.ServantUtil.equipServantArmor(pPlayer, this, itemstack,
                     super.mobInteract(pPlayer, pHand));
         }
@@ -1005,12 +996,189 @@ public class SorcererServant extends SpellcasterIllagerServant {
 
     @Override
     public boolean isAlliedTo(Entity entityIn) {
-        if (super.isAlliedTo(entityIn)) {
+        if (this.isHostile() && entityIn instanceof Raider) {
             return true;
         }
-        if (this.isHostile() && entityIn instanceof AbstractIllager) {
-            return true;
+        return super.isAlliedTo(entityIn);
+    }
+
+    @Override
+    public void setTradingPlayer(@Nullable Player pPlayer) {
+        this.tradingPlayer = pPlayer;
+    }
+
+    @Nullable
+    @Override
+    public Player getTradingPlayer() {
+        return this.tradingPlayer;
+    }
+
+    @Override
+    public MerchantOffers getOffers() {
+        return this.offers;
+    }
+
+    @Override
+    public void overrideOffers(MerchantOffers pOffers) {
+
+    }
+
+    @Override
+    public void notifyTrade(MerchantOffer pOffer) {
+        pOffer.increaseUses();
+        this.ambientSoundTime = -this.getAmbientSoundInterval();
+
+        this.villagerXp += pOffer.getXp();
+
+        if (this.getTrueOwner() != null) {
+            int emeraldCost = pOffer.getCostA().getCount();
+            SpecialServantHandlers.handleSorcererTrade(this, emeraldCost);
+        }
+    }
+
+    @Override
+    public void notifyTradeUpdated(ItemStack pStack) {
+        if (!this.level().isClientSide && this.ambientSoundTime > -this.getAmbientSoundInterval() + 20) {
+            this.ambientSoundTime = -this.getAmbientSoundInterval();
+            this.playSound(this.getNotifyTradeSound(), this.getSoundVolume(), this.getVoicePitch());
+        }
+    }
+
+    @Override
+    public int getVillagerXp() {
+        return this.villagerXp;
+    }
+
+    @Override
+    public void overrideXp(int pXp) {
+        this.villagerXp = pXp;
+    }
+
+    @Override
+    public boolean showProgressBar() {
+        return false;
+    }
+
+    @Override
+    public SoundEvent getNotifyTradeSound() {
+        return ModSounds.SORCERER_AMBIENT.get();
+    }
+
+    @Override
+    public boolean isClientSide() {
+        return this.level().isClientSide;
+    }
+
+    private void generateOffers() {
+        int currentLevel = this.getSorcererLevel();
+
+        if (this.savedLevel == currentLevel && !this.offers.isEmpty()) {
+            return;
+        }
+
+        int tradeCount = currentLevel * 2;
+        this.offers = SorcererTradeManager.generateOffersForLevel(currentLevel, this.level().random, tradeCount);
+        this.savedLevel = currentLevel;
+        if (this.tradingPlayer != null && this.tradingPlayer instanceof ServerPlayer serverPlayer) {
+            serverPlayer.sendMerchantOffers(
+                    serverPlayer.containerMenu.containerId,
+                    this.offers,
+                    currentLevel,
+                    this.villagerXp,
+                    this.showProgressBar(),
+                    this.canRestock());
+        }
+    }
+
+    public boolean canRestock() {
+        return this.hasBed();
+    }
+
+    public boolean hasBed() {
+        if (this.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
+            java.util.Optional<net.minecraft.core.BlockPos> optional = this.getVacantBedPosition(serverLevel);
+            return optional.isPresent() && this.canReachBed(optional.get());
         }
         return false;
+    }
+
+    public java.util.Optional<net.minecraft.core.BlockPos> getVacantBedPosition(
+            net.minecraft.server.level.ServerLevel serverLevel) {
+        return serverLevel.getPoiManager().find(
+                holder -> holder.is(net.minecraft.world.entity.ai.village.poi.PoiTypes.HOME),
+                blockPos -> true,
+                this.blockPosition(),
+                8,
+                net.minecraft.world.entity.ai.village.poi.PoiManager.Occupancy.HAS_SPACE);
+    }
+
+    private boolean canReachBed(net.minecraft.core.BlockPos bedPos) {
+        net.minecraft.world.level.pathfinder.Path path = this.getNavigation().createPath(bedPos, 1);
+        return path != null && path.canReach();
+    }
+
+    private boolean needsToRestock() {
+        for (MerchantOffer offer : this.getOffers()) {
+            if (offer.needsRestock()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean allowedToRestock() {
+        return this.numberOfRestocksToday == 0 ||
+                (this.numberOfRestocksToday < Config.sorcererServantRestockLimit &&
+                        this.level().getGameTime() > this.lastRestockGameTime + Config.sorcererServantRestockInterval);
+    }
+
+    public boolean shouldRestock() {
+        if (!this.hasBed()) {
+            return false;
+        }
+        long i = this.lastRestockGameTime + Config.sorcererServantRestockCooldown;
+        long j = this.level().getGameTime();
+        boolean flag = j > i;
+
+        long k = this.level().getDayTime();
+        if (this.lastRestockCheckDayTime > 0L) {
+            long l = this.lastRestockCheckDayTime / 24000L;
+            long i1 = k / 24000L;
+            flag |= i1 > l;
+        }
+
+        this.lastRestockCheckDayTime = k;
+        if (flag) {
+            this.lastRestockGameTime = j;
+            this.numberOfRestocksToday = 0;
+        }
+
+        return this.allowedToRestock() && this.needsToRestock();
+    }
+
+    public void restock() {
+        if (!this.level().isClientSide && this.hasBed()) {
+            for (MerchantOffer offer : this.getOffers()) {
+                int currentPrice = offer.getCostA().getCount();
+                int basePrice = offer.getBaseCostA().getCount();
+                if (currentPrice > basePrice) {
+                    offer.addToSpecialPriceDiff(basePrice - currentPrice);
+                }
+                offer.resetUses();
+            }
+
+            this.lastRestockGameTime = this.level().getGameTime();
+            ++this.numberOfRestocksToday;
+
+            if (this.tradingPlayer instanceof ServerPlayer serverPlayer) {
+                serverPlayer.sendMerchantOffers(
+                        serverPlayer.containerMenu.containerId,
+                        this.offers,
+                        this.getSorcererLevel(),
+                        this.villagerXp,
+                        this.showProgressBar(),
+                        this.canRestock());
+            }
+        }
     }
 }

@@ -1,0 +1,18 @@
+{
+  "name": "Ghost Missile Focus",
+  "icon": "goetyawaken:ghost_missile_focus",
+  "category": "goety:goetyawaken_focuses",
+  "flag": "goetyawaken:meetyourfight_loaded",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Fires ghost missiles at the target. Sneaking while casting fires a different barrage. These decently powerful magic missiles—condensed even from a Bellringer's spirit—serve as a fine offensive tool for a wizard who manipulates souls."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:ghost_missile_focus",
+      "text": ""
+    }
+  ],
+  "extra_recipe_mappings": {"goetyawaken:ghost_missile_focus":0}
+}

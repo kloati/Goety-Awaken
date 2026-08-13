@@ -9,6 +9,7 @@ import com.Polarice3.Goety.config.AttributesConfig;
 import com.Polarice3.Goety.common.entities.ally.illager.raider.AllyIrk;
 import com.Polarice3.Goety.common.entities.ally.illager.raider.AllyVex;
 import com.Polarice3.Goety.common.entities.ally.illager.raider.RaiderServant;
+
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -24,6 +25,7 @@ import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
 
 public class PreacherServant extends SpellcasterIllagerServant {
@@ -126,9 +128,8 @@ public class PreacherServant extends SpellcasterIllagerServant {
             ++this.healTick;
         }
 
-        if (this.healTick > 20) {
+        if (this.healTick >= 20) {
             this.setHealing(false);
-            this.healTick = 0;
         }
 
         if (!this.level().isClientSide) {
@@ -181,6 +182,11 @@ public class PreacherServant extends SpellcasterIllagerServant {
         return ModSounds.PREACHER_CAST.get();
     }
 
+    @Override
+    public SoundEvent getCelebrateSound() {
+        return ModSounds.PREACHER_AMBIENT.get();
+    }
+
     public boolean canPickUpLoot() {
         return false;
     }
@@ -203,17 +209,13 @@ public class PreacherServant extends SpellcasterIllagerServant {
         }
     }
 
-    @Override
-    public SoundEvent getCelebrateSound() {
-        return null;
-    }
-
     public class PreacherHealGoal extends Goal {
         protected final PreacherServant preacher;
         public LivingEntity target;
 
         public PreacherHealGoal(PreacherServant preacher) {
             this.preacher = preacher;
+            this.setFlags(EnumSet.of(Goal.Flag.LOOK));
         }
 
         @Override
@@ -224,7 +226,10 @@ public class PreacherServant extends SpellcasterIllagerServant {
 
         @Override
         public boolean canContinueToUse() {
-            return this.preacher.healTick < 20;
+            return this.preacher.isHealing()
+                    && this.target != null
+                    && this.target.isAlive()
+                    && this.preacher.healTick < 20;
         }
 
         protected AABB getTargetSearchArea(double p_26069_) {
@@ -239,6 +244,7 @@ public class PreacherServant extends SpellcasterIllagerServant {
             TargetingConditions targetConditions = TargetingConditions.forNonCombat().range(this.getFollowDistance())
                     .selector(
                             p_26058_ -> p_26058_ instanceof LivingEntity
+                                    && p_26058_ != this.preacher
                                     && p_26058_.getHealth() < p_26058_.getMaxHealth()
                                     && p_26058_.isAlive()
                                     && !(p_26058_ instanceof AllyIrk)
@@ -255,6 +261,13 @@ public class PreacherServant extends SpellcasterIllagerServant {
         }
 
         @Override
+        public void stop() {
+            this.preacher.setHealing(false);
+            this.preacher.healTick = 0;
+            this.target = null;
+        }
+
+        @Override
         public void start() {
             super.start();
             this.preacher.level().broadcastEntityEvent(this.preacher, (byte) 4);
@@ -268,7 +281,8 @@ public class PreacherServant extends SpellcasterIllagerServant {
             super.tick();
             this.preacher.navigation.stop();
             if (this.target != null && !this.target.isDeadOrDying()) {
-                MobUtil.instaLook(this.preacher, this.target);
+                this.preacher.getLookControl().setLookAt(this.target,
+                        (float) this.preacher.getMaxHeadYRot(), (float) this.preacher.getMaxHeadXRot());
                 if (this.preacher.healTick == 10) {
                     this.target.heal(AttributesConfig.PreacherHeal.get().floatValue());
                     if (!this.preacher.level().isClientSide) {

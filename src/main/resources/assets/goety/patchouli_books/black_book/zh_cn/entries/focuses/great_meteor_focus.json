@@ -1,0 +1,17 @@
+{
+  "name": "陨星聚晶",
+  "icon": "goetyawaken:great_meteor_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "巨型恶魂的巨型火球可真是太酷了！要是有办法发射这样的巨大火球就好了！很显然，黑沉沉泪作为一种极具爆炸性的材料，蕴含了这种可能性。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:great_meteor_focus",
+      "text": ""
+    }
+  ],
+  "extra_recipe_mappings": {"goetyawaken:great_meteor_focus":0}
+}

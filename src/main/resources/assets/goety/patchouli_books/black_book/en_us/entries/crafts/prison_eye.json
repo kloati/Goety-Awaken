@@ -12,5 +12,6 @@
       "recipe": "goetyawaken:prison_eye",
       "text": "Prison Eye"
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:prison_eye":0}
 }

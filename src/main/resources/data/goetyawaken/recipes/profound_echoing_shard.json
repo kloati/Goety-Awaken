@@ -9,16 +9,10 @@
   "duration": 15,
   "ingredients": [
     {
-      "item": "goety:hunger_core"
-    },
-    {
       "item": "goety:sonic_boom_focus"
     },
     {
       "item": "goety:raging_matter"
-    },
-    {
-      "item": "minecraft:sculk_vein"
     },
     {
       "item": "minecraft:sculk_vein"

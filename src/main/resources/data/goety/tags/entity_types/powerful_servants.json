@@ -1,0 +1,53 @@
+{
+  "replace": false,
+  "values": [
+    "goetyawaken:wight_servant",
+    "goetyawaken:giant_servant",
+    "goetyawaken:plaguewhale_slab_servant",
+    "goetyawaken:wither_servant",
+    "goetyawaken:warden_servant",
+    "goetyawaken:endersent_servant",
+    "goetyawaken:crone_servant",
+    "goetyawaken:minister_servant",
+    "goetyawaken:arch_illusioner_servant",
+    "goetyawaken:vizier_servant",
+    "goetyawaken:ender_keeper_servant",
+    "goetyawaken:apostle_servant",
+    "goetyawaken:heresiarch_servant",
+    "goetyawaken:wraith_necromancer_servant",
+    "goetyawaken:skull_lord_servant",
+    "goetyawaken:parched_necromancer_servant",
+    "goetyawaken:nameless_one_servant",
+    "goetyawaken:mushroom_monstrosity",
+    "goetyawaken:giant_ghast",
+    "goetyawaken:rampart_captain",
+    {
+      "id": "goetyawaken:masquerader_servant",
+      "required": false
+    },
+    {
+      "id": "goetyawaken:swampjaw_servant",
+      "required": false
+    },
+    {
+      "id": "goetyawaken:bellringer_servant",
+      "required": false
+    },
+    {
+      "id": "goetyawaken:rosalyne_servant",
+      "required": false
+    },
+    {
+      "id": "goetyawaken:dame_fortuna_servant",
+      "required": false
+    },
+    {
+      "id": "goetyawaken:stalker_servant",
+      "required": false
+    },
+    {
+      "id": "goetyawaken:shriek_worm_servant",
+      "required": false
+    }
+  ]
+}

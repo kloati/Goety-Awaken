@@ -1,0 +1,17 @@
+{
+  "name": "Pingente Inchado",
+  "icon": "goetyawaken:swelling_pendant",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Assim como o Pingente da Fome devora carne podre para alimentar seu usuário, este Pingente Inchado tem a mesma técnica — só que ele deseja bolas de slime, e só alimentará essas bolas de slime aos slimes do usuário, fazendo com que inchem e cresçam. O Pingente Inchado absorve bolas de slime do seu inventário, as armazena e faz seus slimes ficarem muito maiores quando você os invoca."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:swelling_pendant",
+      "text": ""
+    }
+  ],
+  "extra_recipe_mappings": {"goetyawaken:swelling_pendant":0}
+}

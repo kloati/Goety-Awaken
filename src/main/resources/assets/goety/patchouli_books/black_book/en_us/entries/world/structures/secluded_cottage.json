@@ -1,0 +1,20 @@
+{
+  "name": "Secluded Cottage",
+  "icon": "goety:mystic_core",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(0)Thou art cordially bidden to the 'Secluded Cottage'$(br)$(br)$(0)Here no war-drums sound, nor banners fly.$(br)$(0)Only a once-great leader doth dwell, awaiting a worthy soul.$(br)$(br)$(0)He was the Empire's earliest follower,$(br)$(0)Yet now he steers his own fate alone.$(br)$(0)His wand, which once charged forth for the Empire,$(br)$(0)Now serves but to test and guide the wayward youth."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(0)If thou wouldst lend thine ear, he shall brew thee a cup of tea,$(br)$(0)And tell thee tales never writ in history:$(br)$(0)Of the secret arts of the Soul Ruby,$(br)$(0)Of that unhindered flight through the night,$(br)$(0)Of why he chose this hermit's life$(br)$(0)Rather than tread once more that cold, blood-soaked strife.$(br)$(br)$(0)The door stands ajar.$(br)$(0)Enter with grace and courtesy.$(br)$(0)He no longer feareth death,$(br)$(0)He only cherisheth this hard-won peace.$(br)$(br)$(0)— The Owner of the Secluded Cottage"
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/secluded_cottage.png"],
+      "border": true
+    }
+  ]
+}

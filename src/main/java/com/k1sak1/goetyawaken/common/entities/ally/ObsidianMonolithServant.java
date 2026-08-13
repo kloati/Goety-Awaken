@@ -7,6 +7,7 @@ import com.Polarice3.Goety.client.particles.ShockwaveParticleOption;
 import com.Polarice3.Goety.common.entities.ModEntityType;
 import com.Polarice3.Goety.common.entities.ally.illager.cultist.CultistServant;
 import com.Polarice3.Goety.common.entities.ally.illager.cultist.HereticServant;
+import com.Polarice3.Goety.common.entities.ally.illager.cultist.MaverickServant;
 import com.Polarice3.Goety.common.entities.neutral.AbstractMonolith;
 import com.Polarice3.Goety.common.entities.neutral.Owned;
 import com.Polarice3.Goety.common.entities.neutral.ZPiglinBruteServant;
@@ -18,7 +19,6 @@ import com.Polarice3.Goety.init.ModSounds;
 import com.Polarice3.Goety.utils.*;
 import com.k1sak1.goetyawaken.common.entities.ally.illager.ApostleServant;
 import com.k1sak1.goetyawaken.Config;
-
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -30,6 +30,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
@@ -881,5 +882,71 @@ public class ObsidianMonolithServant extends AbstractMonolith implements IServan
     public void tryKill(Player player) {
         this.hurt(ModDamageSource.getDamageSource(this.level(), ModDamageSource.DISMISSED, new EntityType[0]),
                 Float.MAX_VALUE);
+    }
+
+    public void summonMavericks() {
+        if (this.level() instanceof ServerLevel serverLevel) {
+            MaverickServant maverick = new MaverickServant(
+                    com.Polarice3.Goety.common.entities.ModEntityType.MAVERICK_SERVANT.get(), this.level());
+            int i1 = this.blockPosition().getX()
+                    + (Mth.randomBetweenInclusive(serverLevel.getRandom(), 4, 12)
+                            * Mth.randomBetweenInclusive(serverLevel.getRandom(), -1, 1));
+            int j1 = this.blockPosition().getY()
+                    + (Mth.randomBetweenInclusive(serverLevel.getRandom(), 0, 3)
+                            * Mth.randomBetweenInclusive(serverLevel.getRandom(), -1, 1));
+            int k1 = this.blockPosition().getZ()
+                    + (Mth.randomBetweenInclusive(serverLevel.getRandom(), 4, 12)
+                            * Mth.randomBetweenInclusive(serverLevel.getRandom(), -1, 1));
+            BlockPos blockPos = BlockFinder.SummonPosition(maverick, new BlockPos(i1, j1, k1));
+            maverick.setPos(blockPos.getX() + 0.5D, blockPos.getY(), blockPos.getZ() + 0.5D);
+            if (this.level().noCollision(maverick.getBoundingBox())
+                    && this.level().getEntityCollisions(maverick, maverick.getBoundingBox()).isEmpty()
+                    && !this.level().containsAnyLiquid(maverick.getBoundingBox())) {
+                maverick.finalizeSpawn(serverLevel, this.level().getCurrentDifficultyAt(blockPos),
+                        MobSpawnType.MOB_SUMMONED, null, null);
+                if (this.getTrueOwner() != null) {
+                    maverick.setTrueOwner(this.getTrueOwner());
+                } else {
+                    maverick.setTrueOwner(this);
+                }
+                if (this.getTarget() != null) {
+                    maverick.setTarget(this.getTarget());
+                }
+                maverick.spawnAnim();
+                this.level().addFreshEntity(maverick);
+            }
+        }
+    }
+
+    public void summonHeretics() {
+        if (this.level() instanceof ServerLevel serverLevel) {
+            HereticServant heretic = new HereticServant(
+                    com.Polarice3.Goety.common.entities.ModEntityType.HERETIC_SERVANT.get(), this.level());
+            int i1 = this.blockPosition().getX()
+                    + (Mth.randomBetweenInclusive(serverLevel.getRandom(), 4, 12)
+                            * Mth.randomBetweenInclusive(serverLevel.getRandom(), -1, 1));
+            int j1 = this.blockPosition().getY()
+                    + (Mth.randomBetweenInclusive(serverLevel.getRandom(), 0, 3)
+                            * Mth.randomBetweenInclusive(serverLevel.getRandom(), -1, 1));
+            int k1 = this.blockPosition().getZ()
+                    + (Mth.randomBetweenInclusive(serverLevel.getRandom(), 4, 12)
+                            * Mth.randomBetweenInclusive(serverLevel.getRandom(), -1, 1));
+            BlockPos blockPos = BlockFinder.SummonPosition(heretic, new BlockPos(i1, j1, k1));
+            heretic.setPos(blockPos.getX() + 0.5D, blockPos.getY(), blockPos.getZ() + 0.5D);
+            if (this.level().noCollision(heretic.getBoundingBox())
+                    && this.level().getEntityCollisions(heretic, heretic.getBoundingBox()).isEmpty()
+                    && !this.level().containsAnyLiquid(heretic.getBoundingBox())) {
+                heretic.finalizeSpawn(serverLevel, this.level().getCurrentDifficultyAt(blockPos),
+                        MobSpawnType.MOB_SUMMONED, null, null);
+                heretic.setPersistenceRequired();
+                if (this.getTrueOwner() != null) {
+                    heretic.setTrueOwner(this.getTrueOwner());
+                } else {
+                    heretic.setTrueOwner(this);
+                }
+                heretic.spawnAnim();
+                this.level().addFreshEntity(heretic);
+            }
+        }
     }
 }

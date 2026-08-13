@@ -7,5 +7,6 @@
       "type": "text",
       "text": "孤魂尸鬼的复活道具，可以更便宜地召唤孤魂尸鬼。"
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:terror_soul":0}
 }

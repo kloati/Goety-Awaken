@@ -12,5 +12,6 @@
       "recipe": "goetyawaken:blood_rain_focus",
       "text": "Crafting the Blood Rain Focus."
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:blood_rain_focus":0}
 }

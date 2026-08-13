@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
-      "model": "goetyawaken:block/taboo_bookshelf"
-    }
+    "": [
+      { "model": "goetyawaken:block/taboo_bookshelf" },
+      { "model": "goetyawaken:block/taboo_bookshelf_1" },
+      { "model": "goetyawaken:block/taboo_bookshelf_2" },
+      { "model": "goetyawaken:block/taboo_bookshelf_3" }
+    ]
   }
 }

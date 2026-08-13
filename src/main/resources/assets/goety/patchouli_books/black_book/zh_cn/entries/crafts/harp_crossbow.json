@@ -12,5 +12,6 @@
       "recipe": "goetyawaken:harp_crossbow",
       "text": ""
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:harp_crossbow":0}
 }

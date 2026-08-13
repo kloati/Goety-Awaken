@@ -1,0 +1,24 @@
+{
+  "name": "goetyawaken:absolute_citadel/start_pool",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "goetyawaken:absolute_citadel1",
+        "processors": "goetyawaken:absolute_citadel_loot",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "goetyawaken:absolute_citadel2",
+        "processors": "goetyawaken:absolute_citadel_loot",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

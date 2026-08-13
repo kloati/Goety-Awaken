@@ -1,105 +1,164 @@
 package com.k1sak1.goetyawaken.common.events;
 
+import com.k1sak1.goetyawaken.Config;
+import com.k1sak1.goetyawaken.common.items.ModItems;
 import com.k1sak1.goetyawaken.common.upgrades.ApostleUpgradeData;
 import com.k1sak1.goetyawaken.common.upgrades.ApostleUpgradeManager;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.boss.wither.WitherBoss;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.EntityLeaveLevelEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.server.ServerStoppingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.UUID;
 
 @Mod.EventBusSubscriber
 public class ApostleUpgradeEvents {
 
-    private static final java.util.Map<java.util.UUID, Integer> swiftDayTracker = new java.util.HashMap<>();
-    private static final java.util.Map<java.util.UUID, Long> lastWorldTimeTracker = new java.util.HashMap<>();
+    private static final Map<UUID, RefundInfo> pendingRefunds = new HashMap<>();
+    public static final Map<UUID, Integer> lastMoneyAmounts = new HashMap<>();
+
+    private record RefundInfo(Vec3 pos, UUID ownerUuid, ResourceKey<Level> dimension, long gameTime) {
+    }
 
     @SubscribeEvent
     public static void onLivingDeath(LivingDeathEvent event) {
-        LivingEntity target = event.getEntity();
-        LivingEntity source = event.getSource().getEntity() instanceof LivingEntity
-                ? (LivingEntity) event.getSource().getEntity()
-                : null;
-
-        if (source == null)
+        if (event.getEntity().level().isClientSide) {
             return;
+        }
+        LivingEntity target = event.getEntity();
+        LivingEntity source = event.getSource().getEntity() instanceof LivingEntity living ? living : null;
 
-        if (ApostleUpgradeManager.isMarkedForUpgrade(source)) {
+        if (source != null && ApostleUpgradeManager.isMarkedForUpgrade(source)) {
             ApostleUpgradeData data = ApostleUpgradeManager.getUpgradeData(source);
-
-            if (target.hasEffect(net.minecraft.world.effect.MobEffects.POISON) ||
-                    target.hasEffect(com.Polarice3.Goety.common.effects.GoetyEffects.ACID_VENOM.get())) {
+            boolean changed = false;
+            if (target.hasEffect(net.minecraft.world.effect.MobEffects.POISON)
+                    || target.hasEffect(com.Polarice3.Goety.common.effects.GoetyEffects.ACID_VENOM.get())) {
                 data.incrementBlightKills();
-                ApostleUpgradeManager.saveUpgradeData(source);
+                changed = true;
             }
-
             if (target instanceof WitherBoss) {
                 data.incrementWitherKills();
-                ApostleUpgradeManager.saveUpgradeData(source);
+                changed = true;
             }
-
             if (target.getType() == EntityType.WARDEN) {
                 data.incrementWardenKills();
-                ApostleUpgradeManager.saveUpgradeData(source);
+                changed = true;
             }
-
             if (target.getType() == EntityType.BLAZE) {
                 data.incrementBlazeKills();
-                ApostleUpgradeManager.saveUpgradeData(source);
+                changed = true;
             }
-
             if (target.getType() == EntityType.VILLAGER) {
                 data.incrementVillagerKills();
-                ApostleUpgradeManager.saveUpgradeData(source);
+                changed = true;
+            }
+            if (changed) {
+                ApostleUpgradeManager.saveUpgradeData(source, data);
             }
         }
 
-        if (ApostleUpgradeManager.isMarkedForUpgrade(target)) {
-            ApostleUpgradeManager.clearUpgradeData(target);
+        if (ApostleUpgradeManager.isMarkedForUpgrade(target) && target.level() instanceof ServerLevel serverLevel) {
+            UUID targetId = target.getUUID();
+            if (!pendingRefunds.containsKey(targetId)) {
+                UUID owner = ApostleUpgradeManager.getUpgradeData(target).getMarkedBy();
+                pendingRefunds.put(targetId,
+                        new RefundInfo(target.position(), owner, serverLevel.dimension(), serverLevel.getGameTime()));
+            }
         }
     }
 
     @SubscribeEvent
-    public static void onLivingHurt(LivingHurtEvent event) {
-        LivingEntity target = event.getEntity();
-        LivingEntity source = event.getSource().getEntity() instanceof LivingEntity
-                ? (LivingEntity) event.getSource().getEntity()
-                : null;
-
-        if (source == null)
+    public static void onServerTick(TickEvent.ServerTickEvent event) {
+        if (event.phase != TickEvent.Phase.END || event.getServer().getTickCount() % 20 != 0) {
             return;
+        }
+        int processed = 0;
+        Iterator<Map.Entry<UUID, RefundInfo>> iterator = pendingRefunds.entrySet().iterator();
+        while (iterator.hasNext() && processed < 128) {
+            Map.Entry<UUID, RefundInfo> entry = iterator.next();
+            RefundInfo info = entry.getValue();
+            ServerLevel level = event.getServer().getLevel(info.dimension());
+            if (level == null) {
+                iterator.remove();
+                continue;
+            }
+            if (level.getGameTime() - info.gameTime() < 100) {
+                continue;
+            }
+            iterator.remove();
+            processed++;
+            Entity entity = level.getEntity(entry.getKey());
+            if (entity != null && !entity.isRemoved()) {
+                continue;
+            }
+            refundTear(level, info);
+        }
+    }
 
+    private static void refundTear(ServerLevel level, RefundInfo info) {
+        ItemStack tear = new ItemStack(ModItems.OBSIDIAN_TEAR.get());
+        ServerPlayer owner = info.ownerUuid() == null ? null
+                : level.getServer().getPlayerList().getPlayer(info.ownerUuid());
+        if (owner != null && owner.getInventory().add(tear)) {
+            owner.displayClientMessage(
+                    Component.translatable("message.goetyawaken.apostle.tear_refunded"),
+                    true);
+            return;
+        }
+        BlockPos pos = BlockPos.containing(info.pos());
+        level.getChunk(pos.getX() >> 4, pos.getZ() >> 4);
+        level.addFreshEntity(new ItemEntity(level, info.pos().x, info.pos().y, info.pos().z, tear));
+    }
+
+    @SubscribeEvent
+    public static void onLivingHurt(LivingHurtEvent event) {
+        if (event.getEntity().level().isClientSide) {
+            return;
+        }
+        LivingEntity target = event.getEntity();
+        LivingEntity source = event.getSource().getEntity() instanceof LivingEntity living ? living : null;
+        if (source == null) {
+            return;
+        }
         if (ApostleUpgradeManager.isMarkedForUpgrade(source)) {
             ApostleUpgradeData data = ApostleUpgradeManager.getUpgradeData(source);
             float damage = event.getAmount();
-
+            boolean changed = false;
             if (target instanceof WitherBoss) {
-                data.addWitherDamage((int) (damage));
-                ApostleUpgradeManager.saveUpgradeData(source);
+                data.addWitherDamage((int) damage);
+                changed = true;
             }
-
             if (target.getType() == EntityType.WARDEN) {
-                data.addWardenDamage((int) (damage));
-                ApostleUpgradeManager.saveUpgradeData(source);
+                data.addWardenDamage((int) damage);
+                changed = true;
             }
             if (event.getSource().getMsgId().contains("freeze")) {
                 data.addFrozenDamage((int) damage);
-                ApostleUpgradeManager.saveUpgradeData(source);
+                changed = true;
             }
-        }
-        if (ApostleUpgradeManager.isMarkedForUpgrade(target)) {
-            ApostleUpgradeData data = ApostleUpgradeManager.getUpgradeData(target);
-            float maxHealth = (float) target.getAttributeValue(Attributes.MAX_HEALTH);
-            if (event.getAmount() < 0) {
-                data.addProgress("healAmount", -event.getAmount());
-                ApostleUpgradeManager.saveUpgradeData(target);
+            if (changed) {
+                ApostleUpgradeManager.saveUpgradeData(source, data);
             }
         }
     }
@@ -108,34 +167,31 @@ public class ApostleUpgradeEvents {
         if (ApostleUpgradeManager.isMarkedForUpgrade(sorcerer)) {
             ApostleUpgradeData data = ApostleUpgradeManager.getUpgradeData(sorcerer);
             data.addTradingProgress(emeraldAmount);
-            ApostleUpgradeManager.saveUpgradeData(sorcerer);
+            ApostleUpgradeManager.saveUpgradeData(sorcerer, data);
         }
     }
 
     public static void onServantDealDamage(LivingEntity servant, float damage) {
         if (ApostleUpgradeManager.isMarkedForUpgrade(servant)) {
             ApostleUpgradeData data = ApostleUpgradeManager.getUpgradeData(servant);
-            float maxHealth = (float) servant.getAttributeValue(Attributes.MAX_HEALTH);
-            data.addProgress("damageDealt", damage);
-            ApostleUpgradeManager.saveUpgradeData(servant);
+            data.addDamageDealt(damage);
+            ApostleUpgradeManager.saveUpgradeData(servant, data);
         }
     }
 
     public static void onServantHeal(LivingEntity servant, float healAmount) {
         if (ApostleUpgradeManager.isMarkedForUpgrade(servant)) {
             ApostleUpgradeData data = ApostleUpgradeManager.getUpgradeData(servant);
-            float maxHealth = (float) servant.getAttributeValue(Attributes.MAX_HEALTH);
-            data.addProgress("healAmount", healAmount);
-            ApostleUpgradeManager.saveUpgradeData(servant);
+            data.addHealAmount(healAmount);
+            ApostleUpgradeManager.saveUpgradeData(servant, data);
         }
     }
 
     public static void onServantFrozenDamage(LivingEntity servant, float damage) {
         if (ApostleUpgradeManager.isMarkedForUpgrade(servant)) {
             ApostleUpgradeData data = ApostleUpgradeManager.getUpgradeData(servant);
-            float maxHealth = (float) servant.getAttributeValue(Attributes.MAX_HEALTH);
             data.addFrozenDamage((int) damage);
-            ApostleUpgradeManager.saveUpgradeData(servant);
+            ApostleUpgradeManager.saveUpgradeData(servant, data);
         }
     }
 
@@ -143,7 +199,7 @@ public class ApostleUpgradeEvents {
         if (ApostleUpgradeManager.isMarkedForUpgrade(crone)) {
             ApostleUpgradeData data = ApostleUpgradeManager.getUpgradeData(crone);
             data.setEffectCounts(positiveEffects, negativeEffects);
-            ApostleUpgradeManager.saveUpgradeData(crone);
+            ApostleUpgradeManager.saveUpgradeData(crone, data);
         }
     }
 
@@ -151,81 +207,81 @@ public class ApostleUpgradeEvents {
         if (ApostleUpgradeManager.isMarkedForUpgrade(vizier)) {
             ApostleUpgradeData data = ApostleUpgradeManager.getUpgradeData(vizier);
             data.setCultistFollowers(followerCount);
-            ApostleUpgradeManager.saveUpgradeData(vizier);
-        }
-    }
-
-    @SubscribeEvent
-    public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        if (event.phase == TickEvent.Phase.END) {
-            Player player = event.player;
-            boolean hasSwift = player.hasEffect(net.minecraft.world.effect.MobEffects.MOVEMENT_SPEED) &&
-                    player.getEffect(net.minecraft.world.effect.MobEffects.MOVEMENT_SPEED).getAmplifier() >= 1;
-            for (Entity entity : player.level().getEntities(player, player.getBoundingBox().inflate(64))) {
-                if (entity instanceof LivingEntity livingEntity) {
-                    if (ApostleUpgradeManager.isMarkedForUpgrade(livingEntity) &&
-                            livingEntity.distanceTo(player) < 64) {
-                        boolean servantHasSwift = livingEntity
-                                .hasEffect(net.minecraft.world.effect.MobEffects.MOVEMENT_SPEED) &&
-                                livingEntity.getEffect(net.minecraft.world.effect.MobEffects.MOVEMENT_SPEED)
-                                        .getAmplifier() >= 1;
-
-                        if (servantHasSwift && event.player.tickCount % 20 == 0) {
-                            ApostleUpgradeData data = ApostleUpgradeManager.getUpgradeData(livingEntity);
-                            data.addSwiftTicks(20);
-                            ApostleUpgradeManager.saveUpgradeData(livingEntity);
-                        }
-                        checkAndPerformUpgrade(livingEntity);
-                    }
-                }
-            }
+            ApostleUpgradeManager.saveUpgradeData(vizier, data);
         }
     }
 
     @SubscribeEvent
     public static void onLivingTick(LivingEvent.LivingTickEvent event) {
-        if (!event.getEntity().level().isClientSide) {
-            LivingEntity livingEntity = event.getEntity();
-            if (ApostleUpgradeManager.isMarkedForUpgrade(livingEntity)) {
-                if (livingEntity instanceof com.k1sak1.goetyawaken.common.entities.ally.illager.VizierServant) {
-                    updateVizierFollowerCount(livingEntity);
-                }
-                checkAndPerformUpgrade(livingEntity);
+        LivingEntity livingEntity = event.getEntity();
+        if (livingEntity.level().isClientSide || livingEntity.tickCount % 20 != 0) {
+            return;
+        }
+        if (!ApostleUpgradeManager.isMarkedForUpgrade(livingEntity)) {
+            return;
+        }
+        ApostleUpgradeData data = ApostleUpgradeManager.getUpgradeData(livingEntity);
+        boolean changed = false;
+
+        if (livingEntity.hasEffect(net.minecraft.world.effect.MobEffects.MOVEMENT_SPEED)
+                && livingEntity.getEffect(net.minecraft.world.effect.MobEffects.MOVEMENT_SPEED).getAmplifier() >= 1) {
+            data.addSwiftTicks(20);
+            changed = true;
+        }
+
+        if (livingEntity instanceof com.k1sak1.goetyawaken.common.entities.ally.illager.VizierServant) {
+            if (livingEntity.tickCount % 100 == 0) {
+                updateVizierFollowerCount(livingEntity);
             }
         }
+
+        if (livingEntity instanceof com.k1sak1.goetyawaken.common.entities.ally.illager.SorcererServant sorcerer) {
+            UUID sorcererId = sorcerer.getUUID();
+            int currentMoney = sorcerer.getMoneyAmount();
+            Integer lastMoney = lastMoneyAmounts.get(sorcererId);
+            if (lastMoney == null) {
+                lastMoney = currentMoney;
+            }
+            if (lastMoney > currentMoney) {
+                data.addTradingProgress(lastMoney - currentMoney);
+                changed = true;
+            }
+            lastMoneyAmounts.put(sorcererId, currentMoney);
+        }
+
+        if (changed) {
+            ApostleUpgradeManager.saveUpgradeData(livingEntity, data);
+        }
+        checkAndPerformUpgrade(livingEntity);
     }
 
     private static void updateVizierFollowerCount(LivingEntity vizier) {
-        if (vizier.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
-            java.util.List<net.minecraft.world.entity.Entity> nearbyEntities = serverLevel.getEntities(vizier,
+        if (vizier.level() instanceof ServerLevel serverLevel) {
+            java.util.List<Entity> nearbyEntities = serverLevel.getEntities(vizier,
                     vizier.getBoundingBox().inflate(64.0),
-                    entity -> entity instanceof com.Polarice3.Goety.common.entities.ally.illager.raider.RaiderServant &&
-                            entity != vizier &&
-                            isOwnedBySamePlayer(
+                    entity -> entity instanceof com.Polarice3.Goety.common.entities.ally.illager.raider.RaiderServant
+                            && entity != vizier
+                            && isOwnedBySamePlayer(
                                     (com.Polarice3.Goety.common.entities.ally.illager.raider.RaiderServant) entity,
                                     vizier));
 
-            int followerCount = nearbyEntities.size();
             ApostleUpgradeData data = ApostleUpgradeManager.getUpgradeData(vizier);
-            data.setCultistFollowers(followerCount);
-            ApostleUpgradeManager.saveUpgradeData(vizier);
+            data.setCultistFollowers(nearbyEntities.size());
+            ApostleUpgradeManager.saveUpgradeData(vizier, data);
         }
     }
 
     private static boolean isOwnedBySamePlayer(
             com.Polarice3.Goety.common.entities.ally.illager.raider.RaiderServant servant1,
             LivingEntity servant2) {
-        if (!(servant1 instanceof com.Polarice3.Goety.common.entities.neutral.Owned) ||
-                !(servant2 instanceof com.Polarice3.Goety.common.entities.neutral.Owned)) {
+        if (!(servant1 instanceof com.Polarice3.Goety.common.entities.neutral.Owned)
+                || !(servant2 instanceof com.Polarice3.Goety.common.entities.neutral.Owned)) {
             return false;
         }
-
         com.Polarice3.Goety.common.entities.neutral.Owned owned1 = (com.Polarice3.Goety.common.entities.neutral.Owned) servant1;
         com.Polarice3.Goety.common.entities.neutral.Owned owned2 = (com.Polarice3.Goety.common.entities.neutral.Owned) servant2;
-
-        java.util.UUID owner1Id = owned1.getOwnerId();
-        java.util.UUID owner2Id = owned2.getOwnerId();
-
+        UUID owner1Id = owned1.getOwnerId();
+        UUID owner2Id = owned2.getOwnerId();
         return owner1Id != null && owner2Id != null && owner1Id.equals(owner2Id);
     }
 
@@ -233,54 +289,47 @@ public class ApostleUpgradeEvents {
         if (!ApostleUpgradeManager.isMarkedForUpgrade(entity)) {
             return false;
         }
-
         ApostleUpgradeData data = ApostleUpgradeManager.getUpgradeData(entity);
-        float maxHealth = (float) entity.getAttributeValue(Attributes.MAX_HEALTH);
-        if (data.getProgress("healAmount") >= maxHealth * 1000) {
+        double maxHealth = entity.getAttributeValue(Attributes.MAX_HEALTH);
+        if (data.getProgress("healAmount") >= maxHealth * Config.UPGRADE_HEAL_MULTIPLIER.get()) {
             return true;
         }
-        if (data.getProgress("damageDealt") >= maxHealth * 1000) {
+        if (data.getProgress("damageDealt") >= maxHealth * Config.UPGRADE_DAMAGE_MULTIPLIER.get()) {
             return true;
         }
-        if (data.getBlightKills() >= 100) {
+        if (data.getBlightKills() >= Config.UPGRADE_BLIGHT_KILLS.get()) {
             return true;
         }
-        if (data.getWitherDamage() > 300 * 3 && data.getWitherKills() >= 3) {
+        if (data.getWitherDamage() >= Config.UPGRADE_WITHER_DAMAGE.get()
+                && data.getWitherKills() >= Config.UPGRADE_WITHER_KILLS.get()) {
             return true;
         }
-
-        if (data.getWardenDamage() > 500 * 2 && data.getWardenKills() >= 2) {
+        if (data.getWardenDamage() >= Config.UPGRADE_WARDEN_DAMAGE.get()
+                && data.getWardenKills() >= Config.UPGRADE_WARDEN_KILLS.get()) {
             return true;
         }
-
-        if (data.getPositiveEffects() >= 30 || data.getNegativeEffects() >= 20) {
+        if (data.getPositiveEffects() >= Config.UPGRADE_POSITIVE_EFFECTS.get()
+                || data.getNegativeEffects() >= Config.UPGRADE_NEGATIVE_EFFECTS.get()) {
             return true;
         }
-
-        if (data.getBlazeKills() >= 100) {
+        if (data.getBlazeKills() >= Config.UPGRADE_BLAZE_KILLS.get()) {
             return true;
         }
-
-        if (data.getTradingProgress() >= 4096) {
+        if (data.getTradingProgress() >= Config.UPGRADE_TRADING_EMERALDS.get()) {
             return true;
         }
-
-        if (data.getFrozenDamage() >= maxHealth * 10) {
+        if (data.getFrozenDamage() >= maxHealth * Config.UPGRADE_FROZEN_DAMAGE_MULTIPLIER.get()) {
             return true;
         }
-
-        if (data.getSwiftTicks() >= 240000) {
+        if (data.getSwiftTicks() >= Config.UPGRADE_SWIFT_TICKS.get()) {
             return true;
         }
-
-        if (data.getCultistFollowers() >= 128) {
+        if (data.getCultistFollowers() >= Config.UPGRADE_FOLLOWER_COUNT.get()) {
             return true;
         }
-
-        if (data.getVillagerKills() >= 666) {
+        if (data.getVillagerKills() >= Config.UPGRADE_VILLAGER_KILLS.get()) {
             return true;
         }
-
         return false;
     }
 
@@ -288,58 +337,48 @@ public class ApostleUpgradeEvents {
         if (!ApostleUpgradeManager.isMarkedForUpgrade(entity)) {
             return -1;
         }
-
         ApostleUpgradeData data = ApostleUpgradeManager.getUpgradeData(entity);
-        float maxHealth = (float) entity.getAttributeValue(Attributes.MAX_HEALTH);
+        double maxHealth = entity.getAttributeValue(Attributes.MAX_HEALTH);
 
-        if (data.getProgress("healAmount") >= maxHealth * 1000) {
+        if (data.getProgress("healAmount") >= maxHealth * Config.UPGRADE_HEAL_MULTIPLIER.get()) {
             return 0;
         }
-
-        if (data.getProgress("damageDealt") >= maxHealth * 1000) {
+        if (data.getProgress("damageDealt") >= maxHealth * Config.UPGRADE_DAMAGE_MULTIPLIER.get()) {
             return 1;
         }
-
-        if (data.getBlightKills() >= 100) {
+        if (data.getBlightKills() >= Config.UPGRADE_BLIGHT_KILLS.get()) {
             return 2;
         }
-
-        if (data.getWitherDamage() > 300 * 3 && data.getWitherKills() >= 3) {
+        if (data.getWitherDamage() >= Config.UPGRADE_WITHER_DAMAGE.get()
+                && data.getWitherKills() >= Config.UPGRADE_WITHER_KILLS.get()) {
             return 3;
         }
-
-        if (data.getWardenDamage() > 500 * 2 && data.getWardenKills() >= 2) {
+        if (data.getWardenDamage() >= Config.UPGRADE_WARDEN_DAMAGE.get()
+                && data.getWardenKills() >= Config.UPGRADE_WARDEN_KILLS.get()) {
             return 4;
         }
-
-        if (data.getPositiveEffects() >= 30 || data.getNegativeEffects() >= 20) {
+        if (data.getPositiveEffects() >= Config.UPGRADE_POSITIVE_EFFECTS.get()
+                || data.getNegativeEffects() >= Config.UPGRADE_NEGATIVE_EFFECTS.get()) {
             return 5;
         }
-
-        if (data.getBlazeKills() >= 100) {
+        if (data.getBlazeKills() >= Config.UPGRADE_BLAZE_KILLS.get()) {
             return 6;
         }
-
-        if (data.getTradingProgress() >= 4096) {
+        if (data.getTradingProgress() >= Config.UPGRADE_TRADING_EMERALDS.get()) {
             return 7;
         }
-
-        if (data.getFrozenDamage() >= maxHealth * 10) {
+        if (data.getFrozenDamage() >= maxHealth * Config.UPGRADE_FROZEN_DAMAGE_MULTIPLIER.get()) {
             return 8;
         }
-
-        if (data.getSwiftTicks() >= 240000) {
+        if (data.getSwiftTicks() >= Config.UPGRADE_SWIFT_TICKS.get()) {
             return 9;
         }
-
-        if (data.getCultistFollowers() >= 256) {
+        if (data.getCultistFollowers() >= Config.UPGRADE_FOLLOWER_COUNT.get()) {
             return 10;
         }
-
-        if (data.getVillagerKills() >= 666) {
+        if (data.getVillagerKills() >= Config.UPGRADE_VILLAGER_KILLS.get()) {
             return 11;
         }
-
         return -1;
     }
 
@@ -349,14 +388,27 @@ public class ApostleUpgradeEvents {
             performUpgrade(entity, titleNumber);
             ApostleUpgradeManager.clearUpgradeData(entity);
         }
-        if (ApostleUpgradeManager.isMarkedForUpgrade(entity)) {
-            ApostleUpgradeManager.saveUpgradeData(entity);
-        }
     }
 
     private static void performUpgrade(LivingEntity entity, int titleNumber) {
-        if (entity.level().isClientSide)
+        if (entity.level().isClientSide) {
             return;
+        }
         com.k1sak1.goetyawaken.common.upgrades.ApostleServantConverter.convertToApostle(entity, titleNumber);
+    }
+
+    @SubscribeEvent
+    public static void onEntityLeaveLevel(EntityLeaveLevelEvent event) {
+        if (event.getEntity() instanceof LivingEntity livingEntity) {
+            ApostleUpgradeManager.onEntityLeaveLevel(livingEntity);
+            lastMoneyAmounts.remove(livingEntity.getUUID());
+        }
+    }
+
+    @SubscribeEvent
+    public static void onServerStopping(ServerStoppingEvent event) {
+        ApostleUpgradeManager.onServerStopping();
+        pendingRefunds.clear();
+        lastMoneyAmounts.clear();
     }
 }

@@ -1,14 +1,17 @@
 package com.k1sak1.goetyawaken.common.entities.ally.illager.train;
 
 import com.Polarice3.Goety.api.entities.ally.illager.ITrainIllager;
+import com.k1sak1.goetyawaken.common.ModIntegrationRegistry;
 import com.k1sak1.goetyawaken.utils.AdvancedBlockFinder;
 import com.k1sak1.goetyawaken.common.entities.ModEntityType;
 import com.k1sak1.goetyawaken.common.blocks.ModBlocks;
+import com.k1sak1.goetyawaken.common.compat.ModLoadedUtil;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.tags.BlockTags;
 import com.Polarice3.Goety.common.items.ModItems;
@@ -61,6 +64,18 @@ public class GoetyAwakenIllagerType implements ITrainIllager {
                         if (mob instanceof com.Polarice3.Goety.common.entities.ally.illager.Neollager neollager) {
                                 return neollager.isMagic();
                         }
+                } else if (ModLoadedUtil.isModLoaded(ModLoadedUtil.TAKES_A_PILLAGE)
+                                && ModIntegrationRegistry.SKIRMISHER_SERVANT != null
+                                && entityType == ModIntegrationRegistry.SKIRMISHER_SERVANT.get()) {
+                        return mob.getType() == com.Polarice3.Goety.common.entities.ModEntityType.NEOLLAGER.get();
+                } else if (ModLoadedUtil.isModLoaded(ModLoadedUtil.TAKES_A_PILLAGE)
+                                && ModIntegrationRegistry.ARCHER_SERVANT != null
+                                && entityType == ModIntegrationRegistry.ARCHER_SERVANT.get()) {
+                        return mob.getType() == com.Polarice3.Goety.common.entities.ModEntityType.NEOLLAGER.get();
+                } else if (ModLoadedUtil.isModLoaded(ModLoadedUtil.TAKES_A_PILLAGE)
+                                && ModIntegrationRegistry.LEGIONER_SERVANT != null
+                                && entityType == ModIntegrationRegistry.LEGIONER_SERVANT.get()) {
+                        return mob.getType() == com.Polarice3.Goety.common.entities.ModEntityType.NEOLLAGER.get();
                 }
                 return false;
         }
@@ -132,6 +147,15 @@ public class GoetyAwakenIllagerType implements ITrainIllager {
                         return ModEntityType.PREACHER_SERVANT.get();
                 } else if (checkIllusionerEnvironment(level, blockPos, range)) {
                         return ModEntityType.ILLUSIONER_SERVANT.get();
+                } else if (ModLoadedUtil.isModLoaded(ModLoadedUtil.TAKES_A_PILLAGE)
+                                && checkSkirmisherEnvironment(level, blockPos, range)) {
+                        return ModIntegrationRegistry.SKIRMISHER_SERVANT.get();
+                } else if (ModLoadedUtil.isModLoaded(ModLoadedUtil.TAKES_A_PILLAGE)
+                                && checkArcherEnvironment(level, blockPos, range)) {
+                        return ModIntegrationRegistry.ARCHER_SERVANT.get();
+                } else if (ModLoadedUtil.isModLoaded(ModLoadedUtil.TAKES_A_PILLAGE)
+                                && checkLegionerEnvironment(level, blockPos, range)) {
+                        return ModIntegrationRegistry.LEGIONER_SERVANT.get();
                 }
 
                 return null;
@@ -146,9 +170,8 @@ public class GoetyAwakenIllagerType implements ITrainIllager {
                                                 blockState -> blockState.is(Blocks.CAMPFIRE),
                                                 range, 4)
                                 && AdvancedBlockFinder.getNearbyBlocks(level, blockPos,
-                                                blockState -> blockState.is(
-                                                                com.Polarice3.Goety.common.blocks.ModBlocks.DARK_ALTAR
-                                                                                .get()),
+                                                blockState -> blockState
+                                                                .getBlock() instanceof com.Polarice3.Goety.common.blocks.DarkAltarBlock,
                                                 range, 4)
                                 && checkPedestalsWithCores(level, blockPos, range)
                                 && AdvancedBlockFinder.getNearbyNonEmptyCursedCages(level, blockPos, range, 1)
@@ -279,5 +302,67 @@ public class GoetyAwakenIllagerType implements ITrainIllager {
                                                 range, 24)
                                 && AdvancedBlockFinder.getNearbyPedestalsWithItem(level, blockPos, mirrorFocusCheck,
                                                 range, 1);
+        }
+
+        private boolean checkSkirmisherEnvironment(Level level, BlockPos blockPos, int range) {
+                return AdvancedBlockFinder.getNearbyBlocks(level, blockPos,
+                                blockState -> blockState.is(BlockTags.BANNERS), range, 1)
+                                && AdvancedBlockFinder.getNearbyBlocks(level, blockPos,
+                                                blockState -> blockState.is(BlockTags.PLANKS), range, 64)
+                                && AdvancedBlockFinder.getNearbyBlocks(level, blockPos,
+                                                blockState -> blockState
+                                                                .getBlock() == com.Polarice3.Goety.common.blocks.ModBlocks.OMINOUS_STONE_BLOCK
+                                                                                .get()
+                                                                || blockState.getBlock().getDescriptionId()
+                                                                                .contains("ominous_stone"),
+                                                range, 60)
+                                && AdvancedBlockFinder.getNearbyBlocks(level, blockPos,
+                                                blockState -> blockState.is(BlockTags.WALLS), range, 10)
+                                && AdvancedBlockFinder.getNearbyBlocks(level, blockPos,
+                                                blockState -> blockState.is(BlockTags.WOODEN_FENCES), range, 10)
+                                && AdvancedBlockFinder.getNearbyBlocks(level, blockPos,
+                                                blockState -> blockState.getBlock() instanceof FurnaceBlock
+                                                                || blockState.getBlock() instanceof BlastFurnaceBlock,
+                                                range, 2)
+                                && AdvancedBlockFinder.getNearbyBlocks(level, blockPos,
+                                                blockState -> blockState.getBlock() instanceof CraftingTableBlock,
+                                                range, 1);
+        }
+
+        private boolean checkArcherEnvironment(Level level, BlockPos blockPos, int range) {
+                return AdvancedBlockFinder.getNearbyBlocks(level, blockPos,
+                                blockState -> blockState.is(Blocks.HAY_BLOCK) || blockState.is(Blocks.TARGET), range, 2)
+                                && AdvancedBlockFinder.getNearbyBlocks(level, blockPos,
+                                                blockState -> blockState.getBlock() instanceof CarvedPumpkinBlock,
+                                                range, 2)
+                                && AdvancedBlockFinder.getNearbyBlocks(level, blockPos,
+                                                blockState -> blockState.is(BlockTags.WOODEN_FENCES), range, 16)
+                                && AdvancedBlockFinder.getNearbyBlocks(level, blockPos,
+                                                blockState -> blockState
+                                                                .getBlock() == com.Polarice3.Goety.common.blocks.ModBlocks.OMINOUS_STONE_BLOCK
+                                                                                .get()
+                                                                || blockState.getBlock().getDescriptionId()
+                                                                                .contains("ominous_stone"),
+                                                range, 20);
+        }
+
+        private boolean checkLegionerEnvironment(Level level, BlockPos blockPos, int range) {
+                return AdvancedBlockFinder.getNearbyBlocks(level, blockPos,
+                                blockState -> blockState.getBlock() instanceof GrindstoneBlock, range, 2)
+                                && AdvancedBlockFinder.getNearbyBlocks(level, blockPos,
+                                                blockState -> blockState.getBlock() instanceof SmithingTableBlock,
+                                                range, 2)
+                                && AdvancedBlockFinder.getNearbyBlocks(level, blockPos,
+                                                blockState -> blockState.is(Blocks.IRON_ORE)
+                                                                || blockState.is(Blocks.DEEPSLATE_IRON_ORE),
+                                                range, 16)
+                                && AdvancedBlockFinder.getNearbyBlocks(level, blockPos,
+                                                blockState -> blockState.is(BlockTags.LOGS), range, 32)
+                                && AdvancedBlockFinder.getNearbyBlocks(level, blockPos,
+                                                blockState -> blockState.getBlock() instanceof BarrelBlock, range, 4)
+                                && AdvancedBlockFinder.getNearbyBlocks(level, blockPos,
+                                                blockState -> blockState.getBlock() instanceof BedBlock, range, 4)
+                                && AdvancedBlockFinder.getNearbyBlocks(level, blockPos,
+                                                blockState -> blockState.getBlock() instanceof AnvilBlock, range, 2);
         }
 }

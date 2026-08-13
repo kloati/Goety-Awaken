@@ -1,0 +1,17 @@
+{
+  "name": "Detonation Ring",
+  "icon": "goetyawaken:detonation_ring",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Arch Illusioners have mastered the vicious art of shaping arrows into explosive bolts through magic. This ring, forged with their power, allows the wielder to grasp the technique of magically shaping explosive arrows, and aids the wearer in casting it—granting ordinary arrows they fire the chance to transform into explosive arrows."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:detonation_ring",
+      "text": ""
+    }
+  ],
+  "extra_recipe_mappings": {"goetyawaken:detonation_ring":0}
+}

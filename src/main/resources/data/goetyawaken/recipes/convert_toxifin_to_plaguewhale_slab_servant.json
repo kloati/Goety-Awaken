@@ -1,0 +1,35 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:convert_complete_tamed",
+  "activation_item": {
+    "item": "minecraft:cod"
+  },
+  "craftType": "deep",
+  "entity_to_convert": {
+    "tag": "goetyawaken:toxifin",
+    "display_name": "entity.goetyawaken.toxifin_servant"
+  },
+  "entity_to_convert_into": "goetyawaken:plaguewhale_slab_servant",
+  "soulCost": 4,
+  "duration": 10,
+  "ingredients": [
+    {
+      "item": "minecraft:pufferfish"
+    },
+    {
+      "item": "minecraft:prismarine_shard"
+    },
+    {
+      "item": "minecraft:wither_rose"
+    },
+    {
+      "item": "minecraft:poisonous_potato"
+    },
+    {
+      "item": "minecraft:prismarine_crystals"
+    }
+  ],
+  "result": {
+    "item": "goety:jei_dummy/none"
+  }
+}

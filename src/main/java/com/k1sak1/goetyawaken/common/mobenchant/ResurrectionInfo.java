@@ -2,6 +2,7 @@ package com.k1sak1.goetyawaken.common.mobenchant;
 
 import com.k1sak1.goetyawaken.api.IAncientGlint;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
@@ -15,7 +16,7 @@ public class ResurrectionInfo {
 
     private final Vec3 deathPosition;
     private final CompoundTag entityData;
-    private final Level level;
+    private final ResourceKey<Level> dimension;
     private final UUID originalUUID;
     @Nullable
     private final UUID trueOwnerUUID;
@@ -27,7 +28,7 @@ public class ResurrectionInfo {
 
     public ResurrectionInfo(Entity entity, int resurrectionTicks, long currentGameTime) {
         this.deathPosition = entity.position();
-        this.level = entity.level();
+        this.dimension = entity.level().dimension();
         this.deathGameTime = currentGameTime;
         this.originalUUID = entity.getUUID();
         this.hasAncientGlint = (entity instanceof LivingEntity living && living instanceof IAncientGlint glint)
@@ -81,8 +82,8 @@ public class ResurrectionInfo {
         return entityData;
     }
 
-    public Level getLevel() {
-        return level;
+    public ResourceKey<Level> getDimension() {
+        return dimension;
     }
 
     @Nullable

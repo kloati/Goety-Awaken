@@ -12,5 +12,6 @@
       "recipe": "goetyawaken:ripplewalk",
       "text": "The wearer can run on fluids, but the effect ceases once they stop moving."
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:ripplewalk":0}
 }

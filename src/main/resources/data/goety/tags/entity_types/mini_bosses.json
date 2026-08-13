@@ -1,6 +1,13 @@
 {
   "replace": false,
   "values": [
-    "goetyawaken:wraith_necromancer"
+    "goetyawaken:wraith_necromancer",
+    "goetyawaken:parched_necromancer",
+    "goetyawaken:hostile_wildfire",
+    "goetyawaken:endersent_servant",
+    "goetyawaken:ruby_sorcerer",
+    "goetyawaken:hostile_rampart_captain",
+    "goetyawaken:hostile_giant_ghast",
+    "goetyawaken:arch_illusioner"
   ]
 }

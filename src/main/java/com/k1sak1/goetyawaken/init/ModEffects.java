@@ -4,6 +4,7 @@ import com.k1sak1.goetyawaken.GoetyAwaken;
 import com.k1sak1.goetyawaken.common.effects.*;
 import com.k1sak1.goetyawaken.common.effects.MobResurrectionAuraEffect;
 import com.k1sak1.goetyawaken.common.effects.RecoverEffect;
+import com.k1sak1.goetyawaken.common.effects.PotentVenomEffect;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -70,4 +71,7 @@ public class ModEffects {
 
         public static final RegistryObject<MobEffect> RECOVER = EFFECTS.register("recover",
                         () -> new RecoverEffect(MobEffectCategory.BENEFICIAL, 0x00FF00));
+
+        public static final RegistryObject<MobEffect> POTENT_VENOM = EFFECTS.register("potent_venom",
+                        PotentVenomEffect::new);
 }

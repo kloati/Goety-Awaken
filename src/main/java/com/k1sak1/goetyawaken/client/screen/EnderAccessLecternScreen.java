@@ -11,6 +11,7 @@ import com.k1sak1.goetyawaken.client.screen.widget.sidebutton.SideButton;
 import com.k1sak1.goetyawaken.client.screen.widget.sidebutton.SortingDirectionSideButton;
 import com.k1sak1.goetyawaken.client.screen.widget.sidebutton.SortingTypeSideButton;
 import com.k1sak1.goetyawaken.client.screen.widget.sidebutton.ViewTypeSideButton;
+import com.k1sak1.goetyawaken.client.screen.widget.sidebutton.GridSizeSideButton;
 import com.k1sak1.goetyawaken.common.network.ModNetwork;
 import com.k1sak1.goetyawaken.common.storage.container.EnderAccessLecternContainer;
 import com.k1sak1.goetyawaken.common.storage.grid.IItemGridHandler;
@@ -34,7 +35,6 @@ public class EnderAccessLecternScreen extends AbstractContainerScreen<EnderAcces
     private static final int TOP_HEIGHT = 19;
     private static final int ROW_HEIGHT = 18;
     private static final int BOTTOM_HEIGHT = 156;
-    private static final int VISIBLE_ROWS = 5;
 
     private static final int GRID_X = 8;
     private static final int GRID_Y = TOP_HEIGHT;
@@ -52,27 +52,38 @@ public class EnderAccessLecternScreen extends AbstractContainerScreen<EnderAcces
     public EnderAccessLecternScreen(EnderAccessLecternContainer container, Inventory playerInventory, Component title) {
         super(container, playerInventory, title);
 
-        int totalHeight = TOP_HEIGHT + VISIBLE_ROWS * ROW_HEIGHT + BOTTOM_HEIGHT;
+        int rows = container.getVisibleRows();
+        int totalHeight = TOP_HEIGHT + rows * ROW_HEIGHT + BOTTOM_HEIGHT;
         this.imageWidth = 193;
         this.imageHeight = totalHeight;
-        this.inventoryLabelY = TOP_HEIGHT + VISIBLE_ROWS * ROW_HEIGHT + 73 - 12;
+        this.inventoryLabelY = TOP_HEIGHT + rows * ROW_HEIGHT + 73 - 12;
+    }
+
+    private int visibleRows() {
+        return getMenu().getVisibleRows();
     }
 
     @Override
     protected void init() {
+
+        int rows = visibleRows();
+        this.imageHeight = TOP_HEIGHT + rows * ROW_HEIGHT + BOTTOM_HEIGHT;
+        this.inventoryLabelY = TOP_HEIGHT + rows * ROW_HEIGHT + 73 - 12;
+        getMenu().initSlots();
+
         super.init();
 
-        int headerAndSlots = TOP_HEIGHT + VISIBLE_ROWS * ROW_HEIGHT;
+        int headerAndSlots = TOP_HEIGHT + visibleRows() * ROW_HEIGHT;
 
-        scrollbar = new ScrollbarWidget(leftPos + SCROLLBAR_X, topPos + GRID_Y, VISIBLE_ROWS * ROW_HEIGHT);
+        scrollbar = new ScrollbarWidget(leftPos + SCROLLBAR_X, topPos + GRID_Y, visibleRows() * ROW_HEIGHT);
         scrollbar.setEnabled(true);
 
         searchWidget = new SearchWidget(font, leftPos + 81, topPos + 7, 82, 10);
         searchWidget.setOnChanged(text -> {
-            IGridView view = getMenu().getView();
-            if (view instanceof GridViewImpl impl) {
+            Object viewObj = getMenu().getView();
+            if (viewObj instanceof GridViewImpl impl) {
                 impl.setSearchQuery(text);
-                view.forceSort();
+                impl.forceSort();
                 updateScrollbar();
             }
         });
@@ -84,8 +95,8 @@ public class EnderAccessLecternScreen extends AbstractContainerScreen<EnderAcces
             searchWidget.setFocused(false);
         }
 
-        IGridView view = getMenu().getView();
-        if (view instanceof GridViewImpl impl) {
+        Object viewObj = getMenu().getView();
+        if (viewObj instanceof GridViewImpl impl) {
             impl.setScrollbarUpdater(this::updateScrollbar);
             sideButtonY = 0;
             addSideButton(new SortingDirectionSideButton(0, 0, impl));
@@ -95,6 +106,15 @@ public class EnderAccessLecternScreen extends AbstractContainerScreen<EnderAcces
                     () -> getMenu().getSearchBoxMode(),
                     mode -> getMenu().setSearchBoxMode(mode),
                     searchWidget));
+            addSideButton(new GridSizeSideButton(0, 0,
+                    () -> getMenu().getSize(),
+                    size -> getMenu().setSize(size),
+                    () -> {
+
+                        if (this.minecraft != null) {
+                            this.resize(this.minecraft, this.width, this.height);
+                        }
+                    }));
         }
 
         updateScrollbar();
@@ -109,10 +129,10 @@ public class EnderAccessLecternScreen extends AbstractContainerScreen<EnderAcces
     }
 
     private void updateScrollbar() {
-        IGridView view = getMenu().getView();
-        if (view != null && scrollbar != null) {
-            int totalRows = view.getRows();
-            scrollbar.setMaxOffset(Math.max(0, totalRows - VISIBLE_ROWS));
+        Object viewObj2 = getMenu().getView();
+        if (viewObj2 != null && scrollbar != null) {
+            int totalRows = ((IGridView) viewObj2).getRows();
+            scrollbar.setMaxOffset(Math.max(0, totalRows - visibleRows()));
         }
     }
 
@@ -122,15 +142,16 @@ public class EnderAccessLecternScreen extends AbstractContainerScreen<EnderAcces
 
         int x = this.leftPos;
         int yy = this.topPos;
+        int rows = visibleRows();
 
         graphics.blit(TEXTURE, x, yy, 0, 0, imageWidth, TOP_HEIGHT);
 
-        for (int i = 0; i < VISIBLE_ROWS; i++) {
+        for (int i = 0; i < rows; i++) {
             yy += ROW_HEIGHT;
 
             int yTextureStart = TOP_HEIGHT;
             if (i > 0) {
-                if (i == VISIBLE_ROWS - 1) {
+                if (i == rows - 1) {
                     yTextureStart += ROW_HEIGHT * 2;
                 } else {
                     yTextureStart += ROW_HEIGHT;
@@ -166,16 +187,17 @@ public class EnderAccessLecternScreen extends AbstractContainerScreen<EnderAcces
     }
 
     private void renderGridItems(GuiGraphics graphics, int mouseX, int mouseY) {
-        IGridView view = getMenu().getView();
-        if (view == null)
+        Object viewObj3 = getMenu().getView();
+        if (viewObj3 == null)
             return;
 
-        List<IGridStack> stacks = view.getStacks();
+        List<IGridStack> stacks = ((IGridView) viewObj3).getStacks();
         int offset = scrollbar != null ? scrollbar.getOffset() : 0;
+        int rows = visibleRows();
 
         IGridStack hoveredStack = null;
 
-        for (int row = 0; row < VISIBLE_ROWS; row++) {
+        for (int row = 0; row < rows; row++) {
             for (int col = 0; col < GRID_COLS; col++) {
                 int idx = (offset + row) * GRID_COLS + col;
                 if (idx >= stacks.size())
@@ -204,7 +226,7 @@ public class EnderAccessLecternScreen extends AbstractContainerScreen<EnderAcces
     }
 
     private void renderClearButton(GuiGraphics graphics, int mouseX, int mouseY) {
-        int headerAndSlots = TOP_HEIGHT + VISIBLE_ROWS * ROW_HEIGHT;
+        int headerAndSlots = TOP_HEIGHT + visibleRows() * ROW_HEIGHT;
         int btnX = leftPos + 82;
         int btnY = topPos + headerAndSlots + 4;
 
@@ -234,7 +256,7 @@ public class EnderAccessLecternScreen extends AbstractContainerScreen<EnderAcces
             return true;
         }
 
-        int headerAndSlots = TOP_HEIGHT + VISIBLE_ROWS * ROW_HEIGHT;
+        int headerAndSlots = TOP_HEIGHT + visibleRows() * ROW_HEIGHT;
         int btnX = leftPos + 82;
         int btnY = topPos + headerAndSlots + 4;
         if (mouseX >= btnX && mouseX < btnX + CLEAR_BTN_SIZE
@@ -244,18 +266,19 @@ public class EnderAccessLecternScreen extends AbstractContainerScreen<EnderAcces
         }
 
         IGridStack clicked = getGridStackAt(mouseX, mouseY);
-        if (clicked != null) {
-            handleGridClick(clicked, button);
-            return true;
-        }
 
-        if (isInGridArea(mouseX, mouseY) && hasShiftDown() == false) {
+        if (isInGridArea(mouseX, mouseY) && (button == 0 || button == 1)) {
             ItemStack carried = getMenu().getCarried();
             if (!carried.isEmpty()) {
                 boolean single = button == 1;
                 ModNetwork.channel.sendToServer(new GridItemInsertHeldMessage(single));
                 return true;
             }
+        }
+
+        if (clicked != null) {
+            handleGridClick(clicked, button);
+            return true;
         }
 
         return super.mouseClicked(mouseX, mouseY, button);
@@ -329,14 +352,15 @@ public class EnderAccessLecternScreen extends AbstractContainerScreen<EnderAcces
     }
 
     private IGridStack getGridStackAt(double mouseX, double mouseY) {
-        IGridView view = getMenu().getView();
-        if (view == null)
+        Object viewObj4 = getMenu().getView();
+        if (viewObj4 == null)
             return null;
 
-        List<IGridStack> stacks = view.getStacks();
+        List<IGridStack> stacks = ((IGridView) viewObj4).getStacks();
         int offset = scrollbar != null ? scrollbar.getOffset() : 0;
+        int rows = visibleRows();
 
-        for (int row = 0; row < VISIBLE_ROWS; row++) {
+        for (int row = 0; row < rows; row++) {
             for (int col = 0; col < GRID_COLS; col++) {
                 int idx = (offset + row) * GRID_COLS + col;
                 if (idx >= stacks.size())
@@ -356,7 +380,7 @@ public class EnderAccessLecternScreen extends AbstractContainerScreen<EnderAcces
 
     private boolean isInGridArea(double mouseX, double mouseY) {
         int gridRight = leftPos + GRID_X + GRID_COLS * ROW_HEIGHT;
-        int gridBottom = topPos + GRID_Y + VISIBLE_ROWS * ROW_HEIGHT;
+        int gridBottom = topPos + GRID_Y + visibleRows() * ROW_HEIGHT;
         return mouseX >= leftPos + GRID_X && mouseX < gridRight
                 && mouseY >= topPos + GRID_Y && mouseY < gridBottom;
     }

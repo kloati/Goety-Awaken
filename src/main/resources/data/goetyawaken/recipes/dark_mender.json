@@ -9,16 +9,7 @@
   "duration": 20,
   "ingredients": [
     {
-      "item": "goety:soul_heal_focus"
-    },
-    {
       "item": "goety:grim_infuser"
-    },
-    {
-      "item": "minecraft:nether_star"
-    },
-    {
-      "item": "goety:black_crystal"
     },
     {
       "item": "goety:mystic_core"

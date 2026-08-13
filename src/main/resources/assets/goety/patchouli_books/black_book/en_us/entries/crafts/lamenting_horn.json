@@ -1,0 +1,17 @@
+{
+  "name": "Lamenting Horn",
+  "icon": "goetyawaken:lamenting_horn",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Just as blowing the Blazing Horn can draw a response from a Nether fortress, blowing the Lamenting Horn may also draw a response from certain creatures of the hellish realm..."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:lamenting_horn",
+      "text": ""
+    }
+  ],
+  "extra_recipe_mappings": {"goetyawaken:lamenting_horn":0}
+}

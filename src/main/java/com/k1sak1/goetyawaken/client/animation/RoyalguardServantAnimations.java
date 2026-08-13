@@ -161,7 +161,7 @@ public class RoyalguardServantAnimations {
                                                         AnimationChannel.Interpolations.CATMULLROM)))
                         .build();
 
-        public static final AnimationDefinition ATTACK = AnimationDefinition.Builder.withLength(1.4167F).looping()
+        public static final AnimationDefinition ATTACK = AnimationDefinition.Builder.withLength(1.4167F)
                         .addAnimation("right_leg", new AnimationChannel(AnimationChannel.Targets.ROTATION,
                                         new Keyframe(0.0F, KeyframeAnimations.degreeVec(0.0F, 0.0F, 0.0F),
                                                         AnimationChannel.Interpolations.CATMULLROM),

@@ -1,0 +1,38 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:convert_complete_tamed",
+  "activation_item": {
+    "item": "goety:malefic_helm"
+  },
+  "craftType": "expert_nether",
+  "entity_to_convert": {
+    "tag": "goetyawaken:heretic",
+    "display_name": "entity.goety.heretic"
+  },
+  "entity_to_convert_into": "goetyawaken:heresiarch_servant",
+  "soulCost": 30,
+  "duration": 10,
+  "ingredients": [
+    {
+      "item": "minecraft:magma_cream"
+    },
+    {
+      "item": "goety:surging_focus"
+    },
+    {
+      "item": "goety:hogging_focus"
+    },
+    {
+      "item": "minecraft:fermented_spider_eye"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "minecraft:book"
+    }
+  ],
+  "result": {
+    "item": "goety:jei_dummy/none"
+  }
+}

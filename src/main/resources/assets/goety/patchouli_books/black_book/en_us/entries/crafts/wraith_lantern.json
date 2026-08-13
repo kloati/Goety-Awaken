@@ -12,5 +12,6 @@
       "recipe": "goetyawaken:wraith_lantern",
       "text": "Crafting this chilling lantern will allow you to resurrect the master of that ghostly hut."
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:wraith_lantern":0}
 }

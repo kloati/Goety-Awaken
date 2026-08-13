@@ -16,5 +16,6 @@
       "recipe": "goetyawaken:desert_plagues_focus",
       "text": ""
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:desert_plagues_focus":0}
 }

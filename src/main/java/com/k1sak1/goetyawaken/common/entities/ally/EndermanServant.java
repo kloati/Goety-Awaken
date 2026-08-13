@@ -5,7 +5,10 @@ import com.Polarice3.Goety.common.entities.neutral.Owned;
 import com.Polarice3.Goety.common.entities.neutral.ender.AbstractEnderling;
 import com.Polarice3.Goety.utils.MobUtil;
 import com.k1sak1.goetyawaken.config.AttributesConfig;
+import com.k1sak1.goetyawaken.init.ModEffects;
+import com.k1sak1.goetyawaken.init.ModSounds;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.MobSpawnType;
@@ -22,6 +25,8 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -35,6 +40,7 @@ import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -60,11 +66,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class EndermanServant extends AbstractEnderling implements ICustomAttributes {
-    private static final Logger LOGGER = LoggerFactory.getLogger(EndermanServant.class);
     private static final UUID SPEED_MODIFIER_ATTACKING_UUID = UUID.fromString("020E0DFB-87AE-4653-9556-831010E291A0");
     private static final AttributeModifier SPEED_MODIFIER_ATTACKING = new AttributeModifier(
             SPEED_MODIFIER_ATTACKING_UUID, "Attacking speed boost", (double) 0.15F,
@@ -76,6 +79,9 @@ public class EndermanServant extends AbstractEnderling implements ICustomAttribu
     private static final EntityDataAccessor<ItemStack> DATA_CARRIED_ITEM = SynchedEntityData.defineId(
             EndermanServant.class,
             EntityDataSerializers.ITEM_STACK);
+    private static final EntityDataAccessor<Boolean> DATA_IS_POISONOUS_POTATO = SynchedEntityData.defineId(
+            EndermanServant.class,
+            EntityDataSerializers.BOOLEAN);
     private int lastStareSound = Integer.MIN_VALUE;
     private int targetChangeTime;
     private boolean isBeingStaredAt;
@@ -158,6 +164,7 @@ public class EndermanServant extends AbstractEnderling implements ICustomAttribu
         this.entityData.define(DATA_STARED_AT, false);
         this.entityData.define(DATA_TARGET_BLOCK, new CompoundTag());
         this.entityData.define(DATA_CARRIED_ITEM, ItemStack.EMPTY);
+        this.entityData.define(DATA_IS_POISONOUS_POTATO, false);
     }
 
     public boolean isCreepy() {
@@ -170,6 +177,14 @@ public class EndermanServant extends AbstractEnderling implements ICustomAttribu
 
     public void setBeingStaredAt() {
         this.entityData.set(DATA_STARED_AT, true);
+    }
+
+    public boolean isPoisonousPotato() {
+        return this.entityData.get(DATA_IS_POISONOUS_POTATO);
+    }
+
+    public void setPoisonousPotato(boolean poisonousPotato) {
+        this.entityData.set(DATA_IS_POISONOUS_POTATO, poisonousPotato);
     }
 
     @Override
@@ -190,19 +205,21 @@ public class EndermanServant extends AbstractEnderling implements ICustomAttribu
             MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
         pSpawnData = super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
         this.setConfigurableAttributes();
-        this.setHealth(this.getMaxHealth());
         return pSpawnData;
     }
 
     @Override
     public void readAdditionalSaveData(CompoundTag compound) {
         super.readAdditionalSaveData(compound);
-        this.setConfigurableAttributes();
+        if (compound.contains("PoisonousPotato")) {
+            this.setPoisonousPotato(compound.getBoolean("PoisonousPotato"));
+        }
     }
 
     @Override
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
+        compound.putBoolean("PoisonousPotato", this.isPoisonousPotato());
     }
 
     @Override
@@ -693,6 +710,47 @@ public class EndermanServant extends AbstractEnderling implements ICustomAttribu
     }
 
     @Override
+    public boolean doHurtTarget(Entity pEntity) {
+        boolean flag = super.doHurtTarget(pEntity);
+        if (flag && pEntity instanceof LivingEntity livingEntity && this.isPoisonousPotato()) {
+            livingEntity.addEffect(new MobEffectInstance(ModEffects.POTENT_VENOM.get(),
+                    com.Polarice3.Goety.utils.MathHelper.secondsToTicks(5), 0, false, false));
+        }
+        return flag;
+    }
+
+    @Override
+    public boolean killedEntity(ServerLevel world, LivingEntity killedEntity) {
+        boolean flag = super.killedEntity(world, killedEntity);
+        if (this.isPoisonousPotato() && killedEntity instanceof EnderMan enderMan) {
+            if (net.minecraftforge.event.ForgeEventFactory.canLivingConvert(enderMan,
+                    com.k1sak1.goetyawaken.common.entities.ModEntityType.ENDERMAN_SERVANT.get(), (timer) -> {
+                    })) {
+                EndermanServant servant = enderMan.convertTo(
+                        com.k1sak1.goetyawaken.common.entities.ModEntityType.ENDERMAN_SERVANT.get(), true);
+                if (servant != null) {
+                    servant.setPoisonousPotato(true);
+                    if (this.getTrueOwner() != null) {
+                        servant.setTrueOwner(this.getTrueOwner());
+                    }
+                    servant.finalizeSpawn(world, world.getCurrentDifficultyAt(servant.blockPosition()),
+                            MobSpawnType.CONVERSION, null, null);
+                    servant.setLimitedLife(10 * (15 + world.random.nextInt(45)));
+                    if (this.isHostile()) {
+                        servant.setHostile(true);
+                    }
+                    net.minecraftforge.event.ForgeEventFactory.onLivingConvert(enderMan, servant);
+                    this.playSound(ModSounds.POISONOUS_POTATO_ZOMBIE_INFECT.get(), 1.0F, 1.0F);
+                    if (!servant.isSilent()) {
+                        world.levelEvent(null, 1026, servant.blockPosition(), 0);
+                    }
+                }
+            }
+        }
+        return flag;
+    }
+
+    @Override
     public int getSummonLimit(LivingEntity owner) {
         return com.k1sak1.goetyawaken.Config.endermanServantLimit;
     }
@@ -700,6 +758,9 @@ public class EndermanServant extends AbstractEnderling implements ICustomAttribu
     @Override
     public boolean canBeAffected(net.minecraft.world.effect.MobEffectInstance effectInstance) {
         if (effectInstance.getEffect() == com.Polarice3.Goety.common.effects.GoetyEffects.VOID_TOUCHED.get()) {
+            return false;
+        }
+        if (this.isPoisonousPotato() && effectInstance.getEffect() == MobEffects.POISON) {
             return false;
         }
         return super.canBeAffected(effectInstance);

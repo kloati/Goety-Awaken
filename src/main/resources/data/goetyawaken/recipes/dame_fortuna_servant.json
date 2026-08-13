@@ -1,0 +1,34 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:summon_tamed",
+  "activation_item": {
+    "item": "meetyourfight:dame_fortuna_head"
+  },
+  "craftType": "magic",
+  "entity_to_summon": "goetyawaken:dame_fortuna_servant",
+  "soulCost": 70,
+  "duration": 10,
+  "ingredients": [
+    {
+      "item": "meetyourfight:ace_of_iron"
+    },
+    {
+      "item": "goetyawaken:fate_dice_focus"
+    },
+    {
+      "item": "goetyawaken:chip_focus"
+    },
+    {
+      "item": "minecraft:red_wool"
+    },
+    {
+      "item": "minecraft:red_wool"
+    },
+    {
+      "item": "minecraft:white_wool"
+    }
+  ],
+  "result": {
+    "item": "goety:jei_dummy/none"
+  }
+}

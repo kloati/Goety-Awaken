@@ -3,13 +3,11 @@ package com.k1sak1.goetyawaken.common.entities.projectiles;
 import com.Polarice3.Goety.utils.MobUtil;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.k1sak1.goetyawaken.common.init.GoetyAwakenDataSerializers;
-import com.k1sak1.goetyawaken.utils.GoetyAwakenNBTUtil;
-
+import com.k1sak1.goetyawaken.init.GoetyAwakenDataSerializers;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Vec3i;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
@@ -19,7 +17,6 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
@@ -48,6 +45,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -55,19 +53,20 @@ import java.util.UUID;
 import java.util.function.Predicate;
 
 public class BlockClusterEntity extends Entity {
-    protected static final EntityDataAccessor<Map<BlockPos, BlockState>> BLOCK_STATE_MAP;
-    private static final EntityDataAccessor<List<CompoundTag>> BLOCK_ENTITY_DATA;
-    private static final EntityDataAccessor<BlockPos> ORIGIN_POSITION;
-    private static final EntityDataAccessor<Vec2> ROTATION_INCREMENT;
-    private static final EntityDataAccessor<Boolean> ENABLE_PHYSICS;
-    private static final EntityDataAccessor<Boolean> ALWAYS_RENDER;
-    private static final EntityDataAccessor<Float> WIDTH_DIMENSION;
-    private static final EntityDataAccessor<Float> HEIGHT_DIMENSION;
-    private static final EntityDataAccessor<Float> DEPTH_DIMENSION;
-    private static final EntityDataAccessor<Integer> OSCILLATION_DURATION;
-    protected static final EntityDataAccessor<Optional<BlockPos>> FADE_ORIGIN;
-    private static final EntityDataAccessor<Float> FADE_INTENSITY;
-    private static final EntityDataAccessor<Integer> FADE_RANGE_BUFFER;
+
+    protected static final EntityDataAccessor<Map<BlockPos, BlockState>> CLUSTER_BLOCKS;
+    private static final EntityDataAccessor<List<CompoundTag>> CLUSTER_TILE_DATA;
+    private static final EntityDataAccessor<BlockPos> CLUSTER_ANCHOR;
+    private static final EntityDataAccessor<Vec2> CLUSTER_SPIN;
+    private static final EntityDataAccessor<Boolean> CLUSTER_HAS_PHYSICS;
+    private static final EntityDataAccessor<Boolean> CLUSTER_FORCE_VISIBLE;
+    private static final EntityDataAccessor<Float> CLUSTER_BOUNDS_X;
+    private static final EntityDataAccessor<Float> CLUSTER_BOUNDS_Y;
+    private static final EntityDataAccessor<Float> CLUSTER_BOUNDS_Z;
+    private static final EntityDataAccessor<Integer> CLUSTER_WOBBLE_TICKS;
+    protected static final EntityDataAccessor<Optional<BlockPos>> CLUSTER_FADE_CENTER;
+    private static final EntityDataAccessor<Float> CLUSTER_FADE_POWER;
+    private static final EntityDataAccessor<Integer> CLUSTER_FADE_MARGIN;
 
     @Nullable
     private UUID launcherUUID;
@@ -76,21 +75,21 @@ public class BlockClusterEntity extends Entity {
     private boolean hasLeftLauncher;
     private boolean hasFired;
 
-    private static final float MOTION_DAMPING = 0.99F;
-    private static final float GRAVITY_STRENGTH = 0.03F;
+    private static final float AIR_FRICTION = 0.99F;
+    private static final float GRAVITY_ACCEL = 0.03F;
 
     public int lifetime;
     public boolean shouldDropItems;
     public boolean resetGravityFlag;
-    private int oscillationTimer;
+    private int wobbleTimer;
     @Nonnull
-    public Vec2 oscillationOffset;
+    public Vec2 previousWobble;
     @Nonnull
-    public Vec2 currentOscillation;
-    private int groundPenetration;
-    private boolean preventOverlap;
-    private boolean placeOnImpact;
-    private boolean excludeFromConsumedCount;
+    public Vec2 currentWobble;
+    private int groundBuryDepth;
+    private boolean avoidBlockOverlap;
+    private boolean shouldPlaceOnImpact;
+    private boolean ignoreConsumedCount;
     private float clusterPitchAngle;
     private float prevClusterPitchAngle;
     private float clusterYawAngle;
@@ -104,8 +103,8 @@ public class BlockClusterEntity extends Entity {
         super(entityType, world);
         this.shouldDropItems = true;
         this.resetGravityFlag = true;
-        this.oscillationOffset = Vec2.ZERO;
-        this.currentOscillation = Vec2.ZERO;
+        this.previousWobble = Vec2.ZERO;
+        this.currentWobble = Vec2.ZERO;
         this.spawnHeadIndex = -1;
     }
 
@@ -113,109 +112,72 @@ public class BlockClusterEntity extends Entity {
         super(entityType, world);
         this.shouldDropItems = true;
         this.resetGravityFlag = true;
-        this.oscillationOffset = Vec2.ZERO;
-        this.currentOscillation = Vec2.ZERO;
+        this.previousWobble = Vec2.ZERO;
+        this.currentWobble = Vec2.ZERO;
         this.spawnHeadIndex = -1;
         this.setOwner(launcher);
     }
 
     public static BlockClusterEntity createSphericalCluster(
-            EntityType<?> entityType,
-            Level world,
-            @Nullable LivingEntity owner,
-            BlockState block,
-            float radius,
-            Vec3 pos,
-            Vec3 velocity,
-            Vec2 rotationDelta,
-            boolean noGravity,
-            boolean glowing,
-            boolean placeBlocks,
-            boolean shouldDropItems) {
+            EntityType<?> entityType, Level world, @Nullable LivingEntity owner,
+            BlockState block, float radius, Vec3 pos, Vec3 velocity,
+            Vec2 spinDelta, boolean noGravity, boolean glowing,
+            boolean placeBlocks, boolean shouldDropItems) {
 
         BlockClusterEntity cluster = new BlockClusterEntity(entityType, world, owner);
-
         Map<BlockPos, BlockState> states = Maps.newHashMap();
-        int minX = Mth.floor(-radius);
-        int maxX = Mth.ceil(radius);
-        int minY = Mth.floor(-radius);
-        int maxY = Mth.ceil(radius);
-        int minZ = Mth.floor(-radius);
-        int maxZ = Mth.ceil(radius);
+        float radiusSq = radius * radius;
+        int bound = Mth.ceil(radius);
 
-        float radiusSquared = radius * radius;
-
-        for (int x = minX; x <= maxX; x++) {
-            for (int y = minY; y <= maxY; y++) {
-                for (int z = minZ; z <= maxZ; z++) {
-                    float distSq = x * x + y * y + z * z;
-                    if (distSq <= radiusSquared) {
-                        BlockPos relativePos = new BlockPos(x, y, z);
-                        states.put(relativePos, block);
+        for (int x = -bound; x <= bound; x++) {
+            for (int y = -bound; y <= bound; y++) {
+                for (int z = -bound; z <= bound; z++) {
+                    if ((float) (x * x + y * y + z * z) <= radiusSq) {
+                        states.put(new BlockPos(x, y, z), block);
                     }
                 }
             }
         }
 
         cluster.setPos(pos.x, pos.y, pos.z);
-        cluster.populate(states);
-
+        cluster.loadBlocksFromMap(states);
         cluster.setDeltaMovement(velocity);
-        cluster.setRotationDelta(rotationDelta);
+        cluster.setSpinDelta(spinDelta);
         cluster.setNoGravity(noGravity);
         cluster.setGlowingTag(glowing);
-        cluster.setPhysics(true);
+        cluster.setPhysicsEnabled(true);
         cluster.shouldDropItems = shouldDropItems;
-        cluster.placeOnImpact = placeBlocks;
+        cluster.shouldPlaceOnImpact = placeBlocks;
 
         if (velocity.lengthSqr() > 0.0D) {
-            double d0 = velocity.horizontalDistance();
-            cluster.setXRot((float) (Mth.atan2(velocity.y, d0) * (double) (180F / (float) Math.PI)));
-            cluster.setYRot((float) (Mth.atan2(velocity.x, velocity.z) * (double) (180F / (float) Math.PI)));
+            double horizDist = velocity.horizontalDistance();
+            cluster.setXRot((float) (Mth.atan2(velocity.y, horizDist) * (180F / Math.PI)));
+            cluster.setYRot((float) (Mth.atan2(velocity.x, velocity.z) * (180F / Math.PI)));
             cluster.xRotO = cluster.getXRot();
             cluster.yRotO = cluster.getYRot();
         }
-
         return cluster;
     }
 
     public static BlockClusterEntity createSphericalCluster(
-            EntityType<?> entityType,
-            Level world,
-            @Nullable LivingEntity owner,
-            BlockState block,
-            float radius,
-            Vec3 pos,
-            Vec3 direction,
-            float speed) {
-
-        Vec3 velocity = direction.normalize().scale(speed);
-        return createSphericalCluster(
-                entityType, world, owner, block, radius, pos, velocity,
-                new Vec2(0.0F, 0.0F), false, false, true, true);
+            EntityType<?> entityType, Level world, @Nullable LivingEntity owner,
+            BlockState block, float radius, Vec3 pos, Vec3 direction, float speed) {
+        return createSphericalCluster(entityType, world, owner, block, radius, pos,
+                direction.normalize().scale(speed), Vec2.ZERO, false, false, true, true);
     }
 
     public static BlockClusterEntity createSphericalCluster(
-            EntityType<?> entityType,
-            Level world,
-            @Nullable LivingEntity owner,
-            BlockState block,
-            float radius,
-            Vec3 pos,
-            Vec3 direction,
-            float speed,
-            Vec2 rotationDelta) {
-
-        Vec3 velocity = direction.normalize().scale(speed);
-        return createSphericalCluster(
-                entityType, world, owner, block, radius, pos, velocity,
-                rotationDelta, false, false, true, true);
+            EntityType<?> entityType, Level world, @Nullable LivingEntity owner,
+            BlockState block, float radius, Vec3 pos, Vec3 direction,
+            float speed, Vec2 spinDelta) {
+        return createSphericalCluster(entityType, world, owner, block, radius, pos,
+                direction.normalize().scale(speed), spinDelta, false, false, true, true);
     }
 
-    public void setOwner(@Nullable Entity pOwner) {
-        if (pOwner != null) {
-            this.launcherUUID = pOwner.getUUID();
-            this.cachedLauncher = pOwner;
+    public void setOwner(@Nullable Entity owner) {
+        if (owner != null) {
+            this.launcherUUID = owner.getUUID();
+            this.cachedLauncher = owner;
         }
     }
 
@@ -223,259 +185,216 @@ public class BlockClusterEntity extends Entity {
     public Entity getLauncher() {
         if (this.cachedLauncher != null && !this.cachedLauncher.isRemoved()) {
             return this.cachedLauncher;
-        } else if (this.launcherUUID != null && this.level() instanceof ServerLevel serverLevel) {
-            this.cachedLauncher = serverLevel.getEntity(this.launcherUUID);
+        } else if (this.launcherUUID != null && this.level() instanceof ServerLevel sl) {
+            this.cachedLauncher = sl.getEntity(this.launcherUUID);
             return this.cachedLauncher;
-        } else {
-            return null;
         }
+        return null;
     }
 
-    public void populate(Map<BlockPos, BlockState> states) {
-        if (states.size() > 0) {
-            int minX = 0;
-            int minY = 0;
-            int minZ = 0;
-            int maxX = 0;
-            int maxY = 0;
-            int maxZ = 0;
-
-            for (Map.Entry<BlockPos, BlockState> entry : states.entrySet()) {
-                BlockPos pos = entry.getKey();
-                if (pos.getX() < minX) {
-                    minX = pos.getX();
-                }
-
-                if (pos.getY() < minY) {
-                    minY = pos.getY();
-                }
-
-                if (pos.getZ() < minZ) {
-                    minZ = pos.getZ();
-                }
-
-                if (pos.getX() > maxX) {
-                    maxX = pos.getX();
-                }
-
-                if (pos.getY() > maxY) {
-                    maxY = pos.getY();
-                }
-
-                if (pos.getZ() > maxZ) {
-                    maxZ = pos.getZ();
-                }
-            }
-
-            float x = (float) (maxX - minX);
-            float y = (float) (maxY - minY);
-            float z = (float) (maxZ - minZ);
-            this.setSize(Math.abs(x) + 1.0F, Math.abs(y) + 1.0F, Math.abs(z) + 1.0F);
-            this.setStartPos(BlockPos.containing(
-                    (double) minX + (double) x / (double) 2.0F,
-                    (double) minY + (double) y / (double) 2.0F,
-                    (double) minZ + (double) z / (double) 2.0F));
-            this.setBlocks(states);
-        }
+    public void loadBlocksFromMap(Map<BlockPos, BlockState> states) {
+        if (states.isEmpty())
+            return;
+        int[] bounds = computeBounds(states);
+        float spanX = (float) (bounds[1] - bounds[0]);
+        float spanY = (float) (bounds[3] - bounds[2]);
+        float spanZ = (float) (bounds[5] - bounds[4]);
+        this.setClusterDimensions(Math.abs(spanX) + 1.0F, Math.abs(spanY) + 1.0F, Math.abs(spanZ) + 1.0F);
+        this.setAnchorPosition(new BlockPos(
+                (int) (bounds[0] + spanX / 2.0F),
+                (int) (bounds[2] + spanY / 2.0F),
+                (int) (bounds[4] + spanZ / 2.0F)));
+        this.setClusterBlocks(states);
     }
 
-    public void populate(BlockPos start, BlockPos end, Predicate<BlockState> filter) {
-        float x = (float) Mth.floor((float) (end.getX() - start.getX()));
-        float y = (float) Mth.floor((float) (end.getY() - start.getY()));
-        float z = (float) Mth.floor((float) (end.getZ() - start.getZ()));
-        Vec3 clusterPos = Vec3.atLowerCornerOf(start).add(
-                (double) x / (double) 2.0F + (double) 0.5F,
-                Math.min((double) y, (double) 0.0F),
-                (double) z / (double) 2.0F + (double) 0.5F);
-        this.setPos(clusterPos.x, clusterPos.y, clusterPos.z);
-        this.setSize(Math.abs(x) + 1.0F, Math.abs(y) + 1.0F, Math.abs(z) + 1.0F);
-        this.setStartPos(start.offset(
-                (int) ((double) x / (double) 2.0F),
-                (int) ((double) y / (double) 2.0F),
-                (int) ((double) z / (double) 2.0F)));
+    private static int[] computeBounds(Map<BlockPos, BlockState> states) {
+        int minX = Integer.MAX_VALUE, minY = Integer.MAX_VALUE, minZ = Integer.MAX_VALUE;
+        int maxX = Integer.MIN_VALUE, maxY = Integer.MIN_VALUE, maxZ = Integer.MIN_VALUE;
+        for (BlockPos pos : states.keySet()) {
+            if (pos.getX() < minX)
+                minX = pos.getX();
+            if (pos.getY() < minY)
+                minY = pos.getY();
+            if (pos.getZ() < minZ)
+                minZ = pos.getZ();
+            if (pos.getX() > maxX)
+                maxX = pos.getX();
+            if (pos.getY() > maxY)
+                maxY = pos.getY();
+            if (pos.getZ() > maxZ)
+                maxZ = pos.getZ();
+        }
+        return new int[] { minX, maxX, minY, maxY, minZ, maxZ };
+    }
 
-        for (BlockPos pos : BlockPos.betweenClosed(start, end)) {
+    public void captureRegion(BlockPos corner1, BlockPos corner2, Predicate<BlockState> filter) {
+        int spanX = Mth.floor((float) (corner2.getX() - corner1.getX()));
+        int spanY = Mth.floor((float) (corner2.getY() - corner1.getY()));
+        int spanZ = Mth.floor((float) (corner2.getZ() - corner1.getZ()));
+        this.setPos(Vec3.atLowerCornerOf(corner1).x + (double) spanX / 2.0D + 0.5D,
+                Vec3.atLowerCornerOf(corner1).y + Math.min((double) spanY, 0.0D),
+                Vec3.atLowerCornerOf(corner1).z + (double) spanZ / 2.0D + 0.5D);
+        this.setClusterDimensions(Math.abs(spanX) + 1.0F, Math.abs(spanY) + 1.0F, Math.abs(spanZ) + 1.0F);
+        this.setAnchorPosition(corner1.offset(spanX / 2, spanY / 2, spanZ / 2));
+
+        for (BlockPos pos : BlockPos.betweenClosed(corner1, corner2)) {
             BlockState state = this.level().getBlockState(pos);
             if (!state.isAir() && filter.test(state)) {
                 if (state.hasBlockEntity()) {
                     BlockEntity tile = this.level().getBlockEntity(pos);
                     if (tile != null) {
-                        this.addTileData(tile.serializeNBT());
+                        this.addTileEntityData(tile.serializeNBT());
                         this.level().removeBlockEntity(pos);
                     }
                 }
-
-                BlockPos relative = pos.subtract(this.getStartPos());
-                this.addBlock(state, relative);
+                this.addSingleBlock(state, pos.subtract(this.getAnchorPosition()));
             }
         }
-
-        for (Map.Entry<BlockPos, BlockState> entry : this.getBlocks().entrySet()) {
-            BlockPos pos = this.getStartPos().offset((Vec3i) entry.getKey());
-            this.level().setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
+        for (var entry : this.getClusterBlocks().entrySet()) {
+            this.level().setBlock(this.getAnchorPosition().offset(entry.getKey()),
+                    Blocks.AIR.defaultBlockState(), 3);
         }
     }
 
-    public void populateWithRadius(BlockPos start, float radius, Predicate<BlockState> filter) {
-        this.setSize(
-                (float) (Mth.ceil(radius) * 2 - 1),
-                (float) (Mth.ceil(radius) * 2 - 1),
-                (float) (Mth.ceil(radius) * 2 - 1));
-        this.setStartPos(start);
-        this.setPos(
-                (double) ((float) start.getX() + 0.5F),
-                (double) start.getY() - this.getBoundingBox().getCenter().y + (double) 0.5F,
-                (double) ((float) start.getZ() + 0.5F));
+    public void captureSphericalRegion(BlockPos center, float radius, Predicate<BlockState> filter) {
+        int diameter = Mth.ceil(radius) * 2 - 1;
+        this.setClusterDimensions((float) diameter, (float) diameter, (float) diameter);
+        this.setAnchorPosition(center);
+        this.setPos((double) (center.getX() + 0.5F),
+                center.getY() - this.getBoundingBox().getCenter().y + 0.5D,
+                (double) (center.getZ() + 0.5F));
 
-        for (int x = -Mth.floor(radius); x < Mth.ceil(radius); ++x) {
-            for (int y = -Mth.floor(radius); y < Mth.ceil(radius); ++y) {
-                for (int z = -Mth.floor(radius); z < Mth.ceil(radius); ++z) {
+        int lo = Mth.floor(radius), hi = Mth.ceil(radius);
+        for (int x = -lo; x < hi; x++) {
+            for (int y = -lo; y < hi; y++) {
+                for (int z = -lo; z < hi; z++) {
                     if (Mth.sqrt((float) (x * x + y * y + z * z)) < radius) {
-                        BlockPos currentPos = new BlockPos(x + start.getX(), y + start.getY(), z + start.getZ());
-                        BlockPos relativePos = new BlockPos(x, y, z);
-                        BlockState state = this.level().getBlockState(currentPos);
+                        BlockPos wPos = new BlockPos(x + center.getX(), y + center.getY(), z + center.getZ());
+                        BlockState state = this.level().getBlockState(wPos);
                         if (!state.isAir() && filter.test(state)) {
                             if (state.hasBlockEntity()) {
-                                BlockEntity tile = this.level().getBlockEntity(currentPos);
+                                BlockEntity tile = this.level().getBlockEntity(wPos);
                                 if (tile != null) {
-                                    this.addTileData(tile.serializeNBT());
-                                    this.level().removeBlockEntity(currentPos);
+                                    this.addTileEntityData(tile.serializeNBT());
+                                    this.level().removeBlockEntity(wPos);
                                 }
                             }
-
-                            this.addBlock(state, relativePos);
+                            this.addSingleBlock(state, new BlockPos(x, y, z));
                         }
                     }
                 }
             }
         }
-
-        for (Map.Entry<BlockPos, BlockState> entry : this.getBlocks().entrySet()) {
-            BlockPos pos = start.offset((Vec3i) entry.getKey());
-            this.level().setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
+        for (var entry : this.getClusterBlocks().entrySet()) {
+            this.level().setBlock(center.offset(entry.getKey()), Blocks.AIR.defaultBlockState(), 3);
         }
-    }
-
-    public void setTime(int lifetime) {
-        this.lifetime = lifetime;
     }
 
     @Override
     protected void defineSynchedData() {
-        this.entityData.define(ORIGIN_POSITION, BlockPos.ZERO);
-        this.entityData.define(BLOCK_STATE_MAP, new HashMap<>());
-        this.entityData.define(BLOCK_ENTITY_DATA, new ArrayList<>());
-        this.entityData.define(ROTATION_INCREMENT, new Vec2(0.0F, 0.0F));
-        this.entityData.define(ENABLE_PHYSICS, true);
-        this.entityData.define(ALWAYS_RENDER, false);
-        this.entityData.define(WIDTH_DIMENSION, 1.0F);
-        this.entityData.define(HEIGHT_DIMENSION, 1.0F);
-        this.entityData.define(DEPTH_DIMENSION, 1.0F);
-        this.entityData.define(OSCILLATION_DURATION, 0);
-        this.entityData.define(FADE_ORIGIN, Optional.empty());
-        this.entityData.define(FADE_INTENSITY, 10.0F);
-        this.entityData.define(FADE_RANGE_BUFFER, 0);
+        this.entityData.define(CLUSTER_ANCHOR, BlockPos.ZERO);
+        this.entityData.define(CLUSTER_BLOCKS, new HashMap<>());
+        this.entityData.define(CLUSTER_TILE_DATA, new ArrayList<>());
+        this.entityData.define(CLUSTER_SPIN, new Vec2(0.0F, 0.0F));
+        this.entityData.define(CLUSTER_HAS_PHYSICS, true);
+        this.entityData.define(CLUSTER_FORCE_VISIBLE, false);
+        this.entityData.define(CLUSTER_BOUNDS_X, 1.0F);
+        this.entityData.define(CLUSTER_BOUNDS_Y, 1.0F);
+        this.entityData.define(CLUSTER_BOUNDS_Z, 1.0F);
+        this.entityData.define(CLUSTER_WOBBLE_TICKS, 0);
+        this.entityData.define(CLUSTER_FADE_CENTER, Optional.empty());
+        this.entityData.define(CLUSTER_FADE_POWER, 10.0F);
+        this.entityData.define(CLUSTER_FADE_MARGIN, 0);
     }
 
     @Override
-    protected void readAdditionalSaveData(CompoundTag compound) {
-        if (compound.contains("StartPos")) {
-            this.setStartPos(NbtUtils.readBlockPos(compound.getCompound("StartPos")));
-        }
+    protected void readAdditionalSaveData(CompoundTag tag) {
+        if (tag.contains("AnchorPos"))
+            this.setAnchorPosition(NbtUtils.readBlockPos(tag.getCompound("AnchorPos")));
+        if (tag.contains("ClusterBlocks"))
+            this.setClusterBlocks(readBlockStateMap(
+                    this.level().holderLookup(Registries.BLOCK), tag.getList("ClusterBlocks", 10)));
+        if (tag.contains("ClusterTiles"))
+            this.setTileEntityData(readCompoundTagList(tag.getList("ClusterTiles", 10)));
+        if (tag.contains("SpinDelta"))
+            this.setSpinDelta(readVec2(tag.getCompound("SpinDelta")));
 
-        if (compound.contains("BLOCK_STATE_MAP")) {
-            this.setBlocks(com.k1sak1.goetyawaken.utils.GoetyAwakenNBTUtil.readBlockStatePosMap(
-                    this.level().holderLookup(Registries.BLOCK),
-                    compound.getList("BLOCK_STATE_MAP", 10)));
-        }
-
-        if (compound.contains("TileData")) {
-            this.setTileData(GoetyAwakenNBTUtil.readCompoundList(compound.getList("TileData", 10)));
-        }
-
-        if (compound.contains("RotationDelta")) {
-            CompoundTag deltaCompound = compound.getCompound("RotationDelta");
-            this.setRotationDelta(GoetyAwakenNBTUtil.readVector2f(deltaCompound));
-        }
-
-        if (compound.contains("Width")) {
-            this.entityData.set(WIDTH_DIMENSION, compound.getFloat("Width"));
-            this.entityData.set(DEPTH_DIMENSION, compound.getFloat("Width"));
+        if (tag.contains("ClusterWidth")) {
+            this.entityData.set(CLUSTER_BOUNDS_X, tag.getFloat("ClusterWidth"));
+            this.entityData.set(CLUSTER_BOUNDS_Z, tag.getFloat("ClusterWidth"));
+        } else if (tag.contains("Width")) {
+            this.entityData.set(CLUSTER_BOUNDS_X, tag.getFloat("Width"));
+            this.entityData.set(CLUSTER_BOUNDS_Z, tag.getFloat("Width"));
         } else {
-            this.entityData.set(WIDTH_DIMENSION, compound.getFloat("XSize"));
-            this.entityData.set(DEPTH_DIMENSION, compound.getFloat("ZSize"));
+            this.entityData.set(CLUSTER_BOUNDS_X, tag.getFloat("XSize"));
+            this.entityData.set(CLUSTER_BOUNDS_Z, tag.getFloat("ZSize"));
         }
-
-        if (compound.contains("Height")) {
-            this.entityData.set(HEIGHT_DIMENSION, compound.getFloat("Height"));
+        if (tag.contains("ClusterHeight")) {
+            this.entityData.set(CLUSTER_BOUNDS_Y, tag.getFloat("ClusterHeight"));
+        } else if (tag.contains("Height")) {
+            this.entityData.set(CLUSTER_BOUNDS_Y, tag.getFloat("Height"));
         } else {
-            this.entityData.set(HEIGHT_DIMENSION, compound.getFloat("YSize"));
+            this.entityData.set(CLUSTER_BOUNDS_Y, tag.getFloat("YSize"));
         }
 
         this.refreshDimensions();
-        this.lifetime = compound.getInt("lifetime");
-        this.shouldDropItems = compound.getBoolean("shouldDropItems");
-        this.resetGravityFlag = compound.getBoolean("ResetGravity");
-        if (this.resetGravityFlag) {
+        this.lifetime = tag.getInt("Age");
+        this.shouldDropItems = tag.getBoolean("DropsEnabled");
+        this.resetGravityFlag = tag.getBoolean("AutoResetGravity");
+        if (this.resetGravityFlag)
             this.setNoGravity(false);
-        }
-
-        this.setForceRender(compound.getBoolean("ForceRender"));
-        this.setShakeTime(compound.getInt("oscillationTimer"));
-        this.setSink(compound.getInt("GroundSink"));
-        this.setAntiStacking(compound.getBoolean("preventOverlap"));
-        if (compound.contains("StaticFadePos")) {
-            this.entityData.set(FADE_ORIGIN, Optional.of(NbtUtils.readBlockPos(compound.getCompound("StaticFadePos"))));
-        }
-
-        this.placeOnImpact = compound.getBoolean("placeOnImpact");
-        this.excludeFromConsumedCount = compound.getBoolean("excludeFromConsumedCount");
-        this.spawnedFromBeam = compound.getBoolean("spawnedFromBeam");
-        this.spawnedFromFallingBlock = compound.getBoolean("spawnedFromFallingBlock");
-        this.spawnHeadIndex = compound.getInt("spawnHeadIndex");
-        this.tractorBeamRange = compound.getDouble("tractorBeamRange");
-        if (compound.contains("HasPhysics")) {
-            this.setPhysics(compound.getBoolean("HasPhysics"));
-        }
-
-        if (compound.hasUUID("Owner")) {
-            this.launcherUUID = compound.getUUID("Owner");
+        this.setForceVisible(tag.getBoolean("ForceVisible"));
+        this.setWobbleTicks(tag.getInt("WobbleTicks"));
+        this.setGroundBuryDepth(tag.getInt("BuryDepth"));
+        this.setAvoidBlockOverlap(tag.getBoolean("AvoidOverlap"));
+        if (tag.contains("FadeCenterPos"))
+            this.entityData.set(CLUSTER_FADE_CENTER,
+                    Optional.of(NbtUtils.readBlockPos(tag.getCompound("FadeCenterPos"))));
+        this.shouldPlaceOnImpact = tag.getBoolean("PlaceOnImpact");
+        this.ignoreConsumedCount = tag.getBoolean("SkipConsumedCount");
+        this.spawnedFromBeam = tag.getBoolean("FromBeam");
+        this.spawnedFromFallingBlock = tag.getBoolean("FromFalling");
+        this.spawnHeadIndex = tag.getInt("SpawnHeadId");
+        this.tractorBeamRange = tag.getDouble("BeamRange");
+        if (tag.contains("PhysicsEnabled"))
+            this.setPhysicsEnabled(tag.getBoolean("PhysicsEnabled"));
+        if (tag.hasUUID("Launcher")) {
+            this.launcherUUID = tag.getUUID("Launcher");
             this.cachedLauncher = null;
         }
-        this.hasLeftLauncher = compound.getBoolean("hasLeftLauncher");
-        this.hasFired = compound.getBoolean("hasFired");
+        this.hasLeftLauncher = tag.getBoolean("HasLeftLauncher");
+        this.hasFired = tag.getBoolean("HasFired");
     }
 
     @Override
-    protected void addAdditionalSaveData(CompoundTag compound) {
-        compound.put("StartPos", NbtUtils.writeBlockPos(this.getStartPos()));
-        compound.put("BLOCK_STATE_MAP", GoetyAwakenNBTUtil.writeBlockStatePosMap(this.getBlocks()));
-        compound.put("TileData", GoetyAwakenNBTUtil.writeCompoundList(this.getTileData()));
-        compound.putFloat("XSize", this.entityData.get(WIDTH_DIMENSION));
-        compound.putFloat("YSize", this.entityData.get(HEIGHT_DIMENSION));
-        compound.putFloat("ZSize", this.entityData.get(DEPTH_DIMENSION));
-        compound.putInt("lifetime", this.lifetime);
-        compound.putBoolean("shouldDropItems", this.shouldDropItems);
-        compound.put("RotationDelta", GoetyAwakenNBTUtil.writeVector2f(this.getRotationDelta()));
-        compound.putBoolean("ResetGravity", this.resetGravityFlag);
-        compound.putBoolean("ForceRender", this.forceRender());
-        compound.putInt("oscillationTimer", this.oscillationTimer);
-        compound.putInt("GroundSink", this.getSink());
-        compound.putBoolean("preventOverlap", this.preventOverlap());
-        this.entityData.get(FADE_ORIGIN).ifPresent((pos) -> compound.put("StaticFadePos", NbtUtils.writeBlockPos(pos)));
-        compound.putBoolean("placeOnImpact", this.placeOnImpact);
-        compound.putBoolean("excludeFromConsumedCount", this.excludeFromConsumedCount);
-        compound.putBoolean("spawnedFromBeam", this.spawnedFromBeam);
-        compound.putBoolean("spawnedFromFallingBlock", this.spawnedFromFallingBlock);
-        compound.putInt("spawnHeadIndex", this.spawnHeadIndex);
-        compound.putDouble("tractorBeamRange", this.tractorBeamRange);
-        compound.putBoolean("HasPhysics", this.physicsEnabled());
-
-        if (this.launcherUUID != null) {
-            compound.putUUID("Owner", this.launcherUUID);
-        }
-        compound.putBoolean("hasLeftLauncher", this.hasLeftLauncher);
-        compound.putBoolean("hasFired", this.hasFired);
+    protected void addAdditionalSaveData(CompoundTag tag) {
+        tag.put("AnchorPos", NbtUtils.writeBlockPos(this.getAnchorPosition()));
+        tag.put("ClusterBlocks", writeBlockStateMap(this.getClusterBlocks()));
+        tag.put("ClusterTiles", writeCompoundTagList(this.getTileEntityData()));
+        tag.putFloat("XSize", this.entityData.get(CLUSTER_BOUNDS_X));
+        tag.putFloat("YSize", this.entityData.get(CLUSTER_BOUNDS_Y));
+        tag.putFloat("ZSize", this.entityData.get(CLUSTER_BOUNDS_Z));
+        tag.putInt("Age", this.lifetime);
+        tag.putBoolean("DropsEnabled", this.shouldDropItems);
+        tag.put("SpinDelta", writeVec2(this.getSpinDelta()));
+        tag.putBoolean("AutoResetGravity", this.resetGravityFlag);
+        tag.putBoolean("ForceVisible", this.isForceVisible());
+        tag.putInt("WobbleTicks", this.wobbleTimer);
+        tag.putInt("BuryDepth", this.getGroundBuryDepth());
+        tag.putBoolean("AvoidOverlap", this.isAvoidBlockOverlap());
+        this.entityData.get(CLUSTER_FADE_CENTER).ifPresent(
+                p -> tag.put("FadeCenterPos", NbtUtils.writeBlockPos(p)));
+        tag.putBoolean("PlaceOnImpact", this.shouldPlaceOnImpact);
+        tag.putBoolean("SkipConsumedCount", this.ignoreConsumedCount);
+        tag.putBoolean("FromBeam", this.spawnedFromBeam);
+        tag.putBoolean("FromFalling", this.spawnedFromFallingBlock);
+        tag.putInt("SpawnHeadId", this.spawnHeadIndex);
+        tag.putDouble("BeamRange", this.tractorBeamRange);
+        tag.putBoolean("PhysicsEnabled", this.isPhysicsEnabled());
+        if (this.launcherUUID != null)
+            tag.putUUID("Launcher", this.launcherUUID);
+        tag.putBoolean("HasLeftLauncher", this.hasLeftLauncher);
+        tag.putBoolean("HasFired", this.hasFired);
     }
 
     @Override
@@ -484,491 +403,332 @@ public class BlockClusterEntity extends Entity {
             this.gameEvent(GameEvent.PROJECTILE_SHOOT, this.getLauncher());
             this.hasFired = true;
         }
-
-        if (!this.hasLeftLauncher) {
+        if (!this.hasLeftLauncher)
             this.hasLeftLauncher = this.checkHasLeftLauncher();
-        }
 
-        this.oscillationOffset = new Vec2(this.currentOscillation.x, this.currentOscillation.y);
-        if (this.oscillationTimer > 0) {
-            float oscillationTimer = (float) this.getShakeTime();
-            float x = Mth.cos(oscillationTimer * 4.5F) * 0.05F + (this.random.nextFloat() - 0.5F) * 0.05F;
-            float z = Mth.sin(oscillationTimer * 3.5F) * 0.15F + (this.random.nextFloat() - 0.5F) * 0.2F;
-            this.currentOscillation = new Vec2(x, z);
-            --this.oscillationTimer;
-            if (this.oscillationTimer == 0) {
-                this.setShakeTime(0);
-            }
+        this.previousWobble = new Vec2(this.currentWobble.x, this.currentWobble.y);
+        if (this.wobbleTimer > 0) {
+            float t = (float) this.getWobbleTicks();
+            this.currentWobble = new Vec2(
+                    Mth.cos(t * 4.5F) * 0.05F + (this.random.nextFloat() - 0.5F) * 0.05F,
+                    Mth.sin(t * 3.5F) * 0.15F + (this.random.nextFloat() - 0.5F) * 0.2F);
+            this.wobbleTimer--;
+            if (this.wobbleTimer == 0)
+                this.setWobbleTicks(0);
         } else {
-            this.currentOscillation = new Vec2(0.0F, 0.0F);
+            this.currentWobble = Vec2.ZERO;
         }
 
         if (!this.level().isClientSide) {
-            HitResult hitresult = ProjectileUtil.getHitResultOnMoveVector(this, this::canHitEntity);
-            if (hitresult.getType() != HitResult.Type.MISS) {
-                this.onHit(hitresult);
+            HitResult hit = ProjectileUtil.getHitResultOnMoveVector(this, this::canHitEntity);
+            if (hit.getType() != HitResult.Type.MISS)
+                this.onHit(hit);
+
+            if (this.getClusterBlocks().isEmpty()) {
+                this.discard();
+                return;
+            }
+            if (this.getClusterBlocks().values().stream().allMatch(BlockState::isAir)) {
+                this.discard();
+                return;
             }
 
             BlockPos pos = this.blockPosition();
-            if (this.getBlocks().isEmpty()) {
-                this.discard();
-            }
-
-            Map<BlockPos, BlockState> BLOCK_STATE_MAP = this.getBlocks();
-            boolean isAir = true;
-
-            for (Map.Entry<BlockPos, BlockState> entry : BLOCK_STATE_MAP.entrySet()) {
-                BlockState state = entry.getValue();
-                if (isAir) {
-                    isAir = state.isAir();
-                }
-            }
-
-            if (isAir) {
-                this.discard();
-            }
-
             if (!this.onGround()) {
                 if ((float) pos.getY() + this.getBbHeight() <= (float) this.level().getMinBuildHeight()
                         || this.lifetime > 600) {
                     if (this.shouldDropItems && this.level().getGameRules().getBoolean(GameRules.RULE_DOENTITYDROPS)) {
-                        for (Map.Entry<BlockPos, BlockState> entry : BLOCK_STATE_MAP.entrySet()) {
-                            BlockState state = entry.getValue();
-                            BlockPos position = pos.offset((Vec3i) entry.getKey());
-                            this.spawnAtSpecificLocation(state.getBlock().asItem(), position);
-                        }
+                        for (var e : this.getClusterBlocks().entrySet())
+                            this.spawnAtSpecificLocation(e.getValue().getBlock().asItem(), pos.offset(e.getKey()));
                     }
-
                     this.discard();
                 }
             } else {
-                this.place();
+                this.placeBlocksInWorld();
             }
         } else {
             this.refreshDimensions();
             this.reapplyPosition();
         }
+
         this.travel();
-        ++this.lifetime;
-        this.noPhysics = !this.physicsEnabled();
+        this.lifetime++;
+        this.noPhysics = !this.isPhysicsEnabled();
         super.tick();
+
         this.prevClusterPitchAngle = this.clusterPitchAngle;
         this.prevClusterYawAngle = this.clusterYawAngle;
-        if (this.getShakeTime() <= 0) {
-            this.clusterPitchAngle += this.getRotationDelta().x;
-            this.clusterYawAngle += this.getRotationDelta().y;
+        if (this.getWobbleTicks() <= 0) {
+            this.clusterPitchAngle += this.getSpinDelta().x;
+            this.clusterYawAngle += this.getSpinDelta().y;
         }
     }
 
     protected void travel() {
-        Vec3 vec3 = this.getDeltaMovement();
-        double d2 = this.getX() + vec3.x;
-        double d0 = this.getY() + vec3.y;
-        double d1 = this.getZ() + vec3.z;
+        Vec3 motion = this.getDeltaMovement();
+        double nx = this.getX() + motion.x, ny = this.getY() + motion.y, nz = this.getZ() + motion.z;
         this.updateClusterRotation();
-        if (this.isInWater()) {
-            float waterResistance = 0.8F;
-            this.setDeltaMovement(vec3.scale((double) waterResistance));
-        }
-
-        if (!this.isNoGravity()) {
-            Vec3 vec31 = this.getDeltaMovement();
-            this.setDeltaMovement(vec31.x, vec31.y - (double) this.getGravity(), vec31.z);
-        }
-
-        this.setPos(d2, d0, d1);
+        if (this.isInWater())
+            this.setDeltaMovement(motion.scale(0.8D));
+        if (!this.isNoGravity())
+            this.setDeltaMovement(motion.x, motion.y - (double) this.getGravityForce(), motion.z);
+        this.setPos(nx, ny, nz);
     }
 
     protected void updateClusterRotation() {
-        Vec3 vec3 = this.getDeltaMovement();
-        double d0 = vec3.horizontalDistance();
-        this.setXRot(lerpRotation(this.xRotO, (float) (Mth.atan2(vec3.y, d0) * (double) (180F / (float) Math.PI))));
-        this.setYRot(lerpRotation(this.yRotO, (float) (Mth.atan2(vec3.x, vec3.z) * (double) (180F / (float) Math.PI))));
+        Vec3 m = this.getDeltaMovement();
+        double h = m.horizontalDistance();
+        this.setXRot(lerpAngle(this.xRotO, (float) (Mth.atan2(m.y, h) * (180F / Math.PI))));
+        this.setYRot(lerpAngle(this.yRotO, (float) (Mth.atan2(m.x, m.z) * (180F / Math.PI))));
     }
 
-    protected static float lerpRotation(float pCurrentRotation, float pTargetRotation) {
-        while (pTargetRotation - pCurrentRotation < -180.0F) {
-            pCurrentRotation -= 360.0F;
-        }
-        while (pTargetRotation - pCurrentRotation >= 180.0F) {
-            pCurrentRotation += 360.0F;
-        }
-        return Mth.lerp(0.2F, pCurrentRotation, pTargetRotation);
+    protected static float lerpAngle(float cur, float tgt) {
+        float diff = tgt - cur;
+        while (diff < -180.0F)
+            diff += 360.0F;
+        while (diff >= 180.0F)
+            diff -= 360.0F;
+        return cur + diff * 0.2F;
     }
 
-    protected float getGravity() {
-        return this.isNoGravity() ? 0.0F : GRAVITY_STRENGTH;
+    protected float getGravityForce() {
+        return this.isNoGravity() ? 0.0F : GRAVITY_ACCEL;
     }
 
     private boolean checkHasLeftLauncher() {
-        Entity entity = this.getLauncher();
-        if (entity != null) {
-            for (Entity entity1 : this.level().getEntities(this,
+        Entity l = this.getLauncher();
+        if (l != null) {
+            for (Entity e : this.level().getEntities(this,
                     this.getBoundingBox().expandTowards(this.getDeltaMovement()).inflate(1.0D),
-                    (p_37272_) -> !p_37272_.isSpectator() && p_37272_.isPickable())) {
-                if (entity1.getRootVehicle() == entity.getRootVehicle()) {
+                    en -> !en.isSpectator() && en.isPickable())) {
+                if (e.getRootVehicle() == l.getRootVehicle())
                     return false;
-                }
             }
         }
         return true;
     }
 
-    public boolean canHitEntity(Entity pTarget) {
-        if (!pTarget.canBeHitByProjectile()) {
+    public boolean canHitEntity(Entity target) {
+        if (!target.canBeHitByProjectile())
             return false;
-        }
-
-        Entity entity = this.getLauncher();
-        if (entity == null) {
+        Entity l = this.getLauncher();
+        if (l == null)
             return true;
-        }
-
-        if (this.hasLeftLauncher) {
-            return true;
-        }
-
-        if (entity.isPassengerOfSameVehicle(pTarget)) {
-            return false;
-        }
-
-        Entity owner = this.getLauncher();
-        if (owner != null && pTarget != owner) {
-            if (MobUtil.areAllies(owner, pTarget)) {
+        if (!this.hasLeftLauncher) {
+            if (l.isPassengerOfSameVehicle(target))
                 return false;
-            }
+            if (MobUtil.areAllies(l, target))
+                return false;
         }
-
         return true;
     }
 
-    public void onHit(HitResult pResult) {
-        HitResult.Type hitresult$type = pResult.getType();
-        if (hitresult$type == HitResult.Type.ENTITY) {
-            this.onHitEntity((EntityHitResult) pResult);
-            this.level().gameEvent(GameEvent.PROJECTILE_LAND, pResult.getLocation(),
+    public void onHit(HitResult result) {
+        if (result.getType() == HitResult.Type.ENTITY) {
+            this.onHitEntity((EntityHitResult) result);
+            this.level().gameEvent(GameEvent.PROJECTILE_LAND, result.getLocation(),
                     GameEvent.Context.of(this, (BlockState) null));
-        } else if (hitresult$type == HitResult.Type.BLOCK) {
-            this.onHitBlock((BlockHitResult) pResult);
-            BlockPos blockpos = ((BlockHitResult) pResult).getBlockPos();
-            BlockState blockstate = this.level().getBlockState(blockpos);
-            this.level().gameEvent(GameEvent.PROJECTILE_LAND, blockpos, GameEvent.Context.of(this, blockstate));
+        } else if (result.getType() == HitResult.Type.BLOCK) {
+            this.onHitBlock((BlockHitResult) result);
         }
     }
 
-    public void onHitEntity(EntityHitResult pResult) {
-        Entity entity = pResult.getEntity();
-        float baseDamage = this.calculateTotalHardness() / 2;
+    public void onHitEntity(EntityHitResult result) {
+        Entity target = result.getEntity();
+        float hardness = this.computeBlockHardnessSum();
         float speed = (float) this.getDeltaMovement().length();
-        float damage = baseDamage * (0.1F + speed);
+        if (target.hurt(this.damageSources().flyIntoWall(), hardness * (0.1F + speed)))
+            this.pushTargetAway(target);
+    }
 
-        DamageSource damagesource = this.damageSources().flyIntoWall();
+    public void onHitBlock(BlockHitResult result) {
+        this.placeBlocksInWorld();
+    }
 
-        if (entity.hurt(damagesource, damage)) {
-            this.knockbackTarget(entity, pResult);
+    private float computeBlockHardnessSum() {
+        float sum = 0.0F;
+        for (var e : this.getClusterBlocks().entrySet()) {
+            if (!e.getValue().isAir())
+                sum += e.getValue().getDestroySpeed(this.level(), this.getAnchorPosition().offset(e.getKey()));
         }
+        return Math.max(sum, 1.0F);
     }
 
-    public void onHitBlock(BlockHitResult pResult) {
-        this.place();
-    }
-
-    private float calculateTotalHardness() {
-        float totalHardness = 0.0F;
-        Map<BlockPos, BlockState> BLOCK_STATE_MAP = this.getBlocks();
-        Level level = this.level();
-        for (Map.Entry<BlockPos, BlockState> entry : BLOCK_STATE_MAP.entrySet()) {
-            BlockState state = entry.getValue();
-            if (!state.isAir()) {
-                BlockPos worldPos = this.getStartPos().offset(entry.getKey());
-                totalHardness += state.getDestroySpeed(level, worldPos);
-            }
-        }
-        return Math.max(totalHardness, 1.0F);
-    }
-
-    private void knockbackTarget(Entity target, EntityHitResult pResult) {
-        double d0 = target.getX() - this.getX();
-        double d1 = target.getZ() - this.getZ();
-
+    private void pushTargetAway(Entity target) {
+        double dx = target.getX() - this.getX(), dz = target.getZ() - this.getZ();
         if (target instanceof LivingEntity living) {
-            living.knockback(0.5F, d0, d1);
+            living.knockback(0.5F, dx, dz);
         } else {
-            double dist = Math.sqrt(d0 * d0 + d1 * d1);
-            if (dist > 0.0D) {
-                target.setDeltaMovement(target.getDeltaMovement().add(
-                        d0 / dist * 0.5D,
-                        0.2D,
-                        d1 / dist * 0.5D));
-            }
+            double d = Math.sqrt(dx * dx + dz * dz);
+            if (d > 0.0D)
+                target.setDeltaMovement(target.getDeltaMovement().add(dx / d * 0.5D, 0.2D, dz / d * 0.5D));
         }
     }
 
-    public void place() {
+    public void placeBlocksInWorld() {
         this.discard();
         BlockPos pos = this.blockPosition();
-        if (this.preventOverlap()) {
-            BlockPos currentPos = this.blockPosition();
-            BlockState current = this.level().getBlockState(currentPos);
-
-            for (int i = 0; i < 50 && current.isAir(); ++i) {
-                currentPos = currentPos.below();
-                current = this.level().getBlockState(currentPos);
-            }
-
-            pos = pos.atY(currentPos.getY());
+        if (this.isAvoidBlockOverlap()) {
+            BlockPos scan = this.blockPosition();
+            for (int i = 0; i < 50 && this.level().getBlockState(scan).isAir(); i++)
+                scan = scan.below();
+            pos = pos.atY(scan.getY());
         }
-
-        for (Map.Entry<BlockPos, BlockState> entry : this.getBlocks().entrySet()) {
-            BlockState state = entry.getValue();
-            BlockPos relativePos = entry.getKey();
-            BlockPos basePos = pos.offset(relativePos.getX(), relativePos.getY() - this.getSink(), relativePos.getZ());
-            BlockPos placementPos = basePos
-                    .above(Mth.floor(this.getBoundingBox().getYsize() / (double) 2.0F - (double) 0.5F));
-            if (this.level().getBlockEntity(placementPos) == null
-                    && !this.level().getBlockState(placementPos).is(BlockTags.DRAGON_IMMUNE)
-                    && this.level().setBlock(placementPos, state, 3)) {
+        for (var e : this.getClusterBlocks().entrySet()) {
+            BlockState state = e.getValue();
+            BlockPos rel = e.getKey();
+            BlockPos placePos = pos.offset(rel.getX(), rel.getY() - this.getGroundBuryDepth(), rel.getZ())
+                    .above(Mth.floor(this.getBoundingBox().getYsize() / 2.0D - 0.5D));
+            if (this.level().getBlockEntity(placePos) == null
+                    && !this.level().getBlockState(placePos).is(BlockTags.DRAGON_IMMUNE)
+                    && this.level().setBlock(placePos, state, 3)) {
                 if (state.hasBlockEntity()) {
-                    CompoundTag tileData = this.getTileDataFromOffsetPos(relativePos);
-                    if (tileData != null) {
-                        BlockEntity tile = this.level().getBlockEntity(placementPos);
+                    CompoundTag td = this.getTileDataForRelativePos(rel);
+                    if (td != null) {
+                        BlockEntity tile = this.level().getBlockEntity(placePos);
                         if (tile != null) {
-                            tileData.putInt("x", placementPos.getX());
-                            tileData.putInt("y", placementPos.getY());
-                            tileData.putInt("z", placementPos.getZ());
-                            tile.load(tileData);
+                            td.putInt("x", placePos.getX());
+                            td.putInt("y", placePos.getY());
+                            td.putInt("z", placePos.getZ());
+                            tile.load(td);
                             tile.setChanged();
                         }
                     }
                 }
-
-                this.level().updateNeighborsAt(placementPos, state.getBlock());
+                this.level().updateNeighborsAt(placePos, state.getBlock());
             } else if (this.shouldDropItems && this.level().getGameRules().getBoolean(GameRules.RULE_DOENTITYDROPS)) {
-                this.spawnAtSpecificLocation(state.getBlock().asItem(), placementPos);
+                this.spawnAtSpecificLocation(state.getBlock().asItem(), placePos);
             }
         }
     }
 
     @Nullable
-    public CompoundTag getTileDataFromOffsetPos(BlockPos pos) {
-        BlockPos actualPos = this.getStartPos().offset(pos);
-
-        for (CompoundTag data : this.getTileData()) {
-            if (data.getInt("x") == actualPos.getX() && data.getInt("y") == actualPos.getY()
-                    && data.getInt("z") == actualPos.getZ()) {
+    public CompoundTag getTileDataForRelativePos(BlockPos rel) {
+        BlockPos actual = this.getAnchorPosition().offset(rel);
+        for (CompoundTag data : this.getTileEntityData())
+            if (data.getInt("x") == actual.getX() && data.getInt("y") == actual.getY()
+                    && data.getInt("z") == actual.getZ())
                 return data;
-            }
-        }
-
         return null;
     }
 
-    public void spawnAtSpecificLocation(ItemLike item, BlockPos position) {
-        ItemStack stack = new ItemStack(item);
-        ItemEntity itemEntity = new ItemEntity(this.level(), (double) position.getX(), (double) position.getY(),
-                (double) position.getZ(), stack);
-        itemEntity.setDefaultPickUpDelay();
-        this.level().addFreshEntity(itemEntity);
+    public void spawnAtSpecificLocation(ItemLike item, BlockPos pos) {
+        ItemEntity entity = new ItemEntity(this.level(), pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D,
+                new ItemStack(item));
+        entity.setDefaultPickUpDelay();
+        this.level().addFreshEntity(entity);
     }
 
-    public void setRotationDelta(Vec2 rotation) {
-        this.entityData.set(ROTATION_INCREMENT, rotation);
+    public void setSpinDelta(Vec2 spin) {
+        this.entityData.set(CLUSTER_SPIN, spin);
     }
 
-    public Vec2 getRotationDelta() {
-        return this.entityData.get(ROTATION_INCREMENT);
+    public Vec2 getSpinDelta() {
+        return this.entityData.get(CLUSTER_SPIN);
     }
 
-    public Map<BlockPos, BlockState> getBlocks() {
-        return this.entityData.get(BLOCK_STATE_MAP);
+    public Map<BlockPos, BlockState> getClusterBlocks() {
+        return this.entityData.get(CLUSTER_BLOCKS);
     }
 
-    public void addBlock(BlockState state, BlockPos relativePosition) {
-        Map<BlockPos, BlockState> map = Maps.newHashMap(this.getBlocks());
-        map.put(relativePosition, state);
-        this.entityData.set(BLOCK_STATE_MAP, map);
+    public void addSingleBlock(BlockState state, BlockPos relPos) {
+        Map<BlockPos, BlockState> m = new HashMap<>(this.getClusterBlocks().size() + 1);
+        m.putAll(this.getClusterBlocks());
+        m.put(relPos, state);
+        this.entityData.set(CLUSTER_BLOCKS, m);
     }
 
-    public void setBlocks(Map<BlockPos, BlockState> blocks) {
-        this.entityData.set(BLOCK_STATE_MAP, blocks);
+    public void setClusterBlocks(Map<BlockPos, BlockState> blocks) {
+        this.entityData.set(CLUSTER_BLOCKS, blocks);
     }
 
-    public void setStartPos(BlockPos pos) {
-        this.entityData.set(ORIGIN_POSITION, pos);
+    public void setAnchorPosition(BlockPos pos) {
+        this.entityData.set(CLUSTER_ANCHOR, pos);
     }
 
-    public BlockPos getStartPos() {
-        return this.entityData.get(ORIGIN_POSITION);
+    public BlockPos getAnchorPosition() {
+        return this.entityData.get(CLUSTER_ANCHOR);
     }
 
-    public List<CompoundTag> getTileData() {
-        return this.entityData.get(BLOCK_ENTITY_DATA);
+    public List<CompoundTag> getTileEntityData() {
+        return this.entityData.get(CLUSTER_TILE_DATA);
     }
 
-    public void addTileData(CompoundTag compound) {
-        List<CompoundTag> list = Lists.newArrayList(this.getTileData());
-        list.add(compound);
-        this.entityData.set(BLOCK_ENTITY_DATA, list, true);
+    public void addTileEntityData(CompoundTag tag) {
+        List<CompoundTag> list = Lists.newArrayList(this.getTileEntityData());
+        list.add(tag);
+        this.entityData.set(CLUSTER_TILE_DATA, list, true);
     }
 
-    public void setTileData(List<CompoundTag> list) {
-        this.entityData.set(BLOCK_ENTITY_DATA, list);
+    public void setTileEntityData(List<CompoundTag> list) {
+        this.entityData.set(CLUSTER_TILE_DATA, list);
     }
 
     @Override
     public EntityDimensions getDimensions(Pose pose) {
-        return EntityDimensions.scalable(
-                Math.max(this.entityData.get(WIDTH_DIMENSION), this.entityData.get(DEPTH_DIMENSION)),
-                this.entityData.get(HEIGHT_DIMENSION));
+        float w = Math.max(this.entityData.get(CLUSTER_BOUNDS_X), this.entityData.get(CLUSTER_BOUNDS_Z));
+        return EntityDimensions.scalable(w, this.entityData.get(CLUSTER_BOUNDS_Y));
     }
 
     @SuppressWarnings("unchecked")
+    @Override
     public Packet<ClientGamePacketListener> getAddEntityPacket() {
         return (Packet<ClientGamePacketListener>) NetworkHooks.getEntitySpawningPacket(this);
     }
 
-    public int getSize() {
-        return this.getBlocks().size();
+    public int getBlockCount() {
+        return this.getClusterBlocks().size();
     }
 
-    public boolean physicsEnabled() {
-        return this.entityData.get(ENABLE_PHYSICS);
+    public boolean isPhysicsEnabled() {
+        return this.entityData.get(CLUSTER_HAS_PHYSICS);
     }
 
-    public void setPhysics(boolean physics) {
-        this.entityData.set(ENABLE_PHYSICS, physics);
-        this.noPhysics = !physics;
+    public void setPhysicsEnabled(boolean e) {
+        this.entityData.set(CLUSTER_HAS_PHYSICS, e);
+        this.noPhysics = !e;
     }
 
     public boolean containsBlock(Block block) {
-        for (Map.Entry<BlockPos, BlockState> entry : this.getBlocks().entrySet()) {
-            if (entry.getValue().is(block)) {
-                return true;
-            }
-        }
-
-        return false;
+        return this.getClusterBlocks().values().stream().anyMatch(s -> s.is(block));
     }
 
     @Override
-    public void onSyncedDataUpdated(EntityDataAccessor<?> parameter) {
-        super.onSyncedDataUpdated(parameter);
-        if (!parameter.equals(WIDTH_DIMENSION) && !parameter.equals(HEIGHT_DIMENSION)
-                && !parameter.equals(DEPTH_DIMENSION)) {
-            if (parameter.equals(OSCILLATION_DURATION)) {
-                this.oscillationTimer = this.entityData.get(OSCILLATION_DURATION);
-            }
-        } else {
+    public void onSyncedDataUpdated(EntityDataAccessor<?> key) {
+        super.onSyncedDataUpdated(key);
+        if (key.equals(CLUSTER_BOUNDS_X) || key.equals(CLUSTER_BOUNDS_Y) || key.equals(CLUSTER_BOUNDS_Z))
             this.refreshDimensions();
-        }
+        else if (key.equals(CLUSTER_WOBBLE_TICKS))
+            this.wobbleTimer = this.entityData.get(CLUSTER_WOBBLE_TICKS);
     }
 
-    public boolean forceRender() {
-        return this.entityData.get(ALWAYS_RENDER);
+    public boolean isForceVisible() {
+        return this.entityData.get(CLUSTER_FORCE_VISIBLE);
     }
 
-    public void setForceRender(boolean flag) {
-        this.entityData.set(ALWAYS_RENDER, flag);
+    public void setForceVisible(boolean f) {
+        this.entityData.set(CLUSTER_FORCE_VISIBLE, f);
     }
 
-    public void setSize(float x, float y, float z) {
-        this.entityData.set(WIDTH_DIMENSION, x);
-        this.entityData.set(HEIGHT_DIMENSION, y);
-        this.entityData.set(DEPTH_DIMENSION, z);
+    public void setClusterDimensions(float x, float y, float z) {
+        this.entityData.set(CLUSTER_BOUNDS_X, x);
+        this.entityData.set(CLUSTER_BOUNDS_Y, y);
+        this.entityData.set(CLUSTER_BOUNDS_Z, z);
         this.refreshDimensions();
     }
 
     @Override
     protected AABB makeBoundingBox() {
-        float x = this.entityData.get(WIDTH_DIMENSION);
-        float y = this.entityData.get(HEIGHT_DIMENSION);
-        float z = this.entityData.get(DEPTH_DIMENSION);
-        return new AABB(
-                this.getX() - (double) (x / 2.0F),
-                this.getY(),
-                this.getZ() - (double) z / (double) 2.0F,
-                this.getX() + (double) x / (double) 2.0F,
-                this.getY() + (double) y,
-                this.getZ() + (double) z / (double) 2.0F);
+        float hw = this.entityData.get(CLUSTER_BOUNDS_X) / 2.0F;
+        float h = this.entityData.get(CLUSTER_BOUNDS_Y);
+        float hd = this.entityData.get(CLUSTER_BOUNDS_Z) / 2.0F;
+        return new AABB(this.getX() - hw, this.getY(), this.getZ() - hd,
+                this.getX() + hw, this.getY() + h, this.getZ() + hd);
     }
 
     @Override
     public boolean isPushedByFluid() {
         return false;
-    }
-
-    public void setShakeTime(int lifetime) {
-        this.oscillationTimer = lifetime;
-        this.entityData.set(OSCILLATION_DURATION, lifetime);
-    }
-
-    public int getShakeTime() {
-        return this.oscillationTimer;
-    }
-
-    public void setSink(int groundPenetration) {
-        this.groundPenetration = groundPenetration;
-    }
-
-    public int getSink() {
-        return this.groundPenetration;
-    }
-
-    public void setAntiStacking(boolean flag) {
-        this.preventOverlap = flag;
-    }
-
-    public boolean preventOverlap() {
-        return this.preventOverlap;
-    }
-
-    @Nullable
-    public BlockPos getFadePos() {
-        return this.entityData.get(FADE_ORIGIN).orElse(null);
-    }
-
-    public void setFadePos(@Nullable BlockPos pos) {
-        this.entityData.set(FADE_ORIGIN, Optional.ofNullable(pos));
-    }
-
-    public void setFadeStrength(float strength) {
-        this.entityData.set(FADE_INTENSITY, strength);
-    }
-
-    public float getFadeStrength() {
-        return this.entityData.get(FADE_INTENSITY);
-    }
-
-    public int getFadeDistanceOffset() {
-        return this.entityData.get(FADE_RANGE_BUFFER);
-    }
-
-    public void setFadeDistanceOffset(int offset) {
-        this.entityData.set(FADE_RANGE_BUFFER, offset);
-    }
-
-    public void setShouldCrumble(boolean flag) {
-        this.placeOnImpact = flag;
-    }
-
-    public boolean placeOnImpact() {
-        return this.placeOnImpact;
-    }
-
-    public void setShouldntCountToConsumedEntities(boolean flag) {
-        this.excludeFromConsumedCount = flag;
-    }
-
-    public boolean excludeFromConsumedCount() {
-        return this.excludeFromConsumedCount;
-    }
-
-    public float getClusterXRot(float partialTicks) {
-        return Mth.lerp(partialTicks, this.prevClusterPitchAngle, this.clusterPitchAngle);
-    }
-
-    public float getClusterYRot(float partialTicks) {
-        return Mth.lerp(partialTicks, this.prevClusterYawAngle, this.clusterYawAngle);
     }
 
     @Override
@@ -981,21 +741,141 @@ public class BlockClusterEntity extends Entity {
         return false;
     }
 
+    public void setWobbleTicks(int t) {
+        this.wobbleTimer = t;
+        this.entityData.set(CLUSTER_WOBBLE_TICKS, t);
+    }
+
+    public int getWobbleTicks() {
+        return this.wobbleTimer;
+    }
+
+    public void setGroundBuryDepth(int d) {
+        this.groundBuryDepth = d;
+    }
+
+    public int getGroundBuryDepth() {
+        return this.groundBuryDepth;
+    }
+
+    public void setAvoidBlockOverlap(boolean f) {
+        this.avoidBlockOverlap = f;
+    }
+
+    public boolean isAvoidBlockOverlap() {
+        return this.avoidBlockOverlap;
+    }
+
+    @Nullable
+    public BlockPos getFadeCenter() {
+        return this.entityData.get(CLUSTER_FADE_CENTER).orElse(null);
+    }
+
+    public void setFadeCenter(@Nullable BlockPos p) {
+        this.entityData.set(CLUSTER_FADE_CENTER, Optional.ofNullable(p));
+    }
+
+    public void setFadePower(float p) {
+        this.entityData.set(CLUSTER_FADE_POWER, p);
+    }
+
+    public float getFadePower() {
+        return this.entityData.get(CLUSTER_FADE_POWER);
+    }
+
+    public int getFadeMargin() {
+        return this.entityData.get(CLUSTER_FADE_MARGIN);
+    }
+
+    public void setFadeMargin(int m) {
+        this.entityData.set(CLUSTER_FADE_MARGIN, m);
+    }
+
+    public void setShouldPlaceOnImpact(boolean f) {
+        this.shouldPlaceOnImpact = f;
+    }
+
+    public boolean shouldPlaceOnImpact() {
+        return this.shouldPlaceOnImpact;
+    }
+
+    public void setIgnoreConsumedCount(boolean f) {
+        this.ignoreConsumedCount = f;
+    }
+
+    public boolean isIgnoreConsumedCount() {
+        return this.ignoreConsumedCount;
+    }
+
+    public float getClusterXRot(float pt) {
+        return Mth.lerp(pt, this.prevClusterPitchAngle, this.clusterPitchAngle);
+    }
+
+    public float getClusterYRot(float pt) {
+        return Mth.lerp(pt, this.prevClusterYawAngle, this.clusterYawAngle);
+    }
+
+    private static ListTag writeBlockStateMap(Map<BlockPos, BlockState> map) {
+        ListTag list = new ListTag();
+        for (var e : map.entrySet()) {
+            CompoundTag et = NbtUtils.writeBlockState(e.getValue());
+            et.put("RelPos", NbtUtils.writeBlockPos(e.getKey()));
+            list.add(et);
+        }
+        return list;
+    }
+
+    private static Map<BlockPos, BlockState> readBlockStateMap(
+            net.minecraft.core.HolderGetter<Block> lookup, ListTag list) {
+        Map<BlockPos, BlockState> result = new LinkedHashMap<>();
+        for (int i = 0; i < list.size(); i++) {
+            CompoundTag et = list.getCompound(i);
+            result.put(NbtUtils.readBlockPos(et.getCompound("RelPos")), NbtUtils.readBlockState(lookup, et));
+        }
+        return result;
+    }
+
+    private static ListTag writeCompoundTagList(List<CompoundTag> tags) {
+        ListTag list = new ListTag();
+        for (CompoundTag t : tags)
+            list.add(t);
+        return list;
+    }
+
+    private static List<CompoundTag> readCompoundTagList(ListTag list) {
+        List<CompoundTag> result = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++)
+            result.add(list.getCompound(i));
+        return result;
+    }
+
+    private static CompoundTag writeVec2(Vec2 v) {
+        CompoundTag t = new CompoundTag();
+        t.putFloat("vx", v.x);
+        t.putFloat("vy", v.y);
+        return t;
+    }
+
+    private static Vec2 readVec2(CompoundTag t) {
+        return new Vec2(t.getFloat("vx"), t.getFloat("vy"));
+    }
+
     static {
-        BLOCK_STATE_MAP = SynchedEntityData.defineId(BlockClusterEntity.class,
+        CLUSTER_BLOCKS = SynchedEntityData.defineId(BlockClusterEntity.class,
                 GoetyAwakenDataSerializers.BLOCK_STATE_POS_MAP);
-        BLOCK_ENTITY_DATA = SynchedEntityData.defineId(BlockClusterEntity.class,
+        CLUSTER_TILE_DATA = SynchedEntityData.defineId(BlockClusterEntity.class,
                 GoetyAwakenDataSerializers.COMPOUND_LIST);
-        ORIGIN_POSITION = SynchedEntityData.defineId(BlockClusterEntity.class, EntityDataSerializers.BLOCK_POS);
-        ROTATION_INCREMENT = SynchedEntityData.defineId(BlockClusterEntity.class, GoetyAwakenDataSerializers.VECTOR_2F);
-        ENABLE_PHYSICS = SynchedEntityData.defineId(BlockClusterEntity.class, EntityDataSerializers.BOOLEAN);
-        ALWAYS_RENDER = SynchedEntityData.defineId(BlockClusterEntity.class, EntityDataSerializers.BOOLEAN);
-        WIDTH_DIMENSION = SynchedEntityData.defineId(BlockClusterEntity.class, EntityDataSerializers.FLOAT);
-        HEIGHT_DIMENSION = SynchedEntityData.defineId(BlockClusterEntity.class, EntityDataSerializers.FLOAT);
-        DEPTH_DIMENSION = SynchedEntityData.defineId(BlockClusterEntity.class, EntityDataSerializers.FLOAT);
-        OSCILLATION_DURATION = SynchedEntityData.defineId(BlockClusterEntity.class, EntityDataSerializers.INT);
-        FADE_ORIGIN = SynchedEntityData.defineId(BlockClusterEntity.class, EntityDataSerializers.OPTIONAL_BLOCK_POS);
-        FADE_INTENSITY = SynchedEntityData.defineId(BlockClusterEntity.class, EntityDataSerializers.FLOAT);
-        FADE_RANGE_BUFFER = SynchedEntityData.defineId(BlockClusterEntity.class, EntityDataSerializers.INT);
+        CLUSTER_ANCHOR = SynchedEntityData.defineId(BlockClusterEntity.class, EntityDataSerializers.BLOCK_POS);
+        CLUSTER_SPIN = SynchedEntityData.defineId(BlockClusterEntity.class, GoetyAwakenDataSerializers.VECTOR_2F);
+        CLUSTER_HAS_PHYSICS = SynchedEntityData.defineId(BlockClusterEntity.class, EntityDataSerializers.BOOLEAN);
+        CLUSTER_FORCE_VISIBLE = SynchedEntityData.defineId(BlockClusterEntity.class, EntityDataSerializers.BOOLEAN);
+        CLUSTER_BOUNDS_X = SynchedEntityData.defineId(BlockClusterEntity.class, EntityDataSerializers.FLOAT);
+        CLUSTER_BOUNDS_Y = SynchedEntityData.defineId(BlockClusterEntity.class, EntityDataSerializers.FLOAT);
+        CLUSTER_BOUNDS_Z = SynchedEntityData.defineId(BlockClusterEntity.class, EntityDataSerializers.FLOAT);
+        CLUSTER_WOBBLE_TICKS = SynchedEntityData.defineId(BlockClusterEntity.class, EntityDataSerializers.INT);
+        CLUSTER_FADE_CENTER = SynchedEntityData.defineId(BlockClusterEntity.class,
+                EntityDataSerializers.OPTIONAL_BLOCK_POS);
+        CLUSTER_FADE_POWER = SynchedEntityData.defineId(BlockClusterEntity.class, EntityDataSerializers.FLOAT);
+        CLUSTER_FADE_MARGIN = SynchedEntityData.defineId(BlockClusterEntity.class, EntityDataSerializers.INT);
     }
 }

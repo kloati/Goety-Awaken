@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "goetyawaken:block/sandstone/stained_sandstone_gravel",
+    "top": "goetyawaken:block/sandstone/stained_sandstone_gravel",
+    "side": "goetyawaken:block/sandstone/stained_sandstone_gravel"
+  }
+}

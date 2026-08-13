@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DAC",
+    "ABA",
+    "CAD"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:ghast_tear"
+    },
+    "B": {
+      "item": "minecraft:goat_horn"
+    },
+    "C": {
+      "item": "minecraft:gunpowder"
+    },
+    "D": {
+      "item": "minecraft:blaze_powder"
+    }
+  },
+  "result": {
+    "item": "goetyawaken:lamenting_horn"
+  }
+}

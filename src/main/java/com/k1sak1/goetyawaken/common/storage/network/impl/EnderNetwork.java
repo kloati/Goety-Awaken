@@ -38,6 +38,7 @@ public class EnderNetwork implements INetwork {
         this.itemGridHandler = new ItemGridHandlerImpl(this, null);
         this.nodeGraph = new NetworkNodeGraphImpl(this);
         this.itemStorage = new ItemStorageCacheImpl(this);
+        registerGraphListener();
     }
 
     public EnderNetwork(net.minecraft.world.level.Level level, BlockPos pos, EnderAccessLecternBlockEntity lectern) {
@@ -46,7 +47,14 @@ public class EnderNetwork implements INetwork {
         this.itemGridHandler = new ItemGridHandlerImpl(this, lectern);
         this.nodeGraph = new NetworkNodeGraphImpl(this);
         this.itemStorage = new ItemStorageCacheImpl(this);
+        registerGraphListener();
     }
+
+    private void registerGraphListener() {
+        nodeGraph.addListener(() -> itemStorage.invalidate(InvalidateCause.NETWORK_CHANGED));
+    }
+
+    private boolean couldRun = true;
 
     @Override
     public boolean canRun() {
@@ -55,10 +63,20 @@ public class EnderNetwork implements INetwork {
 
     @Override
     public void update() {
+        boolean canRun = canRun();
+        if (couldRun != canRun) {
+            couldRun = canRun;
+            nodeGraph.invalidate();
+        }
     }
 
     @Override
     public void onRemoved() {
+        if (itemStorage instanceof ItemStorageCacheImpl cache) {
+            cache.getStorages().clear();
+            cache.getList().clear();
+            cache.removeAllListeners();
+        }
     }
 
     @Override
@@ -112,7 +130,11 @@ public class EnderNetwork implements INetwork {
         }
 
         if (action == Action.PERFORM && inserted > 0) {
-            itemStorage.add(stack, inserted, false, false);
+            try {
+                itemStorage.add(stack, inserted, false, false);
+            } catch (Exception e) {
+                itemStorage.invalidate(InvalidateCause.UNKNOWN);
+            }
             notifyShelvesOfChange();
         }
 

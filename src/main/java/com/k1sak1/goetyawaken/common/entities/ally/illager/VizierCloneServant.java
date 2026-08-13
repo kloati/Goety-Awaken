@@ -28,7 +28,6 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import java.util.List;
 
 import javax.annotation.Nullable;
 
@@ -65,33 +64,6 @@ public class VizierCloneServant extends SpellcasterIllagerServant implements Ran
                 return;
             }
             LivingEntity trueOwner = this.getTrueOwner();
-            if (trueOwner != null) {
-                if (this.distanceTo(trueOwner) > 32.0F) {
-                    List<LivingEntity> nearbyMobs = this.level().getEntitiesOfClass(LivingEntity.class,
-                            this.getBoundingBox().inflate(32.0D));
-                    boolean ownerNearby = false;
-                    for (LivingEntity mob : nearbyMobs) {
-                        if (mob == trueOwner) {
-                            ownerNearby = true;
-                            break;
-                        }
-                    }
-
-                    if (!ownerNearby) {
-                        if (!this.level().isClientSide) {
-                            for (int i = 0; i < this.level().random.nextInt(35) + 10; ++i) {
-                                ServerLevel serverLevel = (ServerLevel) this.level();
-                                serverLevel.sendParticles(ParticleTypes.POOF, this.getX(), this.getEyeY(), this.getZ(),
-                                        0, 0.0D,
-                                        0.0D, 0.0D, 0.05D);
-                            }
-                        }
-                        this.discard();
-                        return;
-                    }
-                }
-            }
-
             if (trueOwner != null && trueOwner.isDeadOrDying()) {
                 if (!this.level().isClientSide) {
                     for (int i = 0; i < this.level().random.nextInt(35) + 10; ++i) {

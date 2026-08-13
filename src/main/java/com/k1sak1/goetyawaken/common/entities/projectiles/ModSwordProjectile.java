@@ -197,7 +197,6 @@ public class ModSwordProjectile extends AbstractArrow implements ItemSupplier {
 
     @OnlyIn(Dist.CLIENT)
     private void initializeTrail() {
-        // 只在第一帧初始化一个点，避免所有点都在同一位置
         if (this.hasTrail() && this.getTrailPositions().isEmpty()) {
             this.getTrailPositions().add(new TrailPosition(this.position(), 0));
         }
@@ -205,9 +204,17 @@ public class ModSwordProjectile extends AbstractArrow implements ItemSupplier {
 
     @OnlyIn(Dist.CLIENT)
     private void updateTrail() {
-        // 逐步填充轨迹点直到达到最大数量
-        if (this.getTrailPositions().size() < MAX_TRAILS) {
-            this.getTrailPositions().add(new TrailPosition(this.position(), 0));
+        this.getTrailPositions().add(0, new TrailPosition(this.position(), 0));
+        while (this.getTrailPositions().size() > MAX_TRAILS) {
+            this.getTrailPositions().remove(this.getTrailPositions().size() - 1);
+        }
+    }
+
+    @Override
+    public void onRemovedFromWorld() {
+        super.onRemovedFromWorld();
+        if (this.level().isClientSide && this.trailPositions != null) {
+            this.trailPositions.clear();
         }
     }
 

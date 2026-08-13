@@ -12,5 +12,6 @@
       "recipe": "goetyawaken:dauntless_gloves",
       "text": "穿戴时，增加阔剑类武器25%攻击速度。"
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:dauntless_gloves":0}
 }

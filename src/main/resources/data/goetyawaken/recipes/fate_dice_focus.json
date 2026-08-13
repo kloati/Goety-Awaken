@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AEA",
+    "CBC",
+    "ADA"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:iron_ingot"
+    },
+    "B": {
+      "item": "goety:empty_focus"
+    },
+    "C": {
+      "item": "minecraft:tnt"
+    },
+    "D": {
+      "item": "meetyourfight:slicers_dice"
+    },
+    "E": {
+      "item": "meetyourfight:dame_fortuna_head"
+    }
+  },
+  "result": {
+    "item": "goetyawaken:fate_dice_focus"
+  }
+}

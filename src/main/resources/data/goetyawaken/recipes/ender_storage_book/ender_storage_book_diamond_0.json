@@ -1,0 +1,45 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "minecraft:enchanted_book"
+  },
+  "craftType": "magic",
+  "soulCost": 64,
+  "duration": 8,
+  "ingredients": [
+    {
+      "item": "goety:forbidden_fragment"
+    },
+    {
+      "item": "goety:soul_emerald"
+    },
+    {
+      "item": "goety:recall_focus"
+    },
+    {
+      "item": "goety:dark_scroll"
+    },
+    {
+      "item": "goety:soul_ruby"
+    },
+    {
+      "item": "goety:dark_ingot"
+    },
+    {
+      "item": "goety:dark_ingot"
+    },
+    {
+      "item": "minecraft:respawn_anchor"
+    },
+    {
+      "item": "minecraft:diamond_block"
+    },
+    {
+      "item": "minecraft:netherite_ingot"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:ender_storage_book_diamond"
+  }
+}

@@ -22,6 +22,7 @@ import com.Polarice3.Goety.config.AttributesConfig;
 import com.Polarice3.Goety.config.MobsConfig;
 import com.Polarice3.Goety.init.ModSounds;
 import com.Polarice3.Goety.utils.*;
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -123,6 +124,9 @@ public class NeoEnderKeeper extends AbstractEnderling {
     public AnimationState slice1AnimationState = new AnimationState();
     public AnimationState slice2AnimationState = new AnimationState();
     public AnimationState deathAnimationState = new AnimationState();
+
+    public final List<Pair<Vec3, ModelSnapshot>> trailSnapshots = new ArrayList<>(50);
+    public float lastTrailTick = 0;
 
     public NeoEnderKeeper(EntityType<? extends AbstractEnderling> p_33002_, Level p_33003_) {
         super(p_33002_, p_33003_);
@@ -538,7 +542,59 @@ public class NeoEnderKeeper extends AbstractEnderling {
     }
 
     protected PathNavigation createNavigation(Level worldIn) {
-        return new ModGroundNavigation(this, worldIn);
+        return new ModGroundNavigation(this, worldIn) {
+            @Override
+            public boolean isStableDestination(BlockPos blockPos) {
+                return !this.level.getBlockState(blockPos.below()).isAir();
+            }
+        };
+    }
+
+    @Override
+    public void commandMode() {
+        if (!this.isCommanded()) {
+            return;
+        }
+        BlockPos targetPos = this.getCommandPos();
+        Entity targetEntity = this.getCommandPosEntity();
+        this.setCommandTick(this.getCommandTick() - 1);
+
+        if (targetEntity != null) {
+            this.getNavigation().moveTo(targetEntity, this.getCommandSpeed());
+        } else if (targetPos != null) {
+            if (this.getNavigation().isStableDestination(targetPos)) {
+                this.getNavigation().moveTo(targetPos.getX() + 0.5D, targetPos.getY(), targetPos.getZ() + 0.5D,
+                        this.getCommandSpeed());
+            }
+        }
+
+        AABB aabb = targetPos != null ? new AABB(targetPos) : null;
+        Entity entity = this.getControlledVehicle() != null ? this.getControlledVehicle() : this;
+        if (this.getNavigation().isStuck() || this.getCommandTick() <= 0) {
+            this.setCommandPosEntity(null);
+            this.setCommandPos(null);
+        } else if (aabb != null && entity.getBoundingBox().inflate(0.5F).intersects(aabb)) {
+            if (this.getCommandPosEntity() != null &&
+                    this.getBoundingBox().inflate(1.25D).intersects(this.getCommandPosEntity().getBoundingBox())) {
+                if (this.isAbleToRide(this.getCommandPosEntity())) {
+                    if (this.startRiding(this.getCommandPosEntity())) {
+                        if (this.getTrueOwner() instanceof Player player) {
+                            player.displayClientMessage(
+                                    net.minecraft.network.chat.Component.translatable("info.goety.servant.dismount"),
+                                    true);
+                        }
+                    }
+                }
+                this.setCommandPosEntity(null);
+            }
+            if (this.isGuardingArea()) {
+                this.setBoundPos(targetPos);
+            }
+            this.getNavigation().stop();
+            this.getMoveControl().strafe(0.0F, 0.0F);
+            this.moveTo(targetPos, this.getYRot(), this.getXRot());
+            this.setCommandPos(null);
+        }
     }
 
     public static AttributeSupplier.Builder setCustomAttributes() {
@@ -996,7 +1052,7 @@ public class NeoEnderKeeper extends AbstractEnderling {
         super.aiStep();
 
         Vec3 vector3d = this.getDeltaMovement();
-        if (!this.onGround() && vector3d.y < 0.0D && !this.isNoGravity()) {
+        if (!this.onGround() && vector3d.y < 0.0D && !this.isNoGravity() && !this.isCommanded()) {
             this.setDeltaMovement(vector3d.multiply(1.0D, 0.6D, 1.0D));
         }
         if (this.getVoidShrine() != null) {
@@ -1537,19 +1593,20 @@ public class NeoEnderKeeper extends AbstractEnderling {
         this.overrideSetTarget(target);
     }
 
-    @Override
-    public void servantTick() {
-        super.servantTick();
-        if (this.isGuardingArea()) {
-            if (this.distanceToSqr(this.vec3BoundPos()) > Mth.square(64.0F) && this.getTarget() == null) {
-                Vec3 vec3 = this.vec3BoundPos();
-                this.teleportOut();
-                if (this.ownedTeleport(vec3.x, vec3.y, vec3.z)) {
-                    this.teleportIn();
-                }
-            }
-        }
-    }
+    // @Override
+    // public void servantTick() {
+    // super.servantTick();
+    // if (this.isGuardingArea()) {
+    // if (this.distanceToSqr(this.vec3BoundPos()) > Mth.square(64.0F) &&
+    // this.getTarget() == null) {
+    // Vec3 vec3 = this.vec3BoundPos();
+    // this.teleportOut();
+    // if (this.ownedTeleport(vec3.x, vec3.y, vec3.z)) {
+    // this.teleportIn();
+    // }
+    // }
+    // }
+    // }
 
     public void areaAttack(float range, float height, float arc, float damage, int shieldBreak, boolean knockback) {
         MobUtil.areaAttack(this, range, height, arc, damage,
@@ -1887,5 +1944,19 @@ public class NeoEnderKeeper extends AbstractEnderling {
         public boolean requiresUpdateEveryTick() {
             return true;
         }
+    }
+
+    public boolean shouldAddTrailSnapshot() {
+        return Mth.degreesDifferenceAbs(getYRot(), yBodyRot) < 45
+                && Mth.degreesDifferenceAbs(getYRot(), yBodyRotO) < 45
+                && Mth.degreesDifferenceAbs(yBodyRot, yBodyRotO) < 45
+                && !this.isHiding()
+                && (rapidSwingAnimationState.isStarted()
+                        || chargeAnimationState.isStarted()
+                        || groundPoundAnimationState.isStarted()
+                        || groundPoundSpinAnimationState.isStarted()
+                        || backAwayAnimationState.isStarted()
+                        || slice1AnimationState.isStarted()
+                        || slice2AnimationState.isStarted());
     }
 }

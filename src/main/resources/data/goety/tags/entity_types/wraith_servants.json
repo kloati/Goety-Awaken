@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "goetyawaken:wraith_necromancer_servant",
+    "goetyawaken:tower_wraith_servant",
+    {
+      "id": "goetyawaken:bellringer_servant",
+      "required": false
+    }
+  ]
+}

@@ -3,39 +3,139 @@
   "values": [
     "goetyawaken:claymore",
     "goetyawaken:obsidian_claymore",
+    "goetyawaken:starless_night",
     "goety:blade_of_ender",
-    "dungeons_gear:claymore",
-    "mcdw:sword_claymore",
-    "mcdw:sword_the_starless_night",
-    "irons_spellbooks:claymore",
-    "irons_spellbooks:boreal_blade",
-    "irons_spellbooks:spellbreaker",
-    "irons_spellbooks:legionnaire_flamberge",
-    "irons_spellbooks:keeper_flamberge",
-    "simplyswords:iron_claymore",
-    "simplyswords:gold_claymore",
-    "simplyswords:diamond_claymore",
-    "simplyswords:netherite_claymore",
-    "simplyswords:runic_claymore",
-    "simplyswords:watcher_claymore",
-    "simplyswords:brimstone_claymore",
-    "simplyswords:waking_lichblade",
-    "simplyswords:awakened_lichblade",
-    "legendary_monsters:soul_great_sword",
-    "legendary_monsters:the_great_frost",
-    "legendary_monsters:chorus_blade",
-    "twilightforest:giant_sword",
-    "savageandravage:cleaver_of_beheading",
-    "radiation_zone_reborn:dustorm_greatsword",
-    "tconstruct:cleaver",
-    "born_in_chaos_v1:darkwarblade",
-    "manametalmod:TrueAncientThulium_sword",
-    "aoa3:runic_greatblade",
-    "enigmaticlegacy:etherium_sword",
-    "cataclysm:the_incinerator",
-    "goetydelight:starless_night",
-    "spore:greatsword",
-    "species:spectralibur",
-    "armamentarium:dragonslayer"
+    {
+      "id": "dungeons_gear:claymore",
+      "required": false
+    },
+    {
+      "id": "mcdw:sword_claymore",
+      "required": false
+    },
+    {
+      "id": "mcdw:sword_the_starless_night",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:claymore",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:boreal_blade",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:spellbreaker",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:legionnaire_flamberge",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:keeper_flamberge",
+      "required": false
+    },
+    {
+      "id": "simplyswords:iron_claymore",
+      "required": false
+    },
+    {
+      "id": "simplyswords:gold_claymore",
+      "required": false
+    },
+    {
+      "id": "simplyswords:diamond_claymore",
+      "required": false
+    },
+    {
+      "id": "simplyswords:netherite_claymore",
+      "required": false
+    },
+    {
+      "id": "simplyswords:runic_claymore",
+      "required": false
+    },
+    {
+      "id": "simplyswords:watcher_claymore",
+      "required": false
+    },
+    {
+      "id": "simplyswords:brimstone_claymore",
+      "required": false
+    },
+    {
+      "id": "simplyswords:waking_lichblade",
+      "required": false
+    },
+    {
+      "id": "simplyswords:awakened_lichblade",
+      "required": false
+    },
+    {
+      "id": "legendary_monsters:soul_great_sword",
+      "required": false
+    },
+    {
+      "id": "legendary_monsters:the_great_frost",
+      "required": false
+    },
+    {
+      "id": "legendary_monsters:chorus_blade",
+      "required": false
+    },
+    {
+      "id": "twilightforest:giant_sword",
+      "required": false
+    },
+    {
+      "id": "savageandravage:cleaver_of_beheading",
+      "required": false
+    },
+    {
+      "id": "radiation_zone_reborn:dustorm_greatsword",
+      "required": false
+    },
+    {
+      "id": "tconstruct:cleaver",
+      "required": false
+    },
+    {
+      "id": "born_in_chaos_v1:darkwarblade",
+      "required": false
+    },
+    {
+      "id": "manametalmod:true_ancient_thulium_sword",
+      "required": false
+    },
+    {
+      "id": "aoa3:runic_greatblade",
+      "required": false
+    },
+    {
+      "id": "enigmaticlegacy:etherium_sword",
+      "required": false
+    },
+    {
+      "id": "cataclysm:the_incinerator",
+      "required": false
+    },
+    {
+      "id": "goetydelight:starless_night",
+      "required": false
+    },
+    {
+      "id": "spore:greatsword",
+      "required": false
+    },
+    {
+      "id": "species:spectralibur",
+      "required": false
+    },
+    {
+      "id": "armamentarium:dragonslayer",
+      "required": false
+    }
   ]
 }

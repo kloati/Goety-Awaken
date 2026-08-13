@@ -1,0 +1,22 @@
+{
+  "name": "『Blade of Dusk』Rosalyne",
+  "icon": "meetyourfight:dusk_key",
+  "category": "goety:goetyawaken_summons",
+  "flag": "goetyawaken:meetyourfight_loaded",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "『Blade of Dusk』Rosalyne—an ancient warrior wielding roses as her blade. Once you crossed the dusk and severed her final bond with the roses, this warrior's lingering will bowed at last before a greater power."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:rosalyne_servant",
+      "text": "Through the twilight remnants held within the Dusk Key, you have summoned this rose-bound warrior back into the world through a ritual."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:rosalyne_servant",
+      "text": "Once she measured your life by her blade. Now she guards your throne with it."
+    }
+  ]
+}

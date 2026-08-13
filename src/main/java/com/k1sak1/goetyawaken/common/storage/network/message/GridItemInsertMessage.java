@@ -50,7 +50,27 @@ public class GridItemInsertMessage {
         if (player.containerMenu instanceof com.k1sak1.goetyawaken.common.storage.container.EnderAccessLecternContainer container) {
             var gridHandler = container.getItemGridHandler();
             if (gridHandler != null) {
-                gridHandler.onInsert(player, stack, shift);
+                ItemStack remainder = gridHandler.onInsert(player, stack, shift);
+                int inserted = stack.getCount() - remainder.getCount();
+                if (inserted > 0) {
+                    for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
+                        ItemStack invStack = player.getInventory().getItem(i);
+                        if (!invStack.isEmpty()
+                                && com.k1sak1.goetyawaken.common.storage.impl.StorageAPI.instance()
+                                        .getComparer().isEqualNoQuantity(invStack, stack)) {
+                            invStack.shrink(inserted);
+                            if (invStack.isEmpty()) {
+                                player.getInventory().setItem(i, ItemStack.EMPTY);
+                            }
+                            break;
+                        }
+                    }
+                }
+                if (!remainder.isEmpty()) {
+                    net.minecraftforge.items.ItemHandlerHelper.insertItemStacked(
+                            new net.minecraftforge.items.wrapper.PlayerMainInvWrapper(player.getInventory()),
+                            remainder, false);
+                }
             }
         }
     }

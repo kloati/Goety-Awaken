@@ -1,0 +1,28 @@
+{
+  "name": "Ghast Gigante",
+  "icon": "goetyawaken:gloomy_tears",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "O Ghast Gigante é um ghast aberrante de três cabeças. Sua bocarra gigante frontal pode cuspir bolas de fogo explosivas flamejantes, enquanto as faces em ambos os lados disparam bolas de fogo rastreadoras insidiosas. Seu tamanho excede em muito o dos ghasts comuns, e seus corpos são portanto excepcionalmente resistentes. O poder de fogo deste ghast distorcido do Nether é tão devastadoramente feroz que pode reduzir aventureiros despreparados a cinzas em um instante. Antes de caçar um, certifique-se de equipar equipamento capaz de suportar explosões e chamas."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goetyawaken:lamenting_horn",
+      "title": "Chifre Lamentoso",
+      "text": "Usar o Chifre Lamentoso nos biomas Deltas de Basalto, Terras Áridas do Nether ou Vale das Almas do Nether pode provocar uma resposta de um Ghast Gigante do reino infernal."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_giant_ghast",
+      "text": ""
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goetyawaken:gloomy_tears",
+      "title": "Lágrimas Obscuras",
+      "text": "Ao serem derrotados, eles derramam Lágrimas Obscuras. Estas lágrimas — condensadas com poder do Nether e a maldição moribunda do Ghast Gigante — são materiais explosivos poderosos que podem ser usados para aprimorar a magia do Nether, ou para amaldiçoar um Ghast comum, transformando-o em um Ghast Gigante."
+    }
+  ]
+}

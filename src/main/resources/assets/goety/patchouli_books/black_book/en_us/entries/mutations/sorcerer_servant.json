@@ -11,6 +11,10 @@
       "type": "patchouli:entity",
       "entity": "goetyawaken:sorcerer_servant",
       "text": "Sorcerer servants will fight for you using powerful magic, and you can also trade with them using emeralds."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The higher their level, the richer their wares become: magic cores, magic fabrics, grimoires, totems of undying, and even forbidden relics. A bed is required for them to restock in peace."
     }
   ]
 }

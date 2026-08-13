@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "goetyawaken:block/andesite/polished_sanded_andesite",
+    "top": "goetyawaken:block/andesite/polished_sanded_andesite",
+    "side": "goetyawaken:block/andesite/polished_sanded_andesite"
+  }
+}

@@ -3,7 +3,6 @@ package com.k1sak1.goetyawaken.mixin;
 import com.k1sak1.goetyawaken.client.font.GAErosionRenderer;
 import com.k1sak1.goetyawaken.client.typography.GATextMetadata;
 import com.k1sak1.goetyawaken.client.typography.effects.GAErosionHandler;
-import com.k1sak1.goetyawaken.utils.annotation.ExcludeIfModPresent;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.network.chat.TextColor;
@@ -17,7 +16,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Font.class)
-@ExcludeIfModPresent("modernui")
 public abstract class FontMixin {
 
     @Shadow

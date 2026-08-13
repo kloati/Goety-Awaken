@@ -29,6 +29,13 @@ public class EnderKeeperServant extends NeoEnderKeeper implements ICustomAttribu
         pSpawnData = super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
         this.setConfigurableAttributes();
         this.setHealth(this.getMaxHealth());
+
+        if (pReason == MobSpawnType.MOB_SUMMONED && !this.level().isClientSide) {
+            if (this.getTrueOwner() instanceof net.minecraft.server.level.ServerPlayer serverPlayer) {
+                com.k1sak1.goetyawaken.common.advancements.ModCriteriaTriggers.LONG_WATCH.trigger(serverPlayer);
+            }
+        }
+
         return pSpawnData;
     }
 

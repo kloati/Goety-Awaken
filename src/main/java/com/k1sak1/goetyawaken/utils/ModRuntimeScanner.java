@@ -17,22 +17,21 @@ public class ModRuntimeScanner {
         }
 
         try {
-            try {
-                ModList modList = ModList.get();
-                if (modList != null) {
-                    modList.getModContainerById("");
-                    modList.getMods().forEach(mod -> {
-                        DETECTED_MODS.add(mod.getModId());
-                    });
-                }
-            } catch (NoClassDefFoundError e) {
-                scanViaFMLLoader();
+            ModList modList = ModList.get();
+            if (modList != null) {
+                modList.getMods().forEach(mod -> {
+                    DETECTED_MODS.add(mod.getModId());
+                });
             }
-            initialized = true;
-        } catch (Exception e) {
-            DETECTED_MODS.clear();
-            initialized = true;
+        } catch (Throwable e) {
+
         }
+
+        if (DETECTED_MODS.isEmpty()) {
+            scanViaFMLLoader();
+        }
+
+        initialized = true;
     }
 
     private static void scanViaFMLLoader() {

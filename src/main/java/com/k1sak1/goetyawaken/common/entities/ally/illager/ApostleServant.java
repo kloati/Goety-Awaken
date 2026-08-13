@@ -108,7 +108,6 @@ public class ApostleServant extends SpellCastingCultistServant implements Ranged
     private boolean roarParticles;
     private boolean fireArrows;
     private boolean regen;
-    private boolean killedPlayer;
     private boolean isApostleUpgraded;
     private MobEffect arrowEffect;
     private static final UUID SPEED_MODIFIER_CASTING_UUID = UUID.fromString("5CF17E52-A78A-13D3-A529-90FDE04C181E");
@@ -228,7 +227,6 @@ public class ApostleServant extends SpellCastingCultistServant implements Ranged
         this.setPathfindingMalus(BlockPathTypes.LAVA, 0.0F);
         this.setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 0.0F);
         this.setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, 0.0F);
-        this.xpReward = 0;
         this.coolDown = 100;
         this.spellCycle = 0;
         this.hitTimes = 0;
@@ -409,7 +407,8 @@ public class ApostleServant extends SpellCastingCultistServant implements Ranged
 
     public void die(DamageSource cause) {
         if (this.deathTime > 0) {
-            if (!this.canRevive(cause)) {
+            super.die(cause);
+            if (this.isDeadOrDying() && !this.canRevive(cause)) {
                 if (this.level() instanceof ServerLevel serverLevel && !this.level().isClientSide) {
                     ItemStack obsidianTearStack = new ItemStack(
                             com.k1sak1.goetyawaken.common.items.ModItems.OBSIDIAN_TEAR.get());
@@ -434,7 +433,9 @@ public class ApostleServant extends SpellCastingCultistServant implements Ranged
                     }
                 }
             }
-            super.die(cause);
+            if (!this.isDeadOrDying()) {
+                this.deathTime = 0;
+            }
         }
     }
 
@@ -1333,7 +1334,7 @@ public class ApostleServant extends SpellCastingCultistServant implements Ranged
                 if (!(living instanceof Cultist) && !(living instanceof Witch)
                         && !(living instanceof IOwned && ((IOwned) living).getTrueOwner() == this)
                         && this.getTarget() == living) {
-                    if (living.isInWater()) {
+                    if (living.isInWater() && !MobUtil.areAllies(this, living)) {
                         living.hurt(living.damageSources().hotFloor(), 1.0F);
                     }
                 }
@@ -2476,5 +2477,20 @@ public class ApostleServant extends SpellCastingCultistServant implements Ranged
             }
         }
         return super.mobInteract(pPlayer, pHand);
+    }
+
+    @Override
+    public boolean canWearArmor() {
+        return true;
+    }
+
+    @Override
+    public boolean canHaveWeapon() {
+        return true;
+    }
+
+    @Override
+    public boolean isMainWeapon(ItemStack itemStack) {
+        return itemStack.getItem() instanceof BowItem;
     }
 }

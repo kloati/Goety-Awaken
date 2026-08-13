@@ -1,0 +1,16 @@
+{
+  "name": "Mooshroom Furioso Hostil",
+  "icon": "goetyawaken:hostile_angry_mooshroom_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "A entrada da estrutura misteriosa nas Ilhas dos Cogumelos é guardada por uma manada de Mooshrooms que parecem estar em um estado perpétuo de fúria, investindo violentamente contra qualquer criatura diante deles. Você não pode deixar de se perguntar — que tipo de força poderia tornar estas criaturas normalmente gentis tão ferozes..."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_angry_mooshroom",
+      "text": "Moo!"
+    }
+  ]
+}

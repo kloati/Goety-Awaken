@@ -2,6 +2,7 @@
   "name": "Foco da Fada",
   "icon": "goetyawaken:fairy_focus",
   "category": "goety:goetyawaken_focuses",
+  "flag": "goetyawaken:touhou_little_maid_loaded",
   "pages": [
     {
       "type": "text",

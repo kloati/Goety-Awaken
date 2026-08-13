@@ -12,7 +12,7 @@ import com.Polarice3.Goety.client.particles.SphereExplodeParticleOption;
 import com.Polarice3.Goety.utils.ServerParticleUtil;
 import com.Polarice3.Goety.utils.BlockFinder;
 import com.k1sak1.goetyawaken.common.blocks.ModBlocks;
-import com.k1sak1.goetyawaken.Config;
+import com.k1sak1.goetyawaken.config.AttributesConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -77,16 +77,13 @@ public class MushroomScatterBomb extends ScatterBomb {
                 if (this.getOwner() != null && this.getOwner() instanceof LivingEntity) {
                     acidPool.setOwner((LivingEntity) this.getOwner());
                 }
-                acidPool.setRadius(3.0F);
+                acidPool.setRadius(1.5F);
                 acidPool.setDamage(3.0F);
                 acidPool.setColor(2143038);
-                acidPool.setDuration(160);
-
+                acidPool.setDuration(80);
                 serverLevel.addFreshEntity(acidPool);
-
                 BlockPos centerPos = BlockPos.containing(this.getX(), this.getY(), this.getZ());
-                int radius = 5;
-
+                int radius = 2;
                 for (int dx = -radius; dx <= radius; dx++) {
                     for (int dz = -radius; dz <= radius; dz++) {
                         for (int dy = -2; dy <= 2; dy++) {
@@ -94,7 +91,7 @@ public class MushroomScatterBomb extends ScatterBomb {
 
                             // if (this.getOwner() instanceof MushroomMonstrosityHostile) {
                             if (this.level().random.nextDouble() < 0.04
-                                    && Config.ALLOW_MUSHROOM_MONSTROSITY_PLANT_POISONOUS_MUSHROOM.get()) {
+                                    && AttributesConfig.AllowMushroomMonstrosityPlantPoisonousMushroom.get()) {
                                 BlockPos mushroomPos = pos.above();
                                 boolean isAboveBlockNonSolid = !this.level().getBlockState(mushroomPos)
                                         .isSolidRender(this.level(), mushroomPos);

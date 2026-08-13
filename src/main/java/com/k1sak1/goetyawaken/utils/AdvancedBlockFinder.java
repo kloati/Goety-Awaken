@@ -295,7 +295,7 @@ public class AdvancedBlockFinder {
                 for (int k = -zRange; k <= zRange; ++k) {
                     BlockPos checkPos = blockPos.offset(i, j, k);
                     BlockState blockState = level.getBlockState(checkPos);
-                    if (blockState.is(com.Polarice3.Goety.common.blocks.ModBlocks.PEDESTAL.get())) {
+                    if (blockState.getBlock() instanceof com.Polarice3.Goety.common.blocks.PedestalBlock) {
                         BlockEntity blockEntity = level.getBlockEntity(checkPos);
                         if (blockEntity instanceof PedestalBlockEntity pedestal) {
                             final int[] localCount = { 0 };

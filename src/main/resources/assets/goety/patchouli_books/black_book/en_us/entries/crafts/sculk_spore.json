@@ -1,0 +1,18 @@
+{
+  "name": "Sculk Spore",
+  "icon": "goetyawaken:sculk_spore",
+  "category": "goety:goetyawaken_crafts",
+  "flag": "goetyawaken:deeperdarker_loaded",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A vile spore condensed from sculk blocks, using technology related to silverfish. Plant it into sculk blocks to lure a Shriek Worm lurking in the deep dark to burrow out. Since the spore is tainted with your pheromones, the lured Shriek Worm will become your ally."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:sculk_spore",
+      "text": ""
+    }
+  ],
+  "extra_recipe_mappings": {"goetyawaken:sculk_spore":0}
+}

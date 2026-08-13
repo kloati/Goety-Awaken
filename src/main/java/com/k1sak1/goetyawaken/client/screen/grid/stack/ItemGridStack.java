@@ -16,6 +16,7 @@ import javax.annotation.Nullable;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Deprecated
 public class ItemGridStack implements IGridStack {
     private static final Logger LOGGER = LogManager.getLogger(ItemGridStack.class);
     private static final String ERROR_PLACEHOLDER = "<Error>";

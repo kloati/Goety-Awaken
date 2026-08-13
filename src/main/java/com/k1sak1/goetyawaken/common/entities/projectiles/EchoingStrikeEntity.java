@@ -1,10 +1,9 @@
 package com.k1sak1.goetyawaken.common.entities.projectiles;
 
 import com.Polarice3.Goety.client.particles.SphereExplodeParticleOption;
-import com.Polarice3.Goety.utils.BlockFinder;
 import com.Polarice3.Goety.utils.ColorUtil;
 import com.k1sak1.goetyawaken.common.entities.ModEntityType;
-import com.k1sak1.goetyawaken.common.events.EchoEffectHandler;
+import com.k1sak1.goetyawaken.common.events.ModEffectsEvents;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.protocol.Packet;
@@ -84,7 +83,7 @@ public class EchoingStrikeEntity extends AoeEntity {
                                         this.getOwner()) {
                                     @Override
                                     public String getMsgId() {
-                                        return EchoEffectHandler.ECHO_DAMAGE_MARKER;
+                                        return ModEffectsEvents.ECHO_DAMAGE_MARKER;
                                     }
                                 };
                             } else {
@@ -94,7 +93,7 @@ public class EchoingStrikeEntity extends AoeEntity {
                                         (Entity) this.getOwner()) {
                                     @Override
                                     public String getMsgId() {
-                                        return EchoEffectHandler.ECHO_DAMAGE_MARKER;
+                                        return ModEffectsEvents.ECHO_DAMAGE_MARKER;
                                     }
                                 };
                             }

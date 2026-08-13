@@ -1,9 +1,8 @@
 package com.k1sak1.goetyawaken.client.model.illager;
 
 import com.Polarice3.Goety.common.entities.ally.illager.AbstractIllagerServant;
-import com.Polarice3.Goety.common.entities.ally.illager.SpellcasterIllagerServant;
 import com.Polarice3.Goety.client.render.layer.HierarchicalArmor;
-import com.k1sak1.goetyawaken.common.entities.ally.illager.IllusionerServant;
+import com.Polarice3.Goety.utils.ModelUtil;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.ArmedModel;
 import net.minecraft.client.model.HeadedModel;
@@ -13,11 +12,16 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.monster.AbstractIllager;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import java.util.List;
+import java.util.stream.Stream;
+
 @OnlyIn(Dist.CLIENT)
-public class IllusionerServantModel<T extends SpellcasterIllagerServant> extends HierarchicalModel<T>
+public class IllusionerServantModel<T extends Mob> extends HierarchicalModel<T>
         implements ArmedModel, HeadedModel, HierarchicalArmor {
     public static final net.minecraft.client.model.geom.ModelLayerLocation LAYER_LOCATION = new net.minecraft.client.model.geom.ModelLayerLocation(
             new net.minecraft.resources.ResourceLocation("goetyawaken",
@@ -31,6 +35,7 @@ public class IllusionerServantModel<T extends SpellcasterIllagerServant> extends
     private final ModelPart rightLeg;
     private final ModelPart rightArm;
     private final ModelPart leftArm;
+    public final List<String> allPartNames;
 
     public IllusionerServantModel(ModelPart pRoot) {
         this.root = pRoot;
@@ -42,9 +47,18 @@ public class IllusionerServantModel<T extends SpellcasterIllagerServant> extends
         this.rightLeg = pRoot.getChild("right_leg");
         this.leftArm = pRoot.getChild("left_arm");
         this.rightArm = pRoot.getChild("right_arm");
+        this.allPartNames = Stream.concat(Stream.of("root"), ModelUtil.getAllPartNames(this.root)).toList();
     }
 
     public static LayerDefinition createBodyLayer() {
+        return createBodyLayer(0);
+    }
+
+    public static LayerDefinition createShadowLayer() {
+        return createBodyLayer(-0.05F);
+    }
+
+    public static LayerDefinition createBodyLayer(float deformation) {
         MeshDefinition meshdefinition = new MeshDefinition();
         PartDefinition partdefinition = meshdefinition.getRoot();
         PartDefinition partdefinition1 = partdefinition.addOrReplaceChild("head",
@@ -117,8 +131,15 @@ public class IllusionerServantModel<T extends SpellcasterIllagerServant> extends
             this.leftLeg.zRot = 0.0F;
         }
 
-        AbstractIllagerServant.IllagerServantArmPose illusionerservant$illagerservantarmpose = pEntity.getArmPose();
-        if (illusionerservant$illagerservantarmpose == AbstractIllagerServant.IllagerServantArmPose.ATTACKING) {
+        String poseKey;
+        if (pEntity instanceof AbstractIllagerServant servant) {
+            poseKey = servant.getArmPose().name();
+        } else if (pEntity instanceof AbstractIllager illager) {
+            poseKey = illager.getArmPose().name();
+        } else {
+            poseKey = "NEUTRAL";
+        }
+        if (poseKey.equals("ATTACKING")) {
             if (pEntity.getMainHandItem().isEmpty()) {
                 net.minecraft.client.model.AnimationUtils.animateZombieArms(this.leftArm, this.rightArm, true,
                         this.attackTime, pAgeInTicks);
@@ -126,7 +147,7 @@ public class IllusionerServantModel<T extends SpellcasterIllagerServant> extends
                 net.minecraft.client.model.AnimationUtils.swingWeaponDown(this.rightArm, this.leftArm, pEntity,
                         this.attackTime, pAgeInTicks);
             }
-        } else if (illusionerservant$illagerservantarmpose == AbstractIllagerServant.IllagerServantArmPose.SPELLCASTING) {
+        } else if (poseKey.equals("SPELLCASTING")) {
             this.rightArm.z = 0.0F;
             this.rightArm.x = -5.0F;
             this.leftArm.z = 0.0F;
@@ -137,17 +158,17 @@ public class IllusionerServantModel<T extends SpellcasterIllagerServant> extends
             this.leftArm.zRot = -2.3561945F;
             this.rightArm.yRot = 0.0F;
             this.leftArm.yRot = 0.0F;
-        } else if (illusionerservant$illagerservantarmpose == AbstractIllagerServant.IllagerServantArmPose.BOW_AND_ARROW) {
+        } else if (poseKey.equals("BOW_AND_ARROW")) {
             this.rightArm.yRot = -0.1F + this.head.yRot;
             this.rightArm.xRot = (-(float) Math.PI / 2F) + this.head.xRot;
             this.leftArm.xRot = -0.9424779F + this.head.xRot;
             this.leftArm.yRot = this.head.yRot - 0.4F;
             this.leftArm.zRot = ((float) Math.PI / 2F);
-        } else if (illusionerservant$illagerservantarmpose == AbstractIllagerServant.IllagerServantArmPose.CROSSBOW_HOLD) {
+        } else if (poseKey.equals("CROSSBOW_HOLD")) {
             net.minecraft.client.model.AnimationUtils.animateCrossbowHold(this.rightArm, this.leftArm, this.head, true);
-        } else if (illusionerservant$illagerservantarmpose == AbstractIllagerServant.IllagerServantArmPose.CROSSBOW_CHARGE) {
+        } else if (poseKey.equals("CROSSBOW_CHARGE")) {
             net.minecraft.client.model.AnimationUtils.animateCrossbowCharge(this.rightArm, this.leftArm, pEntity, true);
-        } else if (illusionerservant$illagerservantarmpose == AbstractIllagerServant.IllagerServantArmPose.CELEBRATING) {
+        } else if (poseKey.equals("CELEBRATING")) {
             this.rightArm.z = 0.0F;
             this.rightArm.x = -5.0F;
             this.rightArm.xRot = Mth.cos(pAgeInTicks * 0.6662F) * 0.05F;
@@ -160,7 +181,7 @@ public class IllusionerServantModel<T extends SpellcasterIllagerServant> extends
             this.leftArm.yRot = 0.0F;
         }
 
-        boolean flag = illusionerservant$illagerservantarmpose == AbstractIllagerServant.IllagerServantArmPose.CROSSED;
+        boolean flag = poseKey.equals("CROSSED");
         this.arms.visible = flag;
         this.leftArm.visible = !flag;
         this.rightArm.visible = !flag;

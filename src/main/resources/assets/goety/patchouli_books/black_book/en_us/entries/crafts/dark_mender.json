@@ -16,5 +16,6 @@
       "recipe": "goetyawaken:dark_mender",
       "text": ""
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:dark_mender":0}
 }

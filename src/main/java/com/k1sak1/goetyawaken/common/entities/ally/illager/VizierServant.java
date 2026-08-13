@@ -2,7 +2,6 @@ package com.k1sak1.goetyawaken.common.entities.ally.illager;
 
 import com.Polarice3.Goety.common.entities.ally.illager.SpellcasterIllagerServant;
 import com.Polarice3.Goety.utils.MobUtil;
-import com.Polarice3.Goety.utils.SEHelper;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -41,9 +40,9 @@ import com.k1sak1.goetyawaken.common.entities.ModEntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import javax.annotation.Nullable;
 import net.minecraft.world.entity.AnimationState;
+import net.minecraft.world.entity.Entity;
 
 import com.Polarice3.Goety.utils.BlockFinder;
-import com.Polarice3.Goety.utils.MiscCapHelper;
 import net.minecraft.world.phys.AABB;
 import java.util.List;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -117,6 +116,12 @@ public class VizierServant extends SpellcasterIllagerServant implements net.mine
     private int teleportSkillCooldown = 0;
     private static final int TELEPORT_SKILL_COOLDOWN = 400;
     private static final String TAG_FANGS_ENHANCED = "FangsEnhanced";
+    private int minionScanTimer = 0;
+    private int minionCount = 0;
+    private int groundScanTimer = 0;
+    private double cachedGroundY = 0.0D;
+    private java.util.List<LivingEntity> enhancedTargets = new java.util.ArrayList<>();
+    private int targetScanTimer = 0;
 
     public boolean isFangsEnhanced() {
         return this.entityData.get(FANGS_ENHANCED);
@@ -265,29 +270,33 @@ public class VizierServant extends SpellcasterIllagerServant implements net.mine
             this.setCasting(0);
         }
 
-        int i = 0;
-        if (!MobsConfig.VizierMinion.get()) {
+        int i = this.minionCount;
+        if (this.minionScanTimer-- <= 0) {
+            this.minionScanTimer = 20;
+            i = 0;
+            if (!MobsConfig.VizierMinion.get()) {
+                i = this.level()
+                        .getEntitiesOfClass(com.Polarice3.Goety.common.entities.ally.illager.raider.AllyIrk.class,
+                                this.getBoundingBox().inflate(64))
+                        .size();
 
-            i = this.level()
-                    .getEntitiesOfClass(com.Polarice3.Goety.common.entities.ally.illager.raider.AllyIrk.class,
-                            this.getBoundingBox().inflate(64))
-                    .size();
+                i += this.level()
+                        .getEntitiesOfClass(com.Polarice3.Goety.common.entities.hostile.Irk.class,
+                                this.getBoundingBox().inflate(64))
+                        .size();
+            } else {
 
-            i += this.level()
-                    .getEntitiesOfClass(com.Polarice3.Goety.common.entities.hostile.Irk.class,
-                            this.getBoundingBox().inflate(64))
-                    .size();
-        } else {
+                i = this.level()
+                        .getEntitiesOfClass(com.Polarice3.Goety.common.entities.ally.illager.raider.AllyVex.class,
+                                this.getBoundingBox().inflate(64))
+                        .size();
 
-            i = this.level()
-                    .getEntitiesOfClass(com.Polarice3.Goety.common.entities.ally.illager.raider.AllyVex.class,
-                            this.getBoundingBox().inflate(64))
-                    .size();
-
-            i += this.level()
-                    .getEntitiesOfClass(net.minecraft.world.entity.monster.Vex.class,
-                            this.getBoundingBox().inflate(64))
-                    .size();
+                i += this.level()
+                        .getEntitiesOfClass(net.minecraft.world.entity.monster.Vex.class,
+                                this.getBoundingBox().inflate(64))
+                        .size();
+            }
+            this.minionCount = i;
         }
         if (this.getCastTimes() == 1) {
             if (i >= 2) {
@@ -307,77 +316,97 @@ public class VizierServant extends SpellcasterIllagerServant implements net.mine
         }
 
         this.moveCloak();
-        MiscCapHelper.updateMobTarget(this);
+
+        if (this.getTarget() != null && !this.getTarget().onGround()) {
+            ++this.airBound;
+        } else {
+            this.airBound = 0;
+        }
+
+        if (this.groundScanTimer-- <= 0) {
+            this.groundScanTimer = 20;
+            this.cachedGroundY = BlockFinder.findNearestGroundY(this.level(), this.blockPosition(), 20);
+        }
+        double currentY = this.getY();
+
+        double minAbove = 2.0D;
+        double maxAbove = 8.0D;
+        double idealHeight = 4.0D;
+
+        double aboveGround = currentY - this.cachedGroundY;
+
+        boolean adjust = false;
+        double targetY = currentY;
+
+        if (aboveGround < minAbove) {
+            targetY = this.cachedGroundY + idealHeight;
+            adjust = true;
+        } else if (aboveGround > maxAbove) {
+            if (this.getTarget() != null && !this.getTarget().onGround() && this.airBound > 40 / 2) {
+                if (aboveGround > maxAbove * 2) {
+                    targetY = this.cachedGroundY + maxAbove;
+                    adjust = true;
+                }
+            } else {
+                targetY = this.cachedGroundY + idealHeight;
+                adjust = true;
+            }
+        }
+
+        if (adjust && !this.isSpellcasting() && !this.isCommanded()) {
+            this.getMoveControl().setWantedPosition(this.getX(), targetY, this.getZ(), 0.8F);
+        }
+
         this.servantTick();
 
         this.applyPotionEffectsToAllies();
 
         this.teleportAlliesIfNeeded();
 
-        if (this.getTarget() == null) {
+    }
 
-        } else {
+    @Override
+    public void commandMode() {
+        if (!this.isCommanded()) {
+            return;
+        }
+        BlockPos targetPos = this.getCommandPos();
+        Entity targetEntity = this.getCommandPosEntity();
+        this.setCommandTick(this.getCommandTick() - 1);
 
-            if (!this.isFollowing()) {
-                if (this.getTarget() == null) {
+        if (targetEntity != null) {
+            this.getMoveControl().setWantedPosition(targetEntity.getX(), targetEntity.getEyeY(), targetEntity.getZ(),
+                    this.getCommandSpeed());
+        } else if (targetPos != null) {
+            this.getMoveControl().setWantedPosition(targetPos.getX() + 0.5D, targetPos.getY(), targetPos.getZ() + 0.5D,
+                    this.getCommandSpeed());
+        }
 
-                    if (this.tickCount % 100 == 0) {
-                    }
-
-                    for (LivingEntity livingEntity : this.level().getEntitiesOfClass(LivingEntity.class,
-                            this.getBoundingBox().inflate(32.0F),
-                            net.minecraft.world.entity.EntitySelector.NO_CREATIVE_OR_SPECTATOR)) {
-
-                        if ((livingEntity instanceof net.minecraft.world.entity.player.Player ||
-                                livingEntity instanceof net.minecraft.world.entity.npc.AbstractVillager ||
-                                livingEntity instanceof net.minecraft.world.entity.animal.IronGolem ||
-                                livingEntity instanceof net.minecraft.world.entity.monster.Monster) &&
-                                this.canAttack(livingEntity) &&
-                                !this.isAlliedTo(livingEntity)) {
-
-                            net.minecraft.world.entity.LivingEntity owner = this.getTrueOwner();
-                            if (owner instanceof net.minecraft.world.entity.player.Player player) {
-                                if (!SEHelper.getAllyEntities(player).contains(livingEntity) &&
-                                        !SEHelper.getAllyEntityTypes(player).contains(livingEntity.getType())) {
-                                    this.setTarget(livingEntity);
-                                    break;
-                                }
-                            } else {
-
-                                this.setTarget(livingEntity);
-                                break;
-                            }
+        AABB aabb = targetPos != null ? new AABB(targetPos) : null;
+        Entity entity = this.getControlledVehicle() != null ? this.getControlledVehicle() : this;
+        if (this.getCommandTick() <= 0) {
+            this.setCommandPosEntity(null);
+            this.setCommandPos(null);
+        } else if (aabb != null && entity.getBoundingBox().inflate(0.5F).intersects(aabb)) {
+            if (this.getCommandPosEntity() != null &&
+                    this.getBoundingBox().inflate(1.25D).intersects(this.getCommandPosEntity().getBoundingBox())) {
+                if (this.isAbleToRide(this.getCommandPosEntity())) {
+                    if (this.startRiding(this.getCommandPosEntity())) {
+                        if (this.getTrueOwner() instanceof Player player) {
+                            player.displayClientMessage(Component.translatable("info.goety.servant.dismount"), true);
                         }
                     }
-                } else {
-
-                    if (this.tickCount % 100 == 0) {
-                    }
-
-                    if (!this.getTarget().onGround()) {
-                        ++this.airBound;
-                    } else {
-                        this.airBound = 0;
-                    }
-
-                    if (this.tickCount % 50 == 0) {
-                    }
                 }
+                this.setCommandPosEntity(null);
             }
-
-            if (!this.getTarget().onGround()) {
-                ++this.airBound;
-            } else {
-                this.airBound = 0;
+            if (this.isGuardingArea()) {
+                this.setBoundPos(targetPos);
             }
+            this.getNavigation().stop();
+            this.getMoveControl().strafe(0.0F, 0.0F);
+            this.moveTo(targetPos, this.getYRot(), this.getXRot());
+            this.setCommandPos(null);
         }
-
-        if (this.isStaying() && this.getTarget() == null) {
-            if (this.getNavigation().getPath() != null) {
-                this.getNavigation().stop();
-            }
-        }
-
     }
 
     public static double getHorizontalDistanceSqr(Vec3 pVector) {
@@ -456,7 +485,6 @@ public class VizierServant extends SpellcasterIllagerServant implements net.mine
                 return super.canUse() && VizierServant.this.getTarget() == null;
             }
         });
-        super.registerGoals();
     }
 
     public static AttributeSupplier.Builder setCustomAttributes() {
@@ -652,31 +680,34 @@ public class VizierServant extends SpellcasterIllagerServant implements net.mine
                     clone.discard();
                 }
             }
-            if (!this.canRevive(cause)) {
-                ItemStack fakeAppointment = new ItemStack(
-                        com.k1sak1.goetyawaken.common.items.ModItems.FAKE_APPOINTMENT.get());
-                if (this.getTrueOwner() != null) {
-                    com.Polarice3.Goety.common.entities.projectiles.FlyingItem flyingItem = new com.Polarice3.Goety.common.entities.projectiles.FlyingItem(
-                            com.Polarice3.Goety.common.entities.ModEntityType.FLYING_ITEM.get(),
-                            this.level(),
-                            this.getX(),
-                            this.getY() + 1.0D,
-                            this.getZ());
-                    flyingItem.setOwner(this.getTrueOwner());
-                    flyingItem.setItem(fakeAppointment);
-                    flyingItem.setParticle(ParticleTypes.SOUL);
-                    flyingItem.setSecondsCool(30);
-                    this.level().addFreshEntity(flyingItem);
-                } else {
-                    net.minecraft.world.entity.item.ItemEntity itemEntity = this.spawnAtLocation(fakeAppointment);
-                    if (itemEntity != null) {
-                        itemEntity.setExtendedLifetime();
-                    }
-                }
-            }
         }
 
         super.die(cause);
+        if (this.isDeadOrDying() && !this.canRevive(cause) && !this.level().isClientSide) {
+            ItemStack fakeAppointment = new ItemStack(
+                    com.k1sak1.goetyawaken.common.items.ModItems.FAKE_APPOINTMENT.get());
+            if (this.getTrueOwner() != null) {
+                com.Polarice3.Goety.common.entities.projectiles.FlyingItem flyingItem = new com.Polarice3.Goety.common.entities.projectiles.FlyingItem(
+                        com.Polarice3.Goety.common.entities.ModEntityType.FLYING_ITEM.get(),
+                        this.level(),
+                        this.getX(),
+                        this.getY() + 1.0D,
+                        this.getZ());
+                flyingItem.setOwner(this.getTrueOwner());
+                flyingItem.setItem(fakeAppointment);
+                flyingItem.setParticle(ParticleTypes.SOUL);
+                flyingItem.setSecondsCool(30);
+                this.level().addFreshEntity(flyingItem);
+            } else {
+                net.minecraft.world.entity.item.ItemEntity itemEntity = this.spawnAtLocation(fakeAppointment);
+                if (itemEntity != null) {
+                    itemEntity.setExtendedLifetime();
+                }
+            }
+        }
+        if (!this.isDeadOrDying()) {
+            this.deathTime = 0;
+        }
     }
 
     @Override
@@ -1024,14 +1055,9 @@ public class VizierServant extends SpellcasterIllagerServant implements net.mine
                 if (VizierServant.this.airBound > 20) {
                     if (!VizierServant.this.level().isClientSide) {
                         ServerLevel serverWorld = (ServerLevel) VizierServant.this.level();
-                        for (int i = 0; i < 5; ++i) {
-                            double d0 = serverWorld.random.nextGaussian() * 0.02D;
-                            double d1 = serverWorld.random.nextGaussian() * 0.02D;
-                            double d2 = serverWorld.random.nextGaussian() * 0.02D;
-                            serverWorld.sendParticles(ParticleTypes.ENCHANT, VizierServant.this.getRandomX(1.0D),
-                                    VizierServant.this.getRandomY() + 1.0D, VizierServant.this.getRandomZ(1.0D), 0, d0,
-                                    d1, d2, 0.5F);
-                        }
+                        serverWorld.sendParticles(ParticleTypes.ENCHANT, VizierServant.this.getRandomX(1.0D),
+                                VizierServant.this.getRandomY() + 1.0D, VizierServant.this.getRandomZ(1.0D), 5, 0.0D,
+                                0.0D, 0.0D, 0.5F);
                     }
                 }
 
@@ -1061,24 +1087,18 @@ public class VizierServant extends SpellcasterIllagerServant implements net.mine
         private void attack(LivingEntity livingEntity) {
             if (VizierServant.this.isFangsEnhanced()) {
                 if (VizierServant.this.airBound < 40) {
-                    AABB searchBox = VizierServant.this.getBoundingBox().inflate(16.0D);
-                    List<LivingEntity> targets = VizierServant.this.level().getEntitiesOfClass(LivingEntity.class,
-                            searchBox,
-                            entity -> entity != VizierServant.this &&
-                                    entity.isAlive() &&
-                                    !MobUtil.areAllies(entity, VizierServant.this) &&
-                                    entity != VizierServant.this.getTrueOwner());
+                    List<LivingEntity> targets = this.getEnhancedTargets();
 
                     for (LivingEntity target : targets) {
-                        this.spawnFangs(target.getX(), target.getZ(), target.getY(), target.getY() + 1.0D, 0.0F, 0);
+                        double groundY = BlockFinder.findGroundY(VizierServant.this.level(), target.getX(),
+                                target.getY(), target.getZ());
+                        float f = (float) Mth.atan2(target.getZ() - VizierServant.this.getZ(),
+                                target.getX() - VizierServant.this.getX());
+                        this.spawnFangs(target.getX(), target.getZ(), groundY, groundY + 1.0D, 0.0F, 0);
                         for (int i1 = 0; i1 < 5; ++i1) {
-                            float f = (float) Mth.atan2(target.getZ() - VizierServant.this.getZ(),
-                                    target.getX() - VizierServant.this.getX());
                             float f1 = f + (float) i1 * (float) Math.PI * 0.4F;
                             this.spawnFangs(target.getX() + (double) Mth.cos(f1) * 1.5D,
-                                    target.getZ() + (double) Mth.sin(f1) * 1.5D, target.getY(), target.getY() + 1.0D,
-                                    f1,
-                                    0);
+                                    target.getZ() + (double) Mth.sin(f1) * 1.5D, groundY, groundY + 1.0D, f1, 0);
                         }
                     }
                 } else {
@@ -1101,18 +1121,17 @@ public class VizierServant extends SpellcasterIllagerServant implements net.mine
 
             } else {
                 if (VizierServant.this.airBound < 40) {
-                    BlockPos blockPos = BlockFinder.SummonPosition(livingEntity, livingEntity.blockPosition()).below();
+                    double groundY = BlockFinder.findGroundY(VizierServant.this.level(), livingEntity.getX(),
+                            livingEntity.getY(), livingEntity.getZ());
                     float f = (float) Mth.atan2(livingEntity.getZ() - VizierServant.this.getZ(),
                             livingEntity.getX() - VizierServant.this.getX());
-                    this.spawnFangs(livingEntity.getX(), livingEntity.getZ(), blockPos.getY(), blockPos.getY() + 1.0D,
-                            f, 1);
+                    this.spawnFangs(livingEntity.getX(), livingEntity.getZ(), groundY, groundY + 1.0D, f, 1);
                     if (MobUtil.healthIsHalved(VizierServant.this)
                             || VizierServant.this.level().getDifficulty() != Difficulty.EASY) {
                         for (int i = 0; i < 5; ++i) {
                             float f1 = f + (float) i * (float) Math.PI * 0.4F;
                             this.spawnFangs(livingEntity.getX() + (double) Mth.cos(f1) * 1.5D,
-                                    livingEntity.getZ() + (double) Mth.sin(f1) * 1.5D, blockPos.getY(),
-                                    blockPos.getY() + 1.0D, f1, 1);
+                                    livingEntity.getZ() + (double) Mth.sin(f1) * 1.5D, groundY, groundY + 1.0D, f1, 1);
                         }
                     }
                 } else {
@@ -1133,6 +1152,22 @@ public class VizierServant extends SpellcasterIllagerServant implements net.mine
                     }
                 }
             }
+        }
+
+        private List<LivingEntity> getEnhancedTargets() {
+            int currentTick = VizierServant.this.tickCount;
+            if (currentTick - VizierServant.this.targetScanTimer >= 10) {
+                VizierServant.this.targetScanTimer = currentTick;
+                VizierServant.this.enhancedTargets = VizierServant.this.level().getEntitiesOfClass(LivingEntity.class,
+                        VizierServant.this.getBoundingBox().inflate(16.0D),
+                        entity -> entity != VizierServant.this &&
+                                entity.isAlive() &&
+                                !MobUtil.areAllies(entity, VizierServant.this) &&
+                                entity != VizierServant.this.getTrueOwner());
+            }
+            VizierServant.this.enhancedTargets
+                    .removeIf(entity -> !entity.isAlive() || VizierServant.this.distanceToSqr(entity) > 256.0D);
+            return VizierServant.this.enhancedTargets;
         }
 
         private void spawnFangs(double p_190876_1_, double p_190876_3_, double p_190876_5_, double p_190876_7_,
@@ -1158,7 +1193,7 @@ public class VizierServant extends SpellcasterIllagerServant implements net.mine
                 }
 
                 blockpos = blockpos.below();
-            } while (blockpos.getY() >= Mth.floor(p_190876_5_) - 1);
+            } while (blockpos.getY() >= Mth.floor(p_190876_7_) - 4);
 
             if (flag) {
                 VizierServant.this.level()
@@ -1284,14 +1319,9 @@ public class VizierServant extends SpellcasterIllagerServant implements net.mine
                     if (VizierServant.this.airBound > 40) {
                         if (!VizierServant.this.level().isClientSide) {
                             ServerLevel serverWorld = (ServerLevel) VizierServant.this.level();
-                            for (int i = 0; i < 5; ++i) {
-                                double d3 = serverWorld.random.nextGaussian() * 0.02D;
-                                double d4 = serverWorld.random.nextGaussian() * 0.02D;
-                                double d2 = serverWorld.random.nextGaussian() * 0.02D;
-                                serverWorld.sendParticles(ParticleTypes.ENCHANT, VizierServant.this.getRandomX(1.0D),
-                                        VizierServant.this.getRandomY() + 1.0D, VizierServant.this.getRandomZ(1.0D), 0,
-                                        d3, d4, d2, 0.5F);
-                            }
+                            serverWorld.sendParticles(ParticleTypes.ENCHANT, VizierServant.this.getRandomX(1.0D),
+                                    VizierServant.this.getRandomY() + 1.0D, VizierServant.this.getRandomZ(1.0D), 5,
+                                    0.0D, 0.0D, 0.0D, 0.5F);
                         }
                     }
                     if (this.duration >= 40) {
@@ -1367,7 +1397,7 @@ public class VizierServant extends SpellcasterIllagerServant implements net.mine
                 }
 
                 blockpos = blockpos.below();
-            } while (blockpos.getY() >= Mth.floor(p_190876_5_) - 1);
+            } while (blockpos.getY() >= Mth.floor(p_190876_7_) - 4);
 
             if (flag) {
                 com.Polarice3.Goety.common.entities.projectiles.Spike spikeEntity = new com.Polarice3.Goety.common.entities.projectiles.Spike(
@@ -1682,7 +1712,7 @@ public class VizierServant extends SpellcasterIllagerServant implements net.mine
             flyingItem.setOwner(this.getTrueOwner());
             flyingItem.setItem(new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.CAKE));
             flyingItem.setParticle(net.minecraft.core.particles.ParticleTypes.SOUL);
-            flyingItem.setSecondsCool(30);
+            flyingItem.setSecondsCool(1);
             this.level().addFreshEntity(flyingItem);
         }
     }
@@ -1750,5 +1780,20 @@ public class VizierServant extends SpellcasterIllagerServant implements net.mine
         }
 
         return super.mobInteract(pPlayer, pHand);
+    }
+
+    @Override
+    public boolean canWearArmor() {
+        return true;
+    }
+
+    @Override
+    public boolean canHaveWeapon() {
+        return true;
+    }
+
+    @Override
+    public boolean isMainWeapon(ItemStack itemStack) {
+        return itemStack.getItem() instanceof SwordItem || itemStack.is(ItemTags.SWORDS);
     }
 }

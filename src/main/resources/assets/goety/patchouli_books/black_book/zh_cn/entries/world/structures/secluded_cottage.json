@@ -1,0 +1,20 @@
+{
+  "name": "隐世宅邸",
+  "icon": "goety:mystic_core",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(0)诚邀阁下莅临「隐世宅邸」$(br)$(br)$(0)此处不闻战鼓，不见王旗。$(br)$(0)只有一位曾经的伟大领袖，静待有缘人。$(br)$(br)$(0)他曾是帝国最早的追随者，$(br)$(0)如今却甘做命运的掌舵者。$(br)$(0)他的魔杖曾为帝国冲锋陷阵，$(br)$(0)如今却只用来试炼指点迷途的后辈。"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(0)若你愿倾听，他会为你泡一壶茶，$(br)$(0)讲讲那些不曾载入史册的故事：$(br)$(0)关于灵魂红宝石的秘法，$(br)$(0)关于无人阻拦的逃亡之夜，$(br)$(0)关于为何他宁可在此隐居，$(br)$(0)也不愿再踏足那片冷漠的腥风血雨。$(br)$(br)$(0)门虚掩着。$(br)$(0)进来时，请注意礼貌和风度。$(br)$(0)他已不再惧怕死亡，$(br)$(0)他只是更珍惜这份安宁。$(br)$(br)$(0)——隐世宅邸 主人 敬启"
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["goetyawaken:textures/gui/secluded_cottage.png"],
+      "border": true
+    }
+  ]
+}

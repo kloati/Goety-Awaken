@@ -12,5 +12,6 @@
       "recipe": "goetyawaken:killer_focus",
       "text": "制作杀手聚晶。"
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:killer_focus":0}
 }

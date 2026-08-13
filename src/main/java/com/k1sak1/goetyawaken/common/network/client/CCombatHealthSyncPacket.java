@@ -1,9 +1,6 @@
 package com.k1sak1.goetyawaken.common.network.client;
 
-import com.k1sak1.goetyawaken.common.entities.hostile.undead.necromancer.AbstractNamelessOne;
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.entity.Entity;
 import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
@@ -34,17 +31,6 @@ public class CCombatHealthSyncPacket {
 
     public static void handle(CCombatHealthSyncPacket packet, Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> {
-            Minecraft mc = Minecraft.getInstance();
-            if (mc.level != null) {
-                Entity entity = mc.level.getEntity(packet.entityId);
-                if (entity instanceof AbstractNamelessOne namelessOne) {
-                    if (namelessOne.getDamageCapManager() != null) {
-                        namelessOne.getDamageCapManager().setClientCombatHealth(
-                                packet.currentCombatHealth,
-                                packet.peakCombatHealth);
-                    }
-                }
-            }
         });
         ctx.get().setPacketHandled(true);
     }

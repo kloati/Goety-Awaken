@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "goetyawaken:block/sandstone/cobblestone_sandstone",
+    "top": "goetyawaken:block/sandstone/cobblestone_sandstone",
+    "side": "goetyawaken:block/sandstone/cobblestone_sandstone"
+  }
+}

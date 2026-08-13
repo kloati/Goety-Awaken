@@ -3,6 +3,7 @@ package com.k1sak1.goetyawaken.client.renderer;
 import com.k1sak1.goetyawaken.GoetyAwaken;
 import com.k1sak1.goetyawaken.client.ClientEventHandler;
 import com.k1sak1.goetyawaken.client.model.IceCreeperModel;
+import com.k1sak1.goetyawaken.common.entities.ally.IceCreeperServant;
 import com.k1sak1.goetyawaken.common.entities.hostile.IceCreeper;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -20,6 +21,8 @@ public class IceCreeperRenderer extends MobRenderer<IceCreeper, IceCreeperModel>
             "textures/entity/ice_creeper.png");
     private static final ResourceLocation POWERED_TEXTURE = new ResourceLocation(
             "textures/entity/creeper/creeper_armor.png");
+    private static final ResourceLocation POLARICE3_TEXTURE = new ResourceLocation(GoetyAwaken.MODID,
+            "textures/entity/polarice3.png");
 
     public IceCreeperRenderer(EntityRendererProvider.Context context) {
         super(context, new IceCreeperModel(context.bakeLayer(ClientEventHandler.ICE_CREEPER_LAYER)), 0.5F);
@@ -28,6 +31,12 @@ public class IceCreeperRenderer extends MobRenderer<IceCreeper, IceCreeperModel>
 
     @Override
     public ResourceLocation getTextureLocation(IceCreeper entity) {
+        if (entity.hasCustomName() && entity.getCustomName() != null) {
+            String name = entity.getCustomName().getString();
+            if ("polarice3".equalsIgnoreCase(name)) {
+                return POLARICE3_TEXTURE;
+            }
+        }
         return ICE_CREEPER_TEXTURE;
     }
 

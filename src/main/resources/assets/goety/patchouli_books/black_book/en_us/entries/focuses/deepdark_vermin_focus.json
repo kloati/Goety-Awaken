@@ -1,0 +1,18 @@
+{
+  "name": "Deepdark Vermin Focus",
+  "icon": "goetyawaken:deepdark_vermin_focus",
+  "category": "goety:goetyawaken_focuses",
+  "flag": "goetyawaken:deeperdarker_loaded",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Sculk Leeches and Sculk Centipedes—these tiny vermin of the sculk family often dwell within ancient vases. With your extensive experience in handling sculk creatures, you quickly found a way to make them dwell within a focus instead. These sculk vermin summoned in the Otherside dimension and sculk biomes will be stronger than those summoned in other environments."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:deepdark_vermin_focus",
+      "text": ""
+    }
+  ],
+  "extra_recipe_mappings": {"goetyawaken:deepdark_vermin_focus":0}
+}

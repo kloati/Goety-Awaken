@@ -1,0 +1,17 @@
+{
+  "name": "爆破戒指",
+  "icon": "goetyawaken:detonation_ring",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "高位幻术师掌握着运用魔力将箭矢塑造为爆裂箭矢的恶毒技艺。这枚借助其力量打造的戒指能让使用者领悟用魔力塑造爆炸箭矢的技巧，并帮助佩戴者施展它，使其射出的普通箭矢有可能转变为爆炸箭矢。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:detonation_ring",
+      "text": ""
+    }
+  ],
+  "extra_recipe_mappings": {"goetyawaken:detonation_ring":0}
+}

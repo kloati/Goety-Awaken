@@ -30,13 +30,14 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class ClientBlockClusterEntity extends BlockClusterEntity {
+
     private final BlockClusterWorld blockGetter;
-    private Map<RenderType, Map<BlockPos, BlockState>> toRender = new LinkedHashMap<>();
-    private Map<BlockPos, BlockState> tilesToRender = new LinkedHashMap<>();
+    private Map<RenderType, Map<BlockPos, BlockState>> renderLayers = new LinkedHashMap<>();
+    private Map<BlockPos, BlockState> animatedBlocks = new LinkedHashMap<>();
     @Nullable
-    private String toRenderUniqueId;
+    private String renderCacheKey;
     public float fadeAmount = 1.0F;
-    private float fadeAmountO = 1.0F;
+    private float prevFadeAmount = 1.0F;
 
     public ClientBlockClusterEntity(EntityType<?> entityType, Level world) {
         super(entityType, world);
@@ -44,82 +45,66 @@ public class ClientBlockClusterEntity extends BlockClusterEntity {
     }
 
     @Override
-    public void onSyncedDataUpdated(EntityDataAccessor<?> parameter) {
-        super.onSyncedDataUpdated(parameter);
-        if (parameter.equals(this.BLOCK_STATE_MAP)) {
-            this.toRender.clear();
-            this.tilesToRender.clear();
-
-            for (Map.Entry<BlockPos, BlockState> entry : this.getBlocks().entrySet()) {
-                BlockPos pos = entry.getKey();
-                BlockState state = entry.getValue();
-                if (state.getRenderShape() != RenderShape.ENTITYBLOCK_ANIMATED) {
-                    if (state.getRenderShape() == RenderShape.MODEL) {
-                        BlockRenderDispatcher dispatcher = Minecraft.getInstance().getBlockRenderer();
-                        BakedModel model = dispatcher.getBlockModel(state);
-                        ChunkRenderTypeSet blockRenderTypes = model.getRenderTypes(state,
-                                RandomSource.create(state.getSeed(this.getStartPos())), ModelData.EMPTY);
-
-                        for (RenderType type : RenderType.chunkBufferLayers()) {
-                            if (blockRenderTypes.contains(type)) {
-                                Map<BlockPos, BlockState> map = this.toRender.computeIfAbsent(type,
-                                        (t) -> new LinkedHashMap<>());
-                                map.put(pos, state);
-                            }
-                        }
-                    }
-                } else {
-                    this.tilesToRender.put(pos, state);
-                }
-            }
-
-            this.toRenderUniqueId = this.toRender.toString();
-        } else if (parameter.equals(this.FADE_ORIGIN)) {
-            this.calculateFade();
-            this.fadeAmountO = this.fadeAmount;
+    public void onSyncedDataUpdated(EntityDataAccessor<?> key) {
+        super.onSyncedDataUpdated(key);
+        if (key.equals(this.CLUSTER_BLOCKS)) {
+            this.rebuildRenderCache();
+        } else if (key.equals(this.CLUSTER_FADE_CENTER)) {
+            this.recalcFade();
+            this.prevFadeAmount = this.fadeAmount;
         }
     }
 
-    public Map<RenderType, Map<BlockPos, BlockState>> toRender() {
-        return this.toRender;
+    private void rebuildRenderCache() {
+        this.renderLayers.clear();
+        this.animatedBlocks.clear();
+        BlockRenderDispatcher dispatcher = Minecraft.getInstance().getBlockRenderer();
+        for (var entry : this.getClusterBlocks().entrySet()) {
+            BlockPos pos = entry.getKey();
+            BlockState state = entry.getValue();
+            RenderShape shape = state.getRenderShape();
+            if (shape == RenderShape.ENTITYBLOCK_ANIMATED) {
+                this.animatedBlocks.put(pos, state);
+            } else if (shape == RenderShape.MODEL) {
+                BakedModel model = dispatcher.getBlockModel(state);
+                ChunkRenderTypeSet types = model.getRenderTypes(state,
+                        RandomSource.create(state.getSeed(this.getAnchorPosition())), ModelData.EMPTY);
+                for (RenderType rt : RenderType.chunkBufferLayers()) {
+                    if (types.contains(rt)) {
+                        this.renderLayers.computeIfAbsent(rt, k -> new LinkedHashMap<>()).put(pos, state);
+                    }
+                }
+            }
+        }
+        this.renderCacheKey = this.renderLayers.toString();
     }
 
-    public Map<BlockPos, BlockState> tilesToRender() {
-        return this.tilesToRender;
-    }
-
+    public Map<RenderType, Map<BlockPos, BlockState>> getRenderLayers() { return this.renderLayers; }
+    public Map<BlockPos, BlockState> getAnimatedBlocks() { return this.animatedBlocks; }
     @Nullable
-    public String getToRenderUniqueId() {
-        return this.toRenderUniqueId;
-    }
-
-    public BlockAndTintGetter getBlockGetter() {
-        return this.blockGetter;
-    }
+    public String getRenderCacheKey() { return this.renderCacheKey; }
+    public BlockAndTintGetter getBlockGetter() { return this.blockGetter; }
 
     @Override
     public void tick() {
         super.tick();
-        this.calculateFade();
+        this.recalcFade();
     }
 
-    private void calculateFade() {
-        if (this.getShakeTime() <= 0) {
-            this.fadeAmountO = this.fadeAmount;
-            BlockPos point = this.getFadePos();
-            if (point != null) {
-                double distanceFromCreationToFade = Math.sqrt(this.getStartPos().distSqr(point))
-                        - (double) this.getFadeDistanceOffset();
-                double distance = Math.max((double) 0.0F,
-                        Vec3.atCenterOf(point).distanceTo(this.position()) - (double) this.getFadeDistanceOffset());
-                this.fadeAmount = Math.min(1.0F,
-                        (float) distance / Math.min((float) distanceFromCreationToFade, this.getFadeStrength()));
+    private void recalcFade() {
+        if (this.getWobbleTicks() <= 0) {
+            this.prevFadeAmount = this.fadeAmount;
+            BlockPos fc = this.getFadeCenter();
+            if (fc != null) {
+                double maxRange = Math.sqrt(this.getAnchorPosition().distSqr(fc)) - (double)this.getFadeMargin();
+                double dist = Math.max(0.0D, Vec3.atCenterOf(fc).distanceTo(this.position()) - (double)this.getFadeMargin());
+                this.fadeAmount = (float)Math.min(1.0D, dist / Math.min(maxRange, (double)this.getFadePower()));
             }
         }
     }
 
-    public float lerpFadeAmount(float partialTicks) {
-        return Mth.lerp(partialTicks, this.fadeAmountO, this.fadeAmount);
+    public float getFadeAmount(float partialTicks) {
+        return Mth.lerp(partialTicks, this.prevFadeAmount, this.fadeAmount);
     }
 
     public static class BlockClusterWorld implements BlockAndTintGetter {
@@ -131,58 +116,22 @@ public class ClientBlockClusterEntity extends BlockClusterEntity {
             this.cluster = cluster;
         }
 
-        @Override
-        public BlockEntity getBlockEntity(BlockPos pos) {
-            return null;
-        }
+        @Override public BlockEntity getBlockEntity(BlockPos pos) { return null; }
 
         @Override
         public BlockState getBlockState(BlockPos pos) {
-            BlockState state = this.cluster.getBlocks().get(pos.subtract(this.cluster.getStartPos()));
-            if (state == null) {
-                state = Blocks.AIR.defaultBlockState();
-            }
-            return state;
+            BlockState state = this.cluster.getClusterBlocks()
+                    .get(pos.subtract(this.cluster.getAnchorPosition()));
+            return state != null ? state : Blocks.AIR.defaultBlockState();
         }
 
-        @Override
-        public FluidState getFluidState(BlockPos pos) {
-            return this.getBlockState(pos).getFluidState();
-        }
-
-        @Override
-        public int getHeight() {
-            return this.wrapped.getHeight();
-        }
-
-        @Override
-        public int getMinBuildHeight() {
-            return this.wrapped.getMinBuildHeight();
-        }
-
-        @Override
-        public float getShade(Direction direction, boolean p_45523_) {
-            return this.wrapped.getShade(direction, p_45523_);
-        }
-
-        @Override
-        public LevelLightEngine getLightEngine() {
-            return this.wrapped.getLightEngine();
-        }
-
-        @Override
-        public int getRawBrightness(BlockPos pos, int skyOffset) {
-            return 15;
-        }
-
-        @Override
-        public int getBrightness(LightLayer layer, BlockPos pos) {
-            return 15;
-        }
-
-        @Override
-        public int getBlockTint(BlockPos pos, ColorResolver resolver) {
-            return this.wrapped.getBlockTint(pos, resolver);
-        }
+        @Override public FluidState getFluidState(BlockPos pos) { return this.getBlockState(pos).getFluidState(); }
+        @Override public int getHeight() { return this.wrapped.getHeight(); }
+        @Override public int getMinBuildHeight() { return this.wrapped.getMinBuildHeight(); }
+        @Override public float getShade(Direction d, boolean shaded) { return this.wrapped.getShade(d, shaded); }
+        @Override public LevelLightEngine getLightEngine() { return this.wrapped.getLightEngine(); }
+        @Override public int getRawBrightness(BlockPos pos, int sky) { return 15; }
+        @Override public int getBrightness(LightLayer layer, BlockPos pos) { return 15; }
+        @Override public int getBlockTint(BlockPos pos, ColorResolver r) { return this.wrapped.getBlockTint(pos, r); }
     }
 }

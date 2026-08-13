@@ -12,5 +12,6 @@
       "recipe": "goetyawaken:ancient_gong",
       "text": "把弱化聚晶安置在一个铜锣身上，你就可以模仿出古代铜锣的声音，它在保留了弱化聚晶的功能的情况下，也能够勉强调动沙漠的兴致。"
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:ancient_gong":0}
 }

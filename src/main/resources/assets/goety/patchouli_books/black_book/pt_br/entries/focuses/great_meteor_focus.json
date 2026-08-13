@@ -1,0 +1,17 @@
+{
+  "name": "Foco do Grande Meteoro",
+  "icon": "goetyawaken:great_meteor_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A bola de fogo gigante do Ghast Gigante é simplesmente impressionante! Se ao menos houvesse uma maneira de lançar uma bola de fogo tão massiva você mesmo! Claramente, as Lágrimas Obscuras — sendo um material altamente explosivo — contêm exatamente essa possibilidade."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:great_meteor_focus",
+      "text": ""
+    }
+  ],
+  "extra_recipe_mappings": {"goetyawaken:great_meteor_focus":0}
+}

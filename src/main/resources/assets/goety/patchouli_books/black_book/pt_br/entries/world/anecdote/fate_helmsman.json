@@ -1,0 +1,31 @@
+{
+    "name": "Timoneiro do Destino",
+    "icon": "goety:ominous_orb",
+    "category": "goety:anecdote/anecdote",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "$(0)\"Então por que você deixou o Império Illager?\"$(br)$(5)\"Nunca traí o Império Illager — fui um de seus primeiros seguidores... Lutei ao lado deles em campanhas e perigos, minha varinha desgastada pelas tempestades. Ela foi usada como megafone por mais tempo do que a maioria das pessoas usou suas varinhas... Avancei para a frente porque queria dar o meu melhor pelo império nascente.\"$(br)$(0)\"Então isso seria ainda menos razão para sair, já que você o amava tanto.\"$(br)$(5)\"Sim, eu o amava naquela época. Após a grande guerra, subi a uma posição elevada, aparentemente desfrutando de riquezas e honras infinitas — mas não tinha voz no verdadeiro coração do poder.\""
+        },
+        {
+            "type": "patchouli:text",
+            "text": "$(br)$(0)\"Sem voz? Mas você não é...\"$(br)$(5)\"Quando lutamos, como minhas técnicas se comparavam às dos Vizires que você enfrentou antes?\"$(br)$(0)\"Oh? Está dizendo...\"$(br)$(5)\"Sim — exatamente o que os Illagers mais desejam: atravessar paredes, presas direcionadas, invocação.\"$(br)$(0)\"Isso é exatamente o que eu mais quero também.\"$(br)$(5)\"Não interrompa!\"$(br)$(0)\"Sim, senhor.\"$(br)$(0)— Estranho. Naquele momento, eu me perguntava por que tinha medo dele."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "$(5)\"Nunca me foi permitido aprender esses feitiços... Em vez disso, aqueles jovens Invocadores — ligados por sangue a nobres antigos e clãs poderosos, ou simplesmente porque eram alunos das pessoas certas — passaram nas avaliações e receberam uma parte do poder do Rubi da Alma.\"$(br)$(0)\"Mas você não parece precisar desse poder também.\"$(br)$(5)\"Verdade. No entanto, o Rubi da Alma, a Túnica do Capuz e a Túnica Dourada significam um certo 'reconhecimento'. Claramente, nunca fui admitido no círculo 'reconhecido' — simplesmente porque meu talento não era tão grande quanto o deles... Pode soar como pedir esmola, mas aquela sensação... é desespero.\"$(br)$(0)\"Eu entendo. Já experimentei momentos de profundo desespero também.\"$(br)$(5)\"Hohoho (um pigarro)... E eu ainda era um Ministro, ainda lutando na linha de frente, dia após dia, ano após ano. Eu não suportava mais aquela vida fria e sangrenta.\""
+        },
+        {
+            "type": "patchouli:text",
+            "text": "$(0)\"Então?\"$(br)$(5)\"Então me ofereci para servir como instrutor para os candidatos a Vizir daquele período. Esse posto geralmente é apenas uma formalidade — mas daquela vez, me esforcei mais. Usei meu megafone para dar àqueles jovens um tempero extra.\"$(br)$(0)\"Ah? Isso não é...\"$(br)$(5)\"Fala baixo! Você acha que é honroso?\"$(br)$(5)\"De qualquer forma, na noite anterior à seleção, liderei todos os candidatos daquele período em uma fuga noturna do Império Illager. Nenhum guarda nos deteve no caminho. Escapei pela fronteira assim, determinado a me tornar o timoneiro do meu próprio destino.\"$(br)$(0)\"...\""
+        },
+        {
+            "type": "patchouli:text",
+            "text": "$(5)\"Mais tarde, consegui um animal de estimação — esta galinha laranja. Ela nos ajudou a construir a casa em que vivemos agora.\"$(br)$(0)\"Ah? Galinhas de Lava são tão capazes assim?\"$(br)$(5)\"Oh, você também ouviu falar de Galinhas de Lava? Haha — isso torna as coisas mais fáceis de entender. De qualquer forma, vivíamos bem, e continuamos assim por muito tempo... até você chegar. Inevitavelmente, assumi uma postura defensiva para a batalha.\"$(br)$(0)\"Então por que não continuar lutando? Você não tem medo de que eu o achate como uma panqueca?\"$(br)$(5)\"E daí? Nunca temi a morte. Não sobrevivi todo este tempo me encolhendo. Não vi necessidade de lutar, porque você não veio para brigar — eu sei o que você realmente quer.\""
+        },
+        {
+            "type": "patchouli:text",
+            "text": "$(0)\"Oh?\"$(br)$(5)\"Este é o método para treinar a profissão de Ministro. Você pode transmitir este conhecimento aos aventureiros das gerações futuras, para que eles o inspirem a nunca recuar.\"$(br)$(0)\"Verdadeiramente um veterano experiente. Palavras não podem expressar minha gratidão! Estarei indo! Mas se eu realmente tivesse matado você, como você teria se sentido?\"$(br)$(5)\"Eu teria ficado contente, $(playername) — porque você está fazendo o que quer fazer. Vocês são todos timoneiros de seu próprio destino.\"$(br)$(0)A porta fechou-se suavemente. Continuei minha jornada."
+        }
+    ]
+}

@@ -12,5 +12,6 @@
       "recipe": "goetyawaken:ancient_gong",
       "text": "By placing a Weakening Focus onto a gong, you can mimic the sound of the ancient gong. While retaining the Weakening Focus's original function, it can also barely rouse the interest of the desert."
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:ancient_gong":0}
 }

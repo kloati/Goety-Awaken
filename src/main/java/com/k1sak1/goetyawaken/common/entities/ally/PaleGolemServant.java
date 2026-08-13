@@ -24,6 +24,8 @@ import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -35,6 +37,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.phys.AABB;
 
 import javax.annotation.Nullable;
 
@@ -96,6 +100,64 @@ public class PaleGolemServant extends RaiderGolemServant implements IGolem {
         MobUtil.setBaseAttributes(this.getAttribute(Attributes.FOLLOW_RANGE), 32.0D);
     }
 
+    @Override
+    protected PathNavigation createNavigation(Level pLevel) {
+        GroundPathNavigation navigation = new GroundPathNavigation(this, pLevel) {
+            @Override
+            public boolean isStableDestination(BlockPos blockPos) {
+                return !this.level.getBlockState(blockPos.below()).isAir();
+            }
+        };
+        navigation.setCanOpenDoors(false);
+        navigation.setCanFloat(true);
+        navigation.setCanPassDoors(true);
+        return navigation;
+    }
+
+    @Override
+    public void commandMode() {
+        if (!this.isCommanded()) {
+            return;
+        }
+        BlockPos targetPos = this.getCommandPos();
+        Entity targetEntity = this.getCommandPosEntity();
+        this.setCommandTick(this.getCommandTick() - 1);
+
+        if (targetEntity != null) {
+            this.getNavigation().moveTo(targetEntity, this.getCommandSpeed());
+        } else if (targetPos != null) {
+            if (this.getNavigation().isStableDestination(targetPos)) {
+                this.getNavigation().moveTo(targetPos.getX() + 0.5D, targetPos.getY(), targetPos.getZ() + 0.5D, this.getCommandSpeed());
+            }
+        }
+
+        AABB aabb = targetPos != null ? new AABB(targetPos) : null;
+        Entity entity = this.getControlledVehicle() != null ? this.getControlledVehicle() : this;
+        if (this.getNavigation().isStuck() || this.getCommandTick() <= 0) {
+            this.setCommandPosEntity(null);
+            this.setCommandPos(null);
+        } else if (aabb != null && entity.getBoundingBox().inflate(0.5F).intersects(aabb)) {
+            if (this.getCommandPosEntity() != null &&
+                    this.getBoundingBox().inflate(1.25D).intersects(this.getCommandPosEntity().getBoundingBox())) {
+                if (this.isAbleToRide(this.getCommandPosEntity())) {
+                    if (this.startRiding(this.getCommandPosEntity())) {
+                        if (this.getTrueOwner() instanceof Player player) {
+                            player.displayClientMessage(Component.translatable("info.goety.servant.dismount"), true);
+                        }
+                    }
+                }
+                this.setCommandPosEntity(null);
+            }
+            if (this.isGuardingArea()) {
+                this.setBoundPos(targetPos);
+            }
+            this.getNavigation().stop();
+            this.getMoveControl().strafe(0.0F, 0.0F);
+            this.moveTo(targetPos, this.getYRot(), this.getXRot());
+            this.setCommandPos(null);
+        }
+    }
+
     @Nullable
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty,
@@ -109,11 +171,6 @@ public class PaleGolemServant extends RaiderGolemServant implements IGolem {
     public void readAdditionalSaveData(CompoundTag pCompound) {
         super.readAdditionalSaveData(pCompound);
         this.setConfigurableAttributes();
-    }
-
-    @Override
-    public boolean causeFallDamage(float pFallDistance, float pMultiplier, DamageSource pSource) {
-        return false;
     }
 
     @Override

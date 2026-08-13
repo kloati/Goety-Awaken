@@ -34,14 +34,17 @@ import java.util.function.Predicate;
 
 public class ChampionSpell extends SummonSpell {
 
+    @Override
     public int defaultSoulCost() {
         return com.k1sak1.goetyawaken.Config.CHAMPION_FOCUS_SOUL_COST.get();
     }
 
+    @Override
     public int defaultCastDuration() {
         return com.k1sak1.goetyawaken.Config.CHAMPION_FOCUS_CAST_DURATION.get();
     }
 
+    @Override
     public int SummonDownDuration() {
         return com.k1sak1.goetyawaken.Config.CHAMPION_FOCUS_COOLDOWN.get();
     }

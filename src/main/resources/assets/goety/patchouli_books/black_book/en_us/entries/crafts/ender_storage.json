@@ -33,28 +33,29 @@
     },
     {
       "type": "patchouli:crafting",
-      "recipe": "goetyawaken:ender_storage_book/ender_storage_book_iron",
+      "recipe": "goetyawaken:ender_storage_book/ender_storage_book_iron_0",
       "text": "Why can a book store items? Dark magic, of course. Amazing, isn't it?"
     },
     {
       "type": "goety:ritual",
-      "recipe": "goetyawaken:ender_storage_book/ender_storage_book_gold",
+      "recipe": "goetyawaken:ender_storage_book/ender_storage_book_gold_0",
       "text": ""
     },
     {
       "type": "goety:ritual",
-      "recipe": "goetyawaken:ender_storage_book/ender_storage_book_emerald",
+      "recipe": "goetyawaken:ender_storage_book/ender_storage_book_emerald_0",
       "text": ""
     },
     {
       "type": "goety:ritual",
-      "recipe": "goetyawaken:ender_storage_book/ender_storage_book_diamond",
+      "recipe": "goetyawaken:ender_storage_book/ender_storage_book_diamond_0",
       "text": ""
     },
     {
       "type": "goety:ritual",
-      "recipe": "goetyawaken:ender_storage_book/ender_storage_book_sapphire",
+      "recipe": "goetyawaken:ender_storage_book/ender_storage_book_sapphire_0",
       "text": ""
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:ender_storage_book_gold":0,"goetyawaken:ender_access_lectern":0,"goetyawaken:echoing_ender_shelf":0,"goetyawaken:ender_storage_book_emerald":0,"goetyawaken:ender_storage_book_iron":0,"goetyawaken:ender_storage_book_sapphire":0,"goetyawaken:ender_storage_book_diamond":0}
 }

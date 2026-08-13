@@ -2,7 +2,16 @@
   "parent": "goety:goety/craft_empty_focus",
   "criteria": {
     "bed_lice": {
-      "trigger": "goetyawaken:bed_lice"
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "goetyawaken:infestation_focus"
+            ]
+          }
+        ]
+      }
     }
   },
   "display": {

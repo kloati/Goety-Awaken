@@ -16,5 +16,6 @@
       "recipe": "goetyawaken:access_focus",
       "text": ""
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:access_focus":0}
 }

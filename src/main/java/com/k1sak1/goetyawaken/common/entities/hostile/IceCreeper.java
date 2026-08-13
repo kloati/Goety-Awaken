@@ -2,7 +2,6 @@ package com.k1sak1.goetyawaken.common.entities.hostile;
 
 import com.Polarice3.Goety.utils.LootingExplosion;
 import com.k1sak1.goetyawaken.common.entities.ally.IceCreeperServant;
-
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Enemy;

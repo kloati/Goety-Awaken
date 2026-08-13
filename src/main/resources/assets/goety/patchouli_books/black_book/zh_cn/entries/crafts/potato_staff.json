@@ -1,0 +1,17 @@
+{
+  "name": "马铃耶什，农民的传说之杖",
+  "icon": "goetyawaken:potato_staff",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "很少有人知晓毒马铃薯中蕴含着多么庞大的奥术力量——而你正是其中之一。这柄利用毒马铃薯改造而来的荒野魔杖能为一些法术施加毒马铃薯的力量，还能直接进行堆肥。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:potato_staff",
+      "text": "听说它的诞生只是一个玩笑"
+    }
+  ],
+  "extra_recipe_mappings": {"goetyawaken:potato_staff":0}
+}

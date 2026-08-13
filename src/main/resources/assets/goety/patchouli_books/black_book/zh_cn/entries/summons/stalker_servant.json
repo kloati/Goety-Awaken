@@ -1,0 +1,22 @@
+{
+  "name": "潜行者仆从",
+  "icon": "deeperdarker:soul_crystal",
+  "category": "goety:goetyawaken_summons",
+  "flag": "goetyawaken:deeperdarker_loaded",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "既然连监守者那样扭曲可怖的幽匿造物都能被黑魔法的力量所束缚，那么来自幽冥维度的潜行者自然更不在话下。毕竟，它们与监守者本是同源而生，而这更为羸弱的幽匿生物，当然也更好奴役。只需将其斩杀，便能获得凝聚了它们几乎全部灵魂力量的水晶——你比任何人都清楚，对于一个玩弄灵魂的巫师而言，这意味着什么。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:stalker_servant",
+      "text": ""
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:stalker_servant",
+      "text": "潜行者仆从依然保留着与幽匿水蛭的奇妙共生关系，它们可以在自己身上孵化出这些贪婪的小东西，在战斗中将它们甩向敌人，替你啃噬血肉。"
+    }
+  ]
+}

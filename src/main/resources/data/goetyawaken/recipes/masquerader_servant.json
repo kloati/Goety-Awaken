@@ -1,0 +1,39 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:convert_complete_tamed",
+  "activation_item": {
+    "item": "masquerader_mod:blank_mask"
+  },
+  "craftType": "magic",
+  "entity_to_convert": {
+    "tag": "goetyawaken:sorcerer",
+    "display_name": "entity.goety.sorcerer"
+  },
+  "entity_to_convert_into": "goetyawaken:masquerader_servant",
+  "soulCost": 50,
+  "duration": 10,
+  "research": "ravaging",
+  "ingredients": [
+    {
+      "item": "minecraft:crossbow"
+    },
+    {
+      "item": "minecraft:iron_axe"
+    },
+    {
+      "item": "minecraft:bow"
+    },
+    {
+      "item": "goety:witch_robe"
+    },
+    {
+      "item": "goety:illusion_robe"
+    },
+    {
+      "item": "goety:ominous_shard"
+    }
+  ],
+  "result": {
+    "item": "goety:jei_dummy/none"
+  }
+}

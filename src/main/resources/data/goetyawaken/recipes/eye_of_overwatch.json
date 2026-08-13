@@ -17,12 +17,6 @@
       "item": "minecraft:end_crystal"
     },
     {
-      "item": "goety:weakening_focus"
-    },
-    {
-      "item": "goetyawaken:profound_echoing_shard"
-    },
-    {
       "item": "goety:void_shard"
     },
     {
@@ -33,9 +27,6 @@
     },
     {
       "item": "goety:stormlander"
-    },
-    {
-      "item": "goety:philosophers_stone"
     }
   ],
   "result": {

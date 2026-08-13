@@ -14,5 +14,11 @@ public class CreativeTabEventHandler {
         event.getEntries().remove(new ItemStack(ModItems.MARBLE_FOCUS.get()));
         event.getEntries().remove(new ItemStack(ModItems.NO_1337_CANDY.get()));
         event.getEntries().remove(new ItemStack(ModItems.PULSE_PIE.get()));
+        event.getEntries().remove(new ItemStack(ModItems.GIANT_SPAWN_EGG.get()));
+        event.getEntries().remove(new ItemStack(ModItems.POISONOUS_POTATO_ZOMBIE_SPAWN_EGG.get()));
+        event.getEntries().remove(new ItemStack(ModItems.POISONOUS_POTATO_SKELETON_SPAWN_EGG.get()));
+        event.getEntries().remove(new ItemStack(ModItems.POISONOUS_POTATO_CREEPER_SPAWN_EGG.get()));
+        event.getEntries().remove(new ItemStack(ModItems.TOXIFIN_SPAWN_EGG.get()));
+        event.getEntries().remove(new ItemStack(ModItems.PLAGUEWHALE_SPAWN_EGG.get()));
     }
 }

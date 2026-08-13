@@ -185,6 +185,9 @@ public class SearchWidget extends EditBox {
         }
         if (!getValue().trim().isEmpty()) {
             HISTORY.add(getValue());
+            if (HISTORY.size() > 50) {
+                HISTORY.remove(0);
+            }
         }
         historyIndex = -1;
     }

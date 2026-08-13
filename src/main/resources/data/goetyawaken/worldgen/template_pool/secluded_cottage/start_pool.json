@@ -1,0 +1,24 @@
+{
+  "name": "goetyawaken:secluded_cottage/start_pool",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "goetyawaken:secluded_cottage1",
+        "processors": "goetyawaken:secluded_cottage_loot",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "goetyawaken:secluded_cottage2",
+        "processors": "goetyawaken:secluded_cottage_loot",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

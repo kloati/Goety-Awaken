@@ -1,0 +1,38 @@
+{
+  "name": "Anotações da Bruxa IV",
+  "icon": "goety:death_scythe",
+  "category": "goety:goetyawaken_rumors",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Novos antigos surgiram. Mais perigosos do que qualquer um que já enfrentei antes. Mas você provou sua coragem ao caçar neste mundo. Você provou com sangue e osso que é um caçador verdadeiramente forte. Então confio essas presas em suas mãos."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety:minister",
+      "text": "Timoneiro do Destino"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Um poderoso mago abandonado pelo Império Illager. Entendo sua raiva, mas entender não é perdoar. Ele escolheu este caminho. Ele deve arcar com seu custo. Cuidado com sua varinha. É muito mais perigosa do que parece."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:vindicator_chef",
+      "text": "Chefe de Altomuro"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Ele perdeu uma perna, mas nunca perdeu seu verdadeiro coração. Um homem assim merece respeito. Pena que ele está do lado oposto. Forte como um boi. Não muito esperto. Não deixe que ele te persiga por muito tempo. Ele vai parar para recuperar o fôlego sozinho."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Você alcançou o que eu não pude. O pilar amaldiçoado infinito. O guardião imortal da espadona. A aranha que poderia arrasar uma cidade inteira... Você possui a alma de um verdadeiramente grande caçador. Talvez um dia nossos caminhos se cruzem. Aguardo esse dia."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A lua se ergueu, o vento está calmo.$(br)As flores estão mortas, os pássaros estão mortos.$(br)Apenas minha sombra ainda vive,$(br)Esperando comigo pelo amanhecer.$(br)$(br)A vila quieta me esqueceu.$(br)A cidade barulhenta se afastou de mim.$(br)Apenas esta foice ainda me conhece,$(br)Conhece este meu coração — há muito morto."
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "goetyawaken:poisonous_potato_skeleton_servant",
+    "goetyawaken:vanguard_champion",
+    "goetyawaken:parched_servant",
+    "goetyawaken:parched_necromancer_servant",
+    "goetyawaken:skull_lord_servant",
+    "goetyawaken:bone_lord_servant",
+    {
+      "id": "goetyawaken:swampjaw_servant",
+      "required": false
+    }
+  ]
+}

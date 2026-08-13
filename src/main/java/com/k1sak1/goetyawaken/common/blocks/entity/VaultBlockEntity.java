@@ -242,13 +242,7 @@ public class VaultBlockEntity extends BlockEntity {
             if (hasDisplayItem(sharedData)) {
                 RandomSource random = world.getRandom();
                 if (random.nextFloat() <= 0.02F) {
-                    RegistryObject<SoundEvent>[] ambientSounds = new RegistryObject[] {
-                            ModSounds.VAULT_AMBIENT_1,
-                            ModSounds.VAULT_AMBIENT_2,
-                            ModSounds.VAULT_AMBIENT_3
-                    };
-                    RegistryObject<SoundEvent> randomSound = ambientSounds[random.nextInt(ambientSounds.length)];
-                    world.playLocalSound(pos, randomSound.get(), SoundSource.BLOCKS,
+                    world.playLocalSound(pos, ModSounds.VAULT_AMBIENT.get(), SoundSource.BLOCKS,
                             (random.nextFloat() * 0.25F) + 0.75F, random.nextFloat() + 0.5F, false);
                 }
             }

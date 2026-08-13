@@ -5,6 +5,13 @@ import com.k1sak1.goetyawaken.client.entity.BoulderClusterFactory;
 import com.k1sak1.goetyawaken.common.entities.ally.PaleGolemServant;
 import com.k1sak1.goetyawaken.common.entities.ally.SilverfishServant;
 import com.k1sak1.goetyawaken.common.entities.ally.CreeperServant;
+import com.k1sak1.goetyawaken.common.entities.ally.JITBZombieServant;
+import com.k1sak1.goetyawaken.common.entities.ally.GiantServant;
+import com.k1sak1.goetyawaken.common.entities.ally.PoisonousPotatoZombieServant;
+import com.k1sak1.goetyawaken.common.entities.ally.PoisonousPotatoSkeletonServant;
+import com.k1sak1.goetyawaken.common.entities.ally.PoisonousPotatoCreeperServant;
+import com.k1sak1.goetyawaken.common.entities.ally.ToxifinServant;
+import com.k1sak1.goetyawaken.common.entities.ally.PlaguewhaleSlabServant;
 import com.k1sak1.goetyawaken.common.entities.ally.EndermanServant;
 import com.k1sak1.goetyawaken.common.entities.ally.ShulkerServant;
 import com.k1sak1.goetyawaken.common.entities.ally.EndermiteServant;
@@ -23,9 +30,10 @@ import com.k1sak1.goetyawaken.common.entities.ally.IceCreeperServant;
 import com.k1sak1.goetyawaken.common.entities.hostile.IceCreeper;
 import com.k1sak1.goetyawaken.common.entities.ally.golem.MushroomMonstrosity;
 import com.k1sak1.goetyawaken.common.entities.ally.CaerbannogRabbitServant;
-import com.k1sak1.goetyawaken.common.entities.ally.Integration.MaidFairyServant;
 import com.k1sak1.goetyawaken.common.entities.projectiles.ModShulkerBullet;
 import com.k1sak1.goetyawaken.common.entities.projectiles.ModWitherSkullNoBlockBreak;
+import com.k1sak1.goetyawaken.common.entities.projectiles.GiantGhastFireball;
+import com.k1sak1.goetyawaken.common.entities.projectiles.GiantHellBlast;
 import com.k1sak1.goetyawaken.common.entities.projectiles.EchoingStrikeEntity;
 import com.k1sak1.goetyawaken.common.entities.projectiles.FrostScytheSlash;
 import com.k1sak1.goetyawaken.common.entities.projectiles.SilverfishEggEntity;
@@ -48,6 +56,8 @@ import com.k1sak1.goetyawaken.common.entities.ally.undead.BoundSorcerer;
 import com.k1sak1.goetyawaken.common.entities.ally.undead.tower_wraith.AbstractTowerWraith;
 import com.k1sak1.goetyawaken.common.entities.hostile.HostileTowerWraith;
 import com.k1sak1.goetyawaken.common.entities.hostile.illager.TowerWitch;
+import com.k1sak1.goetyawaken.common.entities.hostile.illager.HostileRampartCaptain.HostileRampartCaptain;
+import com.k1sak1.goetyawaken.common.entities.hostile.illager.RubySorcerer;
 import com.k1sak1.goetyawaken.common.entities.ally.illager.TowerWitchServant;
 import com.k1sak1.goetyawaken.common.entities.hostile.HostileTwilightGoat;
 import com.k1sak1.goetyawaken.common.entities.ally.ObsidianMonolithServant;
@@ -62,10 +72,17 @@ import com.k1sak1.goetyawaken.common.entities.hostile.undead.zombie.FrozenZombie
 import com.k1sak1.goetyawaken.common.entities.hostile.MiniGhastHostile;
 import com.k1sak1.goetyawaken.common.entities.hostile.HostileSnapper;
 import com.k1sak1.goetyawaken.common.entities.ally.SpiderCreeder;
+import com.k1sak1.goetyawaken.common.entities.ally.StatueCreeper;
+import com.k1sak1.goetyawaken.common.entities.hostile.HostileStatueCreeper;
 import com.k1sak1.goetyawaken.common.entities.ally.CorruptedSlime;
 import com.k1sak1.goetyawaken.common.entities.projectiles.PureLightEntity;
 import com.k1sak1.goetyawaken.common.entities.projectiles.ModSwordProjectile;
+import com.k1sak1.goetyawaken.common.entities.projectiles.FlyingAxeEntity;
 import com.k1sak1.goetyawaken.common.entities.projectiles.NamelessBolt;
+import com.k1sak1.goetyawaken.common.entities.ally.illager.RampartCaptain;
+import com.k1sak1.goetyawaken.common.entities.ally.BurningShield;
+import com.k1sak1.goetyawaken.common.entities.ally.illager.TowerGuardServant;
+import com.k1sak1.goetyawaken.common.entities.hostile.illager.HostileTowerGuard;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.registries.DeferredRegister;
@@ -106,56 +123,115 @@ public class ModEntityType {
 
         public static final RegistryObject<EntityType<ParchedServant>> PARCHED_SERVANT = ENTITY_TYPE.register(
                         "parched_servant",
-                        () -> EntityType.Builder.of(ParchedServant::new, MobCategory.MISC)
+                        () -> EntityType.Builder.of(ParchedServant::new, MobCategory.MONSTER)
                                         .sized(0.6F, 1.99F)
                                         .clientTrackingRange(8)
                                         .build("parched_servant"));
 
         public static final RegistryObject<EntityType<PaleGolemServant>> PALE_GOLEM_SERVANT = ENTITY_TYPE.register(
                         "pale_golem_servant",
-                        () -> EntityType.Builder.of(PaleGolemServant::new, MobCategory.MISC)
+                        () -> EntityType.Builder.of(PaleGolemServant::new, MobCategory.MONSTER)
                                         .sized(1.4F, 2.7F)
                                         .clientTrackingRange(10)
                                         .build("pale_golem_servant"));
 
         public static final RegistryObject<EntityType<SilverfishServant>> SILVERFISH_SERVANT = ENTITY_TYPE.register(
                         "silverfish_servant",
-                        () -> EntityType.Builder.of(SilverfishServant::new, MobCategory.MISC)
+                        () -> EntityType.Builder.of(SilverfishServant::new, MobCategory.MONSTER)
                                         .sized(0.4F, 0.3F)
                                         .clientTrackingRange(8)
                                         .build("silverfish_servant"));
 
         public static final RegistryObject<EntityType<CreeperServant>> CREEPER_SERVANT = ENTITY_TYPE.register(
                         "creeper_servant",
-                        () -> EntityType.Builder.of(CreeperServant::new, MobCategory.MISC)
+                        () -> EntityType.Builder.of(CreeperServant::new, MobCategory.MONSTER)
                                         .sized(0.6F, 1.7F)
                                         .clientTrackingRange(8)
                                         .build("creeper_servant"));
 
+        public static final RegistryObject<EntityType<JITBZombieServant>> JITB_ZOMBIE_SERVANT = ENTITY_TYPE.register(
+                        "jitb_zombie_servant",
+                        () -> EntityType.Builder.of(JITBZombieServant::new, MobCategory.MONSTER)
+                                        .sized(0.6F, 1.95F)
+                                        .clientTrackingRange(8)
+                                        .build("jitb_zombie_servant"));
+
+        public static final RegistryObject<EntityType<GiantServant>> GIANT_SERVANT = ENTITY_TYPE.register(
+                        "giant_servant",
+                        () -> EntityType.Builder.of(GiantServant::new, MobCategory.MONSTER)
+                                        .sized(3.6F, 12.0F)
+                                        .clientTrackingRange(10)
+                                        .build("giant_servant"));
+
+        public static final RegistryObject<EntityType<PoisonousPotatoZombieServant>> POISONOUS_POTATO_ZOMBIE_SERVANT = ENTITY_TYPE
+                        .register(
+                                        "poisonous_potato_zombie_servant",
+                                        () -> EntityType.Builder.of(
+                                                        PoisonousPotatoZombieServant::new,
+                                                        MobCategory.MONSTER)
+                                                        .sized(0.6F, 1.95F)
+                                                        .clientTrackingRange(8)
+                                                        .build("poisonous_potato_zombie_servant"));
+
+        public static final RegistryObject<EntityType<PoisonousPotatoSkeletonServant>> POISONOUS_POTATO_SKELETON_SERVANT = ENTITY_TYPE
+                        .register(
+                                        "poisonous_potato_skeleton_servant",
+                                        () -> EntityType.Builder.of(
+                                                        PoisonousPotatoSkeletonServant::new,
+                                                        MobCategory.MONSTER)
+                                                        .sized(0.6F, 1.95F)
+                                                        .clientTrackingRange(8)
+                                                        .build("poisonous_potato_skeleton_servant"));
+
+        public static final RegistryObject<EntityType<PoisonousPotatoCreeperServant>> POISONOUS_POTATO_CREEPER_SERVANT = ENTITY_TYPE
+                        .register(
+                                        "poisonous_potato_creeper_servant",
+                                        () -> EntityType.Builder.of(
+                                                        PoisonousPotatoCreeperServant::new,
+                                                        MobCategory.MONSTER)
+                                                        .sized(0.6F, 1.7F)
+                                                        .clientTrackingRange(8)
+                                                        .build("poisonous_potato_creeper_servant"));
+
+        public static final RegistryObject<EntityType<ToxifinServant>> TOXIFIN_SERVANT = ENTITY_TYPE.register(
+                        "toxifin_servant",
+                        () -> EntityType.Builder.of(ToxifinServant::new, MobCategory.MONSTER)
+                                        .sized(0.85F, 0.425F)
+                                        .clientTrackingRange(8)
+                                        .build("toxifin_servant"));
+
+        public static final RegistryObject<EntityType<PlaguewhaleSlabServant>> PLAGUEWHALE_SLAB_SERVANT = ENTITY_TYPE
+                        .register(
+                                        "plaguewhale_slab_servant",
+                                        () -> EntityType.Builder.of(PlaguewhaleSlabServant::new, MobCategory.MONSTER)
+                                                        .sized(1.9975F, 0.99875F)
+                                                        .clientTrackingRange(8)
+                                                        .build("plaguewhale_slab_servant"));
+
         public static final RegistryObject<EntityType<EndermanServant>> ENDERMAN_SERVANT = ENTITY_TYPE.register(
                         "enderman_servant",
-                        () -> EntityType.Builder.of(EndermanServant::new, MobCategory.MISC)
+                        () -> EntityType.Builder.of(EndermanServant::new, MobCategory.MONSTER)
                                         .sized(0.6F, 2.9F)
                                         .clientTrackingRange(8)
                                         .build("enderman_servant"));
 
         public static final RegistryObject<EntityType<ShulkerServant>> SHULKER_SERVANT = ENTITY_TYPE.register(
                         "shulker_servant",
-                        () -> EntityType.Builder.of(ShulkerServant::new, MobCategory.MISC)
+                        () -> EntityType.Builder.of(ShulkerServant::new, MobCategory.MONSTER)
                                         .sized(1.0F, 1.0F)
                                         .clientTrackingRange(8)
                                         .build("shulker_servant"));
 
         public static final RegistryObject<EntityType<EndermiteServant>> ENDERMITE_SERVANT = ENTITY_TYPE.register(
                         "endermite_servant",
-                        () -> EntityType.Builder.of(EndermiteServant::new, MobCategory.MISC)
+                        () -> EntityType.Builder.of(EndermiteServant::new, MobCategory.MONSTER)
                                         .sized(0.4F, 0.3F)
                                         .clientTrackingRange(8)
                                         .build("endermite_servant"));
 
         public static final RegistryObject<EntityType<WitherServant>> WITHER_SERVANT = ENTITY_TYPE.register(
                         "wither_servant",
-                        () -> EntityType.Builder.of(WitherServant::new, MobCategory.MISC)
+                        () -> EntityType.Builder.of(WitherServant::new, MobCategory.MONSTER)
                                         .sized(1.5F, 3.5F)
                                         .clientTrackingRange(10)
                                         .fireImmune()
@@ -163,7 +239,7 @@ public class ModEntityType {
 
         public static final RegistryObject<EntityType<WardenServant>> WARDEN_SERVANT = ENTITY_TYPE.register(
                         "warden_servant",
-                        () -> EntityType.Builder.of(WardenServant::new, MobCategory.MISC)
+                        () -> EntityType.Builder.of(WardenServant::new, MobCategory.MONSTER)
                                         .sized(0.9F, 2.9F)
                                         .clientTrackingRange(10)
                                         .fireImmune()
@@ -171,7 +247,7 @@ public class ModEntityType {
 
         public static final RegistryObject<EntityType<WightServant>> WIGHT_SERVANT = ENTITY_TYPE.register(
                         "wight_servant",
-                        () -> EntityType.Builder.of(WightServant::new, MobCategory.MISC)
+                        () -> EntityType.Builder.of(WightServant::new, MobCategory.MONSTER)
                                         .sized(0.6F, 2.9F)
                                         .clientTrackingRange(16)
                                         .build("wight_servant"));
@@ -200,7 +276,7 @@ public class ModEntityType {
                                         "tormentor_servant",
                                         () -> EntityType.Builder.of(
                                                         com.k1sak1.goetyawaken.common.entities.ally.illager.TormentorServant::new,
-                                                        MobCategory.MISC)
+                                                        MobCategory.MONSTER)
                                                         .sized(0.6F, 1.95F)
                                                         .fireImmune()
                                                         .clientTrackingRange(8)
@@ -211,7 +287,7 @@ public class ModEntityType {
                                         "endersent_servant",
                                         () -> EntityType.Builder.of(
                                                         com.k1sak1.goetyawaken.common.entities.ally.ender.EndersentServant::new,
-                                                        MobCategory.MISC)
+                                                        MobCategory.MONSTER)
                                                         .sized(0.8F, 5.6F)
                                                         .clientTrackingRange(8)
                                                         .build("endersent_servant"));
@@ -221,7 +297,7 @@ public class ModEntityType {
                                         "envioker_servant",
                                         () -> EntityType.Builder.of(
                                                         com.k1sak1.goetyawaken.common.entities.ally.illager.EnviokerServant::new,
-                                                        MobCategory.MISC)
+                                                        MobCategory.MONSTER)
                                                         .sized(0.6F, 1.95F)
                                                         .clientTrackingRange(8)
                                                         .build("envioker_servant"));
@@ -231,7 +307,7 @@ public class ModEntityType {
                                         "preacher_servant",
                                         () -> EntityType.Builder.of(
                                                         com.k1sak1.goetyawaken.common.entities.ally.illager.PreacherServant::new,
-                                                        MobCategory.MISC)
+                                                        MobCategory.MONSTER)
                                                         .sized(0.6F, 1.95F)
                                                         .clientTrackingRange(8)
                                                         .build("preacher_servant"));
@@ -241,7 +317,7 @@ public class ModEntityType {
                                         "crone_servant",
                                         () -> EntityType.Builder.of(
                                                         com.k1sak1.goetyawaken.common.entities.ally.illager.CroneServant::new,
-                                                        MobCategory.MISC)
+                                                        MobCategory.MONSTER)
                                                         .sized(0.6F, 1.95F)
                                                         .clientTrackingRange(8)
                                                         .build("crone_servant"));
@@ -251,7 +327,7 @@ public class ModEntityType {
                                         "minister_servant",
                                         () -> EntityType.Builder.of(
                                                         com.k1sak1.goetyawaken.common.entities.ally.illager.MinisterServant::new,
-                                                        MobCategory.MISC)
+                                                        MobCategory.MONSTER)
                                                         .sized(0.6F, 1.95F)
                                                         .clientTrackingRange(8)
                                                         .build("minister_servant"));
@@ -261,7 +337,7 @@ public class ModEntityType {
                                         "sorcerer_servant",
                                         () -> EntityType.Builder.of(
                                                         com.k1sak1.goetyawaken.common.entities.ally.illager.SorcererServant::new,
-                                                        MobCategory.MISC)
+                                                        MobCategory.MONSTER)
                                                         .sized(0.6F, 1.95F)
                                                         .clientTrackingRange(8)
                                                         .build("sorcerer_servant"));
@@ -271,7 +347,7 @@ public class ModEntityType {
                                         "illusioner_servant",
                                         () -> EntityType.Builder.of(
                                                         com.k1sak1.goetyawaken.common.entities.ally.illager.IllusionerServant::new,
-                                                        MobCategory.MISC)
+                                                        MobCategory.MONSTER)
                                                         .sized(0.6F, 1.95F)
                                                         .clientTrackingRange(8)
                                                         .build("illusioner_servant"));
@@ -281,7 +357,7 @@ public class ModEntityType {
                                         "arch_illusioner_servant",
                                         () -> EntityType.Builder.of(
                                                         com.k1sak1.goetyawaken.common.entities.ally.illager.ArchIllusionerServant::new,
-                                                        MobCategory.MISC)
+                                                        MobCategory.MONSTER)
                                                         .sized(0.6F, 1.95F)
                                                         .clientTrackingRange(8)
                                                         .build("arch_illusioner_servant"));
@@ -291,7 +367,7 @@ public class ModEntityType {
                                         "arch_illusioner",
                                         () -> EntityType.Builder.of(
                                                         com.k1sak1.goetyawaken.common.entities.hostile.illager.ArchIllusioner::new,
-                                                        MobCategory.MISC)
+                                                        MobCategory.MONSTER)
                                                         .sized(0.6F, 1.95F)
                                                         .clientTrackingRange(8)
                                                         .build("arch_illusioner"));
@@ -301,7 +377,7 @@ public class ModEntityType {
                                         "vizier_clone_servant",
                                         () -> EntityType.Builder.of(
                                                         VizierCloneServant::new,
-                                                        MobCategory.MISC)
+                                                        MobCategory.MONSTER)
                                                         .sized(0.6F, 1.95F)
                                                         .clientTrackingRange(8)
                                                         .build("vizier_clone_servant"));
@@ -311,7 +387,7 @@ public class ModEntityType {
                                         "vizier_servant",
                                         () -> EntityType.Builder.of(
                                                         VizierServant::new,
-                                                        MobCategory.MISC)
+                                                        MobCategory.MONSTER)
                                                         .sized(0.6F, 1.95F)
                                                         .clientTrackingRange(8)
                                                         .build("vizier_servant"));
@@ -321,7 +397,7 @@ public class ModEntityType {
                                         "royalguard_servant",
                                         () -> EntityType.Builder.of(
                                                         RoyalguardServant::new,
-                                                        MobCategory.MISC)
+                                                        MobCategory.MONSTER)
                                                         .sized(0.6F, 1.95F)
                                                         .clientTrackingRange(8)
                                                         .build("royalguard_servant"));
@@ -352,7 +428,7 @@ public class ModEntityType {
                                         "ice_creeper_servant",
                                         () -> EntityType.Builder.of(
                                                         IceCreeperServant::new,
-                                                        MobCategory.MISC)
+                                                        MobCategory.MONSTER)
                                                         .sized(0.6F, 1.7F)
                                                         .clientTrackingRange(8)
                                                         .build("ice_creeper_servant"));
@@ -418,7 +494,7 @@ public class ModEntityType {
                                         "parched_necromancer_servant",
                                         () -> EntityType.Builder.of(
                                                         com.k1sak1.goetyawaken.common.entities.ally.undead.necromancer.ParchedNecromancerServant::new,
-                                                        MobCategory.MISC)
+                                                        MobCategory.MONSTER)
                                                         .sized(0.75F, 2.8875F)
                                                         .clientTrackingRange(8)
                                                         .build("parched_necromancer_servant"));
@@ -426,7 +502,7 @@ public class ModEntityType {
         public static final RegistryObject<EntityType<WraithNecromancerServant>> WRAITH_NECROMANCER_SERVANT = ENTITY_TYPE
                         .register(
                                         "wraith_necromancer_servant",
-                                        () -> EntityType.Builder.of(WraithNecromancerServant::new, MobCategory.MISC)
+                                        () -> EntityType.Builder.of(WraithNecromancerServant::new, MobCategory.MONSTER)
                                                         .sized(1.2F, 3.0F)
                                                         .clientTrackingRange(8)
                                                         .build("wraith_necromancer_servant"));
@@ -444,7 +520,7 @@ public class ModEntityType {
                                         "angry_mooshroom",
                                         () -> EntityType.Builder.of(
                                                         com.k1sak1.goetyawaken.common.entities.ally.AngryMooshroom::new,
-                                                        MobCategory.MISC)
+                                                        MobCategory.MONSTER)
                                                         .sized(0.9F, 1.4F)
                                                         .clientTrackingRange(10)
                                                         .build("angry_mooshroom"));
@@ -491,7 +567,7 @@ public class ModEntityType {
         public static final RegistryObject<EntityType<CaerbannogRabbitServant>> CAERBANNOG_RABBIT_SERVANT = ENTITY_TYPE
                         .register(
                                         "caerbannog_rabbit_servant",
-                                        () -> EntityType.Builder.of(CaerbannogRabbitServant::new, MobCategory.MISC)
+                                        () -> EntityType.Builder.of(CaerbannogRabbitServant::new, MobCategory.MONSTER)
                                                         .sized(0.4F, 0.5F)
                                                         .clientTrackingRange(8)
                                                         .build("caerbannog_rabbit_servant"));
@@ -501,7 +577,7 @@ public class ModEntityType {
                                         "ender_keeper_servant",
                                         () -> EntityType.Builder.of(
                                                         com.k1sak1.goetyawaken.common.entities.ally.EnderKeeperServant::new,
-                                                        MobCategory.MISC)
+                                                        MobCategory.MONSTER)
                                                         .sized(1.5F, 3.0F)
                                                         .clientTrackingRange(8)
                                                         .fireImmune()
@@ -512,7 +588,7 @@ public class ModEntityType {
                                         "apostle_servant",
                                         () -> EntityType.Builder.of(
                                                         com.k1sak1.goetyawaken.common.entities.ally.illager.ApostleServant::new,
-                                                        MobCategory.MISC)
+                                                        MobCategory.MONSTER)
                                                         .fireImmune()
                                                         .sized(0.6F, 1.95F)
                                                         .clientTrackingRange(8)
@@ -523,7 +599,7 @@ public class ModEntityType {
                                         "obsidian_monolith_servant",
                                         () -> EntityType.Builder.of(
                                                         ObsidianMonolithServant::new,
-                                                        MobCategory.MISC)
+                                                        MobCategory.MONSTER)
                                                         .fireImmune().sized(1.0F, 3.1F)
                                                         .clientTrackingRange(8)
                                                         .updateInterval(1)
@@ -536,6 +612,25 @@ public class ModEntityType {
                                         .clientTrackingRange(8)
                                         .fireImmune()
                                         .build("spider_creeder_servant"));
+
+        public static final RegistryObject<EntityType<StatueCreeper>> STATUE_CREEPER = ENTITY_TYPE.register(
+                        "statue_creeper",
+                        () -> EntityType.Builder.of(StatueCreeper::new, MobCategory.MONSTER)
+                                        .sized(0.6F, 1.7F)
+                                        .clientTrackingRange(8)
+                                        .fireImmune()
+                                        .build("statue_creeper"));
+
+        public static final RegistryObject<EntityType<HostileStatueCreeper>> HOSTILE_STATUE_CREEPER = ENTITY_TYPE
+                        .register(
+                                        "hostile_statue_creeper",
+                                        () -> EntityType.Builder.of(
+                                                        HostileStatueCreeper::new,
+                                                        MobCategory.MONSTER)
+                                                        .sized(0.6F, 1.7F)
+                                                        .clientTrackingRange(8)
+                                                        .fireImmune()
+                                                        .build("hostile_statue_creeper"));
 
         public static final RegistryObject<EntityType<com.k1sak1.goetyawaken.common.entities.hostile.HostileSpiderCreeder>> HOSTILE_SPIDER_CREEDER = ENTITY_TYPE
                         .register(
@@ -613,16 +708,6 @@ public class ModEntityType {
                                                         .clientTrackingRange(10)
                                                         .build("hostile_mushroom_monstrosity"));
 
-        public static final RegistryObject<EntityType<MaidFairyServant>> MAID_FAIRY_SERVANT = ENTITY_TYPE
-                        .register(
-                                        "maid_fairy_servant",
-                                        () -> EntityType.Builder.of(
-                                                        MaidFairyServant::new,
-                                                        MobCategory.MISC)
-                                                        .sized(0.6F, 1.5F)
-                                                        .clientTrackingRange(10)
-                                                        .build("maid_fairy_servant"));
-
         public static final RegistryObject<EntityType<HostileGnasher>> HOSTILE_GNASHER = ENTITY_TYPE
                         .register(
                                         "hostile_gnasher",
@@ -632,6 +717,15 @@ public class ModEntityType {
                                                         .sized(1.4F, 0.9F)
                                                         .clientTrackingRange(10)
                                                         .build("hostile_gnasher"));
+
+        public static final RegistryObject<EntityType<BurningShield>> BURNING_SHIELD = ENTITY_TYPE.register(
+                        "burning_shield",
+                        () -> EntityType.Builder.of(BurningShield::new, MobCategory.MISC)
+                                        .sized(0.7F, 1.4F)
+                                        .clientTrackingRange(10)
+                                        .fireImmune()
+                                        .updateInterval(1)
+                                        .build("burning_shield"));
 
         public static final RegistryObject<EntityType<HostileWildfire>> HOSTILE_WILDFIRE = ENTITY_TYPE
                         .register(
@@ -763,7 +857,7 @@ public class ModEntityType {
                                         "nameless_one_servant",
                                         () -> EntityType.Builder.of(
                                                         com.k1sak1.goetyawaken.common.entities.ally.undead.necromancer.NamelessOneServant::new,
-                                                        MobCategory.MISC)
+                                                        MobCategory.MONSTER)
                                                         .sized(0.75F, 2.8875F)
                                                         .clientTrackingRange(8)
                                                         .build("nameless_one_servant"));
@@ -865,15 +959,71 @@ public class ModEntityType {
                                                                         MobCategory.MISC)
                                                         .sized(0.5F, 0.5F)
                                                         .clientTrackingRange(4)
+                                                        .fireImmune()
                                                         .updateInterval(1)
                                                         .build("mod_sword_projectile"));
+
+        public static final RegistryObject<EntityType<FlyingAxeEntity>> FLYING_AXE = ENTITY_TYPE
+                        .register(
+                                        "flying_axe",
+                                        () -> EntityType.Builder
+                                                        .<FlyingAxeEntity>of(
+                                                                        (type, level) -> new FlyingAxeEntity(type,
+                                                                                        level),
+                                                                        MobCategory.MISC)
+                                                        .sized(0.5F, 0.5F)
+                                                        .clientTrackingRange(4)
+                                                        .fireImmune()
+                                                        .updateInterval(1)
+                                                        .build("flying_axe"));
+
+        public static final RegistryObject<EntityType<GiantGhastFireball>> GIANT_GHAST_FIREBALL = ENTITY_TYPE
+                        .register(
+                                        "giant_ghast_fireball",
+                                        () -> EntityType.Builder
+                                                        .<GiantGhastFireball>of(
+                                                                        (type, level) -> new GiantGhastFireball(type,
+                                                                                        level),
+                                                                        MobCategory.MISC)
+                                                        .sized(3.0F, 3.0F)
+                                                        .clientTrackingRange(10)
+                                                        .updateInterval(1)
+                                                        .fireImmune()
+                                                        .build("giant_ghast_fireball"));
+
+        public static final RegistryObject<EntityType<com.k1sak1.goetyawaken.common.entities.projectiles.TrackingFireball>> TRACKING_FIREBALL = ENTITY_TYPE
+                        .register(
+                                        "tracking_fireball",
+                                        () -> EntityType.Builder.<com.k1sak1.goetyawaken.common.entities.projectiles.TrackingFireball>of(
+                                                        (type, level) -> new com.k1sak1.goetyawaken.common.entities.projectiles.TrackingFireball(
+                                                                        type,
+                                                                        level),
+                                                        MobCategory.MISC)
+                                                        .sized(0.9375F, 0.9375F)
+                                                        .clientTrackingRange(10)
+                                                        .updateInterval(1)
+                                                        .fireImmune()
+                                                        .build("tracking_fireball"));
+
+        public static final RegistryObject<EntityType<GiantHellBlast>> GIANT_HELL_BLAST = ENTITY_TYPE
+                        .register(
+                                        "giant_hell_blast",
+                                        () -> EntityType.Builder.<GiantHellBlast>of(
+                                                        (type, level) -> new GiantHellBlast(type,
+                                                                        level),
+                                                        MobCategory.MISC)
+                                                        .sized(3.0F, 3.0F)
+                                                        .clientTrackingRange(10)
+                                                        .updateInterval(1)
+                                                        .fireImmune()
+                                                        .build("giant_hell_blast"));
 
         public static final RegistryObject<EntityType<com.k1sak1.goetyawaken.common.entities.ally.undead.ScarletVex>> SCARLET_VEX = ENTITY_TYPE
                         .register(
                                         "scarlet_vex",
                                         () -> EntityType.Builder.of(
                                                         com.k1sak1.goetyawaken.common.entities.ally.undead.ScarletVex::new,
-                                                        MobCategory.MISC)
+                                                        MobCategory.MONSTER)
                                                         .sized(0.4F, 0.8F)
                                                         .clientTrackingRange(8)
                                                         .fireImmune()
@@ -884,7 +1034,7 @@ public class ModEntityType {
                                         "tower_wraith_servant",
                                         () -> EntityType.Builder.of(
                                                         AbstractTowerWraith::new,
-                                                        MobCategory.MISC)
+                                                        MobCategory.MONSTER)
                                                         .sized(0.6F, 1.99F)
                                                         .clientTrackingRange(8)
                                                         .fireImmune()
@@ -950,5 +1100,98 @@ public class ModEntityType {
                                                         .clientTrackingRange(4)
                                                         .updateInterval(1)
                                                         .build("corrupted_soul_bolt"));
+
+        public static final RegistryObject<EntityType<com.k1sak1.goetyawaken.common.entities.hostile.GiantGhast>> GIANT_GHAST = ENTITY_TYPE
+                        .register(
+                                        "giant_ghast",
+                                        () -> EntityType.Builder.<com.k1sak1.goetyawaken.common.entities.hostile.GiantGhast>of(
+                                                        com.k1sak1.goetyawaken.common.entities.hostile.GiantGhast::new,
+                                                        MobCategory.MONSTER)
+                                                        .sized(8.0F, 8.0F)
+                                                        .fireImmune()
+                                                        .clientTrackingRange(10)
+                                                        .build("giant_ghast"));
+
+        public static final RegistryObject<EntityType<com.k1sak1.goetyawaken.common.entities.hostile.HostileGiantGhast>> HOSTILE_GIANT_GHAST = ENTITY_TYPE
+                        .register(
+                                        "hostile_giant_ghast",
+                                        () -> EntityType.Builder.<com.k1sak1.goetyawaken.common.entities.hostile.HostileGiantGhast>of(
+                                                        com.k1sak1.goetyawaken.common.entities.hostile.HostileGiantGhast::new,
+                                                        MobCategory.MONSTER)
+                                                        .sized(8.0F, 8.0F)
+                                                        .fireImmune()
+                                                        .clientTrackingRange(10)
+                                                        .build("hostile_giant_ghast"));
+
+        public static final RegistryObject<EntityType<RampartCaptain>> RAMPART_CAPTAIN = ENTITY_TYPE.register(
+                        "rampart_captain",
+                        () -> EntityType.Builder.of(RampartCaptain::new, MobCategory.MONSTER)
+                                        .sized(0.6F, 1.95F)
+                                        .clientTrackingRange(8)
+                                        .build("rampart_captain"));
+
+        public static final RegistryObject<EntityType<HostileRampartCaptain>> HOSTILE_RAMPART_CAPTAIN = ENTITY_TYPE
+                        .register("hostile_rampart_captain",
+                                        () -> EntityType.Builder.of(HostileRampartCaptain::new, MobCategory.MONSTER)
+                                                        .sized(0.6F, 1.95F)
+                                                        .clientTrackingRange(8)
+                                                        .build("hostile_rampart_captain"));
+
+        public static final RegistryObject<EntityType<RubySorcerer>> RUBY_SORCERER = ENTITY_TYPE
+                        .register("ruby_sorcerer",
+                                        () -> EntityType.Builder.of(RubySorcerer::new, MobCategory.MONSTER)
+                                                        .sized(0.6F, 1.95F)
+                                                        .clientTrackingRange(8)
+                                                        .build("ruby_sorcerer"));
+
+        public static final RegistryObject<EntityType<com.k1sak1.goetyawaken.common.entities.hostile.illager.Mountaineer>> MOUNTAINEER = ENTITY_TYPE
+                        .register("mountaineer",
+                                        () -> EntityType.Builder.of(
+                                                        com.k1sak1.goetyawaken.common.entities.hostile.illager.Mountaineer::new,
+                                                        MobCategory.MONSTER)
+                                                        .sized(0.6F, 1.95F)
+                                                        .clientTrackingRange(8)
+                                                        .build("mountaineer"));
+
+        public static final RegistryObject<EntityType<com.k1sak1.goetyawaken.common.entities.hostile.illager.WindCaller>> WIND_CALLER = ENTITY_TYPE
+                        .register("wind_caller",
+                                        () -> EntityType.Builder.of(
+                                                        com.k1sak1.goetyawaken.common.entities.hostile.illager.WindCaller::new,
+                                                        MobCategory.MONSTER)
+                                                        .sized(0.6F, 1.95F)
+                                                        .clientTrackingRange(8)
+                                                        .build("wind_caller"));
+
+        public static final RegistryObject<EntityType<com.k1sak1.goetyawaken.common.entities.ally.illager.HeresiarchServant>> HERESIARCH_SERVANT = ENTITY_TYPE
+                        .register("heresiarch_servant",
+                                        () -> EntityType.Builder.of(
+                                                        com.k1sak1.goetyawaken.common.entities.ally.illager.HeresiarchServant::new,
+                                                        MobCategory.MONSTER)
+                                                        .sized(0.75F, 2.4375F)
+                                                        .clientTrackingRange(8)
+                                                        .build("heresiarch_servant"));
+
+        public static final RegistryObject<EntityType<com.k1sak1.goetyawaken.common.entities.ally.Sprites>> SPRITES = ENTITY_TYPE
+                        .register("sprites",
+                                        () -> EntityType.Builder.of(
+                                                        com.k1sak1.goetyawaken.common.entities.ally.Sprites::new,
+                                                        MobCategory.CREATURE)
+                                                        .sized(0.5F, 0.5F)
+                                                        .clientTrackingRange(8)
+                                                        .build("sprites"));
+
+        public static final RegistryObject<EntityType<TowerGuardServant>> TOWER_GUARD_SERVANT = ENTITY_TYPE.register(
+                        "tower_guard_servant",
+                        () -> EntityType.Builder.of(TowerGuardServant::new, MobCategory.MONSTER)
+                                        .sized(0.6F, 1.95F)
+                                        .clientTrackingRange(8)
+                                        .build("tower_guard_servant"));
+
+        public static final RegistryObject<EntityType<HostileTowerGuard>> HOSTILE_TOWER_GUARD = ENTITY_TYPE.register(
+                        "hostile_tower_guard",
+                        () -> EntityType.Builder.of(HostileTowerGuard::new, MobCategory.MONSTER)
+                                        .sized(0.6F, 1.95F)
+                                        .clientTrackingRange(8)
+                                        .build("hostile_tower_guard"));
 
 }

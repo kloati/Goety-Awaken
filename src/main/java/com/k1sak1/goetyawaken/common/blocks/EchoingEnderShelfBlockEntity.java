@@ -45,9 +45,7 @@ public class EchoingEnderShelfBlockEntity extends BlockEntity implements Contain
     private final NonNullList<ItemStack> items = NonNullList.withSize(6, ItemStack.EMPTY);
     private int lastInteractedSlot = -1;
 
-    @Nullable
-    private INetwork network;
-    private boolean isActive = false;
+    private final Set<INetwork> networks = new HashSet<>();
     private final Set<EnderAccessLecternBlockEntity> connectedLecterns = new HashSet<>();
 
     public EchoingEnderShelfBlockEntity(BlockPos pPos, BlockState pState) {
@@ -95,6 +93,7 @@ public class EchoingEnderShelfBlockEntity extends BlockEntity implements Contain
     @Override
     public void clearContent() {
         this.items.clear();
+        this.onStorageChanged();
     }
 
     @Override
@@ -139,12 +138,22 @@ public class EchoingEnderShelfBlockEntity extends BlockEntity implements Contain
 
     @Override
     public @NotNull ItemStack removeItemNoUpdate(int pSlot) {
-        return this.removeItem(pSlot, 1);
+        ItemStack itemstack = this.items.get(pSlot);
+        if (itemstack.isEmpty()) {
+            return ItemStack.EMPTY;
+        }
+        ItemStack result = itemstack.copy();
+        this.items.set(pSlot, ItemStack.EMPTY);
+        this.onStorageChanged();
+        return result;
     }
 
     @Override
     public void setItem(int pSlot, ItemStack pStack) {
         if (this.isValidBook(pStack)) {
+            if (level instanceof ServerLevel serverLevel) {
+                com.k1sak1.goetyawaken.common.items.EnderStorageBookBase.ensureDiskExists(pStack, serverLevel);
+            }
             this.items.set(pSlot, pStack);
             this.updateState(pSlot);
             onStorageChanged();
@@ -235,7 +244,7 @@ public class EchoingEnderShelfBlockEntity extends BlockEntity implements Contain
 
     @Override
     public boolean isActive() {
-        return isActive && network != null;
+        return !networks.isEmpty();
     }
 
     @Override
@@ -243,11 +252,15 @@ public class EchoingEnderShelfBlockEntity extends BlockEntity implements Contain
         return worldPosition;
     }
 
-    public void setNetwork(@Nullable INetwork network) {
-        this.network = network;
-        this.isActive = network != null;
-        if (network != null) {
+    public void bindNetwork(INetwork network) {
+        if (networks.add(network)) {
             network.getItemStorageCache().invalidate(InvalidateCause.CONNECTED_STATE_CHANGED);
+        }
+    }
+
+    public void unbindNetwork(INetwork network) {
+        if (networks.remove(network)) {
+            network.getItemStorageCache().invalidate(InvalidateCause.NETWORK_CHANGED);
         }
     }
 
@@ -257,15 +270,15 @@ public class EchoingEnderShelfBlockEntity extends BlockEntity implements Contain
 
     public void removeConnectedLectern(EnderAccessLecternBlockEntity lectern) {
         connectedLecterns.remove(lectern);
-        if (connectedLecterns.isEmpty()) {
-            setNetwork(null);
+        INetwork lecternNetwork = lectern.getNetwork();
+        if (lecternNetwork != null) {
+            unbindNetwork(lecternNetwork);
         }
     }
 
     public void notifyOtherNetworks(INetwork sourceNetwork) {
-        for (EnderAccessLecternBlockEntity lectern : new ArrayList<>(connectedLecterns)) {
-            INetwork net = lectern.getNetwork();
-            if (net != null && net != sourceNetwork) {
+        for (INetwork net : new ArrayList<>(networks)) {
+            if (net != sourceNetwork) {
                 net.getItemStorageCache().invalidate(InvalidateCause.DISK_INVENTORY_CHANGED);
             }
         }
@@ -273,7 +286,11 @@ public class EchoingEnderShelfBlockEntity extends BlockEntity implements Contain
 
     @Nullable
     public INetwork getNetwork() {
-        return network;
+        return networks.isEmpty() ? null : networks.iterator().next();
+    }
+
+    public Set<INetwork> getNetworks() {
+        return networks;
     }
 
     public boolean hasStorageBooks() {
@@ -302,16 +319,16 @@ public class EchoingEnderShelfBlockEntity extends BlockEntity implements Contain
             lectern.onShelfRemoved(this);
         }
         connectedLecterns.clear();
-        if (network != null) {
-            network.getNodeGraph().invalidate();
-            setNetwork(null);
+        for (INetwork net : new ArrayList<>(networks)) {
+            unbindNetwork(net);
+            net.getNodeGraph().invalidate();
         }
     }
 
     public void onStorageChanged() {
-        if (network != null) {
-            network.getItemStorageCache().invalidate(InvalidateCause.DISK_INVENTORY_CHANGED);
-            network.markDirty();
+        for (INetwork net : new ArrayList<>(networks)) {
+            net.getItemStorageCache().invalidate(InvalidateCause.DISK_INVENTORY_CHANGED);
+            net.markDirty();
         }
     }
 

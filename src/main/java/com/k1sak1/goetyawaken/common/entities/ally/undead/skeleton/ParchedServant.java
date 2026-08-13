@@ -47,36 +47,12 @@ public class ParchedServant extends AbstractSkeletonServant {
 
     @Override
     protected SoundEvent getAmbientSound() {
-        int soundIndex = this.random.nextInt(4) + 1;
-        switch (soundIndex) {
-            case 1:
-                return ModSounds.PARCHED_IDLE_1.get();
-            case 2:
-                return ModSounds.PARCHED_IDLE_2.get();
-            case 3:
-                return ModSounds.PARCHED_IDLE_3.get();
-            case 4:
-                return ModSounds.PARCHED_IDLE_4.get();
-            default:
-                return ModSounds.PARCHED_IDLE_1.get();
-        }
+        return ModSounds.PARCHED_IDLE.get();
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource pDamageSource) {
-        int soundIndex = this.random.nextInt(4) + 1;
-        switch (soundIndex) {
-            case 1:
-                return ModSounds.PARCHED_HURT_1.get();
-            case 2:
-                return ModSounds.PARCHED_HURT_2.get();
-            case 3:
-                return ModSounds.PARCHED_HURT_3.get();
-            case 4:
-                return ModSounds.PARCHED_HURT_4.get();
-            default:
-                return ModSounds.PARCHED_HURT_1.get();
-        }
+        return ModSounds.PARCHED_HURT.get();
     }
 
     @Override
@@ -86,19 +62,7 @@ public class ParchedServant extends AbstractSkeletonServant {
 
     @Override
     protected SoundEvent getStepSound() {
-        int soundIndex = this.random.nextInt(4) + 1;
-        switch (soundIndex) {
-            case 1:
-                return ModSounds.PARCHED_STEP_1.get();
-            case 2:
-                return ModSounds.PARCHED_STEP_2.get();
-            case 3:
-                return ModSounds.PARCHED_STEP_3.get();
-            case 4:
-                return ModSounds.PARCHED_STEP_4.get();
-            default:
-                return ModSounds.PARCHED_STEP_1.get();
-        }
+        return ModSounds.PARCHED_STEP.get();
     }
 
     @Override

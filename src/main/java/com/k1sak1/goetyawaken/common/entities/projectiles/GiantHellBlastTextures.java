@@ -1,0 +1,20 @@
+package com.k1sak1.goetyawaken.common.entities.projectiles;
+
+import com.Polarice3.Goety.Goety;
+import com.google.common.collect.Maps;
+import net.minecraft.Util;
+import net.minecraft.resources.ResourceLocation;
+
+import java.util.Map;
+
+public class GiantHellBlastTextures {
+    public static final Map<Integer, ResourceLocation> TEXTURES = Util.make(Maps.newHashMap(), (map) -> {
+        for (int i = 0; i < 32; i++) {
+            map.put(i, location("hell_blast" + (i + 1) + ".png"));
+        }
+    });
+
+    public static ResourceLocation location(String path) {
+        return Goety.location("textures/entity/projectiles/hell_blast/" + path);
+    }
+}

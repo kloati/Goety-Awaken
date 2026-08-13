@@ -12,5 +12,6 @@
       "recipe": "goetyawaken:creeper_focus",
       "text": "Craft the Creeper Focus."
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:creeper_focus":0}
 }

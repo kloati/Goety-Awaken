@@ -274,6 +274,8 @@ public class MinisterServant extends SpellcasterIllagerServant implements Ranged
             this.deathAnimationState.startIfStopped(this.tickCount);
             this.setYRot(this.deathRotation);
             this.setYBodyRot(this.deathRotation);
+        } else if (this.deathAnimationState.isStarted()) {
+            this.deathAnimationState.stop();
         }
 
         if (this.isCelebrating()) {
@@ -310,32 +312,35 @@ public class MinisterServant extends SpellcasterIllagerServant implements Ranged
                 SEHelper.setRestPeriod(player,
                         MathHelper.minecraftDayToTicks(MobsConfig.IllagerAssaultRestMinister.get()));
             }
-            if (!this.canRevive(p_21014_)) {
-                this.level().broadcastEntityEvent(this, (byte) 10);
-                this.deathRotation = this.getYRot();
-                ItemStack ominousOrbStack = new ItemStack(com.Polarice3.Goety.common.items.ModItems.OMINOUS_ORB.get());
-                if (this.getTrueOwner() != null) {
-                    FlyingItem flyingItem = new FlyingItem(
-                            ModEntityType.FLYING_ITEM.get(),
-                            this.level(),
-                            this.getX(),
-                            this.getY() + 1.0D,
-                            this.getZ());
-                    flyingItem.setOwner(this.getTrueOwner());
-                    flyingItem.setItem(ominousOrbStack);
-                    flyingItem.setParticle(ParticleTypes.SOUL);
-                    flyingItem.setSecondsCool(30);
+        }
+        super.die(p_21014_);
+        if (this.isDeadOrDying() && !this.canRevive(p_21014_) && !this.level().isClientSide) {
+            this.level().broadcastEntityEvent(this, (byte) 10);
+            this.deathRotation = this.getYRot();
+            ItemStack ominousOrbStack = new ItemStack(com.Polarice3.Goety.common.items.ModItems.OMINOUS_ORB.get());
+            if (this.getTrueOwner() != null) {
+                FlyingItem flyingItem = new FlyingItem(
+                        ModEntityType.FLYING_ITEM.get(),
+                        this.level(),
+                        this.getX(),
+                        this.getY() + 1.0D,
+                        this.getZ());
+                flyingItem.setOwner(this.getTrueOwner());
+                flyingItem.setItem(ominousOrbStack);
+                flyingItem.setParticle(ParticleTypes.SOUL);
+                flyingItem.setSecondsCool(30);
 
-                    this.level().addFreshEntity(flyingItem);
-                } else {
-                    ItemEntity itemEntity = this.spawnAtLocation(ominousOrbStack);
-                    if (itemEntity != null) {
-                        itemEntity.setExtendedLifetime();
-                    }
+                this.level().addFreshEntity(flyingItem);
+            } else {
+                ItemEntity itemEntity = this.spawnAtLocation(ominousOrbStack);
+                if (itemEntity != null) {
+                    itemEntity.setExtendedLifetime();
                 }
             }
         }
-        super.die(p_21014_);
+        if (!this.isDeadOrDying()) {
+            this.deathTime = 0;
+        }
     }
 
     protected void tickDeath() {

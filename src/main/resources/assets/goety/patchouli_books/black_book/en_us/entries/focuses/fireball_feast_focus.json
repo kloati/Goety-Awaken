@@ -1,0 +1,17 @@
+{
+  "name": "Fireball Feast Focus",
+  "icon": "goetyawaken:fireball_feast_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The fireballs of Blazes and Ghasts are certainly fierce, but such firepower just isn't quite 'satisfying' enough for you—surely there must be a way to unleash the proud firepower of nether magic even more relentlessly?"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:fireball_feast_focus",
+      "text": "Suppressing fire!"
+    }
+  ],
+  "extra_recipe_mappings": {"goetyawaken:fireball_feast_focus":0}
+}

@@ -1,0 +1,16 @@
+{
+  "name": "敌对愤怒哞菇",
+  "icon": "goetyawaken:hostile_angry_mooshroom_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "蘑菇岛的神秘建筑入口由一群似乎永远处于愤怒状态的哞菇看守，它们会猛烈地撞向面前的生物。你不仅开始思考，什么样的力量能使得平常温顺的哞菇突然变得如此凶悍..."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_angry_mooshroom",
+      "text": "哞！"
+    }
+  ]
+}

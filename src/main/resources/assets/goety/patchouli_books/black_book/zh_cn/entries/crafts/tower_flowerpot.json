@@ -12,5 +12,6 @@
       "recipe": "goetyawaken:tower_flowerpot",
       "text": "时尚的装饰品"
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:tower_flowerpot":0}
 }

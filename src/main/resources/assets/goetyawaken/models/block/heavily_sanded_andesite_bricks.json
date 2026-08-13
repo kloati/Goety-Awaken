@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "goetyawaken:block/andesite/heavily_sanded_andesite_bricks"
+  }
+}

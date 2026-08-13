@@ -21,7 +21,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 /**
  * Inspired by irons-spells-n-spellbooks
  * 
- * @author raoulvdberge (Original Author)
+ * @author iron431 (Original Author)
  * @see <a href=
  *      "https://github.com/iron431/irons-spells-n-spellbooks">irons-spells-n-spellbooks
  *      Repository</a>

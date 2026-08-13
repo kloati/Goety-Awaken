@@ -12,5 +12,6 @@
       "recipe": "goetyawaken:dauntless_gloves",
       "text": "When worn, increases the attack speed of claymore-type weapons by 25%."
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:dauntless_gloves":0}
 }

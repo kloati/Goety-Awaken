@@ -1,0 +1,31 @@
+{
+  "name": "Rampart Captain",
+  "icon": "goety:diamond_ice_axe",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "After clashing with the intrepid Rampart Captain, you cannot help but wonder if you too could acquire such combat prowess and strength. Using specific materials and one of your own Mountaineer servants, you have managed to create a powerful ally."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:convert_mountaineer_to_rampart_captain",
+      "text": "Transform a Mountaineer into a Rampart Captain."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Rampart Captains are much tougher than their illager kin and can hurl their weapons at distant enemies. The horn in their hands can command nearby squad members and unleash powerful wind blasts."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goetyawaken:threat_banner",
+      "title": "Threat Banner",
+      "text": "If your Rampart Captain falls in battle, fear not. They will drop the Threat Banner they carry, and you can use this banner on another Mountaineer servant to reappoint your ally."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:rampart_captain",
+      "text": ""
+    }
+  ]
+}

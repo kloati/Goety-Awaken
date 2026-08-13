@@ -3,7 +3,7 @@ package com.k1sak1.goetyawaken.mixin;
 import com.k1sak1.goetyawaken.api.IAncientGlint;
 import com.k1sak1.goetyawaken.common.mobenchant.IMobEnchantable;
 import com.k1sak1.goetyawaken.common.mobenchant.MobEnchantCapability;
-import com.k1sak1.goetyawaken.common.mobenchant.MobEnchantEventHandler;
+import com.k1sak1.goetyawaken.common.items.CatacombsReliquaryItem;
 import com.k1sak1.goetyawaken.common.mobenchant.MobEnchantType;
 import com.k1sak1.goetyawaken.init.ModEffects;
 import net.minecraft.nbt.CompoundTag;
@@ -62,12 +62,8 @@ public abstract class LivingEntityMixin extends Entity implements IAncientGlint,
 
     @Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
     private void readAncientGlintData(CompoundTag tag, CallbackInfo ci) {
-        if (this.goetyawaken$mobEnchantCapability == null) {
-            this.goetyawaken$mobEnchantCapability = new MobEnchantCapability((LivingEntity) (Object) this);
-        }
+        this.goetyawaken$mobEnchantCapability = new MobEnchantCapability((LivingEntity) (Object) this);
         this.goetyawaken$mobEnchantCapability.loadFromNBT(tag);
-        MobEnchantEventHandler.syncCapabilityToCache((LivingEntity) (Object) this,
-                this.goetyawaken$mobEnchantCapability);
 
         if (tag.contains("AncientGlint")) {
             this.setAncientGlint(tag.getBoolean("AncientGlint"));
@@ -87,8 +83,16 @@ public abstract class LivingEntityMixin extends Entity implements IAncientGlint,
     @Inject(method = "isCurrentlyGlowing", at = @At("HEAD"), cancellable = true)
     private void onIsCurrentlyGlowing(CallbackInfoReturnable<Boolean> cir) {
         LivingEntity self = (LivingEntity) (Object) this;
-        if (self.hasEffect(ModEffects.MUCILAGE_POSSESSION.get())) {
+        if (ModEffects.MUCILAGE_POSSESSION.isPresent() && self.hasEffect(ModEffects.MUCILAGE_POSSESSION.get())) {
             cir.setReturnValue(true);
+        }
+    }
+
+    @Inject(method = "tick", at = @At("HEAD"))
+    private void onTick(CallbackInfo ci) {
+        LivingEntity entity = (LivingEntity) (Object) this;
+        if (CatacombsReliquaryItem.isFireImmune(entity)) {
+            entity.clearFire();
         }
     }
 
@@ -131,50 +135,31 @@ public abstract class LivingEntityMixin extends Entity implements IAncientGlint,
     @Unique
     @Override
     public int getMobEnchantLevel(MobEnchantType enchantType) {
-        if (this.goetyawaken$mobEnchantCapability == null) {
-            this.goetyawaken$mobEnchantCapability = MobEnchantEventHandler.getCapability((LivingEntity) (Object) this);
-        }
-        return this.goetyawaken$mobEnchantCapability.getMobEnchantLevel(enchantType);
+        return goetyawaken$getMobEnchantCapability().getMobEnchantLevel(enchantType);
     }
 
     @Unique
     @Override
     public void setMobEnchantLevel(MobEnchantType enchantType, int level) {
-        if (this.goetyawaken$mobEnchantCapability == null) {
-            this.goetyawaken$mobEnchantCapability = MobEnchantEventHandler.getCapability((LivingEntity) (Object) this);
-        }
-        this.goetyawaken$mobEnchantCapability.setMobEnchantLevel(enchantType, level);
+        goetyawaken$getMobEnchantCapability().setMobEnchantLevel(enchantType, level);
     }
 
     @Unique
     @Override
     public java.util.Map<MobEnchantType, Integer> getMobEnchants() {
-        if (this.goetyawaken$mobEnchantCapability == null) {
-            this.goetyawaken$mobEnchantCapability = MobEnchantEventHandler.getCapability((LivingEntity) (Object) this);
-        }
-        return this.goetyawaken$mobEnchantCapability.getMobEnchants();
+        return goetyawaken$getMobEnchantCapability().getMobEnchants();
     }
 
     @Unique
     @Override
     public void setMobEnchants(java.util.Map<MobEnchantType, Integer> enchants) {
-        if (this.goetyawaken$mobEnchantCapability == null) {
-            this.goetyawaken$mobEnchantCapability = MobEnchantEventHandler.getCapability((LivingEntity) (Object) this);
-        }
-        this.goetyawaken$mobEnchantCapability.setMobEnchants(enchants);
+        goetyawaken$getMobEnchantCapability().setMobEnchants(enchants);
     }
 
     @Unique
     private MobEnchantCapability goetyawaken$getMobEnchantCapability() {
         if (this.goetyawaken$mobEnchantCapability == null) {
-            MobEnchantCapability cached = MobEnchantEventHandler.getCapabilityFromCache((LivingEntity) (Object) this);
-            if (cached != null) {
-                this.goetyawaken$mobEnchantCapability = cached;
-            } else {
-                this.goetyawaken$mobEnchantCapability = new MobEnchantCapability((LivingEntity) (Object) this);
-                MobEnchantEventHandler.syncCapabilityToCache((LivingEntity) (Object) this,
-                        this.goetyawaken$mobEnchantCapability);
-            }
+            this.goetyawaken$mobEnchantCapability = new MobEnchantCapability((LivingEntity) (Object) this);
         }
         return this.goetyawaken$mobEnchantCapability;
     }

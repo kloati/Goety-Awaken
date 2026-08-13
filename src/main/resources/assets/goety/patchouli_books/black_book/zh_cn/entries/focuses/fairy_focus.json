@@ -2,6 +2,7 @@
   "name": "精灵聚晶",
   "icon": "goetyawaken:fairy_focus",
   "category": "goety:goetyawaken_focuses",
+  "flag": "goetyawaken:touhou_little_maid_loaded",
   "pages": [
     {
       "type": "text",
@@ -12,5 +13,6 @@
       "recipe": "goetyawaken:fairy_focus",
       "text": "制造异变？"
     }
-  ]
+  ],
+  "extra_recipe_mappings": {"goetyawaken:fairy_focus":0}
 }

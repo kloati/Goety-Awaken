@@ -13,5 +13,6 @@
       "text": "Craft the Shulker Missile Focus."
     }
   ],
-  "advancement": "minecraft:end/find_end_city"
+  "advancement": "minecraft:end/find_end_city",
+  "extra_recipe_mappings": {"goetyawaken:shulker_missile_focus":0}
 }

@@ -1,0 +1,26 @@
+{
+  "name": "Bellringer Servant",
+  "icon": "meetyourfight:haunted_bell",
+  "category": "goety:goetyawaken_summons",
+  "flag": "goetyawaken:meetyourfight_loaded",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Using the lingering spirit left behind by a Bellringer after its death, you have managed to reproduce a 'Bellringer' that obeys your commands—a trivial task for one as adept in necromancy as yourself. Regrettably, while this spirit is considerably stronger than ordinary ghosts, that's about the extent of it."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:bellringer_servant",
+      "text": ""
+    },
+    {
+      "type": "patchouli:text",
+      "text": "But as you well know, for spectral undead creatures of this nature, the spiritual essence of their own kind serves as a most nourishing tonic. And for a Bellringer, whose spirit is already quite resilient, it can even absorb multiple doses of ectoplasm from its kin—this would make them far more powerful."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:bellringer_servant",
+      "text": "§cFor whom does the bell toll?§r"
+    }
+  ]
+}

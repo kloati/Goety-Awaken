@@ -1,0 +1,17 @@
+{
+  "name": "Great Meteor Focus",
+  "icon": "goetyawaken:great_meteor_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The Giant Ghast's giant fireball is simply awesome! If only there were a way to launch such a massive fireball yourself! Clearly, Gloomy Tears—being a highly explosive material—hold exactly that possibility."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:great_meteor_focus",
+      "text": ""
+    }
+  ],
+  "extra_recipe_mappings": {"goetyawaken:great_meteor_focus":0}
+}

@@ -1,0 +1,36 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goetyawaken:ruby_grimoire"
+  },
+  "craftType": "magic",
+  "soulCost": 256,
+  "duration": 8,
+  "ingredients": [
+    {
+      "item": "goetyawaken:soul_sapphire"
+    },
+    {
+      "item": "minecraft:chorus_flower"
+    },
+    {
+      "item": "minecraft:chorus_flower"
+    },
+    {
+      "item": "minecraft:end_crystal"
+    },
+    {
+      "item": "minecraft:echo_shard"
+    },
+    {
+      "item": "minecraft:echo_shard"
+    },
+    {
+      "item": "goety:void_eye"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:ender_storage_book_sapphire"
+  }
+}

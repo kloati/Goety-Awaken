@@ -1,0 +1,18 @@
+{
+  "name": "Esporo de Sculk",
+  "icon": "goetyawaken:sculk_spore",
+  "category": "goety:goetyawaken_crafts",
+  "flag": "goetyawaken:deeperdarker_loaded",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Um esporo vil condensado de blocos de sculk, usando tecnologia relacionada a traças. Plante-o em blocos de sculk para atrair um Verme Gritante espreitando nas profundezas escuras para sair. Como o esporo está contaminado com seus feromônios, o Verme Gritante atraído se tornará seu aliado."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:sculk_spore",
+      "text": ""
+    }
+  ],
+  "extra_recipe_mappings": {"goetyawaken:sculk_spore":0}
+}

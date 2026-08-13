@@ -4,7 +4,6 @@ import com.Polarice3.Goety.common.entities.ai.path.ModClimberNavigation;
 import com.k1sak1.goetyawaken.init.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.entity.EntityType;
@@ -159,64 +158,16 @@ public class BoulderingZombie extends Zombie {
     }
 
     private SoundEvent getRandomIdleSound() {
-        RandomSource random = this.getRandom();
-        int soundIndex = random.nextInt(5) + 1;
-        switch (soundIndex) {
-            case 1:
-                return ModSounds.BOULDERING_ZOMBIE_IDLE_1.get();
-            case 2:
-                return ModSounds.BOULDERING_ZOMBIE_IDLE_2.get();
-            case 3:
-                return ModSounds.BOULDERING_ZOMBIE_IDLE_3.get();
-            case 4:
-                return ModSounds.BOULDERING_ZOMBIE_IDLE_4.get();
-            case 5:
-                return ModSounds.BOULDERING_ZOMBIE_IDLE_5.get();
-            default:
-                return ModSounds.BOULDERING_ZOMBIE_IDLE_1.get();
-        }
+        return ModSounds.BOULDERING_ZOMBIE_IDLE.get();
     }
 
     private SoundEvent getRandomHurtSound() {
-        RandomSource random = this.getRandom();
-        int soundIndex = random.nextInt(4) + 1;
-        switch (soundIndex) {
-            case 1:
-                return ModSounds.BOULDERING_ZOMBIE_HURT_1.get();
-            case 2:
-                return ModSounds.BOULDERING_ZOMBIE_HURT_2.get();
-            case 3:
-                return ModSounds.BOULDERING_ZOMBIE_HURT_3.get();
-            case 4:
-                return ModSounds.BOULDERING_ZOMBIE_HURT_4.get();
-            default:
-                return ModSounds.BOULDERING_ZOMBIE_HURT_1.get();
-        }
+        return ModSounds.BOULDERING_ZOMBIE_HURT.get();
     }
 
     public void playClimbSound() {
         if (!this.level().isClientSide) {
-            RandomSource random = this.getRandom();
-            int soundIndex = random.nextInt(4) + 1;
-            SoundEvent climbSound;
-            switch (soundIndex) {
-                case 1:
-                    climbSound = ModSounds.BOULDERING_ZOMBIE_CLIMB_1.get();
-                    break;
-                case 2:
-                    climbSound = ModSounds.BOULDERING_ZOMBIE_CLIMB_2.get();
-                    break;
-                case 3:
-                    climbSound = ModSounds.BOULDERING_ZOMBIE_CLIMB_3.get();
-                    break;
-                case 4:
-                    climbSound = ModSounds.BOULDERING_ZOMBIE_CLIMB_4.get();
-                    break;
-                default:
-                    climbSound = ModSounds.BOULDERING_ZOMBIE_CLIMB_1.get();
-                    break;
-            }
-            this.playSound(climbSound, 1.0F, 1.0F);
+            this.playSound(ModSounds.BOULDERING_ZOMBIE_CLIMB.get(), 1.0F, 1.0F);
         }
     }
 }

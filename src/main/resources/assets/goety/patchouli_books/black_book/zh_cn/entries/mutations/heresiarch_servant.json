@@ -1,0 +1,25 @@
+{
+  "name": "异教牧首",
+  "icon": "goety:malefic_helm",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "你已经知道该如何骗过那些愚蠢的村民，让他们在睡梦中堕入下界的怀抱，转化为听命于你的信徒。而在这些信徒之中，你可以挑选出最有天赋的那个，通过一场黑暗仪式将其擢升为异教牧首。牧首不仅精通下界的黑暗学识，更能将地狱之火召唤至主世界，让敌人亲身体会什么是真正的虔诚——它们是少有的真正能让地狱随行的不洁司祭。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:heresiarch_servant",
+      "text": "通过仪式将一个异教徒擢升为异教牧首。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:heresiarch_servant",
+      "text": "如果你将自己伪装成下界的不洁使者，牧首也会变得更强——对于一个信徒而言，这是最有效的激励。"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "你可以用绿宝石从异教牧首那里换取下界的学识——从焦黑的建材到炼狱魔典。若你扮作不洁使者，他们的虔诚将被点燃，为你更快地补货，并提供五折的优惠。即便只像他们一样打扮，戴上相同的帽子，也能获得三成的优惠。让他们在床榻上安眠，货物自会随时间更替。"
+    }
+  ]
+}

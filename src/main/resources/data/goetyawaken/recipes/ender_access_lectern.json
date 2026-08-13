@@ -9,28 +9,19 @@
   "duration": 10,
   "ingredients": [
     {
-      "item": "goety:mystic_core"
+      "item": "minecraft:ender_eye"
+    },
+    {
+      "item": "goety:soul_candlestick"
+    },
+    {
+      "item": "goety:occult_fabric"
+    },
+    {
+      "item": "goety:soul_transfer"
     },
     {
       "item": "minecraft:diamond"
-    },
-    {
-      "item": "minecraft:ender_chest"
-    },
-    {
-      "item": "minecraft:crying_obsidian"
-    },
-    {
-      "item": "minecraft:crying_obsidian"
-    },
-    {
-      "item": "goety:spirit_fabric"
-    },
-    {
-      "item": "goety:spirit_fabric"
-    },
-    {
-      "item": "goety:soul_emerald"
     }
   ],
   "result": {

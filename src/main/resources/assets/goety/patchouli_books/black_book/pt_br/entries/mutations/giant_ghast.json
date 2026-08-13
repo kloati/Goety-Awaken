@@ -1,0 +1,21 @@
+{
+  "name": "Ghast Gigante",
+  "icon": "goetyawaken:gloomy_tears",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Depois de obter as Lágrimas Obscuras derramadas por um Ghast Gigante em sofrimento, você sentiu agudamente a possibilidade de usá-las para amaldiçoar um Ghast comum, transformando-o em um Ghast Gigante."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:giant_ghast_servant",
+      "text": "Você pode até fazer seu Ghast Gigante carregá-lo pelos céus!"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:giant_ghast",
+      "text": ""
+    }
+  ]
+}

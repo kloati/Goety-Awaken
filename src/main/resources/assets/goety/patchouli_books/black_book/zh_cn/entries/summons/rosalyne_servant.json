@@ -1,0 +1,22 @@
+{
+  "name": "『薄暮之锋』罗莎琳",
+  "icon": "meetyourfight:dusk_key",
+  "category": "goety:goetyawaken_summons",
+  "flag": "goetyawaken:meetyourfight_loaded",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "『薄暮之锋』罗莎琳——执蔷薇为刃的古老战士。在你跨越薄暮、斩断她与蔷薇最后的羁绊之后，这位战士残存的意志终于向更强大的力量低下了头。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:rosalyne_servant",
+      "text": "借由黄昏之钥中残留的暮色余晖，你得以在仪式中将这位蔷薇战士重新唤回世间。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:rosalyne_servant",
+      "text": "曾经用剑锋丈量你的生命，如今用剑锋守护你的王座。"
+    }
+  ]
+}

@@ -55,6 +55,21 @@
       "type": "patchouli:text",
       "title": "幻术师仆从",
       "text": "需求: $(li)有魔法资质的新刌民 $(li)24羊毛 $(li)4标靶 $(li)1承载幻象聚晶的祭坛基座。"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "突击手仆从",
+      "text": "$(9)需要安装 It Takes a Pillage 模组$(li)需求：新刌民 $(li)1面旗帜 $(li)64个任意木板 $(li)60个不祥石 $(li)10个任意的墙 $(li)10个任意木栅栏 $(li)2个熔炉 $(li)1个工作台。"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "远弓手仆从",
+      "text": "$(9)需要安装 It Takes a Pillage 模组$(li)需求：新刌民 $(li)2个干草块或标靶 $(li)2个雕刻南瓜 $(li)16个木栅栏 $(li)20个不祥石。"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "重装军仆从",
+      "text": "$(9)需要安装 It Takes a Pillage 模组$(li)需求：新刌民 $(li)2个砂轮 $(li)2个锻造台 $(li)16个铁矿石 $(li)32个原木 $(li)4个木桶 $(li)4张床 $(li)2个铁砧。"
     }
   ],
   "extra_recipe_mappings": {

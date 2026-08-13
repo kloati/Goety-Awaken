@@ -9,6 +9,7 @@ import com.k1sak1.goetyawaken.api.IAncientGlint;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
@@ -17,6 +18,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.EntityLeaveLevelEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -27,10 +29,11 @@ import java.util.concurrent.ConcurrentHashMap;
 @Mod.EventBusSubscriber(modid = GoetyAwaken.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class MobEnchantResurrectionManager {
 
-    private static final Map<Level, Map<UUID, ResurrectionInfo>> RESURRECTION_QUEUE = new ConcurrentHashMap<>();
+    private static final Map<ResourceKey<Level>, Map<UUID, ResurrectionInfo>> RESURRECTION_QUEUE = new ConcurrentHashMap<>();
     private static final Map<UUID, Long> RESURRECTION_COOLDOWN = new ConcurrentHashMap<>();
     private static final int RESURRECTION_COOLDOWN_TICKS = 500;
     private static final int AURA_RADIUS = 32;
+    private static final int COOLDOWN_CLEANUP_INTERVAL = 6000;
 
     @SubscribeEvent
     public static void onEntityDeath(LivingDeathEvent event) {
@@ -108,6 +111,20 @@ public class MobEnchantResurrectionManager {
     }
 
     @SubscribeEvent
+    public static void onLevelUnload(LevelEvent.Unload event) {
+        if (event.getLevel() instanceof ServerLevel serverLevel) {
+            ResourceKey<Level> dimension = serverLevel.dimension();
+            Map<UUID, ResurrectionInfo> queue = RESURRECTION_QUEUE.remove(dimension);
+            if (queue != null) {
+                for (UUID uuid : queue.keySet()) {
+                    RESURRECTION_COOLDOWN.remove(uuid);
+                }
+                queue.clear();
+            }
+        }
+    }
+
+    @SubscribeEvent
     public static void onEntityJoinLevel(EntityJoinLevelEvent event) {
         Entity entity = event.getEntity();
         Level level = entity.level();
@@ -121,7 +138,8 @@ public class MobEnchantResurrectionManager {
         }
 
         UUID entityUUID = entity.getUUID();
-        Map<UUID, ResurrectionInfo> queue = RESURRECTION_QUEUE.computeIfAbsent(level, k -> new ConcurrentHashMap<>());
+        Map<UUID, ResurrectionInfo> queue = RESURRECTION_QUEUE.computeIfAbsent(level.dimension(),
+                k -> new ConcurrentHashMap<>());
 
         if (queue.containsKey(entityUUID)) {
             ResurrectionInfo info = queue.remove(entityUUID);
@@ -144,7 +162,8 @@ public class MobEnchantResurrectionManager {
             }
             RESURRECTION_COOLDOWN.remove(entityUUID);
         }
-        Map<UUID, ResurrectionInfo> queue = RESURRECTION_QUEUE.computeIfAbsent(level, k -> new ConcurrentHashMap<>());
+        Map<UUID, ResurrectionInfo> queue = RESURRECTION_QUEUE.computeIfAbsent(level.dimension(),
+                k -> new ConcurrentHashMap<>());
         if (queue.containsKey(entityUUID)) {
             return;
         }
@@ -153,9 +172,11 @@ public class MobEnchantResurrectionManager {
     }
 
     private static boolean hasResurrectionAura(LivingEntity entity) {
-        MobEnchantCapability capability = MobEnchantEventHandler.getCapability(entity);
-        if (capability != null) {
-            return capability.hasMobEnchantment(MobEnchantType.RESURRECTION_AURA);
+        if (entity instanceof IMobEnchantable enchantable) {
+            MobEnchantCapability capability = enchantable.getMobEnchantCapabilityInstance();
+            if (capability != null) {
+                return capability.hasMobEnchantment(MobEnchantType.RESURRECTION_AURA);
+            }
         }
         return false;
     }
@@ -172,7 +193,7 @@ public class MobEnchantResurrectionManager {
     }
 
     public static void processResurrection(ServerLevel serverLevel) {
-        Map<UUID, ResurrectionInfo> queue = RESURRECTION_QUEUE.get(serverLevel);
+        Map<UUID, ResurrectionInfo> queue = RESURRECTION_QUEUE.get(serverLevel.dimension());
         if (queue == null || queue.isEmpty()) {
             return;
         }
@@ -185,17 +206,23 @@ public class MobEnchantResurrectionManager {
             int remainingTicks = info.getRemainingTicks(currentGameTime);
 
             if (remainingTicks <= 0) {
-                if (respawnEntity(serverLevel, info)) {
+                if (currentGameTime - info.getDeathGameTime() > (long) ResurrectionInfo.RESURRECTION_TICKS * 2L
+                        || respawnEntity(serverLevel, info)) {
                     toRemove.add(entry.getKey());
                 }
             } else {
-                if (remainingTicks % 2 == 0) {
+                if (remainingTicks % 10 == 0) {
                     spawnResurrectionParticles(serverLevel, info.getDeathPosition());
                 }
             }
         }
         for (UUID uuid : toRemove) {
             queue.remove(uuid);
+        }
+
+        if (currentGameTime % COOLDOWN_CLEANUP_INTERVAL == 0) {
+            RESURRECTION_COOLDOWN.entrySet()
+                    .removeIf(entry -> currentGameTime - entry.getValue() > RESURRECTION_COOLDOWN_TICKS * 10);
         }
     }
 

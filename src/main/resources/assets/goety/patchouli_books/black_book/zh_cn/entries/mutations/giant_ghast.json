@@ -1,0 +1,21 @@
+{
+  "name": "巨型恶魂",
+  "icon": "goetyawaken:gloomy_tears",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "在得到巨型恶魂死后流下的黑沉沉泪后，你敏锐地察觉到了用它来诅咒一位恶魂，使其转变为巨型恶魂的可能性。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:giant_ghast_servant",
+      "text": "你甚至可以让你的巨型恶魂载着你飞行！"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:giant_ghast",
+      "text": ""
+    }
+  ]
+}

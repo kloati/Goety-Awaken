@@ -1,0 +1,28 @@
+{
+  "parent": "goety:goety/root",
+  "criteria": {
+    "walk_like_nameless": {
+      "trigger": "goetyawaken:walk_like_nameless"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.goetyawaken.walk_like_nameless.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "goetyawaken:taboo_fragment"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.goetyawaken.walk_like_nameless.title"
+    }
+  },
+  "requirements": [
+    [
+      "walk_like_nameless"
+    ]
+  ]
+}

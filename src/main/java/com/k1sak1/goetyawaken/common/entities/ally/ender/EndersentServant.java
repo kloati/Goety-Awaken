@@ -134,6 +134,14 @@ public class EndersentServant extends com.Polarice3.Goety.common.entities.neutra
     @Override
     public void tick() {
         super.tick();
+        if (this.isHostile()) {
+            com.Polarice3.Goety.utils.MiscCapHelper.updateMobTarget(this);
+
+            if (!this.level().isClientSide()) {
+                this.setAggressive(this.getTarget() != null);
+            }
+        }
+
         if (this.teleportCool > 0) {
             --this.teleportCool;
         }
@@ -1497,6 +1505,9 @@ public class EndersentServant extends com.Polarice3.Goety.common.entities.neutra
     public void die(DamageSource cause) {
         if (this.deathTime > 0) {
             super.die(cause);
+            if (!this.isDeadOrDying()) {
+                this.deathTime = 0;
+            }
         }
     }
 

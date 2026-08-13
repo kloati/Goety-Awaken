@@ -1,0 +1,39 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "minecraft:enchanted_book"
+  },
+  "craftType": "magic",
+  "soulCost": 256,
+  "duration": 8,
+  "ingredients": [
+    {
+      "item": "goetyawaken:soul_sapphire"
+    },
+    {
+      "item": "minecraft:chorus_flower"
+    },
+    {
+      "item": "goety:awakened_emerald_block"
+    },
+    {
+      "item": "minecraft:end_crystal"
+    },
+    {
+      "item": "minecraft:amethyst_cluster"
+    },
+    {
+      "item": "minecraft:echo_shard"
+    },
+    {
+      "item": "goety:forbidden_fragment"
+    },
+    {
+      "item": "goety:void_eye"
+    }
+  ],
+  "result": {
+    "item": "goetyawaken:ender_storage_book_sapphire"
+  }
+}

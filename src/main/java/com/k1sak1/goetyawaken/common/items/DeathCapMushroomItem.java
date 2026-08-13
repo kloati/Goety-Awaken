@@ -56,15 +56,7 @@ public class DeathCapMushroomItem extends Item {
         }
 
         if (entityLiving != null) {
-            Random random = new Random();
-            int soundChoice = random.nextInt(3);
-            SoundEvent selectedSound = switch (soundChoice) {
-                case 0 -> ModSounds.DEATHCAPMUSHROOMEAT1.get();
-                case 1 -> ModSounds.DEATHCAPMUSHROOMEAT2.get();
-                case 2 -> ModSounds.DEATHCAPMUSHROOMEAT3.get();
-                default -> ModSounds.DEATHCAPMUSHROOMEAT1.get();
-            };
-            entityLiving.playSound(selectedSound, 1.0F, 1.0F);
+            entityLiving.playSound(ModSounds.DEATHCAPMUSHROOMEAT.get(), 1.0F, 1.0F);
         }
 
         return stack;
