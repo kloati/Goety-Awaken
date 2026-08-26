@@ -1,0 +1,19 @@
+{
+  "name": "腫れ防止ペンダント",
+  "icon": "goetyawaken:swelling_pendant",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "飢餓ペンダントが腐肉を貪り食って装着者の栄養源とするのと同様に、この膨張ペンダントも同じ原理で栄養を供給します。ただし、こちらはスライムボールを渇望し、装着者のスライムにスライムボールだけを与え、スライムを膨張させて成長させます。膨張ペンダントはインベントリからスライムボールを吸収して保管し、召喚時にスライムをはるかに大きくします。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:swelling_pendant",
+      "text": ""
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goetyawaken:swelling_pendant": 0
+  }
+}

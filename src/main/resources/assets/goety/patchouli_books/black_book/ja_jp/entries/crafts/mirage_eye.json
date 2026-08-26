@@ -5,12 +5,15 @@
   "pages": [
     {
       "type": "text",
-      "text": "蜃気楼を追跡するために用いられるアイ。"
+      "text": "ミラージュを追跡するために使用される目。"
     },
     {
       "type": "patchouli:crafting",
       "recipe": "goetyawaken:mirage_eye",
       "text": "ミラージュアイ"
     }
-  ]
+  ],
+  "extra_recipe_mappings": {
+    "goetyawaken:mirage_eye": 0
+  }
 }

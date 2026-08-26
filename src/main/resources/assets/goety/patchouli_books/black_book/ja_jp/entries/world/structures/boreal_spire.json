@@ -1,0 +1,18 @@
+{
+  "name": "ボリアルタワー",
+  "icon": "goety:snowy_highrock_bricks",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "伝説によれば、北の荒野の奥深く、永遠の夜の冷たい風の中にぽつんと立つ、孤独な塔があるという。時折通りかかる者も、立ち止まる勇気はなく、頭を垂れて足早に歩き去る。塔の中に隠された無数の宝物の存在を知っているのは、経験豊富な冒険者だけだ。"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "goetyawaken:textures/gui/boreal_spire.png"
+      ],
+      "border": true
+    }
+  ]
+}

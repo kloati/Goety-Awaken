@@ -1,0 +1,69 @@
+{
+  "name": "エンダーストレージ",
+  "icon": "goetyawaken:echoing_ender_shelf",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "エンドの空間特性を利用してアイテムを保管するというのは突飛な考えに聞こえるかもしれないが、エンダーチェストは既にその可能性を証明している。もちろん、あの小さな箱では闇の魔術師の野望を収めることはできない。あなたは、闇の魔術を駆使して、ネクロマンサーにふさわしい真のエンダーストレージ保管庫を作り出せることを発見したのだ。"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goetyawaken:ender_access_lectern",
+      "text": "エンダーアクセスレクターは、エンダーストレージネットワーク全体のコントローラー兼ターミナルとして機能します。ソウルエネルギーを供給するには、その下にトーテムまたはソウルトランスファーが入った呪われた檻が必要で、アクセス操作ごとに少量のソウルを消費します。このレクターには奇妙な空間特性があることに気づいたでしょう。半径2ブロック以内のエコーイングエンダーシェルフを自動的に検知して接続できるのです。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:ender_access_lectern",
+      "text": ""
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goetyawaken:echoing_ender_shelf",
+      "text": "アイテムを保管するために、特定のエンダーストレージブックを収納できる棚のような装置を設計しました。本の数が多いほど、エンダーストレージネットワークの容量が大きくなります。また、棚自体にも空きスロット数に応じたエンチャントボーナスがあり、本を2冊挿入するごとにエンチャントパワーが1ポイント増加します。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:echoing_ender_shelf",
+      "text": ""
+    },
+    {
+      "type": "text",
+      "text": "高度なエンダーストレージネットワークを、昔ながらの木製チェストよりも真に優れたものにするには、エンダーストレージブックを作成する必要があります。これらの本はストレージネットワークに容量を提供し、機能させるにはエコーイングエンダーシェルフに設置する必要があります。ストレージネットワークを拡張したい場合は、さらに多くの本を作成するか、既存の本をアップグレードすることもできます。高品質の本ほど、より大きなストレージ容量を提供します。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:ender_storage_book/ender_storage_book_iron_0",
+      "text": "なぜ本は物を保管できるのか？もちろん、黒魔術のおかげだ。驚きだろう？"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:ender_storage_book/ender_storage_book_gold_0",
+      "text": ""
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:ender_storage_book/ender_storage_book_emerald_0",
+      "text": ""
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:ender_storage_book/ender_storage_book_diamond_0",
+      "text": ""
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:ender_storage_book/ender_storage_book_sapphire_0",
+      "text": ""
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goetyawaken:ender_storage_book_gold": 0,
+    "goetyawaken:ender_access_lectern": 0,
+    "goetyawaken:echoing_ender_shelf": 0,
+    "goetyawaken:ender_storage_book_emerald": 0,
+    "goetyawaken:ender_storage_book_iron": 0,
+    "goetyawaken:ender_storage_book_sapphire": 0,
+    "goetyawaken:ender_storage_book_diamond": 0
+  }
+}

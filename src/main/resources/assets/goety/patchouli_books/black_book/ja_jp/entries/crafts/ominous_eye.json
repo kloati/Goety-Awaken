@@ -1,16 +1,19 @@
 {
-  "name": "オミナスアイ",
+  "name": "不吉な目",
   "icon": "goetyawaken:ominous_eye",
   "category": "goety:goetyawaken_crafts",
   "pages": [
     {
       "type": "text",
-      "text": "不吉な城を追跡するために用いられるアイ。"
+      "text": "不吉な城を追跡するために使われる目。"
     },
     {
       "type": "patchouli:crafting",
       "recipe": "goetyawaken:ominous_eye",
-      "text": "オミナスアイ"
+      "text": "不吉な目"
     }
-  ]
+  ],
+  "extra_recipe_mappings": {
+    "goetyawaken:ominous_eye": 0
+  }
 }

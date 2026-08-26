@@ -1,0 +1,18 @@
+{
+  "name": "廃墟の塔",
+  "icon": "goety:crag_bricks",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "長らく放棄された前哨基地。その麓には暗紫色の虚無が広がり、かつてここに駐屯していた者たちの遺体は腐食して頭蓋骨だけになっている。今や塔は空っぽで、虚無から来た生物が今もその壁の中に潜んでいるかどうかは誰にもわからない。"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "goetyawaken:textures/gui/abandoned_tower.png"
+      ],
+      "border": true
+    }
+  ]
+}

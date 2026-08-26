@@ -5,12 +5,15 @@
   "pages": [
     {
       "type": "text",
-      "text": "この黒曜石の大剣もまた、クレイモアと同様に「真のなぎ払い」の極致を繰り出すことができる。ダークメタルを以て鍛え上げられたこの刃は、ソウルエネルギーを糧として自らを修復する力を備えている。その一撃は重厚であるのみならず、犠牲者に「ウェイン」の呪いをもたらし、その生気を削ぎ落とす。どれほど厚いシュルカーの殻であっても、この剣の前では無に等しく、容易く断ち切ることができると言い伝えられている。"
+      "text": "This obsidian greatsword can also perform the art of True Sweep like the claymore. Forged with dark metal, it harnesses soul energy to repair itself. Its attacks are not only heavy, but also inflict the Wane effect upon victims. It is said to be capable of cleaving through even the thickest shulker shells with ease."
     },
     {
       "type": "goety:ritual",
       "recipe": "goetyawaken:obsidian_claymore",
       "text": ""
     }
-  ]
+  ],
+  "extra_recipe_mappings": {
+    "goetyawaken:obsidian_claymore": 0
+  }
 }

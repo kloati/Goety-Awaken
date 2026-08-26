@@ -1,6 +1,6 @@
 {
-  "name": "探索",
-  "description": "この地は、我が知る世界とはあまりにかけ離れているようだ……。",
+  "name": "探査",
+  "description": "この世界は、私が知っている世界とは全く違う…。",
   "icon": "minecraft:map",
   "sortnum": 5,
   "parent": "goety:goetyawaken"

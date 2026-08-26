@@ -1,0 +1,19 @@
+{
+  "name": "ダークソウルキャンドル",
+  "icon": "goetyawaken:dark_soul_candle",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "ソウルキャンドルは、特にダークメタルの鍛造やウィッチブリューの調合において、あまりにも動作が遅いと感じていたことでしょう。この苦痛な作業を加速させる唯一の方法は、圧倒的な量を使うことでした。面倒ながらも必要な実験を重ねた結果、より効率的なキャンドルを開発することに成功しました。このキャンドルは、従来の8倍の速度で装置にソウルエネルギーを供給します！"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:dark_soul_candle",
+      "text": "効率こそが命！"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goetyawaken:dark_soul_candle": 0
+  }
+}

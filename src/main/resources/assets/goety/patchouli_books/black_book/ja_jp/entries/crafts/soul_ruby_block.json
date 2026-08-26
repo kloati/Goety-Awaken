@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "ソウルルビーブロックは、魂のルビーを固く圧縮して造り上げられたものだ。魂のルビーは災厄の王家によって独占されている。$(playername)よ、これほどまでのルビーを手に入れるために、汝は一体どれほどの王族を屠ってきたというのだ？"
+      "text": "ソウルルビーブロックは、ソウルルビーをぎっしりと圧縮して作られています。ソウルルビーは災厄王家が独占しています。$(playername)、あなたはそれを手に入れるために王家の人間を何人殺したのですか？"
     },
     {
       "type": "patchouli:crafting",
@@ -15,7 +15,10 @@
     {
       "type": "patchouli:crafting",
       "recipe": "goetyawaken:soul_ruby_from_block",
-      "text": "ソウルルビーブロックから魂のルビーを取り出す。"
+      "text": "ソウルルビーブロックからソウルルビーを入手してください。"
     }
-  ]
+  ],
+  "extra_recipe_mappings": {
+    "goetyawaken:soul_ruby_block": 0
+  }
 }

@@ -1,0 +1,18 @@
+{
+  "name": "夜の儀式",
+  "icon": "goety:infernal_tome",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "古代のポータルの遺跡の傍らに、五つの黒曜石のモノリスが墓石のように立っている。暗金色の模様で飾られたローブをまとった異端者たちが、もはや大地を堕落させるだけでは満足せず、冥界から強力な存在を呼び戻そうと、一斉に詠唱している。近づく者は皆、闇の奥底から響く心臓の鼓動のような囁き声を聞く。"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "goetyawaken:textures/gui/nocturnal_rite.png"
+      ],
+      "border": true
+    }
+  ]
+}

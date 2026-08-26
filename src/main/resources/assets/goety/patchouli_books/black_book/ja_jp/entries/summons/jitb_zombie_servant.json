@@ -1,0 +1,16 @@
+{
+  "name": "ジャック・イン・ザ・ボックス・ゾンビ",
+  "icon": "goetyawaken:jitb_zombie_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "これらのゾンビは、びっくり箱を持った敵に突進し、その後…自爆する？いずれにせよ、クリーパーフォーカスをネクロスタッフを通してチャネリングすることで召喚できる。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:jitb_zombie_servant",
+      "text": "植物 vs. ゾンビ"
+    }
+  ]
+}

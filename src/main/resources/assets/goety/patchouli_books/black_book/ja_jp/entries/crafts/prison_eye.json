@@ -1,16 +1,19 @@
 {
-  "name": "プリズンアイ",
+  "name": "プリズン・アイ",
   "icon": "goetyawaken:prison_eye",
   "category": "goety:goetyawaken_crafts",
   "pages": [
     {
       "type": "text",
-      "text": "混沌の牢獄を追跡するために用いられるアイ。"
+      "text": "混沌の監獄を追跡するために用いられる目。"
     },
     {
       "type": "patchouli:crafting",
       "recipe": "goetyawaken:prison_eye",
-      "text": "プリズンアイ"
+      "text": "プリズン・アイ"
     }
-  ]
+  ],
+  "extra_recipe_mappings": {
+    "goetyawaken:prison_eye": 0
+  }
 }

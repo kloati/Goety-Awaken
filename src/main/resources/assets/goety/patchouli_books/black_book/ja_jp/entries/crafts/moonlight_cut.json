@@ -1,0 +1,20 @@
+{
+  "name": "ムーンライトカット",
+  "icon": "goetyawaken:moonlight_cut",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "伝説によれば、名もなき王国の精鋭たちが振るうグレイブは、夜空の月光さえも切り裂く力を持っていたという。不死の覇王の配下である後衛部隊の標準装備を模倣し、前巻に記された概念と特定の闇の魔法素材を組み合わせることで、あなたは独自の儀式によってこの武器を再現することに成功した。それは、速度と威力を兼ね備えた武器であり、魔法剣の焦点のように、遠距離攻撃用の複製を発射することもできる。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:moonlight_cut",
+      "text": ""
+    }
+  ],
+  "advancement": "goety:goety/read_front_scroll",
+  "extra_recipe_mappings": {
+    "goetyawaken:moonlight_cut": 0
+  }
+}

@@ -1,16 +1,19 @@
 {
-  "name": "凝視のフォーカス",
+  "name": "視線を集中させる",
   "icon": "goetyawaken:stare_focus",
   "category": "goety:goetyawaken_focuses",
   "pages": [
     {
       "type": "text",
-      "text": "虚空に住まうエンダーマンたちは、汝に力を貸すことを厭わぬようだ。……もっとも、彼らは戦うことよりも、物を運ぶことにかけてその才を発揮するようだがな。"
+      "text": "虚無のエンダーマンたちは、あなたを助けてくれるでしょう。もしかしたら、彼らは戦闘よりも物を動かすことに長けているのかもしれませんね？"
     },
     {
       "type": "goety:ritual",
       "recipe": "goetyawaken:stare_focus",
-      "text": "凝視のフォーカスを作成する。"
+      "text": "視線集中力を鍛える。"
     }
-  ]
+  ],
+  "extra_recipe_mappings": {
+    "goetyawaken:stare_focus": 0
+  }
 }

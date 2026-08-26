@@ -1,0 +1,18 @@
+{
+  "name": "裁判終了",
+  "icon": "goety:void_block",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "エンドシティとは異なる、小さなキャンプがエンドの各地に点在しているという話を聞いたことがあるだろうか？ それらは、もっと重要な何かの前哨基地として機能しているのかもしれない。"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "goetyawaken:textures/gui/endersent_in_end.png"
+      ],
+      "border": true
+    }
+  ]
+}

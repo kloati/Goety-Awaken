@@ -1,0 +1,22 @@
+{
+  "name": "『Blade of Dusk』 ロザリン",
+  "icon": "meetyourfight:dusk_key",
+  "category": "goety:goetyawaken_summons",
+  "flag": "goetyawaken:meetyourfight_loaded",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "『Blade of Dusk』 ロザリン――バラを剣として振るう古代の戦士。あなたが夕暮れを越え、彼女とバラとの最後の繋がりを断ち切った時、この戦士の残された意志はついに、より偉大な力の前に屈服した。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:rosalyne_servant",
+      "text": "黄昏の鍵に宿る黄昏の残滓を通して、あなたは儀式によってこの薔薇に縛られた戦士を再びこの世界に呼び戻したのです。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:rosalyne_servant",
+      "text": "かつて彼女は剣であなたの命を測った。今、彼女はその剣であなたの玉座を守っている。"
+    }
+  ]
+}

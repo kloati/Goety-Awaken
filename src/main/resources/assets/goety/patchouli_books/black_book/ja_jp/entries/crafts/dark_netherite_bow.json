@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "ダークメタルインゴット、金、そしてネザライトを以て鍛え上げられた強弓。弦を引き絞るには並外れた剛力を要するが、それはこの弓が秘める強大な威力の証左でもある。放たれた矢に射抜かれた生物は「ウェイン」の呪いに蝕まれ、その力を削ぎ落とされるだろう。"
+      "text": "この弓はダークインゴット、金、ネザライトから鍛造されている。引き絞るには並外れた力が必要であり、それはより大きな力を象徴している。この弓の矢に当たった生物は衰弱状態になる。"
     },
     {
       "type": "goety:ritual",
@@ -13,5 +13,8 @@
       "text": ""
     }
   ],
-  "advancement": "goety:goety/craft_dark_ingot"
+  "advancement": "goety:goety/craft_dark_ingot",
+  "extra_recipe_mappings": {
+    "goetyawaken:dark_netherite_bow": 0
+  }
 }

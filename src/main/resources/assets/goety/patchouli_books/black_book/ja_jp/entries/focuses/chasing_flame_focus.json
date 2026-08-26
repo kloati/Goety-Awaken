@@ -1,0 +1,19 @@
+{
+  "name": "炎を追い求めるフォーカス",
+  "icon": "goetyawaken:chasing_flame_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "巨大ガストの側面から吐き出される追尾火球は、計り知れないほど厄介で、戦闘で大きな障害となる。グローミーティアーズを入手した後、あなたは思わず、そのような火球を再現できないかと考えを巡らせた。そしてついに、追尾火球を発射できるチェイシングフレイムフォーカスを手に入れたのだ。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:chasing_flame_focus",
+      "text": ""
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goetyawaken:chasing_flame_focus": 0
+  }
+}

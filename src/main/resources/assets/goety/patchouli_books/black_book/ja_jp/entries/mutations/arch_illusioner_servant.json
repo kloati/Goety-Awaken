@@ -1,0 +1,25 @@
+{
+  "name": "大幻術師の従者",
+  "icon": "goety:illusion_focus",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "暗黒の館から遠く離れた地で技を磨いた熟練の幻術師たちは、幻術の熟練度だけでなく、あらゆる面で同族の凡庸な者たちを凌駕している。幻術魔法の基礎しか理解していない見習いとは異なり、大幻術師は孤独を愛する恐るべき弓使いでもある。彼らは未熟な脆さを脱ぎ捨て、鋭敏で狡猾、そして極めて攻撃的な存在へと変貌を遂げたのだ。"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "彼らは魔法の花火矢を詰めた矢筒を携え、戦闘中に美しくも致命的な爆発矢を放つことができる。同時に、複数の幻影の分身を召喚する。花火と神秘的な幻影に紛れて容易に姿を消し、影から次の待ち伏せを企てるのだ。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:arch_illusioner_servant",
+      "text": "儀式を通して、幻術師を大幻術師の従者へと変貌させる。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:arch_illusioner_servant",
+      "text": ""
+    }
+  ]
+}

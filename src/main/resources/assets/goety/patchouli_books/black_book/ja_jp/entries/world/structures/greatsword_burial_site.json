@@ -1,0 +1,18 @@
+{
+  "name": "大剣埋葬地",
+  "icon": "goety:dark_sword",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "大剣埋葬地は、地下の最も深い闇の中に佇んでいると言われている。そこには、誰も振るうことのできない伝説の大剣が、石の台座に埋め込まれている。伝説によれば、この剣は魂そのものを断ち切る力を持つという。しかし、千年もの間、力ずくであろうと神秘的な力であろうと、誰もその厳めしい守護者から剣を奪い取ることができなかった。"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "goetyawaken:textures/gui/greatsword_burial_site.png"
+      ],
+      "border": true
+    }
+  ]
+}

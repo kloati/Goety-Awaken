@@ -1,0 +1,7 @@
+{
+  "name": "古代のささやき",
+  "description": "噂や伝説に語られる、あの強力な古代の存在たちの隠された秘密…。",
+  "icon": "goetyawaken:glowing_ember",
+  "parent": "goety:goetyawaken_world",
+  "sortnum": 1
+}

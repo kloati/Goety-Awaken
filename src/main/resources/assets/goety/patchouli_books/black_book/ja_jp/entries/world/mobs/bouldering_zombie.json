@@ -1,0 +1,16 @@
+{
+  "name": "ボルダリングゾンビ",
+  "icon": "goetyawaken:bouldering_zombie_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "より強く、より速く、より強い山岳ゾンビ。普通のゾンビでは到底登れないような険しい崖も、難なく登り切ることができる。他のゾンビが羨むほどの運動能力以外に、特に際立った特徴はないようだ。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:bouldering_zombie",
+      "text": "登山のエキスパート"
+    }
+  ]
+}

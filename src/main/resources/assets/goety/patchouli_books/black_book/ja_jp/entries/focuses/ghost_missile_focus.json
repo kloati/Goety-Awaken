@@ -1,0 +1,20 @@
+{
+  "name": "ゴーストミサイルフォーカス",
+  "icon": "goetyawaken:ghost_missile_focus",
+  "category": "goety:goetyawaken_focuses",
+  "flag": "goetyawaken:meetyourfight_loaded",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "標的に向かって幽霊ミサイルを発射する。呪文発動中に忍び寄ると、異なる弾幕を放つ。鐘つきの霊魂から凝縮されたこれらの強力な魔法ミサイルは、魂を操る魔法使いにとって優れた攻撃手段となる。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:ghost_missile_focus",
+      "text": ""
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goetyawaken:ghost_missile_focus": 0
+  }
+}

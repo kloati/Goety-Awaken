@@ -1,0 +1,16 @@
+{
+  "name": "喉が渇いた",
+  "icon": "goetyawaken:parched_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "砂漠の古代の住人たちは、あなたに対する長年の憎しみを晴らす方法を見つけたようだ。砂漠の強烈な熱で焼け焦げたこれらの骸骨は、あなたの腕を弱く無力にする矢を放つ。そして、まるで殻のように、日光の下では燃えない。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:parched",
+      "text": "砂漠に新たな脅威が出現。"
+    }
+  ]
+}

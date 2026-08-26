@@ -1,0 +1,22 @@
+{
+  "name": "デイム・フォルトゥナ",
+  "icon": "meetyourfight:devils_ante",
+  "category": "goety:goetyawaken_summons",
+  "flag": "goetyawaken:meetyourfight_loaded",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "運命の女神フォルトゥナは、幸運の女神の寵児――あなたに出会うまでは、賭けに負けたことなど一度もなかった。彼女が最も誇りとしていたことで打ち負かした後、あなたは彼女を味方につける方法を考え始めた。持ち前の才覚を発揮し、あなたはついに彼女のような悪魔と契約を結ぶ方法を発見した。彼女があなたに再び賭けで勝つ前に（ご存じの通り、それはあなたにとって不可能なことだが）、彼女はあなたに仕えなければならないのだ。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:dame_fortuna_servant",
+      "text": ""
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:dame_fortuna_servant",
+      "text": "彼女はあなたにもう一度勝ちたいと思っているんです。"
+    }
+  ]
+}

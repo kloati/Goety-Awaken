@@ -1,17 +1,20 @@
 {
-  "name": "フェアリーのフォーカス",
+  "name": "フェアリーフォーカス",
   "icon": "goetyawaken:fairy_focus",
   "category": "goety:goetyawaken_focuses",
   "flag": "goetyawaken:touhou_little_maid_loaded",
   "pages": [
     {
       "type": "text",
-      "text": "認めざるを得まい。この厄介でか細い小さな妖精どもは、お世辞にも戦闘に長けているとは言えぬが、その容姿だけは非の打ち所がない。メイドとの契約の儀式を研究した汝は、闇の魔術を用いてメイドフェアリーと契約するための儀式を再現することに成功した。今こそ、この美しき「飾り物」どもを働かせる時だ！"
+      "text": "確かに、これらの厄介でか弱い小さな妖精たちは、戦闘ではそれほど強くはないものの、見た目は完璧だ。契約メイドの儀式を研究した後、あなたは闇の魔法を使って妖精メイドと契約する儀式を再現した。さあ、これらの美しい花瓶を有効活用しよう！"
     },
     {
       "type": "goety:ritual",
       "recipe": "goetyawaken:fairy_focus",
-      "text": "異変を引き起こすか？"
+      "text": "インシデントを作成しますか？"
     }
-  ]
+  ],
+  "extra_recipe_mappings": {
+    "goetyawaken:fairy_focus": 0
+  }
 }

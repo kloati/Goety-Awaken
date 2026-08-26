@@ -1,0 +1,22 @@
+{
+  "name": "スワンプジョーの召使い",
+  "icon": "meetyourfight:fossil_bait",
+  "category": "goety:goetyawaken_summons",
+  "flag": "goetyawaken:meetyourfight_loaded",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "スワンプジョーは、古代の化石を器として沼地から「蘇生」したボス級のアンデッド生物です。沼地の束縛から解放されたことで、アンデッドとして浮遊や飛行が可能になり、体内から爆発性の沼地雷を生成することもできます。とはいえ、駆け出しの冒険者でも簡単に骨の破片に砕くことができるでしょう。$(br2) あなたのようなネクロマンサーにとって、この化石化した骨格を奴隷にするのは、手を振るだけで済みます。この生物はまだ侮れない存在ですが、空中爆撃機として、また戦場での邪魔な存在として、その役割を十分に果たします。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:swampjaw_servant",
+      "text": ""
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:swampjaw_servant",
+      "text": "古生物学者なら高く評価するかもしれない。"
+    }
+  ]
+}

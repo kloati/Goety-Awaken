@@ -1,0 +1,19 @@
+{
+  "name": "バーニングシールドフォーカス",
+  "icon": "goetyawaken:burning_shield_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "ワイルドファイアのシールドはブレイズのブレイズロッドの派生形かもしれないが、いずれにせよ、ワイルドファイアに驚異的な防御力を与える。あなた自身もワイルドファイアを創造した後、あなたはついにこれらの危険な生物に安全に接近し、さらに研究を進めることができた。間もなく、あなたはワイルドファイアが燃えるシールドを再生する秘密を解き明かし、秘術を用いてこの知識を一つの焦点へと固めた。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:burning_shield_focus",
+      "text": "術者を守るために燃える盾を召喚する。"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goetyawaken:burning_shield_focus": 0
+  }
+}

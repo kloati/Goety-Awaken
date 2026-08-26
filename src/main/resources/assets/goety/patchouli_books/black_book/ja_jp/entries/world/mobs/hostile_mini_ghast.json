@@ -1,0 +1,16 @@
+{
+  "name": "敵対的なミニガスト",
+  "icon": "goetyawaken:hostile_mini_ghast_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "ネザーの環境に適応するため小型化へと進化を遂げたガスト族の亜種。大型のガストと同様、ミニガストも決して友好的とは言えず、体中が通常のガストと同じように燃え盛る炎で満たされている。とはいえ、この小さな白い爆弾魔が顔面に火の玉を投げつけてくるまでは、可愛らしいと思えるかもしれない。吐き出す火の玉の威力は大型のガストほどではないものの、その猛烈な攻撃は、より執拗な頭痛の種となるだろう。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_mini_ghast",
+      "text": ""
+    }
+  ]
+}

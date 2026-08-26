@@ -1,0 +1,18 @@
+{
+  "name": "プリスティン・シャック",
+  "icon": "goety:witch_cauldron",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "趣のある小さな小屋。そこは、若い魔女と魔法使いのカップルが暮らす居心地の良い家だった。しかし、彼らは知る由もない。老婆が水晶玉を通して、彼らの日常を密かに見守っていることを。"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "goetyawaken:textures/gui/pristine_shack.png"
+      ],
+      "border": true
+    }
+  ]
+}

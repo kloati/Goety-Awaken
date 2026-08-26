@@ -1,0 +1,16 @@
+{
+  "name": "敵対的なスナッパー",
+  "icon": "goetyawaken:hostile_snapper_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "多くの人が想像するように、ピラニアは凶暴で攻撃的という評判に決して裏切らない。陸上では黒いオオカミの群れが協力して狩りをするが、この恐ろしい黒い魚は水面下で独自の捕食活動を行うのだ。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_snapper",
+      "text": ""
+    }
+  ]
+}

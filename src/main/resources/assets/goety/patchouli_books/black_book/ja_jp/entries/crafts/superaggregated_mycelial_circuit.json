@@ -1,11 +1,11 @@
 {
-  "name": "超集積菌糸回路",
+  "name": "超凝集菌糸回路",
   "icon": "goetyawaken:superaggregated_mycelial_circuit",
   "category": "goety:goetyawaken_crafts",
   "pages": [
     {
       "type": "text",
-      "text": "特異な手法で集積され、ムーシュルームの怪物の肉体と深く融合したこれらの菌糸は、独自の生態系を形作っている。それゆえ、さらなる増殖を試みることは至難の業であった。この貴重な素材が失われゆく運命に抗うべく、汝はこの難題に立ち向かう決意をしたのだ。そしてついに「支配のスクロール」から着想を得た汝は、既存の「超集積菌糸回路」を設計図とし、新たなる回路を寸分違わず複製するという、奇跡の如き技法を体得したのである！"
+      "text": "これらの菌糸体は、独特な方法で凝集し、ムーシュルーム・モンストロシティの構成要素と深く融合することで、独自の生態系を形成しており、増殖は極めて困難になっています。これらが再生不可能な資源となるのを防ぐため、あなたは挑戦することにしました。そしてついに、あなたはドミナンス・スクロールからインスピレーションを得て、別の超凝集菌糸体回路の設計図に基づいて、一つの回路を正確に構築するという驚異的な技術を習得したのです！"
     },
     {
       "type": "goety:ritual",
@@ -13,5 +13,8 @@
       "text": ""
     }
   ],
-  "advancement": "goetyawaken:royal_research_completed"
+  "advancement": "goetyawaken:royal_research_completed",
+  "extra_recipe_mappings": {
+    "goetyawaken:superaggregated_mycelial_circuit": 0
+  }
 }

@@ -1,16 +1,16 @@
 {
-  "name": "シルバーフィッシュの従者",
+  "name": "シミの召使い",
   "icon": "goetyawaken:silverfish_spawn_egg",
   "category": "goety:goetyawaken_summons",
   "pages": [
     {
       "type": "text",
-      "text": "石の裂け目に潜む、小さき虫けらども。"
+      "text": "石の隙間にいる小さな虫たち。"
     },
     {
       "type": "patchouli:entity",
       "entity": "goetyawaken:silverfish_servant",
-      "text": "シルバーフィッシュの従者は、汝の命に従い敵に群がり戦うだろう。"
+      "text": "シミのしもべたちがあなたのために戦います。"
     }
   ]
 }

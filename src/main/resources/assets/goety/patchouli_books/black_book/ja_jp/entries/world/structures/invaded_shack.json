@@ -1,0 +1,18 @@
+{
+  "name": "侵入された小屋",
+  "icon": "goety:silt_marble",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "道端に佇む廃屋は、崩れ落ち、打ち捨てられ、生命の気配は全く感じられない。虚無の腐敗が下から忍び寄り、既に住居の半分を飲み込んでいる。もし当時、研究者たちが成功していれば、この場所はこれほど荒廃することはなかったかもしれない。"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "goetyawaken:textures/gui/invaded_shack.png"
+      ],
+      "border": true
+    }
+  ]
+}

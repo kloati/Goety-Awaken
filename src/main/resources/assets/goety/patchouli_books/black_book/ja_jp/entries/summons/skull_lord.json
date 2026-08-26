@@ -1,0 +1,17 @@
+{
+  "name": "スカルロードの従者",
+  "icon": "goetyawaken:ally_pithos",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "死者を蘇生アンカーで固定する技術と、ネクロマンサーを生み出す技にあなたは感銘を受けました。墓王の陶器のピトスを器として用い、あなた自身の髑髏王のしもべを作り上げました。もし王が倒れたとしても、残された陶器のピトスに蘇生アンカーをかけるだけで、再び死から蘇らせることができるのです。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:skull_lord_servant",
+      "text": "超越を達成できなかった死者たち…"
+    }
+  ],
+  "advancement": "goety:goety/unlock_necromancer"
+}

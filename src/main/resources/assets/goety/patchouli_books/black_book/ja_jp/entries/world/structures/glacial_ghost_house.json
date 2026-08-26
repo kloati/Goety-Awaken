@@ -1,0 +1,18 @@
+{
+  "name": "氷河の幽霊屋敷",
+  "icon": "minecraft:spruce_log",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "噂によると、凍てついた海の底には、亡霊のネクロマンサーが徘徊する凍った遺跡があるという。この異様な幽霊は、まるで幽霊のように素早く動き、侵入者に不意に近づき、殺害する。手に持った杖からは、氷の炎を燃え上がらせる極寒のゴーストレイを放つことができ、また、青白い幻影を召喚することもできる。漁師の中には、これは闇に沈むことを拒む古代の幽霊たちが作り出したもので、彼らはそれを足がかりとして、集めた魂を静かに処理しているのだと語る者もいる。"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "goetyawaken:textures/gui/glacial_ghost_house.png"
+      ],
+      "border": true
+    }
+  ]
+}

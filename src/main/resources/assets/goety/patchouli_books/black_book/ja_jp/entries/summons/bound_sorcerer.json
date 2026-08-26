@@ -1,0 +1,16 @@
+{
+  "name": "束縛された魔術師",
+  "icon": "goety:soul_emerald",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "すでにアンデッドのイラジャー魔法使いの作り方を習得したあなたは、自分のソーサラーもアンデッド魔法使いに変えてみませんか？ 名もなきセットを身に着けている間に、ソーサラーがちょっとした事故に遭うように仕向けるだけで、不吉な偶像から束縛されたソーサラーを蘇らせることができます。彼らは以前のレベルを維持し、足がないため空を飛ぶことができます！"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:bound_sorcerer",
+      "text": "黒魔術師よ、待っていろ！覚悟しておけ！"
+    }
+  ]
+}

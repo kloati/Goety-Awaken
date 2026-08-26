@@ -1,0 +1,18 @@
+{
+  "name": "咆哮のガントレット",
+  "icon": "goety:jade",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "咆哮の試練は、その麓に住む村人たちによって畏敬の念を込めて「山の神の怒り」と呼ばれている。彼らは、山の神の化身が雪に覆われた峰々から風吹き荒れる世界を永遠に見守っていると信じており、そのため、あえて登ろうとするよそ者を阻んでいる。ハントスイッチ族でさえ、伝統を重んじるあまり、決してこの山に足を踏み入れなかったと言われている。"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "goetyawaken:textures/gui/gauntlet_of_howling.png"
+      ],
+      "border": true
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "レッドストーンクラスター",
+  "icon": "goetyawaken:redstone_cluster",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "見た目はなかなか良い装飾用のレッドストーン回路だが、囚人たちはきっとそうは思わないだろう。"
+    },
+    {
+      "type": "patchouli:stonecutting",
+      "recipe": "goetyawaken:redstone_cluster/redstone_cluster_1_1",
+      "text": "囚人：悲惨の記憶"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goetyawaken:redstone_cluster": 0
+  }
+}

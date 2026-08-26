@@ -1,0 +1,16 @@
+{
+  "name": "ゾンビ・ダークガード",
+  "icon": "goetyawaken:zombie_darkguard_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "これらの腐敗した死体は重厚な鎧に身を包んでいるが、それは侵入者に対する彼らの憎しみや肉への渇望に何ら影響を与えるものではない。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:zombie_darkguard",
+      "text": "侮ってはいけない相手だ！"
+    }
+  ]
+}

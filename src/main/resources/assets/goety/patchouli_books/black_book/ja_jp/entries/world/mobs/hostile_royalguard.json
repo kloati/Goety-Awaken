@@ -1,0 +1,16 @@
+{
+  "name": "敵対的な王室警備隊",
+  "icon": "goetyawaken:hostile_royalguard_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "ロイヤルガードは、ヴィンディケーターから昇進した精鋭の衛兵で、通常は重要な戦略拠点に配置されるか、王族の警護にあたっています。彼らは重装甲を身に着け、盾とメイスを携えているため、倒すのは困難です。盾を破壊しない限り、あなたの攻撃は彼らにダメージを与えません。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_royalguard",
+      "text": "これらの精鋭戦士には要注意！"
+    }
+  ]
+}

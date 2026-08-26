@@ -1,0 +1,32 @@
+{
+  "name": "星のない夜",
+  "icon": "goetyawaken:starless_night",
+  "category": "goety:goetyawaken_crafts",
+  "advancement": "goety:goety/kill_an_ender_keeper",
+  "secret": true,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "星なき夜は、漆黒の刃の中に痛みの残響が宿っていると言われている。この恐るべきクレイモアは、収集した希少な宝物や珍品を用いて黒曜石のクレイモアを強化することで入手できる。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:starless_night"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "黒曜石のクレイモアのすべての機能を備えているだけでなく、この剣は虚無のエネルギーを注入した刃のような気流を放ち、対象に「虚無に触れた」効果を与えることができる。攻撃ダメージが対象の残り体力を超えた場合、超過ダメージは周囲の生物に転移する。"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "ある種の秘術的な理由により、このクレイモアは杖に挿入して魔法を発動させることができ、フォーカスのような働きをする。ヴォイドスタッフに装着すると、レイザーウィンドフォーカスを彷彿とさせるヴォイドスラッシュを放つ。ヴォイドスタッフと併用しない場合は、エンドウォークフォーカスとして機能する。"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "自己修復のために魂のエネルギーを吸収することができる。"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goetyawaken:starless_night": 0
+  }
+}

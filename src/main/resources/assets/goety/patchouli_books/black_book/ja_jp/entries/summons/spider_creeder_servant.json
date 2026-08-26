@@ -1,0 +1,21 @@
+{
+  "name": "スパイダー・クリーダーの召使い",
+  "icon": "goetyawaken:hostile_spider_creeder_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "クリーパーとスパイダーが融合したような姿をしたこれらの生物は、非常に優れた従者です。その爆発は素早く、敵を炎上させ弱体化させる能力を持っています。熟練した冥界の儀式によって、忠実なスパイダー・クリーダーの従者を召喚することができます。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:spider_creeder_servant",
+      "text": "冥界の荒々しい力は、爆発の技術を極限まで高める方法をあなたに教えてくれた。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:spider_creeder_servant",
+      "text": "スパイダー・クリーダーのしもべたちは、激しい爆発とともにあなたのために戦います。"
+    }
+  ]
+}

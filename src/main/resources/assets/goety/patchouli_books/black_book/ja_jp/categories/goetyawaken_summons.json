@@ -1,6 +1,6 @@
 {
   "name": "召喚",
-  "description": "闇の魔術師に仕える従者もまた、闇に染まりし者たちなのだ。",
+  "description": "闇の魔法使いのしもべたちもまた、闇の存在だ。",
   "icon": "minecraft:zombie_head",
   "sortnum": 2,
   "parent": "goety:goetyawaken"

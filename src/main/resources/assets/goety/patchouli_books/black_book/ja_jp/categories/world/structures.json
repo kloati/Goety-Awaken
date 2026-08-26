@@ -1,0 +1,7 @@
+{
+  "name": "構造物",
+  "description": "この世界の建物と場所。",
+  "icon": "minecraft:bricks",
+  "parent": "goety:goetyawaken_world",
+  "sortnum": 0
+}

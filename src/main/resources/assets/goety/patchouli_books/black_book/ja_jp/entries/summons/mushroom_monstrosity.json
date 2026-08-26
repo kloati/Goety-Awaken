@@ -1,34 +1,47 @@
 {
-  "name": "ムーシュルーム・モンスターズ",
+  "name": "ムーシュルーム・モンストロシティ",
   "icon": "goetyawaken:mushroom_monstrosity_spawn_egg",
   "category": "goety:goetyawaken_summons",
   "pages": [
     {
       "type": "text",
-      "text": "「支配のスクロール」を極めし今、もはやレッドストーンを以て怪物を造り上げるだけでは、汝の野心を充たすことはできぬ。混沌の牢獄に座す真菌の怪物を討ち果たした際、汝はその「試作機」が放つ剥き出しの力と暴力に深く心酔した。古の知恵は今や、その手を伸ばせば届くところにあるのだ。"
+      "text": "支配の巻物を完全に使いこなせるようになった今、レッドストーンで怪物を作り出すだけでは、もはやあなたの野望は満たされないでしょう。混沌の牢獄に潜む菌類の怪物を破壊した後、あなたはプロトタイプの圧倒的な力と暴力性に深く畏敬の念を抱きました。古代の叡智が、今やあなたの手の届くところにあるように思えるのです。"
     },
     {
       "type": "text",
-      "text": "あの怪物から剥ぎ取った回路を手に入れ、三つの次元の力を掌握した汝は、各次元の素材と……いくらかのキノコを融合させた奇怪な鋳型を造り上げた。この構造を前にして、次に何をなすべきか、汝は既に理解しているはずだ。"
+      "text": "あの怪物から剥ぎ取った回路を手に入れ、三次元の力を操るあなたは、それらの次元の物質とある種のキノコを融合させた型を作り出した。この奇妙な型があれば、次に何をすべきかは既に分かっているはずだ。"
     },
     {
       "type": "image",
-      "images": ["goetyawaken:textures/gui/mushroom_monstrosity_1.png"],
+      "images": [
+        "goetyawaken:textures/gui/mushroom_monstrosity_1.png"
+      ],
       "border": true,
-      "title": "鋳型の第一層を構築する",
-      "text": "言うまでもなく、ガラスを配置する必要はない。"
+      "title": "金型の第一層を構築する",
+      "text": "もちろん、ガラスは必須ではありません。"
     },
     {
       "type": "image",
-      "images": ["goetyawaken:textures/gui/mushroom_monstrosity_2.png"],
+      "images": [
+        "goetyawaken:textures/gui/mushroom_monstrosity_2.png"
+      ],
       "border": true,
-      "title": "鋳型の第二層を構築する",
-      "text": "言うまでもなく、ガラスを配置する必要はない。"
+      "title": "金型の2層目を構築する",
+      "text": "もちろん、ガラスは必須ではありません。"
     },
     {
       "type": "patchouli:entity",
       "entity": "goetyawaken:mushroom_monstrosity",
-      "text": "汝自身の「試作機」を構築せよ！"
+      "text": "自分だけのプロトタイプを作ろう！"
+    },
+    {
+      "type": "image",
+      "images": [
+        "goetyawaken:textures/gui/mushroom_monstrosity_revive.png"
+      ],
+      "border": true,
+      "title": "復活",
+      "text": "お前の怪物が倒れた？それはなかなかの快挙だ。敵にとっては、という意味だが。"
     }
   ],
   "advancement": "goetyawaken:royal_research_completed"

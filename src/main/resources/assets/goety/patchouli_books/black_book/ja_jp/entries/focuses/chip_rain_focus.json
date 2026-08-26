@@ -1,0 +1,20 @@
+{
+  "name": "チップレインフォーカス",
+  "icon": "goetyawaken:chip_rain_focus",
+  "category": "goety:goetyawaken_focuses",
+  "flag": "goetyawaken:meetyourfight_loaded",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "術者は標的の敵にチップの弾幕を連続して発射できる。これは、デイム・フォルトゥナの必殺技を模倣したものである。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:chip_rain_focus",
+      "text": ""
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goetyawaken:chip_rain_focus": 0
+  }
+}

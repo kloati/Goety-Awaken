@@ -1,0 +1,16 @@
+{
+  "name": "アイスクリーパー",
+  "icon": "goetyawaken:ice_creeper_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "極寒の地に生息するクリーパーの亜種。霜の力によって巨大な氷の塊へと変貌し、今にも爆発しそうな状態にある。アイスクリーパーの爆発力は元のクリーパーほど強力ではないものの、その鋭い冷気はさらに致命的で、襲いかかった者は凍りついてしまう。寒冷なバイオームで遭遇した際は、特に注意が必要だ。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:ice_creeper",
+      "text": ""
+    }
+  ]
+}

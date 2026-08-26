@@ -1,0 +1,19 @@
+{
+  "name": "真実の探求者",
+  "icon": "goetyawaken:truth_seeker",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "あなたは、手に持つ暗殺用武器の真の力を引き出す方法を常に模索している。ある城の看守が囚人を尋問する際に、ある種の短剣を使うという話を聞いたことがある。イリジャーから略奪した素材と砂漠に棲むアンデッドが所持する破片を用いて、あなたはどんな敵でも従順に語らせることができるこの刃を鍛え上げた。傷ついた生物を苦しめるかのように、より深刻なダメージを与えるだけでなく、残酷にもその魂を肉体から引き剥がすことさえできるのだ！"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:truth_seeker",
+      "text": ""
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goetyawaken:truth_seeker": 0
+  }
+}

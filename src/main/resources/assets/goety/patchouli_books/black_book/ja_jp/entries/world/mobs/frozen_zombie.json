@@ -1,0 +1,16 @@
+{
+  "name": "フローズンゾンビ",
+  "icon": "goetyawaken:frozen_zombie_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "より冷酷で、雪玉を投げつけるゾンビ！パンチや雪玉攻撃で、相手に鈍足効果を与える。それ以外は、普通のゾンビと何ら変わりなく、特に変わったところはない。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:frozen_zombie",
+      "text": "雪合戦！"
+    }
+  ]
+}

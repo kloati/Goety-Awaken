@@ -1,0 +1,19 @@
+{
+  "name": "アサシングローブ",
+  "icon": "goetyawaken:assassin_glove",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "あなたのような闇の魔法使いにとって、敵を背後から仕留めることは決して不名誉な行為ではありません。しかし、短剣の威力のなさに、あなたはしばしば失望させられます。幾度かの試行錯誤を経て、あなたは短剣やポニアードをよりしっかりと握れる手袋を開発しました。この手袋を装着すれば、これらの卑劣な武器を難なく使いこなし、敵の背中を力強く突き刺すことができるのです。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:assassin_glove",
+      "text": ""
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goetyawaken:assassin_glove": 0
+  }
+}
