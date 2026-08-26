@@ -1,5 +1,5 @@
 {
-  "name": "亡霊の召使い",
+  "name": "ワイトの召使い",
   "icon": "goetyawaken:wight_spawn_egg",
   "category": "goety:goetyawaken_summons",
   "pages": [
@@ -14,7 +14,7 @@
     {
       "type": "goety:ritual",
       "recipe": "goetyawaken:wight_servant1",
-      "text": "複雑な儀式を通して、ワイトのしもべを召喚する。"
+      "text": "複雑な儀式を通して、ワイトの従者を召喚する。"
     },
     {
       "type": "goety:ritual",
@@ -24,7 +24,7 @@
     {
       "type": "patchouli:entity",
       "entity": "goetyawaken:wight_servant",
-      "text": "亡者のしもべたちは、あなたのために忠実に戦います。"
+      "text": "ワイトの従者たちは、あなたのために忠実に戦います。"
     }
   ]
 }

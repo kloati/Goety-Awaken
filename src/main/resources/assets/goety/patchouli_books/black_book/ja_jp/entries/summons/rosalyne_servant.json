@@ -1,12 +1,12 @@
 {
-  "name": "『Blade of Dusk』 ロザリン",
+  "name": "『黄昏の刃』 ロザリンの従者",
   "icon": "meetyourfight:dusk_key",
   "category": "goety:goetyawaken_summons",
   "flag": "goetyawaken:meetyourfight_loaded",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "『Blade of Dusk』 ロザリン――バラを剣として振るう古代の戦士。あなたが夕暮れを越え、彼女とバラとの最後の繋がりを断ち切った時、この戦士の残された意志はついに、より偉大な力の前に屈服した。"
+      "text": "『黄昏の刃』 ロザリン――バラを剣として振るう古代の戦士。あなたが夕暮れを越え、彼女とバラとの最後の繋がりを断ち切った時、この戦士の残された意志はついに、より偉大な力の前に屈服した。"
     },
     {
       "type": "goety:ritual",

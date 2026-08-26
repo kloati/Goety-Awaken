@@ -1,16 +1,16 @@
 {
-  "name": "疫病鯨石板の召使い",
+  "name": "疫病鯨石板の従者",
   "icon": "goetyawaken:plaguewhale_spawn_egg",
   "category": "goety:goetyawaken_mutations",
   "pages": [
     {
       "type": "text",
-      "text": "あのふざけた杖でトキシフィン・スラブ（ガーディアンの毒ジャガイモ版）を召喚した後、あなたはそれを使って別の種類のエルダー・ガーディアンを入手できるのではないかと考え始めた…。"
+      "text": "あのふざけた杖でトキシフィンの従者を召喚した後、あなたはそれを使って別の種類のエルダー・ガーディアンを入手できるのではないかと考え始めた…。"
     },
     {
       "type": "goety:ritual",
       "recipe": "goetyawaken:convert_toxifin_to_plaguewhale_slab_servant",
-      "text": "儀式を通して、トキシフィン・スラブ・サーヴァントをプレイグホエール・スラブ・サーヴァントに変身させる。"
+      "text": "儀式を通して、トキシフィンの従者を疫病鯨の従者に変身させる。"
     },
     {
       "type": "patchouli:entity",

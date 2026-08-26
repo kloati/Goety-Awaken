@@ -1,5 +1,5 @@
 {
-  "name": "シミの召使い",
+  "name": "シルバーフィッシュの従者",
   "icon": "goetyawaken:silverfish_spawn_egg",
   "category": "goety:goetyawaken_summons",
   "pages": [
@@ -10,7 +10,7 @@
     {
       "type": "patchouli:entity",
       "entity": "goetyawaken:silverfish_servant",
-      "text": "シミのしもべたちがあなたのために戦います。"
+      "text": "シルバーフィッシュの従者たちがあなたのために戦います。"
     }
   ]
 }

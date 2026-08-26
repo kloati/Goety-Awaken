@@ -1,5 +1,5 @@
 {
-  "name": "アイスクリーパーの召使い",
+  "name": "アイスクリーパーの従者",
   "icon": "goetyawaken:ice_creeper_spawn_egg",
   "category": "goety:goetyawaken_summons",
   "pages": [
@@ -10,12 +10,12 @@
     {
       "type": "goety:ritual",
       "recipe": "goetyawaken:ice_creeper_servant",
-      "text": "氷の力を使ってアイスクリーパーのしもべを召喚する。"
+      "text": "氷の力を使ってアイスクリーパーの従者を召喚する。"
     },
     {
       "type": "patchouli:entity",
       "entity": "goetyawaken:ice_creeper_servant",
-      "text": "アイスクリーパーのしもべたちが、氷の爆発であなたのために戦います。"
+      "text": "アイスクリーパーの従者たちが、氷の爆発であなたのために戦います。"
     }
   ]
 }

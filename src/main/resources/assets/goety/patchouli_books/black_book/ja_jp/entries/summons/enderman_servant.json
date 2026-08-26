@@ -1,5 +1,5 @@
 {
-  "name": "エンダーマンの召使い",
+  "name": "エンダーマンの従者",
   "icon": "goetyawaken:enderman_spawn_egg",
   "category": "goety:goetyawaken_summons",
   "pages": [
@@ -10,12 +10,12 @@
     {
       "type": "goety:ritual",
       "recipe": "goetyawaken:enderman_servant",
-      "text": "エンダーマンのしもべを召喚する"
+      "text": "エンダーマンの従者を召喚する"
     },
     {
       "type": "patchouli:entity",
       "entity": "goetyawaken:enderman_servant",
-      "text": "エンダーマンのしもべたちは、あなたのために忠実に戦い、ブロックを動かします。"
+      "text": "エンダーマンの従者たちは、あなたのために忠実に戦い、ブロックを動かします。"
     }
   ]
 }

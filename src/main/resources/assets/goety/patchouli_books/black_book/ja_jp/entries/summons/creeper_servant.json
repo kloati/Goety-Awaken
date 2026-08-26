@@ -1,5 +1,5 @@
 {
-  "name": "クリーパーサーヴァント",
+  "name": "クリーパーの従者",
   "icon": "goetyawaken:creeper_spawn_egg",
   "category": "goety:goetyawaken_summons",
   "pages": [
@@ -10,12 +10,12 @@
     {
       "type": "goety:ritual",
       "recipe": "goetyawaken:creeper_servant",
-      "text": "爆発物の力を使ってクリーパーのしもべを召喚する。"
+      "text": "爆発物の力を使ってクリーパーの従者を召喚する。"
     },
     {
       "type": "patchouli:entity",
       "entity": "goetyawaken:creeper_servant",
-      "text": "クリーパーのしもべたちは、あなたのために忠実に爆発するでしょう。"
+      "text": "クリーパーの従者たちは、あなたのために忠実に爆発するでしょう。"
     }
   ]
 }

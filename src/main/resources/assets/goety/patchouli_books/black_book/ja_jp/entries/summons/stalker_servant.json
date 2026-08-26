@@ -1,5 +1,5 @@
 {
-  "name": "ストーカー召使い",
+  "name": "ストーカーの従者",
   "icon": "deeperdarker:soul_crystal",
   "category": "goety:goetyawaken_summons",
   "flag": "goetyawaken:deeperdarker_loaded",
@@ -16,7 +16,7 @@
     {
       "type": "patchouli:entity",
       "entity": "goetyawaken:stalker_servant",
-      "text": "ストーカー・サーヴァントは、スカルク・リーチとの奇妙な共生関係を維持している。この貪欲な小生物を自身の体で孵化させ、戦闘中に敵に投げつけ、プレイヤーの代わりに肉を食い荒らさせることができる。"
+      "text": "ストーカーの従者は、スカルク・リーチとの奇妙な共生関係を維持している。この貪欲な小生物を自身の体で孵化させ、戦闘中に敵に投げつけ、プレイヤーの代わりに肉を食い荒らさせることができる。"
     }
   ]
 }

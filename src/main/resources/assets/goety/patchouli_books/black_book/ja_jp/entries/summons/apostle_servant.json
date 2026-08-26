@@ -1,5 +1,5 @@
 {
-  "name": "使徒",
+  "name": "アパスル",
   "icon": "goetyawaken:obsidian_tear",
   "category": "goety:goetyawaken_summons",
   "pages": [
@@ -10,7 +10,7 @@
     {
       "type": "goety:ritual",
       "recipe": "goetyawaken:summon_apostle_servant",
-      "text": "もちろん、生贄を通して「使徒」を直接召喚することもできます。そのような使徒は真に昇天した使徒とは一致しないかもしれませんが、それでも十分でしょう。"
+      "text": "もちろん、生贄を通して「アパスル」を直接召喚することもできます。そのような使徒は真に昇天した使徒とは一致しないかもしれませんが、それでも十分でしょう。"
     },
     {
       "type": "patchouli:entity",
