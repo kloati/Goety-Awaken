@@ -1,0 +1,7 @@
+{
+  "name": "敵",
+  "description": "この世界には、敵対的な生物や脅威が存在する。",
+  "icon": "minecraft:zombie_head",
+  "parent": "goety:goetyawaken_world",
+  "sortnum": 1
+}

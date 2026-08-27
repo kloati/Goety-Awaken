@@ -1,0 +1,37 @@
+{
+  "name": "豪華な骨壺",
+  "icon": "goetyawaken:gorgeous_urn_pale",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "見た目以上に内部空間が広い美しい容器。収納やベース装飾に最適。豊富なカラーバリエーションをご用意しています！"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:gorgeous_urn_pale",
+      "text": "青白い"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:gorgeous_urn_verdant",
+      "text": "緑豊かな"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:gorgeous_urn_indigo",
+      "text": "インジゴ"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:gorgeous_urn_crimson",
+      "text": "クリムゾン"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goetyawaken:gorgeous_urn_verdant": 0,
+    "goetyawaken:gorgeous_urn_pale": 0,
+    "goetyawaken:gorgeous_urn_crimson": 0,
+    "goetyawaken:gorgeous_urn_indigo": 0
+  }
+}

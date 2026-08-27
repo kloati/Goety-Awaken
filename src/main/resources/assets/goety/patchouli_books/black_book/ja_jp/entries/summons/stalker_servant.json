@@ -1,0 +1,22 @@
+{
+  "name": "ストーカーの従者",
+  "icon": "deeperdarker:soul_crystal",
+  "category": "goety:goetyawaken_summons",
+  "flag": "goetyawaken:deeperdarker_loaded",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "ウォーデンという、歪んで恐ろしい怪物――スカルクの忌まわしき存在――でさえ闇の魔法の力で縛られるのだから、深淵の闇次元から来たストーカーも当然例外ではない。結局のところ、彼らはウォーデンと同じ起源を持ち、このより弱いスカルクの怪物は当然ながらさらに簡単に奴隷にできる。ただ一匹殺せば、その魂の力のほぼ全てを凝縮した結晶を手に入れることができる――そして、魂を操る魔法使いにとってそれが何を意味するのかは、誰よりも君が一番よく知っているはずだ。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:stalker_servant",
+      "text": ""
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:stalker_servant",
+      "text": "ストーカーの従者は、スカルク・リーチとの奇妙な共生関係を維持している。この貪欲な小生物を自身の体で孵化させ、戦闘中に敵に投げつけ、プレイヤーの代わりに肉を食い荒らさせることができる。"
+    }
+  ]
+}

@@ -1,11 +1,14 @@
 {
-  "name": "恐怖のソウル",
+  "name": "恐怖の魂",
   "icon": "goetyawaken:terror_soul",
   "category": "goety:goetyawaken_crafts",
   "pages": [
     {
       "type": "text",
-      "text": "ワイトを再誕させるためのアイテム。これを用いれば、通常よりも少ないソウルコストでワイトを召喚することが可能だ。"
+      "text": "ワイトを蘇生させるためのアイテム。ワイトをより安価に召喚できる。"
     }
-  ]
+  ],
+  "extra_recipe_mappings": {
+    "goetyawaken:terror_soul": 0
+  }
 }

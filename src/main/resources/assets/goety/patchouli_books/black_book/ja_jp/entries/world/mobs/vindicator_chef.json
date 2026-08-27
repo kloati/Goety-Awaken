@@ -1,0 +1,16 @@
+{
+  "name": "ヴィンディケーターシェフ",
+  "icon": "goetyawaken:vindicator_chef_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "ヴィンディケーター・シェフは、特別に訓練されたヴィンディケーターです。斧を振るうだけのヴィンディケーターとは異なり、彼らの任務は他のイリジャーのために食事を作ることです。ただし、知能が低いため、料理の腕は洗練されていません。しかし、シェフになったからといって筋肉が衰えるわけではないので、あなたに対する脅威レベルはヴィンディケーターと同じです。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:vindicator_chef",
+      "text": "料理の腕は未熟だが、敵の頭蓋骨を真っ二つに割ることができるシェフ！"
+    }
+  ]
+}

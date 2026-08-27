@@ -1,16 +1,19 @@
 {
-  "name": "ヴォロロのフォーカス",
+  "name": "ウォロロフォーカス",
   "icon": "goetyawaken:wololo_focus",
   "category": "goety:goetyawaken_focuses",
   "pages": [
     {
       "type": "text",
-      "text": "エヴォーカーに由来する神秘的な呪文。羊毛を青から赤へと変えるその力に、当初、汝は全く興味を抱かなかった。闇の魔術の研鑽には何の役にも立たぬ、単なる滑稽で無意味な手品に過ぎぬと考えたからだ。……だが、認めざるを得まい。これはあまりに楽しすぎる！"
+      "text": "召喚術師に由来する謎めいた呪文。羊毛を青から赤に変えるこの呪文は、当初は闇の魔術の習得には何の役にも立たず、ただ面白くて無意味なトリックに過ぎないため、あなたは興味がなかった。しかし、あまりにも面白すぎるのだ！"
     },
     {
       "type": "goety:ritual",
       "recipe": "goetyawaken:wololo_focus",
-      "text": "ヴォロロ！"
+      "text": "ウォロロ！"
     }
-  ]
+  ],
+  "extra_recipe_mappings": {
+    "goetyawaken:wololo_focus": 0
+  }
 }

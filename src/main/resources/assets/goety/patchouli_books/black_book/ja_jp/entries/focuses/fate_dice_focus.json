@@ -1,0 +1,20 @@
+{
+  "name": "運命のダイスフォーカス",
+  "icon": "goetyawaken:fate_dice_focus",
+  "category": "goety:goetyawaken_focuses",
+  "flag": "goetyawaken:meetyourfight_loaded",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "フォルトゥナのダイス爆弾を投げ、爆発時に飛び散る弾丸を放出する。スライサーのダイスを装備していると、さらに多くのダイスが投げられる可能性がある――共鳴効果だろうか？ デイム・フォルトゥナのトレードマークである「ヘッドライナー」の模倣品。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:fate_dice_focus",
+      "text": ""
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goetyawaken:fate_dice_focus": 0
+  }
+}

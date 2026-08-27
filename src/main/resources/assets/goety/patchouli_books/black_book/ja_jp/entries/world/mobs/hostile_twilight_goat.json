@@ -1,0 +1,16 @@
+{
+  "name": "敵対的な黄昏のヤギ",
+  "icon": "goetyawaken:hostile_twilight_goat_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "高地に住む人々の間では、黒いヤギの伝説が古くから語り継がれてきた。これはおそらく「黄昏のヤギ」に由来する話だろう。これらの黒い生き物は、普通のヤギよりもはるかに獰猛で、角で獲物を激しく突き刺す。角が折れた場合は、鋭い歯で獲物を引き裂く。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_twilight_goat",
+      "text": "ダークヤング"
+    }
+  ]
+}

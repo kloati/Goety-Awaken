@@ -1,0 +1,19 @@
+{
+  "name": "ポタティエシュ、農民の偉大な杖",
+  "icon": "goetyawaken:potato_staff",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "毒ジャガイモに秘められた計り知れない神秘的な力を知る者は少ない――そして、あなたはその一人だ。毒ジャガイモを用いて改造されたこのワイルドスタッフは、特定の呪文に毒ジャガイモの力を注入することができ、さらには直接堆肥化にも使用できる。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:potato_staff",
+      "text": "噂によると、その誕生は単なる冗談だったらしい。"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goetyawaken:potato_staff": 0
+  }
+}

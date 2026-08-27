@@ -1,0 +1,16 @@
+{
+  "name": "敵対的なグナッシャー",
+  "icon": "goetyawaken:hostile_gnasher_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "一般的に言って、人間がサメの餌食になることは滅多にないが、深海の黒い悪魔たちはほとんどの魚よりも獰猛だ。凶暴で貪欲、そして疲れ知らず――幸いなことに、サメはあまり頻繁に見かける生き物ではない。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_gnasher",
+      "text": ""
+    }
+  ]
+}

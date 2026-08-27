@@ -1,0 +1,16 @@
+{
+  "name": "ジャングルゾンビ",
+  "icon": "goetyawaken:jungle_zombie_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "ジャングルの生命力は、当然のことながら、これらの死体にも及んでいるようだ。これらのゾンビ化した生物を覆う苔や植物のおかげで、彼らの爪や噛み傷には強力な毒が宿っている。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:jungle_zombie",
+      "text": ""
+    }
+  ]
+}

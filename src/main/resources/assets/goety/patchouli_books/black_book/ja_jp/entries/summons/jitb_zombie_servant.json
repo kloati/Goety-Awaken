@@ -1,0 +1,16 @@
+{
+  "name": "びっくり箱ゾンビ",
+  "icon": "goetyawaken:jitb_zombie_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "これらのゾンビは、びっくり箱を持った敵に突進し、その後…自爆する？いずれにせよ、クリーパーフォーカスをネクロスタッフを通してチャネリングすることで召喚できる。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:jitb_zombie_servant",
+      "text": "プラント vs. ゾンビ"
+    }
+  ]
+}

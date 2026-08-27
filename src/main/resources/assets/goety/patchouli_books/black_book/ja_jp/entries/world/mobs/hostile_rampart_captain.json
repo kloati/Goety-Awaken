@@ -1,0 +1,20 @@
+{
+  "name": "ランパート隊長",
+  "icon": "goety:diamond_ice_axe",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "ランパートキャプテンは、そびえ立つ山頂の放棄された城壁を統括するエリートイラジャーであり、侵入者から城壁を厳重に守っている。不吉な予兆を携えている時、襲撃の角笛を作り、山岳地帯で使用すると、彼の部隊をおびき出すことができ、彼に対する挑発行為となるかもしれない。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_rampart_captain",
+      "text": ""
+    },
+    {
+      "type": "patchouli:text",
+      "text": "この敵を侮ってはいけません。攻撃は強力で、様々な策略を隠し持っています。対峙する際は、飛んでくる氷の斧や猛烈な突風に注意すれば、この脅威を打ち破ることができるかもしれません。"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "沼地鉱山フォーカス",
+  "icon": "goetyawaken:swamp_mine_focus",
+  "category": "goety:goetyawaken_focuses",
+  "flag": "goetyawaken:meetyourfight_loaded",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "標的の頭上に沼地雷を設置する。スワンプジョー自体はそれほど強くないかもしれないが、この卑劣な技は真似してみる価値は十分にある。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:swamp_mine_focus",
+      "text": ""
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goetyawaken:swamp_mine_focus": 0
+  }
+}

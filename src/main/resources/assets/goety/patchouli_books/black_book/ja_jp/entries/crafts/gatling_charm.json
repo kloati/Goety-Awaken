@@ -1,0 +1,23 @@
+{
+  "name": "思いやりのある医師",
+  "icon": "goetyawaken:gatling_charm",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "「兵士1人は百人の兵士に匹敵する」という諺がある。"
+    },
+    {
+      "type": "text",
+      "text": "しかし、戦争の亡霊は決して消えることなく、打ち砕かれた夢の賛歌を歌う悲しげな亡霊だけが残された。そして時が経つにつれ、彼らの鎮魂歌はあなたの耳に届いた。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:gatling_charm",
+      "text": ""
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goetyawaken:gatling_charm": 0
+  }
+}

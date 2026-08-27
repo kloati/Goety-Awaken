@@ -1,0 +1,19 @@
+{
+  "name": "古代のゴング",
+  "icon": "goetyawaken:ancient_gong",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "ある名もなき王国の象徴の一つは、ある種の銅鑼だったと言われており、あなたはそれを再現することに成功した。歪んだ古代の音は今もなお遺跡を揺るがし、瓦礫の中から砂漠の末裔を呼び覚まし、音の源へと誘うのだ。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:ancient_gong",
+      "text": "弱体化フォーカスをゴングの上に置くことで、古代のゴングの音を再現できます。弱体化フォーカスの本来の機能を維持しつつ、砂漠の人々の興味をかろうじて引き起こすことも可能です。"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goetyawaken:ancient_gong": 0
+  }
+}

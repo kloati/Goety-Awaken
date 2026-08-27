@@ -1,0 +1,21 @@
+{
+  "name": "巨大ガスト",
+  "icon": "goetyawaken:gloomy_tears",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "瀕死の巨大ガストが流した陰鬱な涙を手に入れた後、あなたはそれを使って普通のガストに呪いをかけ、巨大ガストに変えることができる可能性を強く感じ取った。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:giant_ghast_servant",
+      "text": "巨大なガストに空を運んでもらうことさえできるんです！"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:giant_ghast",
+      "text": ""
+    }
+  ]
+}

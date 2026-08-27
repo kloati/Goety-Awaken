@@ -1,0 +1,20 @@
+{
+  "name": "チップフォーカス",
+  "icon": "goetyawaken:chip_focus",
+  "category": "goety:goetyawaken_focuses",
+  "flag": "goetyawaken:meetyourfight_loaded",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "術者は、標的とした敵に向かって円状のチップを発射できる。これは、デイム・フォルトゥナの必殺技を模倣したものである。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:chip_focus",
+      "text": ""
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goetyawaken:chip_focus": 0
+  }
+}

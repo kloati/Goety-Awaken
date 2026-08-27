@@ -1,11 +1,11 @@
 {
-  "name": "マッシュルームの帽子",
+  "name": "キノコの帽子",
   "icon": "goetyawaken:mushroom_hat",
   "category": "goety:goetyawaken_crafts",
   "pages": [
     {
       "type": "text",
-      "text": "混沌の牢獄に座す巨獣から抽出した共生菌糸を用い、汝はこの風変わりな帽子を仕立て上げた。マッシュルームの帽子は有害な毒素を濾過し、汝を酸毒から守るだけでなく、時に毒を浄化する力さえ持つ。さらに、この帽子は真菌を増殖させ、汝の敵に向かって放つのだ！"
+      "text": "混沌の牢獄に棲む巨大生物から抽出した共生菌糸体を用いて、このおしゃれな帽子を作り上げました。このキノコ帽子は毒素をろ過し、毒から身を守るだけでなく、時折毒を治す効果もあります。さらに、菌類を増殖させ、敵に放つこともできます！"
     },
     {
       "type": "goety:ritual",
@@ -13,5 +13,8 @@
       "text": ""
     }
   ],
-  "advancement": "goetyawaken:mushroom_monstrosity_kill"
+  "advancement": "goetyawaken:mushroom_monstrosity_kill",
+  "extra_recipe_mappings": {
+    "goetyawaken:mushroom_hat": 0
+  }
 }

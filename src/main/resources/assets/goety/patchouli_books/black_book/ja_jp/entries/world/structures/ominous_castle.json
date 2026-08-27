@@ -1,0 +1,18 @@
+{
+  "name": "不吉な城",
+  "icon": "goety:pale_steel_ingot",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "反逆の野望をすでに抱いていない限り、軽率に王城に侵攻するのは賢明ではない。"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "goetyawaken:textures/gui/ominous_castle.png"
+      ],
+      "border": true
+    }
+  ]
+}

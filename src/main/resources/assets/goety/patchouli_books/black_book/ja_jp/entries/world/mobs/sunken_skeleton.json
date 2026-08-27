@@ -1,0 +1,16 @@
+{
+  "name": "沈んだ骸骨",
+  "icon": "goetyawaken:sunken_skeleton_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "深淵に沈んだ骸骨は、船乗りや釣り人にとって新たな悪夢となった。彼らは最期の瞬間まで握りしめていたクロスボウを携え、泳ぐだけでなく、水中をより効率的に進む銛を発射することもできるのだ。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:sunken_skeleton",
+      "text": ""
+    }
+  ]
+}

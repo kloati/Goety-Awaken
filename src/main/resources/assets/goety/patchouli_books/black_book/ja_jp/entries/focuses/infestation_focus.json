@@ -1,16 +1,19 @@
 {
-  "name": "感染のフォーカス",
+  "name": "害虫のフォーカス",
   "icon": "goetyawaken:infestation_focus",
   "category": "goety:goetyawaken_focuses",
   "pages": [
     {
       "type": "text",
-      "text": "石の裂け目に潜む小さき虫けらどもを、汝の命に従わせるのだ！"
+      "text": "岩の割れ目に住む小さな虫たちを、あなたの命令に従わせなさい！"
     },
     {
       "type": "goety:ritual",
       "recipe": "goetyawaken:infestation_focus",
-      "text": "感染のフォーカスを作成する。"
+      "text": "感染拡大対策を練り上げよう。"
     }
-  ]
+  ],
+  "extra_recipe_mappings": {
+    "goetyawaken:infestation_focus": 0
+  }
 }

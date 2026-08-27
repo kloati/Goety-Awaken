@@ -1,0 +1,18 @@
+{
+  "name": "アポリオン神殿",
+  "icon": "minecraft:red_nether_bricks",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "かつてカルト教団によって建てられた寺院であり、「探求の炎」の巡礼地でもある。寺院の炎は古代から燃え続け、決して消えることはないと言われている。生還した者のほとんどは口を閉ざし、内部での体験を語ろうとしない。そして、生還できなかった者たちの名は、とっくに風に散り散りになり、後には灰だけが残された。"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "goetyawaken:textures/gui/temple_of_apollyon.png"
+      ],
+      "border": true
+    }
+  ]
+}

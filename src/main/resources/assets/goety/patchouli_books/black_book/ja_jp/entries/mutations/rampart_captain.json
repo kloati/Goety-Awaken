@@ -1,0 +1,31 @@
+{
+  "name": "ランパート隊長",
+  "icon": "goety:diamond_ice_axe",
+  "category": "goety:goetyawaken_mutations",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "勇敢な城壁隊長との激闘の後、あなたも彼のような戦闘能力と強さを手に入れられるのではないかと、思わずにはいられません。特定の素材と、あなた自身の山岳兵の従者を一人用いることで、あなたは強力な味方を生み出すことに成功しました。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:convert_mountaineer_to_rampart_captain",
+      "text": "登山家を城壁隊長に変身させよう。"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "ランパート隊長は、同族のイリジャーよりもはるかに頑丈で、遠くの敵に武器を投げつけることができる。手に持った角笛は、近くの分隊員に命令を下したり、強力な突風を放ったりする能力を持つ。"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goetyawaken:threat_banner",
+      "title": "脅威の旗",
+      "text": "城壁隊長が戦闘で倒れても、恐れることはありません。隊長は所持していた脅威の旗を落としますが、その旗を別の登山隊員に使用すれば、味方を再任できます。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:rampart_captain",
+      "text": ""
+    }
+  ]
+}

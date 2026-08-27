@@ -1,0 +1,19 @@
+{
+  "name": "レイスランタン",
+  "icon": "goetyawaken:wraith_lantern",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "魔術師の魂を手に入れるのは容易ではないが、魂の断片を集めることで蘇らせることができる。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:wraith_lantern",
+      "text": "この不気味なランタンを作れば、あの幽霊小屋の主を蘇らせることができるだろう。"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goetyawaken:wraith_lantern": 0
+  }
+}

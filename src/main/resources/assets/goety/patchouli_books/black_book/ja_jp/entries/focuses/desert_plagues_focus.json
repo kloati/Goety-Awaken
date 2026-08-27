@@ -1,0 +1,23 @@
+{
+  "name": "砂漠の疾病フォーカス",
+  "icon": "goetyawaken:desert_plagues_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "text",
+      "text": "あなたの調査によると、古代の「神々」は奴隷を罰し支配するために疫病を用いていたとあなたは考えているようですが、もちろんこれは単なる特殊な魔法の一形態に過ぎません。王国の衰退とともに、これらの魔法は失われてしまいました。もしかしたら、古代王国の高度な魔術師で、不死身の存在として生き残った者が、これらの魔法の知識を今も保持しているかもしれません。"
+    },
+    {
+      "type": "text",
+      "text": "対象の上空に疫病の雲を発生させ、対象を追跡しながら、雹、群れ、雷を絶えず召喚する。風の杖で発動すると、疫病の雲の範囲が広がり、ダメージも増加する。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:desert_plagues_focus",
+      "text": ""
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goetyawaken:desert_plagues_focus": 0
+  }
+}

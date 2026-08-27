@@ -1,0 +1,16 @@
+{
+  "name": "遺跡のネクロマンサー",
+  "icon": "goetyawaken:parched_necromancer_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "黄砂の下に埋もれた古代王国には、かつて多くの強力な魔術師がいたと言われている。彼らは王国の衰退とともに滅びたのではなく、アンデッドとして生まれ変わったのだ……。彼らは身を隠しているが、もしかしたら、その古代王国の何かを使って彼らを召喚できるかもしれない。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:parched_necromancer",
+      "text": "砂漠バイオームで古代のゴングを使って彼らを召喚しよう！"
+    }
+  ]
+}

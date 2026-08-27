@@ -1,0 +1,16 @@
+{
+  "name": "敵対的なクモクリーダー",
+  "icon": "goetyawaken:hostile_spider_creeder_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "苦悶の表情を浮かべ、耳をつんざくような叫び声を上げるこれらの異形の生物は、冒険者たちがクリムゾンフォレストを避ける理由の一つである。クリーパースパイダーは、緑色の一般的な近縁種をはるかに凌駕する爆発力を持つだけでなく、その爆発は致命的な炎をまき散らし、犠牲者を弱体化させる。これらの生物は別の次元から冥界へと渡ってきたのだと囁く者もいる…。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_spider_creeder",
+      "text": "刑務所の看守"
+    }
+  ]
+}

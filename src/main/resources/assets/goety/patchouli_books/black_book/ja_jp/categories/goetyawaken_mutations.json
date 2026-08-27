@@ -1,6 +1,6 @@
 {
-  "name": "変異",
-  "description": "ある生物を別の生物へと変貌させる。",
+  "name": "突然変異",
+  "description": "ある生物を別の生物に変身させる。",
   "icon": "minecraft:red_mushroom",
   "sortnum": 3,
   "parent": "goety:goetyawaken"

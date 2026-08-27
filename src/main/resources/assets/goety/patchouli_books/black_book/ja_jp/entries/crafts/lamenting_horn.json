@@ -1,0 +1,19 @@
+{
+  "name": "嘆きの角笛",
+  "icon": "goetyawaken:lamenting_horn",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "燃え盛る角笛を吹くと冥界の要塞から反応が得られるように、嘆きの角笛を吹くと地獄の領域の特定の生物から反応が得られるかもしれない…。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:lamenting_horn",
+      "text": ""
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goetyawaken:lamenting_horn": 0
+  }
+}

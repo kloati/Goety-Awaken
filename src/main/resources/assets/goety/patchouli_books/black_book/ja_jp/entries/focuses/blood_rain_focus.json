@@ -1,16 +1,19 @@
 {
-  "name": "血雨のフォーカス",
+  "name": "ブラッド・レインのフォーカス",
   "icon": "goetyawaken:blood_rain_focus",
   "category": "goety:goetyawaken_focuses",
   "pages": [
     {
       "type": "text",
-      "text": "滅びし世界の残滓（ざんし）が、かつての雹（ひょう）を汚染した。今やそれはネザー全土の深紅の悪意を宿し、万物への憎悪を吐き出している。$(l)かつて生を謳歌せし者たちに神罰を降らせよ。その血を凍らせ、魂の火を震わせよ。そして静寂こそが、この世界の唯一の支配者とならんことを。"
+      "text": "死せる世界の残滓が雹を汚染した。今や雹は冥界全体の深紅の悪意を帯び、あらゆるものへの憎悪を吐き出している。$(l) かつて生きていた者たちに神の罰が降り注ぎ、彼らの血が凍りつき、魂の炎が震え、沈黙が世界の唯一の主権者として君臨する。"
     },
     {
       "type": "goety:ritual",
       "recipe": "goetyawaken:blood_rain_focus",
-      "text": "血雨のフォーカスを作成する。"
+      "text": "ブラッドレイン・フォーカスの作成。"
     }
-  ]
+  ],
+  "extra_recipe_mappings": {
+    "goetyawaken:blood_rain_focus": 0
+  }
 }

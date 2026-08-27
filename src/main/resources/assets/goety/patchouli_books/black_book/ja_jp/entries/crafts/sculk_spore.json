@@ -1,0 +1,20 @@
+{
+  "name": "スカルク胞子",
+  "icon": "goetyawaken:sculk_spore",
+  "category": "goety:goetyawaken_crafts",
+  "flag": "goetyawaken:deeperdarker_loaded",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "シルバーフィッシュに関連する技術を用いて、スカルクブロックから凝縮された忌まわしい胞子。これをスカルクブロックに植え付けることで、深淵の暗闇に潜むシュリークワームをおびき寄せ、地中から掘り出させることができます。胞子にはあなたのフェロモンが付着しているため、おびき寄せられたシュリークワームはあなたの味方になります。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:sculk_spore",
+      "text": ""
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goetyawaken:sculk_spore": 0
+  }
+}

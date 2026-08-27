@@ -1,0 +1,16 @@
+{
+  "name": "パーチドの従者",
+  "icon": "goetyawaken:parched_servant_spawn_egg",
+  "category": "goety:goetyawaken_summons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "時の砂の中に、無数の住人や旅人が砂漠の黄金の砂丘の下に埋もれてきた。ここで骨の焦点を使うと、忠実なパーチドの従者が召喚されるのも当然のことだろう。敵対的な存在と同様に、彼らの矢は生物に弱体化をもたらす。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:parched_servant",
+      "text": "パーチドの従者は、あなたのために忠実に戦います。"
+    }
+  ]
+}

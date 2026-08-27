@@ -1,0 +1,20 @@
+{
+  "name": "ディープダークのフォーカス",
+  "icon": "goetyawaken:deepdark_vermin_focus",
+  "category": "goety:goetyawaken_focuses",
+  "flag": "goetyawaken:deeperdarker_loaded",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "スカルクヒルとスカルクムカデ――これらのスカルク科の小さな害虫は、しばしば古代の壺の中に生息しています。スカルク生物の扱いに豊富な経験を持つあなたは、それらを特定の場所に閉じ込める方法をすぐに見つけました。異次元やスカルクの生息域で召喚されたこれらのスカルクは、他の環境で召喚されたものよりも強力です。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:deepdark_vermin_focus",
+      "text": ""
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goetyawaken:deepdark_vermin_focus": 0
+  }
+}

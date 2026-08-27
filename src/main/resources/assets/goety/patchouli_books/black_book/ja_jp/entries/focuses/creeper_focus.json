@@ -1,16 +1,19 @@
 {
-  "name": "クリーパーのフォーカス",
+  "name": "クリーパーフォーカス",
   "icon": "goetyawaken:creeper_focus",
   "category": "goety:goetyawaken_focuses",
   "pages": [
     {
       "type": "text",
-      "text": "クリーパーを召喚し、敵に強烈な「サプライズ」を食らわせてやれ！"
+      "text": "クリーパーを召喚して、相手に大きなサプライズを与えよう！"
     },
     {
       "type": "goety:ritual",
       "recipe": "goetyawaken:creeper_focus",
-      "text": "クリーパーのフォーカスを作成する。"
+      "text": "クリーパーフォーカスを作成してください。"
     }
-  ]
+  ],
+  "extra_recipe_mappings": {
+    "goetyawaken:creeper_focus": 0
+  }
 }

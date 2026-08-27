@@ -1,0 +1,18 @@
+{
+  "name": "邪悪な村人の駐屯所",
+  "icon": "minecraft:chiseled_sandstone",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "砂漠の荒野にあるこの休憩所は、イリジャーたちが物資を補給し、休息を取り、進路を記録する場所だ。もしこの場所の炉から煙が立ち上れば、間もなく襲撃の角笛の音が響き渡るだろう。"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "goetyawaken:textures/gui/illager_station.png"
+      ],
+      "border": true
+    }
+  ]
+}

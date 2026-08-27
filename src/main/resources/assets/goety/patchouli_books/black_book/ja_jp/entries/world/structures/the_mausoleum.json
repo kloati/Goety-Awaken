@@ -1,0 +1,18 @@
+{
+  "name": "霊廟",
+  "icon": "goety:crypt_bricks",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "呪われた呼び声の封印された安息の地。その亡霊は墓石の下で静かに眠っている。通路をずっと掘り進むと、霊廟の主が最深の部屋で静かに待ち構えている。死者の安息を乱すのは決して良いことではない――だが、道徳を捨てた闇の魔術師にとって、それは何の意味も持たない。ましてや、墓の中に眠る副葬品を狙っているのならなおさらだ。"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "goetyawaken:textures/gui/the_mausoleum.png"
+      ],
+      "border": true
+    }
+  ]
+}

@@ -1,17 +1,20 @@
 {
-  "name": "シュルカーミサイルのフォーカス",
+  "name": "シュルカーミサイルフォーカス",
   "icon": "goetyawaken:shulker_missile_focus",
   "category": "goety:goetyawaken_focuses",
   "pages": [
     {
       "type": "text",
-      "text": "エンドシティにて初めてシュルカーミサイルを目の当たりにしたその時から、汝はこの魔法の弾こそが、ポーションの効力を運ぶための完璧な「器」であると確信していた。ついにそのミサイルの複製に成功した今、汝は敵を意のままに宙へと舞い上がらせることができるのだ。さらに、このミサイルにポーションの魔力を注入すれば、追尾する弾丸が標的にその効果を直接叩き込むだろう。"
+      "text": "エンドシティで初めてシュルカーミサイルを見た時から、この魔法のミサイルはポーションを運ぶのに最適だとあなたは考えていました。そしてついにそのミサイルを再現することに成功し、敵を空高く飛ばせるようになったのです！さらに、ミサイルにポーションを注入することで、敵にポーションの効果を移すことも可能です。"
     },
     {
       "type": "goety:ritual",
       "recipe": "goetyawaken:shulker_missile_focus",
-      "text": "シュルカーミサイルのフォーカスを作成する。"
+      "text": "シュルカーミサイルフォーカスを作成する。"
     }
   ],
-  "advancement": "minecraft:end/find_end_city"
+  "advancement": "minecraft:end/find_end_city",
+  "extra_recipe_mappings": {
+    "goetyawaken:shulker_missile_focus": 0
+  }
 }

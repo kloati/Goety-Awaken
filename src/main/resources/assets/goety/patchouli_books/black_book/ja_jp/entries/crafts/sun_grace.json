@@ -1,16 +1,19 @@
 {
-  "name": "太陽の愛",
+  "name": "太陽の恵み",
   "icon": "goetyawaken:sun_grace",
   "category": "goety:goetyawaken_crafts",
   "pages": [
     {
       "type": "text",
-      "text": "メイスに神秘的な癒やしのルーンを刻み込む儀式を経て、汝はその武器に強大な再生のエネルギーを宿すことに成功した。これにより、この武器は凄まじい破壊力と、周囲を癒やす強力な支援能力を併せ持つ至高の兵装へと昇華されたのである。"
+      "text": "神秘的な治癒のルーンをメイスに刻み込む儀式を通して、あなたはメイスに強力な回復エネルギーを注入することに成功し、それによってメイスに相当な攻撃力と強力な支援能力の両方を与えることができました。"
     },
     {
       "type": "goety:ritual",
       "recipe": "goetyawaken:sun_grace",
       "text": ""
     }
-  ]
+  ],
+  "extra_recipe_mappings": {
+    "goetyawaken:sun_grace": 0
+  }
 }

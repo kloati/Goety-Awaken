@@ -1,0 +1,19 @@
+{
+  "name": "グレートメテオのフォーカス",
+  "icon": "goetyawaken:great_meteor_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "巨大ガストの巨大な火球は実に素晴らしい！あんな巨大な火球を自分で発射できたらどんなにいいだろう！明らかに、非常に爆発性の高い物質である「陰鬱な涙」には、まさにその可能性が秘められている。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:great_meteor_focus",
+      "text": ""
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goetyawaken:great_meteor_focus": 0
+  }
+}

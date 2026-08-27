@@ -1,0 +1,23 @@
+{
+  "name": "ダークメンダー",
+  "icon": "goetyawaken:dark_mender",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "ソウルメンダーは優秀だが、十分ではない。そう考えたあなたは、改良に取り掛かった。あなたの天才的な改造によって完成したメンダーは、グリムインフューザーとソウルメンダーの機能を兼ね備え、アイテムの変換と修復をさらに高速化できるようになった。"
+    },
+    {
+      "type": "text",
+      "text": "もちろん、機能させるには、トーテムまたは魂の転移装置が入った呪われた檻の上に置かなければなりません。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:dark_mender",
+      "text": ""
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goetyawaken:dark_mender": 0
+  }
+}

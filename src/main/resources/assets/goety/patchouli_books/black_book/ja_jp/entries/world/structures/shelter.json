@@ -1,0 +1,18 @@
+{
+  "name": "シェルター",
+  "icon": "goety:crypt_stone",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "古代人がかつて住んでいた地下壕のことはご存知でしょう。今ではイリジャーがその場所を占拠しています。彼らに先を越される前に、貴重な資源を手に入れることができるかもしれませんよ？"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "goetyawaken:textures/gui/shelter.png"
+      ],
+      "border": true
+    }
+  ]
+}

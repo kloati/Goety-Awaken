@@ -1,0 +1,22 @@
+{
+  "name": "仮面舞踏会の従者",
+  "icon": "masquerader_mod:blank_mask",
+  "category": "goety:goetyawaken_mutations",
+  "flag": "goetyawaken:masquerader_mod_loaded",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "仮面舞踏師は、豪華なローブをまとった「狂人」です。彼の不気味な魔法の仮面は、常に自身のアイデンティティを変える能力を与えてくれます。異なる仮面を被ることで、それぞれの仮面に対応する力を奪うことができるのです。かつてあなたは、小競り合いで仮面舞踏師を逃走させ、戦利品として無地の仮面だけを残しました。その仮面を調べた結果、この仮面には「アイデンティティ」を吸い取る暗黒の術が秘められていることが分かりました。幸運なことに、あなたの配下の魔術師はあらゆる種類の呪文の術に精通していたため、あなたは彼にこの仮面を被せ、改心儀式によって彼をあなた自身の仮面舞踏師へと変貌させたのです。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:masquerader_servant",
+      "text": ""
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:masquerader_servant",
+      "text": "仮面ライダー（実際は違う）"
+    }
+  ]
+}

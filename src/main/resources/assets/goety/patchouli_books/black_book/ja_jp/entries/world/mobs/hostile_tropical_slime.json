@@ -1,0 +1,16 @@
+{
+  "name": "敵対的な熱帯の粘液",
+  "icon": "goetyawaken:hostile_tropical_slime_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "これらの奇妙な生物は常に敵対的であるという事実を無視すれば、熱帯魚水槽のように扱うのも悪くないかもしれない。また、これらの生物は貴重な酸素を体内に含んでおり、破壊されるとそれが放出される。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_tropical_slime",
+      "text": ""
+    }
+  ]
+}

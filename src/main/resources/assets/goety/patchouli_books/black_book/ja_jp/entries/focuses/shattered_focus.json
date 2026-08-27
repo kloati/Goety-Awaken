@@ -1,0 +1,20 @@
+{
+  "name": "砕けたフォーカス",
+  "icon": "goetyawaken:shattered_focus",
+  "category": "goety:goetyawaken_focuses",
+  "flag": "goetyawaken:deeperdarker_loaded",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "砕かれた従者は、未形成で劣化したウォーデンであり、真のウォーデンというよりゾンビに近い存在です。これらのスカルク生物を奴隷にするのは、ウォーデンを奴隷にするよりもはるかに容易であり、召喚儀式をフォーカス内に封じ込めることさえ可能です。異次元やスカルクの生息域で召喚された砕かれた従者は、他の環境で召喚されたものよりも強力になります。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:shattered_focus",
+      "text": ""
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goetyawaken:shattered_focus": 0
+  }
+}

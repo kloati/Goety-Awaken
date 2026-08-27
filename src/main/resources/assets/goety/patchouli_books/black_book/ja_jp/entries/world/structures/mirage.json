@@ -1,0 +1,18 @@
+{
+  "name": "幻影の王国",
+  "icon": "minecraft:sandstone",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "かつて名もなき王国の国境要塞。ここはかつてのエリートたちを守り、重要な鉱物資源の産地でもあった。今日に至るまで、要塞は荒野にそびえ立ち、王国のエリートたちの力の秘密を内部に隠し持っているのかもしれない……。"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "goetyawaken:textures/gui/mirage.png"
+      ],
+      "border": true
+    }
+  ]
+}

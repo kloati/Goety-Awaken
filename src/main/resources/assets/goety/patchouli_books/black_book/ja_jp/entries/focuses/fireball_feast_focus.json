@@ -1,0 +1,19 @@
+{
+  "name": "火球の祝宴のフォーカス",
+  "icon": "goetyawaken:fireball_feast_focus",
+  "category": "goety:goetyawaken_focuses",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "ブレイズやガストの火球は確かに強力だが、それだけでは物足りない――冥界の魔法の威力をさらに容赦なく解き放つ方法がきっとあるはずだ。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:fireball_feast_focus",
+      "text": "制圧射撃！"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goetyawaken:fireball_feast_focus": 0
+  }
+}

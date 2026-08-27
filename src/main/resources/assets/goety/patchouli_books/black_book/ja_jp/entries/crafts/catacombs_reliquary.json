@@ -1,0 +1,19 @@
+{
+  "name": "カタコンベの聖遺物箱",
+  "icon": "goetyawaken:catacombs_reliquary",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "あなたは、自分のアンデッドのしもべたちが太陽を恐れることに時折悩まされています。砂漠にいるあのネクロマンサーはなぜ太陽を恐れないのでしょうか？もしかしたら、彼から何らかの魔法の技を習得することで、その疑問に答えられるかもしれません。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:catacombs_reliquary",
+      "text": "アンデッド生物に日光に対する永続的な耐性を与えるために使用される。"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goetyawaken:catacombs_reliquary": 0
+  }
+}

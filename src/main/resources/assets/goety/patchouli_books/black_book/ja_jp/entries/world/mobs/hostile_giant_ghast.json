@@ -1,0 +1,28 @@
+{
+  "name": "巨大ガスト",
+  "icon": "goetyawaken:gloomy_tears",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "巨大ガストは、3つの頭を持つ異形のガストです。正面の巨大な口からは燃え盛る爆発性の火球を吐き出し、両側の顔からは追跡能力を持つ厄介な火球を発射します。その大きさは通常のガストをはるかに凌駕し、体も非常に頑丈です。冥界から現れたこの異形のガストの火力は凄まじく、準備不足の冒険者を一瞬にして灰燼に帰してしまうほどです。狩りに出かける前に、爆発や炎に耐えられる装備を必ず身につけてください。"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goetyawaken:lamenting_horn",
+      "title": "嘆きの角笛",
+      "text": "ネザーの玄武岩デルタ、ネザー荒野、またはソウルサンドバレーのバイオームで嘆きの角笛を使用すると、地獄の領域から巨大なガストが反応を示すことがあります。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_giant_ghast",
+      "text": ""
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goetyawaken:gloomy_tears",
+      "title": "憂鬱な涙",
+      "text": "敗北すると、彼らは陰鬱な涙を流す。この涙は、冥界の力と巨大ガストの死の呪いが凝縮された強力な爆発物であり、冥界の魔法を強化したり、通常のガストに呪いをかけて巨大ガストに変えたりするために使用できる。"
+    }
+  ]
+}

@@ -1,17 +1,20 @@
 {
-  "name": "ムーシュルームの木槌",
+  "name": "ムーシュルームマレット",
   "icon": "goetyawaken:mooshroom_mace",
   "category": "goety:goetyawaken_crafts",
   "pages": [
     {
       "type": "text",
-      "text": "キノコ被覆合金ブロックは極めて重厚な素材であり、ムーシュルームの怪物の力に耐えうるのはこの物質のみである。だが汝は、この重苦しき力を他に転用できぬものかと考えることがあった。最終的に、汝はこれをどこか見覚えのある姿の武器へと鍛え上げた。ムーシュルームの木槌は、キノコ合金の重量と真菌の爆発力を巧みに利用している。高所から飛び降りて敵を叩き伏せれば、落下距離に応じた追加ダメージを与え、さらに着弾と同時に激しい真菌の爆発を引き起こすのだ。"
+      "text": "キノコで覆われた合金ブロックは、非常に重い素材です。ムーシュルームという怪物の力に耐えられるのは、このような素材だけなのです。しかし、あなたは時折、この重厚な力を別の用途に活用できないかと考えます。そしてついに、どこか見覚えのある武器へと鍛造しました。ムーシュルーム・マレットは、キノコ合金の重さと菌類の爆発力を巧みに利用し、高所から飛び降りて敵を攻撃する際に、落下距離に応じて追加ダメージを与えるだけでなく、着弾時に激しい菌類の爆発を引き起こします。"
     },
     {
       "type": "goety:ritual",
       "recipe": "goetyawaken:mooshroom_mace",
-      "text": "真菌爆発の木槌！"
+      "text": "Fungal Explosion Mallet!"
     }
   ],
-  "advancement": "goetyawaken:mushroom_monstrosity_kill"
+  "advancement": "goetyawaken:mushroom_monstrosity_kill",
+  "extra_recipe_mappings": {
+    "goetyawaken:mooshroom_mace": 0
+  }
 }

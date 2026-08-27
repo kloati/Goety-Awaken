@@ -1,0 +1,19 @@
+{
+  "name": "古い植木鉢",
+  "icon": "goetyawaken:tower_flowerpot",
+  "category": "goety:goetyawaken_crafts",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "塔の職人たちが作った、なかなか素敵な植木鉢だ。作り方を覚えれば、自分の拠点を飾るのにうってつけだろう、とあなたは思う。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goetyawaken:tower_flowerpot",
+      "text": "スタイリッシュな装飾"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goetyawaken:tower_flowerpot": 0
+  }
+}

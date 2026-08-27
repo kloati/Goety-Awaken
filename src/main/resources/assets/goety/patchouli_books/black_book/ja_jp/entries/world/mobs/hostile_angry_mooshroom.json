@@ -1,0 +1,16 @@
+{
+  "name": "敵対的な怒れるムーシュルーム",
+  "icon": "goetyawaken:hostile_angry_mooshroom_spawn_egg",
+  "category": "goety:world/enemies",
+  "pages": [
+    {
+      "type": "text",
+      "text": "キノコ諸島にある謎の建造物の入り口は、常に怒り狂っているかのようなムーシュルームの群れによって守られている。彼らは目の前の生き物すべてに激しく突進してくる。一体どんな力が、普段は温厚なこれらの生き物をこれほどまでに凶暴に変えてしまったのだろうか、と思わずにはいられない。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:hostile_angry_mooshroom",
+      "text": "モー！"
+    }
+  ]
+}

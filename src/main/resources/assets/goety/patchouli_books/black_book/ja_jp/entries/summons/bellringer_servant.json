@@ -1,0 +1,26 @@
+{
+  "name": "ベルリンガーの従者",
+  "icon": "meetyourfight:haunted_bell",
+  "category": "goety:goetyawaken_summons",
+  "flag": "goetyawaken:meetyourfight_loaded",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "死後、ベルリンガーが残した霊魂を利用して、あなたは命令に従うベルリンガーを再現することに成功しました。あなたのような死霊術に長けた者にとっては、これは容易なことです。残念ながら、この霊魂は普通の幽霊よりははるかに強力ですが、それ以上の力はありません。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goetyawaken:bellringer_servant",
+      "text": ""
+    },
+    {
+      "type": "patchouli:text",
+      "text": "しかし、ご存じの通り、このような幽霊のような不死の存在にとって、同族の霊的なエッセンスは最高の滋養強壮剤となる。そして、元々精神が非常に強靭な鐘楼守にとって、同族からエクトプラズムを複数回吸収することさえ可能であり、そうすることでさらに強力になるのだ。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goetyawaken:bellringer_servant",
+      "text": "§c 誰のために鐘は鳴るのか？ §r"
+    }
+  ]
+}

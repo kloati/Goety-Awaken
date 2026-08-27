@@ -1,0 +1,18 @@
+{
+  "name": "潮汐墓",
+  "icon": "minecraft:prismarine_bricks",
+  "category": "goety:world/structures",
+  "pages": [
+    {
+      "type": "text",
+      "text": "深海の底には、船乗りたちが永遠の眠りにつく場所がある。そこへ足を踏み入れた冒険者は、彼らの心に残る強迫観念との生死をかけた戦いを強いられる。勝利すれば宝の鍵を手に入れ、船乗りたちの朽ち果てた骨は貴重な戦利品となる。敗北すれば、深淵へと沈み、永遠に溺れ続けることになる。"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "goetyawaken:textures/gui/tidal_tomb.png"
+      ],
+      "border": true
+    }
+  ]
+}

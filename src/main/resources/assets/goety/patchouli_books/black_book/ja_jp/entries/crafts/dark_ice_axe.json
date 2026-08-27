@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "鉄やダイヤモンドを用いてピッケルを鍛えられるのであれば、ダークメタルでそれを鍛えぬ理由があろうか？この斧はピッケルとしての機能を損なうことなく、他のダークメタル製の道具と同じく敵を弱体化させる力を秘めている。さらに、ソウルを糧とすることで、傷ついた刃を自ら修復するのだ。"
+      "text": "鉄とダイヤモンドを使ってアイスアックスを作れるのだから、ダークメタルで鍛造してみてはどうだろう？ ダークメタル製の道具と同様にアイスアックスとしての機能性を保ちつつ、敵を弱体化させ、さらにソウルを使って自己修復する能力も備えている。"
     },
     {
       "type": "patchouli:crafting",
@@ -13,5 +13,8 @@
       "text": ""
     }
   ],
-  "advancement": "goety:goety/craft_dark_ingot"
+  "advancement": "goety:goety/craft_dark_ingot",
+  "extra_recipe_mappings": {
+    "goetyawaken:dark_ice_axe": 0
+  }
 }
