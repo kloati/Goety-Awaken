@@ -1,5 +1,5 @@
 {
-  "name": "疫病鯨石板の従者",
+  "name": "疫病鯨の従者",
   "icon": "goetyawaken:plaguewhale_spawn_egg",
   "category": "goety:goetyawaken_mutations",
   "pages": [
@@ -15,7 +15,7 @@
     {
       "type": "patchouli:entity",
       "entity": "goetyawaken:plaguewhale_slab_servant",
-      "text": "疫病鯨石板は、毒ジャガイモの力によって歪められた長老守護者であると言われている。"
+      "text": "疫病鯨は、毒ジャガイモの力によって歪められた長老守護者であると言われている。"
     }
   ]
 }

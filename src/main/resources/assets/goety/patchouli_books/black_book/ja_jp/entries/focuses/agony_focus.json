@@ -1,5 +1,5 @@
 {
-  "name": "苦痛のフォーカス",
+  "name": "苦悩のフォーカス",
   "icon": "goetyawaken:agony_focus",
   "category": "goety:goetyawaken_focuses",
   "pages": [
@@ -10,7 +10,7 @@
     {
       "type": "goety:ritual",
       "recipe": "goetyawaken:agony_focus",
-      "text": "苦痛のフォーカスを作り出す。"
+      "text": "苦悩のフォーカスを作り出す。"
     }
   ],
   "extra_recipe_mappings": {
